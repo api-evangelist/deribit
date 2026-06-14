@@ -1,0 +1,8 @@
+{
+  "jsonrpc": "2.0",
+  "id": 7859,
+  "method": "private/enable_cancel_on_disconnect",
+  "params": {
+    "scope": "account"
+  }
+}

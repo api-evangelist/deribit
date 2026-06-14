@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/group_rate_and_burst.json",
+  "title": "Group Rate And Burst",
+  "properties": {
+    "total": {
+      "type": "object",
+      "properties": {
+        "rate": {
+          "type": "integer",
+          "description": "Number of all requests per second in perpetuals allowed for user"
+        },
+        "burst": {
+          "type": "integer",
+          "description": "Maximal number of all requests allowed for user in burst mode"
+        }
+      }
+    },
+    "perpetuals": {
+      "type": "object",
+      "properties": {
+        "rate": {
+          "type": "integer",
+          "description": "Number of perpetual requests per second allowed for user"
+        },
+        "burst": {
+          "type": "integer",
+          "description": "Maximal number of perpetuals requests allowed for user in burst mode"
+        }
+      }
+    },
+    "futures": {
+      "type": "object",
+      "properties": {
+        "rate": {
+          "type": "integer",
+          "description": "Number of futures requests per second allowed for user"
+        },
+        "burst": {
+          "type": "integer",
+          "description": "Maximal number of futures requests allowed for user in burst mode"
+        }
+      }
+    },
+    "options": {
+      "type": "object",
+      "properties": {
+        "rate": {
+          "type": "integer",
+          "description": "Number of option requests per second allowed for user"
+        },
+        "burst": {
+          "type": "integer",
+          "description": "Maximal number of option requests allowed for user in burst mode"
+        }
+      }
+    }
+  },
+  "type": "object"
+}

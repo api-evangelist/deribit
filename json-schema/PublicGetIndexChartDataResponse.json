@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/PublicGetIndexChartDataResponse.json",
+  "title": "Publicgetindexchartdataresponse",
+  "properties": {
+    "jsonrpc": {
+      "type": "string",
+      "enum": [
+        "2.0"
+      ],
+      "description": "The JSON-RPC version (2.0)"
+    },
+    "id": {
+      "type": "integer",
+      "description": "The id that was sent in the request"
+    },
+    "result": {
+      "type": "array",
+      "description": "**Response:**\nThe response returns an array of data points, where each data point is an array containing:\n\n- **Index 0**: Timestamp in milliseconds since the Unix epoch\n- **Index 1**: Average index price at that timestamp\n\nExample response structure:\n```json\n[\n [1573228800000, 8751.7138636],\n [1573232400000, 8751.7138636],\n [1573236000000, 8751.7138636]\n]\n```\n\nEach entry in the result array represents a single data point:\n\n- The first value (timestamp) indicates when the price was recorded\n- The second value (price) is the average index price at that timestamp\n\nThe data points are returned in chronological order, making them ready for direct use in charting libraries.\n"
+    }
+  },
+  "required": [
+    "jsonrpc",
+    "result"
+  ],
+  "type": "object"
+}

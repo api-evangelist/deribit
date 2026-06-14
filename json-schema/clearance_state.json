@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/clearance_state.json",
+  "title": "Clearance State",
+  "enum": [
+    "in_progress",
+    "pending_admin_decision",
+    "pending_user_input",
+    "success",
+    "failed",
+    "cancelled",
+    "refund_initiated",
+    "refunded"
+  ],
+  "type": "string",
+  "description": "Clearance state indicating the current status of the transaction clearance process. Allowed values: <li><code>in_progress</code>: clearance process is in progress</li> <li><code>pending_admin_decision</code>: transaction is under manual review by Deribit admin</li> <li><code>pending_user_input</code>: user should provide additional information regarding the transaction</li> <li><code>success</code>: clearance process completed successfully</li> <li><code>failed</code>: clearance process failed, transaction is rejected</li> <li><code>cancelled</code>: transaction is cancelled (currently used only for withdrawals, meaning the withdrawal is cancelled)</li> <li><code>refund_initiated</code>: clearance process failed, transaction refund is initiated, funds are removed from Deribit balance (valid for deposits only)</li> <li><code>refunded</code>: clearance process failed, deposit amount is refunded back to the client (valid for deposits only)</li>"
+}

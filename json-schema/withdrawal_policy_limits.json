@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/withdrawal_policy_limits.json",
+  "title": "Withdrawal Policy Limits",
+  "properties": {
+    "h24": {
+      "$ref": "#/components/schemas/withdrawal_policy_limit_buckets"
+    }
+  },
+  "required": [
+    "h24"
+  ],
+  "type": "object"
+}

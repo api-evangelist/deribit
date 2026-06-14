@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/block_rfq_trade_tape_continuation.json",
+  "title": "Block Rfq Trade Tape Continuation",
+  "example": "1738050297271:103",
+  "type": "string",
+  "description": "Continuation token for pagination. `NULL` when no continuation. Consists of `timestamp` and `block_rfq_id`."
+}

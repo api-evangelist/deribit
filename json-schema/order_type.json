@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/order_type.json",
+  "title": "Order Type",
+  "enum": [
+    "market",
+    "limit",
+    "stop_market",
+    "stop_limit",
+    "take_market",
+    "take_limit",
+    "trailing_stop"
+  ],
+  "type": "string",
+  "description": "Order type: `\"limit\"`, `\"market\"`, `\"stop_limit\"`, `\"stop_market\"`, `\"take_limit\"`, `\"take_market\"`, `\"trailing_stop\"`"
+}

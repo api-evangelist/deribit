@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/PublicGetAprHistoryResponse.json",
+  "title": "Publicgetaprhistoryresponse",
+  "properties": {
+    "jsonrpc": {
+      "type": "string",
+      "enum": [
+        "2.0"
+      ],
+      "description": "The JSON-RPC version (2.0)"
+    },
+    "id": {
+      "type": "integer",
+      "description": "The id that was sent in the request"
+    },
+    "result": {
+      "properties": {
+        "continuation": {
+          "$ref": "#/components/schemas/continuation"
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "day": {
+                "type": "integer",
+                "description": "The full epoch day"
+              },
+              "apr": {
+                "type": "number",
+                "description": "The APR of the day"
+              }
+            }
+          }
+        }
+      },
+      "required": [
+        "data"
+      ],
+      "type": "object"
+    }
+  },
+  "required": [
+    "jsonrpc",
+    "result"
+  ],
+  "type": "object"
+}

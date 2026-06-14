@@ -1,0 +1,7 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/average_price.json",
+  "title": "Average Price",
+  "type": "number",
+  "description": "Average fill price of the order"
+}

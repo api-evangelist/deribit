@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/api_key_enabled.json",
+  "title": "Api Key Enabled",
+  "example": true,
+  "type": "boolean",
+  "description": "Informs whether api key is enabled and can be used for authentication"
+}

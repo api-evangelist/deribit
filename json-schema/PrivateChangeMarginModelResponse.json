@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/PrivateChangeMarginModelResponse.json",
+  "title": "Privatechangemarginmodelresponse",
+  "properties": {
+    "jsonrpc": {
+      "type": "string",
+      "enum": [
+        "2.0"
+      ],
+      "description": "The JSON-RPC version (2.0)"
+    },
+    "id": {
+      "type": "integer",
+      "description": "The id that was sent in the request"
+    },
+    "result": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "old_state": {
+            "type": "object",
+            "properties": {
+              "maintenance_margin_rate": {
+                "type": "number",
+                "description": "Maintenance margin rate before change"
+              },
+              "initial_margin_rate": {
+                "type": "number",
+                "description": "Initial margin rate before change"
+              },
+              "available_balance": {
+                "type": "number",
+                "description": "Available balance before change"
+              }
+            },
+            "required": [
+              "maintenance_margin_rate",
+              "initial_margin_rate",
+              "available_balance"
+            ],
+            "description": "Represents portfolio state before change"
+          },
+          "new_state": {
+            "type": "object",
+            "properties": {
+              "maintenance_margin_rate": {
+                "type": "number",
+                "description": "Maintenance margin rate after change"
+              },
+              "initial_margin_rate": {
+                "type": "number",
+                "description": "Initial margin rate after change"
+              },
+              "available_balance": {
+                "type": "number",
+                "description": "Available balance after change"
+              }
+            },
+            "required": [
+              "maintenance_margin_rate",
+              "initial_margin_rate",
+              "available_balance"
+            ],
+            "description": "Represents portfolio state after change"
+          },
+          "currency": {
+            "$ref": "#/components/schemas/currency"
+          }
+        },
+        "required": [
+          "old_state",
+          "new_state",
+          "currency"
+        ]
+      }
+    }
+  },
+  "required": [
+    "jsonrpc",
+    "result"
+  ],
+  "type": "object"
+}

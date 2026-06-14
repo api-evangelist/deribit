@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/trades_volumes.json",
+  "title": "Trades Volumes",
+  "properties": {
+    "currency": {
+      "$ref": "#/components/schemas/currency"
+    },
+    "calls_volume": {
+      "example": 20.1,
+      "type": "number",
+      "description": "Total 24h trade volume for call options."
+    },
+    "puts_volume": {
+      "example": 60.2,
+      "type": "number",
+      "description": "Total 24h trade volume for put options."
+    },
+    "futures_volume": {
+      "example": 30.5178,
+      "type": "number",
+      "description": "Total 24h trade volume for futures."
+    },
+    "spot_volume": {
+      "example": 11.6,
+      "type": "number",
+      "description": "Total 24h trade for spot."
+    },
+    "calls_volume_7d": {
+      "example": 75.6,
+      "type": "number",
+      "description": "Total 7d trade volume for call options."
+    },
+    "puts_volume_7d": {
+      "example": 356.9,
+      "type": "number",
+      "description": "Total 7d trade volume for put options."
+    },
+    "futures_volume_7d": {
+      "example": 213.8841,
+      "type": "number",
+      "description": "Total 7d trade volume for futures."
+    },
+    "spot_volume_7d": {
+      "example": 64.8,
+      "type": "number",
+      "description": "Total 7d trade for spot."
+    },
+    "calls_volume_30d": {
+      "example": 547.3,
+      "type": "number",
+      "description": "Total 30d trade volume for call options."
+    },
+    "puts_volume_30d": {
+      "example": 785.5,
+      "type": "number",
+      "description": "Total 30d trade volume for put options."
+    },
+    "futures_volume_30d": {
+      "example": 998.2128,
+      "type": "number",
+      "description": "Total 30d trade volume for futures."
+    },
+    "spot_volume_30d": {
+      "example": 310.5,
+      "type": "number",
+      "description": "Total 30d trade for spot."
+    }
+  },
+  "required": [
+    "currency",
+    "futures_volume",
+    "puts_volume",
+    "calls_volume"
+  ],
+  "type": "object"
+}

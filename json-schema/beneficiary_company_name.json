@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/beneficiary_company_name.json",
+  "title": "Beneficiary Company Name",
+  "example": "Company Name",
+  "type": "string",
+  "description": "Company name of the beneficiary (if beneficiary is a company)"
+}

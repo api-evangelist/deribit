@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/PrivateGetSecurityKeyActivationDataResponse.json",
+  "title": "Privategetsecuritykeyactivationdataresponse",
+  "properties": {
+    "jsonrpc": {
+      "type": "string",
+      "enum": [
+        "2.0"
+      ],
+      "description": "The JSON-RPC version (2.0)"
+    },
+    "id": {
+      "type": "integer",
+      "description": "The id that was sent in the request"
+    },
+    "result": {
+      "type": "object",
+      "properties": {
+        "activation_challenge": {
+          "type": "string",
+          "description": "Activation challenge, needs to be send with activation request"
+        },
+        "account": {
+          "type": "string",
+          "description": "Email address of current account"
+        },
+        "issuer": {
+          "type": "string",
+          "description": "Domain name"
+        },
+        "type": {
+          "$ref": "#/components/schemas/security_key_type"
+        },
+        "secret": {
+          "type": "string",
+          "description": "TFA Secret (for tfa type only)"
+        },
+        "data": {
+          "type": "object",
+          "description": "Data for U2F activation"
+        }
+      },
+      "required": [
+        "activation_challenge"
+      ]
+    }
+  },
+  "required": [
+    "jsonrpc",
+    "result"
+  ],
+  "type": "object"
+}

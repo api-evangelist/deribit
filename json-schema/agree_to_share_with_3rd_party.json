@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/agree_to_share_with_3rd_party.json",
+  "title": "Agree To Share With 3Rd Party",
+  "example": true,
+  "type": "boolean",
+  "description": "Indicates that the user agreed to shared provided information with 3rd parties"
+}

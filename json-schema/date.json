@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/date.json",
+  "title": "Date",
+  "example": "2019-11-24",
+  "type": "string",
+  "description": "The event date with year, month and day"
+}

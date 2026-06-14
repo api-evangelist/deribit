@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/beneficiary_vasp_name.json",
+  "title": "Beneficiary Vasp Name",
+  "example": "Money's Gone",
+  "type": "string",
+  "description": "Name of beneficiary VASP"
+}

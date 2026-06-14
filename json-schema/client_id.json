@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/client_id.json",
+  "title": "Client Id",
+  "example": "IY2D68DS",
+  "type": "string",
+  "description": "Client identifier used for authentication"
+}

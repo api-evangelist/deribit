@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/deposit_state.json",
+  "title": "Deposit State",
+  "enum": [
+    "pending",
+    "completed",
+    "rejected",
+    "replaced"
+  ],
+  "type": "string",
+  "description": "Deposit state. Allowed values: <li><code>pending</code>: deposit detected on blockchain/system, compliance not yet finished</li> <li><code>completed</code>: compliance check finished successfully</li> <li><code>rejected</code>: deposit failed compliance and must be handled manually</li> <li><code>replaced</code>: deposit transaction was replaced on the blockchain and should have a new transaction hash</li>"
+}

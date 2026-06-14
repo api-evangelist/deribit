@@ -1,0 +1,140 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/block_rfq.json",
+  "title": "Block Rfq",
+  "properties": {
+    "creation_timestamp": {
+      "type": "integer",
+      "example": 1536569522277,
+      "description": "The timestamp when Block RFQ was created (milliseconds since the Unix epoch)"
+    },
+    "expiration_timestamp": {
+      "type": "integer",
+      "example": 1536569522277,
+      "description": "The timestamp when the Block RFQ will expire (milliseconds since the UNIX epoch)"
+    },
+    "block_rfq_id": {
+      "type": "integer",
+      "description": "ID of the Block RFQ"
+    },
+    "role": {
+      "type": "string",
+      "enum": [
+        "taker",
+        "maker"
+      ],
+      "description": "Role of the user in Block RFQ"
+    },
+    "state": {
+      "type": "string",
+      "enum": [
+        "open",
+        "filled",
+        "cancelled",
+        "expired"
+      ],
+      "description": "State of the Block RFQ"
+    },
+    "taker_rating": {
+      "type": "string",
+      "description": "Rating of the taker"
+    },
+    "makers": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "description": "List of targeted Block RFQ makers"
+      }
+    },
+    "amount": {
+      "type": "number",
+      "description": "This value multiplied by the ratio of a leg gives trade size on that leg."
+    },
+    "min_trade_amount": {
+      "type": "number",
+      "description": "Minimum amount for trading"
+    },
+    "asks": {
+      "$ref": "#/components/schemas/quote_asks"
+    },
+    "bids": {
+      "$ref": "#/components/schemas/quote_bids"
+    },
+    "legs": {
+      "$ref": "#/components/schemas/block_rfq_legs"
+    },
+    "hedge": {
+      "$ref": "#/components/schemas/block_rfq_hedge_leg"
+    },
+    "combo_id": {
+      "$ref": "#/components/schemas/combo_id"
+    },
+    "label": {
+      "type": "string",
+      "description": "User defined label for the Block RFQ (maximum 64 characters)"
+    },
+    "app_name": {
+      "type": "string",
+      "example": "Example Application",
+      "description": "The name of the application that created the Block RFQ on behalf of the user (optional, visible only to taker)."
+    },
+    "mark_price": {
+      "$ref": "#/components/schemas/mark_price"
+    },
+    "disclosed": {
+      "type": "boolean",
+      "description": "Indicates whether the RFQ was created as non-anonymous, meaning taker and maker aliases are visible to counterparties."
+    },
+    "taker": {
+      "type": "string",
+      "example": "TAKER1",
+      "description": "Taker alias. Present only when `disclosed` is `true`."
+    },
+    "index_prices": {
+      "type": "array",
+      "items": {
+        "type": "number",
+        "description": "A list of index prices for the underlying instrument(s) at the time of trade execution."
+      }
+    },
+    "included_in_taker_rating": {
+      "type": "boolean",
+      "description": "Indicates whether the RFQ is included in the taker's rating calculation. Present only for closed RFQs created by the requesting taker."
+    },
+    "trades": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "direction": {
+            "$ref": "#/components/schemas/direction"
+          },
+          "price": {
+            "$ref": "#/components/schemas/price"
+          },
+          "amount": {
+            "type": "number",
+            "description": "Trade amount. For options, linear futures, linear perpetuals and spots the amount is denominated in the underlying base currency coin. The inverse perpetuals and inverse futures are denominated in USD units."
+          },
+          "maker": {
+            "type": "string",
+            "description": "Alias of the maker (optional)"
+          },
+          "hedge_amount": {
+            "type": "number",
+            "description": "Amount of the hedge leg. For linear futures, linear perpetuals and spots the amount is denominated in the underlying base currency coin. The inverse perpetuals and inverse futures are denominated in USD units."
+          }
+        }
+      }
+    },
+    "trade_trigger": {
+      "$ref": "#/components/schemas/trade_trigger",
+      "description": "Present only if a trade trigger was placed by the taker and only visible to taker. Only for cases: `cancelled` (contains the reason for cancellation) and `untriggered` (contains the information about the trade trigger)."
+    },
+    "trade_allocations": {
+      "$ref": "#/components/schemas/trade_allocations",
+      "description": "List of allocations for Block RFQ pre-allocation. Allows to split amount between different (sub)accounts. The taker can also allocate to himself. Visible only to the taker."
+    }
+  },
+  "type": "object"
+}

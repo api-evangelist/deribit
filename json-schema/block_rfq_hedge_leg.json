@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/block_rfq_hedge_leg.json",
+  "title": "Block Rfq Hedge Leg",
+  "properties": {
+    "amount": {
+      "type": "integer",
+      "description": "It represents the requested hedge leg size. For perpetual and inverse futures the amount is in USD units. For options and linear futures it is the underlying base currency coin."
+    },
+    "instrument_name": {
+      "type": "string",
+      "example": "BTC-PERPETUAL",
+      "description": "Unique instrument identifier"
+    },
+    "direction": {
+      "type": "string",
+      "enum": [
+        "buy",
+        "sell"
+      ],
+      "description": "Direction: `buy`, or `sell`"
+    },
+    "price": {
+      "type": "number",
+      "description": "Price for a hedge leg"
+    }
+  },
+  "type": "object"
+}

@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/block_rfq_quote.json",
+  "title": "Block Rfq Quote",
+  "properties": {
+    "creation_timestamp": {
+      "type": "integer",
+      "example": 1536569522277,
+      "description": "The timestamp when quote was created (milliseconds since the Unix epoch)"
+    },
+    "last_update_timestamp": {
+      "type": "integer",
+      "example": 1536569522277,
+      "description": "Timestamp of the last update of the quote (milliseconds since the UNIX epoch)"
+    },
+    "block_rfq_id": {
+      "type": "integer",
+      "description": "ID of the Block RFQ"
+    },
+    "block_rfq_quote_id": {
+      "type": "integer",
+      "description": "ID of the Block RFQ quote"
+    },
+    "quote_state": {
+      "type": "string",
+      "description": "State of the quote"
+    },
+    "execution_instruction": {
+      "type": "string",
+      "enum": [
+        "any_part_of",
+        "all_or_none"
+      ],
+      "description": "Execution instruction of the quote. Default - `any_part_of`\n\n- `\"all_or_none (AON)\"` - The quote can only be filled entirely or not at all, ensuring that its amount matches the amount specified in the Block RFQ. Additionally, 'all_or_none' quotes have priority over 'any_part_of' quotes at the same price level.\n- `\"any_part_of (APO)\"` - The quote can be filled either partially or fully, with the filled amount potentially being less than the Block RFQ amount."
+    },
+    "price": {
+      "type": "number",
+      "description": "Price of a quote"
+    },
+    "amount": {
+      "type": "number",
+      "description": "This value multiplied by the ratio of a leg gives trade size on that leg."
+    },
+    "direction": {
+      "$ref": "#/components/schemas/quote_direction"
+    },
+    "filled_amount": {
+      "$ref": "#/components/schemas/filled_amount_quote"
+    },
+    "legs": {
+      "$ref": "#/components/schemas/leg_structure"
+    },
+    "hedge": {
+      "$ref": "#/components/schemas/block_rfq_hedge_leg"
+    },
+    "replaced": {
+      "$ref": "#/components/schemas/replaced_quote"
+    },
+    "label": {
+      "type": "string",
+      "description": "User defined label for the quote (maximum 64 characters)"
+    },
+    "app_name": {
+      "type": "string",
+      "example": "Example Application",
+      "description": "The name of the application that placed the quote on behalf of the user (optional)."
+    },
+    "quote_state_reason": {
+      "type": "string",
+      "description": "Reason of quote cancellation"
+    }
+  },
+  "type": "object"
+}

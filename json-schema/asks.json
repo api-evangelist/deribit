@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/asks.json",
+  "title": "Asks",
+  "items": {
+    "items": {
+      "type": "number"
+    },
+    "minItems": 2,
+    "maxItems": 2,
+    "type": "array",
+    "description": "List of asks (price-amount pairs)"
+  },
+  "type": "array"
+}

@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/direction.json",
+  "title": "Direction",
+  "enum": [
+    "buy",
+    "sell"
+  ],
+  "type": "string",
+  "description": "Direction: `buy`, or `sell`"
+}

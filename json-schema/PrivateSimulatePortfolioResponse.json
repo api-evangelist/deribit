@@ -1,0 +1,224 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/PrivateSimulatePortfolioResponse.json",
+  "title": "Privatesimulateportfolioresponse",
+  "properties": {
+    "jsonrpc": {
+      "type": "string",
+      "enum": [
+        "2.0"
+      ],
+      "description": "The JSON-RPC version (2.0)"
+    },
+    "id": {
+      "type": "integer",
+      "description": "The id that was sent in the request"
+    },
+    "result": {
+      "type": "object",
+      "properties": {
+        "currency": {
+          "example": "BTC",
+          "type": "string",
+          "description": "Currency of the simulation"
+        },
+        "equity": {
+          "example": 150075253.91354558,
+          "type": "number",
+          "description": "The account's current equity"
+        },
+        "balance": {
+          "example": 150076473.4995114,
+          "type": "number",
+          "description": "The account's balance"
+        },
+        "margin_balance": {
+          "example": 153534213.79481918,
+          "type": "number",
+          "description": "The account's margin balance. When cross collateral is enabled, this aggregated value is calculated by converting the sum of each cross collateral currency's value to the given currency, using each cross collateral currency's index."
+        },
+        "initial_margin": {
+          "example": 37662472.03416069,
+          "type": "number",
+          "description": "The account's initial margin. When cross collateral is enabled, this aggregated value is calculated by converting the sum of each cross collateral currency's value to the given currency, using each cross collateral currency's index."
+        },
+        "maintenance_margin": {
+          "example": 30129215.84817124,
+          "type": "number",
+          "description": "The maintenance margin. When cross collateral is enabled, this aggregated value is calculated by converting the sum of each cross collateral currency's value to the given currency, using each cross collateral currency's index."
+        },
+        "projected_initial_margin": {
+          "$ref": "#/components/schemas/projected_initial_margin"
+        },
+        "projected_maintenance_margin": {
+          "$ref": "#/components/schemas/projected_maintenance_margin"
+        },
+        "available_funds": {
+          "example": 115871741.76065847,
+          "type": "number",
+          "description": "The account's available funds. When cross collateral is enabled, this aggregated value is calculated by converting the sum of each cross collateral currency's value to the given currency, using each cross collateral currency's index."
+        },
+        "available_withdrawal_funds": {
+          "example": 115871741.76065847,
+          "type": "number",
+          "description": "The account's available to withdrawal funds"
+        },
+        "available_subaccount_transfer_funds": {
+          "example": 0,
+          "type": "number",
+          "description": "The account's available funds for subaccount transfers"
+        },
+        "total_pl": {
+          "example": 40419.10179263,
+          "type": "number",
+          "description": "Profit and loss"
+        },
+        "session_rpl": {
+          "$ref": "#/components/schemas/rpl"
+        },
+        "session_upl": {
+          "$ref": "#/components/schemas/upl"
+        },
+        "futures_pl": {
+          "example": 39497.54616685,
+          "type": "number",
+          "description": "Futures profit and loss"
+        },
+        "futures_session_rpl": {
+          "example": 1.309136,
+          "type": "number",
+          "description": "Futures session realized profit and loss"
+        },
+        "futures_session_upl": {
+          "example": -164.48253509,
+          "type": "number",
+          "description": "Futures session unrealized profit and loss"
+        },
+        "options_pl": {
+          "example": 921.55562578,
+          "type": "number",
+          "description": "Options profit and loss"
+        },
+        "options_session_rpl": {
+          "example": 0,
+          "type": "number",
+          "description": "Options session realized profit and loss"
+        },
+        "options_session_upl": {
+          "example": -174.67960675,
+          "type": "number",
+          "description": "Options session unrealized profit and loss"
+        },
+        "options_value": {
+          "example": -1056.41256672,
+          "type": "number",
+          "description": "Options value"
+        },
+        "options_delta": {
+          "example": 2883.38481,
+          "type": "number",
+          "description": "Options summary delta"
+        },
+        "options_gamma": {
+          "example": -0.03907,
+          "type": "number",
+          "description": "Options summary gamma"
+        },
+        "options_theta": {
+          "example": 142583.29246,
+          "type": "number",
+          "description": "Options summary theta"
+        },
+        "options_vega": {
+          "example": -39322.23046,
+          "type": "number",
+          "description": "Options summary vega"
+        },
+        "options_gamma_map": {
+          "type": "object",
+          "description": "Map of options' gammas per index"
+        },
+        "options_theta_map": {
+          "type": "object",
+          "description": "Map of options' thetas per index"
+        },
+        "options_vega_map": {
+          "type": "object",
+          "description": "Map of options' vegas per index"
+        },
+        "delta_total": {
+          "$ref": "#/components/schemas/delta_total"
+        },
+        "delta_total_map": {
+          "type": "object",
+          "description": "Map of total deltas per index"
+        },
+        "projected_delta_total": {
+          "$ref": "#/components/schemas/projected_delta_total"
+        },
+        "additional_reserve": {
+          "$ref": "#/components/schemas/additional_reserve"
+        },
+        "spot_reserve": {
+          "example": 0,
+          "type": "number",
+          "description": "The account's balance reserved in active spot orders"
+        },
+        "fee_balance": {
+          "$ref": "#/components/schemas/fee_balance"
+        },
+        "locked_balance": {
+          "example": 0,
+          "type": "number",
+          "description": "The account's locked balance"
+        },
+        "margin_model": {
+          "type": "string",
+          "example": "cross_pm",
+          "description": "Name of user's currently enabled margin model"
+        },
+        "portfolio_margining_enabled": {
+          "type": "boolean",
+          "example": true,
+          "description": "`true` when portfolio margining is enabled for user"
+        },
+        "cross_collateral_enabled": {
+          "type": "boolean",
+          "example": true,
+          "description": "When `true` cross collateral is enabled for user"
+        },
+        "total_equity_usd": {
+          "example": 13075634611389.318,
+          "type": "number",
+          "description": "Optional (only for users using cross margin). The account's total equity in all cross collateral currencies, expressed in USD"
+        },
+        "total_initial_margin_usd": {
+          "example": 3139528603778.822,
+          "type": "number",
+          "description": "Optional (only for users using cross margin). The account's total initial margin in all cross collateral currencies, expressed in USD"
+        },
+        "total_maintenance_margin_usd": {
+          "example": 2511559381417.215,
+          "type": "number",
+          "description": "Optional (only for users using cross margin). The account's total maintenance margin in all cross collateral currencies, expressed in USD"
+        },
+        "total_margin_balance_usd": {
+          "example": 12798550648250.61,
+          "type": "number",
+          "description": "Optional (only for users using cross margin). The account's total margin balance in all cross collateral currencies, expressed in USD"
+        },
+        "total_delta_total_usd": {
+          "example": 6157454218.3753195,
+          "type": "number",
+          "description": "Optional (only for users using cross margin). The account's total delta total in all cross collateral currencies, expressed in USD"
+        }
+      },
+      "description": "Portfolio margin simulation result"
+    }
+  },
+  "required": [
+    "jsonrpc",
+    "result"
+  ],
+  "type": "object"
+}

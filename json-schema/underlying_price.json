@@ -1,0 +1,7 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/underlying_price.json",
+  "title": "Underlying Price",
+  "type": "number",
+  "description": "Underlying price for implied volatility calculations (options only)"
+}

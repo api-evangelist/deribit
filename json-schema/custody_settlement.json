@@ -1,0 +1,129 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/custody_settlement.json",
+  "title": "Custody Settlement",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier of the settlement instance"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "completed",
+        "completed_partially",
+        "failed",
+        "in_progress"
+      ],
+      "example": "completed",
+      "description": "Status of the settlement"
+    },
+    "created_at": {
+      "type": "integer",
+      "example": 1736712919000,
+      "description": "The timestamp when the settlement was created (milliseconds since the Unix epoch)"
+    },
+    "updated_at": {
+      "type": "integer",
+      "example": 1736713920000,
+      "description": "Timestamp of the last update of the settlement (milliseconds since the Unix epoch)"
+    },
+    "failed_at": {
+      "type": "integer",
+      "example": 1736713950000,
+      "description": "Timestamp (in milliseconds since the Unix epoch) when the settlement or settlement instruction failed. Present only if the status is `failed`."
+    },
+    "completed_at": {
+      "type": "integer",
+      "example": 1736714000000,
+      "description": "Timestamp of when the settlement was completed (if applicable)"
+    },
+    "instructions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "currency": {
+            "type": "string",
+            "description": "The currency supported by custodian and exchange"
+          },
+          "amount": {
+            "type": "number",
+            "example": 1.3141,
+            "description": "<ul><li>Positive value means that since the previous settlement, the client has earned/bought the asset in the exchange and settlement direction is from exchange to the client.</li><li>Negative value means, since the previous settlement, the client has lost/sold the asset in the exchange and settlement direction is from client to deribit.</li>"
+          },
+          "custody_balance": {
+            "type": "number",
+            "example": 2.341,
+            "description": "Custody balance of the user at the time of initiating the settlement"
+          },
+          "total_equity": {
+            "type": "number",
+            "example": 3.452,
+            "description": "Total equity of the client between all main and sub accounts, at the time of initialising the settlement."
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "pending_review",
+              "pending_execution",
+              "completed",
+              "rejected",
+              "failed",
+              "skipped"
+            ],
+            "example": "completed",
+            "description": "The status of settlement instruction. Default is `pending_review`."
+          },
+          "settlement_id": {
+            "type": "string",
+            "example": "dec42708-2ec6-4cdd-8f9d-d49bbe94d0aa",
+            "description": "The id of the settlement instance"
+          },
+          "created_at": {
+            "type": "integer",
+            "example": 1736712919000,
+            "description": "Timestamp of when the instruction was created (milliseconds since the Unix epoch)"
+          },
+          "updated_at": {
+            "type": "integer",
+            "example": 1736713920000,
+            "description": "Timestamp of the last update of the instruction (milliseconds since the Unix epoch)"
+          },
+          "failed_at": {
+            "type": "integer",
+            "example": 1736713950000,
+            "description": "Timestamp (in milliseconds since the Unix epoch) when the settlement or settlement instruction failed. Present only if the status is `failed`."
+          },
+          "reviewed_at": {
+            "type": "integer",
+            "example": 1736713986000,
+            "description": "Timestamp (in milliseconds since the Unix epoch) when the custodian reviewed the settlement instruction. Present only after a review action has been taken."
+          },
+          "completed_at": {
+            "type": "integer",
+            "example": 1736714000000,
+            "description": "Timestamp (in milliseconds since the Unix epoch) when the settlement or settlement instruction was completed. Only present if the status is `completed`."
+          },
+          "review_reason": {
+            "type": "string",
+            "example": "Custody balance mismatch",
+            "description": "Optional reason provided by the custodian when rejecting or ignoring a settlement instruction."
+          },
+          "review_result": {
+            "type": "string",
+            "example": "confirm",
+            "description": "Outcome of the custodian's review. Present only after the review has been completed. Values match the `action` taken: `confirm`, `ignore`, or `reject`."
+          }
+        }
+      },
+      "description": "Settlement currency instructions"
+    },
+    "note": {
+      "type": "string",
+      "example": "Settlement processed successfully",
+      "description": "Additional note related to the settlement"
+    }
+  },
+  "type": "object"
+}

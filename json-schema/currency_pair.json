@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/currency_pair.json",
+  "title": "Currency Pair",
+  "enum": [
+    "btc_usd",
+    "eth_usd"
+  ],
+  "type": "string",
+  "description": "Currency pair: `\"btc_usd\"` or `\"eth_usd\"`"
+}

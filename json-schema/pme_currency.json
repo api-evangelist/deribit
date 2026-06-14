@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/pme_currency.json",
+  "title": "Pme Currency",
+  "enum": [
+    "BTC",
+    "ETH",
+    "USDC",
+    "USDT",
+    "CROSS"
+  ],
+  "type": "string",
+  "description": "The currency for which the Extended Risk Matrix will be calculated. Use `CROSS` for Cross Collateral simulation."
+}

@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/withdrawal_state.json",
+  "title": "Withdrawal State",
+  "enum": [
+    "unconfirmed",
+    "confirmed",
+    "cancelled",
+    "completed",
+    "interrupted",
+    "rejected"
+  ],
+  "type": "string",
+  "description": "Withdrawal state, allowed values : `unconfirmed`, `confirmed`, `cancelled`, `completed`, `interrupted`, `rejected`"
+}

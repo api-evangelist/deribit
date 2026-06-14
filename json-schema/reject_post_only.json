@@ -1,0 +1,7 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/reject_post_only.json",
+  "title": "Reject Post Only",
+  "type": "boolean",
+  "description": "`true` if order has `reject_post_only` flag (field is present only when `post_only` is `true`)"
+}

@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/custody_log.json",
+  "title": "Custody Log",
+  "properties": {
+    "currency": {
+      "$ref": "#/components/schemas/currency"
+    },
+    "request_id": {
+      "type": "string",
+      "description": "Request ID"
+    },
+    "request": {
+      "type": "string",
+      "enum": [
+        "add_funds",
+        "remove_funds",
+        "deposit_funds",
+        "withdraw_funds"
+      ],
+      "description": "Request type"
+    },
+    "success": {
+      "type": "boolean",
+      "description": "When request was successful set to `true`"
+    },
+    "timestamp": {
+      "$ref": "#/components/schemas/timestamp"
+    },
+    "amount": {
+      "$ref": "#/components/schemas/currency_amount"
+    }
+  },
+  "required": [
+    "currency",
+    "request_id",
+    "request",
+    "success",
+    "timestamp"
+  ],
+  "type": "object",
+  "description": "Custody log"
+}

@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/public_key.json",
+  "title": "Public Key",
+  "example": "-----BEGIN PUBLIC KEY----- MCowBQYDK2VwAyEApajFN0CSwIaaiIRPiFbiYYvpsLQLSccSLLsKPe984sc= -----END PUBLIC KEY-----",
+  "type": "string",
+  "description": "PEM encoded public key (Ed25519/RSA) used for asymmetric signatures (optional)"
+}

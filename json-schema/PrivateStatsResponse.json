@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/PrivateStatsResponse.json",
+  "title": "Privatestatsresponse",
+  "properties": {
+    "jsonrpc": {
+      "type": "string",
+      "enum": [
+        "2.0"
+      ],
+      "description": "The JSON-RPC version (2.0)"
+    },
+    "id": {
+      "type": "integer",
+      "description": "The id that was sent in the request"
+    },
+    "result": {
+      "properties": {
+        "user": {
+          "type": "object",
+          "description": "Statistics of the user"
+        },
+        "apps": {
+          "type": "array",
+          "description": "Statistics of the applications owned by the user"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "required": [
+    "jsonrpc",
+    "result"
+  ],
+  "type": "object"
+}

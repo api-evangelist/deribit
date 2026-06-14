@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/PublicGetBlockRfqTradesResponse.json",
+  "title": "Publicgetblockrfqtradesresponse",
+  "properties": {
+    "jsonrpc": {
+      "type": "string",
+      "enum": [
+        "2.0"
+      ],
+      "description": "The JSON-RPC version (2.0)"
+    },
+    "id": {
+      "type": "integer",
+      "description": "The id that was sent in the request"
+    },
+    "result": {
+      "properties": {
+        "block_rfqs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer",
+                "description": "ID of the Block RFQ"
+              },
+              "timestamp": {
+                "$ref": "#/components/schemas/trade_timestamp"
+              },
+              "direction": {
+                "$ref": "#/components/schemas/direction",
+                "description": "Trade direction of the taker"
+              },
+              "amount": {
+                "type": "number",
+                "description": "This value multiplied by the ratio of a leg gives trade size on that leg."
+              },
+              "mark_price": {
+                "type": "number",
+                "description": "Mark Price at the moment of trade"
+              },
+              "legs": {
+                "$ref": "#/components/schemas/leg_structure"
+              },
+              "combo_id": {
+                "$ref": "#/components/schemas/combo_id"
+              },
+              "hedge": {
+                "$ref": "#/components/schemas/block_rfq_hedge_leg"
+              },
+              "index_prices": {
+                "type": "object",
+                "description": "A map of index prices for the underlying instrument(s) at the time of trade execution, where keys are price index names and values are prices."
+              },
+              "trades": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "direction": {
+                      "$ref": "#/components/schemas/direction"
+                    },
+                    "price": {
+                      "$ref": "#/components/schemas/price"
+                    },
+                    "amount": {
+                      "type": "number",
+                      "description": "Trade amount. For options, linear futures, linear perpetuals and spots the amount is denominated in the underlying base currency coin. The inverse perpetuals and inverse futures are denominated in USD units."
+                    },
+                    "hedge_amount": {
+                      "type": "number",
+                      "description": "Amount of the hedge leg. For linear futures, linear perpetuals and spots the amount is denominated in the underlying base currency coin. The inverse perpetuals and inverse futures are denominated in USD units."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "continuation": {
+          "$ref": "#/components/schemas/block_rfq_trade_tape_continuation"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "required": [
+    "jsonrpc",
+    "result"
+  ],
+  "type": "object"
+}

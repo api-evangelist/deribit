@@ -1,0 +1,96 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/trigger_order_history_record.json",
+  "title": "Trigger Order History Record",
+  "properties": {
+    "timestamp": {
+      "$ref": "#/components/schemas/timestamp"
+    },
+    "trigger": {
+      "$ref": "#/components/schemas/trigger"
+    },
+    "trigger_price": {
+      "$ref": "#/components/schemas/trigger_price"
+    },
+    "trigger_offset": {
+      "$ref": "#/components/schemas/trigger_offset"
+    },
+    "trigger_order_id": {
+      "type": "string",
+      "example": "SLTB-187015",
+      "description": "Id of the user order used for the trigger-order reference before triggering"
+    },
+    "order_id": {
+      "$ref": "#/components/schemas/order_id"
+    },
+    "order_state": {
+      "$ref": "#/components/schemas/order_state_stop"
+    },
+    "instrument_name": {
+      "$ref": "#/components/schemas/instrument_name"
+    },
+    "request": {
+      "type": "string",
+      "example": "trigger:order",
+      "description": "Type of last request performed on the trigger order by user or system. `\"cancel\"` - when order was cancelled, `\"trigger:order\"` - when trigger order spawned market or limit order after being triggered"
+    },
+    "direction": {
+      "$ref": "#/components/schemas/direction"
+    },
+    "price": {
+      "$ref": "#/components/schemas/price"
+    },
+    "amount": {
+      "$ref": "#/components/schemas/amount"
+    },
+    "last_update_timestamp": {
+      "$ref": "#/components/schemas/timestamp"
+    },
+    "reduce_only": {
+      "$ref": "#/components/schemas/reduce_only"
+    },
+    "post_only": {
+      "$ref": "#/components/schemas/post_only"
+    },
+    "order_type": {
+      "type": "string",
+      "enum": [
+        "limit",
+        "market"
+      ],
+      "description": "Requested order type: `\"limit` or `\"market\"`"
+    },
+    "label": {
+      "$ref": "#/components/schemas/label_presentation"
+    },
+    "is_secondary_oto": {
+      "$ref": "#/components/schemas/is_secondary_oto"
+    },
+    "oco_ref": {
+      "$ref": "#/components/schemas/oco_ref"
+    },
+    "source": {
+      "type": "string",
+      "example": "api",
+      "description": "Source of the order that is linked to the trigger order."
+    }
+  },
+  "required": [
+    "trigger",
+    "timestamp",
+    "trigger_price",
+    "trigger_order_id",
+    "order_state",
+    "request",
+    "post_only",
+    "order_type",
+    "price",
+    "order_id",
+    "trigger_offset",
+    "instrument_name",
+    "amount",
+    "direction",
+    "reduce_only"
+  ],
+  "type": "object"
+}

@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/trigger.json",
+  "title": "Trigger",
+  "enum": [
+    "index_price",
+    "mark_price",
+    "last_price"
+  ],
+  "type": "string",
+  "description": "Trigger type (only for trigger orders). Allowed values: `\"index_price\"`, `\"mark_price\"`, `\"last_price\"`."
+}

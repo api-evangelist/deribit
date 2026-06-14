@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/PrivateGetMmpStatusResponse.json",
+  "title": "Privategetmmpstatusresponse",
+  "properties": {
+    "jsonrpc": {
+      "type": "string",
+      "enum": [
+        "2.0"
+      ],
+      "description": "The JSON-RPC version (2.0)"
+    },
+    "id": {
+      "type": "integer",
+      "description": "The id that was sent in the request"
+    },
+    "result": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "index_name": {
+            "$ref": "#/components/schemas/index_name"
+          },
+          "frozen_until": {
+            "type": "integer",
+            "description": "Timestamp (milliseconds since the UNIX epoch) until the user will be frozen - 0 means that the user is frozen until manual reset."
+          },
+          "mmp_group": {
+            "type": "string",
+            "example": "MassQuoteBot7",
+            "description": "Triggered mmp group, this parameter is optional (appears only for Mass Quote orders trigger)"
+          },
+          "block_rfq": {
+            "type": "boolean",
+            "example": false,
+            "description": "If true, indicates that the MMP status is for Block RFQ. Block RFQ MMP status is completely separate from normal order/quote MMP status."
+          }
+        },
+        "required": [
+          "index_name",
+          "frozen_until",
+          "mmp_group"
+        ]
+      }
+    }
+  },
+  "required": [
+    "jsonrpc",
+    "result"
+  ],
+  "type": "object"
+}

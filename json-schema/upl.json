@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/upl.json",
+  "title": "Upl",
+  "example": 0.846863,
+  "type": "number",
+  "description": "Session unrealized profit and loss"
+}

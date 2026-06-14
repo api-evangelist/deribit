@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/beneficiary_vasp_did.json",
+  "title": "Beneficiary Vasp Did",
+  "example": "did:example:123456789abcdefghi",
+  "type": "string",
+  "description": "DID of beneficiary VASP"
+}

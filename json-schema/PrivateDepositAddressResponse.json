@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/PrivateDepositAddressResponse.json",
+  "title": "Privatedepositaddressresponse",
+  "properties": {
+    "jsonrpc": {
+      "type": "string",
+      "enum": [
+        "2.0"
+      ],
+      "description": "The JSON-RPC version (2.0)"
+    },
+    "id": {
+      "type": "integer",
+      "description": "The id that was sent in the request"
+    },
+    "result": {
+      "type": "object",
+      "properties": {
+        "creation_timestamp": {
+          "$ref": "#/components/schemas/timestamp"
+        },
+        "currency": {
+          "$ref": "#/components/schemas/currency"
+        },
+        "address": {
+          "$ref": "#/components/schemas/currency_address"
+        },
+        "type": {
+          "$ref": "#/components/schemas/wallet_address_type"
+        }
+      },
+      "required": [
+        "creation_timestamp",
+        "currency",
+        "address",
+        "type"
+      ],
+      "description": "Object if address is created, null otherwise"
+    }
+  },
+  "required": [
+    "jsonrpc",
+    "result"
+  ],
+  "type": "object"
+}

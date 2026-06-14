@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/combo_id.json",
+  "title": "Combo Id",
+  "example": "BTC-FS-31DEC21-PERP",
+  "type": "string",
+  "description": "Unique combo identifier"
+}

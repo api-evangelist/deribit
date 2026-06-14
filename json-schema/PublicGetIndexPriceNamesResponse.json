@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/PublicGetIndexPriceNamesResponse.json",
+  "title": "Publicgetindexpricenamesresponse",
+  "properties": {
+    "jsonrpc": {
+      "type": "string",
+      "enum": [
+        "2.0"
+      ],
+      "description": "The JSON-RPC version (2.0)"
+    },
+    "id": {
+      "type": "integer",
+      "description": "The id that was sent in the request"
+    },
+    "result": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Index name"
+          },
+          "future_combo_creation_enabled": {
+            "type": "boolean",
+            "description": "Whether future combo creation is enabled for this index (only present when `extended`=`true`)"
+          },
+          "option_combo_creation_enabled": {
+            "type": "boolean",
+            "description": "Whether option combo creation is enabled for this index (only present when `extended`=`true`)"
+          }
+        },
+        "required": [
+          "name"
+        ]
+      }
+    }
+  },
+  "required": [
+    "jsonrpc",
+    "result"
+  ],
+  "type": "object"
+}

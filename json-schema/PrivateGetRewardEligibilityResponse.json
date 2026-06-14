@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/PrivateGetRewardEligibilityResponse.json",
+  "title": "Privategetrewardeligibilityresponse",
+  "properties": {
+    "jsonrpc": {
+      "type": "string",
+      "enum": [
+        "2.0"
+      ],
+      "description": "The JSON-RPC version (2.0)"
+    },
+    "id": {
+      "type": "integer",
+      "description": "The id that was sent in the request"
+    },
+    "result": {
+      "type": "object",
+      "properties": {
+        "eligibility_status": {
+          "type": "string",
+          "enum": [
+            "eligible",
+            "partially_eligible",
+            "non_eligible"
+          ],
+          "description": "<ul> <li>`eligible`: User can get reward for specific currency for all its equity</li> <li>`partially_eligible`: User can get reward for specific currency, but custody balance is excluded</li> <li>`non_eligible`: User can not get reward for specific currency</li> </ul>"
+        },
+        "apr_sma7": {
+          "type": "number",
+          "example": 4.156,
+          "description": "Simple Moving Average (SMA) of the last 7 days of rewards for the currency"
+        }
+      },
+      "required": [
+        "eligibility_status",
+        "apr_sma7"
+      ]
+    }
+  },
+  "required": [
+    "jsonrpc",
+    "result"
+  ],
+  "type": "object"
+}

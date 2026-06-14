@@ -1,0 +1,7 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/contracts.json",
+  "title": "Contracts",
+  "type": "number",
+  "description": "It represents the order size in contract units. (Optional, may be absent in historical data)."
+}

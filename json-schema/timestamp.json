@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/timestamp.json",
+  "title": "Timestamp",
+  "example": 1536569522277,
+  "type": "integer",
+  "description": "The timestamp (milliseconds since the Unix epoch)"
+}

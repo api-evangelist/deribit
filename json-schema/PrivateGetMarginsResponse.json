@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/PrivateGetMarginsResponse.json",
+  "title": "Privategetmarginsresponse",
+  "properties": {
+    "jsonrpc": {
+      "type": "string",
+      "enum": [
+        "2.0"
+      ],
+      "description": "The JSON-RPC version (2.0)"
+    },
+    "id": {
+      "type": "integer",
+      "description": "The id that was sent in the request"
+    },
+    "result": {
+      "properties": {
+        "buy": {
+          "example": 0.01681367,
+          "type": "number",
+          "description": "Margin when buying"
+        },
+        "sell": {
+          "example": 0.01680479,
+          "type": "number",
+          "description": "Margin when selling"
+        },
+        "min_price": {
+          "$ref": "#/components/schemas/min_price"
+        },
+        "max_price": {
+          "$ref": "#/components/schemas/max_price"
+        }
+      },
+      "required": [
+        "buy",
+        "sell",
+        "min_price",
+        "max_price"
+      ],
+      "type": "object"
+    }
+  },
+  "required": [
+    "jsonrpc",
+    "result"
+  ],
+  "type": "object"
+}

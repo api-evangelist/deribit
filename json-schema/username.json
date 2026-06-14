@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/username.json",
+  "title": "Username",
+  "example": "MrTrader",
+  "type": "string",
+  "description": "System name or user defined subaccount alias"
+}

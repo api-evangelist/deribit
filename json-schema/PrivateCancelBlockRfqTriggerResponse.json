@@ -1,0 +1,6 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/PrivateCancelBlockRfqTriggerResponse.json",
+  "title": "Privatecancelblockrfqtriggerresponse",
+  "$ref": "#/components/schemas/block_rfq"
+}

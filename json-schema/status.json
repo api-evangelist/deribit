@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/status.json",
+  "title": "Status",
+  "enum": [
+    "admin_locked",
+    "waiting",
+    "confirmed",
+    "ready"
+  ],
+  "type": "string",
+  "description": "Wallet address status, values: [`admin_locked`, `waiting`, `confirmed`, `ready`]"
+}

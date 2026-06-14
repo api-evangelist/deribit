@@ -1,0 +1,7 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/wallet_address_type.json",
+  "title": "Wallet Address Type",
+  "type": "string",
+  "description": "Address type/purpose, allowed values : `deposit`"
+}

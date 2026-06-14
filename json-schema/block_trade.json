@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/block_trade.json",
+  "title": "Block Trade",
+  "properties": {
+    "id": {
+      "$ref": "#/components/schemas/block_trade_id"
+    },
+    "timestamp": {
+      "$ref": "#/components/schemas/timestamp"
+    },
+    "trades": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/user_trade"
+      }
+    },
+    "app_name": {
+      "type": "string",
+      "example": "Example Application",
+      "description": "The name of the application that executed the block trade on behalf of the user (optional)."
+    },
+    "broker_code": {
+      "type": "string",
+      "example": "2krM7sJsx",
+      "description": "Broker code associated with the broker block trade."
+    },
+    "broker_name": {
+      "type": "string",
+      "example": "Test Broker",
+      "description": "Name of the broker associated with the block trade."
+    }
+  },
+  "required": [
+    "id",
+    "timestamp",
+    "trades"
+  ],
+  "type": "object"
+}

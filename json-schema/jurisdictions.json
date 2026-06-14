@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/jurisdictions.json",
+  "title": "Jurisdictions",
+  "items": {
+    "type": "string",
+    "description": "Jurisdiction name"
+  },
+  "type": "array",
+  "description": "Jurisdictions a VASP belongs to"
+}

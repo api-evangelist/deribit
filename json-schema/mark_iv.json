@@ -1,0 +1,7 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/mark_iv.json",
+  "title": "Mark Iv",
+  "type": "number",
+  "description": "(Only for option) implied volatility for mark price"
+}

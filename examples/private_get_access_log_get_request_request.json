@@ -1,0 +1,9 @@
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "method": "private/get_access_log",
+  "params": {
+    "offset": 0,
+    "count": 3
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "jsonrpc": "2.0",
+  "id": 3601,
+  "method": "public/get_delivery_prices",
+  "params": {
+    "index_name": "btc_usd",
+    "offset": 0,
+    "count": 5
+  }
+}

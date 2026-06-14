@@ -1,0 +1,7 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/trigger_offset.json",
+  "title": "Trigger Offset",
+  "type": "number",
+  "description": "The maximum deviation from the price peak beyond which the order will be triggered (Only for trailing trigger orders)"
+}

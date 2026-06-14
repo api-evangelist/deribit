@@ -1,0 +1,9 @@
+{
+  "jsonrpc": "2.0",
+  "id": 42,
+  "method": "private/list_address_beneficiaries",
+  "params": {
+    "currency": "BTC",
+    "limit": 10
+  }
+}

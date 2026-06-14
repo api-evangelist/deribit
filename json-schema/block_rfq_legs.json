@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/block_rfq_legs.json",
+  "title": "Block Rfq Legs",
+  "items": {
+    "properties": {
+      "ratio": {
+        "type": "integer",
+        "description": "Ratio of amount between legs"
+      },
+      "instrument_name": {
+        "type": "string",
+        "example": "BTC-PERPETUAL",
+        "description": "Unique instrument identifier"
+      },
+      "direction": {
+        "type": "string",
+        "enum": [
+          "buy",
+          "sell"
+        ],
+        "description": "Direction: `buy`, or `sell`"
+      }
+    },
+    "type": "object"
+  },
+  "type": "array"
+}

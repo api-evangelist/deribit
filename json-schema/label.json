@@ -1,0 +1,7 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/label.json",
+  "title": "Label",
+  "type": "string",
+  "description": "User defined label (up to 64 characters)"
+}

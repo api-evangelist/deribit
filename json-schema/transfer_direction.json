@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/transfer_direction.json",
+  "title": "Transfer Direction",
+  "enum": [
+    "payment",
+    "income"
+  ],
+  "type": "string",
+  "description": "Transfer direction"
+}

@@ -1,0 +1,7 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/is_secondary_oto.json",
+  "title": "Is Secondary Oto",
+  "type": "boolean",
+  "description": "`true` if the order is an order that can be triggered by another order, otherwise not present."
+}

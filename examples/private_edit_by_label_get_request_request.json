@@ -1,0 +1,11 @@
+{
+  "jsonrpc": "2.0",
+  "id": 9,
+  "method": "private/edit_by_label",
+  "params": {
+    "instrument_name": "BTC-PERPETUAL",
+    "label": "i_love_deribit",
+    "amount": 150,
+    "price": 50111
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/position_move_trade.json",
+  "title": "Position Move Trade",
+  "properties": {
+    "source_uid": {
+      "type": "integer",
+      "description": "Trade source uid"
+    },
+    "target_uid": {
+      "type": "integer",
+      "description": "Trade target uid"
+    },
+    "instrument_name": {
+      "$ref": "#/components/schemas/instrument_name"
+    },
+    "direction": {
+      "$ref": "#/components/schemas/direction",
+      "description": "Trade direction from source perspective"
+    },
+    "price": {
+      "$ref": "#/components/schemas/price",
+      "description": "The price of the trade"
+    },
+    "amount": {
+      "type": "number",
+      "description": "Trade amount. For perpetual and inverse futures the amount is in USD units. For options and linear futures it is the underlying base currency coin."
+    }
+  },
+  "required": [
+    "instrument_name",
+    "direction",
+    "price",
+    "amount"
+  ],
+  "type": "object"
+}

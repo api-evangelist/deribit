@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/max_scope.json",
+  "title": "Max Scope",
+  "items": {
+    "type": "string"
+  },
+  "example": [
+    "account:read",
+    "trade:read",
+    "block_trade:read_write",
+    "wallet:none"
+  ],
+  "type": "array",
+  "description": "Describes maximal access for tokens generated with given key. If scope is not provided, its value is set as none.\n\n**\ud83d\udcd6 Related Article:** [Access Scope](https://docs.deribit.com/articles/access-scope)\n"
+}

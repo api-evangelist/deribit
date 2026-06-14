@@ -1,0 +1,7 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/interest_value.json",
+  "title": "Interest Value",
+  "type": "number",
+  "description": "Value used to calculate `realized_funding` in positions (perpetual only)"
+}

@@ -1,0 +1,8 @@
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "method": "private/get_block_rfq_quotes",
+  "params": {
+    "block_rfq_id": 1
+  }
+}

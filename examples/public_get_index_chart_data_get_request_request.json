@@ -1,0 +1,9 @@
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "method": "public/get_index_chart_data",
+  "params": {
+    "index_name": "btc_usd",
+    "range": "1m"
+  }
+}

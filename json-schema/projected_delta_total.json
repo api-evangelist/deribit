@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/projected_delta_total.json",
+  "title": "Projected Delta Total",
+  "example": 0.1334,
+  "type": "number",
+  "description": "The sum of position deltas without positions that will expire during closest expiration"
+}

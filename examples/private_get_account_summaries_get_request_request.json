@@ -1,0 +1,8 @@
+{
+  "jsonrpc": "2.0",
+  "id": 2515,
+  "method": "private/get_account_summaries",
+  "params": {
+    "extended": true
+  }
+}

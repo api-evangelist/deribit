@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/api_key.json",
+  "title": "Api Key",
+  "properties": {
+    "id": {
+      "$ref": "#/components/schemas/key_id"
+    },
+    "timestamp": {
+      "$ref": "#/components/schemas/timestamp"
+    },
+    "client_id": {
+      "$ref": "#/components/schemas/client_id"
+    },
+    "client_secret": {
+      "$ref": "#/components/schemas/client_secret"
+    },
+    "public_key": {
+      "$ref": "#/components/schemas/public_key"
+    },
+    "max_scope": {
+      "$ref": "#/components/schemas/max_scope"
+    },
+    "enabled": {
+      "$ref": "#/components/schemas/api_key_enabled"
+    },
+    "default": {
+      "$ref": "#/components/schemas/api_key_default"
+    },
+    "name": {
+      "$ref": "#/components/schemas/api_key_name"
+    },
+    "enabled_features": {
+      "$ref": "#/components/schemas/api_key_features"
+    },
+    "ip_whitelist": {
+      "type": "array",
+      "description": "List of IP addresses whitelisted for a selected key"
+    }
+  },
+  "required": [
+    "id",
+    "timestamp",
+    "client_id",
+    "client_secret",
+    "max_scope",
+    "default"
+  ],
+  "type": "object"
+}

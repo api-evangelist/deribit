@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/role.json",
+  "title": "Role",
+  "enum": [
+    "maker",
+    "taker"
+  ],
+  "type": "string",
+  "description": "Trade role of the user: `maker` or `taker`"
+}

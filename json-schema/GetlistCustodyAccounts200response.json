@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/GetlistCustodyAccounts200response.json",
+  "title": "Getlistcustodyaccounts200Response",
+  "allOf": [
+    {
+      "$ref": "#/components/schemas/ErrorResponse"
+    },
+    {
+      "properties": {
+        "result": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/custody_account"
+          }
+        }
+      }
+    }
+  ]
+}

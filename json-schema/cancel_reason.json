@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/cancel_reason.json",
+  "title": "Cancel Reason",
+  "enum": [
+    "user_request",
+    "autoliquidation",
+    "cancel_on_disconnect",
+    "risk_mitigation",
+    "pme_risk_reduction",
+    "pme_account_locked",
+    "position_locked",
+    "mmp_trigger",
+    "mmp_config_curtailment",
+    "edit_post_only_reject",
+    "oco_other_closed",
+    "oto_primary_closed",
+    "settlement"
+  ],
+  "type": "string",
+  "description": "Enumerated reason behind cancel `\"user_request\"`, `\"autoliquidation\"`, `\"cancel_on_disconnect\"`, `\"risk_mitigation\"`, `\"pme_risk_reduction\"` (portfolio margining risk reduction), `\"pme_account_locked\"` (portfolio margining account locked per currency), `\"position_locked\"`, `\"mmp_trigger\"` (market maker protection), `\"mmp_config_curtailment\"` (market maker configured quantity decreased), `\"edit_post_only_reject\"` (cancelled on edit because of `reject_post_only` setting), `\"oco_other_closed\"` (the oco order linked to this order was closed), `\"oto_primary_closed\"` (the oto primary order that was going to trigger this order was cancelled), `\"settlement\"` (closed because of a settlement)"
+}

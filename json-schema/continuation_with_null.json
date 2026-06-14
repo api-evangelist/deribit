@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/continuation_with_null.json",
+  "title": "Continuation With Null",
+  "example": 429946,
+  "type": "integer",
+  "description": "Continuation token for pagination. `NULL` when no continuation."
+}

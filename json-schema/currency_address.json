@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/currency_address.json",
+  "title": "Currency Address",
+  "example": "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa",
+  "type": "string",
+  "description": "Address in proper format for currency"
+}

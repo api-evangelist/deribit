@@ -1,0 +1,7 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/implv.json",
+  "title": "Implv",
+  "type": "number",
+  "description": "Implied volatility in percent. (Only if `advanced=\"implv\"`)"
+}

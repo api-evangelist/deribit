@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/currency_address_type.json",
+  "title": "Currency Address Type",
+  "enum": [
+    "HOSTED",
+    "UNHOSTED",
+    "UNKNOWN"
+  ],
+  "example": "HOSTED",
+  "type": "string",
+  "description": "Address type acording to Notabene"
+}

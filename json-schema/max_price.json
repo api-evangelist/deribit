@@ -1,0 +1,7 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/max_price.json",
+  "title": "Max Price",
+  "type": "number",
+  "description": "The maximum price for the future. Any buy orders you submit higher than this price, will be clamped to this maximum."
+}

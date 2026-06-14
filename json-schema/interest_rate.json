@@ -1,0 +1,7 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/interest_rate.json",
+  "title": "Interest Rate",
+  "type": "number",
+  "description": "Interest rate used in implied volatility calculations (options only)"
+}

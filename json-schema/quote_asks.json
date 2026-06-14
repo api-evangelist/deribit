@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/quote_asks.json",
+  "title": "Quote Asks",
+  "items": {
+    "properties": {
+      "makers": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "description": "Maker of the quote"
+        }
+      },
+      "price": {
+        "type": "number",
+        "description": "Price of a quote"
+      },
+      "last_update_timestamp": {
+        "type": "integer",
+        "example": 1536569522277,
+        "description": "Timestamp of the last update of the quote (milliseconds since the UNIX epoch)"
+      },
+      "execution_instruction": {
+        "type": "string",
+        "enum": [
+          "any_part_of",
+          "all_or_none"
+        ],
+        "description": "Execution instruction of the quote. Default - `any_part_of`\n\n- `\"all_or_none (AON)\"` - The quote can only be filled entirely or not at all, ensuring that its amount matches the amount specified in the Block RFQ. Additionally, 'all_or_none' quotes have priority over 'any_part_of' quotes at the same price level.\n- `\"any_part_of (APO)\"` - The quote can be filled either partially or fully, with the filled amount potentially being less than the Block RFQ amount."
+      },
+      "amount": {
+        "type": "number",
+        "description": "This value multiplied by the ratio of a leg gives trade size on that leg."
+      },
+      "expires_at": {
+        "type": "integer",
+        "example": 1745312540321,
+        "description": "The timestamp when the quote expires (milliseconds since the Unix epoch), equal to the earliest expiry of placed quotes"
+      }
+    },
+    "type": "object"
+  },
+  "type": "array"
+}

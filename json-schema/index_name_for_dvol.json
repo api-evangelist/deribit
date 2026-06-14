@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/index_name_for_dvol.json",
+  "title": "Index Name For Dvol",
+  "enum": [
+    "btc_usd",
+    "eth_usd"
+  ],
+  "type": "string",
+  "description": "Index identifier supported for DVOL"
+}

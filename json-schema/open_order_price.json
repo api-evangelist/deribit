@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/open_order_price.json",
+  "title": "Open Order Price",
+  "oneOf": [
+    {
+      "type": "number"
+    },
+    {
+      "enum": [
+        "market_price"
+      ],
+      "type": "string"
+    }
+  ],
+  "description": "Price in base currency or \"market_price\" in case of open trigger market orders"
+}

@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/address_beneficiary_item.json",
+  "title": "Address Beneficiary Item",
+  "properties": {
+    "currency": {
+      "$ref": "#/components/schemas/currency"
+    },
+    "address": {
+      "$ref": "#/components/schemas/currency_address"
+    },
+    "tag": {
+      "type": "string",
+      "nullable": true,
+      "description": "Tag for XRP addresses (optional)"
+    },
+    "user_id": {
+      "$ref": "#/components/schemas/user_id"
+    },
+    "agreed": {
+      "$ref": "#/components/schemas/agree_to_share_with_3rd_party"
+    },
+    "personal": {
+      "$ref": "#/components/schemas/personal_wallet"
+    },
+    "unhosted": {
+      "$ref": "#/components/schemas/unhosted_wallet"
+    },
+    "beneficiary_vasp_name": {
+      "$ref": "#/components/schemas/beneficiary_vasp_name"
+    },
+    "beneficiary_vasp_did": {
+      "$ref": "#/components/schemas/beneficiary_vasp_did"
+    },
+    "beneficiary_vasp_website": {
+      "$ref": "#/components/schemas/beneficiary_vasp_website"
+    },
+    "beneficiary_first_name": {
+      "$ref": "#/components/schemas/beneficiary_first_name"
+    },
+    "beneficiary_last_name": {
+      "$ref": "#/components/schemas/beneficiary_last_name"
+    },
+    "beneficiary_company_name": {
+      "$ref": "#/components/schemas/beneficiary_company_name"
+    },
+    "beneficiary_address": {
+      "$ref": "#/components/schemas/beneficiary_address"
+    },
+    "created": {
+      "$ref": "#/components/schemas/timestamp"
+    },
+    "updated": {
+      "$ref": "#/components/schemas/timestamp"
+    }
+  },
+  "required": [
+    "currency",
+    "address",
+    "user_id",
+    "agreed",
+    "personal",
+    "unhosted",
+    "beneficiary_vasp_name",
+    "beneficiary_vasp_did",
+    "beneficiary_address",
+    "created",
+    "updated"
+  ],
+  "type": "object"
+}

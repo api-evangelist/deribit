@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/enabled_field.json",
+  "title": "Enabled Field",
+  "example": true,
+  "type": "boolean",
+  "description": "Current configuration status"
+}

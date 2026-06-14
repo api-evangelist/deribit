@@ -1,0 +1,8 @@
+{
+  "jsonrpc": "2.0",
+  "id": 47,
+  "method": "private/cancel_by_label",
+  "params": {
+    "label": "label"
+  }
+}

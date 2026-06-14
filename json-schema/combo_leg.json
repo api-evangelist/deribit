@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/combo_leg.json",
+  "title": "Combo Leg",
+  "properties": {
+    "instrument_name": {
+      "$ref": "#/components/schemas/instrument_name"
+    },
+    "amount": {
+      "$ref": "#/components/schemas/combo_leg_amount"
+    }
+  },
+  "type": "object"
+}

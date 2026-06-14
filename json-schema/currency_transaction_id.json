@@ -1,0 +1,9 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/currency_transaction_id.json",
+  "title": "Currency Transaction Id",
+  "nullable": true,
+  "example": "1b1fb5568515e2b79503501e3d3680b2d0838d5dfc2d15a04eb8cd9fbbe0b572",
+  "type": "string",
+  "description": "Transaction id in proper format for currency, `null` if id is not available"
+}

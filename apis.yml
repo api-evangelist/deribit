@@ -35,7 +35,9 @@ apis:
       - type: Documentation
         url: https://docs.deribit.com/
       - type: OpenAPI
-        url: https://docs.deribit.com/
+        url: https://docs.deribit.com/specifications/deribit_openapi.json
+      - type: OpenAPI
+        url: https://raw.githubusercontent.com/api-evangelist/deribit/refs/heads/main/openapi/deribit-openapi.json
       - type: Authentication
         url: https://docs.deribit.com/articles/authentication
       - type: RateLimits

@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/trade_trigger.json",
+  "title": "Trade Trigger",
+  "properties": {
+    "state": {
+      "$ref": "#/components/schemas/trade_trigger_state"
+    },
+    "price": {
+      "type": "number",
+      "description": "Price of the trade trigger"
+    },
+    "direction": {
+      "type": "string",
+      "enum": [
+        "buy",
+        "sell"
+      ],
+      "description": "Direction of the trade trigger"
+    },
+    "cancel_reason": {
+      "type": "string",
+      "description": "Reason for cancellation, present only when state is cancelled"
+    }
+  },
+  "required": [
+    "state",
+    "price",
+    "direction"
+  ],
+  "type": "object",
+  "description": "Contains information about the trade trigger state"
+}

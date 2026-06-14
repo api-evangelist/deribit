@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/address_info_required.json",
+  "title": "Address Info Required",
+  "example": true,
+  "type": "boolean",
+  "description": "Signalises that addition information regarding the beneficiary of the address is required"
+}

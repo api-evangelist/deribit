@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/currency_portfolio.json",
+  "title": "Currency Portfolio",
+  "properties": {
+    "margin_balance": {
+      "type": "number",
+      "description": "The account's margin balance. When cross collateral is enabled, this aggregated value is calculated by converting the sum of each cross collateral currency's value to the given currency, using each cross collateral currency's index."
+    },
+    "currency": {
+      "type": "string",
+      "enum": [
+        "btc",
+        "eth"
+      ],
+      "description": "The selected currency"
+    },
+    "maintenance_margin": {
+      "type": "number",
+      "description": "The maintenance margin. When cross collateral is enabled, this aggregated value is calculated by converting the sum of each cross collateral currency's value to the given currency, using each cross collateral currency's index."
+    },
+    "initial_margin": {
+      "type": "number",
+      "description": "The account's initial margin. When cross collateral is enabled, this aggregated value is calculated by converting the sum of each cross collateral currency's value to the given currency, using each cross collateral currency's index."
+    },
+    "equity": {
+      "type": "number",
+      "description": "The account's current equity"
+    },
+    "balance": {
+      "type": "number",
+      "description": "The account's balance"
+    },
+    "available_withdrawal_funds": {
+      "type": "number",
+      "description": "The account's available to withdrawal funds"
+    },
+    "available_funds": {
+      "type": "number",
+      "description": "The account's available funds. When cross collateral is enabled, this aggregated value is calculated by converting the sum of each cross collateral currency's value to the given currency, using each cross collateral currency's index."
+    },
+    "additional_reserve": {
+      "$ref": "#/components/schemas/additional_reserve"
+    },
+    "spot_reserve": {
+      "type": "number",
+      "description": "The account's balance reserved in active spot orders"
+    }
+  },
+  "required": [
+    "margin_balance",
+    "currency",
+    "maintenance_margin",
+    "initial_margin",
+    "equity",
+    "balance",
+    "available_withdrawal_funds",
+    "available_funds",
+    "additional_reserve",
+    "spot_reserve"
+  ],
+  "type": "object"
+}

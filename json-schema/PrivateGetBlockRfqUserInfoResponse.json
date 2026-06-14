@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/PrivateGetBlockRfqUserInfoResponse.json",
+  "title": "Privategetblockrfquserinforesponse",
+  "properties": {
+    "jsonrpc": {
+      "type": "string",
+      "enum": [
+        "2.0"
+      ],
+      "description": "The JSON-RPC version (2.0)"
+    },
+    "id": {
+      "type": "integer",
+      "description": "The id that was sent in the request"
+    },
+    "result": {
+      "type": "object",
+      "properties": {
+        "parent": {
+          "type": "object",
+          "properties": {
+            "identity": {
+              "type": "string",
+              "description": "Group-level alias identifying the account group as a whole."
+            },
+            "is_maker": {
+              "type": "boolean",
+              "description": "Indicates whether the Parent Identity has maker scope."
+            }
+          },
+          "description": "Parent Identity (group alias), representing the overall account group (main + subaccounts)."
+        },
+        "users": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "user_id": {
+                "$ref": "#/components/schemas/user_id"
+              },
+              "taker_rating": {
+                "type": "number",
+                "description": "Taker rating associated with this account, if available."
+              },
+              "identity": {
+                "type": "string",
+                "description": "Specific alias identifying this account individually."
+              },
+              "is_maker": {
+                "type": "boolean",
+                "description": "Indicates whether this account has maker scope."
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "required": [
+    "jsonrpc",
+    "result"
+  ],
+  "type": "object"
+}

@@ -1,0 +1,6 @@
+{
+  "jsonrpc": "2.0",
+  "id": 2,
+  "method": "private/get_affiliate_program_info",
+  "params": {}
+}

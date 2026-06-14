@@ -1,0 +1,8 @@
+{
+  "jsonrpc": "2.0",
+  "id": 8190,
+  "method": "private/remove_api_key",
+  "params": {
+    "id": 2
+  }
+}

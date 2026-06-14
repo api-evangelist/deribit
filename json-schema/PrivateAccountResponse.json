@@ -1,0 +1,389 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/PrivateAccountResponse.json",
+  "title": "Privateaccountresponse",
+  "properties": {
+    "jsonrpc": {
+      "type": "string",
+      "enum": [
+        "2.0"
+      ],
+      "description": "The JSON-RPC version (2.0)"
+    },
+    "id": {
+      "type": "integer",
+      "description": "The id that was sent in the request"
+    },
+    "result": {
+      "properties": {
+        "total_pl": {
+          "example": 0.02032221,
+          "type": "number",
+          "description": "Profit and loss"
+        },
+        "session_rpl": {
+          "$ref": "#/components/schemas/rpl"
+        },
+        "session_upl": {
+          "$ref": "#/components/schemas/upl"
+        },
+        "available_funds": {
+          "example": 2.2638913,
+          "type": "number",
+          "description": "The account's available funds. When cross collateral is enabled, this aggregated value is calculated by converting the sum of each cross collateral currency's value to the given currency, using each cross collateral currency's index."
+        },
+        "available_withdrawal_funds": {
+          "type": "number",
+          "example": 2.26,
+          "description": "The account's available to withdrawal funds"
+        },
+        "margin_balance": {
+          "type": "number",
+          "example": 2.25,
+          "description": "The account's margin balance. When cross collateral is enabled, this aggregated value is calculated by converting the sum of each cross collateral currency's value to the given currency, using each cross collateral currency's index."
+        },
+        "balance": {
+          "example": 3.4906363,
+          "type": "number",
+          "description": "The account's balance"
+        },
+        "spot_reserve": {
+          "example": 0.3,
+          "type": "number",
+          "description": "The account's balance reserved in active spot orders"
+        },
+        "additional_reserve": {
+          "$ref": "#/components/schemas/additional_reserve"
+        },
+        "fee_balance": {
+          "$ref": "#/components/schemas/fee_balance"
+        },
+        "fee_group": {
+          "type": "string",
+          "description": "Fee group indicates the level of fee discounts applied to an account. Use `extended`: `true` to view this field. If the field is missing, the account is not assigned to any fee group. **\ud83d\udcd6 Related Support Article:** [Automatically applied volume based fee discounts](https://support.deribit.com/hc/en-us/articles/25944746248989-Fees#heading-11)"
+        },
+        "currency": {
+          "example": "ETH",
+          "type": "string",
+          "description": "The selected currency"
+        },
+        "delta_total": {
+          "$ref": "#/components/schemas/delta_total"
+        },
+        "projected_delta_total": {
+          "$ref": "#/components/schemas/projected_delta_total"
+        },
+        "deposit_address": {
+          "example": "14diAAyXL5UzhPTCKC998ch2GV7DMb7yDi",
+          "type": "string",
+          "description": "The deposit address for the account (if available)"
+        },
+        "email": {
+          "example": "support@deribit.com",
+          "type": "string",
+          "description": "User email (available when parameter `extended` = `true`)"
+        },
+        "equity": {
+          "example": 2.6437733,
+          "type": "number",
+          "description": "The account's current equity"
+        },
+        "futures_pl": {
+          "example": 0,
+          "type": "number",
+          "description": "Futures profit and Loss"
+        },
+        "futures_session_rpl": {
+          "example": 0,
+          "type": "number",
+          "description": "Futures session realized profit and Loss"
+        },
+        "futures_session_upl": {
+          "example": 0,
+          "type": "number",
+          "description": "Futures session unrealized profit and Loss"
+        },
+        "initial_margin": {
+          "example": 0.379882,
+          "type": "number",
+          "description": "The account's initial margin. When cross collateral is enabled, this aggregated value is calculated by converting the sum of each cross collateral currency's value to the given currency, using each cross collateral currency's index."
+        },
+        "maintenance_margin": {
+          "example": 0.1334519,
+          "type": "number",
+          "description": "The maintenance margin. When cross collateral is enabled, this aggregated value is calculated by converting the sum of each cross collateral currency's value to the given currency, using each cross collateral currency's index."
+        },
+        "estimated_liquidation_ratio": {
+          "$ref": "#/components/schemas/estimated_liquidation_ratio"
+        },
+        "system_name": {
+          "example": "myname",
+          "type": "string",
+          "description": "System generated user nickname (available when parameter `extended` = `true`)"
+        },
+        "options_delta": {
+          "example": 0,
+          "type": "number",
+          "description": "Options summary delta"
+        },
+        "options_gamma": {
+          "example": 0,
+          "type": "number",
+          "description": "Options summary gamma"
+        },
+        "options_pl": {
+          "example": 0,
+          "type": "number",
+          "description": "Options profit and Loss"
+        },
+        "options_session_rpl": {
+          "example": 0,
+          "type": "number",
+          "description": "Options session realized profit and Loss"
+        },
+        "options_session_upl": {
+          "example": 0,
+          "type": "number",
+          "description": "Options session unrealized profit and Loss"
+        },
+        "options_theta": {
+          "example": 0,
+          "type": "number",
+          "description": "Options summary theta"
+        },
+        "options_value": {
+          "example": 0,
+          "type": "number",
+          "description": "Options value"
+        },
+        "options_vega": {
+          "example": 0,
+          "type": "number",
+          "description": "Options summary vega"
+        },
+        "options_gamma_map": {
+          "type": "object",
+          "description": "Map of options' gammas per index"
+        },
+        "options_theta_map": {
+          "type": "object",
+          "description": "Map of options' thetas per index"
+        },
+        "options_vega_map": {
+          "type": "object",
+          "description": "Map of options' vegas per index"
+        },
+        "security_keys_enabled": {
+          "example": false,
+          "type": "boolean",
+          "description": "Whether Security Key authentication is enabled (available when parameter `extended` = `true`)"
+        },
+        "mmp_enabled": {
+          "example": false,
+          "type": "boolean",
+          "description": "Whether MMP is enabled (available when parameter `extended` = `true`)"
+        },
+        "projected_initial_margin": {
+          "$ref": "#/components/schemas/projected_initial_margin"
+        },
+        "projected_maintenance_margin": {
+          "$ref": "#/components/schemas/projected_maintenance_margin"
+        },
+        "username": {
+          "type": "string",
+          "example": "name",
+          "description": "Account name (given by user) (available when parameter `extended` = `true`)"
+        },
+        "type": {
+          "enum": [
+            "main",
+            "subaccount"
+          ],
+          "type": "string",
+          "description": "Account type (available when parameter `extended` = `true`)"
+        },
+        "login_enabled": {
+          "type": "boolean",
+          "example": false,
+          "description": "Whether account is loginable using email and password (available when parameter `extended` = `true` and account is a subaccount)"
+        },
+        "id": {
+          "type": "integer",
+          "example": 12354,
+          "description": "Account id (available when parameter `extended` = `true`)"
+        },
+        "portfolio_margining_enabled": {
+          "type": "boolean",
+          "example": true,
+          "description": "`true` when portfolio margining is enabled for user"
+        },
+        "cross_collateral_enabled": {
+          "type": "boolean",
+          "example": true,
+          "description": "When `true` cross collateral is enabled for user"
+        },
+        "margin_model": {
+          "type": "string",
+          "example": "segregated_sm",
+          "description": "Name of user's currently enabled margin model"
+        },
+        "total_equity_usd": {
+          "example": 2.6437733,
+          "type": "number",
+          "description": "Optional (only for users using cross margin). The account's total equity in all cross collateral currencies, expressed in USD"
+        },
+        "total_initial_margin_usd": {
+          "example": 0.379882,
+          "type": "number",
+          "description": "Optional (only for users using cross margin). The account's total initial margin in all cross collateral currencies, expressed in USD"
+        },
+        "total_maintenance_margin_usd": {
+          "example": 0.1334519,
+          "type": "number",
+          "description": "Optional (only for users using cross margin). The account's total maintenance margin in all cross collateral currencies, expressed in USD"
+        },
+        "total_margin_balance_usd": {
+          "type": "number",
+          "example": 2.25,
+          "description": "Optional (only for users using cross margin). The account's total margin balance in all cross collateral currencies, expressed in USD"
+        },
+        "total_delta_total_usd": {
+          "type": "number",
+          "example": 1.8,
+          "description": "Optional (only for users using cross margin). The account's total delta total in all cross collateral currencies, expressed in USD"
+        },
+        "interuser_transfers_enabled": {
+          "type": "boolean",
+          "example": false,
+          "description": "`true` when the inter-user transfers are enabled for user (available when parameter `extended` = `true`)"
+        },
+        "referrer_id": {
+          "type": "string",
+          "example": "517.6035",
+          "description": "Optional identifier of the referrer (of the affiliation program, and available when parameter `extended` = `true`), which link was used by this account at registration. It coincides with suffix of the affiliation link path after `/reg-`"
+        },
+        "limits": {
+          "$ref": "#/components/schemas/api_limits"
+        },
+        "creation_timestamp": {
+          "type": "integer",
+          "example": 1542100802842,
+          "description": "Time at which the account was created (milliseconds since the Unix epoch; available when parameter `extended` = `true`)"
+        },
+        "has_non_block_chain_equity": {
+          "type": "boolean",
+          "description": "Optional field returned with value `true` when user has non block chain equity that is excluded from proof of reserve calculations"
+        },
+        "self_trading_reject_mode": {
+          "type": "string",
+          "description": "Self trading rejection behavior - `reject_taker` or `cancel_maker` (available when parameter `extended` = `true`)"
+        },
+        "self_trading_extended_to_subaccounts": {
+          "type": "string",
+          "description": "`true` if self trading rejection behavior is applied to trades between subaccounts (available when parameter `extended` = `true`)"
+        },
+        "fees": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object",
+              "properties": {
+                "default": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "description": "Fee type - `relative` if fee is calculated as a fraction of base instrument fee, `fixed` if fee is calculated solely using user fee"
+                    },
+                    "taker": {
+                      "type": "number",
+                      "description": "Taker fee"
+                    },
+                    "maker": {
+                      "type": "number",
+                      "description": "Maker fee"
+                    }
+                  },
+                  "required": [
+                    "type",
+                    "taker",
+                    "maker"
+                  ]
+                },
+                "block_trade": {
+                  "type": "number",
+                  "description": "Block trade fee (if applicable)"
+                }
+              },
+              "required": [
+                "default"
+              ]
+            }
+          },
+          "description": "Fee structure for all currency pairs and instrument types related to the currency (available when parameter `extended` = `true` and user has any discounts). Keys are index names (e.g., \"btc_usd\"), values are objects with instrument types as keys (option, perpetual, future)."
+        },
+        "affiliate_promotion_fee": {
+          "type": "number",
+          "example": 0,
+          "description": "Affiliate promotion fee (if greater than 0.0)"
+        },
+        "trading_products_details": {
+          "type": "object",
+          "description": "Which trading products are enabled or can be overwritten for the account"
+        },
+        "receive_notifications": {
+          "type": "boolean",
+          "example": false,
+          "description": "Whether the account receives notifications"
+        },
+        "is_direct_access_allowed": {
+          "type": "boolean",
+          "example": false,
+          "description": "Whether Direct Access trading is enabled for the account."
+        }
+      },
+      "required": [
+        "equity",
+        "currency",
+        "maintenance_margin",
+        "initial_margin",
+        "available_funds",
+        "available_withdrawal_funds",
+        "balance",
+        "session_upl",
+        "session_rpl",
+        "total_pl",
+        "options_pl",
+        "options_session_upl",
+        "options_session_rpl",
+        "options_delta",
+        "options_gamma",
+        "options_vega",
+        "options_value",
+        "options_theta",
+        "futures_pl",
+        "options_gamma_map",
+        "options_theta_map",
+        "options_vega_map",
+        "futures_session_upl",
+        "futures_session_rpl",
+        "projected_maintenance_margin",
+        "delta_total",
+        "projected_delta_total",
+        "security_keys_enabled",
+        "system_name",
+        "username",
+        "email",
+        "type",
+        "id"
+      ],
+      "type": "object"
+    }
+  },
+  "required": [
+    "jsonrpc",
+    "result"
+  ],
+  "type": "object"
+}

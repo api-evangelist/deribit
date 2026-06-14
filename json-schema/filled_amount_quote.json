@@ -1,0 +1,7 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/filled_amount_quote.json",
+  "title": "Filled Amount Quote",
+  "type": "number",
+  "description": "Filled amount of the quote. For perpetual and futures the filled_amount is in USD units, for options - in units or corresponding cryptocurrency contracts, e.g., BTC or ETH."
+}

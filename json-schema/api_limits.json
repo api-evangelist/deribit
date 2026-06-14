@@ -1,0 +1,7 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/api_limits.json",
+  "title": "Api Limits",
+  "type": "object",
+  "description": "Returned object is described in [separate document](https://support.deribit.com/hc/en-us/articles/25944617523357-Rate-Limits)."
+}

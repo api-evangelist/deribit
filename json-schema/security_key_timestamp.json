@@ -1,0 +1,7 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/security_key_timestamp.json",
+  "title": "Security Key Timestamp",
+  "type": "integer",
+  "description": "Timestamp when Security Key was created (milliseconds since the UNIX epoch)"
+}

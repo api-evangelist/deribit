@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/user_change.json",
+  "title": "User Change",
+  "properties": {
+    "instrument_name": {
+      "$ref": "#/components/schemas/instrument_name"
+    },
+    "trades": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/user_trade"
+      }
+    },
+    "orders": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/order"
+      }
+    },
+    "position": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/position"
+      }
+    }
+  },
+  "type": "object"
+}

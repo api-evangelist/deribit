@@ -1,0 +1,7 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/trigger_price.json",
+  "title": "Trigger Price",
+  "type": "number",
+  "description": "Trigger price (Only for future trigger orders)"
+}

@@ -1,0 +1,11 @@
+{
+  "jsonrpc": "2.0",
+  "id": 4,
+  "method": "private/get_transaction_log",
+  "params": {
+    "currency": "BTC",
+    "start_timestamp": "1613657734000",
+    "end_timestamp": "1613660407000",
+    "count": 5
+  }
+}

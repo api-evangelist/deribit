@@ -1,0 +1,22 @@
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "method": "private/simulate_block_trade",
+  "params": {
+    "role": "maker",
+    "trades": [
+      {
+        "instrument_name": "BTC-PERPETUAL",
+        "direction": "buy",
+        "price": 11624,
+        "amount": 40
+      },
+      {
+        "instrument_name": "BTC-9AUG19-10250-P",
+        "direction": "buy",
+        "amount": 1.2,
+        "price": 0.0707
+      }
+    ]
+  }
+}

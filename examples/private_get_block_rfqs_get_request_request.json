@@ -1,0 +1,10 @@
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "method": "private/get_block_rfqs",
+  "params": {
+    "count": 20,
+    "state": "open",
+    "role": "maker"
+  }
+}

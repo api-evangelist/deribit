@@ -1,0 +1,7 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/display_amount.json",
+  "title": "Display Amount",
+  "type": "number",
+  "description": "The actual display amount of iceberg order. Absent for other types of orders."
+}

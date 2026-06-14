@@ -1,0 +1,8 @@
+{
+  "jsonrpc": "2.0",
+  "id": 24,
+  "method": "private/cancel_all_block_rfq_quotes",
+  "params": {
+    "block_rfq_id": 154
+  }
+}

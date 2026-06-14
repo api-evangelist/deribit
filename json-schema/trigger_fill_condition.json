@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/trigger_fill_condition.json",
+  "title": "Trigger Fill Condition",
+  "enum": [
+    "first_hit",
+    "complete_fill",
+    "incremental"
+  ],
+  "type": "string",
+  "description": "<p>The fill condition of the linked order (Only for linked order types), default: `first_hit`.</p> <ul> <li>`\"first_hit\"` - any execution of the primary order will fully cancel/place all secondary orders.</li> <li>`\"complete_fill\"` - a complete execution (meaning the primary order no longer exists) will cancel/place the secondary orders.</li> <li>`\"incremental\"` - any fill of the primary order will cause proportional partial cancellation/placement of the secondary order. The amount that will be subtracted/added to the secondary order will be rounded down to the contract size.</li> </ul>"
+}

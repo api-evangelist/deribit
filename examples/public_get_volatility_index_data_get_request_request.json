@@ -1,0 +1,11 @@
+{
+  "jsonrpc": "2.0",
+  "id": 833,
+  "method": "public/get_volatility_index_data",
+  "params": {
+    "currency": "BTC",
+    "start_timestamp": 1599373800000,
+    "end_timestamp": 1599376800000,
+    "resolution": "60"
+  }
+}

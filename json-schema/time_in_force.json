@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/time_in_force.json",
+  "title": "Time In Force",
+  "enum": [
+    "good_til_cancelled",
+    "good_til_day",
+    "fill_or_kill",
+    "immediate_or_cancel"
+  ],
+  "type": "string",
+  "description": "Order time in force: `\"good_til_cancelled\"`, `\"good_til_day\"`, `\"fill_or_kill\"` or `\"immediate_or_cancel\"`"
+}

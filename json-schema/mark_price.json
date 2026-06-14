@@ -1,0 +1,7 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/mark_price.json",
+  "title": "Mark Price",
+  "type": "number",
+  "description": "The mark price for the instrument"
+}

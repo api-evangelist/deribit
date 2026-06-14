@@ -1,0 +1,25 @@
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "method": "private/execute_block_trade",
+  "params": {
+    "nonce": "bszyprbq",
+    "timestamp": 1590485535899,
+    "role": "maker",
+    "trades": [
+      {
+        "instrument_name": "BTC-PERPETUAL",
+        "direction": "sell",
+        "price": 8900,
+        "amount": 200000
+      },
+      {
+        "instrument_name": "BTC-28MAY20-9000-C",
+        "direction": "sell",
+        "amount": 5,
+        "price": 0.0133
+      }
+    ],
+    "counterparty_signature": "1590485595899.1Mn52L_Q.lNyNBzXXo-_QBT_wDuMgnhA7uS9tBqdQ5TLN6rxbuoAiQhyaJYGJrm5IV_9enp9niY_x8D60AJLm3yEKPUY1Dv3T0TW0n5-ADPpJF7Fpj0eVDZpZ6QCdX8snBWrSJ0TtqevnO64RCBlN1dIm2T70PP9dlhiqPDAUYI4fpB1vLYI"
+  }
+}

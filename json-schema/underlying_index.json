@@ -1,0 +1,7 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/underlying_index.json",
+  "title": "Underlying Index",
+  "type": "number",
+  "description": "Name of the underlying future, or `index_price` (options only)"
+}

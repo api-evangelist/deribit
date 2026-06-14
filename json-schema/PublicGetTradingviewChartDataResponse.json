@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/PublicGetTradingviewChartDataResponse.json",
+  "title": "Publicgettradingviewchartdataresponse",
+  "properties": {
+    "jsonrpc": {
+      "type": "string",
+      "enum": [
+        "2.0"
+      ],
+      "description": "The JSON-RPC version (2.0)"
+    },
+    "id": {
+      "type": "integer",
+      "description": "The id that was sent in the request"
+    },
+    "result": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "ok",
+            "no_data"
+          ],
+          "description": "Status of the query: `ok` or `no_data`"
+        },
+        "ticks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/timestamp"
+          },
+          "description": "Values of the time axis given in milliseconds since UNIX epoch"
+        },
+        "volume": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/chart_volume"
+          },
+          "description": "List of volume bars (in base currency, one per candle)"
+        },
+        "cost": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/chart_volume"
+          },
+          "description": "List of cost bars (volume in quote currency, one per candle)"
+        },
+        "open": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/quote_price"
+          },
+          "description": "List of prices at open (one per candle)"
+        },
+        "close": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/quote_price"
+          },
+          "description": "List of prices at close (one per candle)"
+        },
+        "high": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/quote_price"
+          },
+          "description": "List of highest price levels (one per candle)"
+        },
+        "low": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/quote_price"
+          },
+          "description": "List of lowest price levels (one per candle)"
+        }
+      }
+    }
+  },
+  "required": [
+    "jsonrpc",
+    "result"
+  ],
+  "type": "object"
+}

@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/kind.json",
+  "title": "Kind",
+  "enum": [
+    "future",
+    "option",
+    "spot",
+    "future_combo",
+    "option_combo"
+  ],
+  "type": "string",
+  "description": "Instrument kind: `\"future\"`, `\"option\"`, `\"spot\"`, `\"future_combo\"`, `\"option_combo\"`"
+}

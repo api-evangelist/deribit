@@ -1,0 +1,12 @@
+{
+  "jsonrpc": "2.0",
+  "id": 22222,
+  "method": "private/simulate_portfolio",
+  "params": {
+    "currency": "BTC",
+    "add_positions": true,
+    "simulated_positions": {
+      "BTC-PERPETUAL": 1
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/result_count.json",
+  "title": "Result Count",
+  "example": 101,
+  "type": "integer",
+  "description": "Total number of results available"
+}

@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/withdrawal_policy_limit_bucket.json",
+  "title": "Withdrawal Policy Limit Bucket",
+  "enum": [
+    "h24"
+  ],
+  "type": "string",
+  "description": "Withdrawal Policy limit bucket, i.e. `\"h24\"`"
+}

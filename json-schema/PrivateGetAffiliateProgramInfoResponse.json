@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/PrivateGetAffiliateProgramInfoResponse.json",
+  "title": "Privategetaffiliateprograminforesponse",
+  "properties": {
+    "jsonrpc": {
+      "type": "string",
+      "enum": [
+        "2.0"
+      ],
+      "description": "The JSON-RPC version (2.0)"
+    },
+    "id": {
+      "type": "integer",
+      "description": "The id that was sent in the request"
+    },
+    "result": {
+      "properties": {
+        "is_enabled": {
+          "type": "boolean",
+          "description": "Status of affiliate program"
+        },
+        "number_of_affiliates": {
+          "type": "number",
+          "description": "Number of affiliates"
+        },
+        "link": {
+          "type": "string",
+          "description": "Affiliate link"
+        },
+        "received": {
+          "type": "object",
+          "properties": {
+            "eth": {
+              "type": "number",
+              "description": "Total payout received in ETH"
+            },
+            "btc": {
+              "type": "number",
+              "description": "Total payout received in BTC"
+            }
+          },
+          "required": [
+            "btc",
+            "eth"
+          ]
+        }
+      },
+      "required": [
+        "is_enabled"
+      ],
+      "type": "object"
+    }
+  },
+  "required": [
+    "jsonrpc",
+    "result"
+  ],
+  "type": "object"
+}

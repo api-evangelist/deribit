@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/original_order_type.json",
+  "title": "Original Order Type",
+  "enum": [
+    "market",
+    "market_limit"
+  ],
+  "type": "string",
+  "description": "Original order type. Optional field"
+}

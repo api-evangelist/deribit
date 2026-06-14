@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/address_ownership_item.json",
+  "title": "Address Ownership Item",
+  "properties": {
+    "owner_vasp_did": {
+      "$ref": "#/components/schemas/did"
+    },
+    "address": {
+      "$ref": "#/components/schemas/currency_address"
+    },
+    "address_type": {
+      "$ref": "#/components/schemas/currency_address_type"
+    },
+    "asset": {
+      "$ref": "#/components/schemas/currency"
+    },
+    "source": {
+      "$ref": "#/components/schemas/source"
+    }
+  },
+  "required": [
+    "owner_vasp_did",
+    "address",
+    "address_type",
+    "asset",
+    "source"
+  ],
+  "type": "object"
+}

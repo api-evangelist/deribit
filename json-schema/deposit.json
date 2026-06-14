@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/deposit.json",
+  "title": "Deposit",
+  "properties": {
+    "currency": {
+      "$ref": "#/components/schemas/currency"
+    },
+    "address": {
+      "$ref": "#/components/schemas/currency_address"
+    },
+    "amount": {
+      "$ref": "#/components/schemas/currency_amount"
+    },
+    "state": {
+      "$ref": "#/components/schemas/deposit_state"
+    },
+    "transaction_id": {
+      "$ref": "#/components/schemas/currency_transaction_id"
+    },
+    "source_address": {
+      "$ref": "#/components/schemas/currency_address"
+    },
+    "received_timestamp": {
+      "$ref": "#/components/schemas/timestamp"
+    },
+    "updated_timestamp": {
+      "$ref": "#/components/schemas/timestamp"
+    },
+    "note": {
+      "type": "string"
+    },
+    "clearance_state": {
+      "$ref": "#/components/schemas/clearance_state"
+    },
+    "refund_transaction_id": {
+      "$ref": "#/components/schemas/currency_transaction_id"
+    }
+  },
+  "required": [
+    "currency",
+    "address",
+    "amount",
+    "state",
+    "transaction_id",
+    "received_timestamp",
+    "updated_timestamp"
+  ],
+  "type": "object"
+}

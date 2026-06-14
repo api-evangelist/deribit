@@ -1,0 +1,13 @@
+{
+  "jsonrpc": "2.0",
+  "id": 7859,
+  "method": "private/set_mmp_config",
+  "params": {
+    "index_name": "btc_usd",
+    "mmp_group": "MassQuoteBot7",
+    "interval": 60,
+    "frozen_time": 0,
+    "quantity_limit": 3,
+    "max_quote_quantity": 2.5
+  }
+}

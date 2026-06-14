@@ -1,0 +1,7 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/jwt.json",
+  "title": "Jwt",
+  "type": "string",
+  "description": "JSON web token"
+}

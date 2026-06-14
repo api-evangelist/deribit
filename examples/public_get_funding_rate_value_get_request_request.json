@@ -1,0 +1,10 @@
+{
+  "jsonrpc": "2.0",
+  "id": 7617,
+  "method": "public/get_funding_rate_value",
+  "params": {
+    "instrument_name": "BTC-PERPETUAL",
+    "start_timestamp": 1569888000000,
+    "end_timestamp": 1569974400000
+  }
+}

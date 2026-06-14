@@ -1,0 +1,26 @@
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "method": "private/edit_block_rfq_quote",
+  "params": {
+    "label": "example_quote",
+    "block_rfq_id": 3,
+    "amount": 20000,
+    "direction": "buy",
+    "legs": [
+      {
+        "instrument_name": "BTC-15NOV24",
+        "price": 74600,
+        "ratio": "1",
+        "direction": "buy"
+      }
+    ],
+    "hedge": {
+      "amount": 10,
+      "direction": "buy",
+      "price": 70000,
+      "instrument_name": "BTC-PERPETUAL"
+    },
+    "execution_instruction": "any_part_of"
+  }
+}

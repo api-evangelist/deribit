@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/block_rfq_time_in_force.json",
+  "title": "Block Rfq Time In Force",
+  "enum": [
+    "fill_or_kill",
+    "good_til_cancelled"
+  ],
+  "type": "string",
+  "description": "Block RFQ time in force: `\"fill_or_kill\"` or `\"good_til_cancelled\"`"
+}

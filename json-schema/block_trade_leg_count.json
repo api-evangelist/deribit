@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/block_trade_leg_count.json",
+  "title": "Block Trade Leg Count",
+  "example": 3,
+  "type": "integer",
+  "description": "Block trade leg count - when trade was part of a block trade"
+}

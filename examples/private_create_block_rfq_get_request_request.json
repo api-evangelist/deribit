@@ -1,0 +1,24 @@
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "method": "private/create_block_rfq",
+  "params": {
+    "legs": [
+      {
+        "instrument_name": "BTC-15NOV24",
+        "amount": 20000,
+        "direction": "sell"
+      }
+    ],
+    "hedge": {
+      "amount": 10,
+      "direction": "buy",
+      "price": 70000,
+      "instrument_name": "BTC-PERPETUAL"
+    },
+    "label": "example",
+    "makers": [
+      "MAKER1"
+    ]
+  }
+}

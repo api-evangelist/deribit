@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/PrivateSetMmpConfigResponse.json",
+  "title": "Privatesetmmpconfigresponse",
+  "properties": {
+    "jsonrpc": {
+      "type": "string",
+      "enum": [
+        "2.0"
+      ],
+      "description": "The JSON-RPC version (2.0)"
+    },
+    "id": {
+      "type": "integer",
+      "description": "The id that was sent in the request"
+    },
+    "result": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "index_name": {
+            "$ref": "#/components/schemas/index_name"
+          },
+          "interval": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 3600,
+            "description": "The duration of the monitoring window in seconds. For example, an <code>interval</code> of <code>3</code> implies a 3-second window. <br><br>The <code>interval</code> begins after the first trade. <br><br>If a new trade is executed after the <code>interval</code> has ended, a new <code>interval</code> is started, and counters reset. <br><br>If a trade occurs during an already running <code>interval</code>, that <code>interval</code> continues unaffected. <br><br>This mechanism allows the platform to track activity in short, rolling windows to identify potentially risky trading behavior. <br><br>If set to <code>0</code>, MMP is disabled. <br><br>Maximum value: <code>3600</code> seconds (1 hour)."
+          },
+          "frozen_time": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 3600,
+            "description": "Time in seconds that MMP remains active after being triggered. Once this frozen period has passed, MMP will automatically reset, allowing new orders to be submitted. <br><br>If you want to disable automatic reset, set <code>frozen_time</code> to <code>0</code>. In that case, a manual reset is required using the <code>private/reset_mmp</code> method. <br><br>Manual reset is also possible during the frozen time period. <br><br>Maximum value: <code>3600</code> seconds (1 hour)."
+          },
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Integer identifier for the MMP group (int64). This is the programmatic identifier for the group. Entries without an `mmp_group` name correspond to the orders MMP group (the default group)."
+          },
+          "mmp_group": {
+            "type": "string",
+            "description": "Name of the MMP group. Absent for the orders MMP group (the default group), which has no string name \u2014 its entry is identified by the `id` field alone."
+          },
+          "quantity_limit": {
+            "type": "number",
+            "description": "The total traded quantity, measured in units of the base currency (e.g., BTC in <code>BTC-PERPETUAL</code>), within the <code>interval</code>. <br><br>This count is direction-agnostic\u2014a buy followed by a sell counts double. <br><br>Example: Buy <code>10</code> BTC and sell <code>10</code> BTC = <code>20</code> total quantity. <br><br>Applicable to both options and futures. <br><br><strong>Note:</strong> Once this is set, an initial margin will be reserved even without any open positions. Initial Margin due to <code>quantity_limit</code> = <code>quantity_limit</code> * <code>0.03</code> <br><br>Maximum 4 decimal places."
+          },
+          "delta_limit": {
+            "type": "number",
+            "description": "The maximum allowable net transaction delta change during the <code>interval</code>. <br><br>Expressed in units of base currency. <br><br>The <code>delta_limit</code> is treated as an absolute threshold: e.g., <code>delta_limit: 10</code> \u2192 MMP is triggered if net transaction delta exceeds <code>+10</code> or drops below <code>-10</code>. <br><br>Direction matters: buying <code>+5</code> delta and selling <code>\u22125</code> delta cancels out if within the same <code>interval</code>. <br><br><strong>Note:</strong> Note that we use the net transaction delta instead of delta. Net Transaction Delta = <code>Delta - Mark Price</code>. In the rest of this document, \"delta\" actually refers to net transaction delta. <br><br>Maximum 4 decimal places."
+          },
+          "vega_limit": {
+            "type": "number",
+            "description": "The maximum change in vega exposure allowed within a given <code>interval</code>, measured in absolute terms. <br><br>Expressed in USD, representing the change in sensitivity to implied volatility across executed trades. <br><br>This parameter is primarily relevant for options traders managing risk in volatile markets. <br><br>Similar to <code>delta_limit</code>, the <code>vega_limit</code> is direction-aware and evaluated on a net basis. If the exposure exceeds the set threshold (positively or negatively), MMP will be triggered. <br><br><strong>Notice:</strong> When evaluating Delta and Vega limits for MMP, Deribit uses the greeks at the moment of trade execution. The system does not re-evaluate Delta or Vega using live greeks at the time of MMP checking. <br><br>Maximum 4 decimal places."
+          },
+          "max_quote_quantity": {
+            "type": "number",
+            "description": "Maximum Quote Quantity (MQQ). MQQ is configured per index but enforced per side, per order book (instrument) \u2014 the total combined size of open MMP orders per side per instrument cannot exceed MQQ (specified in base currency). MQQ is used for Initial Margin calculation (3% of MQQ is taken as Initial Margin for MMP orders and quotes). <br><br>**Important Notes:** <br>- **Configured per index, enforced per instrument:** MQQ is configured at the index level (an MMP group is linked to an index). However, the limit is enforced separately per order book (instrument) per side. \"Per order book\" means per instrument (not per expiry). The limit is NOT the sum across all instruments \u2014 each instrument has its own separate MQQ enforcement. <br>- **MQQ limits cumulative size, not order count:** For example, with MQQ of 3 BTC, you can place multiple orders (three orders of 1 BTC each, or one order of 2.5 BTC plus one of 0.5 BTC) as long as the total size per side per instrument does not exceed 3 BTC <br>- **MQQ is separate per MMP group:** Each MMP group has its own independent MQQ configuration. MQQ limits are enforced separately for each MMP group. <br>- **MQQ vs Quantity Limit relationship:** You can set MQQ > `quantity_limit`. This allows quotes to be larger than the quantity limit, and enables MMP to trigger on partial fills of quotes. This decouples the MMP reserved margin from the MMP quantity limit. <br>- **Base currency:** MQQ is specified and enforced in base currency <br>- **Inverse futures:** Size is calculated as Amount / Price to convert to base currency <br>- **Inverse future spreads:** Size is calculated as Amount / IndexPrice <br>- **SM accounts:** MMP orders and quotes on options and option_combos are not supported for SM accounts <br>- **Rejections:** MQQ is enforced for **MMP-enabled orders and quotes**. Quote entries and MMP-enabled orders (i.e., orders with `mmp=true`) are rejected if their individual size is greater than `max_quote_quantity`, or if accepting them would make the total open MMP size per side per instrument exceed `max_quote_quantity`. Non\u2011MMP orders are not subject to MQQ and may be larger than `max_quote_quantity`. <br>- **Precision:** All MMP configuration values support maximum 4 decimal places <br>- **Latency:** There are no latency benefits from MQQ if you already use mass quotes."
+          },
+          "block_rfq": {
+            "type": "boolean",
+            "description": "If true, indicates MMP configuration for Block RFQ. Block RFQ MMP settings are completely separate from normal order/quote MMP settings."
+          },
+          "trade_count_limit": {
+            "type": "integer",
+            "description": "For Block RFQ only. The maximum number of Block RFQ trades allowed in the lookback window. Each RFQ trade counts as +1 towards the limit (not individual legs). Works across all currency pairs."
+          }
+        },
+        "required": [
+          "index_name",
+          "interval",
+          "frozen_time"
+        ]
+      }
+    }
+  },
+  "required": [
+    "jsonrpc",
+    "result"
+  ],
+  "type": "object"
+}

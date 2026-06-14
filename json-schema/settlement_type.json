@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/settlement_type.json",
+  "title": "Settlement Type",
+  "enum": [
+    "settlement",
+    "delivery",
+    "bankruptcy"
+  ],
+  "type": "string",
+  "description": "The type of settlement. `settlement`, `delivery` or `bankruptcy`."
+}

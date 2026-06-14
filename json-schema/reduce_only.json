@@ -1,0 +1,7 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/reduce_only.json",
+  "title": "Reduce Only",
+  "type": "boolean",
+  "description": "Optional (not added for spot). '`true` for reduce-only orders only'"
+}

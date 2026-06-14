@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/security_key_assignments.json",
+  "title": "Security Key Assignments",
+  "items": {
+    "properties": {
+      "assignment": {
+        "type": "string",
+        "enum": [
+          "login",
+          "wallet",
+          "admin",
+          "account"
+        ],
+        "description": "Assignment name"
+      },
+      "timestamp": {
+        "type": "integer",
+        "description": "Timestamp when assignment was created (milliseconds since the UNIX epoch)"
+      }
+    },
+    "required": [
+      "type",
+      "assignment",
+      "timestamp"
+    ],
+    "type": "object"
+  },
+  "type": "array"
+}

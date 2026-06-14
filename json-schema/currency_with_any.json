@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/currency_with_any.json",
+  "title": "Currency With Any",
+  "enum": [
+    "BTC",
+    "ETH",
+    "USDC",
+    "USDT",
+    "EURR",
+    "any"
+  ],
+  "type": "string",
+  "description": "Currency name or `\"any\"` if don't care"
+}

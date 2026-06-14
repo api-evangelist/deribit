@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/PublicStatusResponse.json",
+  "title": "Publicstatusresponse",
+  "properties": {
+    "jsonrpc": {
+      "type": "string",
+      "enum": [
+        "2.0"
+      ],
+      "description": "The JSON-RPC version (2.0)"
+    },
+    "id": {
+      "type": "integer",
+      "description": "The id that was sent in the request"
+    },
+    "result": {
+      "type": "object",
+      "properties": {
+        "locked": {
+          "type": "string",
+          "description": "`true` when platform is locked in all currencies, `partial` when some currencies are locked, `false` - when there are not currencies locked"
+        },
+        "locked_indices": {
+          "type": "array",
+          "description": "List of currency indices locked platform-wise"
+        }
+      },
+      "required": [
+        "locked"
+      ]
+    }
+  },
+  "required": [
+    "jsonrpc",
+    "result"
+  ],
+  "type": "object"
+}

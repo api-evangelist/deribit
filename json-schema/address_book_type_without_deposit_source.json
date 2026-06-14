@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/address_book_type_without_deposit_source.json",
+  "title": "Address Book Type Without Deposit Source",
+  "enum": [
+    "transfer",
+    "withdrawal"
+  ],
+  "type": "string",
+  "description": "Address book type"
+}

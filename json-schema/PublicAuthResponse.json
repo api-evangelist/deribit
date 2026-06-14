@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/PublicAuthResponse.json",
+  "title": "Publicauthresponse",
+  "properties": {
+    "jsonrpc": {
+      "type": "string",
+      "enum": [
+        "2.0"
+      ],
+      "description": "The JSON-RPC version (2.0)"
+    },
+    "id": {
+      "type": "integer",
+      "description": "The id that was sent in the request"
+    },
+    "result": {
+      "type": "object",
+      "properties": {
+        "access_token": {
+          "type": "string",
+          "example": "843SehgeX5n6XxEU4XbABx4Cny5Akai5iHiJePTsvUw7",
+          "description": "OAuth access token to be used for authentication of 'private' requests"
+        },
+        "token_type": {
+          "type": "string",
+          "enum": [
+            "bearer"
+          ],
+          "description": "Authorization type, allowed value - `bearer`"
+        },
+        "expires_in": {
+          "type": "integer",
+          "example": 315360000,
+          "description": "Token lifetime in seconds"
+        },
+        "refresh_token": {
+          "type": "string",
+          "example": "6faf8L36JdaSqsjCEEiwqifPpj6JB18RWwiWHrsGTZ91",
+          "description": "Can be used to request a new token (with a new lifetime)"
+        },
+        "scope": {
+          "type": "string",
+          "description": "Type of the access for assigned token"
+        },
+        "state": {
+          "type": "string",
+          "description": "Copied from the input (if applicable)"
+        },
+        "sid": {
+          "type": "string",
+          "description": "Optional Session id"
+        },
+        "enabled_features": {
+          "$ref": "#/components/schemas/api_key_features"
+        },
+        "mandatory_tfa_status": {
+          "type": "string",
+          "example": "enabled",
+          "description": "2FA is required for privileged methods"
+        },
+        "google_login": {
+          "type": "boolean",
+          "description": "The access token was acquired by logging in through Google."
+        }
+      },
+      "required": [
+        "access_token",
+        "token_type",
+        "expires_in",
+        "refresh_token",
+        "scope"
+      ]
+    }
+  },
+  "required": [
+    "jsonrpc",
+    "result"
+  ],
+  "type": "object"
+}

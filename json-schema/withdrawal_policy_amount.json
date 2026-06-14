@@ -1,0 +1,7 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/withdrawal_policy_amount.json",
+  "title": "Withdrawal Policy Amount",
+  "type": "number",
+  "description": "A positive float as limit"
+}

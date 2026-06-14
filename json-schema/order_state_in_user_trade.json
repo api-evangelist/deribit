@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/order_state_in_user_trade.json",
+  "title": "Order State In User Trade",
+  "enum": [
+    "open",
+    "filled",
+    "rejected",
+    "cancelled",
+    "untriggered",
+    "archive"
+  ],
+  "type": "string",
+  "description": "Order state: `\"open\"`, `\"filled\"`, `\"rejected\"`, `\"cancelled\"`, `\"untriggered\"` or `\"archive\"` (if order was archived)"
+}

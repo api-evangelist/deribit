@@ -1,0 +1,8 @@
+{
+  "jsonrpc": "2.0",
+  "id": 6524,
+  "method": "private/reset_api_key",
+  "params": {
+    "id": 3
+  }
+}

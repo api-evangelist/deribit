@@ -1,0 +1,9 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/orders.json",
+  "title": "Orders",
+  "items": {
+    "$ref": "#/components/schemas/order"
+  },
+  "type": "array"
+}

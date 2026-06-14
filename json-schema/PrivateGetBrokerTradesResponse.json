@@ -1,0 +1,104 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/PrivateGetBrokerTradesResponse.json",
+  "title": "Privategetbrokertradesresponse",
+  "properties": {
+    "jsonrpc": {
+      "type": "string",
+      "enum": [
+        "2.0"
+      ],
+      "description": "The JSON-RPC version (2.0)"
+    },
+    "id": {
+      "type": "integer",
+      "description": "The id that was sent in the request"
+    },
+    "result": {
+      "type": "object",
+      "properties": {
+        "history": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Unique identifier of the block trade history entry."
+              },
+              "timestamp": {
+                "type": "integer",
+                "description": "Timestamp of the block trade history entry (milliseconds since the UNIX epoch)."
+              },
+              "trades": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/block_trade"
+                }
+              },
+              "maker": {
+                "type": "object",
+                "properties": {
+                  "user_id": {
+                    "type": "integer",
+                    "description": "Obscured user id of the maker."
+                  },
+                  "client_id": {
+                    "type": "integer",
+                    "description": "ID of a client; available to broker. Represents a group of users under a common name."
+                  },
+                  "client_name": {
+                    "type": "string",
+                    "description": "Name of the client; available to broker."
+                  },
+                  "client_link_name": {
+                    "type": "string",
+                    "description": "Name of the linked user within the client; available to broker."
+                  },
+                  "client_link_id": {
+                    "type": "integer",
+                    "description": "ID assigned to a single user in a client; available to broker."
+                  }
+                }
+              },
+              "taker": {
+                "type": "object",
+                "properties": {
+                  "user_id": {
+                    "type": "integer",
+                    "description": "Obscured user id of the taker."
+                  },
+                  "client_id": {
+                    "type": "integer",
+                    "description": "ID of a client; available to broker. Represents a group of users under a common name."
+                  },
+                  "client_name": {
+                    "type": "string",
+                    "description": "Name of the client; available to broker."
+                  },
+                  "client_link_name": {
+                    "type": "string",
+                    "description": "Name of the linked user within the client; available to broker."
+                  },
+                  "client_link_id": {
+                    "type": "integer",
+                    "description": "ID assigned to a single user in a client; available to broker."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "next_start_id": {
+          "type": "integer",
+          "description": "The next start ID for pagination."
+        }
+      }
+    }
+  },
+  "required": [
+    "jsonrpc",
+    "result"
+  ],
+  "type": "object"
+}

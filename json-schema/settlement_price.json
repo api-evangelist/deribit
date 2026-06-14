@@ -1,0 +1,7 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/settlement_price.json",
+  "title": "Settlement Price",
+  "type": "number",
+  "description": "Optional (not added for spot). The settlement price for the instrument. Only when `state = open`"
+}

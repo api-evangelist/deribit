@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/block_trade_order.json",
+  "title": "Block Trade Order",
+  "example": true,
+  "type": "boolean",
+  "description": "`true` if order made from block_trade trade, added only in that case."
+}

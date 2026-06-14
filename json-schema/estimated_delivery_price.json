@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/estimated_delivery_price.json",
+  "title": "Estimated Delivery Price",
+  "example": 11628.81,
+  "type": "number",
+  "description": "Estimated delivery price for the market. For more details, see Contract Specification > General Documentation > Expiration Price"
+}

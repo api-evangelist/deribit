@@ -1,0 +1,111 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/pending_block_trade.json",
+  "title": "Pending Block Trade",
+  "properties": {
+    "nonce": {
+      "type": "string",
+      "example": "bF1_gfgcsd",
+      "description": "Nonce that can be used to approve or reject pending block trade."
+    },
+    "timestamp": {
+      "type": "integer",
+      "description": "Timestamp that can be used to approve or reject pending block trade."
+    },
+    "trades": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/pending_block_trade"
+      }
+    },
+    "app_name": {
+      "type": "string",
+      "example": "Example Application",
+      "description": "The name of the application that executed the block trade on behalf of the user (optional)."
+    },
+    "username": {
+      "type": "string",
+      "example": "Trader",
+      "description": "Username of the user who initiated the block trade."
+    },
+    "role": {
+      "$ref": "#/components/schemas/role"
+    },
+    "user_id": {
+      "$ref": "#/components/schemas/user_id"
+    },
+    "broker_code": {
+      "type": "string",
+      "example": "jpqYKgg1",
+      "description": "Broker code associated with the broker block trade."
+    },
+    "broker_name": {
+      "type": "string",
+      "example": "Test Broker",
+      "description": "Name of the broker associated with the block trade."
+    },
+    "state": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string",
+          "enum": [
+            "initial",
+            "accepted",
+            "rejected",
+            "executed"
+          ],
+          "description": "State value."
+        },
+        "timestamp": {
+          "type": "integer",
+          "description": "State timestamp."
+        }
+      },
+      "required": [
+        "value",
+        "timestamp"
+      ],
+      "description": "State of the pending block trade for current user."
+    },
+    "counterparty_state": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string",
+          "enum": [
+            "initial",
+            "accepted",
+            "rejected",
+            "executed"
+          ],
+          "description": "State value."
+        },
+        "timestamp": {
+          "type": "integer",
+          "description": "State timestamp."
+        }
+      },
+      "required": [
+        "value",
+        "timestamp"
+      ],
+      "description": "State of the pending block trade for the other party (optional)."
+    },
+    "combo_id": {
+      "type": "string",
+      "example": "BTC-CS-27JUN25-80000_85000",
+      "description": "Combo instrument identifier"
+    }
+  },
+  "required": [
+    "nonce",
+    "timestamp",
+    "trades",
+    "app_name",
+    "role",
+    "user_id",
+    "state"
+  ],
+  "type": "object"
+}

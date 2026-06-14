@@ -1,0 +1,18 @@
+{
+  "jsonrpc": "2.0",
+  "id": 42,
+  "method": "private/add_to_address_book",
+  "params": {
+    "currency": "BTC",
+    "type": "withdrawal",
+    "address": "bc1qar0srrr7xfkvy5l643lydnw9re59gtzzwf0uyj",
+    "label": "Main address",
+    "beneficiary_vasp_name": "Money`s Gone",
+    "beneficiary_vasp_did": "did:example:123456789abcdefghi",
+    "beneficiary_first_name": "John",
+    "beneficiary_last_name": "Doe",
+    "beneficiary_address": "NL, Amsterdam, Street, 1",
+    "agreed": true,
+    "personal": false
+  }
+}

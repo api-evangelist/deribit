@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/execution_instruction.json",
+  "title": "Execution Instruction",
+  "enum": [
+    "any_part_of",
+    "all_or_none"
+  ],
+  "type": "string",
+  "description": "Execution instruction of the quote. Default - `any_part_of`\n\n- `\"all_or_none (AON)\"` - The quote can only be filled entirely or not at all, ensuring that its amount matches the amount specified in the Block RFQ. Additionally, 'all_or_none' quotes have priority over 'any_part_of' quotes at the same price level.\n- `\"any_part_of (APO)\"` - The quote can be filled either partially or fully, with the filled amount potentially being less than the Block RFQ amount."
+}

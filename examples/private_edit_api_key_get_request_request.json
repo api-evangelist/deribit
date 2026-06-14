@@ -1,0 +1,10 @@
+{
+  "jsonrpc": "2.0",
+  "id": 2453,
+  "method": "private/edit_api_key",
+  "params": {
+    "name": "NewKeyName",
+    "max_scope": "account:read_write wallet:read_write block_trade:read trade:read_write",
+    "id": 3
+  }
+}

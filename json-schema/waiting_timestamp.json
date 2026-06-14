@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/waiting_timestamp.json",
+  "title": "Waiting Timestamp",
+  "example": true,
+  "type": "boolean",
+  "description": "Timestamp when the address will be ready"
+}

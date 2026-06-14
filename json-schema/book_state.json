@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/book_state.json",
+  "title": "Book State",
+  "enum": [
+    "open",
+    "settlement",
+    "delivered",
+    "inactive",
+    "locked",
+    "halted",
+    "archivized"
+  ],
+  "type": "string",
+  "description": "The state of the order book. Represents the current lifecycle stage of the instrument.\n\n**State Lifecycle and Meanings:**\n\n- `open`: Default state for running books. In this state book is accepting new orders, edits, cancels; prices should be updated, trading is live.\n- `settlement`: Books enters to this state during settlement/delivery. New orders, edits, cancels are not accepted. After this state normally next state should be `open` if it was settlement, or `delivered` if it was delivery. On enter to this state good till day orders in book are canceled.\n- `delivered`: Final state of book that has been delivered. New orders, edits, cancels are not accepted. After some time book process will be terminated and, instrument moved to `expired_instruments` and its `instrument_state` will become archivized. On enter to this all open orders in book are canceled.\n- `inactive`: After a book is deactivated, this state is set on book. New orders, edits, cancels are not accepted. On enter to this all open orders in book are canceled. Book in this state is not considered as open. This can be also final state for book.\n- `locked`: New orders, edits, are not accepted, only cancels ARE accepted. In some cases when configured books can start as locked or it may become locked on admin request. Settlement is possible on locked books.\n- `halted`: The state that books enter as a result of an error. Settlement is not possible when there is at least one book in this state.\n- `archivized`: Set when instrument is moved to `expired_instruments` table, final state.\n"
+}

@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/custody_name.json",
+  "title": "Custody Name",
+  "enum": [
+    "copper",
+    "cobo"
+  ],
+  "type": "string",
+  "description": "Custody name"
+}

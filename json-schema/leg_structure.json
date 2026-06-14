@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/leg_structure.json",
+  "title": "Leg Structure",
+  "items": {
+    "properties": {
+      "ratio": {
+        "type": "integer",
+        "description": "Ratio of amount between legs"
+      },
+      "instrument_name": {
+        "type": "string",
+        "example": "BTC-PERPETUAL",
+        "description": "Unique instrument identifier"
+      },
+      "direction": {
+        "type": "string",
+        "enum": [
+          "buy",
+          "sell"
+        ],
+        "description": "Direction: `buy`, or `sell`"
+      },
+      "price": {
+        "type": "number",
+        "description": "Price for a leg"
+      }
+    },
+    "type": "object"
+  },
+  "type": "array"
+}

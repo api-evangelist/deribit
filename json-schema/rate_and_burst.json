@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/rate_and_burst.json",
+  "title": "Rate And Burst",
+  "required": [
+    "rate",
+    "burst"
+  ],
+  "properties": {
+    "rate": {
+      "type": "integer",
+      "description": "Number of requests per second allowed for user"
+    },
+    "burst": {
+      "type": "integer",
+      "description": "Maximal number of requests allowed for user in burst mode"
+    }
+  },
+  "type": "object"
+}

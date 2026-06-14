@@ -1,0 +1,8 @@
+{
+  "jsonrpc": "2.0",
+  "id": 2515,
+  "method": "private/list_custody_accounts",
+  "params": {
+    "currency": "BTC"
+  }
+}

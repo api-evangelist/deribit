@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/withdrawal.json",
+  "title": "Withdrawal",
+  "properties": {
+    "address": {
+      "$ref": "#/components/schemas/currency_address"
+    },
+    "amount": {
+      "$ref": "#/components/schemas/currency_amount"
+    },
+    "confirmed_timestamp": {
+      "type": "integer",
+      "example": 1536569522277,
+      "nullable": true,
+      "description": "The timestamp (milliseconds since the Unix epoch) of withdrawal confirmation, `null` when not confirmed"
+    },
+    "created_timestamp": {
+      "$ref": "#/components/schemas/timestamp"
+    },
+    "currency": {
+      "$ref": "#/components/schemas/currency"
+    },
+    "fee": {
+      "$ref": "#/components/schemas/fee"
+    },
+    "id": {
+      "type": "integer",
+      "example": 1,
+      "description": "Withdrawal id in Deribit system"
+    },
+    "priority": {
+      "type": "number",
+      "example": 1,
+      "description": "Id of priority level"
+    },
+    "state": {
+      "$ref": "#/components/schemas/withdrawal_state"
+    },
+    "transaction_id": {
+      "$ref": "#/components/schemas/currency_transaction_id"
+    },
+    "updated_timestamp": {
+      "$ref": "#/components/schemas/timestamp"
+    },
+    "nonce": {
+      "type": "string",
+      "description": "Optional idempotency nonce if provided in the request"
+    }
+  },
+  "required": [
+    "currency",
+    "address",
+    "amount",
+    "state",
+    "transaction_id",
+    "updated_timestamp"
+  ],
+  "type": "object"
+}

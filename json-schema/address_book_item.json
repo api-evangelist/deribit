@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/address_book_item.json",
+  "title": "Address Book Item",
+  "properties": {
+    "currency": {
+      "$ref": "#/components/schemas/wallet_currency"
+    },
+    "address": {
+      "$ref": "#/components/schemas/currency_address"
+    },
+    "creation_timestamp": {
+      "$ref": "#/components/schemas/timestamp"
+    },
+    "type": {
+      "$ref": "#/components/schemas/address_book_type"
+    },
+    "label": {
+      "$ref": "#/components/schemas/address_label"
+    },
+    "beneficiary_vasp_name": {
+      "$ref": "#/components/schemas/beneficiary_vasp_name"
+    },
+    "beneficiary_vasp_did": {
+      "$ref": "#/components/schemas/beneficiary_vasp_did"
+    },
+    "beneficiary_vasp_website": {
+      "$ref": "#/components/schemas/beneficiary_vasp_website"
+    },
+    "beneficiary_first_name": {
+      "$ref": "#/components/schemas/beneficiary_first_name"
+    },
+    "beneficiary_last_name": {
+      "$ref": "#/components/schemas/beneficiary_last_name"
+    },
+    "beneficiary_company_name": {
+      "$ref": "#/components/schemas/beneficiary_company_name"
+    },
+    "beneficiary_address": {
+      "$ref": "#/components/schemas/beneficiary_address"
+    },
+    "agreed": {
+      "$ref": "#/components/schemas/agree_to_share_with_3rd_party"
+    },
+    "personal": {
+      "$ref": "#/components/schemas/personal_wallet"
+    },
+    "info_required": {
+      "$ref": "#/components/schemas/address_info_required"
+    },
+    "status": {
+      "$ref": "#/components/schemas/status"
+    },
+    "waiting_timestamp": {
+      "$ref": "#/components/schemas/waiting_timestamp"
+    },
+    "requires_confirmation": {
+      "$ref": "#/components/schemas/requires_confirmation"
+    },
+    "requires_confirmation_change": {
+      "$ref": "#/components/schemas/requires_confirmation_change"
+    }
+  },
+  "required": [
+    "currency",
+    "address",
+    "creation_timestamp"
+  ],
+  "type": "object"
+}

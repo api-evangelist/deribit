@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/tick_size_step.json",
+  "title": "Tick Size Step",
+  "properties": {
+    "above_price": {
+      "type": "number",
+      "description": "The price from which the increased tick size applies"
+    },
+    "tick_size": {
+      "type": "number",
+      "description": "Tick size to be used above the price. It must be multiple of the minimum tick size."
+    }
+  },
+  "type": "object"
+}

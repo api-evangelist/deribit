@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/PublicGetIndexPriceResponse.json",
+  "title": "Publicgetindexpriceresponse",
+  "properties": {
+    "jsonrpc": {
+      "type": "string",
+      "enum": [
+        "2.0"
+      ],
+      "description": "The JSON-RPC version (2.0)"
+    },
+    "id": {
+      "type": "integer",
+      "description": "The id that was sent in the request"
+    },
+    "result": {
+      "properties": {
+        "index_price": {
+          "example": 11628.81,
+          "type": "number",
+          "description": "Value of requested index"
+        },
+        "estimated_delivery_price": {
+          "example": 11628.81,
+          "type": "number",
+          "description": "Estimated delivery price for the market. For more details, see Documentation > General > Expiration Price"
+        }
+      },
+      "required": [
+        "index_price",
+        "estimated_delivery_price"
+      ],
+      "type": "object"
+    }
+  },
+  "required": [
+    "jsonrpc",
+    "result"
+  ],
+  "type": "object"
+}

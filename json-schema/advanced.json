@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/advanced.json",
+  "title": "Advanced",
+  "enum": [
+    "usd",
+    "implv"
+  ],
+  "type": "string",
+  "description": "advanced type: `\"usd\"` or `\"implv\"` (Only for options; field is omitted if not applicable).\n"
+}

@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/estimated_liquidation_ratio.json",
+  "title": "Estimated Liquidation Ratio",
+  "example": 2.34e-05,
+  "type": "number",
+  "description": "Estimated Liquidation Ratio is returned only for users without portfolio margining enabled. Multiplying it by future position's market price returns its estimated liquidation price. When cross collateral is enabled, this aggregated value is calculated by converting the sum of each cross collateral currency's value to the given currency, using each cross collateral currency's index."
+}

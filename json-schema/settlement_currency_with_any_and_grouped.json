@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/settlement_currency_with_any_and_grouped.json",
+  "title": "Settlement Currency With Any And Grouped",
+  "enum": [
+    "BTC",
+    "ETH",
+    "USDC",
+    "USDT",
+    "any",
+    "grouped"
+  ],
+  "type": "string",
+  "description": "Currency name or `\"any\"` if don't care or `\"grouped\"` if grouped by currencies"
+}

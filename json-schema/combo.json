@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/combo.json",
+  "title": "Combo",
+  "properties": {
+    "id": {
+      "$ref": "#/components/schemas/combo_id"
+    },
+    "instrument_id": {
+      "$ref": "#/components/schemas/instrument_id"
+    },
+    "state": {
+      "$ref": "#/components/schemas/combo_state"
+    },
+    "state_timestamp": {
+      "$ref": "#/components/schemas/timestamp"
+    },
+    "creation_timestamp": {
+      "$ref": "#/components/schemas/timestamp"
+    },
+    "legs": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/combo_leg"
+      }
+    }
+  },
+  "type": "object"
+}

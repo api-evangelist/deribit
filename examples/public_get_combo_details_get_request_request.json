@@ -1,0 +1,8 @@
+{
+  "jsonrpc": "2.0",
+  "id": 3,
+  "method": "public/get_combo_details",
+  "params": {
+    "combo_id": "BTC-FS-29APR22_PERP"
+  }
+}

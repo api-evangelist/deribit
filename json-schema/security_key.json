@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/security_key.json",
+  "title": "Security Key",
+  "properties": {
+    "id": {
+      "$ref": "#/components/schemas/security_key_id"
+    },
+    "name": {
+      "$ref": "#/components/schemas/security_key_name"
+    },
+    "type": {
+      "$ref": "#/components/schemas/security_key_type"
+    },
+    "assignments": {
+      "$ref": "#/components/schemas/security_key_assignments"
+    },
+    "timestamp": {
+      "$ref": "#/components/schemas/security_key_timestamp"
+    },
+    "last_used": {
+      "$ref": "#/components/schemas/security_key_last_used"
+    }
+  },
+  "required": [
+    "id",
+    "type",
+    "name",
+    "assignments",
+    "timestamp",
+    "last_used"
+  ],
+  "type": "object"
+}

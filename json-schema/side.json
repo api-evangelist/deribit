@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/side.json",
+  "title": "Side",
+  "example": "`buy`",
+  "enum": [
+    "buy",
+    "sell"
+  ],
+  "type": "string",
+  "description": "Side - `buy` or `sell`"
+}

@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/currency_with_any_and_list.json",
+  "title": "Currency With Any And List",
+  "oneOf": [
+    {
+      "type": "string"
+    },
+    {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    }
+  ],
+  "description": "The currency symbol, list of currency symbols or `\"any\"` for all"
+}

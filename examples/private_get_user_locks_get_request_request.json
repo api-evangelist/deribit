@@ -1,0 +1,6 @@
+{
+  "jsonrpc": "2.0",
+  "id": 74,
+  "method": "private/get_user_locks",
+  "params": {}
+}

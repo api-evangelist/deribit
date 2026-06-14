@@ -1,0 +1,7 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/max_show.json",
+  "title": "Max Show",
+  "type": "number",
+  "description": "Deprecated. Maximum amount within an order to be shown to other traders, 0 for invisible order."
+}

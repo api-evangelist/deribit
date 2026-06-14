@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/transfer_other_side.json",
+  "title": "Transfer Other Side",
+  "example": "Smith",
+  "type": "string",
+  "description": "For transfer from/to subaccount returns this subaccount name, for transfer to other account returns address, for transfer from other account returns that accounts username."
+}

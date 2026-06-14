@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/user_id.json",
+  "title": "User Id",
+  "example": 57874,
+  "type": "integer",
+  "description": "Unique user identifier"
+}

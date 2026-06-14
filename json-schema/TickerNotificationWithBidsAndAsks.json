@@ -1,0 +1,107 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/TickerNotificationWithBidsAndAsks.json",
+  "title": "Tickernotificationwithbidsandasks",
+  "properties": {
+    "instrument_name": {
+      "$ref": "#/components/schemas/instrument_name"
+    },
+    "timestamp": {
+      "$ref": "#/components/schemas/timestamp"
+    },
+    "state": {
+      "$ref": "#/components/schemas/book_state"
+    },
+    "stats": {
+      "$ref": "#/components/schemas/stats"
+    },
+    "open_interest": {
+      "$ref": "#/components/schemas/open_interest"
+    },
+    "best_bid_price": {
+      "$ref": "#/components/schemas/best_bid_price"
+    },
+    "best_bid_amount": {
+      "$ref": "#/components/schemas/best_bid_amount"
+    },
+    "best_ask_price": {
+      "$ref": "#/components/schemas/best_ask_price"
+    },
+    "best_ask_amount": {
+      "$ref": "#/components/schemas/best_ask_amount"
+    },
+    "index_price": {
+      "$ref": "#/components/schemas/index_price"
+    },
+    "min_price": {
+      "$ref": "#/components/schemas/min_price"
+    },
+    "max_price": {
+      "$ref": "#/components/schemas/max_price"
+    },
+    "mark_price": {
+      "$ref": "#/components/schemas/mark_price"
+    },
+    "last_price": {
+      "$ref": "#/components/schemas/last_price"
+    },
+    "underlying_price": {
+      "$ref": "#/components/schemas/underlying_price"
+    },
+    "underlying_index": {
+      "$ref": "#/components/schemas/underlying_index"
+    },
+    "interest_rate": {
+      "$ref": "#/components/schemas/interest_rate"
+    },
+    "bid_iv": {
+      "$ref": "#/components/schemas/bid_iv"
+    },
+    "ask_iv": {
+      "$ref": "#/components/schemas/ask_iv"
+    },
+    "mark_iv": {
+      "$ref": "#/components/schemas/mark_iv"
+    },
+    "greeks": {
+      "$ref": "#/components/schemas/greeks"
+    },
+    "funding_8h": {
+      "$ref": "#/components/schemas/funding_8h"
+    },
+    "current_funding": {
+      "$ref": "#/components/schemas/current_funding"
+    },
+    "delivery_price": {
+      "$ref": "#/components/schemas/delivery_price"
+    },
+    "settlement_price": {
+      "$ref": "#/components/schemas/settlement_price"
+    },
+    "bids": {
+      "$ref": "#/components/schemas/bids"
+    },
+    "asks": {
+      "$ref": "#/components/schemas/asks"
+    }
+  },
+  "required": [
+    "instrument_name",
+    "timestamp",
+    "state",
+    "stats",
+    "open_interest",
+    "index_price",
+    "best_bid_price",
+    "best_bid_amount",
+    "best_ask_price",
+    "best_ask_amount",
+    "min_price",
+    "max_price",
+    "mark_price",
+    "last_price",
+    "bids",
+    "asks"
+  ],
+  "type": "object"
+}

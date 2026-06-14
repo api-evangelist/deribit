@@ -1,0 +1,125 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/PrivateGetBrokerTradeRequestsResponse.json",
+  "title": "Privategetbrokertraderequestsresponse",
+  "properties": {
+    "jsonrpc": {
+      "type": "string",
+      "enum": [
+        "2.0"
+      ],
+      "description": "The JSON-RPC version (2.0)"
+    },
+    "id": {
+      "type": "integer",
+      "description": "The id that was sent in the request"
+    },
+    "result": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "timestamp": {
+            "type": "integer",
+            "description": "Timestamp of the broker block trade request (milliseconds since the UNIX epoch)."
+          },
+          "state": {
+            "type": "string",
+            "description": "State of the broker block trade request."
+          },
+          "trades": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "amount": {
+                  "type": "number",
+                  "description": "Trade amount."
+                },
+                "direction": {
+                  "type": "string",
+                  "description": "Trade direction (buy or sell)."
+                },
+                "price": {
+                  "type": "number",
+                  "description": "Trade price."
+                },
+                "instrument_name": {
+                  "type": "string",
+                  "description": "Name of the traded instrument."
+                }
+              }
+            }
+          },
+          "maker": {
+            "type": "object",
+            "properties": {
+              "state": {
+                "type": "string",
+                "description": "State of the request from the maker side: `initial`, `approved`, or `rejected`."
+              },
+              "client_id": {
+                "type": "integer",
+                "description": "ID of a client; available to broker. Represents a group of users under a common name."
+              },
+              "user_id": {
+                "type": "string",
+                "description": "Obscured user id of the maker."
+              },
+              "client_name": {
+                "type": "string",
+                "description": "Name of the client; available to broker."
+              },
+              "client_link_name": {
+                "type": "string",
+                "description": "Name of the linked user within the client; available to broker."
+              },
+              "client_link_id": {
+                "type": "integer",
+                "description": "ID assigned to a single user in a client; available to broker."
+              }
+            }
+          },
+          "taker": {
+            "type": "object",
+            "properties": {
+              "state": {
+                "type": "string",
+                "description": "State of the request from the taker side: `initial`, `approved`, or `rejected`."
+              },
+              "client_id": {
+                "type": "integer",
+                "description": "ID of a client; available to broker. Represents a group of users under a common name."
+              },
+              "user_id": {
+                "type": "string",
+                "description": "Obscured user id of the taker."
+              },
+              "client_name": {
+                "type": "string",
+                "description": "Name of the client; available to broker."
+              },
+              "client_link_name": {
+                "type": "string",
+                "description": "Name of the linked user within the client; available to broker."
+              },
+              "client_link_id": {
+                "type": "integer",
+                "description": "ID assigned to a single user in a client; available to broker."
+              }
+            }
+          },
+          "nonce": {
+            "type": "string",
+            "description": "Nonce for approving or rejecting the broker block trade request."
+          }
+        }
+      }
+    }
+  },
+  "required": [
+    "jsonrpc",
+    "result"
+  ],
+  "type": "object"
+}

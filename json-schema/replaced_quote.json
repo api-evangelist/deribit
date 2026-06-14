@@ -1,0 +1,7 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/replaced_quote.json",
+  "title": "Replaced Quote",
+  "type": "boolean",
+  "description": "`true` if the quote was edited, otherwise `false`."
+}

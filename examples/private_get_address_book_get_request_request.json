@@ -1,0 +1,9 @@
+{
+  "jsonrpc": "2.0",
+  "id": 31,
+  "method": "private/get_address_book",
+  "params": {
+    "currency": "BTC",
+    "type": "withdrawal"
+  }
+}

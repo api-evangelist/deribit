@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/cod_scope.json",
+  "title": "Cod Scope",
+  "enum": [
+    "connection",
+    "account"
+  ],
+  "type": "string",
+  "description": "Informs if Cancel on Disconnect was checked for the current connection or the account"
+}

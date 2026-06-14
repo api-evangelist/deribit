@@ -1,0 +1,10 @@
+{
+  "jsonrpc": "2.0",
+  "id": 42,
+  "method": "private/remove_from_address_book",
+  "params": {
+    "currency": "BTC",
+    "type": "transfer",
+    "address": "bc1qar0srrr7xfkvy5l643lydnw9re59gtzzwf0uyj"
+  }
+}

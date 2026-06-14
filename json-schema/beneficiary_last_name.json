@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/beneficiary_last_name.json",
+  "title": "Beneficiary Last Name",
+  "example": "Doe",
+  "type": "string",
+  "description": "Last name of the beneficiary (if beneficiary is a person)"
+}

@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/Getunsubscribe200response.json",
+  "title": "Getunsubscribe200Response",
+  "type": "object",
+  "properties": {
+    "jsonrpc": {
+      "type": "string",
+      "example": "2.0"
+    },
+    "id": {
+      "type": "integer",
+      "example": 8691
+    },
+    "result": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-deribit-type": "channel"
+      },
+      "example": [
+        "deribit_price_index.btc_usd"
+      ],
+      "description": "List of channels that were successfully unsubscribed in this request"
+    }
+  }
+}

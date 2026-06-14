@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/access_log.json",
+  "title": "Access Log",
+  "properties": {
+    "id": {
+      "$ref": "#/components/schemas/id"
+    },
+    "ip": {
+      "type": "string",
+      "description": "IP address of source that generated action"
+    },
+    "timestamp": {
+      "$ref": "#/components/schemas/timestamp"
+    },
+    "country": {
+      "type": "string",
+      "description": "Country where the IP address is registered (estimated)"
+    },
+    "city": {
+      "type": "string",
+      "description": "City where the IP address is registered (estimated)"
+    },
+    "log": {
+      "type": "string",
+      "description": "Action description. Possible values:\n\n- ``changed_email`` - email was changed\n- ``changed_password`` - password was changed\n- ``disabled_tfa`` - TFA was disabled\n- ``enabled_tfa`` - TFA was enabled\n- ``success`` - successful login\n- ``failure`` - login failure\n- ``enabled_subaccount_login`` - login was enabled for subaccount (in `data` - subaccount uid)\n- ``disabled_subaccount_login`` - login was disabled for subaccount (in `data` - subaccount uid)\n- ``new_api_key`` - API key was created (in `data` key client id)\n- ``removed_api_key`` - API key was removed (in `data` key client id)\n- ``changed_scope`` - scope of API key was changed (in `data` key client id)\n- ``changed_whitelist`` - whitelist of API key was edited (in `data` key client id)\n- ``disabled_api_key`` - API key was disabled (in `data` key client id)\n- ``enabled_api_key`` - API key was enabled (in `data` key client id)\n- ``reset_api_key`` - API key was reset (in `data` key client id)\n"
+    },
+    "data": {
+      "description": "Optional, additional information about action, type depends on `log` value",
+      "oneOf": [
+        {
+          "type": "object"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    }
+  },
+  "required": [
+    "id",
+    "ip",
+    "timestamp",
+    "country",
+    "city",
+    "log"
+  ],
+  "type": "object"
+}

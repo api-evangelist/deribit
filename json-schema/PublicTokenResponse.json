@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/PublicTokenResponse.json",
+  "title": "Publictokenresponse",
+  "properties": {
+    "jsonrpc": {
+      "type": "string",
+      "enum": [
+        "2.0"
+      ],
+      "description": "The JSON-RPC version (2.0)"
+    },
+    "id": {
+      "type": "integer",
+      "description": "The id that was sent in the request"
+    },
+    "result": {
+      "type": "object",
+      "properties": {
+        "access_token": {
+          "type": "string",
+          "example": "843SehgeX5n6XxEU4XbABx4Cny5Akai5iHiJePTsvUw7"
+        },
+        "token_type": {
+          "type": "string",
+          "enum": [
+            "bearer"
+          ],
+          "description": "Authorization type, allowed value - `bearer`"
+        },
+        "expires_in": {
+          "type": "integer",
+          "example": 315360000,
+          "description": "Token lifetime in seconds"
+        },
+        "refresh_token": {
+          "type": "string",
+          "example": "6faf8L36JdaSqsjCEEiwqifPpj6JB18RWwiWHrsGTZ91",
+          "description": "Can be used to request a new token (with a new lifetime)"
+        },
+        "scope": {
+          "type": "string",
+          "description": "Type of the access for assigned token"
+        },
+        "sid": {
+          "type": "string",
+          "description": "Optional Session id"
+        }
+      },
+      "required": [
+        "access_token",
+        "token_type",
+        "expires_in",
+        "refresh_token",
+        "scope"
+      ]
+    }
+  },
+  "required": [
+    "jsonrpc",
+    "result"
+  ],
+  "type": "object"
+}

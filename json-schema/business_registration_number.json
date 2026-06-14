@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/business_registration_number.json",
+  "title": "Business Registration Number",
+  "example": "2021/135466541/07",
+  "type": "string",
+  "description": "Registration number of the company"
+}

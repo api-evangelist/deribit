@@ -1,0 +1,9 @@
+{
+  "jsonrpc": "2.0",
+  "id": 7851,
+  "method": "private/get_mmp_status",
+  "params": {
+    "index_name": "btc_usd",
+    "mmp_group": "MassQuoteBot7"
+  }
+}

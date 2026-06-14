@@ -1,0 +1,113 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/position.json",
+  "title": "Position",
+  "properties": {
+    "instrument_name": {
+      "$ref": "#/components/schemas/instrument_name"
+    },
+    "kind": {
+      "$ref": "#/components/schemas/kind"
+    },
+    "average_price": {
+      "type": "number",
+      "description": "Average price of trades that built this position"
+    },
+    "direction": {
+      "$ref": "#/components/schemas/position_direction"
+    },
+    "mark_price": {
+      "type": "number",
+      "description": "Current mark price for position's instrument"
+    },
+    "delta": {
+      "type": "number",
+      "description": "Delta parameter"
+    },
+    "gamma": {
+      "type": "number",
+      "description": "Only for options, Gamma parameter"
+    },
+    "vega": {
+      "type": "number",
+      "description": "Only for options, Vega parameter"
+    },
+    "theta": {
+      "type": "number",
+      "description": "Only for options, Theta parameter"
+    },
+    "index_price": {
+      "type": "number",
+      "description": "Current index price"
+    },
+    "initial_margin": {
+      "type": "number",
+      "description": "Initial margin"
+    },
+    "maintenance_margin": {
+      "type": "number",
+      "description": "Maintenance margin"
+    },
+    "settlement_price": {
+      "type": "number",
+      "description": "Optional (not added for spot). Last settlement price for position's instrument 0 if instrument wasn't settled yet"
+    },
+    "total_profit_loss": {
+      "type": "number",
+      "description": "Profit or loss from position"
+    },
+    "floating_profit_loss": {
+      "type": "number",
+      "description": "Floating profit or loss"
+    },
+    "realized_profit_loss": {
+      "type": "number",
+      "description": "Realized profit or loss"
+    },
+    "size": {
+      "type": "number",
+      "description": "Position size for futures size in quote currency (e.g. USD), for options size is in base currency (e.g. BTC)"
+    },
+    "size_currency": {
+      "type": "number",
+      "description": "Only for futures, position size in base currency"
+    },
+    "average_price_usd": {
+      "type": "number",
+      "description": "Only for options, average price in USD"
+    },
+    "floating_profit_loss_usd": {
+      "type": "number",
+      "description": "Only for options, floating profit or loss in USD"
+    },
+    "leverage": {
+      "type": "integer",
+      "description": "Current available leverage for future position"
+    },
+    "realized_funding": {
+      "type": "number",
+      "description": "Realized Funding in current session included in session realized profit or loss, only for positions of perpetual instruments"
+    },
+    "interest_value": {
+      "type": "number",
+      "description": "Value used to calculate `realized_funding` (perpetual only)"
+    }
+  },
+  "required": [
+    "instrument_name",
+    "kind",
+    "average_price",
+    "direction",
+    "mark_price",
+    "delta",
+    "index_price",
+    "initial_margin",
+    "maintenance_margin",
+    "settlement_price",
+    "total_profit_loss",
+    "floating_profit_loss",
+    "realized_profit_loss",
+    "size"
+  ],
+  "type": "object"
+}

@@ -1,0 +1,10 @@
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "method": "private/set_self_trading_config",
+  "params": {
+    "mode": "cancel_maker",
+    "extended_to_subaccounts": true,
+    "block_rfq_self_match_prevention": true
+  }
+}

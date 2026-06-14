@@ -1,0 +1,9 @@
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "method": "public/get_instruments",
+  "params": {
+    "currency": "BTC",
+    "kind": "future"
+  }
+}

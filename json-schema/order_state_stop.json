@@ -1,0 +1,7 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/order_state_stop.json",
+  "title": "Order State Stop",
+  "type": "string",
+  "description": "Order state: `\"triggered\"`, `\"cancelled\"`, or `\"rejected\"` with rejection reason (e.g. `\"rejected:reduce_direction\"`)."
+}

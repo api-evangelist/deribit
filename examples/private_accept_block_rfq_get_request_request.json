@@ -1,0 +1,24 @@
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "method": "private/accept_block_rfq",
+  "params": {
+    "block_rfq_id": 1,
+    "legs": [
+      {
+        "instrument_name": "BTC-8NOV24-70000-C",
+        "ratio": 1,
+        "direction": "buy"
+      },
+      {
+        "instrument_name": "BTC-8NOV24-72000-C",
+        "ratio": 1,
+        "direction": "sell"
+      }
+    ],
+    "price": 0.01,
+    "direction": "buy",
+    "amount": 100,
+    "time_in_force": "fill_or_kill"
+  }
+}

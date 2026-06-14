@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/order_type2.json",
+  "title": "Order Type2",
+  "enum": [
+    "all",
+    "limit",
+    "trigger_all",
+    "stop_all",
+    "stop_limit",
+    "stop_market",
+    "take_all",
+    "take_limit",
+    "take_market",
+    "trailing_all",
+    "trailing_stop"
+  ],
+  "type": "string",
+  "description": "Order type: `\"all\"`, `\"limit\"`, `\"trigger_all\"`, `\"stop_all\"`, `\"stop_limit\"`, `\"stop_market\"`, `\"take_all\"`, `\"take_limit\"`, `\"take_market\"`, `\"trailing_all\"`, `\"trailing_stop\"`"
+}

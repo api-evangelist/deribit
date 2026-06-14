@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/withdrawal_policy_category.json",
+  "title": "Withdrawal Policy Category",
+  "enum": [
+    "small",
+    "secure"
+  ],
+  "type": "string",
+  "description": "Withdrawal Policy category, i.e. `\"small\"`, `\"secure\"`"
+}

@@ -1,0 +1,11 @@
+{
+  "jsonrpc": "2.0",
+  "id": 276,
+  "method": "private/get_user_trades_by_instrument_and_time",
+  "params": {
+    "instrument_name": "BTC-PERPETUAL",
+    "start_timestamp": 1590470872894,
+    "end_timestamp": 1590480872894,
+    "count": 2
+  }
+}

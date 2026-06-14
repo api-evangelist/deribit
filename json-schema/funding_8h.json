@@ -1,0 +1,7 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/funding_8h.json",
+  "title": "Funding 8H",
+  "type": "number",
+  "description": "Funding 8h (perpetual only)"
+}

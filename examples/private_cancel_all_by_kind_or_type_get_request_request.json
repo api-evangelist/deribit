@@ -1,0 +1,12 @@
+{
+  "jsonrpc": "2.0",
+  "id": 2,
+  "method": "private/cancel_all_by_kind_or_type",
+  "params": {
+    "currency": [
+      "BTC",
+      "ETH"
+    ],
+    "kind": "future"
+  }
+}

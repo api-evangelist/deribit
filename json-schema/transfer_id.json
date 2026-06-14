@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/transfer_id.json",
+  "title": "Transfer Id",
+  "example": 12,
+  "type": "integer",
+  "description": "Id of transfer"
+}

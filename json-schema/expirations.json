@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/expirations.json",
+  "title": "Expirations",
+  "properties": {
+    "currency": {
+      "$ref": "#/components/schemas/currency_with_any_and_grouped"
+    },
+    "kind": {
+      "$ref": "#/components/schemas/kind_future_or_option_with_any"
+    }
+  },
+  "type": "object",
+  "description": "A map where each key is valid currency (e.g. btc, eth, usdc), and the value is a list of expirations or a map where each key is a valid kind (future or options) and value is a list of expirations from every instrument"
+}

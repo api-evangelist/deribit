@@ -1,0 +1,8 @@
+{
+  "jsonrpc": "2.0",
+  "id": 2,
+  "method": "public/get_combos",
+  "params": {
+    "currency": "BTC"
+  }
+}

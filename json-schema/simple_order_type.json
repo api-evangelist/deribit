@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/simple_order_type.json",
+  "title": "Simple Order Type",
+  "enum": [
+    "all",
+    "limit",
+    "trigger_all",
+    "stop",
+    "take",
+    "trailing_stop"
+  ],
+  "type": "string",
+  "description": "Order type: `\"all\"`, `\"limit\"`, `\"stop\"`, `\"take\"`, `\"trailing_stop\"`, `\"trailing_take\"`"
+}

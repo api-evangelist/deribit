@@ -1,0 +1,167 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/instrument.json",
+  "title": "Instrument",
+  "properties": {
+    "kind": {
+      "$ref": "#/components/schemas/kind"
+    },
+    "settlement_currency": {
+      "type": "string",
+      "enum": [
+        "BTC",
+        "ETH"
+      ],
+      "description": "Optional (not added for spot). Settlement currency for the instrument."
+    },
+    "counter_currency": {
+      "type": "string",
+      "enum": [
+        "USD",
+        "USDC"
+      ],
+      "description": "Counter currency for the instrument."
+    },
+    "base_currency": {
+      "type": "string",
+      "enum": [
+        "BTC",
+        "ETH"
+      ],
+      "description": "The underlying currency being traded."
+    },
+    "quote_currency": {
+      "type": "string",
+      "enum": [
+        "USD"
+      ],
+      "description": "The currency in which the instrument prices are quoted."
+    },
+    "min_trade_amount": {
+      "type": "number",
+      "example": 0.1,
+      "description": "Minimum amount for trading. For perpetual and inverse futures the amount is in USD units. For options and linear futures it is the underlying base currency coin."
+    },
+    "instrument_name": {
+      "$ref": "#/components/schemas/instrument_name"
+    },
+    "instrument_id": {
+      "$ref": "#/components/schemas/instrument_id"
+    },
+    "is_active": {
+      "type": "boolean",
+      "description": "Indicates if the instrument can currently be traded."
+    },
+    "settlement_period": {
+      "type": "string",
+      "enum": [
+        "month",
+        "week",
+        "perpetual"
+      ],
+      "description": "Optional (not added for spot). The settlement period."
+    },
+    "creation_timestamp": {
+      "type": "integer",
+      "example": 1536569522277,
+      "description": "The time when the instrument was first created (milliseconds since the UNIX epoch)."
+    },
+    "tick_size": {
+      "type": "number",
+      "example": 0.0001,
+      "description": "Specifies minimal price change and, as follows, the number of decimal places for instrument prices."
+    },
+    "tick_size_steps": {
+      "$ref": "#/components/schemas/tick_size_step"
+    },
+    "expiration_timestamp": {
+      "type": "integer",
+      "description": "The time when the instrument will expire (milliseconds since the UNIX epoch)."
+    },
+    "strike": {
+      "type": "number",
+      "description": "The strike value (only for options)."
+    },
+    "option_type": {
+      "type": "string",
+      "enum": [
+        "call",
+        "put"
+      ],
+      "description": "The option type (only for options)."
+    },
+    "future_type": {
+      "type": "string",
+      "enum": [
+        "linear",
+        "reversed"
+      ],
+      "description": "Future type (only for futures)(field is deprecated and will be removed in the future, `instrument_type` should be used instead)."
+    },
+    "instrument_type": {
+      "type": "string",
+      "description": "Type of the instrument. `linear` or `reversed`"
+    },
+    "contract_size": {
+      "type": "integer",
+      "example": 1,
+      "description": "Contract size for instrument."
+    },
+    "maker_commission": {
+      "type": "number",
+      "example": 0.0001,
+      "description": "Maker commission for instrument."
+    },
+    "taker_commission": {
+      "type": "number",
+      "example": 0.0005,
+      "description": "Taker commission for instrument."
+    },
+    "max_liquidation_commission": {
+      "type": "number",
+      "example": 0.001,
+      "description": "Maximal liquidation trade commission for instrument (only for futures)."
+    },
+    "block_trade_commission": {
+      "type": "number",
+      "example": 0.0005,
+      "description": "Block Trade commission for instrument."
+    },
+    "block_trade_tick_size": {
+      "type": "number",
+      "example": 0.01,
+      "description": "Specifies minimal price change for block trading."
+    },
+    "block_trade_min_trade_amount": {
+      "type": "number",
+      "example": 25,
+      "description": "Minimum amount for block trading."
+    },
+    "max_leverage": {
+      "type": "integer",
+      "example": 100,
+      "description": "Maximal leverage for instrument (only for futures)."
+    },
+    "price_index": {
+      "$ref": "#/components/schemas/price_index"
+    },
+    "state": {
+      "$ref": "#/components/schemas/book_state"
+    }
+  },
+  "required": [
+    "kind",
+    "base_currency",
+    "quote_currency",
+    "min_trade_amount",
+    "instrument_name",
+    "is_active",
+    "settlement_period",
+    "creation_timestamp",
+    "tick_size",
+    "expiration_timestamp",
+    "contract_size",
+    "price_index"
+  ],
+  "type": "object"
+}

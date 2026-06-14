@@ -1,0 +1,19 @@
+{
+  "jsonrpc": "2.0",
+  "id": 42,
+  "method": "private/save_address_beneficiary",
+  "params": {
+    "currency": "BTC",
+    "address": "bc1qar0srrr7xfkvy5l643lydnw9re59gtzzwf0uyj",
+    "agreed": true,
+    "personal": false,
+    "unhosted": false,
+    "beneficiary_vasp_name": "Money's Gone",
+    "beneficiary_vasp_did": "did:example:123456789abcdefghi",
+    "beneficiary_vasp_website": "https://example.com",
+    "beneficiary_first_name": "John",
+    "beneficiary_last_name": "Doe",
+    "beneficiary_company_name": "Example Corp",
+    "beneficiary_address": "NL, Amsterdam, Street, 1"
+  }
+}

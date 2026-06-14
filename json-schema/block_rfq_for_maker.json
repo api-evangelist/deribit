@@ -1,0 +1,107 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/block_rfq_for_maker.json",
+  "title": "Block Rfq For Maker",
+  "properties": {
+    "creation_timestamp": {
+      "type": "integer",
+      "example": 1536569522277,
+      "description": "The timestamp when Block RFQ was created (milliseconds since the Unix epoch)"
+    },
+    "expiration_timestamp": {
+      "type": "integer",
+      "example": 1536569522277,
+      "description": "The timestamp when the Block RFQ will expire (milliseconds since the UNIX epoch)"
+    },
+    "block_rfq_id": {
+      "type": "integer",
+      "description": "ID of the Block RFQ"
+    },
+    "role": {
+      "type": "string",
+      "enum": [
+        "taker",
+        "maker"
+      ],
+      "description": "Role of the user in Block RFQ"
+    },
+    "state": {
+      "type": "string",
+      "enum": [
+        "open",
+        "filled",
+        "cancelled",
+        "expired"
+      ],
+      "description": "State of the Block RFQ"
+    },
+    "taker_rating": {
+      "type": "string",
+      "description": "Rating of the taker"
+    },
+    "amount": {
+      "type": "number",
+      "description": "This value multiplied by the ratio of a leg gives trade size on that leg."
+    },
+    "min_trade_amount": {
+      "type": "number",
+      "description": "Minimum amount for trading"
+    },
+    "legs": {
+      "$ref": "#/components/schemas/block_rfq_legs"
+    },
+    "hedge": {
+      "$ref": "#/components/schemas/block_rfq_hedge_leg"
+    },
+    "combo_id": {
+      "$ref": "#/components/schemas/combo_id"
+    },
+    "disclosed": {
+      "type": "boolean",
+      "description": "Indicates whether the RFQ was created as non-anonymous, meaning taker and maker aliases are visible to counterparties."
+    },
+    "taker": {
+      "type": "string",
+      "example": "TAKER1",
+      "description": "Taker alias. Present only when `disclosed` is `true`."
+    },
+    "index_prices": {
+      "type": "array",
+      "items": {
+        "type": "number",
+        "description": "A list of index prices for the underlying instrument(s) at the time of trade execution."
+      }
+    },
+    "included_in_taker_rating": {
+      "type": "boolean",
+      "description": "Indicates whether the RFQ is included in the taker's rating calculation. Present only for closed RFQs created by the requesting taker."
+    },
+    "trades": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "direction": {
+            "$ref": "#/components/schemas/direction"
+          },
+          "price": {
+            "$ref": "#/components/schemas/price"
+          },
+          "amount": {
+            "type": "number",
+            "description": "Trade amount. For options, linear futures, linear perpetuals and spots the amount is denominated in the underlying base currency coin. The inverse perpetuals and inverse futures are denominated in USD units."
+          },
+          "maker": {
+            "type": "string",
+            "description": "Alias of the maker (optional)"
+          },
+          "hedge_amount": {
+            "type": "number",
+            "description": "Amount of the hedge leg. For linear futures, linear perpetuals and spots the amount is denominated in the underlying base currency coin. The inverse perpetuals and inverse futures are denominated in USD units."
+          }
+        }
+      }
+    }
+  },
+  "type": "object"
+}

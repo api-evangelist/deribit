@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/best_ask_amount.json",
+  "title": "Best Ask Amount",
+  "nullable": true,
+  "type": "number",
+  "description": "It represents the requested order size of all best asks"
+}

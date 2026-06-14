@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/trade_trigger_state.json",
+  "title": "Trade Trigger State",
+  "enum": [
+    "triggered",
+    "untriggered",
+    "cancelled"
+  ],
+  "type": "string",
+  "description": "Trade trigger state: `\"untriggered\"` or `\"cancelled\"`"
+}

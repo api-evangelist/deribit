@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/position_move.json",
+  "title": "Position Move",
+  "properties": {
+    "trades": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/position_move_trade"
+      }
+    }
+  },
+  "required": [
+    "trades"
+  ],
+  "type": "object"
+}

@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/unhosted_wallet.json",
+  "title": "Unhosted Wallet",
+  "example": false,
+  "type": "boolean",
+  "description": "Indicates if the address belongs to an unhosted wallet"
+}

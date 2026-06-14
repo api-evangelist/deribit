@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/additional_reserve.json",
+  "title": "Additional Reserve",
+  "example": 0.3,
+  "type": "number",
+  "description": "The account's balance reserved in other orders"
+}

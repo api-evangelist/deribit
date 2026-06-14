@@ -1,0 +1,9 @@
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "method": "private/change_margin_model",
+  "params": {
+    "user_id": 3,
+    "margin_model": "cross_pm"
+  }
+}

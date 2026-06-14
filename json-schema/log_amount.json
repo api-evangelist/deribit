@@ -1,0 +1,7 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/log_amount.json",
+  "title": "Log Amount",
+  "type": "number",
+  "description": "For perpetual and inverse futures the amount is in USD units. For options and linear futures it is the underlying base currency coin."
+}

@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/wallet_currency.json",
+  "title": "Wallet Currency",
+  "enum": [
+    "BTC",
+    "ETH",
+    "STETH",
+    "ETHW",
+    "USDC",
+    "USDT",
+    "EURR",
+    "SOL",
+    "XRP",
+    "USYC",
+    "PAXG",
+    "BNB",
+    "USDE"
+  ],
+  "type": "string",
+  "description": "Currency, i.e `\"BTC\"`, `\"ETH\"`, `\"USDC\"`"
+}

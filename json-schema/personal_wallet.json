@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/personal_wallet.json",
+  "title": "Personal Wallet",
+  "example": true,
+  "type": "boolean",
+  "description": "The user confirms that he provided address belongs to him and he has access to it via an un-hosted wallet software"
+}

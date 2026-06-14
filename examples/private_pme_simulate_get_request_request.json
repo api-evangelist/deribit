@@ -1,0 +1,8 @@
+{
+  "jsonrpc": "2.0",
+  "id": 2255,
+  "method": "private/pme/simulate",
+  "params": {
+    "currency": "BTC"
+  }
+}

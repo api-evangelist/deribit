@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/scale_down.json",
+  "title": "Scale Down",
+  "properties": {
+    "mm_multiplier": {
+      "type": "number",
+      "description": "Maintenance Margin multiplier"
+    },
+    "im_multiplier": {
+      "type": "number",
+      "description": "Initial Margin multiplier"
+    }
+  },
+  "required": [
+    "im_multiplier",
+    "mm_multiplier"
+  ],
+  "type": "object",
+  "description": "The field is only added if the user has it set"
+}

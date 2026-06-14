@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/trade_allocations.json",
+  "title": "Trade Allocations",
+  "items": {
+    "properties": {
+      "user_id": {
+        "type": "integer",
+        "description": "User ID to allocate part of the RFQ amount. For brokers the User ID is obstructed."
+      },
+      "client_info": {
+        "type": "object",
+        "properties": {
+          "client_id": {
+            "type": "integer",
+            "description": "ID of a client; available to broker. Represents a group of users under a common name."
+          },
+          "client_link_id": {
+            "type": "integer",
+            "description": "ID assigned to a single user in a client; available to broker."
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the linked user within the client; available to broker."
+          }
+        },
+        "description": "Client allocation info for brokers."
+      },
+      "amount": {
+        "type": "number",
+        "description": "Amount allocated to this user or client."
+      }
+    },
+    "type": "object"
+  },
+  "type": "array",
+  "description": "List of allocations for Block RFQ pre-allocation. Allows to split amount between different (sub)accounts or broker clients. Each allocation must specify either `user_id` (for direct allocation) or `client_info` object (for broker allocation), and amount. Visible only to the taker."
+}

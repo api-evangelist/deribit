@@ -1,0 +1,7 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/trade_seq.json",
+  "title": "Trade Seq",
+  "type": "integer",
+  "description": "The sequence number of the trade within instrument"
+}

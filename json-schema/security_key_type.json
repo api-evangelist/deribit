@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/security_key_type.json",
+  "title": "Security Key Type",
+  "enum": [
+    "tfa",
+    "u2f"
+  ],
+  "type": "string",
+  "description": "Security Key type"
+}

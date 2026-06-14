@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/block_trade_id.json",
+  "title": "Block Trade Id",
+  "example": "154",
+  "type": "string",
+  "description": "Block trade id"
+}

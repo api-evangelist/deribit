@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/PublicGetFundingRateHistoryResponse.json",
+  "title": "Publicgetfundingratehistoryresponse",
+  "properties": {
+    "jsonrpc": {
+      "type": "string",
+      "enum": [
+        "2.0"
+      ],
+      "description": "The JSON-RPC version (2.0)"
+    },
+    "id": {
+      "type": "integer",
+      "description": "The id that was sent in the request"
+    },
+    "result": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "timestamp": {
+            "$ref": "#/components/schemas/timestamp"
+          },
+          "prev_index_price": {
+            "$ref": "#/components/schemas/price"
+          },
+          "index_price": {
+            "$ref": "#/components/schemas/price"
+          },
+          "interest_1h": {
+            "type": "number",
+            "description": "1hour interest rate"
+          },
+          "interest_8h": {
+            "type": "number",
+            "description": "8hour interest rate"
+          }
+        }
+      }
+    }
+  },
+  "required": [
+    "jsonrpc",
+    "result"
+  ],
+  "type": "object"
+}

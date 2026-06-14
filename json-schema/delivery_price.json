@@ -1,0 +1,7 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/delivery_price.json",
+  "title": "Delivery Price",
+  "type": "number",
+  "description": "The settlement price for the instrument. Only when `state = closed`"
+}

@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/external_id.json",
+  "title": "External Id",
+  "example": "4b4cee3d-2dfc-4402-a9ae-f8f9785fa966",
+  "type": "string",
+  "description": "User ID in external systems"
+}

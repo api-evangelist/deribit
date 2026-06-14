@@ -1,0 +1,10 @@
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "method": "private/approve_block_trade",
+  "params": {
+    "timestamp": 1711468813551,
+    "nonce": "bt-468nha",
+    "role": "maker"
+  }
+}

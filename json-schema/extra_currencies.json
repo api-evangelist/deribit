@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/extra_currencies.json",
+  "title": "Extra Currencies",
+  "items": {
+    "type": "string",
+    "description": "Name of the currency"
+  },
+  "example": [
+    "USDC"
+  ],
+  "type": "array",
+  "description": "The user can pass a list of currencies to add the address for. It is currently available ONLY for ERC20 currencies. Without passing this paramater for an ERC20 currency, the address will be added to ALL of the ERC20 currencies."
+}

@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/best_bid_price.json",
+  "title": "Best Bid Price",
+  "nullable": true,
+  "type": "number",
+  "description": "The current best bid price, `null` if there aren't any bids"
+}

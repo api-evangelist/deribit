@@ -1,0 +1,9 @@
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "method": "private/cancel_block_rfq_quote",
+  "params": {
+    "label": "example_quote",
+    "block_rfq_id": 3
+  }
+}

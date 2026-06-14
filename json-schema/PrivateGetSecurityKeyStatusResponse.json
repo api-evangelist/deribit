@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/PrivateGetSecurityKeyStatusResponse.json",
+  "title": "Privategetsecuritykeystatusresponse",
+  "properties": {
+    "jsonrpc": {
+      "type": "string",
+      "enum": [
+        "2.0"
+      ],
+      "description": "The JSON-RPC version (2.0)"
+    },
+    "id": {
+      "type": "integer",
+      "description": "The id that was sent in the request"
+    },
+    "result": {
+      "type": "object",
+      "properties": {
+        "mode": {
+          "type": "string",
+          "enum": [
+            "basic",
+            "advanced"
+          ],
+          "description": "Current Security Keys management mode"
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "`true` if there is any assignment to any key made"
+        },
+        "assignments": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "login",
+              "account",
+              "wallet",
+              "admin"
+            ],
+            "description": ""
+          },
+          "description": "List of assignments that has Security Key assigned, allowed values: `login`, `account`, `wallet`, `admin`"
+        }
+      },
+      "required": [
+        "mode",
+        "enabled",
+        "assignments"
+      ]
+    }
+  },
+  "required": [
+    "jsonrpc",
+    "result"
+  ],
+  "type": "object"
+}

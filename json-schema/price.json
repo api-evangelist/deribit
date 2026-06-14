@@ -1,0 +1,7 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/price.json",
+  "title": "Price",
+  "type": "number",
+  "description": "Price in base currency"
+}

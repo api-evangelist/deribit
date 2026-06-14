@@ -1,0 +1,21 @@
+{
+  "jsonrpc": "2.0",
+  "id": 3,
+  "method": "private/move_positions",
+  "params": {
+    "currency": "BTC",
+    "source_uid": 3,
+    "target_uid": 23,
+    "trades": [
+      {
+        "instrument_name": "BTC-PERPETUAL",
+        "price": "35800",
+        "amount": "110"
+      },
+      {
+        "instrument_name": "BTC-28JAN22-32500-C",
+        "amount": "0.1"
+      }
+    ]
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/kind_with_combo_all.json",
+  "title": "Kind With Combo All",
+  "enum": [
+    "future",
+    "option",
+    "spot",
+    "future_combo",
+    "option_combo",
+    "combo",
+    "any"
+  ],
+  "type": "string",
+  "description": "Instrument kind: `\"future\"`, `\"option\"`, `\"spot\"`, `\"future_combo\"`, `\"option_combo\"`, `\"combo\"` for any combo or `\"any\"` for all"
+}

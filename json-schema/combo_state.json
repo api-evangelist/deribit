@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/combo_state.json",
+  "title": "Combo State",
+  "enum": [
+    "active",
+    "inactive"
+  ],
+  "type": "string",
+  "description": "Combo state: `\"active\"`, \"`inactive`\""
+}

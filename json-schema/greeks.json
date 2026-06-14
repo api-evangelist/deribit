@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/greeks.json",
+  "title": "Greeks",
+  "properties": {
+    "delta": {
+      "type": "number",
+      "description": "(Only for option) The delta value for the option. This is the **Black Scholes Delta** for individual option expiries. \n\nNote that DeltaTotal in account summary uses Net Transaction Delta instead. See the greeks object description for more details.\n"
+    },
+    "gamma": {
+      "type": "number",
+      "description": "(Only for option) The gamma value for the option. Calculated using standard Black Scholes without adjustments.\n\nGamma measures the rate of change of delta with respect to changes in the underlying asset price.\n"
+    },
+    "rho": {
+      "type": "number",
+      "description": "(Only for option) The rho value for the option. Calculated using standard Black Scholes without adjustments.\n\nRho measures the sensitivity of the option price to changes in the risk-free interest rate.\n"
+    },
+    "theta": {
+      "type": "number",
+      "description": "(Only for option) The theta value for the option. Deribit uses the **minimum of (1 day Theta, lifetime theta of the option)**.\n\nSo if you take an option with 1 hour to expire for example, generally Black Scholes Theta will give you the equivalent 1 day Theta. Whereas we show the 1 hour Theta, so our Theta would differ from Black Scholes Theta when time to expiry is less than 1 day.\n\nTheta measures the rate of change of the option price with respect to time decay.\n"
+    },
+    "vega": {
+      "type": "number",
+      "description": "(Only for option) The vega value for the option. Calculated using standard Black Scholes without adjustments.\n\nVega (not actually a Greek symbol) measures the sensitivity of the option price to changes in implied volatility.\n"
+    }
+  },
+  "required": [
+    "delta",
+    "gamma",
+    "rho",
+    "theta",
+    "vega"
+  ],
+  "type": "object",
+  "description": "Only for options. Greeks are risk measures that describe how the option's price changes with respect to various factors.\n\n**Delta (\u0394)**\n\nDeribit uses two different Deltas:\n- **DeltaTotal** in the account summary uses the **Net Transaction Delta (NTD)**\n- **Delta** for individual option expiries is the **Black Scholes Delta**\n\nIn the settings section you can toggle Net Transaction Delta instead.\n\n**What is DeltaTotal in the account summary?**\n`DeltaTotal = Net Transaction Delta of options + BTC Position of Futures`\n\n**What is Net Transaction Delta?**\n`Net Transaction Delta = Black Scholes Delta - Mark Price of Options`\n\n**Why do we use a Net Transaction Delta?**\nThe Delta Total uses the Net Transaction Delta (or price adjusted Delta) of the options. This is because, from a risk perspective, we are interested in the change in Bitcoin price as the underlying changes.\n\nYou should actually treat your delta as **Equity + Delta Total** if you want to have less risk for your USD PnL.\n\n**Example:** Consider a call option with strike 0, which has a Black Scholes Delta of 1 and Net Transaction Delta = 0.\n\nImagine you have 2 BTC equity and no positions and BTC price is at USD 60k. In that case you would short 2 Futures contracts to hedge your USD exposure to BTC.\n\nNow let's say you buy one call with strike 0. The question is if you should sell another future?\n\nThe call will always have a price of 1 BTC. So you buy it at 1 BTC which equates to USD 60k. Let's say the price increases to USD 70k. The value of the call is still 1 BTC. At settlement you receive 1 BTC for the call. So you paid 1 BTC and then receive 1 BTC which means your USD PnL on buying the call is 0. If you sold a future on it, then you would actually lose on the future.\n\n\u26a0\ufe0f **During the 30 minute settlement period we decay your Delta.** See [Delta decay during settlement](https://support.deribit.com/hc/en-us/articles/25944751433757-Delta-decay-during-settlement) for more details.\n\n**Theta (\u0398)**\n\nThe Theta that Deribit uses is the **minimum of (1 day Theta, lifetime theta of the option)**. So if you take an option with 1 hour to expire for example, generally Black Scholes Theta will give you the equivalent 1 day Theta. Whereas we show the 1 hour Theta, so our Theta would differ from Black Scholes Theta when time to expiry is less than 1 day.\n\n**Vega, Gamma, and Rho**\n\nVega (not actually a Greek symbol), Gamma, Theta and Rho values shown on Deribit are calculated using **standard Black Scholes without adjustments**.\n"
+}

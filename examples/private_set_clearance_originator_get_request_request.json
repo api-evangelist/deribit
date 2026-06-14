@@ -1,0 +1,20 @@
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "method": "private/set_clearance_originator",
+  "params": {
+    "deposit_id": {
+      "currency": "BTC",
+      "user_id": 123,
+      "address": "2NBqqD5GRJ8wHy1PYyCXTe9ke5226FhavBz",
+      "tx_hash": "230669110fdaf0a0dbcdc079b6b8b43d5af29cc73683835b9bc6b3406c065fda"
+    },
+    "originator": {
+      "is_personal": false,
+      "first_name": "First",
+      "last_name": "Last",
+      "company_name": "Company Name",
+      "address": "NL, Amsterdam, Street, 1"
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "jsonrpc": "2.0",
+  "id": 6,
+  "method": "private/create_combo",
+  "params": {
+    "trades": [
+      {
+        "instrument_name": "BTC-29APR22-37500-C",
+        "amount": "1",
+        "direction": "buy"
+      },
+      {
+        "instrument_name": "BTC-29APR22-37500-P",
+        "amount": "1",
+        "direction": "sell"
+      }
+    ]
+  }
+}

@@ -1,0 +1,94 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/PrivateMassQuoteResponse.json",
+  "title": "Privatemassquoteresponse",
+  "properties": {
+    "jsonrpc": {
+      "type": "string",
+      "enum": [
+        "2.0"
+      ],
+      "description": "The JSON-RPC version (2.0)"
+    },
+    "id": {
+      "type": "integer",
+      "description": "The id that was sent in the request"
+    },
+    "result": {
+      "type": "object",
+      "properties": {
+        "orders": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/order"
+          }
+        },
+        "trades": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/user_trade"
+          }
+        },
+        "errors_count": {
+          "type": "integer",
+          "description": "Number of errors (present when `detailed` : `false`)."
+        },
+        "pending_requests_count": {
+          "type": "integer",
+          "description": "Number of pending quotes (present when `wait_for_response`: `false` and `detailed` : `false`)."
+        },
+        "pending_requests": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "instrument_name": {
+                "type": "string",
+                "description": "Instrument name."
+              },
+              "side": {
+                "type": "string",
+                "description": "Quote side - `bid` or `ask`."
+              }
+            }
+          },
+          "description": "List of pending quotes (present when `wait_for_response`: `false` and `detailed` : `true`)."
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "instrument_name": {
+                "type": "string",
+                "description": "Instrument name."
+              },
+              "side": {
+                "type": "string",
+                "description": "Quote side - `bid` or `ask`."
+              },
+              "error": {
+                "type": "object",
+                "description": "Error data."
+              },
+              "code": {
+                "type": "integer",
+                "description": "Error code"
+              },
+              "message": {
+                "type": "string",
+                "description": "Error message."
+              }
+            }
+          },
+          "description": "List of errors (present when `detailed` : `true`)."
+        }
+      }
+    }
+  },
+  "required": [
+    "jsonrpc",
+    "result"
+  ],
+  "type": "object"
+}

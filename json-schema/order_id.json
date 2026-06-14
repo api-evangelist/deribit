@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/order_id.json",
+  "title": "Order Id",
+  "example": "ETH-100234",
+  "type": "string",
+  "description": "Unique order identifier"
+}

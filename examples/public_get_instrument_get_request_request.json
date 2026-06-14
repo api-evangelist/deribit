@@ -1,0 +1,8 @@
+{
+  "jsonrpc": "2.0",
+  "id": 2,
+  "method": "public/get_instrument",
+  "params": {
+    "instrument_name": "BTC-13JAN23-16000-P"
+  }
+}

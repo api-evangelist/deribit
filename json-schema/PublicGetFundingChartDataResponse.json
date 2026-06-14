@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/PublicGetFundingChartDataResponse.json",
+  "title": "Publicgetfundingchartdataresponse",
+  "properties": {
+    "jsonrpc": {
+      "type": "string",
+      "enum": [
+        "2.0"
+      ],
+      "description": "The JSON-RPC version (2.0)"
+    },
+    "id": {
+      "type": "integer",
+      "description": "The id that was sent in the request"
+    },
+    "result": {
+      "type": "object",
+      "properties": {
+        "current_interest": {
+          "type": "number",
+          "example": 0.005000670552845,
+          "description": "Current interest"
+        },
+        "interest_8h": {
+          "type": "number",
+          "example": 0.0040080896931,
+          "description": "Current interest 8h"
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "timestamp": {
+                "$ref": "#/components/schemas/timestamp"
+              },
+              "index_price": {
+                "$ref": "#/components/schemas/index_price"
+              },
+              "interest_8h": {
+                "type": "number",
+                "example": 0.004999511380756577,
+                "description": "Historical interest 8h value"
+              }
+            },
+            "required": [
+              "timestamp",
+              "index_price",
+              "interest_8h"
+            ]
+          }
+        }
+      },
+      "required": [
+        "current_interest",
+        "data",
+        "interest_8h"
+      ]
+    }
+  },
+  "required": [
+    "jsonrpc",
+    "result"
+  ],
+  "type": "object"
+}

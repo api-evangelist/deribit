@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/PrivateGetJwtResponse.json",
+  "title": "Privategetjwtresponse",
+  "properties": {
+    "jsonrpc": {
+      "type": "string",
+      "enum": [
+        "2.0"
+      ],
+      "description": "The JSON-RPC version (2.0)"
+    },
+    "id": {
+      "type": "integer",
+      "description": "The id that was sent in the request"
+    },
+    "result": {
+      "type": "string",
+      "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjQyLCJndWlkIjo0MjQyLCJlbWFpbCI6InRyYWRlckBkZXJpYml0LmNvbSIsImRpc3BsYXlfbmFtZSI6IlRyYWRlciJ9.d-QIJqBr8E1wrG_XIQHD0VPPDP3RJqA0Va8rC2V4VCE"
+    }
+  },
+  "required": [
+    "jsonrpc",
+    "result"
+  ],
+  "type": "object"
+}

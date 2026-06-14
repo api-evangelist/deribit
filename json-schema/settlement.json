@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/settlement.json",
+  "title": "Settlement",
+  "properties": {
+    "funding": {
+      "example": -2.511e-06,
+      "type": "number",
+      "description": "funding (in base currency ; settlement for perpetual product only)"
+    },
+    "funded": {
+      "example": 0,
+      "type": "number",
+      "description": "funded amount (bankruptcy only)"
+    },
+    "index_price": {
+      "example": 11008.37,
+      "type": "number",
+      "description": "underlying index price at time of event (in quote currency; settlement and delivery only)"
+    },
+    "instrument_name": {
+      "example": "BTC-30MAR18",
+      "type": "string",
+      "description": "instrument name (settlement and delivery only)"
+    },
+    "mark_price": {
+      "example": 11000,
+      "type": "number",
+      "description": "mark price for at the settlement time (in quote currency; settlement and delivery only)"
+    },
+    "position": {
+      "example": 1000,
+      "type": "number",
+      "description": "position size (in quote currency; settlement and delivery only)"
+    },
+    "profit_loss": {
+      "example": 0,
+      "type": "number",
+      "description": "profit and loss (in base currency; settlement and delivery only)"
+    },
+    "session_bankruptcy": {
+      "example": 0.001160788,
+      "type": "number",
+      "description": "value of session bankruptcy (in base currency; bankruptcy only)"
+    },
+    "session_profit_loss": {
+      "example": 0.001160788,
+      "type": "number",
+      "description": "total value of session profit and losses (in base currency)"
+    },
+    "session_tax": {
+      "example": -0.001160788,
+      "type": "number",
+      "description": "total amount of paid taxes/fees (in base currency; bankruptcy only)"
+    },
+    "session_tax_rate": {
+      "example": 0.000103333,
+      "type": "number",
+      "description": "rate of paid taxes/fees (in base currency; bankruptcy only)"
+    },
+    "socialized": {
+      "example": -0.001160788,
+      "type": "number",
+      "description": "the amount of the socialized losses (in base currency; bankruptcy only)"
+    },
+    "timestamp": {
+      "$ref": "#/components/schemas/timestamp"
+    },
+    "type": {
+      "$ref": "#/components/schemas/settlement_type"
+    }
+  },
+  "required": [
+    "type",
+    "timestamp",
+    "session_profit_loss",
+    "position",
+    "instrument_name",
+    "index_price",
+    "funding"
+  ],
+  "type": "object"
+}

@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/block_rfq_currency.json",
+  "title": "Block Rfq Currency",
+  "enum": [
+    "BTC",
+    "ETH",
+    "USDC",
+    "USDT",
+    "any"
+  ],
+  "type": "string",
+  "description": "Currency, i.e `\"BTC\"`, `\"ETH\"`, `\"USDC\"`"
+}

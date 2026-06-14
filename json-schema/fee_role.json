@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/fee_role.json",
+  "title": "Fee Role",
+  "enum": [
+    "maker",
+    "taker"
+  ],
+  "type": "string",
+  "description": "Fee role of the user: `maker` or `taker`. Can be different from trade role of the user when iceberg order was involved in matching."
+}

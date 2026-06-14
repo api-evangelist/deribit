@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/custody_account.json",
+  "title": "Custody Account",
+  "properties": {
+    "currency": {
+      "$ref": "#/components/schemas/currency"
+    },
+    "name": {
+      "$ref": "#/components/schemas/custody_name"
+    },
+    "balance": {
+      "$ref": "#/components/schemas/currency_amount",
+      "description": "Balance available on custody account"
+    },
+    "pending_withdrawal_balance": {
+      "$ref": "#/components/schemas/currency_amount",
+      "description": "Pending balance transferred from trading account to custody account"
+    },
+    "auto_deposit": {
+      "type": "boolean",
+      "description": "When set to 'true' all new funds added to custody balance will be automatically transferred to trading balance"
+    },
+    "client_id": {
+      "type": "string",
+      "description": "API key 'client id' used to reserve/release funds in custody platform, requires scope 'custody:read_write'"
+    },
+    "external_id": {
+      "$ref": "#/components/schemas/external_id"
+    },
+    "withdrawal_address": {
+      "type": "string",
+      "description": "Address that is used for withdrawals"
+    },
+    "withdrawal_address_change": {
+      "type": "number",
+      "description": "UNIX timestamp after when new withdrawal address will be used for withdrawals"
+    },
+    "pending_withdrawal_addres": {
+      "type": "string",
+      "description": "New withdrawal address that will be used after 'withdrawal_address_change'"
+    },
+    "deposit_address": {
+      "type": "string",
+      "description": "Address that can be used for deposits"
+    }
+  },
+  "required": [
+    "currency",
+    "name",
+    "pending_withdrawal_balance"
+  ],
+  "type": "object",
+  "description": "Custody account"
+}

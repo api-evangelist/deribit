@@ -1,0 +1,10 @@
+{
+  "jsonrpc": "2.0",
+  "id": 5663,
+  "method": "private/cancel_quotes",
+  "params": {
+    "cancel_type": "delta",
+    "min_delta": 0.4,
+    "max_delta": 0.6
+  }
+}

@@ -1,0 +1,201 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/order.json",
+  "title": "Order",
+  "properties": {
+    "order_id": {
+      "$ref": "#/components/schemas/order_id"
+    },
+    "order_state": {
+      "$ref": "#/components/schemas/order_state"
+    },
+    "order_type": {
+      "$ref": "#/components/schemas/order_type"
+    },
+    "original_order_type": {
+      "$ref": "#/components/schemas/original_order_type"
+    },
+    "time_in_force": {
+      "$ref": "#/components/schemas/time_in_force"
+    },
+    "is_rebalance": {
+      "type": "boolean",
+      "description": "Optional (only for spot). `true` if order was automatically created during cross-collateral balance restoration"
+    },
+    "is_liquidation": {
+      "type": "boolean",
+      "description": "Optional (not added for spot). `true` if order was automatically created during liquidation"
+    },
+    "instrument_name": {
+      "$ref": "#/components/schemas/instrument_name"
+    },
+    "creation_timestamp": {
+      "$ref": "#/components/schemas/timestamp"
+    },
+    "last_update_timestamp": {
+      "$ref": "#/components/schemas/timestamp"
+    },
+    "direction": {
+      "$ref": "#/components/schemas/direction"
+    },
+    "price": {
+      "$ref": "#/components/schemas/open_order_price"
+    },
+    "label": {
+      "$ref": "#/components/schemas/label"
+    },
+    "post_only": {
+      "$ref": "#/components/schemas/post_only"
+    },
+    "reject_post_only": {
+      "$ref": "#/components/schemas/reject_post_only"
+    },
+    "reduce_only": {
+      "$ref": "#/components/schemas/reduce_only"
+    },
+    "api": {
+      "$ref": "#/components/schemas/api"
+    },
+    "web": {
+      "$ref": "#/components/schemas/web"
+    },
+    "mobile": {
+      "$ref": "#/components/schemas/mobile"
+    },
+    "refresh_amount": {
+      "$ref": "#/components/schemas/refresh_amount"
+    },
+    "display_amount": {
+      "$ref": "#/components/schemas/display_amount"
+    },
+    "amount": {
+      "$ref": "#/components/schemas/amount"
+    },
+    "contracts": {
+      "$ref": "#/components/schemas/contracts"
+    },
+    "filled_amount": {
+      "$ref": "#/components/schemas/filled_amount"
+    },
+    "average_price": {
+      "$ref": "#/components/schemas/average_price"
+    },
+    "advanced": {
+      "$ref": "#/components/schemas/advanced"
+    },
+    "implv": {
+      "$ref": "#/components/schemas/implv"
+    },
+    "usd": {
+      "$ref": "#/components/schemas/usd"
+    },
+    "triggered": {
+      "$ref": "#/components/schemas/triggered"
+    },
+    "trigger": {
+      "$ref": "#/components/schemas/trigger"
+    },
+    "trigger_price": {
+      "$ref": "#/components/schemas/trigger_price"
+    },
+    "trigger_offset": {
+      "$ref": "#/components/schemas/trigger_offset"
+    },
+    "trigger_reference_price": {
+      "$ref": "#/components/schemas/trigger_reference_price"
+    },
+    "block_trade": {
+      "$ref": "#/components/schemas/block_trade_order"
+    },
+    "mmp": {
+      "type": "boolean",
+      "description": "`true` if the order is a MMP order, otherwise `false`."
+    },
+    "risk_reducing": {
+      "type": "boolean",
+      "description": "`true` if the order is marked by the platform as a risk reducing order (can apply only to orders placed by PM users), otherwise `false`."
+    },
+    "replaced": {
+      "type": "boolean",
+      "description": "`true` if the order was edited (by user or - in case of advanced options orders - by pricing engine), otherwise `false`."
+    },
+    "auto_replaced": {
+      "type": "boolean",
+      "description": "Options, advanced orders only - `true` if last modification of the order was performed by the pricing engine, otherwise `false`."
+    },
+    "quote": {
+      "type": "boolean",
+      "description": "If order is a quote. Present only if true."
+    },
+    "mmp_group": {
+      "type": "string",
+      "description": "Name of the MMP group supplied in the `private/mass_quote` request. Only present for quote orders."
+    },
+    "quote_set_id": {
+      "type": "string",
+      "description": "Identifier of the QuoteSet supplied in the `private/mass_quote` request. Only present for quote orders."
+    },
+    "quote_id": {
+      "type": "string",
+      "description": "The same QuoteID as supplied in the `private/mass_quote` request. Only present for quote orders."
+    },
+    "trigger_order_id": {
+      "type": "string",
+      "example": "SLIB-370",
+      "description": "Id of the trigger order that created the order (Only for orders that were created by triggered orders)."
+    },
+    "app_name": {
+      "type": "string",
+      "example": "Example Application",
+      "description": "The name of the application that placed the order on behalf of the user (optional)."
+    },
+    "mmp_cancelled": {
+      "type": "boolean",
+      "example": true,
+      "description": "`true` if order was cancelled by mmp trigger (optional)"
+    },
+    "cancel_reason": {
+      "$ref": "#/components/schemas/cancel_reason"
+    },
+    "oto_order_ids": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/order_id",
+        "description": "Order Id"
+      },
+      "description": "The Ids of the orders that will be triggered if the order is filled"
+    },
+    "trigger_fill_condition": {
+      "$ref": "#/components/schemas/trigger_fill_condition"
+    },
+    "oco_ref": {
+      "$ref": "#/components/schemas/oco_ref"
+    },
+    "primary_order_id": {
+      "$ref": "#/components/schemas/order_id",
+      "description": "ID of the order that triggered this order."
+    },
+    "is_secondary_oto": {
+      "$ref": "#/components/schemas/is_secondary_oto"
+    },
+    "is_primary_otoco": {
+      "type": "boolean",
+      "description": "`true` if the order is an order that can trigger an OCO pair, otherwise not present."
+    }
+  },
+  "required": [
+    "order_id",
+    "order_state",
+    "order_type",
+    "time_in_force",
+    "instrument_name",
+    "creation_timestamp",
+    "last_update_timestamp",
+    "direction",
+    "price",
+    "label",
+    "post_only",
+    "api"
+  ],
+  "type": "object"
+}

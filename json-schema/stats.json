@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/stats.json",
+  "title": "Stats",
+  "properties": {
+    "volume": {
+      "type": "number",
+      "description": "Volume during last 24h in base currency"
+    },
+    "low": {
+      "type": "number",
+      "description": "Lowest price during 24h"
+    },
+    "high": {
+      "type": "number",
+      "description": "Highest price during 24h"
+    },
+    "price_change": {
+      "example": 10.23,
+      "type": "number",
+      "description": "24-hour price change expressed as a percentage, `null` if there weren't any trades"
+    },
+    "volume_usd": {
+      "$ref": "#/components/schemas/volume_usd"
+    }
+  },
+  "required": [
+    "volume",
+    "high",
+    "low"
+  ],
+  "type": "object"
+}

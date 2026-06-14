@@ -1,0 +1,7 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/quantity.json",
+  "title": "Quantity",
+  "type": "number",
+  "description": "The number of contracts to be traded."
+}

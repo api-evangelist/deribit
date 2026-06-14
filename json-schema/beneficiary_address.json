@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/beneficiary_address.json",
+  "title": "Beneficiary Address",
+  "example": "NL, Amsterdam, Street, 1",
+  "type": "string",
+  "description": "Geographical address of the beneficiary"
+}

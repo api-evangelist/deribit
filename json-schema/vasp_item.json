@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/vasp_item.json",
+  "title": "Vasp Item",
+  "properties": {
+    "did": {
+      "$ref": "#/components/schemas/did"
+    },
+    "jurisdictions": {
+      "$ref": "#/components/schemas/jurisdictions"
+    },
+    "name": {
+      "$ref": "#/components/schemas/vasp_name"
+    }
+  },
+  "required": [
+    "did",
+    "name"
+  ],
+  "type": "object"
+}

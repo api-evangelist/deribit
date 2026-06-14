@@ -1,0 +1,10 @@
+{
+  "jsonrpc": "2.0",
+  "id": 8974,
+  "method": "private/create_api_key",
+  "params": {
+    "name": "Public key 1",
+    "max_scope": "account:read trade:read block_trade:read_write wallet:none",
+    "public_key": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAM7FWhKquNqLmTOV4hfYT5r3AjrYiORTT6Tn5HIfFNV8=\n-----END PUBLIC KEY-----"
+  }
+}

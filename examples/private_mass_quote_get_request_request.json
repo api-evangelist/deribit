@@ -1,0 +1,36 @@
+{
+  "jsonrpc": "2.0",
+  "id": 7859,
+  "method": "private/mass_quote",
+  "params": {
+    "detailed": true,
+    "quote_id": "1",
+    "mmp_group": "default",
+    "quotes": [
+      {
+        "instrument_name": "BTC-PERPETUAL",
+        "quote_set_id": "futures",
+        "ask": {
+          "price": 43800,
+          "amount": 10
+        },
+        "bid": {
+          "price": 43700,
+          "amount": 10
+        }
+      },
+      {
+        "instrument_name": "BTC-22DEC23-41600-C",
+        "quote_set_id": "options",
+        "ask": {
+          "price": 0.05,
+          "amount": 1
+        },
+        "bid": {
+          "price": 0.04,
+          "amount": 1
+        }
+      }
+    ]
+  }
+}

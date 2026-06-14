@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/requires_confirmation_change.json",
+  "title": "Requires Confirmation Change",
+  "example": true,
+  "type": "boolean",
+  "description": "If email confirmation change is in progress"
+}

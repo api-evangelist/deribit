@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/api_key_features.json",
+  "title": "Api Key Features",
+  "items": {
+    "type": "string"
+  },
+  "type": "array",
+  "description": "List of enabled advanced on-key features.<br><br><b>Available options:</b><br>- <code>restricted_block_trades</code>: Limit the block_trade read the scope of the API key to block trades that have been made using this specific API key<br>- <code>block_trade_approval</code>: Block trades created using this API key require additional user approval. Methods that use <code>block_rfq</code> scope are not affected by Block Trade approval feature"
+}

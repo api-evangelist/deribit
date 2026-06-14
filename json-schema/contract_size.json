@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/contract_size.json",
+  "title": "Contract Size",
+  "example": 10,
+  "type": "integer",
+  "description": "Contract size, for futures in USD, for options in base currency of the instrument (BTC, ETH, ...)"
+}

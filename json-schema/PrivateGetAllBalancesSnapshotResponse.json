@@ -1,0 +1,125 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/PrivateGetAllBalancesSnapshotResponse.json",
+  "title": "Privategetallbalancessnapshotresponse",
+  "properties": {
+    "jsonrpc": {
+      "type": "string",
+      "enum": [
+        "2.0"
+      ],
+      "description": "The JSON-RPC version (2.0)"
+    },
+    "id": {
+      "type": "integer",
+      "description": "The id that was sent in the request"
+    },
+    "result": {
+      "type": "object",
+      "properties": {
+        "balances": {
+          "type": "array",
+          "properties": {
+            "currency": {
+              "$ref": "#/components/schemas/currency"
+            },
+            "total_equity": {
+              "type": "number",
+              "description": "Equity of the main account + subaccounts. Takes into account external equity."
+            },
+            "custody": {
+              "type": "number",
+              "description": "Custody balance"
+            },
+            "pnl": {
+              "type": "number",
+              "description": "Profit net loss of the user (total_equity - custody)"
+            },
+            "accounts": {
+              "type": "object",
+              "properties": {
+                "available_withdrawal_funds": {
+                  "type": "number",
+                  "description": "The account's available to withdrawal funds"
+                },
+                "available_funds": {
+                  "type": "number",
+                  "description": "The account's available funds. When cross collateral is enabled, this aggregated value is calculated by converting the sum of each cross collateral currency's value to the given currency, using each cross collateral currency's index."
+                },
+                "initial_margin": {
+                  "type": "number",
+                  "description": "The account's initial margin. When cross collateral is enabled, this aggregated value is calculated by converting the sum of each cross collateral currency's value to the given currency, using each cross collateral currency's index."
+                },
+                "maintenance_margin": {
+                  "type": "number",
+                  "description": "The maintenance margin. When cross collateral is enabled, this aggregated value is calculated by converting the sum of each cross collateral currency's value to the given currency, using each cross collateral currency's index."
+                },
+                "equity": {
+                  "type": "number",
+                  "description": "The account's current equity"
+                },
+                "margin_balance": {
+                  "type": "number",
+                  "description": "The account's margin balance. When cross collateral is enabled, this aggregated value is calculated by converting the sum of each cross collateral currency's value to the given currency, using each cross collateral currency's index."
+                },
+                "main": {
+                  "type": "boolean",
+                  "description": "Main account or subaccount"
+                },
+                "balance": {
+                  "type": "number",
+                  "description": "Balance of the (sub)account"
+                },
+                "user_id": {
+                  "type": "integer",
+                  "description": "Id of a (sub)account"
+                },
+                "snapshot_timestamp": {
+                  "type": "integer",
+                  "description": "Timestamp of the snapshot"
+                }
+              },
+              "required": [
+                "available_withdrawal_funds",
+                "available_funds",
+                "initial_margin",
+                "maintenance_margin",
+                "equity",
+                "margin_balance",
+                "main",
+                "balance",
+                "user_id"
+              ],
+              "description": "Represents portfolio of main-account and sub-accounts"
+            }
+          },
+          "description": "User balance in a given currency"
+        },
+        "signature": {
+          "type": "string",
+          "description": "The signature, encode as base64. Signature is generated using RSA SHA256 with 4096bit key. The signature can be verified using the signature_payload and Deribit's public key."
+        },
+        "signature_payload": {
+          "type": "string",
+          "description": "Serialized JSON string of the result (without the `signature` and `signature_payload` fields). The JSON string is compressed using Gzip and encoded in Base64. To validate the process, the user should first decode the Base64-encoded `signature_payload` and then un-Gzip the decoded payload to retrieve the original JSON string. Next, the user should verify the `signature` by using the decoded JSON string along with the corresponding public key, ensuring that the signature was correctly generated."
+        },
+        "signed_at": {
+          "type": "integer",
+          "description": "Timestamp of the signature"
+        }
+      },
+      "required": [
+        "currency",
+        "accounts",
+        "total_equity",
+        "custody",
+        "pnl"
+      ]
+    }
+  },
+  "required": [
+    "jsonrpc",
+    "result"
+  ],
+  "type": "object"
+}

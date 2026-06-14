@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/PublicGetAnnouncementsResponse.json",
+  "title": "Publicgetannouncementsresponse",
+  "properties": {
+    "jsonrpc": {
+      "type": "string",
+      "enum": [
+        "2.0"
+      ],
+      "description": "The JSON-RPC version (2.0)"
+    },
+    "id": {
+      "type": "integer",
+      "description": "The id that was sent in the request"
+    },
+    "result": {
+      "type": "array",
+      "items": {
+        "properties": {
+          "body": {
+            "example": "An&nbsp;announcement",
+            "type": "string",
+            "description": "The HTML body of the announcement"
+          },
+          "publication_timestamp": {
+            "example": 1527844253000,
+            "type": "integer",
+            "description": "The timestamp (milliseconds since the Unix epoch) of announcement publication"
+          },
+          "id": {
+            "example": 19288317,
+            "type": "number",
+            "description": "A unique identifier for the announcement"
+          },
+          "important": {
+            "example": false,
+            "type": "boolean",
+            "description": "Whether the announcement is marked as important"
+          },
+          "confirmation": {
+            "type": "boolean",
+            "example": false,
+            "description": "Whether the user confirmation is required for this announcement"
+          },
+          "title": {
+            "example": "Example announcement",
+            "type": "string",
+            "description": "The title of the announcement"
+          }
+        },
+        "required": [
+          "title",
+          "body",
+          "important",
+          "id",
+          "publication_timestamp"
+        ],
+        "type": "object"
+      }
+    }
+  },
+  "required": [
+    "jsonrpc",
+    "result"
+  ],
+  "type": "object"
+}

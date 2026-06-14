@@ -1,0 +1,7 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/transfer_state.json",
+  "title": "Transfer State",
+  "type": "string",
+  "description": "Transfer state, allowed values : `prepared`, `confirmed`, `cancelled`, `waiting_for_admin`, `insufficient_funds`,  `withdrawal_limit` otherwise rejection reason"
+}

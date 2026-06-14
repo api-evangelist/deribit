@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/deribit/json-schema/security_key_id.json",
+  "title": "Security Key Id",
+  "example": 12,
+  "type": "integer",
+  "description": "Security Key Identifier"
+}
