@@ -1,0 +1,77 @@
+name: Deribit API Plans
+description: Deribit uses a VIP tier system based on monthly trading volume rather than traditional API subscription tiers. The API itself is free to use for all registered users. Fee discounts scale with volume through VIP 1-6 levels.
+url: https://www.deribit.com/pages/information/fees
+plans:
+
+  - name: Standard
+    description: Default access for all registered Deribit users with full API access to REST and WebSocket endpoints.
+    rate_limits:
+      - type: connections
+        limit: 32
+        unit: simultaneous connections per IP
+      - type: websocket
+        limit: 200
+        unit: messages per second (burst to 300)
+      - type: api_keys
+        limit: 8
+        unit: keys per subaccount
+      - type: sessions
+        limit: 16
+        unit: active sessions per API key
+    features:
+      - REST HTTP API access
+      - WebSocket JSON-RPC API access
+      - FIX API access (institutional)
+      - Test environment access
+      - Market data subscriptions
+      - Trading operations
+      - Account management
+      - Block trading
+      - Cancel on Disconnect
+
+  - name: VIP 1
+    description: First volume discount tier. Requires 100k USDC equity or $250k total equity.
+    equity_requirement:
+      usdc: 100000
+      total_usd: 250000
+    fee_discounts:
+      futures: progressive
+      options: progressive
+    features:
+      - All Standard features
+      - Reduced trading fees
+      - Daily tier upgrades (rolling 30-day volume)
+
+  - name: VIP 2
+    description: Second volume discount tier based on monthly options or futures trading volume.
+    features:
+      - All VIP 1 features
+      - Further fee reductions
+
+  - name: VIP 3
+    description: Third volume discount tier for active traders.
+    features:
+      - All VIP 2 features
+      - Further fee reductions
+
+  - name: VIP 4
+    description: Fourth volume discount tier for high-frequency traders.
+    features:
+      - All VIP 3 features
+      - Further fee reductions
+
+  - name: VIP 5
+    description: Fifth volume discount tier for institutional-level traders.
+    features:
+      - All VIP 4 features
+      - Further fee reductions
+
+  - name: VIP 6
+    description: Highest volume tier. Requires over $5 billion in monthly volume. Provides up to 55% discount on futures fees and up to 66.66% discount on options fees.
+    volume_threshold_usd: 5000000000
+    fee_discounts:
+      futures_max_discount: 55%
+      options_max_discount: 66.66%
+    features:
+      - All VIP 5 features
+      - Maximum fee discounts available

@@ -1,0 +1,80 @@
+name: Deribit FinOps / Fee Schedule
+description: Deribit charges trading fees on a maker/taker model. The API itself is free to use. Fees vary by instrument type and asset. A VIP tier system launched November 1, 2025 provides progressive discounts based on monthly trading volume. Upgrades process daily; downgrades process monthly.
+url: https://support.deribit.com/hc/en-us/articles/25944746248989-Fees
+
+api_cost: free
+
+trading_fees:
+
+  futures:
+    btc_eth_weekly:
+      maker: "-0.01%"
+      taker: "0.05%"
+      note: Negative maker fee = rebate
+    sol_weekly:
+      maker: "-0.02%"
+      taker: "0.05%"
+    btc_eth_quarterly_and_perpetuals:
+      maker: "0.00% to -0.02%"
+      taker: "0.05%"
+    usdc_perpetuals:
+      maker: "0.00%"
+      taker: "0.05%"
+
+  options:
+    btc_eth:
+      maker: "0.03% of underlying (min 0.0003 BTC/ETH per contract)"
+      taker: "0.03% of underlying (min 0.0003 BTC/ETH per contract)"
+    sol:
+      maker: "0.00%"
+      taker: "0.03% of underlying (min 0.0003 SOL per contract)"
+
+  spot:
+    maker: "0.00%"
+    taker: "0.00%"
+    note: Zero-fee spot trading
+
+delivery_fees:
+  weekly_futures: "0.00%"
+  quarterly_futures: "0.025%"
+  daily_options: "0.00%"
+  standard_options: "0.015% (capped at 12.5% of option value)"
+
+liquidation_fees:
+  range: "0.75% to 0.90%"
+  note: Portion directed to exchange insurance fund
+
+vip_tier_system:
+  launched: "2025-11-01"
+  description: Automated VIP fee system with progressive discounts based on monthly trading volume.
+  upgrade_schedule: Daily at 12:00 UTC (rolling 30-day period)
+  downgrade_schedule: Monthly on the 1st (one level at a time)
+  tiers:
+    - name: Standard
+      volume_threshold: N/A
+      equity_requirement: N/A
+    - name: VIP 1
+      equity_requirement: "100k USDC OR $250k total equity"
+      futures_discount: progressive
+      options_discount: progressive
+    - name: VIP 2
+      volume_threshold: separate thresholds for options vs futures
+      futures_discount: progressive
+      options_discount: progressive
+    - name: VIP 3
+      futures_discount: progressive
+      options_discount: progressive
+    - name: VIP 4
+      futures_discount: progressive
+      options_discount: progressive
+    - name: VIP 5
+      futures_discount: progressive
+      options_discount: progressive
+    - name: VIP 6
+      volume_threshold_usd: 5000000000
+      futures_max_discount: "55%"
+      options_max_discount: "66.66%"
+
+combo_discounts:
+  taker: "100% discount on cheapest leg"
+  maker: "Rebates reduced by 50%"

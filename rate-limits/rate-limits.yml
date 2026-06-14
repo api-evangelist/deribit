@@ -1,0 +1,32 @@
+name: Deribit API Rate Limits
+description: Deribit uses a credit-based rate limiting system for authenticated users. Credits are replenished continuously at a fixed rate depending on the sub-account tier. Public unauthenticated requests are rate-limited per IP address.
+url: https://docs.deribit.com/articles/rate-limits
+
+connection_limits:
+  simultaneous_connections_per_ip: 32
+  note: Limit covers both session-scoped and connection-scoped connections. Counts HTTP requests and WebSocket connections combined.
+  api_keys_per_subaccount: 8
+  active_sessions_per_api_key: 16
+  subaccounts_per_account: 20
+  http_connection_expiry_minutes: 15
+
+websocket_limits:
+  messages_per_second: 200
+  burst_limit: 300
+  protocol: JSON-RPC 2.0
+
+credit_system:
+  description: Each API request consumes credits from a pool. Credits refill continuously like a leaky bucket. Refill rate and maximum pool size scale with sub-account tier and trading activity.
+  authenticated:
+    description: Authenticated requests draw from per-sub-account credit pools. Higher tiers receive larger pools and faster refill rates.
+    benefit: Higher and more transparent limits, scales with trading tier, less likely to be IP rate-limited.
+  public:
+    description: Non-authenticated requests are rate-limited per IP address. Do not draw from sub-account credit pool.
+    risk: If IP exceeds public request allowance, subsequent calls may be temporarily rejected or connection disconnected.
+
+recommendations:
+  - Prefer WebSocket subscriptions over continuous REST polling to reduce latency and stay within rate limits
+  - Maintain persistent connections rather than opening and closing repeatedly
+  - Use authenticated requests when possible for higher rate limits
+  - Avoid subscribing to excessive channels simultaneously to prevent connection_too_slow errors
+  - Enable heartbeats on WebSocket connections to improve Cancel on Disconnect reliability

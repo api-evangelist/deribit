@@ -1,0 +1,158 @@
+name: Deribit
+description: Deribit is a leading Bitcoin and Ethereum options and futures exchange offering a comprehensive REST and WebSocket API for derivatives trading, market data, portfolio management, and block trades. The platform supports futures, perpetuals, options, and spot trading across BTC, ETH, and SOL with both individual and institutional access via JSON-RPC, HTTP, and FIX protocol interfaces.
+image: https://www.deribit.com/images/deribit-logo.png
+tags:
+  - Derivatives
+  - Cryptocurrency
+  - Bitcoin
+  - Ethereum
+  - Options
+  - Futures
+  - Perpetuals
+  - Trading
+  - Market Data
+  - Block Trading
+  - WebSocket
+  - Financial
+created: "2026-06-13"
+modified: "2026-06-13"
+url: https://raw.githubusercontent.com/api-evangelist/deribit/refs/heads/main/apis.yml
+specificationVersion: "0.19"
+apis:
+
+  - name: Deribit REST API
+    description: JSON-RPC over HTTP interface for cryptocurrency derivatives trading on Deribit. Provides access to market data, trading operations, account management, wallet operations, and block trading for Bitcoin, Ethereum, and Solana options, futures, and perpetuals.
+    humanURL: https://docs.deribit.com/
+    baseURL: https://www.deribit.com/api/v2
+    tags:
+      - REST
+      - HTTP
+      - JSON-RPC
+      - Derivatives
+      - Trading
+      - Market Data
+    properties:
+      - type: Documentation
+        url: https://docs.deribit.com/
+      - type: OpenAPI
+        url: https://docs.deribit.com/
+      - type: Authentication
+        url: https://docs.deribit.com/articles/authentication
+      - type: RateLimits
+        url: https://docs.deribit.com/articles/rate-limits
+      - type: Sandbox
+        url: https://test.deribit.com/api/v2
+      - type: TermsOfService
+        url: https://support.deribit.com/hc/en-us/sections/25944530944285-Terms-Of-Service-Overview
+      - type: PrivacyPolicy
+        url: https://support.deribit.com/hc/en-us/articles/25944470689309-Privacy-Notice
+      - type: x-plans
+        url: https://raw.githubusercontent.com/api-evangelist/deribit/refs/heads/main/plans/plans.yml
+      - type: x-rate-limits
+        url: https://raw.githubusercontent.com/api-evangelist/deribit/refs/heads/main/rate-limits/rate-limits.yml
+      - type: x-finops
+        url: https://raw.githubusercontent.com/api-evangelist/deribit/refs/heads/main/finops/finops.yml
+    contact:
+      - FN: Deribit Support
+        url: https://support.deribit.com/hc/en-us
+
+  - name: Deribit WebSocket API
+    description: JSON-RPC over WebSocket interface for real-time bidirectional communication with the Deribit exchange. Recommended for most use cases, supporting real-time market data subscriptions, trading operations, account notifications, and streaming updates for order books, trades, positions, and portfolio.
+    humanURL: https://docs.deribit.com/
+    baseURL: wss://www.deribit.com/ws/api/v2
+    tags:
+      - WebSocket
+      - JSON-RPC
+      - Real-time
+      - Streaming
+      - Subscriptions
+      - Derivatives
+      - Trading
+    properties:
+      - type: Documentation
+        url: https://docs.deribit.com/
+      - type: AsyncAPI
+        url: https://docs.deribit.com/
+      - type: Authentication
+        url: https://docs.deribit.com/articles/authentication
+      - type: ConnectionManagement
+        url: https://docs.deribit.com/articles/connection-management-best-practices
+      - type: RateLimits
+        url: https://docs.deribit.com/articles/rate-limits
+      - type: Sandbox
+        url: wss://test.deribit.com/ws/api/v2
+      - type: TermsOfService
+        url: https://support.deribit.com/hc/en-us/sections/25944530944285-Terms-Of-Service-Overview
+      - type: PrivacyPolicy
+        url: https://support.deribit.com/hc/en-us/articles/25944470689309-Privacy-Notice
+      - type: x-plans
+        url: https://raw.githubusercontent.com/api-evangelist/deribit/refs/heads/main/plans/plans.yml
+      - type: x-rate-limits
+        url: https://raw.githubusercontent.com/api-evangelist/deribit/refs/heads/main/rate-limits/rate-limits.yml
+      - type: x-finops
+        url: https://raw.githubusercontent.com/api-evangelist/deribit/refs/heads/main/finops/finops.yml
+    contact:
+      - FN: Deribit Support
+        url: https://support.deribit.com/hc/en-us
+
+  - name: Deribit FIX API
+    description: Financial Information eXchange protocol interface for institutional trading on Deribit. Designed for professional trading firms requiring low-latency order entry and execution reports using the industry-standard FIX protocol.
+    humanURL: https://docs.deribit.com/
+    baseURL: https://www.deribit.com
+    tags:
+      - FIX
+      - Institutional
+      - Trading
+      - Low Latency
+      - Financial
+    properties:
+      - type: Documentation
+        url: https://docs.deribit.com/
+      - type: TermsOfService
+        url: https://support.deribit.com/hc/en-us/sections/25944530944285-Terms-Of-Service-Overview
+      - type: PrivacyPolicy
+        url: https://support.deribit.com/hc/en-us/articles/25944470689309-Privacy-Notice
+      - type: x-plans
+        url: https://raw.githubusercontent.com/api-evangelist/deribit/refs/heads/main/plans/plans.yml
+      - type: x-rate-limits
+        url: https://raw.githubusercontent.com/api-evangelist/deribit/refs/heads/main/rate-limits/rate-limits.yml
+      - type: x-finops
+        url: https://raw.githubusercontent.com/api-evangelist/deribit/refs/heads/main/finops/finops.yml
+    contact:
+      - FN: Deribit Support
+        url: https://support.deribit.com/hc/en-us
+
+common:
+  - type: Blog
+    url: https://insights.deribit.com/
+  - type: DevHub
+    url: https://insights.deribit.com/dev-hub/
+  - type: ExchangeUpdates
+    url: https://insights.deribit.com/exchange-updates/
+  - type: Status
+    url: https://status.deribit.com/
+  - type: Support
+    url: https://support.deribit.com/hc/en-us
+  - type: Fees
+    url: https://support.deribit.com/hc/en-us/articles/25944746248989-Fees
+  - type: TermsOfService
+    url: https://support.deribit.com/hc/en-us/sections/25944530944285-Terms-Of-Service-Overview
+  - type: PrivacyPolicy
+    url: https://support.deribit.com/hc/en-us/articles/25944470689309-Privacy-Notice
+  - type: ApiConsole
+    url: https://www.deribit.com/api_console
+  - type: Changelog
+    url: https://www.deribit.com/pages/information/Releases
+  - type: MulticastGuide
+    url: https://support.deribit.com/hc/en-us/articles/29392445838877-Multicast-Developer-Guide
+  - type: x-plans
+    url: https://raw.githubusercontent.com/api-evangelist/deribit/refs/heads/main/plans/plans.yml
+  - type: x-rate-limits
+    url: https://raw.githubusercontent.com/api-evangelist/deribit/refs/heads/main/rate-limits/rate-limits.yml
+  - type: x-finops
+    url: https://raw.githubusercontent.com/api-evangelist/deribit/refs/heads/main/finops/finops.yml
+
+maintainers:
+  - FN: API Evangelist
+    url: https://apievangelist.com
+    email: kin@apievangelist.com
