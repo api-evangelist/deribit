@@ -127,7 +127,7 @@ apis:
 common:
   - type: Blog
     url: https://insights.deribit.com/
-  - type: DevHub
+  - type: Portal
     url: https://insights.deribit.com/dev-hub/
   - type: ExchangeUpdates
     url: https://insights.deribit.com/exchange-updates/
@@ -141,9 +141,9 @@ common:
     url: https://support.deribit.com/hc/en-us/sections/25944530944285-Terms-Of-Service-Overview
   - type: PrivacyPolicy
     url: https://support.deribit.com/hc/en-us/articles/25944470689309-Privacy-Notice
-  - type: ApiConsole
+  - type: Console
     url: https://www.deribit.com/api_console
-  - type: Changelog
+  - type: ChangeLog
     url: https://www.deribit.com/pages/information/Releases
   - type: MulticastGuide
     url: https://support.deribit.com/hc/en-us/articles/29392445838877-Multicast-Developer-Guide
