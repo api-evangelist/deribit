@@ -125,6 +125,10 @@ apis:
         url: https://support.deribit.com/hc/en-us
 
 common:
+  - type: DomainSecurity
+    url: security/deribit-domain-security.yml
+  - type: Authentication
+    url: authentication/deribit-authentication.yml
   - type: Blog
     url: https://insights.deribit.com/
   - type: Portal

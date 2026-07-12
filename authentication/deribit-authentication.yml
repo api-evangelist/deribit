@@ -1,0 +1,14 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/deribit-starbase-openapi.json
+summary:
+  types:
+  - http
+schemes:
+- name: BearerAuth
+  type: http
+  scheme: bearer
+  description: API key passed as a Bearer token. The authenticated session determines the portfolio
+    that operations are applied to.
+  sources:
+  - openapi/deribit-starbase-openapi.json
