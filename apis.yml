@@ -125,6 +125,8 @@ apis:
         url: https://support.deribit.com/hc/en-us
 
 common:
+  - type: AgenticAccess
+    url: agentic-access/deribit-agentic-access.yml
   - type: DomainSecurity
     url: security/deribit-domain-security.yml
   - type: Authentication
