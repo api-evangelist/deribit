@@ -1,0 +1,4821 @@
+openapi: 3.0.0
+info:
+  title: Deribit Account Management Matching Engine API
+  version: 2.1.1
+servers:
+- url: https://test.deribit.com/api/v2
+tags:
+- name: Matching Engine
+paths:
+  /private/simulate_block_trade:
+    get:
+      parameters:
+      - in: query
+        name: role
+        required: false
+        schema:
+          $ref: '#/components/schemas/role'
+        description: Describes if user wants to be maker or taker of trades
+      - in: query
+        name: trades
+        required: true
+        schema:
+          type: array
+          items:
+            type: object
+            properties:
+              instrument_name:
+                $ref: '#/components/schemas/instrument_name'
+                description: Instrument name
+              price:
+                type: number
+                description: Price for trade
+              amount:
+                $ref: '#/components/schemas/amount'
+                description: It represents the requested trade size. For perpetual and inverse futures the amount is in USD units. For options and linear futures it is the underlying base currency coin.
+              direction:
+                $ref: '#/components/schemas/direction'
+                description: Direction of trade from the maker perspective
+        description: List of trades for block trade
+        style: form
+        explode: true
+      responses:
+        '200':
+          $ref: '#/components/responses/PrivateSimulateBlockTradeResponse'
+      tags:
+      - Matching Engine
+      requestBody:
+        content:
+          application/json:
+            examples:
+              request:
+                value:
+                  jsonrpc: '2.0'
+                  id: 1
+                  method: private/simulate_block_trade
+                  params:
+                    role: maker
+                    trades:
+                    - instrument_name: BTC-PERPETUAL
+                      direction: buy
+                      price: 11624
+                      amount: 40
+                    - instrument_name: BTC-9AUG19-10250-P
+                      direction: buy
+                      amount: 1.2
+                      price: 0.0707
+                description: JSON-RPC Request Example
+        description: JSON-RPC request body
+      description: 'Checks if a block trade can be executed without actually executing it. Use this method to verify that a block trade will succeed before proceeding with the actual execution.
+
+
+        **📖 Related Article:** [Block Trading](https://docs.deribit.com/articles/block-trading-api)
+
+
+        **Scope:** `block_trade:read`
+
+
+        [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fsimulate_block_trade)
+
+
+        '
+      x-mint:
+        metadata:
+          title: private/simulate_block_trade
+          og:title: private/simulate_block_trade
+          keywords:
+          - private/simulate_block_trade
+          - role
+          - trades
+        href: /api-reference/block-trade/private-simulate_block_trade
+  /private/verify_block_trade:
+    get:
+      parameters:
+      - in: query
+        name: timestamp
+        required: true
+        schema:
+          $ref: '#/components/schemas/timestamp'
+        description: Timestamp, shared with other party (milliseconds since the UNIX epoch)
+      - in: query
+        name: nonce
+        required: true
+        schema:
+          $ref: '#/components/schemas/nonce'
+        description: Nonce, shared with other party
+      - in: query
+        name: role
+        required: true
+        schema:
+          $ref: '#/components/schemas/role'
+        description: Describes if user wants to be maker or taker of trades
+      - in: query
+        name: trades
+        required: true
+        schema:
+          type: array
+          items:
+            type: object
+            properties:
+              instrument_name:
+                $ref: '#/components/schemas/instrument_name'
+                description: Instrument name
+              price:
+                type: number
+                description: Price for trade
+              amount:
+                $ref: '#/components/schemas/amount'
+                description: It represents the requested trade size. For perpetual and inverse futures the amount is in USD units. For options and linear futures it is the underlying base currency coin.
+              direction:
+                $ref: '#/components/schemas/direction'
+                description: Direction of trade from the maker perspective
+        description: List of trades for block trade
+        style: form
+        explode: true
+      responses:
+        '200':
+          $ref: '#/components/responses/PrivateVerifyBlockTradeResponse'
+      tags:
+      - Matching Engine
+      requestBody:
+        content:
+          application/json:
+            examples:
+              request:
+                value:
+                  jsonrpc: '2.0'
+                  id: 1
+                  method: private/verify_block_trade
+                  params:
+                    nonce: okpdjkdo
+                    timestamp: 1565172650935
+                    role: maker
+                    trades:
+                    - instrument_name: BTC-PERPETUAL
+                      direction: buy
+                      price: 11624
+                      amount: 40
+                    - instrument_name: BTC-9AUG19-10250-P
+                      direction: buy
+                      amount: 1.2
+                      price: 0.0707
+                description: JSON-RPC Request Example
+        description: JSON-RPC request body
+      description: 'Verifies and creates a block trade signature. This is the first step in the block trade workflow - the first party calls this method to generate a signature that must be shared with the second party.
+
+
+        **Note:** In the API, the `direction` field is always expressed from the maker''s perspective. This means that when you accept a block trade as a taker, the direction shown in the API represents the opposite side of your trade. For example, if you are buying puts as a taker, the API will show the operation as a "sell put" (maker''s perspective), and you will be verifying and accepting a "sell put" block trade.
+
+
+        **📖 Related Article:** [Block Trading](https://docs.deribit.com/articles/block-trading-api)
+
+
+        **Scope:** `block_trade:read`
+
+
+        [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fverify_block_trade)
+
+
+        '
+      x-mint:
+        metadata:
+          title: private/verify_block_trade
+          og:title: private/verify_block_trade
+          keywords:
+          - private/verify_block_trade
+          - timestamp
+          - nonce
+          - role
+          - trades
+          - signature
+        href: /api-reference/block-trade/private-verify_block_trade
+  /private/execute_block_trade:
+    get:
+      parameters:
+      - in: query
+        name: timestamp
+        required: true
+        schema:
+          $ref: '#/components/schemas/timestamp'
+        description: Timestamp, shared with other party (milliseconds since the UNIX epoch)
+      - in: query
+        name: nonce
+        required: true
+        schema:
+          $ref: '#/components/schemas/nonce'
+        description: Nonce, shared with other party
+      - in: query
+        name: role
+        required: true
+        schema:
+          $ref: '#/components/schemas/role'
+        description: Describes if user wants to be maker or taker of trades
+      - in: query
+        name: trades
+        required: true
+        schema:
+          type: array
+          items:
+            type: object
+            properties:
+              instrument_name:
+                $ref: '#/components/schemas/instrument_name'
+                description: Instrument name
+              price:
+                type: number
+                description: Price for trade
+              amount:
+                $ref: '#/components/schemas/amount'
+                description: It represents the requested trade size. For perpetual and inverse futures the amount is in USD units. For options and linear futures it is the underlying base currency coin.
+              direction:
+                $ref: '#/components/schemas/direction'
+                description: Direction of trade from the maker perspective
+        description: List of trades for block trade
+        style: form
+        explode: true
+      - in: query
+        name: counterparty_signature
+        required: true
+        schema:
+          $ref: '#/components/schemas/block_trade_signature'
+        description: Signature of block trade generated by `private/verify_block_trade_method`
+      responses:
+        '200':
+          $ref: '#/components/responses/PrivateGetBlockTradeResponse'
+      tags:
+      - Matching Engine
+      requestBody:
+        content:
+          application/json:
+            examples:
+              request:
+                value:
+                  jsonrpc: '2.0'
+                  id: 1
+                  method: private/execute_block_trade
+                  params:
+                    nonce: bszyprbq
+                    timestamp: 1590485535899
+                    role: maker
+                    trades:
+                    - instrument_name: BTC-PERPETUAL
+                      direction: sell
+                      price: 8900
+                      amount: 200000
+                    - instrument_name: BTC-28MAY20-9000-C
+                      direction: sell
+                      amount: 5
+                      price: 0.0133
+                    counterparty_signature: 1590485595899.1Mn52L_Q.lNyNBzXXo-_QBT_wDuMgnhA7uS9tBqdQ5TLN6rxbuoAiQhyaJYGJrm5IV_9enp9niY_x8D60AJLm3yEKPUY1Dv3T0TW0n5-ADPpJF7Fpj0eVDZpZ6QCdX8snBWrSJ0TtqevnO64RCBlN1dIm2T70PP9dlhiqPDAUYI4fpB1vLYI
+                description: JSON-RPC Request Example
+        description: JSON-RPC request body
+      description: 'Executes a block trade. This is the second step in the block trade workflow - the second party calls this method with the signature received from the first party to execute the trade.
+
+
+        The whole request must be exactly the same as in [private/verify_block_trade](https://docs.deribit.com/api-reference/block-trade/private-verify_block_trade), only the `role` field should be set appropriately - this means that both sides have to agree on the same `timestamp`, `nonce`, and `trades` fields, and the server will ensure that the `role` field is different between sides (each party accepts their own role).
+
+
+        Using the same `timestamp` and `nonce` by both sides in [private/verify_block_trade](https://docs.deribit.com/api-reference/block-trade/private-verify_block_trade) ensures that even if unintentionally both sides execute the given block trade with a valid `counterparty_signature`, the block trade will be executed only once.
+
+
+        **Note:** In the API, the `direction` field is always expressed from the maker''s perspective. This means that when you accept a block trade as a taker, the direction shown in the API represents the opposite side of your trade. For example, if you are buying puts as a taker, the API will show the operation as a "sell put" (maker''s perspective), and you will be verifying and accepting a "sell put" block trade.
+
+
+        **📖 Related Article:** [Block Trading](https://docs.deribit.com/articles/block-trading-api)
+
+
+        **Scope:** `block_trade:read_write`
+
+
+        [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fexecute_block_trade)
+
+
+        '
+      x-mint:
+        metadata:
+          title: private/execute_block_trade
+          og:title: private/execute_block_trade
+          keywords:
+          - private/execute_block_trade
+          - timestamp
+          - nonce
+          - role
+          - trades
+          - counterparty_signature
+          - app_name
+          - broker_code
+          - broker_name
+          - trade_id
+          - trade_seq
+          - instrument_name
+          - order_type
+          - advanced
+          - order_id
+          - matching_id
+          - direction
+          - tick_direction
+          - index_price
+          - price
+          - amount
+          - contracts
+          - iv
+          - underlying_price
+          - liquidation
+          - liquidity
+          - fee
+          - fee_currency
+          - label
+          - state
+          - block_trade_id
+          - block_rfq_id
+          - block_rfq_quote_id
+          - reduce_only
+          - post_only
+          - mmp
+          - risk_reducing
+          - api
+          - profit_loss
+          - mark_price
+          - legs
+          - combo_id
+          - combo_trade_id
+          - quote_set_id
+          - quote_id
+          - trade_allocations
+          - user_id
+          - client_info
+          - client_id
+          - client_link_id
+          - name
+        href: /api-reference/block-trade/private-execute_block_trade
+  /private/create_combo:
+    get:
+      parameters:
+      - in: query
+        name: trades
+        required: true
+        schema:
+          type: array
+          items:
+            type: object
+            properties:
+              instrument_name:
+                $ref: '#/components/schemas/instrument_name'
+              amount:
+                $ref: '#/components/schemas/amount'
+              direction:
+                $ref: '#/components/schemas/direction'
+        description: List of trades used to create a combo
+        style: form
+        explode: true
+      responses:
+        '200':
+          $ref: '#/components/responses/PrivateCreateComboResponse'
+      tags:
+      - Matching Engine
+      requestBody:
+        content:
+          application/json:
+            examples:
+              request:
+                value:
+                  jsonrpc: '2.0'
+                  id: 6
+                  method: private/create_combo
+                  params:
+                    trades:
+                    - instrument_name: BTC-29APR22-37500-C
+                      amount: '1'
+                      direction: buy
+                    - instrument_name: BTC-29APR22-37500-P
+                      amount: '1'
+                      direction: sell
+                description: JSON-RPC Request Example
+        description: JSON-RPC request body
+      description: 'Verifies and creates a combo book or returns an existing combo matching the given trades. Combos allow trading on multiple instruments (futures and options) simultaneously as a single strategy.
+
+
+        If a combo matching the provided trades already exists, this method returns the existing combo. Otherwise, it creates a new combo book with the specified leg structure.
+
+
+        **Scope:** `trade:read_write`
+
+
+        [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fcreate_combo)
+
+
+        '
+      x-mint:
+        metadata:
+          title: private/create_combo
+          og:title: private/create_combo
+          keywords:
+          - private/create_combo
+          - trades
+          - instrument_id
+          - state
+          - state_timestamp
+          - creation_timestamp
+          - legs
+          - instrument_name
+          - amount
+        href: /api-reference/combo-books/private-create_combo
+  /private/cancel_all:
+    get:
+      parameters:
+      - name: detailed
+        required: false
+        in: query
+        schema:
+          type: boolean
+        description: 'When `detailed` is set to `true`, the output format is changed to include a list of all cancelled orders.
+
+
+          **📖 Related Article:** [Detailed Response for Cancel Methods](https://docs.deribit.com/articles/json-rpc-overview#detailed-response-for-cancel-methods)
+
+
+          Default: `false`
+
+          '
+      - name: freeze_quotes
+        required: false
+        in: query
+        schema:
+          type: boolean
+        description: Whether or not to reject incoming quotes for 1 second after cancelling (`false` by default). Related to `private/mass_quote` request.
+      responses:
+        '200':
+          $ref: '#/components/responses/PrivateCancelAllResponse'
+      tags:
+      - Matching Engine
+      requestBody:
+        content:
+          application/json:
+            examples:
+              request:
+                value:
+                  jsonrpc: '2.0'
+                  id: 8748
+                  method: private/cancel_all
+                  params: {}
+                description: JSON-RPC Request Example
+        description: JSON-RPC request body
+      description: 'Cancels all open orders and trigger orders for the authenticated account across all currencies and instrument kinds. This is a bulk cancellation operation useful for quickly clearing all active orders.
+
+
+        Use the `detailed` parameter to receive a list of all cancelled orders. The `freeze_quotes` parameter can be used to freeze quotes instead of cancelling them.
+
+
+        **Note:** This operation cannot be undone. All open orders will be permanently cancelled.
+
+
+        **Scope:** `trade:read_write`
+
+
+        [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fcancel_all)
+
+
+        '
+      x-mint:
+        metadata:
+          title: private/cancel_all
+          og:title: private/cancel_all
+          keywords:
+          - private/cancel_all
+          - detailed
+          - freeze_quotes
+        href: /api-reference/trading/private-cancel_all
+  /private/cancel_all_by_instrument:
+    get:
+      parameters:
+      - name: instrument_name
+        required: true
+        in: query
+        schema:
+          $ref: '#/components/schemas/instrument_name'
+        description: Instrument name
+      - name: type
+        required: false
+        in: query
+        schema:
+          $ref: '#/components/schemas/simple_order_type'
+        description: Order type - `limit`, `stop`, `take`, `trigger_all` or `all`, default - `all`
+      - name: detailed
+        required: false
+        in: query
+        schema:
+          type: boolean
+        description: 'When `detailed` is set to `true`, the output format is changed to include a list of all cancelled orders.
+
+
+          **📖 Related Article:** [Detailed Response for Cancel Methods](https://docs.deribit.com/articles/json-rpc-overview#detailed-response-for-cancel-methods)
+
+
+          Default: `false`
+
+          '
+      - name: include_combos
+        required: false
+        in: query
+        schema:
+          type: boolean
+        description: 'When set to `true` orders in combo instruments affecting a given position will also be cancelled. Default: `false`'
+      - name: freeze_quotes
+        required: false
+        in: query
+        schema:
+          type: boolean
+        description: Whether or not to reject incoming quotes for 1 second after cancelling (`false` by default). Related to `private/mass_quote` request.
+      responses:
+        '200':
+          $ref: '#/components/responses/PrivateCancelAllResponse'
+      tags:
+      - Matching Engine
+      requestBody:
+        content:
+          application/json:
+            examples:
+              request:
+                value:
+                  jsonrpc: '2.0'
+                  id: 4122
+                  method: private/cancel_all_by_instrument
+                  params:
+                    instrument_name: ETH-22FEB19-120-P
+                    type: all
+                description: JSON-RPC Request Example
+        description: JSON-RPC request body
+      description: 'Cancels all open orders for a specific instrument. This is useful for quickly clearing all orders for a single instrument.
+
+
+        Orders can be optionally filtered by order type (limit, market, stop, etc.). Use the `detailed` parameter to receive a list of all cancelled orders. The `include_combos` parameter can be used to include combo orders in the cancellation.
+
+
+        **Scope:** `trade:read_write`
+
+
+        [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fcancel_all_by_instrument)
+
+
+        '
+      x-mint:
+        metadata:
+          title: private/cancel_all_by_instrument
+          og:title: private/cancel_all_by_instrument
+          keywords:
+          - private/cancel_all_by_instrument
+          - instrument_name
+          - type
+          - detailed
+          - include_combos
+          - freeze_quotes
+        href: /api-reference/trading/private-cancel_all_by_instrument
+  /private/cancel_all_by_currency:
+    get:
+      parameters:
+      - name: currency
+        required: true
+        in: query
+        schema:
+          $ref: '#/components/schemas/currency'
+        description: The currency symbol
+      - name: kind
+        required: false
+        in: query
+        schema:
+          $ref: '#/components/schemas/kind_with_combo_all'
+        description: Instrument kind, `"combo"` for any combo or `"any"` for all. If not provided instruments of all kinds are considered
+      - name: type
+        required: false
+        in: query
+        schema:
+          $ref: '#/components/schemas/simple_order_type'
+        description: Order type - `limit`, `stop`, `take`, `trigger_all` or `all`, default - `all`
+      - name: detailed
+        required: false
+        in: query
+        schema:
+          type: boolean
+        description: 'When `detailed` is set to `true`, the output format is changed to include a list of all cancelled orders.
+
+
+          **📖 Related Article:** [Detailed Response for Cancel Methods](https://docs.deribit.com/articles/json-rpc-overview#detailed-response-for-cancel-methods)
+
+
+          Default: `false`
+
+          '
+      - name: freeze_quotes
+        required: false
+        in: query
+        schema:
+          type: boolean
+        description: Whether or not to reject incoming quotes for 1 second after cancelling (`false` by default). Related to `private/mass_quote` request.
+      responses:
+        '200':
+          $ref: '#/components/responses/PrivateCancelAllResponse'
+      tags:
+      - Matching Engine
+      requestBody:
+        content:
+          application/json:
+            examples:
+              request:
+                value:
+                  jsonrpc: '2.0'
+                  id: 5663
+                  method: private/cancel_all_by_currency
+                  params:
+                    currency: BTC
+                    kind: option
+                description: JSON-RPC Request Example
+        description: JSON-RPC request body
+      description: 'Cancels all open orders for a specific currency. This is useful for quickly clearing all orders across multiple instruments in a currency.
+
+
+        Orders can be optionally filtered by instrument kind (future, option, etc.) and/or order type (limit, market, stop, etc.). Use the `detailed` parameter to receive a list of all cancelled orders.
+
+
+        **Scope:** `trade:read_write`
+
+
+        [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fcancel_all_by_currency)
+
+
+        '
+      x-mint:
+        metadata:
+          title: private/cancel_all_by_currency
+          og:title: private/cancel_all_by_currency
+          keywords:
+          - private/cancel_all_by_currency
+          - currency
+          - kind
+          - type
+          - detailed
+          - freeze_quotes
+        href: /api-reference/trading/private-cancel_all_by_currency
+  /private/cancel_all_by_currency_pair:
+    get:
+      parameters:
+      - name: currency_pair
+        required: true
+        in: query
+        schema:
+          $ref: '#/components/schemas/index_name'
+        description: The currency pair symbol
+      - name: kind
+        required: false
+        in: query
+        schema:
+          $ref: '#/components/schemas/kind_with_combo_all'
+        description: Instrument kind, `"combo"` for any combo or `"any"` for all. If not provided instruments of all kinds are considered
+      - name: type
+        required: false
+        in: query
+        schema:
+          $ref: '#/components/schemas/simple_order_type'
+        description: Order type - `limit`, `stop`, `take`, `trigger_all` or `all`, default - `all`
+      - name: detailed
+        required: false
+        in: query
+        schema:
+          type: boolean
+        description: 'When `detailed` is set to `true`, the output format is changed to include a list of all cancelled orders.
+
+
+          **📖 Related Article:** [Detailed Response for Cancel Methods](https://docs.deribit.com/articles/json-rpc-overview#detailed-response-for-cancel-methods)
+
+
+          Default: `false`
+
+          '
+      - name: freeze_quotes
+        required: false
+        in: query
+        schema:
+          type: boolean
+        description: Whether or not to reject incoming quotes for 1 second after cancelling (`false` by default). Related to `private/mass_quote` request.
+      responses:
+        '200':
+          $ref: '#/components/responses/PrivateCancelAllResponse'
+      tags:
+      - Matching Engine
+      requestBody:
+        content:
+          application/json:
+            examples:
+              request:
+                value:
+                  jsonrpc: '2.0'
+                  id: 5663
+                  method: private/cancel_all_by_currency_pair
+                  params:
+                    currency_pair: BTC_USD
+                    kind: option
+                description: JSON-RPC Request Example
+        description: JSON-RPC request body
+      description: 'Cancels all open orders for a specific currency pair. This is useful for quickly clearing all orders across instruments in a currency pair.
+
+
+        Orders can be optionally filtered by instrument kind (future, option, etc.) and/or order type (limit, market, stop, etc.). Use the `detailed` parameter to receive a list of all cancelled orders.
+
+
+        **Scope:** `trade:read_write`
+
+
+        [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fcancel_all_by_currency_pair)
+
+
+        '
+      x-mint:
+        metadata:
+          title: private/cancel_all_by_currency_pair
+          og:title: private/cancel_all_by_currency_pair
+          keywords:
+          - private/cancel_all_by_currency_pair
+          - currency_pair
+          - kind
+          - type
+          - detailed
+          - freeze_quotes
+        href: /api-reference/trading/private-cancel_all_by_currency_pair
+  /private/cancel_all_by_kind_or_type:
+    get:
+      parameters:
+      - name: currency
+        required: true
+        in: query
+        schema:
+          $ref: '#/components/schemas/currency_with_any_and_list'
+        description: The currency symbol, list of currency symbols or `"any"` for all
+      - name: kind
+        required: false
+        in: query
+        schema:
+          $ref: '#/components/schemas/kind_with_combo_all'
+        description: Instrument kind, `"combo"` for any combo or `"any"` for all. If not provided instruments of all kinds are considered
+      - name: type
+        required: false
+        in: query
+        schema:
+          $ref: '#/components/schemas/simple_order_type'
+        description: Order type - `limit`, `stop`, `take`, `trigger_all` or `all`, default - `all`
+      - name: detailed
+        required: false
+        in: query
+        schema:
+          type: boolean
+        description: 'When `detailed` is set to `true`, the output format is changed to include a list of all cancelled orders.
+
+
+          **📖 Related Article:** [Detailed Response for Cancel Methods](https://docs.deribit.com/articles/json-rpc-overview#detailed-response-for-cancel-methods)
+
+
+          Default: `false`
+
+          '
+      - name: freeze_quotes
+        required: false
+        in: query
+        schema:
+          type: boolean
+        description: Whether or not to reject incoming quotes for 1 second after cancelling (`false` by default). Related to `private/mass_quote` request.
+      responses:
+        '200':
+          $ref: '#/components/responses/PrivateCancelAllResponse'
+      tags:
+      - Matching Engine
+      requestBody:
+        content:
+          application/json:
+            examples:
+              request:
+                value:
+                  jsonrpc: '2.0'
+                  id: 2
+                  method: private/cancel_all_by_kind_or_type
+                  params:
+                    currency:
+                    - BTC
+                    - ETH
+                    kind: future
+                description: JSON-RPC Request Example
+        description: JSON-RPC request body
+      description: 'Cancels all open orders in one or more currencies, optionally filtered by instrument kind and/or order type. This provides flexible bulk cancellation across multiple currencies.
+
+
+        Specify one or more currencies, and optionally filter by instrument kind (future, option, etc.) and/or order type (limit, market, stop, etc.). Use the `detailed` parameter to receive a list of all cancelled orders.
+
+
+        **Scope:** `trade:read_write`
+
+
+        [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fcancel_all_by_kind_or_type)
+
+
+        '
+      x-mint:
+        metadata:
+          title: private/cancel_all_by_kind_or_type
+          og:title: private/cancel_all_by_kind_or_type
+          keywords:
+          - private/cancel_all_by_kind_or_type
+          - currency
+          - kind
+          - type
+          - detailed
+          - freeze_quotes
+        href: /api-reference/trading/private-cancel_all_by_kind_or_type
+  /private/cancel_by_label:
+    get:
+      parameters:
+      - name: label
+        in: query
+        schema:
+          type: string
+        required: true
+        description: user defined label for the order (maximum 64 characters)
+      - in: query
+        name: currency
+        required: false
+        schema:
+          $ref: '#/components/schemas/currency'
+        description: The currency symbol
+      responses:
+        '200':
+          $ref: '#/components/responses/PrivateCancelAllResponse'
+      tags:
+      - Matching Engine
+      requestBody:
+        content:
+          application/json:
+            examples:
+              request:
+                value:
+                  jsonrpc: '2.0'
+                  id: 47
+                  method: private/cancel_by_label
+                  params:
+                    label: label
+                description: JSON-RPC Request Example
+        description: JSON-RPC request body
+      description: 'Cancels all orders (including trigger orders) that have a specific label. This is useful for managing groups of related orders that share the same label.
+
+
+        Orders can be cancelled across all currencies or filtered to a specific currency. When cancelling by currency, the currency queue is used for processing.
+
+
+        **Rate Limits:** When called without the `currency` parameter, this method is subject to `cancel_all` rate limits. Different rate limit values may apply for per-currency cancels versus calls without providing the currency parameter.
+
+
+        **Scope:** `trade:read_write`
+
+
+        [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fcancel_by_label)
+
+
+        '
+      x-mint:
+        metadata:
+          title: private/cancel_by_label
+          og:title: private/cancel_by_label
+          keywords:
+          - private/cancel_by_label
+          - label
+          - currency
+        href: /api-reference/trading/private-cancel_by_label
+  /private/cancel_quotes:
+    get:
+      parameters:
+      - name: detailed
+        required: false
+        in: query
+        schema:
+          type: boolean
+        description: 'When `detailed` is set to `true`, the output format is changed to include a list of all cancelled orders.
+
+
+          **📖 Related Article:** [Detailed Response for Cancel Methods](https://docs.deribit.com/articles/json-rpc-overview#detailed-response-for-cancel-methods)
+
+
+          Default: `false`
+
+          '
+      - name: freeze_quotes
+        required: false
+        in: query
+        schema:
+          type: boolean
+        description: Whether or not to reject incoming quotes for 1 second after cancelling (`false` by default). Related to `private/mass_quote` request.
+      - name: cancel_type
+        in: query
+        schema:
+          enum:
+          - delta
+          - quote_set_id
+          - instrument
+          - instrument_kind
+          - currency
+          - currency_pair
+          - all
+          type: string
+          example: delta
+        required: true
+        description: Type of cancel criteria.
+      - name: min_delta
+        in: query
+        schema:
+          type: number
+          example: 0.4
+        required: false
+        description: 'Min delta to cancel by delta (for `cancel_type`: `delta`).'
+      - name: max_delta
+        in: query
+        schema:
+          type: number
+          example: 0.6
+        required: false
+        description: 'Max delta to cancel by delta (for `cancel_type`: `delta`).'
+      - name: quote_set_id
+        in: query
+        schema:
+          type: string
+        required: false
+        description: Unique identifier for the Quote set.
+      - name: instrument_name
+        in: query
+        schema:
+          type: string
+        required: false
+        description: Instrument name.
+      - name: kind
+        required: false
+        in: query
+        schema:
+          $ref: '#/components/schemas/kind_with_combo_all'
+        description: Instrument kind, `"combo"` for any combo or `"any"` for all. If not provided instruments of all kinds are considered
+      - name: currency
+        required: true
+        in: query
+        schema:
+          $ref: '#/components/schemas/currency'
+        description: The currency symbol
+      - name: currency_pair
+        required: true
+        in: query
+        schema:
+          $ref: '#/components/schemas/index_name'
+        description: The currency pair symbol
+      responses:
+        '200':
+          $ref: '#/components/responses/PrivateCancelQuotesResponse'
+      tags:
+      - Matching Engine
+      requestBody:
+        content:
+          application/json:
+            examples:
+              request:
+                value:
+                  jsonrpc: '2.0'
+                  id: 5663
+                  method: private/cancel_quotes
+                  params:
+                    cancel_type: delta
+                    min_delta: 0.4
+                    max_delta: 0.6
+                description: JSON-RPC Request Example
+        description: JSON-RPC request body
+      description: 'Cancels quotes (mass quote orders) based on various criteria. This method provides flexible options for cancelling quotes:
+
+
+        - `delta`: Cancels quotes within a delta range defined by `min_delta` and `max_delta`
+
+        - `quote_set_id`: Cancels quotes by a specific Quote Set identifier
+
+        - `instrument`: Cancels all quotes associated with a particular instrument
+
+        - `kind`: Cancels all quotes for a certain instrument kind
+
+        - `currency`: Cancels all quotes in a specified currency
+
+        - `currency_pair`: Cancels all quotes in a specified currency pair
+
+        - `all`: Cancels all quotes
+
+
+        Use the `detailed` parameter to receive a list of all cancelled quotes.
+
+
+        **Scope:** `trade:read_write`
+
+
+        [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fcancel_quotes)
+
+
+        '
+      x-mint:
+        metadata:
+          title: private/cancel_quotes
+          og:title: private/cancel_quotes
+          keywords:
+          - private/cancel_quotes
+          - detailed
+          - freeze_quotes
+          - cancel_type
+          - min_delta
+          - max_delta
+          - quote_set_id
+          - instrument_name
+          - kind
+          - currency
+          - currency_pair
+        href: /api-reference/trading/private-cancel_quotes
+  /private/cancel:
+    get:
+      parameters:
+      - in: query
+        name: order_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/order_id'
+        description: The order id
+      responses:
+        '200':
+          $ref: '#/components/responses/PrivateCancelResponse'
+      tags:
+      - Matching Engine
+      requestBody:
+        content:
+          application/json:
+            examples:
+              request:
+                value:
+                  jsonrpc: '2.0'
+                  id: 4214
+                  method: private/cancel
+                  params:
+                    order_id: ETH-SLIS-12
+                description: JSON-RPC Request Example
+        description: JSON-RPC request body
+      description: 'Cancels a specific order identified by its order ID. The order must be open (not yet filled or cancelled) to be cancelled successfully.
+
+
+        Once cancelled, the order is removed from the order book and cannot be restored. Any unfilled portion of the order will be cancelled.
+
+
+        **Scope:** `trade:read_write`
+
+
+        [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fcancel)
+
+
+        '
+      x-mint:
+        metadata:
+          title: private/cancel
+          og:title: private/cancel
+          keywords:
+          - private/cancel
+          - order_id
+          - order_state
+          - order_type
+          - original_order_type
+          - time_in_force
+          - is_rebalance
+          - is_liquidation
+          - instrument_name
+          - creation_timestamp
+          - last_update_timestamp
+          - direction
+          - price
+          - label
+          - post_only
+          - reject_post_only
+          - reduce_only
+          - api
+          - web
+          - mobile
+          - refresh_amount
+          - display_amount
+          - amount
+          - contracts
+          - filled_amount
+          - average_price
+          - advanced
+          - implv
+          - usd
+          - triggered
+          - trigger
+          - trigger_price
+          - trigger_offset
+          - trigger_reference_price
+          - block_trade
+          - mmp
+          - risk_reducing
+          - replaced
+          - auto_replaced
+          - quote
+          - mmp_group
+          - quote_set_id
+          - quote_id
+          - trigger_order_id
+          - app_name
+          - mmp_cancelled
+          - cancel_reason
+          - oto_order_ids
+          - trigger_fill_condition
+          - oco_ref
+          - primary_order_id
+          - is_secondary_oto
+          - is_primary_otoco
+        href: /api-reference/trading/private-cancel
+  /private/buy:
+    get:
+      tags:
+      - Matching Engine
+      parameters:
+      - name: instrument_name
+        required: true
+        in: query
+        schema:
+          $ref: '#/components/schemas/instrument_name'
+        description: Instrument name
+      - name: amount
+        in: query
+        schema:
+          type: number
+        required: false
+        description: It represents the requested order size. For perpetual and inverse futures the amount is in USD units. For options and linear futures it is the underlying base currency coin. The `amount` is a mandatory parameter if `contracts` parameter is missing. If both `contracts` and `amount` parameter are passed they must match each other otherwise error is returned.
+      - name: contracts
+        in: query
+        schema:
+          type: number
+        required: false
+        description: It represents the requested order size in contract units and can be passed instead of `amount`. The `contracts` is a mandatory parameter if `amount` parameter is missing. If both `contracts` and `amount` parameter are passed they must match each other otherwise error is returned.
+      - name: type
+        in: query
+        schema:
+          type: string
+          enum:
+          - limit
+          - stop_limit
+          - take_limit
+          - market
+          - stop_market
+          - take_market
+          - market_limit
+          - trailing_stop
+        required: false
+        description: 'The order type, default: `"limit"`'
+      - name: label
+        in: query
+        schema:
+          type: string
+        required: false
+        description: user defined label for the order (maximum 64 characters)
+      - name: price
+        in: query
+        schema:
+          type: number
+        required: false
+        description: <p>The order price in base currency (Only for limit and stop_limit orders)</p> <p>When adding an order with advanced=usd, the field price should be the option price value in USD.</p> <p>When adding an order with advanced=implv, the field price should be a value of implied volatility in percentages. For example,  price=100, means implied volatility of 100%</p>
+      - name: time_in_force
+        in: query
+        schema:
+          type: string
+          default: good_til_cancelled
+          enum:
+          - good_til_cancelled
+          - good_til_day
+          - fill_or_kill
+          - immediate_or_cancel
+        required: false
+        description: <p>Specifies how long the order remains in effect. Default `"good_til_cancelled"`</p> <ul> <li>`"good_til_cancelled"` - unfilled order remains in order book until cancelled</li> <li>`"good_til_day"` - unfilled order remains in order book till the end of the trading session</li> <li>`"fill_or_kill"` - execute a transaction immediately and completely or not at all</li> <li>`"immediate_or_cancel"` - execute a transaction immediately, and any portion of the order that cannot be immediately filled is cancelled</li> </ul>
+      - name: display_amount
+        in: query
+        schema:
+          type: number
+          default: 1
+        required: false
+        description: Initial display amount for iceberg order. Has to be at least 100 times minimum amount for instrument and ratio of hidden part vs visible part has to be less than 100 as well.
+      - name: post_only
+        in: query
+        schema:
+          type: boolean
+          default: true
+        required: false
+        description: <p>If true, the order is considered post-only. If the new price would cause the order to be filled immediately (as taker), the price will be changed to be just below the spread.</p> <p>Only valid in combination with time_in_force=`"good_til_cancelled"`</p>
+      - name: reject_post_only
+        in: query
+        schema:
+          type: boolean
+          default: false
+        required: false
+        description: <p>If an order is considered post-only and this field is set to true then the order is put to the order book unmodified or the request is rejected.</p> <p>Only valid in combination with `"post_only"` set to true</p>
+      - name: reduce_only
+        in: query
+        schema:
+          type: boolean
+          default: false
+        required: false
+        description: If `true`, the order is considered reduce-only which is intended to only reduce a current position
+      - name: trigger_price
+        in: query
+        schema:
+          type: number
+        required: false
+        description: Trigger price, required for trigger orders only (Stop-loss or Take-profit orders)
+      - name: trigger_offset
+        in: query
+        schema:
+          type: number
+        required: false
+        description: The maximum deviation from the price peak beyond which the order will be triggered
+      - name: trigger
+        in: query
+        schema:
+          $ref: '#/components/schemas/trigger'
+        required: false
+        description: Defines the trigger type. Required for `"Stop-Loss"`, `"Take-Profit"` and `"Trailing"` trigger orders
+      - name: advanced
+        in: query
+        schema:
+          $ref: '#/components/schemas/advanced'
+        required: false
+        description: Advanced option order type. (Only for options. Advanced USD orders are not supported for linear options.)
+      - name: mmp
+        in: query
+        schema:
+          type: boolean
+          default: false
+        required: false
+        description: Order MMP flag, only for order_type 'limit'
+      - name: valid_until
+        in: query
+        schema:
+          type: integer
+        required: false
+        description: Timestamp, when provided server will start processing request in Matching Engine only before given timestamp, in other cases `timed_out` error will be responded. Remember that the given timestamp should be consistent with the server's time, use <a href='#public-get_time'>/public/time</a> method to obtain current server time.
+      - name: linked_order_type
+        in: query
+        schema:
+          type: string
+          enum:
+          - one_triggers_other
+          - one_cancels_other
+          - one_triggers_one_cancels_other
+        required: false
+        description: <p>The type of the linked order.</p> <ul> <li>`"one_triggers_other"` - Execution of primary order triggers the placement of one or more secondary orders.</li> <li>`"one_cancels_other"` -  The execution of one order in a pair automatically cancels the other, typically used to set a stop-loss and take-profit simultaneously.</li> <li>`"one_triggers_one_cancels_other"` - The execution of a primary order triggers two secondary orders (a stop-loss and take-profit pair), where the execution of one secondary order cancels the other.</li> </ul>
+      - name: trigger_fill_condition
+        in: query
+        schema:
+          type: string
+          enum:
+          - first_hit
+          - complete_fill
+          - incremental
+          default: first_hit
+        required: false
+        description: '<p>The fill condition of the linked order (Only for linked order types), default: `first_hit`.</p> <ul> <li>`"first_hit"` - any execution of the primary order will fully cancel/place all secondary orders.</li> <li>`"complete_fill"` - a complete execution (meaning the primary order no longer exists) will cancel/place the secondary orders.</li> <li>`"incremental"` - any fill of the primary order will cause proportional partial cancellation/placement of the secondary order. The amount that will be subtracted/added to the secondary order will be rounded down to the contract size.</li> </ul>'
+      - name: otoco_config
+        in: query
+        schema:
+          type: array
+          items:
+            type: object
+            properties:
+              amount:
+                $ref: '#/components/schemas/amount'
+                description: It represents the requested order size. For perpetual and inverse futures the amount is in USD units. For options and linear futures it is the underlying base currency coin.
+              direction:
+                $ref: '#/components/schemas/direction'
+                description: Direction of trade from the maker perspective
+              type:
+                type: string
+                enum:
+                - limit
+                - stop_limit
+                - take_limit
+                - market
+                - stop_market
+                - take_market
+                - market_limit
+                - trailing_stop
+                description: 'The order type, default: "limit"'
+              label:
+                type: string
+                description: user defined label for the order (maximum 64 characters)
+              price:
+                type: number
+                description: The order price in base currency (Only for limit and stop_limit orders)
+              reduce_only:
+                type: boolean
+                default: false
+                description: If true, the order is considered reduce-only which is intended to only reduce a current position
+              time_in_force:
+                type: string
+                default: good_til_cancelled
+                enum:
+                - good_til_cancelled
+                - good_til_day
+                - fill_or_kill
+                - immediate_or_cancel
+                description: Specifies how long the order remains in effect. Default "good_til_cancelled"
+              post_only:
+                type: boolean
+                default: false
+                description: If true, the order is considered post-only. If the new price would cause the order to be filled immediately (as taker), the price will be changed to be just below or above the spread (according to the direction of the order).
+              reject_post_only:
+                type: boolean
+                default: false
+                description: If an order is considered post-only and this field is set to true then the order is put to the order book unmodified or the request is rejected.
+              trigger_price:
+                type: number
+                description: Trigger price, required for trigger orders only (Stop-loss or Take-profit orders)
+              trigger_offset:
+                type: number
+                description: The maximum deviation from the price peak beyond which the order will be triggered
+              trigger:
+                $ref: '#/components/schemas/trigger'
+                description: Defines the trigger type. Required for "Stop-Loss", "Take-Profit" and "Trailing" trigger orders
+        description: List of orders to create or cancel when this order is filled.
+        style: form
+        explode: true
+        required: false
+      responses:
+        '200':
+          $ref: '#/components/responses/PrivateBuyAndSellResponse'
+      requestBody:
+        content:
+          application/json:
+            examples:
+              request:
+                value:
+                  jsonrpc: '2.0'
+                  id: 5275
+                  method: private/buy
+                  params:
+                    instrument_name: ETH-PERPETUAL
+                    amount: 40
+                    type: market
+                    label: market0000234
+                description: JSON-RPC Request Example
+        description: JSON-RPC request body
+      description: 'Places a buy order for an instrument. Supports various order types including limit, market, stop, and advanced order types (stop-limit, take-profit, take-profit-limit, trailing-stop, etc.).
+
+
+        You can specify order parameters such as price, quantity, time-in-force, post-only, reduce-only, and trigger conditions. Orders can be labeled for easier management and tracking.
+
+
+        **📖 Related Article:** [Order Management Best Practices](https://docs.deribit.com/articles/order-management-best-practices)
+
+
+        **Scope:** `trade:read_write`
+
+
+        [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fbuy)
+
+
+        '
+      x-mint:
+        metadata:
+          title: private/buy
+          og:title: private/buy
+          keywords:
+          - private/buy
+          - instrument_name
+          - amount
+          - contracts
+          - type
+          - label
+          - price
+          - time_in_force
+          - display_amount
+          - post_only
+          - reject_post_only
+          - reduce_only
+          - trigger_price
+          - trigger_offset
+          - trigger
+          - advanced
+          - mmp
+          - valid_until
+          - linked_order_type
+          - trigger_fill_condition
+          - otoco_config
+          - order
+          - trades
+          - order_id
+          - order_state
+          - order_type
+          - original_order_type
+          - is_rebalance
+          - is_liquidation
+          - creation_timestamp
+          - last_update_timestamp
+          - direction
+          - api
+          - web
+          - mobile
+          - refresh_amount
+          - filled_amount
+          - average_price
+          - implv
+          - usd
+          - triggered
+          - trigger_reference_price
+          - block_trade
+          - risk_reducing
+          - replaced
+          - auto_replaced
+          - quote
+          - mmp_group
+          - quote_set_id
+          - quote_id
+          - trigger_order_id
+          - app_name
+          - mmp_cancelled
+          - cancel_reason
+          - oto_order_ids
+          - oco_ref
+          - primary_order_id
+          - is_secondary_oto
+          - is_primary_otoco
+          - trade_id
+          - trade_seq
+          - timestamp
+          - matching_id
+          - tick_direction
+          - index_price
+          - iv
+          - underlying_price
+          - liquidation
+          - liquidity
+          - fee
+          - fee_currency
+          - state
+          - block_trade_id
+          - block_rfq_id
+          - block_rfq_quote_id
+          - profit_loss
+          - mark_price
+          - legs
+          - combo_id
+          - combo_trade_id
+          - trade_allocations
+          - user_id
+          - client_info
+          - client_id
+          - client_link_id
+          - name
+        href: /api-reference/trading/private-buy
+  /private/sell:
+    get:
+      tags:
+      - Matching Engine
+      parameters:
+      - name: instrument_name
+        required: true
+        in: query
+        schema:
+          $ref: '#/components/schemas/instrument_name'
+        description: Instrument name
+      - name: amount
+        in: query
+        schema:
+          type: number
+        required: false
+        description: It represents the requested order size. For perpetual and inverse futures the amount is in USD units. For options and linear futures it is the underlying base currency coin. The `amount` is a mandatory parameter if `contracts` parameter is missing. If both `contracts` and `amount` parameter are passed they must match each other otherwise error is returned.
+      - name: contracts
+        in: query
+        schema:
+          type: number
+        required: false
+        description: It represents the requested order size in contract units and can be passed instead of `amount`. The `contracts` is a mandatory parameter if `amount` parameter is missing. If both `contracts` and `amount` parameter are passed they must match each other otherwise error is returned.
+      - name: type
+        in: query
+        schema:
+          type: string
+          enum:
+          - limit
+          - stop_limit
+          - take_limit
+          - market
+          - stop_market
+          - take_market
+          - market_limit
+          - trailing_stop
+        required: false
+        description: 'The order type, default: `"limit"`'
+      - name: label
+        in: query
+        schema:
+          type: string
+        required: false
+        description: user defined label for the order (maximum 64 characters)
+      - name: price
+        in: query
+        schema:
+          type: number
+        required: false
+        description: <p>The order price in base currency (Only for limit and stop_limit orders)</p> <p>When adding an order with advanced=usd, the field price should be the option price value in USD.</p> <p>When adding an order with advanced=implv, the field price should be a value of implied volatility in percentages. For example,  price=100, means implied volatility of 100%</p>
+      - name: time_in_force
+        in: query
+        schema:
+          type: string
+          default: good_til_cancelled
+          enum:
+          - good_til_cancelled
+          - good_til_day
+          - fill_or_kill
+          - immediate_or_cancel
+        required: false
+        description: <p>Specifies how long the order remains in effect. Default `"good_til_cancelled"`</p> <ul> <li>`"good_til_cancelled"` - unfilled order remains in order book until cancelled</li> <li>`"good_til_day"` - unfilled order remains in order book till the end of the trading session</li> <li>`"fill_or_kill"` - execute a transaction immediately and completely or not at all</li> <li>`"immediate_or_cancel"` - execute a transaction immediately, and any portion of the order that cannot be immediately filled is cancelled</li> </ul>
+      - name: display_amount
+        in: query
+        schema:
+          type: number
+          default: 1
+        required: false
+        description: Initial display amount for iceberg order. Has to be at least 100 times minimum amount for instrument and ratio of hidden part vs visible part has to be less than 100 as well.
+      - name: post_only
+        in: query
+        schema:
+          type: boolean
+          default: true
+        required: false
+        description: <p>If true, the order is considered post-only. If the new price would cause the order to be filled immediately (as taker), the price will be changed to be just above the spread.</p> <p>Only valid in combination with time_in_force=`"good_til_cancelled"`</p>
+      - name: reject_post_only
+        in: query
+        schema:
+          type: boolean
+          default: false
+        required: false
+        description: <p>If an order is considered post-only and this field is set to true then the order is put to the order book unmodified or the request is rejected.</p> <p>Only valid in combination with `"post_only"` set to true</p>
+      - name: reduce_only
+        in: query
+        schema:
+          type: boolean
+          default: false
+        required: false
+        description: If `true`, the order is considered reduce-only which is intended to only reduce a current position
+      - name: trigger_price
+        in: query
+        schema:
+          type: number
+        required: false
+        description: Trigger price, required for trigger orders only (Stop-loss or Take-profit orders)
+      - name: trigger_offset
+        in: query
+        schema:
+          type: number
+        required: false
+        description: The maximum deviation from the price peak beyond which the order will be triggered
+      - name: trigger
+        in: query
+        schema:
+          $ref: '#/components/schemas/trigger'
+        required: false
+        description: Defines the trigger type. Required for `"Stop-Loss"`, `"Take-Profit"` and `"Trailing"` trigger orders
+      - name: advanced
+        in: query
+        schema:
+          $ref: '#/components/schemas/advanced'
+        required: false
+        description: Advanced option order type. (Only for options. Advanced USD orders are not supported for linear options.)
+      - name: mmp
+        in: query
+        schema:
+          type: boolean
+          default: false
+        required: false
+        description: Order MMP flag, only for order_type 'limit'
+      - name: valid_until
+        in: query
+        schema:
+          type: integer
+        required: false
+        description: Timestamp, when provided server will start processing request in Matching Engine only before given timestamp, in other cases `timed_out` error will be responded. Remember that the given timestamp should be consistent with the server's time, use <a href='#public-get_time'>/public/time</a> method to obtain current server time.
+      - name: linked_order_type
+        in: query
+        schema:
+          type: string
+          enum:
+          - one_triggers_other
+          - one_cancels_other
+          - one_triggers_one_cancels_other
+        required: false
+        description: <p>The type of the linked order.</p> <ul> <li>`"one_triggers_other"` - Execution of primary order triggers the placement of one or more secondary orders.</li> <li>`"one_cancels_other"` -  The execution of one order in a pair automatically cancels the other, typically used to set a stop-loss and take-profit simultaneously.</li> <li>`"one_triggers_one_cancels_other"` - The execution of a primary order triggers two secondary orders (a stop-loss and take-profit pair), where the execution of one secondary order cancels the other.</li> </ul>
+      - name: trigger_fill_condition
+        in: query
+        schema:
+          type: string
+          enum:
+          - first_hit
+          - complete_fill
+          - incremental
+          default: first_hit
+        required: false
+        description: '<p>The fill condition of the linked order (Only for linked order types), default: `first_hit`.</p> <ul> <li>`"first_hit"` - any execution of the primary order will fully cancel/place all secondary orders.</li> <li>`"complete_fill"` - a complete execution (meaning the primary order no longer exists) will cancel/place the secondary orders.</li> <li>`"incremental"` - any fill of the primary order will cause proportional partial cancellation/placement of the secondary order. The amount that will be subtracted/added to the secondary order will be rounded down to the contract size.</li> </ul>'
+      - name: otoco_config
+        in: query
+        schema:
+          type: array
+          items:
+            type: object
+            properties:
+              amount:
+                $ref: '#/components/schemas/amount'
+                description: It represents the requested order size. For perpetual and inverse futures the amount is in USD units. For options and linear futures it is the underlying base currency coin.
+              direction:
+                $ref: '#/components/schemas/direction'
+                description: Direction of trade from the maker perspective
+              type:
+                type: string
+                enum:
+                - limit
+                - stop_limit
+                - take_limit
+                - market
+                - stop_market
+                - take_market
+                - market_limit
+                - trailing_stop
+                description: 'The order type, default: "limit"'
+              label:
+                type: string
+                description: user defined label for the order (maximum 64 characters)
+              price:
+                type: number
+                description: The order price in base currency (Only for limit and stop_limit orders)
+              reduce_only:
+                type: boolean
+                default: false
+                description: If true, the order is considered reduce-only which is intended to only reduce a current position
+              time_in_force:
+                type: string
+                default: good_til_cancelled
+                enum:
+                - good_til_cancelled
+                - good_til_day
+                - fill_or_kill
+                - immediate_or_cancel
+                description: Specifies how long the order remains in effect. Default "good_til_cancelled"
+              post_only:
+                type: boolean
+                default: false
+                description: If true, the order is considered post-only. If the new price would cause the order to be filled immediately (as taker), the price will be changed to be just below or above the spread (according to the direction of the order).
+              reject_post_only:
+                type: boolean
+                default: false
+                description: If an order is considered post-only and this field is set to true then the order is put to the order book unmodified or the request is rejected.
+              trigger_price:
+                type: number
+                description: Trigger price, required for trigger orders only (Stop-loss or Take-profit orders)
+              trigger_offset:
+                type: number
+                description: The maximum deviation from the price peak beyond which the order will be triggered
+              trigger:
+                $ref: '#/components/schemas/trigger'
+                description: Defines the trigger type. Required for "Stop-Loss", "Take-Profit" and "Trailing" trigger orders
+        description: List of orders to create or cancel when this order is filled.
+        style: form
+        explode: true
+        required: false
+      responses:
+        '200':
+          $ref: '#/components/responses/PrivateBuyAndSellResponse'
+      requestBody:
+        content:
+          application/json:
+            examples:
+              request:
+                value:
+                  jsonrpc: '2.0'
+                  id: 2148
+                  method: private/sell
+                  params:
+                    instrument_name: ETH-PERPETUAL
+                    amount: 123
+                    type: stop_limit
+                    price: 145.61
+                    trigger_price: 145
+                    trigger: last_price
+                description: JSON-RPC Request Example
+        description: JSON-RPC request body
+      description: 'Places a sell order for an instrument. Supports various order types including limit, market, stop, and advanced order types (stop-limit, take-profit, take-profit-limit, trailing-stop, etc.).
+
+
+        You can specify order parameters such as price, quantity, time-in-force, post-only, reduce-only, and trigger conditions. Orders can be labeled for easier management and tracking. Market Maker Protection (MMP) can be enabled to prevent excessive quoting.
+
+
+        **📖 Related Article:** [Order Management Best Practices](https://docs.deribit.com/articles/order-management-best-practices)
+
+
+        **Scope:** `trade:read_write`
+
+
+        [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fsell)
+
+
+        '
+      x-mint:
+        metadata:
+          title: private/sell
+          og:title: private/sell
+          keywords:
+          - private/sell
+          - instrument_name
+          - amount
+          - contracts
+          - type
+          - label
+          - price
+          - time_in_force
+          - display_amount
+          - post_only
+          - reject_post_only
+          - reduce_only
+          - trigger_price
+          - trigger_offset
+          - trigger
+          - advanced
+          - mmp
+          - valid_until
+          - linked_order_type
+          - trigger_fill_condition
+          - otoco_config
+          - order
+          - trades
+          - order_id
+          - order_state
+          - order_type
+          - original_order_type
+          - is_rebalance
+          - is_liquidation
+          - creation_timestamp
+          - last_update_timestamp
+          - direction
+          - api
+          - web
+          - mobile
+          - refresh_amount
+          - filled_amount
+          - average_price
+          - implv
+          - usd
+          - triggered
+          - trigger_reference_price
+          - block_trade
+          - risk_reducing
+          - replaced
+          - auto_replaced
+          - quote
+          - mmp_group
+          - quote_set_id
+          - quote_id
+          - trigger_order_id
+          - app_name
+          - mmp_cancelled
+          - cancel_reason
+          - oto_order_ids
+          - oco_ref
+          - primary_order_id
+          - is_secondary_oto
+          - is_primary_otoco
+          - trade_id
+          - trade_seq
+          - timestamp
+          - matching_id
+          - tick_direction
+          - index_price
+          - iv
+          - underlying_price
+          - liquidation
+          - liquidity
+          - fee
+          - fee_currency
+          - state
+          - block_trade_id
+          - block_rfq_id
+          - block_rfq_quote_id
+          - profit_loss
+          - mark_price
+          - legs
+          - combo_id
+          - combo_trade_id
+          - trade_allocations
+          - user_id
+          - client_info
+          - client_id
+          - client_link_id
+          - name
+        href: /api-reference/trading/private-sell
+  /private/edit:
+    get:
+      parameters:
+      - in: query
+        name: order_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/order_id'
+        description: The order id
+      - name: amount
+        in: query
+        schema:
+          type: number
+        required: false
+        description: It represents the requested order size. For perpetual and inverse futures the amount is in USD units. For options and linear futures it is the underlying base currency coin. The `amount` is a mandatory parameter if `contracts` parameter is missing. If both `contracts` and `amount` parameter are passed they must match each other otherwise error is returned.
+      - name: contracts
+        in: query
+        schema:
+          type: number
+        required: false
+        description: It represents the requested order size in contract units and can be passed instead of `amount`. The `contracts` is a mandatory parameter if `amount` parameter is missing. If both `contracts` and `amount` parameter are passed they must match each other otherwise error is returned.
+      - name: price
+        in: query
+        schema:
+          type: number
+        required: false
+        description: <p>The order price in base currency.</p> <p>When editing an option order with advanced=usd, the field price should be the option price value in USD.</p> <p>When editing an option order with advanced=implv, the field price should be a value of implied volatility in percentages. For example,  price=100, means implied volatility of 100%</p>
+      - name: post_only
+        in: query
+        schema:
+          type: boolean
+          default: true
+        required: false
+        description: <p>If true, the order is considered post-only. If the new price would cause the order to be filled immediately (as taker), the price will be changed to be just below or above the spread (accordingly to the original order type).</p> <p>Only valid in combination with time_in_force=`"good_til_cancelled"`</p>
+      - name: reduce_only
+        in: query
+        schema:
+          type: boolean
+          default: false
+        required: false
+        description: If `true`, the order is considered reduce-only which is intended to only reduce a current position
+      - name: reject_post_only
+        in: query
+        schema:
+          type: boolean
+          default: false
+        required: false
+        description: <p>If an order is considered post-only and this field is set to true then the order is put to the order book unmodified or the request is rejected.</p> <p>Only valid in combination with `"post_only"` set to true</p>
+      - name: advanced
+        in: query
+        schema:
+          $ref: '#/components/schemas/advanced'
+        required: false
+        description: Advanced option order type. If you have posted an advanced option order, it is necessary to re-supply this parameter when editing it (Only for options)
+      - name: trigger_price
+        in: query
+        schema:
+          type: number
+        required: false
+        description: Trigger price, required for trigger orders only (Stop-loss or Take-profit orders)
+      - name: trigger_offset
+        in: query
+        schema:
+          type: number
+        required: false
+        description: The maximum deviation from the price peak beyond which the order will be triggered
+      - name: mmp
+        in: query
+        schema:
+          type: boolean
+          default: false
+        required: false
+        description: Order MMP flag, only for order_type 'limit'
+      - name: valid_until
+        in: query
+        schema:
+          type: integer
+        required: false
+        description: Timestamp, when provided server will start processing request in Matching Engine only before given timestamp, in other cases `timed_out` error will be responded. Remember that the given timestamp should be consistent with the server's time, use <a href='#public-get_time'>/public/time</a> method to obtain current server time.
+      - name: display_amount
+        in: query
+        schema:
+          type: number
+          default: 1
+        required: false
+        description: Initial display amount for iceberg order. Has to be at least 100 times minimum amount for instrument and ratio of hidden part vs visible part has to be less than 100 as well.
+      responses:
+        '200':
+          $ref: '#/components/responses/PrivateEditResponse'
+      tags:
+      - Matching Engine
+      requestBody:
+        content:
+          application/json:
+            examples:
+              request:
+                value:
+                  jsonrpc: '2.0'
+                  id: 3725
+                  method: private/edit
+                  params:
+                    order_id: '438994'
+                    amount: 4
+                    price: 222
+                    advanced: implv
+                description: JSON-RPC Request Example
+        description: JSON-RPC request body
+      description: 'Modifies an existing order by changing its price, amount, and/or other properties such as time-in-force, post-only, reduce-only, trigger conditions, or advanced order type.
+
+
+        The order is identified by its order ID. Only open orders can be edited. Changes take effect immediately and may result in the order being filled if the new price matches the market.
+
+
+        **📖 Related Article:** [Order Management Best Practices](https://docs.deribit.com/articles/order-management-best-practices)
+
+
+        **Scope:** `trade:read_write`
+
+
+        [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fedit)
+
+
+        '
+      x-mint:
+        metadata:
+          title: private/edit
+          og:title: private/edit
+          keywords:
+          - private/edit
+          - order_id
+          - amount
+          - contracts
+          - price
+          - post_only
+          - reduce_only
+          - reject_post_only
+          - advanced
+          - trigger_price
+          - trigger_offset
+          - mmp
+          - valid_until
+          - display_amount
+          - order
+          - trades
+          - order_state
+          - order_type
+          - original_order_type
+          - time_in_force
+          - is_rebalance
+          - is_liquidation
+          - instrument_name
+          - creation_timestamp
+          - last_update_timestamp
+          - direction
+          - label
+          - api
+          - web
+          - mobile
+          - refresh_amount
+          - filled_amount
+          - average_price
+          - implv
+          - usd
+          - triggered
+          - trigger
+          - trigger_reference_price
+          - block_trade
+          - risk_reducing
+          - replaced
+          - auto_replaced
+          - quote
+          - mmp_group
+          - quote_set_id
+          - quote_id
+          - trigger_order_id
+          - app_name
+          - mmp_cancelled
+          - cancel_reason
+          - oto_order_ids
+          - trigger_fill_condition
+          - oco_ref
+          - primary_order_id
+          - is_secondary_oto
+          - is_primary_otoco
+          - trade_id
+          - trade_seq
+          - timestamp
+          - matching_id
+          - tick_direction
+          - index_price
+          - iv
+          - underlying_price
+          - liquidation
+          - liquidity
+          - fee
+          - fee_currency
+          - state
+          - block_trade_id
+          - block_rfq_id
+          - block_rfq_quote_id
+          - profit_loss
+          - mark_price
+          - legs
+          - combo_id
+          - combo_trade_id
+          - trade_allocations
+          - user_id
+          - client_info
+          - client_id
+          - client_link_id
+          - name
+        href: /api-reference/trading/private-edit
+  /private/edit_by_label:
+    get:
+      parameters:
+      - name: label
+        in: query
+        schema:
+          type: string
+        required: false
+        description: user defined label for the order (maximum 64 characters)
+      - name: instrument_name
+        required: true
+        in: query
+        schema:
+          $ref: '#/components/schemas/instrument_name'
+        description: Instrument name
+      - name: amount
+        in: query
+        schema:
+          type: number
+        required: false
+        description: It represents the requested order size. For perpetual and inverse futures the amount is in USD units. For options and linear futures it is the underlying base currency coin. The `amount` is a mandatory parameter if `contracts` parameter is missing. If both `contracts` and `amount` parameter are passed they must match each other otherwise error is returned.
+      - name: contracts
+        in: query
+        schema:
+          type: number
+        required: false
+        description: It represents the requested order size in contract units and can be passed instead of `amount`. The `contracts` is a mandatory parameter if `amount` parameter is missing. If both `contracts` and `amount` parameter are passed they must match each other otherwise error is returned.
+      - name: price
+        in: query
+        schema:
+          type: number
+        required: false
+        description: <p>The order price in base currency.</p> <p>When editing an option order with advanced=usd, the field price should be the option price value in USD.</p> <p>When editing an option order with advanced=implv, the field price should be a value of implied volatility in percentages. For example,  price=100, means implied volatility of 100%</p>
+      - name: post_only
+        in: query
+        schema:
+          type: boolean
+          default: true
+        required: false
+        description: <p>If true, the order is considered post-only. If the new price would cause the order to be filled immediately (as taker), the price will be changed to be just below or above the spread (accordingly to the original order type).</p> <p>Only valid in combination with time_in_force=`"good_til_cancelled"`</p>
+      - name: reduce_only
+        in: query
+        schema:
+          type: boolean
+          default: false
+        required: false
+        description: If `true`, the order is considered reduce-only which is intended to only reduce a current position
+      - name: reject_post_only
+        in: query
+        schema:
+          type: boolean
+          default: false
+        required: false
+        description: <p>If an order is considered post-only and this field is set to true then the order is put to the order book unmodified or the request is rejected.</p> <p>Only valid in combination with `"post_only"` set to true</p>
+      - name: advanced
+        in: query
+        schema:
+          $ref: '#/components/schemas/advanced'
+        required: false
+        description: Advanced option order type. If you have posted an advanced option order, it is necessary to re-supply this parameter when editing it (Only for options)
+      - name: trigger_price
+        in: query
+        schema:
+          type: number
+        required: false
+        description: Trigger price, required for trigger orders only (Stop-loss or Take-profit orders)
+      - name: mmp
+        in: query
+        schema:
+          type: boolean
+          default: false
+        required: false
+        description: Order MMP flag, only for order_type 'limit'
+      - name: valid_until
+        in: query
+        schema:
+          type: integer
+        required: false
+        description: Timestamp, when provided server will start processing request in Matching Engine only before given timestamp, in other cases `timed_out` error will be responded. Remember that the given timestamp should be consistent with the server's time, use <a href='#public-get_time'>/public/time</a> method to obtain current server time.
+      responses:
+        '200':
+          $ref: '#/components/responses/PrivateEditResponse'
+      tags:
+      - Matching Engine
+      requestBody:
+        content:
+          application/json:
+            examples:
+              request:
+                value:
+                  jsonrpc: '2.0'
+                  id: 9
+                  method: private/edit_by_label
+                  params:
+                    instrument_name: BTC-PERPETUAL
+                    label: i_love_deribit
+                    amount: 150
+                    price: 50111
+                description: JSON-RPC Request Example
+        description: JSON-RPC request body
+      description: 'Modifies an order identified by its label. This method works only when there is exactly one open order with the specified label.
+
+
+        You can change the order''s price, amount, and/or other properties such as time-in-force, post-only, reduce-only, trigger conditions, or advanced order type. Changes take effect immediately.
+
+
+        **Scope:** `trade:read_write`
+
+
+        [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fedit_by_label)
+
+
+        '
+      x-mint:
+        metadata:
+          title: private/edit_by_label
+          og:title: private/edit_by_label
+          keywords:
+          - private/edit_by_label
+          - label
+          - instrument_name
+          - amount
+          - contracts
+          - price
+          - post_only
+          - reduce_only
+          - reject_post_only
+          - advanced
+          - trigger_price
+          - mmp
+          - valid_until
+          - order
+          - trades
+          - order_id
+          - order_state
+          - order_type
+          - original_order_type
+          - time_in_force
+          - is_rebalance
+          - is_liquidation
+          - creation_timestamp
+          - last_update_timestamp
+          - direction
+          - api
+          - web
+          - mobile
+          - refresh_amount
+          - display_amount
+          - filled_amount
+          - average_price
+          - implv
+          - usd
+          - triggered
+          - trigger
+          - trigger_offset
+          - trigger_reference_price
+          - block_trade
+          - risk_reducing
+          - replaced
+          - auto_replaced
+          - quote
+          - mmp_group
+          - quote_set_id
+          - quote_id
+          - trigger_order_id
+          - app_name
+          - mmp_cancelled
+          - cancel_reason
+          - oto_order_ids
+          - trigger_fill_condition
+          - oco_ref
+          - primary_order_id
+          - is_secondary_oto
+          - is_primary_otoco
+          - trade_id
+          - trade_seq
+          - timestamp
+          - matching_id
+          - tick_direction
+          - index_price
+          - iv
+          - underlying_price
+          - liquidation
+          - liquidity
+          - fee
+          - fee_currency
+          - state
+          - block_trade_id
+          - block_rfq_id
+          - block_rfq_quote_id
+          - profit_loss
+          - mark_price
+          - legs
+          - combo_id
+          - combo_trade_id
+          - trade_allocations
+          - user_id
+          - client_info
+          - client_id
+          - client_link_id
+          - name
+        href: /api-reference/trading/private-edit_by_label
+  /private/close_position:
+    get:
+      tags:
+      - Matching Engine
+      parameters:
+      - name: instrument_name
+        required: true
+        in: query
+        schema:
+          $ref: '#/components/schemas/instrument_name'
+        description: Instrument name
+      - name: type
+        in: query
+        schema:
+          type: string
+          enum:
+          - limit
+          - market
+        required: true
+        description: The order type
+      - name: price
+        in: query
+        schema:
+          type: number
+        required: false
+        description: Optional price for limit order.
+      responses:
+        '200':
+          $ref: '#/components/responses/PrivateBuyAndSellResponse'
+      requestBody:
+        content:
+          application/json:
+            examples:
+              request:
+                value:
+                  jsonrpc: '2.0'
+                  id: 6130
+                  method: private/close_position
+                  params:
+                    instrument_name: ETH-PERPETUAL
+                    type: limit
+                    price: 145.17
+                description: JSON-RPC Request Example
+        description: JSON-RPC request body
+      description: 'Places a reduce-only order to close an existing position. Reduce-only orders can only reduce or close a position; they cannot open a new position or increase an existing one.
+
+
+        You can specify whether to use a market or limit order. If using a limit order, provide the price. The order will automatically be set to reduce-only to ensure it only closes the position.
+
+
+        **Scope:** `trade:read_write`
+
+
+        [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fclose_position)
+
+
+        '
+      x-mint:
+        metadata:
+          title: private/close_position
+          og:title: private/close_position
+          keywords:
+          - private/close_position
+          - instrument_name
+          - type
+          - price
+          - order
+          - trades
+          - order_id
+          - order_state
+          - order_type
+          - original_order_type
+          - time_in_force
+          - is_rebalance
+          - is_liquidation
+          - creation_timestamp
+          - last_update_timestamp
+          - direction
+          - label
+          - post_only
+          - reject_post_only
+          - reduce_only
+          - api
+          - web
+          - mobile
+          - refresh_amount
+          - display_amount
+          - amount
+          - contracts
+          - filled_amount
+          - average_price
+          - advanced
+          - implv
+          - usd
+          - triggered
+          - trigger
+          - trigger_price
+          - trigger_offset
+          - trigger_reference_price
+          - block_trade
+          - mmp
+          - risk_reducing
+          - replaced
+          - auto_replaced
+          - quote
+          - mmp_group
+          - quote_set_id
+          - quote_id
+          - trigger_order_id
+          - app_name
+          - mmp_cancelled
+          - cancel_reason
+          - oto_order_ids
+          - trigger_fill_condition
+          - oco_ref
+          - primary_order_id
+          - is_secondary_oto
+          - is_primary_otoco
+          - trade_id
+          - trade_seq
+          - timestamp
+          - matching_id
+          - tick_direction
+          - index_price
+          - iv
+          - underlying_price
+          - liquidation
+          - liquidity
+          - fee
+          - fee_currency
+          - state
+          - block_trade_id
+          - block_rfq_id
+          - block_rfq_quote_id
+          - profit_loss
+          - mark_price
+          - legs
+          - combo_id
+          - combo_trade_id
+          - trade_allocations
+          - user_id
+          - client_info
+          - client_id
+          - client_link_id
+          - name
+        href: /api-reference/trading/private-close_position
+  /private/get_mmp_config:
+    get:
+      tags:
+      - Matching Engine
+      parameters:
+      - name: index_name
+        required: false
+        in: query
+        schema:
+          $ref: '#/components/schemas/index_name_derivative'
+        description: Index identifier of derivative instrument on the platform; skipping this parameter will return all configurations
+      - name: mmp_group
+        required: false
+        in: query
+        schema:
+          type: string
+          example: MassQuoteBot7
+        description: 'Specifies the MMP group for which the configuration is being retrieved. MMP groups are used for Mass Quotes. If MMP group is not provided, the method returns the configuration for the MMP settings for regular orders. The `index_name` must be specified before using this parameter.
+
+
+          **Note:** Leaving `mmp_group` empty is explicitly allowed and is the correct way to retrieve configuration for the orders MMP group. It is not an error or an incomplete request — omitting this field intentionally targets the default orders MMP group rather than any named mass quote group.
+
+
+          **📖 Related Article:** [Mass Quotes Specifications](https://docs.deribit.com/articles/mass-quotes-specifications)
+
+          '
+      - name: block_rfq
+        required: false
+        in: query
+        schema:
+          type: boolean
+          default: false
+        description: 'If true, retrieves MMP configuration for Block RFQ. When set, requires `block_rfq` scope instead of `trade` scope. Block RFQ MMP settings are completely separate from normal order/quote MMP settings.
+
+          '
+      responses:
+        '200':
+          $ref: '#/components/responses/PrivateGetMmpConfigResponse'
+      requestBody:
+        content:
+          application/json:
+            examples:
+              request:
+                value:
+                  jsonrpc: '2.0'
+                  id: 7859
+                  method: private/get_mmp_config
+                  params:
+                    index_name: btc_usd
+                    mmp_group: MassQuoteBot7
+                description: JSON-RPC Request Example
+        description: JSON-RPC request body
+      description: 'Retrieves Market Maker Protection (MMP) configuration for an index. Returns all currently active MMP parameters for the selected index, including the interval, `frozen_time`, quantity/delta/vega limits, and `max_quote_quantity`.
+
+
+        If the `index_name` parameter is not provided, a list of all MMP configurations is returned. An empty list means no MMP configuration exists. This method is useful for verifying your configuration or confirming applied updates.
+
+
+        For Mass Quotes, specify the `mmp_group` parameter to retrieve configuration for a specific MMP group. If no group is provided, returns configuration for regular orders. Set `block_rfq` to `true` to retrieve MMP configuration for Block RFQ (requires `block_rfq:read` scope).
+
+
+        Each entry in the response includes an `id` field (integer) that uniquely identifies the MMP group. This integer ID is the programmatic identifier for the group and can be used to reference it in contexts where the string `mmp_group` name is not accepted. Entries that have no `mmp_group` name in the response correspond to the orders MMP group (the default group).
+
+
+        **📖 Related Article:** [Market Maker Protection API Configuration](https://docs.deribit.com/articles/market-maker-protection)
+
+
+        **Scope:** `trade:read` or `block_rfq:read` (when `block_rfq` = `true`)
+
+
+        [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_mmp_config)
+
+
+        '
+      x-mint:
+        metadata:
+          title: private/get_mmp_config
+          og:title: private/get_mmp_config
+          keywords:
+          - private/get_mmp_config
+          - index_name
+          - mmp_group
+          - block_rfq
+          - interval
+          - frozen_time
+          - quantity_limit
+          - delta_limit
+          - vega_limit
+          - max_quote_quantity
+          - trade_count_limit
+        href: /api-reference/trading/private-get_mmp_config
+  /private/get_mmp_status:
+    get:
+      tags:
+      - Matching Engine
+      parameters:
+      - name: index_name
+        required: false
+        in: query
+        schema:
+          $ref: '#/components/schemas/index_name_derivative'
+        description: Index identifier of derivative instrument on the platform; skipping this parameter will return all configurations
+      - name: mmp_group
+        required: false
+        in: query
+        schema:
+          type: string
+          example: MassQuoteBot7
+        description: 'Specifies the MMP group for which the status is being retrieved. The `index_name` must be specified before using this parameter.
+
+
+          **📖 Related Article:** [Mass Quotes Specifications](https://docs.deribit.com/articles/mass-quotes-specifications)
+
+          '
+      - name: block_rfq
+        required: false
+        in: query
+        schema:
+          type: boolean
+          default: false
+        description: 'If true, retrieves MMP status for Block RFQ. When set, requires `block_rfq` scope instead of `trade` scope. Block RFQ MMP status is completely separate from normal order/quote MMP status.
+
+          '
+      responses:
+        '200':
+          $ref: '#/components/responses/PrivateGetMmpStatusResponse'
+      requestBody:
+        content:
+          application/json:
+            examples:
+              request:
+                value:
+                  jsonrpc: '2.0'
+                  id: 7851
+                  method: private/get_mmp_status
+                  params:
+                    index_name: btc_usd
+                    mmp_group: MassQuoteBot7
+                description: JSON-RPC Request Example
+        description: JSON-RPC request body
+      description: 'Retrieves Market Maker Protection (MMP) status for a triggered index or MMP group. Returns the live MMP state including whether MMP is enabled or triggered, remaining frozen time (if triggered), whether quoting is currently allowed, and any active freeze conditions.
+
+
+        If the `index_name` parameter is not provided, a list of all triggered MMP statuses is returned. This method lets you track whether protection is active and when quoting will resume.
+
+
+        For Mass Quotes, specify the `mmp_group` parameter to check status for a specific MMP group. Set `block_rfq` to `true` to retrieve MMP status for Block RFQ (requires `block_rfq:read` scope).
+
+
+        **📖 Related Article:** [Market Maker Protection API Configuration](https://docs.deribit.com/articles/market-maker-protection)
+
+
+        **Scope:** `trade:read` or `block_rfq:read` (when `block_rfq` = `true`)
+
+
+        [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_mmp_status)
+
+
+        '
+      x-mint:
+        metadata:
+          title: private/get_mmp_status
+          og:title: private/get_mmp_status
+          keywords:
+          - private/get_mmp_status
+          - index_name
+          - mmp_group
+          - block_rfq
+          - frozen_until
+        href: /api-reference/trading/private-get_mmp_status
+  /private/set_mmp_config:
+    get:
+      tags:
+      - Matching Engine
+      parameters:
+      - name: index_name
+        required: true
+        in: query
+        schema:
+          $ref: '#/components/schemas/index_name_derivative'
+        description: Index identifier of derivative instrument on the platform
+      - name: interval
+        required: true
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          maximum: 3600
+          example: 60
+        description: 'The duration of the monitoring window in seconds. For example, an `interval` of `3` implies a 3-second window.
+
+
+          The `interval` begins after the first trade. If a new trade is executed after the `interval` has ended, a new `interval` is started, and counters reset. If a trade occurs during an already running `interval`, that `interval` continues unaffected.
+
+
+          This mechanism allows the platform to track activity in short, rolling windows to identify potentially risky trading behavior.
+
+
+          If set to `0`, MMP is removed.
+
+
+          Maximum value: `3600` seconds (1 hour).
+
+          '
+      - name: frozen_time
+        required: true
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          maximum: 3600
+          example: 0
+        description: 'Time in seconds that MMP remains active after being triggered. Once this frozen period has passed, MMP will automatically reset, allowing new orders to be submitted.
+
+
+          If you want to disable automatic reset, set `frozen_time` to `0`. In that case, a manual reset is required using the `private/reset_mmp` method.
+
+
+          Manual reset is also possible during the frozen time period.
+
+
+          Maximum value: `3600` seconds (1 hour).
+
+          '
+      - name: mmp_group
+        required: false
+        in: query
+        schema:
+          type: string
+          example: MassQuoteBot7
+        description: 'Designates the MMP group for which the configuration is being set. If the specified group is already associated with a different `index_name`, an error is returned. This parameter enables distinct configurations for each MMP group, linked to particular `index_name`. Maximum 64 characters. Case sensitive. Cannot be empty string.
+
+
+          **📖 Related Article:** [Mass Quotes Specifications](https://docs.deribit.com/articles/mass-quotes-specifications)
+
+          '
+      - name: quantity_limit
+        required: false
+        in: query
+        schema:
+          type: number
+          example: 3
+        description: 'The total traded quantity, measured in units of the base currency (e.g., BTC in `BTC-PERPETUAL`), within the `interval`.
+
+
+          This count is direction-agnostic—a buy followed by a sell counts double.
+
+
+          Example: Buy `10` BTC and sell `10` BTC = `20` total quantity.
+
+
+          Applicable to both options and futures.
+
+
+          Positive value with maximum 4 decimal places.
+
+          '
+      - name: delta_limit
+        required: false
+        in: query
+        schema:
+          type: number
+        description: 'The maximum allowable net transaction delta change during the `interval`.
+
+
+          Expressed in units of base currency.
+
+
+          The `delta_limit` is treated as an absolute threshold: e.g., `delta_limit: 10` → MMP is triggered if net transaction delta exceeds `+10` or drops below `-10`.
+
+
+          Direction matters: buying `+5` delta and selling `−5` delta cancels out if within the same `interval`.
+
+
+          **Note:** Note that we use the net transaction delta instead of delta. Net Transaction Delta = `Delta - Mark Price`. In the rest of this document, "delta" actually refers to net transaction delta.
+
+
+          Positive value with maximum 4 decimal places.
+
+          '
+      - name: vega_limit
+        required: false
+        in: query
+        schema:
+          type: number
+        description: 'The maximum change in vega exposure allowed within a given `interval`, measured in absolute terms.
+
+
+          Expressed in USD, representing the change in sensitivity to implied volatility across executed trades.
+
+
+          This parameter is primarily relevant for options traders managing risk in volatile markets.
+
+
+          Similar to `delta_limit`, the `vega_limit` is direction-aware and evaluated on a net basis. If the exposure exceeds the set threshold (positively or negatively), MMP will be triggered.
+
+
+          **Notice:** When evaluating Delta and Vega limits for MMP, Deribit uses the greeks at the moment of trade execution. The system does not re-evaluate Delta or Vega using live greeks at the time of MMP checking.
+
+
+          Positive value with maximum 4 decimal places.
+
+          '
+      - name: max_quote_quantity
+        required: true
+        in: query
+        schema:
+          type: number
+          example: 2.5
+        description: Maximum Quote Quantity (MQQ) in base currency. MQQ is configured per index but enforced per side, per order book (instrument) — the total combined size of open MMP orders per side per instrument cannot exceed MQQ. **See response description for detailed information about MQQ behavior and limitations.** Maximum 4 decimal places.
+      - name: block_rfq
+        required: false
+        in: query
+        schema:
+          type: boolean
+          default: false
+        description: 'If true, configures MMP for Block RFQ. When set, requires `block_rfq` scope instead of `trade` scope. Block RFQ MMP settings are completely separate from normal order/quote MMP settings.
+
+          '
+      - name: trade_count_limit
+        required: false
+        in: query
+        schema:
+          type: integer
+          maximum: 1000
+          minimum: 1
+        description: For Block RFQ only (`block_rfq` = `true`). Sets the maximum number of Block RFQ trades allowed in the lookback window. Each RFQ trade counts as `+1` towards the limit (not individual legs). Works across all currency pairs. When using this parameter, `index_name` must be set to `"all"`. Maximum - `1000`.
+      responses:
+        '200':
+          $ref: '#/components/responses/PrivateSetMmpConfigResponse'
+      requestBody:
+        content:
+          application/json:
+            examples:
+              request:
+                value:
+                  jsonrpc: '2.0'
+                  id: 7859
+                  method: private/set_mmp_config
+                  params:
+                    index_name: btc_usd
+                    mmp_group: MassQuoteBot7
+                    interval: 60
+                    frozen_time: 0
+                    quantity_limit: 3
+                    max_quote_quantity: 2.5
+                description: JSON-RPC Request Example
+        description: JSON-RPC request body
+      description: 'Configures Market Maker Protection (MMP) for a specific index. This method sets the monitoring window, freeze duration, and exposure limits (quantity, delta, vega, and Maximum Quote Quantity).
+
+
+        At least one limit parameter must be set. Maximum Quote Quantity (MQQ) is a required parameter that limits the total combined size of open MMP orders. MQQ is configured per index but enforced per side, per order book (instrument).
+
+
+        The `interval` parameter defines the monitoring window duration in seconds. The `frozen_time` parameter sets how long MMP remains active after being triggered. Set `frozen_time` to `0` to disable automatic reset (manual reset required).
+
+
+        For Mass Quotes, use the `mmp_group` parameter to configure MMP for a specific group. Set `block_rfq` to `true` to configure MMP for Block RFQ (requires `block_rfq:read_write` scope). Set `interval` to `0` to remove MMP configuration.
+
+
+        **📖 Related Article:** [Market Maker Protection API Configuration](https://docs.deribit.com/articles/market-maker-protection)
+
+
+        **Scope:** `trade:read_write` or `block_rfq:read_write` (when `block_rfq` = `true`)
+
+
+        [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fset_mmp_config)
+
+
+        '
+      x-mint:
+        metadata:
+          title: private/set_mmp_config
+          og:title: private/set_mmp_config
+          keywords:
+          - private/set_mmp_config
+          - index_name
+          - interval
+          - frozen_time
+          - mmp_group
+          - quantity_limit
+          - delta_limit
+          - vega_limit
+          - max_quote_quantity
+          - block_rfq
+          - trade_count_limit
+        href: /api-reference/trading/private-set_mmp_config
+  /private/reset_mmp:
+    get:
+      tags:
+      - Matching Engine
+      parameters:
+      - name: index_name
+        required: true
+        in: query
+        schema:
+          type: string
+          example: btc_usd
+        description: 'Currency pair for which to reset MMP limits.
+
+
+          **For regular MMP (`block_rfq = false`):** Must be a specific currency pair (e.g., "btc_usd", "eth_usd"). The value `"all"` is not allowed.
+
+
+          **For Block RFQ MMP (`block_rfq = true`):** Can be either a specific currency pair or `"all"` to reset MMP limits across all currency pairs.
+
+          '
+      - name: mmp_group
+        required: false
+        in: query
+        schema:
+          type: string
+          example: MassQuoteBot7
+        description: 'Specifies the MMP group for which limits are being reset. If this parameter is omitted, the method resets the traditional (no group) MMP limits.
+
+
+          **📖 Related Article:** [Mass Quotes Specifications](https://docs.deribit.com/articles/mass-quotes-specifications)
+
+          '
+      - name: block_rfq
+        required: false
+        in: query
+        schema:
+          type: boolean
+          default: false
+        description: 'If true, resets MMP for Block RFQ. When set, requires `block_rfq` scope instead of `trade` scope. Block RFQ MMP settings are completely separate from normal order/quote MMP settings. When `block_rfq = true`, the `index_name` parameter can be set to `"all"` to reset limits across all currency pairs.
+
+          '
+      responses:
+        '200':
+          $ref: '#/components/responses/OkResponse'
+      requestBody:
+        content:
+          application/json:
+            examples:
+              request:
+                value:
+                  jsonrpc: '2.0'
+                  id: 7859
+                  method: private/reset_mmp
+                  params:
+                    index_name: btc_usd
+                    mmp_group: MassQuoteBot7
+                description: JSON-RPC Request Example
+        description: JSON-RPC request body
+      description: 'Resets Market Maker Protection (MMP) limits for the specified currency pair or MMP group. If MMP protection has been triggered and quoting is frozen, this method allows you to manually resume quoting.
+
+
+        If the configured `frozen_time` has expired, the system will automatically reset MMP. If `frozen_time` is set to `0` (automatic reset disabled), you must call this method to re-enable quoting. You can also perform a manual reset during the frozen period if you want to resume quoting early.
+
+
+        For regular MMP (`block_rfq = false`), the `index_name` must be a specific currency pair (e.g., "btc_usd", "eth_usd"). For Block RFQ MMP (`block_rfq = true`), you can set `index_name` to `"all"` to reset limits across all currency pairs. Use the `mmp_group` parameter to reset limits for a specific MMP group.
+
+
+        **📖 Related Article:** [Market Maker Protection API Configuration](https://docs.deribit.com/articles/market-maker-protection)
+
+
+        **Scope:** `trade:read_write` or `block_rfq:read_write` (when `block_rfq` = `true`)
+
+
+        [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Freset_mmp)
+
+
+        '
+      x-mint:
+        metadata:
+          title: private/reset_mmp
+          og:title: private/reset_mmp
+          keywords:
+          - private/reset_mmp
+          - index_name
+          - mmp_group
+          - block_rfq
+        href: /api-reference/trading/private-reset_mmp
+  /private/mass_quote:
+    get:
+      parameters:
+      - name: wait_for_response
+        in: query
+        schema:
+          type: boolean
+        required: false
+        description: If false, the response is sent immediately after the risk check. If true, the response is sent after the orders all go through the matching engine. Default - `true`.
+      - name: detailed
+        in: query
+        schema:
+          type: boolean
+          example: true
+        required: false
+        description: Flag to receive a list of all order changes and a list of errors, or to only receive a list of errors. Default - `false`.
+      - name: quote_id
+        in: query
+        schema:
+          type: string
+          example: '1'
+        required: true
+        description: Identifier of a mass quote message. Can be used to match trades to requests. We recommend using an incrementing counter.
+      - name: mmp_group
+        in: query
+        schema:
+          type: string
+          example: default
+        required: true
+        description: Name of the MMP group. An MMP group has to be used and only one quote can exist per instrument per side per MMP group.
+      - name: valid_until
+        in: query
+        schema:
+          type: integer
+        required: false
+        description: Timestamp, when provided server will start processing request in Matching Engine only before given timestamp, in other cases `timed_out` error will be responded. Remember that the given timestamp should be consistent with the server's time, use <a href='#public-get_time'>/public/time</a> method to obtain current server time.
+      - name: quotes
+        in: query
+        required: true
+        schema:
+          type: array
+          items:
+            type: object
+            properties:
+              instrument_name:
+                type: string
+                description: The name of the instrument.
+              quote_set_id:
+                type: string
+                description: User-defined label that can be used for targeted cancels using private/cancel_quotes.
+              ask:
+                type: object
+                properties:
+                  price:
+                    type: number
+                    description: The price of this side of the quote. If no price is supplied, only the amount is amended.
+                  amount:
+                    type: number
+                    description: The amount of this side of the quote. If no quantity is supplied, only the price is amended.
+                  post_only:
+                    type: boolean
+                    default: false
+                    description: If true, the order is considered post-only. If the new price would cause the order to be filled immediately (as taker), the price will be changed to be just below the spread. Default - `false`
+                  reject_post_only:
+                    type: boolean
+                    default: false
+                    description: If an order is considered post-only and this field is set to true then the order is put to the order book unmodified or the request is rejected. Only valid in combination with "post_only" set to `true`. Default value - `false`
+                description: Order details for the ask. If not provided, `bid` must be present.
+              bid:
+                type: object
+                properties:
+                  price:
+                    type: number
+                    description: The price of this side of the quote. If no price is supplied, only the amount is amended.
+                  amount:
+                    type: number
+                    description: The amount of this side of the quote. If no quantity is supplied, only the price is amended.
+                  post_only:
+                    type: boolean
+                    default: false
+                    description: If true, the order is considered post-only. If the new price would cause the order to be filled immediately (as taker), the price will be changed to be just below the spread. Default - `false`
+                  reject_post_only:
+                    type: boolean
+                    default: false
+                    description: If an order is considered post-only and this field is set to true then the order is put to the order book unmodified or the request is rejected. Only valid in combination with "post_only" set to `true`. Default value - `false`
+                description: Order details for the bid. If not provided, `ask` must be present.
+          example:
+          - instrument_name: BTC-PERPETUAL
+            quote_set_id: futures
+            ask:
+              price: 43800
+              amount: 10
+            bid:
+              price: 43700
+              amount: 10
+          - instrument_name: BTC-22DEC23-41600-C
+            quote_set_id: options
+            ask:
+              price: 0.05
+              amount: 1
+            bid:
+              price: 0.04
+              amount: 1
+        description: List of quotes.
+        style: form
+        explode: true
+      responses:
+        '200':
+          $ref: '#/components/responses/PrivateMassQuoteResponse'
+      tags:
+      - Matching Engine
+      requestBody:
+        content:
+          application/json:
+            examples:
+              request:
+                value:
+                  jsonrpc: '2.0'
+                  id: 7859
+                  method: private/mass_quote
+                  params:
+                    detailed: true
+                    quote_id: '1'
+                    mmp_group: default
+                    quotes:
+                    - instrument_name: BTC-PERPETUAL
+                      quote_set_id: futures
+                      ask:
+                        price: 43800
+                        amount: 10
+                      bid:
+                        price: 43700
+                        amount: 10
+                    - instrument_name: BTC-22DEC23-41600-C
+                      quote_set_id: options
+                      ask:
+                        price: 0.05
+                        amount: 1
+                      bid:
+                        price: 0.04
+                        amount: 1
+                description: JSON-RPC Request Example
+        description: JSON-RPC request body
+      description: 'Places buy and/or sell orders (quotes) on one or more instruments simultaneously. This method is designed for market makers who need to quote on multiple instruments efficiently.
+
+
+        **Requirements:**
+
+        - Cancel-on-Disconnect must be enabled (see [private/enable_cancel_on_disconnect](https://docs.deribit.com/api-reference/session-management/private-enable_cancel_on_disconnect)), otherwise the request will return an error.
+
+        - This endpoint can only be used after approval from the administrators.
+
+
+        Each quote can include both bid and ask sides, or just one side. Quotes are identified by `quote_set_id` for targeted cancellation. Use the `wait_for_response` parameter to control whether to wait for all orders to be processed before returning.
+
+
+        **📖 Related Article:** [Mass Quotes Specifications](https://docs.deribit.com/articles/mass-quotes-specifications)
+
+
+        **Scope:** `trade:read_write`
+
+
+        [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fmass_quote)
+
+
+        '
+      x-mint:
+        metadata:
+          title: private/mass_quote
+          og:title: private/mass_quote
+          keywords:
+          - private/mass_quote
+          - wait_for_response
+          - detailed
+          - quote_id
+          - mmp_group
+          - valid_until
+          - quotes
+          - orders
+          - trades
+          - errors_count
+          - pending_requests_count
+          - pending_requests
+          - errors
+          - order_id
+          - order_state
+          - order_type
+          - original_order_type
+          - time_in_force
+          - is_rebalance
+          - is_liquidation
+          - instrument_name
+          - creation_timestamp
+          - last_update_timestamp
+          - direction
+          - price
+          - label
+          - post_only
+          - reject_post_only
+          - reduce_only
+          - api
+          - web
+          - mobile
+          - refresh_amount
+          - display_amount
+          - amount
+          - contracts
+          - filled_amount
+          - average_price
+          - advanced
+          - implv
+          - usd
+          - triggered
+          - trigger
+          - trigger_price
+          - trigger_offset
+          - trigger_reference_price
+          - block_trade
+          - mmp
+          - risk_reducing
+          - replaced
+          - auto_replaced
+          - quote
+          - quote_set_id
+          - trigger_order_id
+          - app_name
+          - mmp_cancelled
+          - cancel_reason
+          - oto_order_ids
+          - trigger_fill_condition
+          - oco_ref
+          - primary_order_id
+          - is_secondary_oto
+          - is_primary_otoco
+          - trade_id
+          - trade_seq
+          - timestamp
+          - matching_id
+          - tick_direction
+          - index_price
+          - iv
+          - underlying_price
+          - liquidation
+          - liquidity
+          - fee
+          - fee_currency
+          - state
+          - block_trade_id
+          - block_rfq_id
+          - block_rfq_quote_id
+          - profit_loss
+          - mark_price
+          - legs
+          - combo_id
+          - combo_trade_id
+          - trade_allocations
+          - user_id
+          - client_info
+          - client_id
+          - client_link_id
+          - name
+          - side
+          - code
+          - message
+        href: /api-reference/trading/private-mass_quote
+  /private/move_positions:
+    get:
+      parameters:
+      - in: query
+        name: currency
+        required: false
+        schema:
+          $ref: '#/components/schemas/currency'
+        description: The currency symbol
+      - name: source_uid
+        in: query
+        schema:
+          type: integer
+          example: 1
+        required: true
+        description: Id of source subaccount. Can be found in `My Account >> Subaccounts` tab
+      - name: target_uid
+        in: query
+        schema:
+          type: integer
+          example: 1
+        required: true
+        description: Id of target subaccount. Can be found in `My Account >> Subaccounts` tab
+      - in: query
+        name: trades
+        required: true
+        schema:
+          type: array
+          items:
+            type: object
+            properties:
+              instrument_name:
+                $ref: '#/components/schemas/instrument_name'
+                description: Instrument name
+              price:
+                type: number
+                description: Price for trade - if not provided average price of the position is used
+              amount:
+                type: number
+                description: It represents the requested trade size. For perpetual and inverse futures the amount is in USD units. For options and linear futures it is the underlying base currency coin. Amount can't exceed position size.
+        description: List of trades for position move
+        style: form
+        explode: true
+      responses:
+        '200':
+          $ref: '#/components/responses/PrivatePositionMoveResponse'
+      tags:
+      - Matching Engine
+      requestBody:
+        content:
+          application/json:
+            examples:
+              request:
+                value:
+                  jsonrpc: '2.0'
+                  id: 3
+                  method: private/move_positions
+                  params:
+                    currency: BTC
+                    source_uid: 3
+                    target_uid: 23
+                    trades:
+                    - instrument_name: BTC-PERPETUAL
+                      price: '35800'
+                      amount: '110'
+                    - instrument_name: BTC-28JAN22-32500-C
+                      amount: '0.1'
+                description: JSON-RPC Request Example
+        description: JSON-RPC request body
+      description: "Moves positions from a source subaccount to a target subaccount. This operation transfers open positions between subaccounts, which is useful for rebalancing or reorganizing trading activities.\n\nPositions can be filtered by currency. The operation creates trades to transfer positions, which may affect P&L and margin calculations.\n\n**Note - This method has distinct API rate limiting requirements:** \n- Sustained rate: 6 requests/minute\n- Weekly limit: 100 move_position uses per week (168 hours)\n\nFor more information, see [Rate Limits](https://support.deribit.com/hc/en-us/articles/25944617523357-Rate-Limits).\n\n**Important:** In rare cases, the request may return an `internal_server_error`. This does not necessarily mean the operation failed entirely. Part or all of the position transfer might have still been processed successfully. Check the positions in both accounts to verify the transfer status.\n\n**\U0001F4D6 Related Article:** [Moving Positions](https://docs.deribit.com/articles/moving-positions-api)\n\n**Scope:** `trade:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fmove_positions)\n\n"
+      x-mint:
+        metadata:
+          title: private/move_positions
+          og:title: private/move_positions
+          keywords:
+          - private/move_positions
+          - currency
+          - source_uid
+          - target_uid
+          - trades
+          - instrument_name
+          - direction
+          - price
+          - amount
+        href: /api-reference/trading/private-move_positions
+components:
+  schemas:
+    order_state_in_user_trade:
+      enum:
+      - open
+      - filled
+      - rejected
+      - cancelled
+      - untriggered
+      - archive
+      type: string
+      description: 'Order state: `"open"`, `"filled"`, `"rejected"`, `"cancelled"`, `"untriggered"` or `"archive"` (if order was archived)'
+    trigger_offset:
+      type: number
+      description: The maximum deviation from the price peak beyond which the order will be triggered (Only for trailing trigger orders)
+    api:
+      type: boolean
+      description: '`true` if created with API'
+    trigger:
+      enum:
+      - index_price
+      - mark_price
+      - last_price
+      type: string
+      description: 'Trigger type (only for trigger orders). Allowed values: `"index_price"`, `"mark_price"`, `"last_price"`.'
+    combo_id:
+      example: BTC-FS-31DEC21-PERP
+      type: string
+      description: Unique combo identifier
+    block_trade_id:
+      example: '154'
+      type: string
+      description: Block trade id
+    contracts:
+      type: number
+      description: It represents the order size in contract units. (Optional, may be absent in historical data).
+    kind_with_combo_all:
+      enum:
+      - future
+      - option
+      - spot
+      - future_combo
+      - option_combo
+      - combo
+      - any
+      type: string
+      description: 'Instrument kind: `"future"`, `"option"`, `"spot"`, `"future_combo"`, `"option_combo"`, `"combo"` for any combo or `"any"` for all'
+    order_type:
+      enum:
+      - market
+      - limit
+      - stop_market
+      - stop_limit
+      - take_market
+      - take_limit
+      - trailing_stop
+      type: string
+      description: 'Order type: `"limit"`, `"market"`, `"stop_limit"`, `"stop_market"`, `"take_limit"`, `"take_market"`, `"trailing_stop"`'
+    reduce_only:
+      type: boolean
+      description: Optional (not added for spot). '`true` for reduce-only orders only'
+    position_move:
+      properties:
+        trades:
+          type: array
+          items:
+            $ref: '#/components/schemas/position_move_trade'
+      required:
+      - trades
+      type: object
+    combo_state:
+      enum:
+      - active
+      - inactive
+      type: string
+      description: 'Combo state: `"active"`, "`inactive`"'
+    price:
+      type: number
+      description: Price in base currency
+    trigger_reference_price:
+      type: number
+      description: The price of the given trigger at the time when the order was placed (Only for trailing trigger orders)
+    display_amount:
+      type: number
+      description: The actual display amount of iceberg order. Absent for other types of orders.
+    PrivateGetBlockTradeResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          $ref: '#/components/schemas/block_trade'
+      required:
+      - jsonrpc
+      - result
+      type: object
+    filled_amount:
+      type: number
+      description: Filled amount of the order. For perpetual and futures the filled_amount is in USD units, for options - in units or corresponding cryptocurrency contracts, e.g., BTC or ETH.
+    block_trade_id_in_result:
+      example: '154'
+      type: string
+      description: Block trade id - when trade was part of a block trade
+    PrivatePositionMoveResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          $ref: '#/components/schemas/position_move'
+      required:
+      - jsonrpc
+      - result
+      type: object
+    PrivateBuyAndSellResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          type: object
+          properties:
+            order:
+              $ref: '#/components/schemas/order'
+            trades:
+              type: array
+              items:
+                $ref: '#/components/schemas/user_trade'
+          required:
+          - order
+          - trades
+      required:
+      - jsonrpc
+      - result
+      type: object
+    is_secondary_oto:
+      type: boolean
+      description: '`true` if the order is an order that can be triggered by another order, otherwise not present.'
+    PrivateCancelAllResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          type: number
+          example: 7
+          description: Total number of successfully cancelled orders
+      required:
+      - jsonrpc
+      - result
+      type: object
+    trade_id:
+      type: string
+      description: Unique (per currency) trade identifier
+    cancel_reason:
+      enum:
+      - user_request
+      - autoliquidation
+      - cancel_on_disconnect
+      - risk_mitigation
+      - pme_risk_reduction
+      - pme_account_locked
+      - position_locked
+      - mmp_trigger
+      - mmp_config_curtailment
+      - edit_post_only_reject
+      - oco_other_closed
+      - oto_primary_closed
+      - settlement
+      type: string
+      description: Enumerated reason behind cancel `"user_request"`, `"autoliquidation"`, `"cancel_on_disconnect"`, `"risk_mitigation"`, `"pme_risk_reduction"` (portfolio margining risk reduction), `"pme_account_locked"` (portfolio margining account locked per currency), `"position_locked"`, `"mmp_trigger"` (market maker protection), `"mmp_config_curtailment"` (market maker configured quantity decreased), `"edit_post_only_reject"` (cancelled on edit because of `reject_post_only` setting), `"oco_other_closed"` (the oco order linked to this order was closed), `"oto_primary_closed"` (the oto primary order that was going to trigger this order was cancelled), `"settlement"` (closed because of a settlement)
+    PrivateCancelQuotesResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          type: number
+          example: 3
+          description: Total number of successfully cancelled quotes
+      required:
+      - jsonrpc
+      - result
+      type: object
+    timestamp:
+      example: 1536569522277
+      type: integer
+      description: The timestamp (milliseconds since the Unix epoch)
+    instrument_id:
+      type: integer
+      description: Instrument ID
+    currency:
+      enum:
+      - BTC
+      - ETH
+      - USDC
+      - USDT
+      - EURR
+      type: string
+      description: Currency, i.e `"BTC"`, `"ETH"`, `"USDC"`
+    order:
+      properties:
+        order_id:
+          $ref: '#/components/schemas/order_id'
+        order_state:
+          $ref: '#/components/schemas/order_state'
+        order_type:
+          $ref: '#/components/schemas/order_type'
+        original_order_type:
+          $ref: '#/components/schemas/original_order_type'
+        time_in_force:
+          $ref: '#/components/schemas/time_in_force'
+        is_rebalance:
+          type: boolean
+          description: Optional (only for spot). `true` if order was automatically created during cross-collateral balance restoration
+        is_liquidation:
+          type: boolean
+          description: Optional (not added for spot). `true` if order was automatically created during liquidation
+        instrument_name:
+          $ref: '#/components/schemas/instrument_name'
+        creation_timestamp:
+          $ref: '#/components/schemas/timestamp'
+        last_update_timestamp:
+          $ref: '#/components/schemas/timestamp'
+        direction:
+          $ref: '#/components/schemas/direction'
+        price:
+          $ref: '#/components/schemas/open_order_price'
+        label:
+          $ref: '#/components/schemas/label'
+        post_only:
+          $ref: '#/components/schemas/post_only'
+        reject_post_only:
+          $ref: '#/components/schemas/reject_post_only'
+        reduce_only:
+          $ref: '#/components/schemas/reduce_only'
+        api:
+          $ref: '#/components/schemas/api'
+        web:
+          $ref: '#/components/schemas/web'
+        mobile:
+          $ref: '#/components/schemas/mobile'
+        refresh_amount:
+          $ref: '#/components/schemas/refresh_amount'
+        display_amount:
+          $ref: '#/components/schemas/display_amount'
+        amount:
+          $ref: '#/components/schemas/amount'
+        contracts:
+          $ref: '#/components/schemas/contracts'
+        filled_amount:
+          $ref: '#/components/schemas/filled_amount'
+        average_price:
+          $ref: '#/components/schemas/average_price'
+        advanced:
+          $ref: '#/components/schemas/advanced'
+        implv:
+          $ref: '#/components/schemas/implv'
+        usd:
+          $ref: '#/components/schemas/usd'
+        triggered:
+          $ref: '#/components/schemas/triggered'
+        trigger:
+          $ref: '#/components/schemas/trigger'
+        trigger_price:
+          $ref: '#/components/schemas/trigger_price'
+        trigger_offset:
+          $ref: '#/components/schemas/trigger_offset'
+        trigger_reference_price:
+          $ref: '#/components/schemas/trigger_reference_price'
+        block_trade:
+          $ref: '#/components/schemas/block_trade_order'
+        mmp:
+          type: boolean
+          description: '`true` if the order is a MMP order, otherwise `false`.'
+        risk_reducing:
+          type: boolean
+          description: '`true` if the order is marked by the platform as a risk reducing order (can apply only to orders placed by PM users), otherwise `false`.'
+        replaced:
+          type: boolean
+          description: '`true` if the order was edited (by user or - in case of advanced options orders - by pricing engine), otherwise `false`.'
+        auto_replaced:
+          type: boolean
+          description: Options, advanced orders only - `true` if last modification of the order was performed by the pricing engine, otherwise `false`.
+        quote:
+          type: boolean
+          description: If order is a quote. Present only if true.
+        mmp_group:
+          type: string
+          description: Name of the MMP group supplied in the `private/mass_quote` request. Only present for quote orders.
+        quote_set_id:
+          type: string
+          description: Identifier of the QuoteSet supplied in the `private/mass_quote` request. Only present for quote orders.
+        quote_id:
+          type: string
+          description: The same QuoteID as supplied in the `private/mass_quote` request. Only present for quote orders.
+        trigger_order_id:
+          type: string
+          example: SLIB-370
+          description: Id of the trigger order that created the order (Only for orders that were created by triggered orders).
+        app_name:
+          type: string
+          example: Example Application
+          description: The name of the application that placed the order on behalf of the user (optional).
+        mmp_cancelled:
+          type: boolean
+          example: true
+          description: '`true` if order was cancelled by mmp trigger (optional)'
+        cancel_reason:
+          $ref: '#/components/schemas/cancel_reason'
+        oto_order_ids:
+          type: array
+          items:
+            $ref: '#/components/schemas/order_id'
+            description: Order Id
+          description: The Ids of the orders that will be triggered if the order is filled
+        trigger_fill_condition:
+          $ref: '#/components/schemas/trigger_fill_condition'
+        oco_ref:
+          $ref: '#/components/schemas/oco_ref'
+        primary_order_id:
+          $ref: '#/components/schemas/order_id'
+          description: ID of the order that triggered this order.
+        is_secondary_oto:
+          $ref: '#/components/schemas/is_secondary_oto'
+        is_primary_otoco:
+          type: boolean
+          description: '`true` if the order is an order that can trigger an OCO pair, otherwise not present.'
+      required:
+      - order_id
+      - order_state
+      - order_type
+      - time_in_force
+      - instrument_name
+      - creation_timestamp
+      - last_update_timestamp
+      - direction
+      - price
+      - label
+      - post_only
+      - api
+      type: object
+    amount:
+      type: number
+      description: It represents the requested order size. For perpetual and inverse futures the amount is in USD units. For options and linear futures it is the underlying base currency coin.
+    PrivateMassQuoteResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          type: object
+          properties:
+            orders:
+              type: array
+              items:
+                $ref: '#/components/schemas/order'
+            trades:
+              type: array
+              items:
+                $ref: '#/components/schemas/user_trade'
+            errors_count:
+              type: integer
+              description: 'Number of errors (present when `detailed` : `false`).'
+            pending_requests_count:
+              type: integer
+              description: 'Number of pending quotes (present when `wait_for_response`: `false` and `detailed` : `false`).'
+            pending_requests:
+              type: array
+              items:
+                type: object
+                properties:
+                  instrument_name:
+                    type: string
+                    description: Instrument name.
+                  side:
+                    type: string
+                    description: Quote side - `bid` or `ask`.
+              description: 'List of pending quotes (present when `wait_for_response`: `false` and `detailed` : `true`).'
+            errors:
+              type: array
+              items:
+                type: object
+                properties:
+                  instrument_name:
+                    type: string
+                    description: Instrument name.
+                  side:
+                    type: string
+                    description: Quote side - `bid` or `ask`.
+                  error:
+                    type: object
+                    description: Error data.
+                  code:
+                    type: integer
+                    description: Error code
+                  message:
+                    type: string
+                    description: Error message.
+              description: 'List of errors (present when `detailed` : `true`).'
+      required:
+      - jsonrpc
+      - result
+      type: object
+    index_name_derivative:
+      enum:
+      - btc_usd
+      - eth_usd
+      - btc_usdc
+      - eth_usdc
+      - ada_usdc
+      - algo_usdc
+      - avax_usdc
+      - bch_usdc
+      - bnb_usdc
+      - doge_usdc
+      - dot_usdc
+      - link_usdc
+      - ltc_usdc
+      - near_usdc
+      - paxg_usdc
+      - shib_usdc
+      - sol_usdc
+      - ton_usdc
+      - trx_usdc
+      - trump_usdc
+      - uni_usdc
+      - xrp_usdc
+      - usde_usdc
+      - buidl_usdc
+      - btcdvol_usdc
+      - ethdvol_usdc
+      - btc_usdt
+      - eth_usdt
+      - all
+      type: string
+      description: Index identifier of derivative instrument on the platform
+    direction:
+      enum:
+      - buy
+      - sell
+      type: string
+      description: 'Direction: `buy`, or `sell`'
+    block_trade:
+      properties:
+        id:
+          $ref: '#/components/schemas/block_trade_id'
+        timestamp:
+          $ref: '#/components/schemas/timestamp'
+        trades:
+          type: array
+          items:
+            $ref: '#/components/schemas/user_trade'
+        app_name:
+          type: string
+          example: Example Application
+          description: The name of the application that executed the block trade on behalf of the user (optional).
+        broker_code:
+          type: string
+          example: 2krM7sJsx
+          description: Broker code associated with the broker block trade.
+        broker_name:
+          type: string
+          example: Test Broker
+          description: Name of the broker associated with the block trade.
+      required:
+      - id
+      - timestamp
+      - trades
+      type: object
+    PrivateCancelResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          $ref: '#/components/schemas/order'
+      required:
+      - jsonrpc
+      - result
+      type: object
+    advanced:
+      enum:
+      - usd
+      - implv
+      type: string
+      description: 'advanced type: `"usd"` or `"implv"` (Only for options; field is omitted if not applicable).
+
+        '
+    web:
+      type: boolean
+      description: '`true` if created via Deribit frontend (optional)'
+    PrivateGetMmpStatusResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          type: array
+          items:
+            type: object
+            properties:
+              index_name:
+                $ref: '#/components/schemas/index_name'
+              frozen_until:
+                type: integer
+                description: Timestamp (milliseconds since the UNIX epoch) until the user will be frozen - 0 means that the user is frozen until manual reset.
+              mmp_group:
+                type: string
+                example: MassQuoteBot7
+                description: Triggered mmp group, this parameter is optional (appears only for Mass Quote orders trigger)
+              block_rfq:
+                type: boolean
+                example: false
+                description: If true, indicates that the MMP status is for Block RFQ. Block RFQ MMP status is completely separate from normal order/quote MMP status.
+            required:
+            - index_name
+            - frozen_until
+            - mmp_group
+      required:
+      - jsonrpc
+      - result
+      type: object
+    position_move_trade:
+      properties:
+        source_uid:
+          type: integer
+          description: Trade source uid
+        target_uid:
+          type: integer
+          description: Trade target uid
+        instrument_name:
+          $ref: '#/components/schemas/instrument_name'
+        direction:
+          $ref: '#/components/schemas/direction'
+          description: Trade direction from source perspective
+        price:
+          $ref: '#/components/schemas/price'
+          description: The price of the trade
+        amount:
+          type: number
+          description: Trade amount. For perpetual and inverse futures the amount is in USD units. For options and linear futures it is the underlying base currency coin.
+      required:
+      - instrument_name
+      - direction
+      - price
+      - amount
+      type: object
+    block_trade_signature:
+      example: 1565173369982.1M9tO0Q-.z9n9WyZUU5op9pEz6Jtd2CI71QxQMMsCZAexnIfK9HQRT1pKH3clxeIbY7Bqm-yMcWIoE3IfCDPW5VEdiN-6oS0YkKUyXPD500MUf3ULKhfkmH81EZs
+      type: string
+      description: Signature of block trade<br>It is valid only for 5 minutes around given timestamp
+    instrument_name:
+      example: BTC-PERPETUAL
+      type: string
+      description: Unique instrument identifier
+    PrivateSimulateBlockTradeResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          type: boolean
+          description: '`true` if block trade can be executed, `false` otherwise'
+      required:
+      - jsonrpc
+      - result
+      type: object
+    block_trade_order:
+      example: true
+      type: boolean
+      description: '`true` if order made from block_trade trade, added only in that case.'
+    user_trade:
+      properties:
+        trade_id:
+          $ref: '#/components/schemas/trade_id'
+        trade_seq:
+          $ref: '#/components/schemas/trade_seq'
+        instrument_name:
+          $ref: '#/components/schemas/instrument_name'
+        timestamp:
+          $ref: '#/components/schemas/trade_timestamp'
+        order_type:
+          type: string
+          enum:
+          - limit
+          - market
+          - liquidation
+          description: 'Order type: `"limit`, `"market"`, or `"liquidation"`'
+        advanced:
+          type: string
+          enum:
+          - usd
+          - implv
+          description: 'Advanced type of user order: `"usd"` or `"implv"` (only for options; omitted if not applicable)'
+        order_id:
+          type: string
+          description: Id of the user order (maker or taker), i.e. subscriber's order id that took part in the trade
+        matching_id:
+          type: string
+          description: Always `null`
+        direction:
+          $ref: '#/components/schemas/direction'
+          description: Trade direction of the taker
+        tick_direction:
+          $ref: '#/components/schemas/tick_direction'
+        index_price:
+          type: number
+          description: Index Price at the moment of trade
+        price:
+          $ref: '#/components/schemas/price'
+          description: The price of the trade
+        amount:
+          type: number
+          description: Trade amount. For perpetual and inverse futures the amount is in USD units. For options and linear futures it is the underlying base currency coin.
+        contracts:
+          type: number
+          description: Trade size in contract units (optional, may be absent in historical trades)
+        iv:
+          type: number
+          description: Option implied volatility for the price (Option only)
+        underlying_price:
+          type: number
+          description: Underlying price for implied volatility calculations (Options only)
+        liquidation:
+          type: string
+          enum:
+          - M
+          - T
+          - MT
+          description: 'Optional field (only for trades caused by liquidation): `"M"` when maker side of trade was under liquidation, `"T"` when taker side was under liquidation, `"MT"` when both sides of trade were under liquidation'
+        liquidity:
+          type: string
+          enum:
+          - M
+          - T
+          description: 'Describes what was role of users order: `"M"` when it was maker order, `"T"` when it was taker order'
+        fee:
+          type: number
+          description: User's fee in units of the specified `fee_currency`
+        fee_currency:
+          $ref: '#/components/schemas/currency'
+        label:
+          $ref: '#/components/schemas/label_presentation'
+        state:
+          $ref: '#/components/schemas/order_state_in_user_trade'
+        block_trade_id:
+          $ref: '#/components/schemas/block_trade_id_in_result'
+        block_rfq_id:
+          type: integer
+          description: ID of the Block RFQ - when trade was part of the Block RFQ
+        block_rfq_quote_id:
+          type: integer
+          description: ID of the Block RFQ quote - when trade was part of the Block RFQ
+        reduce_only:
+          type: string
+          description: '`true` if user order is reduce-only'
+        post_only:
+          type: string
+          description: '`true` if user order is post-only'
+        mmp:
+          type: boolean
+          description: '`true` if user order is MMP'
+        risk_reducing:
+          type: boolean
+          description: '`true` if user order is marked by the platform as a risk reducing order (can apply only to orders placed by PM users)'
+        api:
+          type: boolean
+          description: '`true` if user order was created with API'
+        profit_loss:
+          $ref: '#/components/schemas/profit_loss'
+        mark_price:
+          type: number
+          description: Mark Price at the moment of trade
+        legs:
+          type: array
+          description: Optional field containing leg trades if trade is a combo trade (present when querying for **only** combo trades and in `combo_trades` events)
+        combo_id:
+          type: string
+          description: Optional field containing combo instrument name if the trade is a combo trade
+        combo_trade_id:
+          type: number
+          description: Optional field containing combo trade identifier if the trade is a combo trade
+        quote_set_id:
+          type: string
+          description: QuoteSet of the user order (optional, present only for orders placed with `private/mass_quote`)
+        quote_id:
+          type: string
+          description: QuoteID of the user order (optional, present only for orders placed with `private/mass_quote`)
+        trade_allocations:
+          type: array
+          items:
+            type: object
+            properties:
+              user_id:
+                type: integer
+                description: User ID to which part of the trade is allocated. For brokers the User ID is obstructed.
+              amount:
+                type: number
+                description: Amount allocated to this user.
+              fee:
+                type: number
+                description: Fee for the allocated part of the trade.
+              client_info:
+                type: object
+                properties:
+                  client_id:
+                    type: integer
+                    description: ID of a client; available to broker. Represents a group of users under a common name.
+                  client_link_id:
+                    type: integer
+                    description: ID assigned to a single user in a client; available to broker.
+                  name:
+                    type: string
+                    description: Name of the linked user within the client; available to broker.
+                description: Optional client allocation info for brokers.
+            required:
+            - amount
+            - fee
+          description: List of allocations for Block RFQ pre-allocation. Each allocation specifies `user_id`, `amount`, and `fee` for the allocated part of the trade. For broker client allocations, a `client_info` object will be included.
+      required:
+      - trade_id
+      - trade_seq
+      - instrument_name
+      - timestamp
+      - order_id
+      - matching_id
+      - direction
+      - tick_direction
+      - index_price
+      - price
+      - amount
+      - fee
+      - fee_currency
+      - state
+      - mark_price
+      type: object
+    original_order_type:
+      enum:
+      - market
+      - market_limit
+      type: string
+      description: Original order type. Optional field
+    combo_leg:
+      properties:
+        instrument_name:
+          $ref: '#/components/schemas/instrument_name'
+        amount:
+          $ref: '#/components/schemas/combo_leg_amount'
+      type: object
+    average_price:
+      type: number
+      description: Average fill price of the order
+    usd:
+      type: number
+      description: Option price in USD (Only if `advanced="usd"`)
+    PrivateCreateComboResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          $ref: '#/components/schemas/combo'
+      required:
+      - jsonrpc
+      - result
+      type: object
+    implv:
+      type: number
+      description: Implied volatility in percent. (Only if `advanced="implv"`)
+    label_presentation:
+      type: string
+      description: User defined label (presented only when previously set for order by user)
+    simple_order_type:
+      enum:
+      - all
+      - limit
+      - trigger_all
+      - stop
+      - take
+      - trailing_stop
+      type: string
+      description: 'Order type: `"all"`, `"limit"`, `"stop"`, `"take"`, `"trailing_stop"`, `"trailing_take"`'
+    combo_leg_amount:
+      example: -1
+      type: integer
+      description: Size multiplier of a leg. A negative value indicates that the trades on given leg are in opposite direction to the combo trades they originate from
+    tick_direction:
+      enum:
+      - 0
+      - 1
+      - 2
+      - 3
+      type: integer
+      description: Direction of the "tick" (`0` = Plus Tick, `1` = Zero-Plus Tick, `2` = Minus Tick, `3` = Zero-Minus Tick).
+    trigger_price:
+      type: number
+      description: Trigger price (Only for future trigger orders)
+    profit_loss:
+      type: number
+      description: Profit and loss in base currency.
+    reject_post_only:
+      type: boolean
+      description: '`true` if order has `reject_post_only` flag (field is present only when `post_only` is `true`)'
+    oco_ref:
+      type: string
+      description: Unique reference that identifies a one_cancels_others (OCO) pair.
+    trade_timestamp:
+      example: 1517329113791
+      type: integer
+      description: The timestamp of the trade (milliseconds since the UNIX epoch)
+    PrivateVerifyBlockTradeResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          type: object
+          properties:
+            signature:
+              $ref: '#/components/schemas/block_trade_signature'
+          required:
+          - signature
+      required:
+      - jsonrpc
+      - result
+      type: object
+    nonce:
+      example: bF1_gfgcsd
+      type: string
+      description: Nonce
+    mobile:
+      type: boolean
+      description: Optional field with value `true` added only when created with Mobile Application
+    order_id:
+      example: ETH-100234
+      type: string
+      description: Unique order identifier
+    trigger_fill_condition:
+      enum:
+      - first_hit
+      - complete_fill
+      - incremental
+      type: string
+      description: '<p>The fill condition of the linked order (Only for linked order types), default: `first_hit`.</p> <ul> <li>`"first_hit"` - any execution of the primary order will fully cancel/place all secondary orders.</li> <li>`"complete_fill"` - a complete execution (meaning the primary order no longer exists) will cancel/place the secondary orders.</li> <li>`"incremental"` - any fill of the primary order will cause proportional partial cancellation/placement of the secondary order. The amount that will be subtracted/added to the secondary order will be rounded down to the contract size.</li> </ul>'
+    PrivateGetMmpConfigResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          type: array
+          items:
+            type: object
+            properties:
+              index_name:
+                $ref: '#/components/schemas/index_name'
+              interval:
+                type: integer
+                minimum: 0
+                maximum: 3600
+                description: 'The duration of the monitoring window in seconds. For example, an <code>interval</code> of <code>3</code> implies a 3-second window. <br><br>The <code>interval</code> begins after the first trade. <br><br>If a new trade is executed after the <code>interval</code> has ended, a new <code>interval</code> is started, and counters reset. <br><br>If a trade occurs during an already running <code>interval</code>, that <code>interval</code> continues unaffected. <br><br>This mechanism allows the platform to track activity in short, rolling windows to identify potentially risky trading behavior. <br><br>If set to <code>0</code>, MMP is disabled. <br><br>Maximum value: <code>3600</code> seconds (1 hour).'
+              frozen_time:
+                type: integer
+                minimum: 0
+                maximum: 3600
+                description: 'Time in seconds that MMP remains active after being triggered. Once this frozen period has passed, MMP will automatically reset, allowing new orders to be submitted. <br><br>If you want to disable automatic reset, set <code>frozen_time</code> to <code>0</code>. In that case, a manual reset is required using the <code>private/reset_mmp</code> method. <br><br>Manual reset is also possible during the frozen time period. <br><br>Maximum value: <code>3600</code> seconds (1 hour).'
+              id:
+                type: integer
+                format: int64
+                description: Integer identifier for the MMP group (int64). This is the programmatic identifier for the group. Entries without an `mmp_group` name correspond to the orders MMP group (the default group).
+              mmp_group:
+                type: string
+                description: Name of the MMP group. Absent for the orders MMP group (the default group), which has no string name — its entry is identified by the `id` field alone.
+              quantity_limit:
+                type: number
+                description: 'The total traded quantity, measured in units of the base currency (e.g., BTC in <code>BTC-PERPETUAL</code>), within the <code>interval</code>. <br><br>This count is direction-agnostic—a buy followed by a sell counts double. <br><br>Example: Buy <code>10</code> BTC and sell <code>10</code> BTC = <code>20</code> total quantity. <br><br>Applicable to both options and futures. <br><br><strong>Note:</strong> Once this is set, an initial margin will be reserved even without any open positions. Initial Margin due to <code>quantity_limit</code> = <code>quantity_limit</code> * <code>0.03</code> <br><br>Maximum 4 decimal places.'
+              delta_limit:
+                type: number
+                description: 'The maximum allowable net transaction delta change during the <code>interval</code>. <br><br>Expressed in units of base currency. <br><br>The <code>delta_limit</code> is treated as an absolute threshold: e.g., <code>delta_limit: 10</code> → MMP is triggered if net transaction delta exceeds <code>+10</code> or drops below <code>-10</code>. <br><br>Direction matters: buying <code>+5</code> delta and selling <code>−5</code> delta cancels out if within the same <code>interval</code>. <br><br><strong>Note:</strong> Note that we use the net transaction delta instead of delta. Net Transaction Delta = <code>Delta - Mark Price</code>. In the rest of this document, "delta" actually refers to net transaction delta. <br><br>Maximum 4 decimal places.'
+              vega_limit:
+                type: number
+                description: The maximum change in vega exposure allowed within a given <code>interval</code>, measured in absolute terms. <br><br>Expressed in USD, representing the change in sensitivity to implied volatility across executed trades. <br><br>This parameter is primarily relevant for options traders managing risk in volatile markets. <br><br>Similar to <code>delta_limit</code>, the <code>vega_limit</code> is direction-aware and evaluated on a net basis. If the exposure exceeds the set threshold (positively or negatively), MMP will be triggered. <br><br><strong>Notice:</strong> When evaluating Delta and Vega limits for MMP, Deribit uses the greeks at the moment of trade execution. The system does not re-evaluate Delta or Vega using live greeks at the time of MMP checking. <br><br>Maximum 4 decimal places.
+              max_quote_quantity:
+                type: number
+                description: Maximum Quote Quantity (MQQ). MQQ is configured per index but enforced per side, per order book (instrument) — the total combined size of open MMP orders per side per instrument cannot exceed MQQ (specified in base currency). MQQ is used for Initial Margin calculation (3% of MQQ is taken as Initial Margin for MMP orders and quotes). <br><br>**Important Notes:** <br>- **Configured per index, enforced per instrument:** MQQ is configured at the index level (an MMP group is linked to an index). However, the limit is enforced separately per order book (instrument) per side. "Per order book" means per instrument (not per expiry). The limit is NOT the sum across all instruments — each instrument has its own separate MQQ enforcement. <br>- **MQQ limits cumulative size, not order count:** For example, with MQQ of 3 BTC, you can place multiple orders (three orders of 1 BTC each, or one order of 2.5 BTC plus one of 0.5 BTC) as long as the total size per side per instrument does not exceed 3 BTC <br>- **MQQ is separate per MMP group:** Each MMP group has its own independent MQQ configuration. MQQ limits are enforced separately for each MMP group. <br>- **MQQ vs Quantity Limit relationship:** You can set MQQ > `quantity_limit`. This allows quotes to be larger than the quantity limit, and enables MMP to trigger on partial fills of quotes. This decouples the MMP reserved margin from the MMP quantity limit. <br>- **Base currency:** MQQ is specified and enforced in base currency <br>- **Inverse futures:** Size is calculated as Amount / Price to convert to base currency <br>- **Inverse future spreads:** Size is calculated as Amount / IndexPrice <br>- **SM accounts:** MMP orders and quotes on options and option_combos are not supported for SM accounts <br>- **Rejections:** MQQ is enforced for **MMP-enabled orders and quotes**. Quote entries and MMP-enabled orders (i.e., orders with `mmp=true`) are rejected if their individual size is greater than `max_quote_quantity`, or if accepting them would make the total open MMP size per side per instrument exceed `max_quote_quantity`. Non‑MMP orders are not subject to MQQ and may be larger than `max_quote_quantity`. <br>- **Precision:** All MMP configuration values support maximum 4 decimal places <br>- **Latency:** There are no latency benefits from MQQ if you already use mass quotes.
+              block_rfq:
+                type: boolean
+                description: If true, indicates MMP configuration for Block RFQ. Block RFQ MMP settings are completely separate from normal order/quote MMP settings.
+              trade_count_limit:
+                type: integer
+                description: For Block RFQ only. The maximum number of Block RFQ trades allowed in the lookback window. Each RFQ trade counts as +1 towards the limit (not individual legs). Works across all currency pairs.
+            required:
+            - index_name
+            - interval
+            - frozen_time
+      required:
+      - jsonrpc
+      - result
+      type: object
+    time_in_force:
+      enum:
+      - good_til_cancelled
+      - good_til_day
+      - fill_or_kill
+      - immediate_or_cancel
+      type: string
+      description: 'Order time in force: `"good_til_cancelled"`, `"good_til_day"`, `"fill_or_kill"` or `"immediate_or_cancel"`'
+    trade_seq:
+      type: integer
+      description: The sequence number of the trade within instrument
+    index_name:
+      enum:
+      - btc_usd
+      - eth_usd
+      - ada_usdc
+      - algo_usdc
+      - avax_usdc
+      - bch_usdc
+      - bnb_usdc
+      - btc_usdc
+      - btcdvol_usdc
+      - buidl_usdc
+      - doge_usdc
+      - dot_usdc
+      - eurr_usdc
+      - eth_usdc
+      - ethdvol_usdc
+      - link_usdc
+      - ltc_usdc
+      - near_usdc
+      - paxg_usdc
+      - shib_usdc
+      - sol_usdc
+      - steth_usdc
+      - ton_usdc
+      - trump_usdc
+      - trx_usdc
+      - uni_usdc
+      - usde_usdc
+      - usyc_usdc
+      - xrp_usdc
+      - btc_usdt
+      - eth_usdt
+      - eurr_usdt
+      - sol_usdt
+      - steth_usdt
+      - usdc_usdt
+      - usde_usdt
+      - btc_eurr
+      - btc_usde
+      - btc_usyc
+      - eth_btc
+      - eth_eurr
+      - eth_usde
+      - eth_usyc
+      - steth_eth
+      - paxg_btc
+      - drbfix-btc_usdc
+      - drbfix-eth_usdc
+      type: string
+      description: Index identifier, matches (base) cryptocurrency with quote currency
+    PrivateSetMmpConfigResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          type: array
+          items:
+            type: object
+            properties:
+              index_name:
+                $ref: '#/components/schemas/index_name'
+              interval:
+                type: integer
+                minimum: 0
+                maximum: 3600
+                description: 'The duration of the monitoring window in seconds. For example, an <code>interval</code> of <code>3</code> implies a 3-second window. <br><br>The <code>interval</code> begins after the first trade. <br><br>If a new trade is executed after the <code>interval</code> has ended, a new <code>interval</code> is started, and counters reset. <br><br>If a trade occurs during an already running <code>interval</code>, that <code>interval</code> continues unaffected. <br><br>This mechanism allows the platform to track activity in short, rolling windows to identify potentially risky trading behavior. <br><br>If set to <code>0</code>, MMP is disabled. <br><br>Maximum value: <code>3600</code> seconds (1 hour).'
+              frozen_time:
+                type: integer
+                minimum: 0
+                maximum: 3600
+                description: 'Time in seconds that MMP remains active after being triggered. Once this frozen period has passed, MMP will automatically reset, allowing new orders to be submitted. <br><br>If you want to disable automatic reset, set <code>frozen_time</code> to <code>0</code>. In that case, a manual reset is required using the <code>private/reset_mmp</code> method. <br><br>Manual reset is also possible during the frozen time period. <br><br>Maximum value: <code>3600</code> seconds (1 hour).'
+              id:
+                type: integer
+                format: int64
+                description: Integer identifier for the MMP group (int64). This is the programmatic identifier for the group. Entries without an `mmp_group` name correspond to the orders MMP group (the default group).
+              mmp_group:
+                type: string
+                description: Name of the MMP group. Absent for the orders MMP group (the default group), which has no string name — its entry is identified by the `id` field alone.
+              quantity_limit:
+                type: number
+                description: 'The total traded quantity, measured in units of the base currency (e.g., BTC in <code>BTC-PERPETUAL</code>), within the <code>interval</code>. <br><br>This count is direction-agnostic—a buy followed by a sell counts double. <br><br>Example: Buy <code>10</code> BTC and sell <code>10</code> BTC = <code>20</code> total quantity. <br><br>Applicable to both options and futures. <br><br><strong>Note:</strong> Once this is set, an initial margin will be reserved even without any open positions. Initial Margin due to <code>quantity_limit</code> = <code>quantity_limit</code> * <code>0.03</code> <br><br>Maximum 4 decimal places.'
+              delta_limit:
+                type: number
+                description: 'The maximum allowable net transaction delta change during the <code>interval</code>. <br><br>Expressed in units of base currency. <br><br>The <code>delta_limit</code> is treated as an absolute threshold: e.g., <code>delta_limit: 10</code> → MMP is triggered if net transaction delta exceeds <code>+10</code> or drops below <code>-10</code>. <br><br>Direction matters: buying <code>+5</code> delta and selling <code>−5</code> delta cancels out if within the same <code>interval</code>. <br><br><strong>Note:</strong> Note that we use the net transaction delta instead of delta. Net Transaction Delta = <code>Delta - Mark Price</code>. In the rest of this document, "delta" actually refers to net transaction delta. <br><br>Maximum 4 decimal places.'
+              vega_limit:
+                type: number
+                description: The maximum change in vega exposure allowed within a given <code>interval</code>, measured in absolute terms. <br><br>Expressed in USD, representing the change in sensitivity to implied volatility across executed trades. <br><br>This parameter is primarily relevant for options traders managing risk in volatile markets. <br><br>Similar to <code>delta_limit</code>, the <code>vega_limit</code> is direction-aware and evaluated on a net basis. If the exposure exceeds the set threshold (positively or negatively), MMP will be triggered. <br><br><strong>Notice:</strong> When evaluating Delta and Vega limits for MMP, Deribit uses the greeks at the moment of trade execution. The system does not re-evaluate Delta or Vega using live greeks at the time of MMP checking. <br><br>Maximum 4 decimal places.
+              max_quote_quantity:
+                type: number
+                description: Maximum Quote Quantity (MQQ). MQQ is configured per index but enforced per side, per order book (instrument) — the total combined size of open MMP orders per side per instrument cannot exceed MQQ (specified in base currency). MQQ is used for Initial Margin calculation (3% of MQQ is taken as Initial Margin for MMP orders and quotes). <br><br>**Important Notes:** <br>- **Configured per index, enforced per instrument:** MQQ is configured at the index level (an MMP group is linked to an index). However, the limit is enforced separately per order book (instrument) per side. "Per order book" means per instrument (not per expiry). The limit is NOT the sum across all instruments — each instrument has its own separate MQQ enforcement. <br>- **MQQ limits cumulative size, not order count:** For example, with MQQ of 3 BTC, you can place multiple orders (three orders of 1 BTC each, or one order of 2.5 BTC plus one of 0.5 BTC) as long as the total size per side per instrument does not exceed 3 BTC <br>- **MQQ is separate per MMP group:** Each MMP group has its own independent MQQ configuration. MQQ limits are enforced separately for each MMP group. <br>- **MQQ vs Quantity Limit relationship:** You can set MQQ > `quantity_limit`. This allows quotes to be larger than the quantity limit, and enables MMP to trigger on partial fills of quotes. This decouples the MMP reserved margin from the MMP quantity limit. <br>- **Base currency:** MQQ is specified and enforced in base currency <br>- **Inverse futures:** Size is calculated as Amount / Price to convert to base currency <br>- **Inverse future spreads:** Size is calculated as Amount / IndexPrice <br>- **SM accounts:** MMP orders and quotes on options and option_combos are not supported for SM accounts <br>- **Rejections:** MQQ is enforced for **MMP-enabled orders and quotes**. Quote entries and MMP-enabled orders (i.e., orders with `mmp=true`) are rejected if their individual size is greater than `max_quote_quantity`, or if accepting them would make the total open MMP size per side per instrument exceed `max_quote_quantity`. Non‑MMP orders are not subject to MQQ and may be larger than `max_quote_quantity`. <br>- **Precision:** All MMP configuration values support maximum 4 decimal places <br>- **Latency:** There are no latency benefits from MQQ if you already use mass quotes.
+              block_rfq:
+                type: boolean
+                description: If true, indicates MMP configuration for Block RFQ. Block RFQ MMP settings are completely separate from normal order/quote MMP settings.
+              trade_count_limit:
+                type: integer
+                description: For Block RFQ only. The maximum number of Block RFQ trades allowed in the lookback window. Each RFQ trade counts as +1 towards the limit (not individual legs). Works across all currency pairs.
+            required:
+            - index_name
+            - interval
+            - frozen_time
+      required:
+      - jsonrpc
+      - result
+      type: object
+    refresh_amount:
+      type: number
+      description: The initial display amount of iceberg order. Iceberg order display amount will be refreshed to that value after match consuming actual display amount. Absent for other types of orders
+    PrivateEditResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          type: object
+          properties:
+            order:
+              $ref: '#/components/schemas/order'
+            trades:
+              type: array
+              items:
+                $ref: '#/components/schemas/user_trade'
+          required:
+          - order
+          - trades
+      required:
+      - jsonrpc
+      - result
+      type: object
+    combo:
+      properties:
+        id:
+          $ref: '#/components/schemas/combo_id'
+        instrument_id:
+          $ref: '#/components/schemas/instrument_id'
+        state:
+          $ref: '#/components/schemas/combo_state'
+        state_timestamp:
+          $ref: '#/components/schemas/timestamp'
+        creation_timestamp:
+          $ref: '#/components/schemas/timestamp'
+        legs:
+          type: array
+          items:
+            $ref: '#/components/schemas/combo_leg'
+      type: object
+    OkResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          type: string
+          enum:
+          - ok
+          description: Result of method execution. `ok` in case of success
+      required:
+      - jsonrpc
+      - result
+      type: object
+    post_only:
+      type: boolean
+      description: '`true` for post-only orders only'
+    currency_with_any_and_list:
+      oneOf:
+      - type: string
+      - items:
+          type: string
+        type: array
+      description: The currency symbol, list of currency symbols or `"any"` for all
+    label:
+      type: string
+      description: User defined label (up to 64 characters)
+    role:
+      enum:
+      - maker
+      - taker
+      type: string
+      description: 'Trade role of the user: `maker` or `taker`'
+    open_order_price:
+      oneOf:
+      - type: number
+      - enum:
+        - market_price
+        type: string
+      description: Price in base currency or "market_price" in case of open trigger market orders
+    order_state:
+      enum:
+      - open
+      - filled
+      - rejected
+      - cancelled
+      - untriggered
+      - triggered
+      type: string
+      description: 'Order state: `"open"`, `"filled"`, `"rejected"`, `"cancelled"`, `"untriggered"`'
+    triggered:
+      type: boolean
+      description: Whether the trigger order has been triggered
+  responses:
+    PrivatePositionMoveResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PrivatePositionMoveResponse'
+          examples:
+            response:
+              value:
+                jsonrpc: '2.0'
+                id: 3
+                result:
+                - target_uid: 23
+                  source_uid: 3
+                  price: 0.1223
+                  instrument_name: BTC-28JAN22-32500-C
+                  direction: sell
+                  amount: 0.1
+                - target_uid: 23
+                  source_uid: 3
+                  price: 35800
+                  instrument_name: BTC-PERPETUAL
+                  direction: buy
+                  amount: 110
+              description: Response example
+      description: Success response
+    PrivateMassQuoteResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PrivateMassQuoteResponse'
+          examples:
+            response:
+              value:
+                jsonrpc: '2.0'
+                id: 7859
+                result:
+                  errors:
+                  - instrument_name: BTC-PERPETUAL
+                    side: bid
+                    error:
+                      message: price_too_high 43666.4288
+                      code: 10007
+                  orders:
+                  - is_liquidation: false
+                    reduce_only: false
+                    risk_reducing: false
+                    last_update_timestamp: 1703162550180
+                    creation_timestamp: 1703162478689
+                    filled_amount: 0
+                    average_price: 0
+                    order_type: limit
+                    order_state: open
+                    quote: true
+                    quote_set_id: options
+                    quote_id: '1'
+                    post_only: false
+                    replaced: false
+                    mmp_group: default
+                    web: false
+                    mmp: true
+                    api: false
+                    instrument_name: BTC-22DEC23-41600-C
+                    order_id: '6653852'
+                    max_show: 1
+                    time_in_force: good_til_cancelled
+                    price: 0.04
+                    direction: buy
+                    amount: 1
+                    label: ''
+                  - is_liquidation: false
+                    reduce_only: false
+                    risk_reducing: false
+                    last_update_timestamp: 1703162550180
+                    creation_timestamp: 1703162478689
+                    filled_amount: 0
+                    average_price: 0
+                    order_type: limit
+                    order_state: open
+                    quote: true
+                    quote_set_id: options
+                    quote_id: '1'
+                    post_only: false
+                    replaced: false
+                    mmp_group: default
+                    web: false
+                    mmp: true
+                    api: false
+                    instrument_name: BTC-22DEC23-41600-C
+                    order_id: '6653853'
+                    max_show: 1
+                    time_in_force: good_til_cancelled
+                    price: 0.05
+                    direction: sell
+                    amount: 1
+                    label: ''
+                  - is_liquidation: false
+                    reduce_only: false
+                    risk_reducing: false
+                    last_update_timestamp: 1703162550180
+                    creation_timestamp: 1703162478689
+                    filled_amount: 0
+                    average_price: 0
+                    order_type: limit
+                    order_state: open
+                    quote: true
+                    quote_set_id: futures
+                    quote_id: '1'
+                    post_only: false
+                    replaced: false
+                    mmp_group: default
+                    web: false
+                    mmp: true
+                    api: false
+                    instrument_name: BTC-PERPETUAL
+                    order_id: '6653855'
+                    max_show: 10
+                    time_in_force: good_til_cancelled
+                    price: 43800
+                    direction: sell
+                    amount: 10
+                    label: ''
+                  trades: []
+              description: Response example
+      description: Success response
+    OkResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OkResponse'
+          examples:
+            response:
+              value:
+                jsonrpc: '2.0'
+                id: 1569
+                result: ok
+              description: Response example
+      description: Success response
+    PrivateGetMmpConfigResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PrivateGetMmpConfigResponse'
+          examples:
+            response:
+              value:
+                jsonrpc: '2.0'
+                id: 7859
+                result:
+                - index_name: btc_usd
+                  mmp_group: MassQuoteBot7
+                  interval: 60
+                  frozen_time: 0
+                  quantity_limit: 0.5
+                  delta_limit: 0.3
+                  vega_limit: 0.1
+                  max_quote_quantity: 0.4
+              description: Response example
+      description: Success response
+    PrivateCreateComboResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PrivateCreateComboResponse'
+          examples:
+            response:
+              value:
+                jsonrpc: '2.0'
+                id: 6
+                result:
+                  state_timestamp: 1650960943922
+                  state: active
+                  legs:
+                  - instrument_name: BTC-29APR22-37500-C
+                    amount: 1
+                  - instrument_name: BTC-29APR22-37500-P
+                    amount: -1
+                  id: BTC-REV-29APR22-37500
+                  instrument_id: 52
+                  creation_timestamp: 1650960943000
+              description: Response example
+      description: Success response
+    PrivateGetBlockTradeResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PrivateGetBlockTradeResponse'
+          examples:
+            response:
+              value:
+                jsonrpc: '2.0'
+                result:
+                  trades:
+                  - trade_seq: 37
+                    trade_id: '92437'
+                    timestamp: 1565089523719
+                    tick_direction: 3
+                    state: filled
+                    price: 0.0001
+                    order_type: limit
+                    order_id: '343062'
+                    matching_id: null
+                    liquidity: T
+                    iv: 0
+                    instrument_name: BTC-9AUG19-10250-C
+                    index_price: 11738
+                    fee_currency: BTC
+                    fee: 0.00025
+                    direction: sell
+                    block_trade_id: '61'
+                    amount: 10
+                  - trade_seq: 25350
+                    trade_id: '92435'
+                    timestamp: 1565089523719
+                    tick_direction: 3
+                    state: filled
+                    price: 11590
+                    order_type: limit
+                    order_id: '343058'
+                    matching_id: null
+                    liquidity: T
+                    instrument_name: BTC-PERPETUAL
+                    index_price: 11737.98
+                    fee_currency: BTC
+                    fee: 1.64e-06
+                    direction: buy
+                    block_trade_id: '61'
+                    amount: 190
+                  timestamp: 1565089523720
+                  id: '61'
+              description: Response example
+      description: Success response
+    PrivateGetMmpStatusResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PrivateGetMmpStatusResponse'
+          examples:
+            response:
+              value:
+                jsonrpc: '2.0'
+                id: 7851
+                result:
+                - index_name: btc_usd
+                  frozen_until: 1744275841861
+                  mmp_group: MassQuoteBot7
+              description: Response example
+      description: Success response
+    PrivateVerifyBlockTradeResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PrivateVerifyBlockTradeResponse'
+          examples:
+            response:
+              value:
+                jsonrpc: '2.0'
+                result:
+                  signature: 1565172710935.1ESE83qh.g6fbgRd4VWagaJz7xdi2WaV-q-d3J0njoz1jZavuRudZJZif9uH8XdUAx1LHsu0E3e0ZG_xe1UPYlwo41xRVrkWU6OMgygDRafUkEmBuk9iLqjc9rh4
+              description: Response example
+      description: Success response
+    PrivateCancelAllResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PrivateCancelAllResponse'
+          examples:
+            response:
+              value:
+                jsonrpc: '2.0'
+                id: 47
+                result: 4
+              description: Response example
+      description: Success response
+    PrivateSimulateBlockTradeResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PrivateSimulateBlockTradeResponse'
+          examples:
+            response:
+              value:
+                jsonrpc: '2.0'
+                result: true
+              description: Response example
+      description: Success response
+    PrivateEditResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PrivateEditResponse'
+          examples:
+            response:
+              value:
+                jsonrpc: '2.0'
+                id: 9
+                result:
+                  trades: []
+                  order:
+                    web: false
+                    time_in_force: good_til_cancelled
+                    replaced: true
+                    reduce_only: false
+                    price: 50111
+                    post_only: false
+                    order_type: limit
+                    order_state: open
+                    order_id: '94166'
+                    max_show: 150
+                    last_update_timestamp: 1616155550773
+                    label: i_love_deribit
+                    is_rebalance: false
+                    is_liquidation: false
+                    instrument_name: BTC-PERPETUAL
+                    filled_amount: 0
+                    direction: buy
+                    creation_timestamp: 1616155547764
+                    average_price: 0
+                    api: true
+                    amount: 150
+              description: Response example
+      description: Success response
+    PrivateCancelQuotesResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PrivateCancelQuotesResponse'
+      description: Success response
+    PrivateSetMmpConfigResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PrivateSetMmpConfigResponse'
+          examples:
+            response:
+              value:
+                jsonrpc: '2.0'
+                id: 7859
+                method: private/set_mmp_config
+                result:
+                  index_name: btc_usd
+                  mmp_group: MassQuoteBot7
+                  interval: 60
+                  frozen_time: 0
+                  quantity_limit: 3
+                  max_quote_quantity: 2.5
+              description: Response example
+      description: Success response
+    PrivateCancelResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PrivateCancelResponse'
+          examples:
+            response:
+              value:
+                jsonrpc: '2.0'
+                id: 4214
+                result:
+                  triggered: false
+                  trigger: index_price
+                  time_in_force: good_til_cancelled
+                  trigger_price: 144.73
+                  reduce_only: false
+                  price: market_price
+                  post_only: false
+                  order_type: stop_market
+                  order_state: untriggered
+                  order_id: ETH-SLIS-12
+                  max_show: 5
+                  last_update_timestamp: 1550575961291
+                  label: ''
+                  is_rebalance: false
+                  is_liquidation: false
+                  instrument_name: ETH-PERPETUAL
+                  direction: sell
+                  creation_timestamp: 1550575961291
+                  api: false
+                  amount: 5
+              description: Response example
+      description: Success response
+    PrivateBuyAndSellResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PrivateBuyAndSellResponse'
+          examples:
+            response:
+              value:
+                jsonrpc: '2.0'
+                id: 6130
+                result:
+                  trades:
+                  - trade_seq: 1966068
+                    trade_id: ETH-2696097
+                    timestamp: 1590486335742
+                    tick_direction: 0
+                    state: filled
+                    reduce_only: true
+                    price: 202.8
+                    post_only: false
+                    order_type: limit
+                    order_id: ETH-584864807
+                    matching_id: null
+                    mark_price: 202.79
+                    liquidity: T
+                    instrument_name: ETH-PERPETUAL
+                    index_price: 202.86
+                    fee_currency: ETH
+                    fee: 7.766e-05
+                    direction: sell
+                    amount: 21
+                  order:
+                    web: false
+                    time_in_force: good_til_cancelled
+                    replaced: false
+                    reduce_only: true
+                    price: 198.75
+                    post_only: false
+                    order_type: limit
+                    order_state: filled
+                    order_id: ETH-584864807
+                    max_show: 21
+                    last_update_timestamp: 1590486335742
+                    label: ''
+                    is_rebalance: false
+                    is_liquidation: false
+                    instrument_name: ETH-PERPETUAL
+                    filled_amount: 21
+                    direction: sell
+                    creation_timestamp: 1590486335742
+                    average_price: 202.8
+                    api: true
+                    amount: 21
+              description: Response example
+      description: Success response

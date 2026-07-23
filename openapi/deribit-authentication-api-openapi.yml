@@ -1,0 +1,552 @@
+openapi: 3.0.0
+info:
+  title: Deribit Account Management Authentication API
+  version: 2.1.1
+servers:
+- url: https://test.deribit.com/api/v2
+tags:
+- name: Authentication
+paths:
+  /public/auth:
+    get:
+      tags:
+      - Authentication
+      parameters:
+      - name: grant_type
+        in: query
+        schema:
+          type: string
+          enum:
+          - client_credentials
+          - client_signature
+          - refresh_token
+          example: client_credentials
+        required: true
+        description: Method of authentication
+      - name: client_id
+        in: query
+        schema:
+          type: string
+          example: fo7WAPRm4P
+        required: true
+        description: Required for grant type `` `client_credentials` `` and `` `client_signature` ``
+      - name: client_secret
+        in: query
+        schema:
+          type: string
+          example: W0H6FJW4IRPZ1MOQ8FP6KMC5RZDUUKXS
+        required: true
+        description: Required for grant type `` `client_credentials` ``
+      - name: refresh_token
+        in: query
+        schema:
+          type: string
+        required: true
+        description: Required for grant type `` `refresh_token` ``
+      - name: timestamp
+        in: query
+        schema:
+          type: integer
+        required: true
+        description: 'Required for grant type `` `client_signature` ``.
+
+
+          Provides time when request has been generated (milliseconds since the UNIX epoch).
+
+          '
+      - name: signature
+        in: query
+        schema:
+          type: string
+        required: true
+        description: 'Required for grant type `` `client_signature` ``.
+
+
+          It''s a cryptographic signature calculated over provided fields using user **secret key**. The signature should be calculated as an HMAC (Hash-based Message Authentication Code) with `` `SHA256` `` hash algorithm.
+
+          '
+      - name: nonce
+        in: query
+        schema:
+          type: string
+        description: 'Optional for grant type `` `client_signature` ``.
+
+
+          Delivers user generated initialization vector for the server token.
+
+          '
+        required: false
+      - name: data
+        in: query
+        schema:
+          type: string
+        description: 'Optional for grant type `` `client_signature` ``.
+
+
+          Contains any user specific value.
+
+          '
+        required: false
+      - name: state
+        in: query
+        schema:
+          type: string
+        description: Will be passed back in the response.
+        required: false
+      - name: scope
+        in: query
+        schema:
+          type: string
+          example: connection
+        description: 'Describes type of the access for assigned token.
+
+
+
+          **Possible values:**
+
+
+          - `` `connection` ``
+
+          - `` `session:name` ``
+
+          - `` `trade:[read, read_write, none]` ``
+
+          - `` `wallet:[read, read_write, none]` ``
+
+          - `` `account:[read, read_write, none]` ``
+
+          - `` `expires:NUMBER` ``
+
+          - `` `ip:ADDR` ``
+
+
+
+          Details are elucidated in [Access scope](https://docs.deribit.com/articles/access-scope)
+
+          '
+        required: false
+      responses:
+        '200':
+          $ref: '#/components/responses/PublicAuthResponse'
+      requestBody:
+        content:
+          application/json:
+            examples:
+              request:
+                value:
+                  jsonrpc: '2.0'
+                  id: 9929
+                  method: public/auth
+                  params:
+                    grant_type: client_credentials
+                    client_id: fo7WAPRm4P
+                    client_secret: W0H6FJW4IRPZ1MOQ8FP6KMC5RZDUUKXS
+                description: JSON-RPC Request Example
+        description: JSON-RPC request body
+      description: 'Retrieve an OAuth access token, to be used for authentication of ''private'' requests.
+
+
+        **📖 Related Article:** [Authentication](https://docs.deribit.com/articles/authentication)
+
+
+        **Authentication Methods:**
+
+
+        Three methods of authentication are supported:
+
+
+
+        - ``client_credentials`` - Using the client id and client secret that can be found on the API page on the website. This is the simplest method, suitable for server-to-server applications and quick setup.
+
+
+        - ``client_signature`` - Enhanced security method that uses a cryptographic signature instead of sending the client secret directly. You generate an HMAC-SHA256 signature of a string containing a timestamp, a random nonce, and optional data, using your Client Secret as the key. This method requires `` `client_id` ``, `` `timestamp` `` (current time in milliseconds), `` `nonce` ``, `` `signature` ``, and optionally a `` `data` `` field. Deribit verifies the signature instead of requiring the raw secret. Best for enhanced security, asymmetric key pairs, and avoiding secret transmission. See the [Client Signature (WebSocket) guide](https://docs.deribit.com/articles/authentication#client-signature-websocket) for detailed signature calculation instructions.
+
+
+        - ``refresh_token`` - Using a refresh token that was received from an earlier invocation. This allows you to obtain a new access token without re-supplying your Client ID and Client Secret. Best for long-lived sessions, token renewal, and avoiding re-authentication.
+
+
+
+        **Response:**
+
+
+        The response will contain an access token, expiration period (number of seconds that the token is valid) and a refresh token that can be used to get a new set of tokens.
+
+
+        [Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fauth)
+
+
+        '
+      x-mint:
+        metadata:
+          title: public/auth
+          og:title: public/auth
+          keywords:
+          - public/auth
+          - grant_type
+          - client_id
+          - client_secret
+          - refresh_token
+          - timestamp
+          - signature
+          - nonce
+          - data
+          - state
+          - scope
+          - access_token
+          - token_type
+          - expires_in
+          - sid
+          - enabled_features
+          - mandatory_tfa_status
+          - google_login
+        href: /api-reference/authentication/public-auth
+  /public/exchange_token:
+    get:
+      tags:
+      - Authentication
+      parameters:
+      - name: refresh_token
+        in: query
+        schema:
+          type: string
+          example: 1568800656974.1CWcuzUS.MGy49NK4hpTwvR1OYWfpqMEkH4T4oDg4tNIcrM7KdeyxXRcSFqiGzA_D4Cn7mqWocHmlS89FFmUYcmaN2H7lNKKTnhRg5EtrzsFCCiuyN0Wv9y-LbGLV3-Ojv_kbD50FoScQ8BDXS5b_w6Ir1MqEdQ3qFZ3MLcvlPiIgG2BqyJX3ybYnVpIlrVrrdYD1-lkjLcjxOBNJvvUKNUAzkQ
+        required: true
+        description: Refresh token
+      - name: subject_id
+        in: query
+        schema:
+          type: integer
+          example: 10
+        required: true
+        description: New subject id
+      - name: scope
+        in: query
+        schema:
+          type: string
+        required: false
+        description: Optional scope override for the new session. Cannot exceed caller's permissions. Supports `session` scope for direct session creation during token exchange.
+      responses:
+        '200':
+          $ref: '#/components/responses/PublicTokenResponse'
+      requestBody:
+        content:
+          application/json:
+            examples:
+              request:
+                value:
+                  jsonrpc: '2.0'
+                  id: 7619
+                  method: public/exchange_token
+                  params:
+                    refresh_token: 1568800656974.1CWcuzUS.MGy49NK4hpTwvR1OYWfpqMEkH4T4oDg4tNIcrM7KdeyxXRcSFqiGzA_D4Cn7mqWocHmlS89FFmUYcmaN2H7lNKKTnhRg5EtrzsFCCiuyN0Wv9y-LbGLV3-Ojv_kbD50FoScQ8BDXS5b_w6Ir1MqEdQ3qFZ3MLcvlPiIgG2BqyJX3ybYnVpIlrVrrdYD1-lkjLcjxOBNJvvUKNUAzkQ
+                    subject_id: 10
+                description: JSON-RPC Request Example
+        description: JSON-RPC request body
+      description: "Generates a token for a new subject id. This method can be used to switch between subaccounts.\n\n**\U0001F4D6 Related Articles:** \n- [Fork and Exchange Tokens](https://docs.deribit.com/articles/authentication#fork-and-exchange-tokens)\n- [Managing Subaccounts](https://docs.deribit.com/articles/managing-subaccounts-api)\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fexchange_token)\n\n"
+      x-mint:
+        metadata:
+          title: public/exchange_token
+          og:title: public/exchange_token
+          keywords:
+          - public/exchange_token
+          - refresh_token
+          - subject_id
+          - scope
+          - access_token
+          - token_type
+          - expires_in
+          - sid
+        href: /api-reference/authentication/public-exchange_token
+  /public/fork_token:
+    get:
+      tags:
+      - Authentication
+      parameters:
+      - name: refresh_token
+        in: query
+        schema:
+          type: string
+          example: 1568800656974.1CWcuzUS.MGy49NK4hpTwvR1OYWfpqMEkH4T4oDg4tNIcrM7KdeyxXRcSFqiGzA_D4Cn7mqWocHmlS89FFmUYcmaN2H7lNKKTnhRg5EtrzsFCCiuyN0Wv9y-LbGLV3-Ojv_kbD50FoScQ8BDXS5b_w6Ir1MqEdQ3qFZ3MLcvlPiIgG2BqyJX3ybYnVpIlrVrrdYD1-lkjLcjxOBNJvvUKNUAzkQ
+        required: true
+        description: Refresh token
+      - name: session_name
+        in: query
+        schema:
+          type: string
+          example: forked_session_name
+        required: true
+        description: New session name
+      responses:
+        '200':
+          $ref: '#/components/responses/PublicTokenResponse'
+      requestBody:
+        content:
+          application/json:
+            examples:
+              request:
+                value:
+                  jsonrpc: '2.0'
+                  id: 7620
+                  method: public/fork_token
+                  params:
+                    refresh_token: 1568800656974.1CWcuzUS.MGy49NK4hpTwvR1OYWfpqMEkH4T4oDg4tNIcrM7KdeyxXRcSFqiGzA_D4Cn7mqWocHmlS89FFmUYcmaN2H7lNKKTnhRg5EtrzsFCCiuyN0Wv9y-LbGLV3-Ojv_kbD50FoScQ8BDXS5b_w6Ir1MqEdQ3qFZ3MLcvlPiIgG2BqyJX3ybYnVpIlrVrrdYD1-lkjLcjxOBNJvvUKNUAzkQ
+                    session_name: forked_session_name
+                description: JSON-RPC Request Example
+        description: JSON-RPC request body
+      description: 'Generates a token for a new named session. This method can be used only with session scoped tokens.
+
+
+        **📖 More Details:** [Fork and Exchange Tokens](https://docs.deribit.com/articles/authentication#fork-and-exchange-tokens)
+
+
+        [Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Ffork_token)
+
+
+        '
+      x-mint:
+        metadata:
+          title: public/fork_token
+          og:title: public/fork_token
+          keywords:
+          - public/fork_token
+          - refresh_token
+          - session_name
+          - access_token
+          - token_type
+          - expires_in
+          - scope
+          - sid
+        href: /api-reference/authentication/public-fork_token
+  /private/logout:
+    get:
+      tags:
+      - Authentication
+      parameters:
+      - name: invalidate_token
+        in: query
+        required: false
+        schema:
+          type: boolean
+        description: '<b>Token Invalidation:</b> By default, all tokens created during the current session are invalidated when you call this method. You can control this behavior using this parameter: <ul><li><b>invalidate_token=true</b> (default): All session tokens are invalidated, requiring re-authentication for new connections</li><li><b>invalidate_token=false</b>: Tokens remain valid, allowing you to reconnect using the same authentication</li></ul>'
+      responses:
+        '200':
+          description: Connection closed
+      requestBody:
+        content:
+          application/json:
+            examples:
+              request:
+                value:
+                  jsonrpc: '2.0'
+                  id: 42
+                  method: private/logout
+                  params:
+                    access_token: 1529453804065.h2QrBgvn.oS36pCOmuK9EX7954lzCSkUioEtTMg7F5ShToM0ZfYlqU05OquXkQIe2_DDEkPhzmoPp1fBp0ycXShR_0jf-SMSXEdVqxLRWuOw-_StG5BMjToiAl27CbHY4P92MPhlMblTOtTImE81-5dFdyDVydpBwmlfKM3OSQ39kulP9bbfw-2jhyegOL0AgqJTY_tj554oHCQFTbq0A0ZWukukmxL2yu6iy34XdzaJB26Igy-3UxGBMwFu53EhjKBweh7xyP2nDm57-wybndJMtSyTGDXH3vjBVclo1iup5yRP
+                    invalidate_token: true
+                description: JSON-RPC Request Example
+        description: JSON-RPC request body
+      description: 'Gracefully terminate the current WebSocket connection and optionally invalidate all tokens associated with the session.
+
+
+        This method provides a clean way to close WebSocket connections while preserving active orders when [**Cancel On Disconnect (COD)**](https://docs.deribit.com/api-reference/session-management/private-enable_cancel_on_disconnect) is enabled.
+
+
+        **Use Cases:**
+
+
+        - **Clean Shutdown:** Properly close WebSocket connections during application shutdown or restart
+
+        - **Order Preservation:** Close connections without triggering order cancellations when COD is enabled
+
+        - **Session Management:** Invalidate tokens to ensure security when closing connections
+
+        - **Maintenance Operations:** Temporarily disconnect for system maintenance without affecting trading positions
+
+
+        **Cancel On Disconnect (COD) Behavior:**
+
+
+        When Cancel On Disconnect is enabled for your connection, this method provides a safe way to close the connection without triggering automatic order cancellations. This is different from other disconnection scenarios:
+
+
+        - **Graceful logout** (this method): Orders are **NOT cancelled**, even if COD is enabled
+
+        - **Unexpected disconnection:** Orders are **cancelled** if COD is enabled
+
+        - **Inactivity timeout:** Orders are **cancelled** if COD is enabled
+
+        - **Heartbeat failure:** Orders are **cancelled** if COD is enabled
+
+
+        This distinction allows you to perform planned disconnections (e.g., for maintenance, updates, or reconnection) while preserving your active orders.
+
+
+        **WebSocket Only:**
+
+
+        This method is designed exclusively for WebSocket connections. Attempting to use it via REST/HTTP will result in a 400 error response.
+
+
+        **Note:** This method has no response. The WebSocket connection is closed immediately after the request is processed.
+
+
+        [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Flogout)
+
+
+        '
+      x-mint:
+        metadata:
+          title: private/logout
+          og:title: private/logout
+          keywords:
+          - private/logout
+          - invalidate_token
+        href: /api-reference/authentication/private-logout
+components:
+  schemas:
+    PublicTokenResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          type: object
+          properties:
+            access_token:
+              type: string
+              example: 843SehgeX5n6XxEU4XbABx4Cny5Akai5iHiJePTsvUw7
+            token_type:
+              type: string
+              enum:
+              - bearer
+              description: Authorization type, allowed value - `bearer`
+            expires_in:
+              type: integer
+              example: 315360000
+              description: Token lifetime in seconds
+            refresh_token:
+              type: string
+              example: 6faf8L36JdaSqsjCEEiwqifPpj6JB18RWwiWHrsGTZ91
+              description: Can be used to request a new token (with a new lifetime)
+            scope:
+              type: string
+              description: Type of the access for assigned token
+            sid:
+              type: string
+              description: Optional Session id
+          required:
+          - access_token
+          - token_type
+          - expires_in
+          - refresh_token
+          - scope
+      required:
+      - jsonrpc
+      - result
+      type: object
+    PublicAuthResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          type: object
+          properties:
+            access_token:
+              type: string
+              example: 843SehgeX5n6XxEU4XbABx4Cny5Akai5iHiJePTsvUw7
+              description: OAuth access token to be used for authentication of 'private' requests
+            token_type:
+              type: string
+              enum:
+              - bearer
+              description: Authorization type, allowed value - `bearer`
+            expires_in:
+              type: integer
+              example: 315360000
+              description: Token lifetime in seconds
+            refresh_token:
+              type: string
+              example: 6faf8L36JdaSqsjCEEiwqifPpj6JB18RWwiWHrsGTZ91
+              description: Can be used to request a new token (with a new lifetime)
+            scope:
+              type: string
+              description: Type of the access for assigned token
+            state:
+              type: string
+              description: Copied from the input (if applicable)
+            sid:
+              type: string
+              description: Optional Session id
+            enabled_features:
+              $ref: '#/components/schemas/api_key_features'
+            mandatory_tfa_status:
+              type: string
+              example: enabled
+              description: 2FA is required for privileged methods
+            google_login:
+              type: boolean
+              description: The access token was acquired by logging in through Google.
+          required:
+          - access_token
+          - token_type
+          - expires_in
+          - refresh_token
+          - scope
+      required:
+      - jsonrpc
+      - result
+      type: object
+    api_key_features:
+      items:
+        type: string
+      type: array
+      description: 'List of enabled advanced on-key features.<br><br><b>Available options:</b><br>- <code>restricted_block_trades</code>: Limit the block_trade read the scope of the API key to block trades that have been made using this specific API key<br>- <code>block_trade_approval</code>: Block trades created using this API key require additional user approval. Methods that use <code>block_rfq</code> scope are not affected by Block Trade approval feature'
+  responses:
+    PublicAuthResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PublicAuthResponse'
+          examples:
+            response:
+              value:
+                jsonrpc: '2.0'
+                id: 9929
+                result:
+                  access_token: 1582628593469.1MbQ-J_4.CBP-OqOwm_FBdMYj4cRK2dMXyHPfBtXGpzLxhWg31nHu3H_Q60FpE5_vqUBEQGSiMrIGzw3nC37NMb9d1tpBNqBOM_Ql9pXOmgtV9Yj3Pq1c6BqC6dU6eTxHMFO67x8GpJxqw_QcKP5IepwGBD-gfKSHfAv9AEnLJkNu3JkMJBdLToY1lrBnuedF3dU_uARm
+                  expires_in: 31536000
+                  refresh_token: 1582628593469.1GP4rQd0.A9Wa78o5kFRIUP49mScaD1CqHgiK50HOl2VA6kCtWa8BQZU5Dr03BhcbXPNvEh3I_MVixKZXnyoBeKJwLl8LXnfo180ckAiPj3zOclcUu4zkXuF3NNP3sTPcDf1B3C1CwMKkJ1NOcf1yPmRbsrd7hbgQ-hLa40tfx6Oa-85ymm_3Z65LZcnCeLrqlj_A9jM
+                  scope: connection mainaccount
+                  enabled_features: []
+                  token_type: bearer
+              description: Response example
+      description: Success response
+    PublicTokenResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PublicTokenResponse'
+          examples:
+            response:
+              value:
+                jsonrpc: '2.0'
+                id: 9929
+                result:
+                  access_token: 1582628593469.1MbQ-J_4.CBP-OqOwm_FBdMYj4cRK2dMXyHPfBtXGpzLxhWg31nHu3H_Q60FpE5_vqUBEQGSiMrIGzw3nC37NMb9d1tpBNqBOM_Ql9pXOmgtV9Yj3Pq1c6BqC6dU6eTxHMFO67x8GpJxqw_QcKP5IepwGBD-gfKSHfAv9AEnLJkNu3JkMJBdLToY1lrBnuedF3dU_uARm
+                  expires_in: 31536000
+                  refresh_token: 1582628593469.1GP4rQd0.A9Wa78o5kFRIUP49mScaD1CqHgiK50HOl2VA6kCtWa8BQZU5Dr03BhcbXPNvEh3I_MVixKZXnyoBeKJwLl8LXnfo180ckAiPj3zOclcUu4zkXuF3NNP3sTPcDf1B3C1CwMKkJ1NOcf1yPmRbsrd7hbgQ-hLa40tfx6Oa-85ymm_3Z65LZcnCeLrqlj_A9jM
+                  scope: session:named_session mainaccount
+                  token_type: bearer
+              description: Response example
+      description: Success response

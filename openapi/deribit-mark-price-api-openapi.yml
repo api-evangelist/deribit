@@ -1,0 +1,117 @@
+openapi: 3.0.0
+info:
+  title: Deribit Account Management Mark Price API
+  version: 2.1.1
+servers:
+- url: https://test.deribit.com/api/v2
+tags:
+- name: Mark Price
+paths:
+  /public/get_mark_price_history:
+    get:
+      parameters:
+      - name: instrument_name
+        required: true
+        in: query
+        schema:
+          $ref: '#/components/schemas/instrument_name'
+        description: Instrument name
+      - name: start_timestamp
+        required: true
+        in: query
+        schema:
+          $ref: '#/components/schemas/timestamp'
+        description: The earliest timestamp to return result from (milliseconds since the UNIX epoch)
+      - name: end_timestamp
+        required: true
+        in: query
+        schema:
+          $ref: '#/components/schemas/timestamp'
+        description: The most recent timestamp to return result from (milliseconds since the UNIX epoch)
+      responses:
+        '200':
+          $ref: '#/components/responses/PublicGetMarkPriceHistoryResponse'
+      tags:
+      - Mark Price
+      requestBody:
+        content:
+          application/json:
+            examples:
+              request:
+                value:
+                  jsonrpc: '2.0'
+                  id: 1
+                  method: public/get_mark_price_history
+                  params:
+                    instrument_name: BTC-25JUN21-50000-C
+                    start_timestamp: 1609376800000
+                    end_timestamp: 1609376810000
+                description: JSON-RPC Request Example
+        description: JSON-RPC request body
+      description: 'Retrieves 5-minute historical mark price data for an instrument. Mark prices are used for margin calculations and position valuations.
+
+
+        **Note:** Currently, mark price history is available only for a subset of options that participate in volatility index calculations. All other instruments, including futures and perpetuals, will return an empty list.
+
+
+        [Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_mark_price_history)
+
+
+        '
+      x-mint:
+        metadata:
+          title: public/get_mark_price_history
+          og:title: public/get_mark_price_history
+          keywords:
+          - public/get_mark_price_history
+          - instrument_name
+          - start_timestamp
+          - end_timestamp
+        href: /api-reference/market-data/public-get_mark_price_history
+components:
+  schemas:
+    timestamp:
+      example: 1536569522277
+      type: integer
+      description: The timestamp (milliseconds since the Unix epoch)
+    instrument_name:
+      example: BTC-PERPETUAL
+      type: string
+      description: Unique instrument identifier
+    PublicGetMarkPriceHistoryResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          type: array
+          description: Markprice history values as an array of arrays with 2 values each. The inner values correspond to the timestamp in ms and the markprice itself.
+      required:
+      - jsonrpc
+      - result
+      type: object
+  responses:
+    PublicGetMarkPriceHistoryResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PublicGetMarkPriceHistoryResponse'
+          examples:
+            response:
+              value:
+                jsonrpc: '2.0'
+                id: 25
+                result:
+                - - 1608142381229
+                  - 0.5165791606037885
+                - - 1608142380231
+                  - 0.5165737855432504
+                - - 1608142379227
+                  - 0.5165768236356326
+              description: Response example
+      description: Success response

@@ -1,0 +1,2832 @@
+openapi: 3.0.0
+info:
+  title: Deribit Account Management Block RFQ API
+  version: 2.1.1
+servers:
+- url: https://test.deribit.com/api/v2
+tags:
+- name: Block RFQ
+paths:
+  /private/get_block_rfqs:
+    get:
+      parameters:
+      - name: count
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 1000
+          minimum: 1
+        description: Count of Block RFQs returned, maximum - `1000`
+      - name: state
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - open
+          - filled
+          - traded
+          - cancelled
+          - expired
+          - closed
+        description: State of Block RFQ
+      - name: role
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - any
+          - taker
+          - maker
+        description: Role of the user in Block RFQ. When the `any` role is selected, the method returns all Block RFQs in which the user has participated, either as the `taker` or as a `maker`
+      - name: continuation
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: The continuation parameter specifies the starting point for fetching historical Block RFQs. When provided, the endpoint returns Block RFQs, starting from the specified ID and continuing backward (e.g., if `continuation` is 50, results will include Block RFQs of ID 49, 48, etc.)
+      - name: block_rfq_id
+        required: false
+        in: query
+        schema:
+          type: integer
+        description: ID of the Block RFQ
+      - in: query
+        name: currency
+        required: false
+        schema:
+          $ref: '#/components/schemas/block_rfq_currency'
+        description: The currency symbol
+      responses:
+        '200':
+          $ref: '#/components/responses/PrivateGetBlockRfqsResponse'
+      tags:
+      - Block RFQ
+      requestBody:
+        content:
+          application/json:
+            examples:
+              request:
+                value:
+                  jsonrpc: '2.0'
+                  id: 1
+                  method: private/get_block_rfqs
+                  params:
+                    count: 20
+                    state: open
+                    role: maker
+                description: JSON-RPC Request Example
+        description: JSON-RPC request body
+      description: 'Returns a list of Block RFQs that were either created by the user or assigned to them as a maker, sorted in descending order.
+
+
+        `trades` and `mark_price` are only visible for the filled Block RFQ. When a `block_rfq_id` is specified, only that particular Block RFQ will be returned. If called by a `taker`, response will additionally include `makers` list and `label` if previously provided. If called by the `maker`, the `trades` will include the maker''s alias, but only for trades in which this maker participated. Can be optionally filtered by currency.
+
+
+        Use [private/get_block_rfq_quotes](https://docs.deribit.com/api-reference/block-rfq/private-get_block_rfq_quotes) to retrieve quotes for Block RFQs.
+
+
+        **📖 Related Article:** [Deribit Block RFQ API walkthrough](https://docs.deribit.com/articles/block-rfq-api-walkthrough)
+
+
+        **Scope:** `block_rfq:read`
+
+
+        [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_block_rfqs)
+
+
+        '
+      x-mint:
+        metadata:
+          title: private/get_block_rfqs
+          og:title: private/get_block_rfqs
+          keywords:
+          - private/get_block_rfqs
+          - count
+          - state
+          - role
+          - continuation
+          - block_rfq_id
+          - currency
+          - block_rfqs
+          - creation_timestamp
+          - expiration_timestamp
+          - taker_rating
+          - makers
+          - amount
+          - min_trade_amount
+          - asks
+          - bids
+          - legs
+          - hedge
+          - combo_id
+          - label
+          - app_name
+          - mark_price
+          - disclosed
+          - taker
+          - index_prices
+          - included_in_taker_rating
+          - trades
+          - trade_trigger
+          - trade_allocations
+          - price
+          - last_update_timestamp
+          - execution_instruction
+          - expires_at
+          - ratio
+          - instrument_name
+          - direction
+          - maker
+          - hedge_amount
+          - cancel_reason
+          - user_id
+          - client_info
+          - client_id
+          - client_link_id
+          - name
+        href: /api-reference/block-rfq/private-get_block_rfqs
+  /private/create_block_rfq:
+    get:
+      parameters:
+      - in: query
+        name: legs
+        required: true
+        schema:
+          type: array
+          items:
+            type: object
+            properties:
+              instrument_name:
+                $ref: '#/components/schemas/instrument_name'
+                description: Instrument name
+              amount:
+                $ref: '#/components/schemas/amount'
+                description: It represents the requested trade size. For perpetual and inverse futures the amount is in USD units. For options and linear futures it is the underlying base currency coin.
+              direction:
+                $ref: '#/components/schemas/direction'
+                description: Direction of selected leg
+        description: List of legs used to create Block RFQ
+        style: form
+        explode: true
+      - name: trade_allocations
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            type: object
+            properties:
+              user_id:
+                type: integer
+                description: User ID (subaccount or main account) to allocate part of the RFQ amount.
+              client_info:
+                type: object
+                properties:
+                  client_id:
+                    type: integer
+                    description: ID of a client; available to broker. Represents a group of users under a common name.
+                  client_link_id:
+                    type: integer
+                    description: ID assigned to a single user in a client; available to broker.
+                description: Client allocation info for brokers.
+              amount:
+                type: number
+                description: Amount allocated to this user or client.
+        description: List of allocations for Block RFQ pre-allocation. Allows to split amount between different (sub)accounts or broker clients. Each allocation must specify either `user_id` (for direct allocation) or `client_info` object (for broker allocation), and amount.
+        style: form
+        explode: true
+      - in: query
+        name: hedge
+        required: false
+        schema:
+          type: string
+          description: 'JSON string containing: instrument_name, direction, price, amount'
+        description: Hedge leg of the Block RFQ. There is only one hedge leg allowed per Block RFQ
+      - name: label
+        in: query
+        schema:
+          type: string
+        required: false
+        description: User defined label for the Block RFQ (maximum 64 characters)
+      - name: makers
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+        required: false
+        description: List of targeted Block RFQ makers. Only those makers will be notified about created Block RFQ. If the list is empty, all available makers will be targeted.
+        style: form
+        explode: true
+      - name: disclosed
+        in: query
+        required: false
+        schema:
+          type: boolean
+        description: Determines whether the RFQ is non-anonymous, revealing both taker and maker aliases. It can be set to `false` (anonymous mode) only when at least 5 makers are targeted. Default value is `true`.
+      responses:
+        '200':
+          $ref: '#/components/responses/PrivateCreateBlockRfqResponse'
+      tags:
+      - Block RFQ
+      requestBody:
+        content:
+          application/json:
+            examples:
+              request:
+                value:
+                  jsonrpc: '2.0'
+                  id: 1
+                  method: private/create_block_rfq
+                  params:
+                    legs:
+                    - instrument_name: BTC-15NOV24
+                      amount: 20000
+                      direction: sell
+                    hedge:
+                      amount: 10
+                      direction: buy
+                      price: 70000
+                      instrument_name: BTC-PERPETUAL
+                    label: example
+                    makers:
+                    - MAKER1
+                description: JSON-RPC Request Example
+        description: JSON-RPC request body
+      description: '**Taker method**
+
+
+        Creates a new Block RFQ. Use [private/get_block_rfqs](https://docs.deribit.com/api-reference/block-rfq/private-get_block_rfqs) to retrieve Block RFQ information.
+
+
+        **Block RFQ pre-allocation:** The taker can split the total amount between different (sub)accounts using the `trade_allocations` parameter. The taker can also allocate to himself. Each allocation must specify either `user_id` (for direct allocation) or `client_info` object (for broker allocation), and `amount`.
+
+
+        **📖 Related Article:** [Deribit Block RFQ API walkthrough](https://docs.deribit.com/articles/block-rfq-api-walkthrough)
+
+
+        **Scope:** `block_rfq:read_write`
+
+
+        [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fcreate_block_rfq)
+
+
+        '
+      x-mint:
+        metadata:
+          title: private/create_block_rfq
+          og:title: private/create_block_rfq
+          keywords:
+          - private/create_block_rfq
+          - legs
+          - trade_allocations
+          - hedge
+          - label
+          - makers
+          - disclosed
+          - creation_timestamp
+          - expiration_timestamp
+          - block_rfq_id
+          - role
+          - state
+          - taker_rating
+          - amount
+          - min_trade_amount
+          - asks
+          - bids
+          - combo_id
+          - app_name
+          - mark_price
+          - taker
+          - index_prices
+          - included_in_taker_rating
+          - trades
+          - trade_trigger
+          - price
+          - last_update_timestamp
+          - execution_instruction
+          - expires_at
+          - ratio
+          - instrument_name
+          - direction
+          - maker
+          - hedge_amount
+          - cancel_reason
+          - user_id
+          - client_info
+          - client_id
+          - client_link_id
+          - name
+        href: /api-reference/block-rfq/private-create_block_rfq
+  /private/cancel_block_rfq:
+    get:
+      parameters:
+      - name: block_rfq_id
+        required: true
+        in: query
+        schema:
+          type: integer
+        description: ID of the Block RFQ
+      responses:
+        '200':
+          $ref: '#/components/responses/PrivateCancelBlockRfqResponse'
+      tags:
+      - Block RFQ
+      requestBody:
+        content:
+          application/json:
+            examples:
+              request:
+                value:
+                  jsonrpc: '2.0'
+                  id: 1
+                  method: private/cancel_block_rfq
+                  params:
+                    block_rfq_id: 366
+                description: JSON-RPC Request Example
+        description: JSON-RPC request body
+      description: '**Taker method**
+
+
+        Cancels a Block RFQ using the specified `block_rfq_id`.
+
+
+        Use [private/get_block_rfqs](https://docs.deribit.com/api-reference/block-rfq/private-get_block_rfqs) to retrieve Block RFQ information, or [private/create_block_rfq](https://docs.deribit.com/api-reference/block-rfq/private-create_block_rfq) to create a new Block RFQ.
+
+
+        **📖 Related Article:** [Deribit Block RFQ API walkthrough](https://docs.deribit.com/articles/block-rfq-api-walkthrough)
+
+
+        **Scope:** `block_rfq:read_write`
+
+
+        [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fcancel_block_rfq)
+
+
+        '
+      x-mint:
+        metadata:
+          title: private/cancel_block_rfq
+          og:title: private/cancel_block_rfq
+          keywords:
+          - private/cancel_block_rfq
+          - block_rfq_id
+          - creation_timestamp
+          - expiration_timestamp
+          - role
+          - state
+          - taker_rating
+          - makers
+          - amount
+          - min_trade_amount
+          - asks
+          - bids
+          - legs
+          - hedge
+          - combo_id
+          - label
+          - app_name
+          - mark_price
+          - disclosed
+          - taker
+          - index_prices
+          - included_in_taker_rating
+          - trades
+          - trade_trigger
+          - trade_allocations
+          - price
+          - last_update_timestamp
+          - execution_instruction
+          - expires_at
+          - ratio
+          - instrument_name
+          - direction
+          - maker
+          - hedge_amount
+          - cancel_reason
+          - user_id
+          - client_info
+          - client_id
+          - client_link_id
+          - name
+        href: /api-reference/block-rfq/private-cancel_block_rfq
+  /private/accept_block_rfq:
+    get:
+      parameters:
+      - name: block_rfq_id
+        required: true
+        in: query
+        schema:
+          type: integer
+        description: ID of the Block RFQ
+      - in: query
+        name: price
+        required: true
+        schema:
+          type: number
+        description: Maximum acceptable price for execution
+      - in: query
+        name: amount
+        required: true
+        schema:
+          $ref: '#/components/schemas/amount'
+        description: This value multiplied by the ratio of a leg gives trade size on that leg.
+      - in: query
+        name: direction
+        required: true
+        schema:
+          $ref: '#/components/schemas/direction'
+        description: Direction of the trade from the taker perspective
+      - in: query
+        name: hedge
+        required: false
+        schema:
+          type: string
+          description: 'JSON string containing: instrument_name, direction, price, amount'
+        description: Hedge leg of the Block RFQ. There is only one hedge leg allowed per Block RFQ
+      - in: query
+        name: legs
+        required: true
+        schema:
+          type: array
+          items:
+            type: object
+            properties:
+              instrument_name:
+                $ref: '#/components/schemas/instrument_name'
+                description: Instrument name
+              direction:
+                $ref: '#/components/schemas/direction'
+                description: Direction of selected leg. Must match the direction of the corresponding leg in the Block RFQ
+              ratio:
+                type: integer
+                description: Ratio of amount between legs
+        description: List of legs used to trade Block RFQ
+        style: form
+        explode: true
+      - name: time_in_force
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - fill_or_kill
+          - good_til_cancelled
+          example: fill_or_kill
+        description: Specifies how long the order should remain active
+      responses:
+        '200':
+          $ref: '#/components/responses/PrivateAcceptBlockRfqResponse'
+      tags:
+      - Block RFQ
+      requestBody:
+        content:
+          application/json:
+            examples:
+              request:
+                value:
+                  jsonrpc: '2.0'
+                  id: 1
+                  method: private/accept_block_rfq
+                  params:
+                    block_rfq_id: 1
+                    legs:
+                    - instrument_name: BTC-8NOV24-70000-C
+                      ratio: 1
+                      direction: buy
+                    - instrument_name: BTC-8NOV24-72000-C
+                      ratio: 1
+                      direction: sell
+                    price: 0.01
+                    direction: buy
+                    amount: 100
+                    time_in_force: fill_or_kill
+                description: JSON-RPC Request Example
+        description: JSON-RPC request body
+      description: '**Taker method**
+
+
+        Allows Block RFQ taker to accept a quote by sending a single crossing price. The order can be either filled immediately (`fill_or_kill`) or remain active until cancelled (`good_til_cancelled`).
+
+
+        **Note:** After Block RFQ creation, a grace period of 5 seconds begins, during which the taker cannot see quotes or trade the Block RFQ.
+
+
+        Use [private/get_block_rfqs](https://docs.deribit.com/api-reference/block-rfq/private-get_block_rfqs) to retrieve Block RFQ information, or [private/cancel_block_rfq](https://docs.deribit.com/api-reference/block-rfq/private-cancel_block_rfq) to cancel a Block RFQ.
+
+
+        **📖 Related Article:** [Deribit Block RFQ API walkthrough](https://docs.deribit.com/articles/block-rfq-api-walkthrough)
+
+
+        **Scope:** `block_rfq:read_write`
+
+
+        [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Faccept_block_rfq)
+
+
+        '
+      x-mint:
+        metadata:
+          title: private/accept_block_rfq
+          og:title: private/accept_block_rfq
+          keywords:
+          - private/accept_block_rfq
+          - block_rfq_id
+          - price
+          - amount
+          - direction
+          - hedge
+          - legs
+          - time_in_force
+          - trade_trigger
+          - block_trades
+          - state
+          - timestamp
+          - trades
+          - app_name
+          - broker_code
+          - broker_name
+          - trade_id
+          - trade_seq
+          - instrument_name
+          - order_type
+          - advanced
+          - order_id
+          - matching_id
+          - tick_direction
+          - index_price
+          - contracts
+          - iv
+          - underlying_price
+          - liquidation
+          - liquidity
+          - fee
+          - fee_currency
+          - label
+          - block_trade_id
+          - block_rfq_quote_id
+          - reduce_only
+          - post_only
+          - mmp
+          - risk_reducing
+          - api
+          - profit_loss
+          - mark_price
+          - combo_id
+          - combo_trade_id
+          - quote_set_id
+          - quote_id
+          - trade_allocations
+          - user_id
+          - client_info
+          - client_id
+          - client_link_id
+          - name
+        href: /api-reference/block-rfq/private-accept_block_rfq
+  /private/cancel_block_rfq_trigger:
+    get:
+      parameters:
+      - name: block_rfq_id
+        required: true
+        in: query
+        schema:
+          type: integer
+        description: ID of the Block RFQ
+      responses:
+        '200':
+          $ref: '#/components/responses/PrivateCancelBlockRfqTriggerResponse'
+      tags:
+      - Block RFQ
+      requestBody:
+        content:
+          application/json:
+            examples:
+              request:
+                value:
+                  jsonrpc: '2.0'
+                  id: 1
+                  method: private/cancel_block_rfq_trigger
+                  params:
+                    block_rfq_id: 123
+                description: JSON-RPC Request Example
+        description: JSON-RPC request body
+      description: '**Taker method**
+
+
+        Allows Block RFQ taker to cancel an active trigger for a Block RFQ. The response includes the full Block RFQ object with the trade trigger state set to cancelled.
+
+
+        Use [private/get_block_rfqs](https://docs.deribit.com/api-reference/block-rfq/private-get_block_rfqs) to retrieve Block RFQ information.
+
+
+        **📖 Related Article:** [Deribit Block RFQ API walkthrough](https://docs.deribit.com/articles/block-rfq-api-walkthrough)
+
+
+        **Scope:** `block_rfq:read_write`
+
+
+        [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fcancel_block_rfq_trigger)
+
+
+        '
+      x-mint:
+        metadata:
+          title: private/cancel_block_rfq_trigger
+          og:title: private/cancel_block_rfq_trigger
+          keywords:
+          - private/cancel_block_rfq_trigger
+          - block_rfq_id
+          - creation_timestamp
+          - expiration_timestamp
+          - role
+          - state
+          - taker_rating
+          - makers
+          - amount
+          - min_trade_amount
+          - asks
+          - bids
+          - legs
+          - hedge
+          - combo_id
+          - label
+          - app_name
+          - mark_price
+          - disclosed
+          - taker
+          - index_prices
+          - included_in_taker_rating
+          - trades
+          - trade_trigger
+          - trade_allocations
+          - price
+          - last_update_timestamp
+          - execution_instruction
+          - expires_at
+          - ratio
+          - instrument_name
+          - direction
+          - maker
+          - hedge_amount
+          - cancel_reason
+          - user_id
+          - client_info
+          - client_id
+          - client_link_id
+          - name
+        href: /api-reference/block-rfq/private-cancel_block_rfq_trigger
+  /private/get_block_rfq_quotes:
+    get:
+      parameters:
+      - name: block_rfq_id
+        required: false
+        in: query
+        schema:
+          type: integer
+        description: ID of the Block RFQ
+      - name: label
+        in: query
+        schema:
+          type: string
+        required: false
+        description: User defined label for the Block RFQ quote (maximum 64 characters). Used to identify quotes of a selected Block RFQ
+      - name: block_rfq_quote_id
+        required: false
+        in: query
+        schema:
+          type: integer
+        description: ID of the Block RFQ quote
+      responses:
+        '200':
+          $ref: '#/components/responses/PrivateGetBlockRfqQuotesResponse'
+      tags:
+      - Block RFQ
+      requestBody:
+        content:
+          application/json:
+            examples:
+              request:
+                value:
+                  jsonrpc: '2.0'
+                  id: 1
+                  method: private/get_block_rfq_quotes
+                  params:
+                    block_rfq_id: 1
+                description: JSON-RPC Request Example
+        description: JSON-RPC request body
+      description: '**Maker method**
+
+
+        Retrieves all open quotes for Block RFQs. When a `block_rfq_id` is specified, only the open quotes for that particular Block RFQ will be returned. When a `label` is specified, all quotes with this label are returned. `block_rfq_quote_id` returns one specific quote.
+
+
+        Use [private/add_block_rfq_quote](https://docs.deribit.com/api-reference/block-rfq/private-add_block_rfq_quote) to add quotes, or [private/get_block_rfqs](https://docs.deribit.com/api-reference/block-rfq/private-get_block_rfqs) to retrieve Block RFQ information.
+
+
+        **📖 Related Article:** [Deribit Block RFQ API walkthrough](https://docs.deribit.com/articles/block-rfq-api-walkthrough)
+
+
+        **Scope:** `block_rfq:read`
+
+
+        [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_block_rfq_quotes)
+
+
+        '
+      x-mint:
+        metadata:
+          title: private/get_block_rfq_quotes
+          og:title: private/get_block_rfq_quotes
+          keywords:
+          - private/get_block_rfq_quotes
+          - block_rfq_id
+          - label
+          - block_rfq_quote_id
+          - creation_timestamp
+          - last_update_timestamp
+          - quote_state
+          - execution_instruction
+          - price
+          - amount
+          - direction
+          - filled_amount
+          - legs
+          - hedge
+          - replaced
+          - app_name
+          - quote_state_reason
+          - ratio
+          - instrument_name
+        href: /api-reference/block-rfq/private-get_block_rfq_quotes
+  /private/add_block_rfq_quote:
+    get:
+      parameters:
+      - name: label
+        in: query
+        schema:
+          type: string
+        required: false
+        description: User defined label for the Block RFQ quote (maximum 64 characters). Used to identify quotes of a selected Block RFQ
+      - name: block_rfq_id
+        required: true
+        in: query
+        schema:
+          type: integer
+        description: ID of the Block RFQ
+      - in: query
+        name: amount
+        required: true
+        schema:
+          $ref: '#/components/schemas/amount'
+        description: This value multiplied by the ratio of a leg gives trade size on that leg.
+      - in: query
+        name: direction
+        required: true
+        schema:
+          $ref: '#/components/schemas/direction'
+        description: Direction of trade from the maker perspective
+      - in: query
+        name: legs
+        required: true
+        schema:
+          type: array
+          items:
+            type: object
+            properties:
+              instrument_name:
+                $ref: '#/components/schemas/instrument_name'
+                description: Instrument name
+              price:
+                type: number
+                description: Price for trade
+              ratio:
+                type: integer
+                description: Ratio of amount between legs
+              direction:
+                $ref: '#/components/schemas/direction'
+                description: Direction of selected leg. Must match the direction of the corresponding leg in the Block RFQ
+        description: List of legs used for Block RFQ quote
+        style: form
+        explode: true
+      - in: query
+        name: hedge
+        required: false
+        schema:
+          type: string
+          description: 'JSON string containing: instrument_name, direction, price, amount'
+        description: Hedge leg of the Block RFQ. There is only one hedge leg allowed per Block RFQ
+      - name: execution_instruction
+        required: false
+        in: query
+        schema:
+          type: string
+          enum:
+          - all_or_none
+          - any_part_of
+        description: <p>Execution instruction of the quote. Default - `any_part_of`</p> <ul> <li>`"all_or_none (AON)"` - The quote can only be filled entirely or not at all, ensuring that its amount matches the amount specified in the Block RFQ. Additionally, 'all_or_none' quotes have priority over 'any_part_of' quotes at the same price level.</li> <li>`"any_part_of (APO)"` - The quote can be filled either partially or fully, with the filled amount potentially being less than the Block RFQ amount.</li> </ul>
+      - in: query
+        name: price
+        required: false
+        schema:
+          type: number
+        description: Aggregated price used for quoting future spreads.
+      - name: expires_at
+        required: false
+        in: query
+        schema:
+          type: integer
+          example: 1745312540321
+        description: The timestamp when the quote expires (milliseconds since the Unix epoch)
+      responses:
+        '200':
+          $ref: '#/components/responses/PrivateAddBlockRfqQuoteResponse'
+      tags:
+      - Block RFQ
+      requestBody:
+        content:
+          application/json:
+            examples:
+              request:
+                value:
+                  jsonrpc: '2.0'
+                  id: 1
+                  method: private/add_block_rfq_quote
+                  params:
+                    label: example_quote
+                    block_rfq_id: 3
+                    amount: 10000
+                    direction: buy
+                    legs:
+                    - instrument_name: BTC-15NOV24
+                      price: 69600
+                      ratio: '1'
+                      direction: buy
+                    hedge:
+                      amount: 10
+                      direction: buy
+                      price: 70000
+                      instrument_name: BTC-PERPETUAL
+                    execution_instruction: any_part_of
+                    expires_at: 1745312540321
+                description: JSON-RPC Request Example
+        description: JSON-RPC request body
+      description: '**Maker method**
+
+
+        Adds a quote to an existing Block RFQ. To calculate individual leg prices, use [private/get_leg_prices](https://docs.deribit.com/api-reference/combo-books/private-get_leg_prices).
+
+
+        Use [private/get_block_rfqs](https://docs.deribit.com/api-reference/block-rfq/private-get_block_rfqs) to retrieve Block RFQ information, or [private/edit_block_rfq_quote](https://docs.deribit.com/api-reference/block-rfq/private-edit_block_rfq_quote) to modify an existing quote.
+
+
+        **📖 Related Article:** [Deribit Block RFQ API walkthrough](https://docs.deribit.com/articles/block-rfq-api-walkthrough)
+
+
+        **Scope:** `block_rfq:read_write`
+
+
+        [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fadd_block_rfq_quote)
+
+
+        '
+      x-mint:
+        metadata:
+          title: private/add_block_rfq_quote
+          og:title: private/add_block_rfq_quote
+          keywords:
+          - private/add_block_rfq_quote
+          - label
+          - block_rfq_id
+          - amount
+          - direction
+          - legs
+          - hedge
+          - execution_instruction
+          - price
+          - expires_at
+          - creation_timestamp
+          - last_update_timestamp
+          - block_rfq_quote_id
+          - quote_state
+          - filled_amount
+          - replaced
+          - app_name
+          - quote_state_reason
+          - ratio
+          - instrument_name
+        href: /api-reference/block-rfq/private-add_block_rfq_quote
+  /private/edit_block_rfq_quote:
+    get:
+      parameters:
+      - in: query
+        name: legs
+        required: true
+        schema:
+          type: array
+          items:
+            type: object
+            properties:
+              instrument_name:
+                $ref: '#/components/schemas/instrument_name'
+                description: Instrument name
+              price:
+                type: number
+                description: Price for trade
+              ratio:
+                type: integer
+                description: Ratio of amount between legs
+              direction:
+                $ref: '#/components/schemas/direction'
+                description: Direction of selected leg. Must match the direction of the corresponding leg in the Block RFQ
+        description: List of legs used for Block RFQ quote
+        style: form
+        explode: true
+      - in: query
+        name: amount
+        required: true
+        schema:
+          $ref: '#/components/schemas/amount'
+        description: This value multiplied by the ratio of a leg gives trade size on that leg.
+      - name: block_rfq_quote_id
+        required: false
+        in: query
+        schema:
+          type: integer
+        description: ID of the Block RFQ quote
+      - name: label
+        in: query
+        schema:
+          type: string
+        required: false
+        description: User defined label for the Block RFQ quote (maximum 64 characters). Used to identify quotes of a selected Block RFQ
+      - in: query
+        name: hedge
+        required: false
+        schema:
+          type: string
+          description: 'JSON string containing: instrument_name, direction, price, amount'
+        description: Hedge leg of the Block RFQ. There is only one hedge leg allowed per Block RFQ
+      - name: block_rfq_id
+        required: false
+        in: query
+        schema:
+          type: integer
+        description: ID of the Block RFQ
+      - in: query
+        name: price
+        required: false
+        schema:
+          type: number
+        description: Aggregated price used for quoting future spreads.
+      responses:
+        '200':
+          $ref: '#/components/responses/PrivateEditBlockRfqQuoteResponse'
+      tags:
+      - Block RFQ
+      requestBody:
+        content:
+          application/json:
+            examples:
+              request:
+                value:
+                  jsonrpc: '2.0'
+                  id: 1
+                  method: private/edit_block_rfq_quote
+                  params:
+                    label: example_quote
+                    block_rfq_id: 3
+                    amount: 20000
+                    direction: buy
+                    legs:
+                    - instrument_name: BTC-15NOV24
+                      price: 74600
+                      ratio: '1'
+                      direction: buy
+                    hedge:
+                      amount: 10
+                      direction: buy
+                      price: 70000
+                      instrument_name: BTC-PERPETUAL
+                    execution_instruction: any_part_of
+                description: JSON-RPC Request Example
+        description: JSON-RPC request body
+      description: '**Maker method**
+
+
+        Edits a Block RFQ quote using the specified `block_rfq_quote_id`. Alternatively, you can use a combination of `block_rfq_id` and `label` to edit the quote.
+
+
+        Use [private/add_block_rfq_quote](https://docs.deribit.com/api-reference/block-rfq/private-add_block_rfq_quote) to add new quotes, or [private/cancel_block_rfq_quote](https://docs.deribit.com/api-reference/block-rfq/private-cancel_block_rfq_quote) to cancel quotes.
+
+
+        **📖 Related Article:** [Deribit Block RFQ API walkthrough](https://docs.deribit.com/articles/block-rfq-api-walkthrough)
+
+
+        **Scope:** `block_rfq:read_write`
+
+
+        [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fedit_block_rfq_quote)
+
+
+        '
+      x-mint:
+        metadata:
+          title: private/edit_block_rfq_quote
+          og:title: private/edit_block_rfq_quote
+          keywords:
+          - private/edit_block_rfq_quote
+          - legs
+          - amount
+          - block_rfq_quote_id
+          - label
+          - hedge
+          - block_rfq_id
+          - price
+          - creation_timestamp
+          - last_update_timestamp
+          - quote_state
+          - execution_instruction
+          - direction
+          - filled_amount
+          - replaced
+          - app_name
+          - quote_state_reason
+          - ratio
+          - instrument_name
+        href: /api-reference/block-rfq/private-edit_block_rfq_quote
+  /private/cancel_block_rfq_quote:
+    get:
+      parameters:
+      - name: block_rfq_quote_id
+        required: false
+        in: query
+        schema:
+          type: integer
+        description: ID of the Block RFQ quote
+      - name: label
+        in: query
+        schema:
+          type: string
+        required: false
+        description: User defined label for the Block RFQ quote (maximum 64 characters). Used to identify quotes of a selected Block RFQ
+      - name: block_rfq_id
+        required: false
+        in: query
+        schema:
+          type: integer
+        description: ID of the Block RFQ
+      responses:
+        '200':
+          $ref: '#/components/responses/PrivateCancelBlockRfqQuoteResponse'
+      tags:
+      - Block RFQ
+      requestBody:
+        content:
+          application/json:
+            examples:
+              request:
+                value:
+                  jsonrpc: '2.0'
+                  id: 1
+                  method: private/cancel_block_rfq_quote
+                  params:
+                    label: example_quote
+                    block_rfq_id: 3
+                description: JSON-RPC Request Example
+        description: JSON-RPC request body
+      description: '**Maker method**
+
+
+        Cancels a single Block RFQ quote. You can identify the quote to cancel using either:
+
+
+        - `block_rfq_quote_id` - the unique ID of the quote
+
+        - `block_rfq_id` + `label` - the Block RFQ ID and the quote label
+
+
+        **Note:** Mass cancellation by label is not supported. This method cancels only one quote at a time. To cancel all quotes, use [private/cancel_all_block_rfq_quotes](https://docs.deribit.com/api-reference/block-rfq/private-cancel_all_block_rfq_quotes).
+
+
+        **📖 Related Article:** [Deribit Block RFQ API walkthrough](https://docs.deribit.com/articles/block-rfq-api-walkthrough)
+
+
+        **Scope:** `block_rfq:read_write`
+
+
+        [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fcancel_block_rfq_quote)
+
+
+        '
+      x-mint:
+        metadata:
+          title: private/cancel_block_rfq_quote
+          og:title: private/cancel_block_rfq_quote
+          keywords:
+          - private/cancel_block_rfq_quote
+          - block_rfq_quote_id
+          - label
+          - block_rfq_id
+          - creation_timestamp
+          - last_update_timestamp
+          - quote_state
+          - execution_instruction
+          - price
+          - amount
+          - direction
+          - filled_amount
+          - legs
+          - hedge
+          - replaced
+          - app_name
+          - quote_state_reason
+          - ratio
+          - instrument_name
+        href: /api-reference/block-rfq/private-cancel_block_rfq_quote
+  /private/cancel_all_block_rfq_quotes:
+    get:
+      parameters:
+      - name: block_rfq_id
+        required: false
+        in: query
+        schema:
+          type: integer
+        description: ID of the Block RFQ
+      - name: detailed
+        required: false
+        in: query
+        schema:
+          type: boolean
+        description: 'When `detailed` is set to `true`, the output format is changed to include a list of all cancelled orders.
+
+
+          **📖 Related Article:** [Detailed Response for Cancel Methods](https://docs.deribit.com/articles/json-rpc-overview#detailed-response-for-cancel-methods)
+
+
+          Default: `false`
+
+          '
+      responses:
+        '200':
+          $ref: '#/components/responses/PrivateCancelAllBlockRfqQuotesResponse'
+      tags:
+      - Block RFQ
+      requestBody:
+        content:
+          application/json:
+            examples:
+              request:
+                value:
+                  jsonrpc: '2.0'
+                  id: 24
+                  method: private/cancel_all_block_rfq_quotes
+                  params:
+                    block_rfq_id: 154
+                description: JSON-RPC Request Example
+        description: JSON-RPC request body
+      description: '**Maker method**
+
+
+        Cancels all user quotes in all Block RFQs. Optionally cancels all quotes in a specific RFQ if the `block_rfq_id` is provided.
+
+
+        **Note:** Mass cancellation by label is not supported. This method will cancel all quotes regardless of their labels. To cancel a single quote, use [private/cancel_block_rfq_quote](https://docs.deribit.com/api-reference/block-rfq/private-cancel_block_rfq_quote).
+
+
+        **📖 Related Article:** [Deribit Block RFQ API walkthrough](https://docs.deribit.com/articles/block-rfq-api-walkthrough)
+
+
+        **Scope:** `block_rfq:read_write`
+
+
+        [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fcancel_all_block_rfq_quotes)
+
+
+        '
+      x-mint:
+        metadata:
+          title: private/cancel_all_block_rfq_quotes
+          og:title: private/cancel_all_block_rfq_quotes
+          keywords:
+          - private/cancel_all_block_rfq_quotes
+          - block_rfq_id
+          - detailed
+        href: /api-reference/block-rfq/private-cancel_all_block_rfq_quotes
+  /private/get_block_rfq_makers:
+    get:
+      responses:
+        '200':
+          $ref: '#/components/responses/PrivateGetBlockRfqMakersResponse'
+      tags:
+      - Block RFQ
+      requestBody:
+        content:
+          application/json:
+            examples:
+              request:
+                value:
+                  jsonrpc: '2.0'
+                  id: 1
+                  method: private/get_block_rfq_makers
+                  params: {}
+                description: JSON-RPC Request Example
+        description: JSON-RPC request body
+      description: 'Returns a list of all available Block RFQ makers. This method takes no parameters.
+
+
+        Use this method to retrieve the list of makers that can be specified when creating a Block RFQ with [private/create_block_rfq](https://docs.deribit.com/api-reference/block-rfq/private-create_block_rfq).
+
+
+        **📖 Related Article:** [Deribit Block RFQ API walkthrough](https://docs.deribit.com/articles/block-rfq-api-walkthrough)
+
+
+        **Scope:** `block_rfq:read`
+
+
+        [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_block_rfq_makers)
+
+
+        '
+      x-mint:
+        metadata:
+          title: private/get_block_rfq_makers
+          og:title: private/get_block_rfq_makers
+          keywords:
+          - private/get_block_rfq_makers
+        href: /api-reference/block-rfq/private-get_block_rfq_makers
+  /public/get_block_rfq_trades:
+    get:
+      parameters:
+      - name: currency
+        required: true
+        in: query
+        schema:
+          $ref: '#/components/schemas/currency_with_any'
+        description: The currency symbol or `"any"` for all
+      - name: continuation
+        in: query
+        required: false
+        schema:
+          type: string
+          example: 1738050297271:103
+        description: Continuation token for pagination. Consists of `timestamp` and `block_rfq_id`.
+      - name: count
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 1000
+          minimum: 1
+        description: Count of Block RFQs returned, maximum - `1000`
+      responses:
+        '200':
+          $ref: '#/components/responses/PublicGetBlockRfqTradesResponse'
+      tags:
+      - Block RFQ
+      requestBody:
+        content:
+          application/json:
+            examples:
+              request:
+                value:
+                  jsonrpc: '2.0'
+                  id: 1
+                  method: public/get_block_rfq_trades
+                  params:
+                    currency: BTC
+                description: JSON-RPC Request Example
+        description: JSON-RPC request body
+      description: 'Returns a list of recent Block RFQ trades. Can be optionally filtered by currency.
+
+
+        This is a public method that provides market data about completed Block RFQ trades. For private Block RFQ information, use [private/get_block_rfqs](https://docs.deribit.com/api-reference/block-rfq/private-get_block_rfqs).
+
+
+        **📖 Related Article:** [Deribit Block RFQ API walkthrough](https://docs.deribit.com/articles/block-rfq-api-walkthrough)
+
+
+        [Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_block_rfq_trades)
+
+
+        '
+      x-mint:
+        metadata:
+          title: public/get_block_rfq_trades
+          og:title: public/get_block_rfq_trades
+          keywords:
+          - public/get_block_rfq_trades
+          - currency
+          - continuation
+          - count
+          - block_rfqs
+          - timestamp
+          - direction
+          - amount
+          - mark_price
+          - legs
+          - combo_id
+          - hedge
+          - index_prices
+          - trades
+          - ratio
+          - instrument_name
+          - price
+          - hedge_amount
+        href: /api-reference/block-rfq/public-get_block_rfq_trades
+  /private/get_block_rfq_user_info:
+    get:
+      parameters: []
+      responses:
+        '200':
+          $ref: '#/components/responses/PrivateGetBlockRfqUserInfoResponse'
+      tags:
+      - Block RFQ
+      requestBody:
+        content:
+          application/json:
+            examples:
+              request:
+                value:
+                  jsonrpc: '2.0'
+                  id: 1
+                  method: private/get_block_rfq_user_info
+                  params: {}
+                description: JSON-RPC Request Example
+        description: JSON-RPC request body
+      description: 'Returns identity and rating information for the requesting account and its subaccounts. Includes both group-level and individual user-level alias data, if available.
+
+
+        This information is useful for understanding your Block RFQ maker identity and rating when participating in Block RFQ trades.
+
+
+        **📖 Related Article:** [Deribit Block RFQ API walkthrough](https://docs.deribit.com/articles/block-rfq-api-walkthrough)
+
+
+        **Scope:** `block_rfq:read`
+
+
+        [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_block_rfq_user_info)
+
+
+        '
+      x-mint:
+        metadata:
+          title: private/get_block_rfq_user_info
+          og:title: private/get_block_rfq_user_info
+          keywords:
+          - private/get_block_rfq_user_info
+          - parent
+          - users
+          - identity
+          - is_maker
+          - user_id
+          - taker_rating
+        href: /api-reference/block-rfq/private-get_block_rfq_user_info
+components:
+  schemas:
+    quote_bids:
+      items:
+        properties:
+          makers:
+            type: array
+            items:
+              type: string
+              description: Maker of the quote
+          price:
+            type: number
+            description: Price of a quote
+          last_update_timestamp:
+            type: integer
+            example: 1536569522277
+            description: Timestamp of the last update of the quote (milliseconds since the UNIX epoch)
+          execution_instruction:
+            type: string
+            enum:
+            - any_part_of
+            - all_or_none
+            description: 'Execution instruction of the quote. Default - `any_part_of`
+
+
+              - `"all_or_none (AON)"` - The quote can only be filled entirely or not at all, ensuring that its amount matches the amount specified in the Block RFQ. Additionally, ''all_or_none'' quotes have priority over ''any_part_of'' quotes at the same price level.
+
+              - `"any_part_of (APO)"` - The quote can be filled either partially or fully, with the filled amount potentially being less than the Block RFQ amount.'
+          amount:
+            type: number
+            description: This value multiplied by the ratio of a leg gives trade size on that leg.
+          expires_at:
+            type: integer
+            example: 1745312540321
+            description: The timestamp when the quote expires (milliseconds since the Unix epoch), equal to the earliest expiry of placed quotes
+        type: object
+      type: array
+    block_trade_id_in_result:
+      example: '154'
+      type: string
+      description: Block trade id - when trade was part of a block trade
+    order_state_in_user_trade:
+      enum:
+      - open
+      - filled
+      - rejected
+      - cancelled
+      - untriggered
+      - archive
+      type: string
+      description: 'Order state: `"open"`, `"filled"`, `"rejected"`, `"cancelled"`, `"untriggered"` or `"archive"` (if order was archived)'
+    PrivateGetBlockRfqUserInfoResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          type: object
+          properties:
+            parent:
+              type: object
+              properties:
+                identity:
+                  type: string
+                  description: Group-level alias identifying the account group as a whole.
+                is_maker:
+                  type: boolean
+                  description: Indicates whether the Parent Identity has maker scope.
+              description: Parent Identity (group alias), representing the overall account group (main + subaccounts).
+            users:
+              type: array
+              items:
+                type: object
+                properties:
+                  user_id:
+                    $ref: '#/components/schemas/user_id'
+                  taker_rating:
+                    type: number
+                    description: Taker rating associated with this account, if available.
+                  identity:
+                    type: string
+                    description: Specific alias identifying this account individually.
+                  is_maker:
+                    type: boolean
+                    description: Indicates whether this account has maker scope.
+      required:
+      - jsonrpc
+      - result
+      type: object
+    continuation:
+      example: xY7T6cutS3t2B9YtaDkE6TS379oKnkzTvmEDUnEUP2Msa9xKWNNaT
+      type: string
+      description: Continuation token for pagination.
+    mark_price:
+      type: number
+      description: The mark price for the instrument
+    trade_id:
+      type: string
+      description: Unique (per currency) trade identifier
+    block_rfq_trade_tape_continuation:
+      example: 1738050297271:103
+      type: string
+      description: Continuation token for pagination. `NULL` when no continuation. Consists of `timestamp` and `block_rfq_id`.
+    PrivateAddBlockRfqQuoteResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          $ref: '#/components/schemas/block_rfq_quote'
+      required:
+      - jsonrpc
+      - result
+      type: object
+    trade_trigger_state:
+      enum:
+      - triggered
+      - untriggered
+      - cancelled
+      type: string
+      description: 'Trade trigger state: `"untriggered"` or `"cancelled"`'
+    timestamp:
+      example: 1536569522277
+      type: integer
+      description: The timestamp (milliseconds since the Unix epoch)
+    label_presentation:
+      type: string
+      description: User defined label (presented only when previously set for order by user)
+    trade_allocations:
+      items:
+        properties:
+          user_id:
+            type: integer
+            description: User ID to allocate part of the RFQ amount. For brokers the User ID is obstructed.
+          client_info:
+            type: object
+            properties:
+              client_id:
+                type: integer
+                description: ID of a client; available to broker. Represents a group of users under a common name.
+              client_link_id:
+                type: integer
+                description: ID assigned to a single user in a client; available to broker.
+              name:
+                type: string
+                description: Name of the linked user within the client; available to broker.
+            description: Client allocation info for brokers.
+          amount:
+            type: number
+            description: Amount allocated to this user or client.
+        type: object
+      type: array
+      description: List of allocations for Block RFQ pre-allocation. Allows to split amount between different (sub)accounts or broker clients. Each allocation must specify either `user_id` (for direct allocation) or `client_info` object (for broker allocation), and amount. Visible only to the taker.
+    block_rfq:
+      properties:
+        creation_timestamp:
+          type: integer
+          example: 1536569522277
+          description: The timestamp when Block RFQ was created (milliseconds since the Unix epoch)
+        expiration_timestamp:
+          type: integer
+          example: 1536569522277
+          description: The timestamp when the Block RFQ will expire (milliseconds since the UNIX epoch)
+        block_rfq_id:
+          type: integer
+          description: ID of the Block RFQ
+        role:
+          type: string
+          enum:
+          - taker
+          - maker
+          description: Role of the user in Block RFQ
+        state:
+          type: string
+          enum:
+          - open
+          - filled
+          - cancelled
+          - expired
+          description: State of the Block RFQ
+        taker_rating:
+          type: string
+          description: Rating of the taker
+        makers:
+          type: array
+          items:
+            type: string
+            description: List of targeted Block RFQ makers
+        amount:
+          type: number
+          description: This value multiplied by the ratio of a leg gives trade size on that leg.
+        min_trade_amount:
+          type: number
+          description: Minimum amount for trading
+        asks:
+          $ref: '#/components/schemas/quote_asks'
+        bids:
+          $ref: '#/components/schemas/quote_bids'
+        legs:
+          $ref: '#/components/schemas/block_rfq_legs'
+        hedge:
+          $ref: '#/components/schemas/block_rfq_hedge_leg'
+        combo_id:
+          $ref: '#/components/schemas/combo_id'
+        label:
+          type: string
+          description: User defined label for the Block RFQ (maximum 64 characters)
+        app_name:
+          type: string
+          example: Example Application
+          description: The name of the application that created the Block RFQ on behalf of the user (optional, visible only to taker).
+        mark_price:
+          $ref: '#/components/schemas/mark_price'
+        disclosed:
+          type: boolean
+          description: Indicates whether the RFQ was created as non-anonymous, meaning taker and maker aliases are visible to counterparties.
+        taker:
+          type: string
+          example: TAKER1
+          description: Taker alias. Present only when `disclosed` is `true`.
+        index_prices:
+          type: array
+          items:
+            type: number
+            description: A list of index prices for the underlying instrument(s) at the time of trade execution.
+        included_in_taker_rating:
+          type: boolean
+          description: Indicates whether the RFQ is included in the taker's rating calculation. Present only for closed RFQs created by the requesting taker.
+        trades:
+          type: array
+          items:
+            type: object
+            properties:
+              direction:
+                $ref: '#/components/schemas/direction'
+              price:
+                $ref: '#/components/schemas/price'
+              amount:
+                type: number
+                description: Trade amount. For options, linear futures, linear perpetuals and spots the amount is denominated in the underlying base currency coin. The inverse perpetuals and inverse futures are denominated in USD units.
+              maker:
+                type: string
+                description: Alias of the maker (optional)
+              hedge_amount:
+                type: number
+                description: Amount of the hedge leg. For linear futures, linear perpetuals and spots the amount is denominated in the underlying base currency coin. The inverse perpetuals and inverse futures are denominated in USD units.
+        trade_trigger:
+          $ref: '#/components/schemas/trade_trigger'
+          description: 'Present only if a trade trigger was placed by the taker and only visible to taker. Only for cases: `cancelled` (contains the reason for cancellation) and `untriggered` (contains the information about the trade trigger).'
+        trade_allocations:
+          $ref: '#/components/schemas/trade_allocations'
+          description: List of allocations for Block RFQ pre-allocation. Allows to split amount between different (sub)accounts. The taker can also allocate to himself. Visible only to the taker.
+      type: object
+    block_rfq_legs:
+      items:
+        properties:
+          ratio:
+            type: integer
+            description: Ratio of amount between legs
+          instrument_name:
+            type: string
+            example: BTC-PERPETUAL
+            description: Unique instrument identifier
+          direction:
+            type: string
+            enum:
+            - buy
+            - sell
+            description: 'Direction: `buy`, or `sell`'
+        type: object
+      type: array
+    replaced_quote:
+      type: boolean
+      description: '`true` if the quote was edited, otherwise `false`.'
+    PrivateCreateBlockRfqResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          $ref: '#/components/schemas/block_rfq'
+      required:
+      - jsonrpc
+      - result
+      type: object
+    combo_id:
+      example: BTC-FS-31DEC21-PERP
+      type: string
+      description: Unique combo identifier
+    block_trade_id:
+      example: '154'
+      type: string
+      description: Block trade id
+    tick_direction:
+      enum:
+      - 0
+      - 1
+      - 2
+      - 3
+      type: integer
+      description: Direction of the "tick" (`0` = Plus Tick, `1` = Zero-Plus Tick, `2` = Minus Tick, `3` = Zero-Minus Tick).
+    profit_loss:
+      type: number
+      description: Profit and loss in base currency.
+    currency:
+      enum:
+      - BTC
+      - ETH
+      - USDC
+      - USDT
+      - EURR
+      type: string
+      description: Currency, i.e `"BTC"`, `"ETH"`, `"USDC"`
+    PrivateCancelBlockRfqResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          $ref: '#/components/schemas/block_rfq'
+      required:
+      - jsonrpc
+      - result
+      type: object
+    block_rfq_hedge_leg:
+      properties:
+        amount:
+          type: integer
+          description: It represents the requested hedge leg size. For perpetual and inverse futures the amount is in USD units. For options and linear futures it is the underlying base currency coin.
+        instrument_name:
+          type: string
+          example: BTC-PERPETUAL
+          description: Unique instrument identifier
+        direction:
+          type: string
+          enum:
+          - buy
+          - sell
+          description: 'Direction: `buy`, or `sell`'
+        price:
+          type: number
+          description: Price for a hedge leg
+      type: object
+    PublicGetBlockRfqTradesResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          properties:
+            block_rfqs:
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    description: ID of the Block RFQ
+                  timestamp:
+                    $ref: '#/components/schemas/trade_timestamp'
+                  direction:
+                    $ref: '#/components/schemas/direction'
+                    description: Trade direction of the taker
+                  amount:
+                    type: number
+                    description: This value multiplied by the ratio of a leg gives trade size on that leg.
+                  mark_price:
+                    type: number
+                    description: Mark Price at the moment of trade
+                  legs:
+                    $ref: '#/components/schemas/leg_structure'
+                  combo_id:
+                    $ref: '#/components/schemas/combo_id'
+                  hedge:
+                    $ref: '#/components/schemas/block_rfq_hedge_leg'
+                  index_prices:
+                    type: object
+                    description: A map of index prices for the underlying instrument(s) at the time of trade execution, where keys are price index names and values are prices.
+                  trades:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        direction:
+                          $ref: '#/components/schemas/direction'
+                        price:
+                          $ref: '#/components/schemas/price'
+                        amount:
+                          type: number
+                          description: Trade amount. For options, linear futures, linear perpetuals and spots the amount is denominated in the underlying base currency coin. The inverse perpetuals and inverse futures are denominated in USD units.
+                        hedge_amount:
+                          type: number
+                          description: Amount of the hedge leg. For linear futures, linear perpetuals and spots the amount is denominated in the underlying base currency coin. The inverse perpetuals and inverse futures are denominated in USD units.
+            continuation:
+              $ref: '#/components/schemas/block_rfq_trade_tape_continuation'
+          type: object
+      required:
+      - jsonrpc
+      - result
+      type: object
+    amount:
+      type: number
+      description: It represents the requested order size. For perpetual and inverse futures the amount is in USD units. For options and linear futures it is the underlying base currency coin.
+    block_rfq_quote:
+      properties:
+        creation_timestamp:
+          type: integer
+          example: 1536569522277
+          description: The timestamp when quote was created (milliseconds since the Unix epoch)
+        last_update_timestamp:
+          type: integer
+          example: 1536569522277
+          description: Timestamp of the last update of the quote (milliseconds since the UNIX epoch)
+        block_rfq_id:
+          type: integer
+          description: ID of the Block RFQ
+        block_rfq_quote_id:
+          type: integer
+          description: ID of the Block RFQ quote
+        quote_state:
+          type: string
+          description: State of the quote
+        execution_instruction:
+          type: string
+          enum:
+          - any_part_of
+          - all_or_none
+          description: 'Execution instruction of the quote. Default - `any_part_of`
+
+
+            - `"all_or_none (AON)"` - The quote can only be filled entirely or not at all, ensuring that its amount matches the amount specified in the Block RFQ. Additionally, ''all_or_none'' quotes have priority over ''any_part_of'' quotes at the same price level.
+
+            - `"any_part_of (APO)"` - The quote can be filled either partially or fully, with the filled amount potentially being less than the Block RFQ amount.'
+        price:
+          type: number
+          description: Price of a quote
+        amount:
+          type: number
+          description: This value multiplied by the ratio of a leg gives trade size on that leg.
+        direction:
+          $ref: '#/components/schemas/quote_direction'
+        filled_amount:
+          $ref: '#/components/schemas/filled_amount_quote'
+        legs:
+          $ref: '#/components/schemas/leg_structure'
+        hedge:
+          $ref: '#/components/schemas/block_rfq_hedge_leg'
+        replaced:
+          $ref: '#/components/schemas/replaced_quote'
+        label:
+          type: string
+          description: User defined label for the quote (maximum 64 characters)
+        app_name:
+          type: string
+          example: Example Application
+          description: The name of the application that placed the quote on behalf of the user (optional).
+        quote_state_reason:
+          type: string
+          description: Reason of quote cancellation
+      type: object
+    filled_amount_quote:
+      type: number
+      description: Filled amount of the quote. For perpetual and futures the filled_amount is in USD units, for options - in units or corresponding cryptocurrency contracts, e.g., BTC or ETH.
+    PrivateAcceptBlockRfqResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          type: object
+          properties:
+            trade_trigger:
+              type: object
+              properties:
+                state:
+                  type: string
+                  enum:
+                  - untriggered
+                price:
+                  type: number
+                direction:
+                  type: string
+                  enum:
+                  - buy
+                  - sell
+            block_trades:
+              type: array
+              items:
+                $ref: '#/components/schemas/block_trade'
+          required:
+          - trade_trigger
+          - block_trades
+      required:
+      - jsonrpc
+      - result
+      type: object
+    PrivateCancelBlockRfqQuoteResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          $ref: '#/components/schemas/block_rfq_quote'
+      required:
+      - jsonrpc
+      - result
+      type: object
+    user_id:
+      example: 57874
+      type: integer
+      description: Unique user identifier
+    direction:
+      enum:
+      - buy
+      - sell
+      type: string
+      description: 'Direction: `buy`, or `sell`'
+    trade_timestamp:
+      example: 1517329113791
+      type: integer
+      description: The timestamp of the trade (milliseconds since the UNIX epoch)
+    block_rfq_currency:
+      enum:
+      - BTC
+      - ETH
+      - USDC
+      - USDT
+      - any
+      type: string
+      description: Currency, i.e `"BTC"`, `"ETH"`, `"USDC"`
+    currency_with_any:
+      enum:
+      - BTC
+      - ETH
+      - USDC
+      - USDT
+      - EURR
+      - any
+      type: string
+      description: Currency name or `"any"` if don't care
+    leg_structure:
+      items:
+        properties:
+          ratio:
+            type: integer
+            description: Ratio of amount between legs
+          instrument_name:
+            type: string
+            example: BTC-PERPETUAL
+            description: Unique instrument identifier
+          direction:
+            type: string
+            enum:
+            - buy
+            - sell
+            description: 'Direction: `buy`, or `sell`'
+          price:
+            type: number
+            description: Price for a leg
+        type: object
+      type: array
+    PrivateEditBlockRfqQuoteResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          $ref: '#/components/schemas/block_rfq_quote'
+      required:
+      - jsonrpc
+      - result
+      type: object
+    block_trade:
+      properties:
+        id:
+          $ref: '#/components/schemas/block_trade_id'
+        timestamp:
+          $ref: '#/components/schemas/timestamp'
+        trades:
+          type: array
+          items:
+            $ref: '#/components/schemas/user_trade'
+        app_name:
+          type: string
+          example: Example Application
+          description: The name of the application that executed the block trade on behalf of the user (optional).
+        broker_code:
+          type: string
+          example: 2krM7sJsx
+          description: Broker code associated with the broker block trade.
+        broker_name:
+          type: string
+          example: Test Broker
+          description: Name of the broker associated with the block trade.
+      required:
+      - id
+      - timestamp
+      - trades
+      type: object
+    PrivateCancelAllBlockRfqQuotesResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          type: number
+          example: 7
+          description: Total number of successfully cancelled quotes
+      required:
+      - jsonrpc
+      - result
+      type: object
+    PrivateGetBlockRfqsResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          properties:
+            block_rfqs:
+              type: array
+              items:
+                $ref: '#/components/schemas/block_rfq'
+            continuation:
+              $ref: '#/components/schemas/continuation'
+          type: object
+      required:
+      - jsonrpc
+      - result
+      type: object
+    PrivateGetBlockRfqMakersResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          type: array
+          description: A list of available makers.
+      required:
+      - jsonrpc
+      - result
+      type: object
+    PrivateCancelBlockRfqTriggerResponse:
+      $ref: '#/components/schemas/block_rfq'
+    quote_direction:
+      enum:
+      - buy
+      - sell
+      type: string
+      description: Direction of trade from the maker perspective
+    price:
+      type: number
+      description: Price in base currency
+    instrument_name:
+      example: BTC-PERPETUAL
+      type: string
+      description: Unique instrument identifier
+    trade_trigger:
+      properties:
+        state:
+          $ref: '#/components/schemas/trade_trigger_state'
+        price:
+          type: number
+          description: Price of the trade trigger
+        direction:
+          type: string
+          enum:
+          - buy
+          - sell
+          description: Direction of the trade trigger
+        cancel_reason:
+          type: string
+          description: Reason for cancellation, present only when state is cancelled
+      required:
+      - state
+      - price
+      - direction
+      type: object
+      description: Contains information about the trade trigger state
+    quote_asks:
+      items:
+        properties:
+          makers:
+            type: array
+            items:
+              type: string
+              description: Maker of the quote
+          price:
+            type: number
+            description: Price of a quote
+          last_update_timestamp:
+            type: integer
+            example: 1536569522277
+            description: Timestamp of the last update of the quote (milliseconds since the UNIX epoch)
+          execution_instruction:
+            type: string
+            enum:
+            - any_part_of
+            - all_or_none
+            description: 'Execution instruction of the quote. Default - `any_part_of`
+
+
+              - `"all_or_none (AON)"` - The quote can only be filled entirely or not at all, ensuring that its amount matches the amount specified in the Block RFQ. Additionally, ''all_or_none'' quotes have priority over ''any_part_of'' quotes at the same price level.
+
+              - `"any_part_of (APO)"` - The quote can be filled either partially or fully, with the filled amount potentially being less than the Block RFQ amount.'
+          amount:
+            type: number
+            description: This value multiplied by the ratio of a leg gives trade size on that leg.
+          expires_at:
+            type: integer
+            example: 1745312540321
+            description: The timestamp when the quote expires (milliseconds since the Unix epoch), equal to the earliest expiry of placed quotes
+        type: object
+      type: array
+    PrivateGetBlockRfqQuotesResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/block_rfq_quote'
+      required:
+      - jsonrpc
+      - result
+      type: object
+    user_trade:
+      properties:
+        trade_id:
+          $ref: '#/components/schemas/trade_id'
+        trade_seq:
+          $ref: '#/components/schemas/trade_seq'
+        instrument_name:
+          $ref: '#/components/schemas/instrument_name'
+        timestamp:
+          $ref: '#/components/schemas/trade_timestamp'
+        order_type:
+          type: string
+          enum:
+          - limit
+          - market
+          - liquidation
+          description: 'Order type: `"limit`, `"market"`, or `"liquidation"`'
+        advanced:
+          type: string
+          enum:
+          - usd
+          - implv
+          description: 'Advanced type of user order: `"usd"` or `"implv"` (only for options; omitted if not applicable)'
+        order_id:
+          type: string
+          description: Id of the user order (maker or taker), i.e. subscriber's order id that took part in the trade
+        matching_id:
+          type: string
+          description: Always `null`
+        direction:
+          $ref: '#/components/schemas/direction'
+          description: Trade direction of the taker
+        tick_direction:
+          $ref: '#/components/schemas/tick_direction'
+        index_price:
+          type: number
+          description: Index Price at the moment of trade
+        price:
+          $ref: '#/components/schemas/price'
+          description: The price of the trade
+        amount:
+          type: number
+          description: Trade amount. For perpetual and inverse futures the amount is in USD units. For options and linear futures it is the underlying base currency coin.
+        contracts:
+          type: number
+          description: Trade size in contract units (optional, may be absent in historical trades)
+        iv:
+          type: number
+          description: Option implied volatility for the price (Option only)
+        underlying_price:
+          type: number
+          description: Underlying price for implied volatility calculations (Options only)
+        liquidation:
+          type: string
+          enum:
+          - M
+          - T
+          - MT
+          description: 'Optional field (only for trades caused by liquidation): `"M"` when maker side of trade was under liquidation, `"T"` when taker side was under liquidation, `"MT"` when both sides of trade were under liquidation'
+        liquidity:
+          type: string
+          enum:
+          - M
+          - T
+          description: 'Describes what was role of users order: `"M"` when it was maker order, `"T"` when it was taker order'
+        fee:
+          type: number
+          description: User's fee in units of the specified `fee_currency`
+        fee_currency:
+          $ref: '#/components/schemas/currency'
+        label:
+          $ref: '#/components/schemas/label_presentation'
+        state:
+          $ref: '#/components/schemas/order_state_in_user_trade'
+        block_trade_id:
+          $ref: '#/components/schemas/block_trade_id_in_result'
+        block_rfq_id:
+          type: integer
+          description: ID of the Block RFQ - when trade was part of the Block RFQ
+        block_rfq_quote_id:
+          type: integer
+          description: ID of the Block RFQ quote - when trade was part of the Block RFQ
+        reduce_only:
+          type: string
+          description: '`true` if user order is reduce-only'
+        post_only:
+          type: string
+          description: '`true` if user order is post-only'
+        mmp:
+          type: boolean
+          description: '`true` if user order is MMP'
+        risk_reducing:
+          type: boolean
+          description: '`true` if user order is marked by the platform as a risk reducing order (can apply only to orders placed by PM users)'
+        api:
+          type: boolean
+          description: '`true` if user order was created with API'
+        profit_loss:
+          $ref: '#/components/schemas/profit_loss'
+        mark_price:
+          type: number
+          description: Mark Price at the moment of trade
+        legs:
+          type: array
+          description: Optional field containing leg trades if trade is a combo trade (present when querying for **only** combo trades and in `combo_trades` events)
+        combo_id:
+          type: string
+          description: Optional field containing combo instrument name if the trade is a combo trade
+        combo_trade_id:
+          type: number
+          description: Optional field containing combo trade identifier if the trade is a combo trade
+        quote_set_id:
+          type: string
+          description: QuoteSet of the user order (optional, present only for orders placed with `private/mass_quote`)
+        quote_id:
+          type: string
+          description: QuoteID of the user order (optional, present only for orders placed with `private/mass_quote`)
+        trade_allocations:
+          type: array
+          items:
+            type: object
+            properties:
+              user_id:
+                type: integer
+                description: User ID to which part of the trade is allocated. For brokers the User ID is obstructed.
+              amount:
+                type: number
+                description: Amount allocated to this user.
+              fee:
+                type: number
+                description: Fee for the allocated part of the trade.
+              client_info:
+                type: object
+                properties:
+                  client_id:
+                    type: integer
+                    description: ID of a client; available to broker. Represents a group of users under a common name.
+                  client_link_id:
+                    type: integer
+                    description: ID assigned to a single user in a client; available to broker.
+                  name:
+                    type: string
+                    description: Name of the linked user within the client; available to broker.
+                description: Optional client allocation info for brokers.
+            required:
+            - amount
+            - fee
+          description: List of allocations for Block RFQ pre-allocation. Each allocation specifies `user_id`, `amount`, and `fee` for the allocated part of the trade. For broker client allocations, a `client_info` object will be included.
+      required:
+      - trade_id
+      - trade_seq
+      - instrument_name
+      - timestamp
+      - order_id
+      - matching_id
+      - direction
+      - tick_direction
+      - index_price
+      - price
+      - amount
+      - fee
+      - fee_currency
+      - state
+      - mark_price
+      type: object
+    trade_seq:
+      type: integer
+      description: The sequence number of the trade within instrument
+  responses:
+    PrivateCancelAllBlockRfqQuotesResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PrivateCancelAllBlockRfqQuotesResponse'
+          examples:
+            response:
+              value:
+                jsonrpc: '2.0'
+                result: 1
+              description: Response example
+      description: Success response
+    PublicGetBlockRfqTradesResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PublicGetBlockRfqTradesResponse'
+          examples:
+            response:
+              value:
+                jsonrpc: '2.0'
+                id: 1
+                result:
+                  continuation: 1739739009234:6570
+                  block_rfqs:
+                  - id: 6611
+                    timestamp: 1739803305362
+                    combo_id: BTC-CS-28FEB25-100000_106000
+                    legs:
+                    - price: 0.1
+                      direction: buy
+                      instrument_name: BTC-28FEB25-100000-C
+                      ratio: 1
+                    - price: 0.05
+                      direction: sell
+                      instrument_name: BTC-28FEB25-106000-C
+                      ratio: 1
+                    amount: 12.5
+                    direction: sell
+                    mark_price: 0.010356754
+                    trades:
+                    - price: 0.05
+                      amount: 12.5
+                      direction: sell
+                      hedge_amount: 50
+                    hedge:
+                      price: 96000
+                      amount: 50
+                      direction: sell
+                      instrument_name: BTC-PERPETUAL
+                    index_prices:
+                      btc_usd: 96000
+                      btc_usdc: 95950
+                  - id: 6600
+                    timestamp: 1739774397766
+                    combo_id: BTC-CS-28FEB25-100000_106000
+                    legs:
+                    - price: 0.1
+                      direction: buy
+                      instrument_name: BTC-28FEB25-100000-C
+                      ratio: 1
+                    - price: 0.05
+                      direction: sell
+                      instrument_name: BTC-28FEB25-106000-C
+                      ratio: 1
+                    amount: 12.5
+                    direction: sell
+                    mark_price: 0.007458089
+                    trades:
+                    - price: 0.05
+                      amount: 12.5
+                      direction: sell
+                      hedge_amount: 50
+                    hedge:
+                      price: 96000
+                      amount: 50
+                      direction: sell
+                      instrument_name: BTC-PERPETUAL
+                    index_prices:
+                      btc_usd: 96000
+                      btc_usdc: 95950
+                  - id: 6579
+                    timestamp: 1739743922308
+                    combo_id: BTC-CS-17FEB25-89000_90000
+                    legs:
+                    - price: 0.08
+                      direction: buy
+                      instrument_name: BTC-17FEB25-89000-C
+                      ratio: 1
+                    - price: 0.075
+                      direction: sell
+                      instrument_name: BTC-17FEB25-90000-C
+                      ratio: 1
+                    amount: 12.5
+                    direction: sell
+                    mark_price: 0.010314468
+                    trades:
+                    - price: 0.005
+                      amount: 12.5
+                      direction: sell
+              description: Response example
+      description: Success response
+    PrivateEditBlockRfqQuoteResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PrivateEditBlockRfqQuoteResponse'
+          examples:
+            response:
+              value:
+                jsonrpc: '2.0'
+                id: 1
+                result:
+                  label: example_quote
+                  amount: 20000
+                  direction: buy
+                  price: 74600
+                  legs:
+                  - direction: buy
+                    price: 74600
+                    instrument_name: BTC-15NOV24
+                    ratio: 1
+                  creation_timestamp: 1731076586371
+                  block_rfq_id: 3
+                  replaced: true
+                  filled_amount: 0
+                  last_update_timestamp: 1731076638591
+                  hedge:
+                    amount: 10
+                    direction: buy
+                    price: 70000
+                    instrument_name: BTC-PERPETUAL
+                  block_rfq_quote_id: 8
+                  quote_state: open
+              description: Response example
+      description: Success response
+    PrivateCancelBlockRfqTriggerResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PrivateCancelBlockRfqTriggerResponse'
+          examples:
+            response:
+              value:
+                jsonrpc: '2.0'
+                id: 1
+                result:
+                  creation_timestamp: 1730798381504
+                  expiration_timestamp: 1730798481504
+                  block_rfq_id: 123
+                  role: taker
+                  state: open
+                  taker_rating: 1-2
+                  makers:
+                  - maker1
+                  - maker2
+                  amount: 100
+                  min_trade_amount: 10
+                  legs:
+                  - instrument_name: BTC-8NOV24-70000-C
+                    ratio: 1
+                  - instrument_name: BTC-8NOV24-72000-C
+                    ratio: 1
+                  combo_id: BTC-CS-8NOV24-70000_72000
+                  label: My Block RFQ
+                  app_name: Example Application
+                  mark_price: 0.025
+                  disclosed: false
+                  trade_trigger:
+                    state: cancelled
+                    price: 0.01
+                    direction: buy
+                    cancel_reason: User cancelled
+              description: Response example
+      description: Success response
+    PrivateGetBlockRfqUserInfoResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PrivateGetBlockRfqUserInfoResponse'
+          examples:
+            response:
+              value:
+                jsonrpc: '2.0'
+                id: 1
+                result:
+                  parent:
+                    identity: MAKER1
+                    is_maker: true
+                  users:
+                  - user_id: 1
+                    taker_rating: 98.5
+                    identity: TAKER1
+                    is_maker: false
+                  - user_id: 2
+                    taker_rating: 97
+              description: Response example
+      description: Success response
+    PrivateCreateBlockRfqResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PrivateCreateBlockRfqResponse'
+          examples:
+            response:
+              value:
+                jsonrpc: '2.0'
+                id: 1
+                result:
+                  label: example
+                  state: created
+                  amount: 20000
+                  role: taker
+                  bids: []
+                  asks: []
+                  combo_id: BTC-15NOV24
+                  legs:
+                  - direction: sell
+                    instrument_name: BTC-15NOV24
+                    ratio: 1
+                  creation_timestamp: 1731062187555
+                  block_rfq_id: 507
+                  expiration_timestamp: 1731062487555
+                  hedge:
+                    amount: 10
+                    direction: buy
+                    price: 70000
+                    instrument_name: BTC-PERPETUAL
+                  makers:
+                  - MAKER1
+              description: Response example
+      description: Success response
+    PrivateCancelBlockRfqQuoteResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PrivateCancelBlockRfqQuoteResponse'
+          examples:
+            response:
+              value:
+                jsonrpc: '2.0'
+                id: 1
+                result:
+                  label: example_quote
+                  amount: 20000
+                  direction: buy
+                  price: 74600
+                  legs:
+                  - direction: buy
+                    price: 74600
+                    instrument_name: BTC-15NOV24
+                    ratio: 1
+                  creation_timestamp: 1731076586371
+                  block_rfq_id: 3
+                  replaced: false
+                  filled_amount: 0
+                  last_update_timestamp: 1731076655746
+                  hedge:
+                    amount: 10
+                    direction: buy
+                    price: 70000
+                    instrument_name: BTC-PERPETUAL
+                  block_rfq_quote_id: 8
+                  quote_state: cancelled
+              description: Response example
+      description: Success response
+    PrivateAddBlockRfqQuoteResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PrivateAddBlockRfqQuoteResponse'
+          examples:
+            response:
+              value:
+                jsonrpc: '2.0'
+                id: 1
+                result:
+                  label: example_quote
+                  amount: 10000
+                  direction: buy
+                  price: 69600
+                  legs:
+                  - direction: buy
+                    price: 69600
+                    instrument_name: BTC-15NOV24
+                    ratio: 1
+                  creation_timestamp: 1731076586371
+                  block_rfq_id: 3
+                  replaced: false
+                  filled_amount: 0
+                  hedge:
+                    amount: 10
+                    direction: buy
+                    price: 70000
+                    instrument_name: BTC-PERPETUAL
+                  last_update_timestamp: 1731076586371
+                  block_rfq_quote_id: 8
+                  quote_state: open
+              description: Response example
+      description: Success response
+    PrivateGetBlockRfqsResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PrivateGetBlockRfqsResponse'
+          examples:
+            response:
+              value:
+                jsonrpc: '2.0'
+                id: 1
+                result:
+                  continuation: null
+                  block_rfqs:
+                  - state: open
+                    amount: 40000
+                    role: maker
+                    combo_id: BTC-15NOV24
+                    legs:
+                    - direction: sell
+                      instrument_name: BTC-15NOV24
+                      ratio: 1
+                    creation_timestamp: 1731062457741
+                    block_rfq_id: 508
+                    expiration_timestamp: 1731062757741
+                    hedge:
+                      amount: 10
+                      direction: buy
+                      price: 70000
+                      instrument_name: BTC-PERPETUAL
+                    taker_rating: 1-2
+              description: Response example
+      description: Success response
+    PrivateGetBlockRfqMakersResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PrivateGetBlockRfqMakersResponse'
+          examples:
+            response:
+              value:
+                jsonrpc: '2.0'
+                id: 1
+                result:
+                - MAKER1
+                - MAKER2
+                - MAKER3
+              description: Response example
+      description: Success response
+    PrivateGetBlockRfqQuotesResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PrivateGetBlockRfqQuotesResponse'
+          examples:
+            response:
+              value:
+                jsonrpc: '2.0'
+                id: 1
+                result:
+                  label: example_quote
+                  amount: 20000
+                  direction: buy
+                  price: 74600
+                  legs:
+                  - direction: buy
+                    price: 74600
+                    instrument_name: BTC-15NOV24
+                    ratio: 1
+                  creation_timestamp: 1731076586371
+                  block_rfq_id: 1
+                  replaced: false
+                  filled_amount: 0
+                  last_update_timestamp: 1731076638591
+                  hedge:
+                    amount: 10
+                    direction: buy
+                    price: 70000
+                    instrument_name: BTC-PERPETUAL
+                  block_rfq_quote_id: 8
+                  quote_state: open
+                  execution_instruction: all_or_none
+              description: Response example
+      description: Success response
+    PrivateAcceptBlockRfqResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PrivateAcceptBlockRfqResponse'
+          examples:
+            response:
+              value:
+                jsonrpc: '2.0'
+                id: 1
+                result:
+                  block_trades:
+                  - id: BLOCK-423
+                    timestamp: 1730798381504
+                    trades:
+                    - timestamp: 1730798381502
+                      state: filled
+                      fee: 1.5e-07
+                      amount: 100
+                      direction: buy
+                      price: 69696.8
+                      index_price: 70000
+                      profit_loss: 0
+                      instrument_name: BTC-8NOV24-70000-C
+                      trade_seq: 113
+                      mark_price: 0.03
+                      order_id: '2899'
+                      matching_id: null
+                      tick_direction: 2
+                      combo_id: BTC-CS-8NOV24-70000_72000
+                      block_rfq_id: 1
+                      api: true
+                      contracts: 100
+                      post_only: false
+                      block_trade_id: BLOCK-423
+                      trade_id: '771'
+                      order_type: limit
+                      mmp: false
+                      risk_reducing: false
+                      reduce_only: false
+                      block_trade_leg_count: 2
+                      self_trade: false
+                      fee_currency: BTC
+                      liquidity: T
+                    - timestamp: 1730798381502
+                      state: filled
+                      fee: 1.5e-07
+                      amount: 100
+                      direction: sell
+                      price: 69677.4
+                      index_price: 70000
+                      profit_loss: 0
+                      instrument_name: BTC-8NOV24-72000-C
+                      trade_seq: 113
+                      mark_price: 0.02
+                      order_id: '2900'
+                      matching_id: null
+                      tick_direction: 2
+                      combo_id: BTC-CS-8NOV24-70000_72000
+                      block_rfq_id: 1
+                      api: true
+                      contracts: 100
+                      post_only: false
+                      block_trade_id: BLOCK-423
+                      trade_id: '772'
+                      order_type: limit
+                      mmp: false
+                      risk_reducing: false
+                      reduce_only: false
+                      block_trade_leg_count: 2
+                      self_trade: false
+                      fee_currency: BTC
+                      liquidity: T
+              description: Response example
+      description: Success response
+    PrivateCancelBlockRfqResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PrivateCancelBlockRfqResponse'
+          examples:
+            response:
+              value:
+                jsonrpc: '2.0'
+                id: 1
+                result:
+                  creation_timestamp: 1729855159611
+                  block_rfq_id: 366
+                  expiration_timestamp: 1729855459611
+                  role: taker
+                  asks: []
+                  bids: []
+                  makers: []
+                  amount: 100000
+                  legs:
+                  - ratio: 1
+                    instrument_name: BTC-1NOV24
+                    direction: sell
+                  - ratio: 1
+                    instrument_name: BTC-PERPETUAL
+                    direction: buy
+                  combo_id: BTC-FS-1NOV24_PERP
+                  state: cancelled
+                  label: example
+              description: Response example
+      description: Success response

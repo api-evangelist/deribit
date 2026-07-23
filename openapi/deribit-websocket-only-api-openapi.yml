@@ -1,0 +1,714 @@
+openapi: 3.0.0
+info:
+  title: Deribit Account Management WebSocket Only API
+  version: 2.1.1
+  description: Can only be used over websockets.
+servers:
+- url: https://test.deribit.com/api/v2
+tags:
+- name: WebSocket Only
+  description: Can only be used over websockets.
+paths:
+  /private/logout:
+    get:
+      tags:
+      - WebSocket Only
+      parameters:
+      - name: invalidate_token
+        in: query
+        required: false
+        schema:
+          type: boolean
+        description: '<b>Token Invalidation:</b> By default, all tokens created during the current session are invalidated when you call this method. You can control this behavior using this parameter: <ul><li><b>invalidate_token=true</b> (default): All session tokens are invalidated, requiring re-authentication for new connections</li><li><b>invalidate_token=false</b>: Tokens remain valid, allowing you to reconnect using the same authentication</li></ul>'
+      responses:
+        '200':
+          description: Connection closed
+      requestBody:
+        content:
+          application/json:
+            examples:
+              request:
+                value:
+                  jsonrpc: '2.0'
+                  id: 42
+                  method: private/logout
+                  params:
+                    access_token: 1529453804065.h2QrBgvn.oS36pCOmuK9EX7954lzCSkUioEtTMg7F5ShToM0ZfYlqU05OquXkQIe2_DDEkPhzmoPp1fBp0ycXShR_0jf-SMSXEdVqxLRWuOw-_StG5BMjToiAl27CbHY4P92MPhlMblTOtTImE81-5dFdyDVydpBwmlfKM3OSQ39kulP9bbfw-2jhyegOL0AgqJTY_tj554oHCQFTbq0A0ZWukukmxL2yu6iy34XdzaJB26Igy-3UxGBMwFu53EhjKBweh7xyP2nDm57-wybndJMtSyTGDXH3vjBVclo1iup5yRP
+                    invalidate_token: true
+                description: JSON-RPC Request Example
+        description: JSON-RPC request body
+      description: 'Gracefully terminate the current WebSocket connection and optionally invalidate all tokens associated with the session.
+
+
+        This method provides a clean way to close WebSocket connections while preserving active orders when [**Cancel On Disconnect (COD)**](https://docs.deribit.com/api-reference/session-management/private-enable_cancel_on_disconnect) is enabled.
+
+
+        **Use Cases:**
+
+
+        - **Clean Shutdown:** Properly close WebSocket connections during application shutdown or restart
+
+        - **Order Preservation:** Close connections without triggering order cancellations when COD is enabled
+
+        - **Session Management:** Invalidate tokens to ensure security when closing connections
+
+        - **Maintenance Operations:** Temporarily disconnect for system maintenance without affecting trading positions
+
+
+        **Cancel On Disconnect (COD) Behavior:**
+
+
+        When Cancel On Disconnect is enabled for your connection, this method provides a safe way to close the connection without triggering automatic order cancellations. This is different from other disconnection scenarios:
+
+
+        - **Graceful logout** (this method): Orders are **NOT cancelled**, even if COD is enabled
+
+        - **Unexpected disconnection:** Orders are **cancelled** if COD is enabled
+
+        - **Inactivity timeout:** Orders are **cancelled** if COD is enabled
+
+        - **Heartbeat failure:** Orders are **cancelled** if COD is enabled
+
+
+        This distinction allows you to perform planned disconnections (e.g., for maintenance, updates, or reconnection) while preserving your active orders.
+
+
+        **WebSocket Only:**
+
+
+        This method is designed exclusively for WebSocket connections. Attempting to use it via REST/HTTP will result in a 400 error response.
+
+
+        **Note:** This method has no response. The WebSocket connection is closed immediately after the request is processed.
+
+
+        [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Flogout)
+
+
+        '
+      x-mint:
+        metadata:
+          title: private/logout
+          og:title: private/logout
+          keywords:
+          - private/logout
+          - invalidate_token
+        href: /api-reference/authentication/private-logout
+  /public/set_heartbeat:
+    get:
+      parameters:
+      - in: query
+        name: interval
+        required: true
+        schema:
+          example: 30
+          type: number
+        description: The heartbeat interval in seconds, but not less than 10
+      responses:
+        '200':
+          $ref: '#/components/responses/OkResponse'
+      tags:
+      - WebSocket Only
+      requestBody:
+        content:
+          application/json:
+            examples:
+              request:
+                value:
+                  jsonrpc: '2.0'
+                  id: 9098
+                  method: public/set_heartbeat
+                  params:
+                    interval: 30
+                description: JSON-RPC Request Example
+        description: JSON-RPC request body
+      description: 'Signals the WebSocket connection to send and request heartbeats. Heartbeats can be used to detect stale connections.
+
+
+        When heartbeats have been set up, the API server will send `heartbeat` messages and `test_request` messages. Your software should respond to `test_request` messages by sending a `/api/v2/public/test` request. If your software fails to do so, the API server will immediately close the connection. If your account is configured to cancel on disconnect, any orders opened over the connection will be cancelled.
+
+
+        **WebSocket Only:** This method is designed exclusively for WebSocket connections. Attempting to use it via REST/HTTP will result in an error response.
+
+
+        [Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fset_heartbeat)
+
+
+        '
+      x-mint:
+        metadata:
+          title: public/set_heartbeat
+          og:title: public/set_heartbeat
+          keywords:
+          - public/set_heartbeat
+          - interval
+        href: /api-reference/session-management/public-set_heartbeat
+  /public/disable_heartbeat:
+    get:
+      tags:
+      - WebSocket Only
+      responses:
+        '200':
+          $ref: '#/components/responses/OkResponse'
+      requestBody:
+        content:
+          application/json:
+            examples:
+              request:
+                value:
+                  jsonrpc: '2.0'
+                  id: 3562
+                  method: public/disable_heartbeat
+                  params: {}
+                description: JSON-RPC Request Example
+        description: JSON-RPC request body
+      description: 'Stop sending heartbeat messages. This method takes no parameters.
+
+
+        **WebSocket Only:** This method is designed exclusively for WebSocket connections. Attempting to use it via REST/HTTP will result in an error response.
+
+
+        [Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fdisable_heartbeat)
+
+
+        '
+      x-mint:
+        metadata:
+          title: public/disable_heartbeat
+          og:title: public/disable_heartbeat
+          keywords:
+          - public/disable_heartbeat
+        href: /api-reference/session-management/public-disable_heartbeat
+  /public/subscribe:
+    get:
+      tags:
+      - WebSocket Only
+      parameters:
+      - name: channels
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+            example: deribit_price_index.btc_usd
+          example:
+          - deribit_price_index.btc_usd
+        required: true
+        description: A list of channels to subscribe to. See [Notifications and Subscriptions](https://docs.deribit.com/articles/notifications) for all available channels.
+        style: form
+        explode: true
+      responses:
+        '200':
+          $ref: '#/components/responses/PrivateSubscribeResponse'
+        '401':
+          $ref: '#/components/responses/ErrorMessageResponse'
+      requestBody:
+        content:
+          application/json:
+            examples:
+              request:
+                value:
+                  jsonrpc: '2.0'
+                  id: 3600
+                  method: public/subscribe
+                  params:
+                    channels:
+                    - deribit_price_index.btc_usd
+                description: JSON-RPC Request Example
+        description: JSON-RPC request body
+      description: 'Subscribe to one or more channels. This is the same method as `/private/subscribe`, but it can only be used for ''public'' channels.
+
+
+        For a complete list of available subscription channels and their notification formats, see [Notifications and Subscriptions](https://docs.deribit.com/articles/notifications).
+
+
+        **Note - This method has distinct API rate limiting requirements:** Sustained rate: ~3.3 requests/second. For more information, see [Rate Limits](https://docs.deribit.com/articles/rate-limits).
+
+
+        **📖 Related Article:** [Market Data Collection Best Practices](https://docs.deribit.com/articles/market-data-collection-best-practices)
+
+
+        [Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fsubscribe)
+
+
+        '
+      x-mint:
+        metadata:
+          title: public/subscribe
+          og:title: public/subscribe
+          keywords:
+          - public/subscribe
+          - channels
+        href: /api-reference/subscription-management/public-subscribe
+  /public/unsubscribe:
+    get:
+      tags:
+      - WebSocket Only
+      parameters:
+      - name: channels
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+            example: deribit_price_index.btc_usd
+          example:
+          - deribit_price_index.btc_usd
+        required: true
+        description: A list of channels to unsubscribe from. Only successfully unsubscribed channels will be returned in the result. See [Notifications and Subscriptions](https://docs.deribit.com/articles/notifications) for all available channels.
+        style: form
+        explode: true
+      responses:
+        '200':
+          $ref: '#/components/responses/Getunsubscribe200response'
+        '401':
+          $ref: '#/components/responses/ErrorMessageResponse'
+      requestBody:
+        content:
+          application/json:
+            examples:
+              request:
+                value:
+                  jsonrpc: '2.0'
+                  id: 8691
+                  method: public/unsubscribe
+                  params:
+                    channels:
+                    - deribit_price_index.btc_usd
+                description: JSON-RPC Request Example
+        description: JSON-RPC request body
+      description: 'Unsubscribe from one or more channels. The response contains only the channels that were successfully unsubscribed in this request.
+
+
+        For a complete list of available subscription channels and their notification formats, see [Notifications and Subscriptions](https://docs.deribit.com/articles/notifications).
+
+
+        **Note:** The `result` field in the response contains only the channels that were successfully processed and unsubscribed from this specific request. It does not include all previously subscribed topics. If a channel in the request is invalid, not subscribed, or fails validation, it will not appear in the result.
+
+
+        [Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Funsubscribe)
+
+
+        '
+      x-mint:
+        metadata:
+          title: public/unsubscribe
+          og:title: public/unsubscribe
+          keywords:
+          - public/unsubscribe
+          - channels
+        href: /api-reference/subscription-management/public-unsubscribe
+  /public/unsubscribe_all:
+    get:
+      tags:
+      - WebSocket Only
+      responses:
+        '200':
+          $ref: '#/components/responses/OkResponse'
+      requestBody:
+        content:
+          application/json:
+            examples:
+              request:
+                value:
+                  jsonrpc: '2.0'
+                  id: 153
+                  method: public/unsubscribe_all
+                  params: {}
+                description: JSON-RPC Request Example
+        description: JSON-RPC request body
+      description: 'Unsubscribe from all the channels subscribed so far. This method takes no parameters.
+
+
+        [Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Funsubscribe_all)
+
+
+        '
+      x-mint:
+        metadata:
+          title: public/unsubscribe_all
+          og:title: public/unsubscribe_all
+          keywords:
+          - public/unsubscribe_all
+        href: /api-reference/subscription-management/public-unsubscribe_all
+  /private/subscribe:
+    get:
+      tags:
+      - WebSocket Only
+      parameters:
+      - name: channels
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+            example: deribit_price_index.btc_usd
+          example:
+          - deribit_price_index.btc_usd
+        required: true
+        description: A list of channels to subscribe to. See [Notifications and Subscriptions](https://docs.deribit.com/articles/notifications) for all available channels.
+        style: form
+        explode: true
+      - name: label
+        in: query
+        required: false
+        schema:
+          type: string
+          example: TestLabel1
+        description: Optional label which will be added to notifications of private channels (max 16 characters).
+      responses:
+        '200':
+          $ref: '#/components/responses/PrivateSubscribeResponse'
+        '401':
+          $ref: '#/components/responses/ErrorMessageResponse'
+      requestBody:
+        content:
+          application/json:
+            examples:
+              request:
+                value:
+                  jsonrpc: '2.0'
+                  id: 4235
+                  method: private/subscribe
+                  params:
+                    channels:
+                    - deribit_price_index.btc_usd
+                description: JSON-RPC Request Example
+        description: JSON-RPC request body
+      description: 'Subscribe to one or more channels. The name of the channel determines what information will be provided, and in what form.
+
+
+        For a complete list of available subscription channels and their notification formats, see [Notifications and Subscriptions](https://docs.deribit.com/articles/notifications).
+
+
+        **Note - This method has distinct API rate limiting requirements:** Sustained rate: ~3.3 requests/second. For more information, see [Rate Limits](https://docs.deribit.com/articles/rate-limits).
+
+
+        **📖 Related Article:** [Market Data Collection Best Practices](https://docs.deribit.com/articles/market-data-collection-best-practices)
+
+
+        [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fsubscribe)
+
+
+        '
+      x-mint:
+        metadata:
+          title: private/subscribe
+          og:title: private/subscribe
+          keywords:
+          - private/subscribe
+          - channels
+          - label
+        href: /api-reference/subscription-management/private-subscribe
+  /private/unsubscribe:
+    get:
+      tags:
+      - WebSocket Only
+      parameters:
+      - name: channels
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+            example: deribit_price_index.btc_usd
+          example:
+          - deribit_price_index.btc_usd
+        required: true
+        description: A list of channels to unsubscribe from. Only successfully unsubscribed channels will be returned in the result. See [Notifications and Subscriptions](https://docs.deribit.com/articles/notifications) for all available channels.
+        style: form
+        explode: true
+      responses:
+        '200':
+          $ref: '#/components/responses/Getunsubscribe200response'
+        '401':
+          $ref: '#/components/responses/ErrorMessageResponse'
+      requestBody:
+        content:
+          application/json:
+            examples:
+              request:
+                value:
+                  jsonrpc: '2.0'
+                  id: 3370
+                  method: private/unsubscribe
+                  params:
+                    channels:
+                    - deribit_price_index.btc_usd
+                description: JSON-RPC Request Example
+        description: JSON-RPC request body
+      description: 'Unsubscribe from one or more channels. The response contains only the channels that were successfully unsubscribed in this request.
+
+
+        For a complete list of available subscription channels and their notification formats, see [Notifications and Subscriptions](https://docs.deribit.com/articles/notifications).
+
+
+        **Note:** The `result` field in the response contains only the channels that were successfully processed and unsubscribed from this specific request. It does not include all previously subscribed topics. If a channel in the request is invalid, not subscribed, or fails validation, it will not appear in the result.
+
+
+        [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Funsubscribe)
+
+
+        '
+      x-mint:
+        metadata:
+          title: private/unsubscribe
+          og:title: private/unsubscribe
+          keywords:
+          - private/unsubscribe
+          - channels
+        href: /api-reference/subscription-management/private-unsubscribe
+  /private/unsubscribe_all:
+    get:
+      tags:
+      - WebSocket Only
+      responses:
+        '200':
+          $ref: '#/components/responses/OkResponse'
+      requestBody:
+        content:
+          application/json:
+            examples:
+              request:
+                value:
+                  jsonrpc: '2.0'
+                  id: 154
+                  method: private/unsubscribe_all
+                  params: {}
+                description: JSON-RPC Request Example
+        description: JSON-RPC request body
+      description: 'Unsubscribe from all the channels subscribed so far. This method takes no parameters.
+
+
+        [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Funsubscribe_all)
+
+
+        '
+      x-mint:
+        metadata:
+          title: private/unsubscribe_all
+          og:title: private/unsubscribe_all
+          keywords:
+          - private/unsubscribe_all
+        href: /api-reference/subscription-management/private-unsubscribe_all
+  /public/hello:
+    get:
+      parameters:
+      - name: client_name
+        in: query
+        schema:
+          type: string
+          example: My Trading Software
+        required: true
+        description: Client software name
+      - name: client_version
+        in: query
+        schema:
+          type: string
+          example: 1.0.2
+        required: true
+        description: Client software version
+      responses:
+        '200':
+          $ref: '#/components/responses/PublicTestResponse'
+      tags:
+      - WebSocket Only
+      requestBody:
+        content:
+          application/json:
+            examples:
+              request:
+                value:
+                  jsonrpc: '2.0'
+                  id: 2841
+                  method: public/hello
+                  params:
+                    client_name: My Trading Software
+                    client_version: 1.0.2
+                description: JSON-RPC Request Example
+        description: JSON-RPC request body
+      description: 'Method used to introduce the client software connected to Deribit platform over websocket. Provided data may have an impact on the maintained connection and will be collected for internal statistical purposes. In response, Deribit will also introduce itself.
+
+
+        [Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fhello)
+
+
+        '
+      x-mint:
+        metadata:
+          title: public/hello
+          og:title: public/hello
+          keywords:
+          - public/hello
+          - client_name
+          - client_version
+          - version
+        href: /api-reference/supporting/public-hello
+components:
+  schemas:
+    PublicTestResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          type: object
+          properties:
+            version:
+              example: 2.1.26
+              type: string
+              description: The API version
+          required:
+          - version
+      required:
+      - jsonrpc
+      - result
+      type: object
+    Getunsubscribe200response:
+      type: object
+      properties:
+        jsonrpc:
+          type: string
+          example: '2.0'
+        id:
+          type: integer
+          example: 8691
+        result:
+          type: array
+          items:
+            type: string
+            x-deribit-type: channel
+          example:
+          - deribit_price_index.btc_usd
+          description: List of channels that were successfully unsubscribed in this request
+    PrivateSubscribeResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          type: array
+          items:
+            type: string
+            example: deribit_price_index.btc_usd
+          description: A list of subscribed channels.
+      required:
+      - jsonrpc
+      - result
+      type: object
+    OkResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          type: string
+          enum:
+          - ok
+          description: Result of method execution. `ok` in case of success
+      required:
+      - jsonrpc
+      - result
+      type: object
+    ErrorMessageResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        message:
+          type: string
+        error:
+          type: integer
+      required:
+      - jsonrpc
+      - message
+      - error
+      type: object
+  responses:
+    PrivateSubscribeResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PrivateSubscribeResponse'
+          examples:
+            response:
+              value:
+                jsonrpc: '2.0'
+                id: 4235
+                result:
+                - deribit_price_index.btc_usd
+              description: Response example
+      description: Success response
+    OkResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OkResponse'
+          examples:
+            response:
+              value:
+                jsonrpc: '2.0'
+                id: 1569
+                result: ok
+              description: Response example
+      description: Success response
+    PublicTestResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PublicTestResponse'
+          examples:
+            response:
+              value:
+                jsonrpc: '2.0'
+                id: 8212
+                result:
+                  version: 1.2.26
+              description: Response example
+      description: Success response
+    ErrorMessageResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessageResponse'
+      description: Success response
+    Getunsubscribe200response:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Getunsubscribe200response'
+          examples:
+            jsonObject:
+              value:
+                jsonrpc: '2.0'
+                id: 3370
+                result:
+                - deribit_price_index.btc_usd
+            response:
+              value:
+                jsonrpc: '2.0'
+                id: 3370
+                result:
+                - deribit_price_index.btc_usd
+              description: Response example
+      description: Successfully unsubscribed from channels

@@ -1,0 +1,338 @@
+openapi: 3.0.0
+info:
+  title: Deribit Account Management Session Management API
+  version: 2.1.1
+servers:
+- url: https://test.deribit.com/api/v2
+tags:
+- name: Session Management
+paths:
+  /public/set_heartbeat:
+    get:
+      parameters:
+      - in: query
+        name: interval
+        required: true
+        schema:
+          example: 30
+          type: number
+        description: The heartbeat interval in seconds, but not less than 10
+      responses:
+        '200':
+          $ref: '#/components/responses/OkResponse'
+      tags:
+      - Session Management
+      requestBody:
+        content:
+          application/json:
+            examples:
+              request:
+                value:
+                  jsonrpc: '2.0'
+                  id: 9098
+                  method: public/set_heartbeat
+                  params:
+                    interval: 30
+                description: JSON-RPC Request Example
+        description: JSON-RPC request body
+      description: 'Signals the WebSocket connection to send and request heartbeats. Heartbeats can be used to detect stale connections.
+
+
+        When heartbeats have been set up, the API server will send `heartbeat` messages and `test_request` messages. Your software should respond to `test_request` messages by sending a `/api/v2/public/test` request. If your software fails to do so, the API server will immediately close the connection. If your account is configured to cancel on disconnect, any orders opened over the connection will be cancelled.
+
+
+        **WebSocket Only:** This method is designed exclusively for WebSocket connections. Attempting to use it via REST/HTTP will result in an error response.
+
+
+        [Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fset_heartbeat)
+
+
+        '
+      x-mint:
+        metadata:
+          title: public/set_heartbeat
+          og:title: public/set_heartbeat
+          keywords:
+          - public/set_heartbeat
+          - interval
+        href: /api-reference/session-management/public-set_heartbeat
+  /public/disable_heartbeat:
+    get:
+      tags:
+      - Session Management
+      responses:
+        '200':
+          $ref: '#/components/responses/OkResponse'
+      requestBody:
+        content:
+          application/json:
+            examples:
+              request:
+                value:
+                  jsonrpc: '2.0'
+                  id: 3562
+                  method: public/disable_heartbeat
+                  params: {}
+                description: JSON-RPC Request Example
+        description: JSON-RPC request body
+      description: 'Stop sending heartbeat messages. This method takes no parameters.
+
+
+        **WebSocket Only:** This method is designed exclusively for WebSocket connections. Attempting to use it via REST/HTTP will result in an error response.
+
+
+        [Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fdisable_heartbeat)
+
+
+        '
+      x-mint:
+        metadata:
+          title: public/disable_heartbeat
+          og:title: public/disable_heartbeat
+          keywords:
+          - public/disable_heartbeat
+        href: /api-reference/session-management/public-disable_heartbeat
+  /private/enable_cancel_on_disconnect:
+    get:
+      tags:
+      - Session Management
+      parameters:
+      - name: scope
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - connection
+          - account
+        description: Specifies if Cancel On Disconnect change should be applied/checked for the current connection or the account (default - `connection`)<br/><br/> **NOTICE:** Scope `connection` can be used only when working via Websocket.
+      responses:
+        '200':
+          $ref: '#/components/responses/OkResponse'
+      requestBody:
+        content:
+          application/json:
+            examples:
+              request:
+                value:
+                  jsonrpc: '2.0'
+                  id: 7859
+                  method: private/enable_cancel_on_disconnect
+                  params:
+                    scope: account
+                description: JSON-RPC Request Example
+        description: JSON-RPC request body
+      description: 'Enable Cancel On Disconnect for the connection. After enabling, all orders created via this connection will be automatically cancelled when the connection is closed.
+
+
+        Cancel is triggered in the following cases: when the TCP connection is properly terminated, when the connection is closed due to 10 minutes of inactivity, or when a heartbeat detects a disconnection. To reduce the inactivity timeout, consider using [public/set_heartbeat](https://docs.deribit.com/api-reference/session-management/public-set_heartbeat).
+
+
+        **Note:** If the connection is gracefully closed using [private/logout](https://docs.deribit.com/api-reference/authentication/private-logout), cancel-on-disconnect will **not** be triggered.
+
+
+        **Notice:** Cancel-on-Disconnect does not affect orders created by other connections - they will remain active! When change is applied on the `account` scope, then every newly opened connection will start with **active** Cancel on Disconnect.
+
+
+        **WebSocket Only:** This method is designed exclusively for WebSocket connections. Attempting to use it via REST/HTTP will result in an error response.
+
+
+        **Scope:** `account:read_write`
+
+
+        [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fenable_cancel_on_disconnect)
+
+
+        '
+      x-mint:
+        metadata:
+          title: private/enable_cancel_on_disconnect
+          og:title: private/enable_cancel_on_disconnect
+          keywords:
+          - private/enable_cancel_on_disconnect
+          - scope
+        href: /api-reference/session-management/private-enable_cancel_on_disconnect
+  /private/disable_cancel_on_disconnect:
+    get:
+      tags:
+      - Session Management
+      parameters:
+      - name: scope
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - connection
+          - account
+        description: Specifies if Cancel On Disconnect change should be applied/checked for the current connection or the account (default - `connection`)<br/><br/> **NOTICE:** Scope `connection` can be used only when working via Websocket.
+      responses:
+        '200':
+          $ref: '#/components/responses/OkResponse'
+      requestBody:
+        content:
+          application/json:
+            examples:
+              request:
+                value:
+                  jsonrpc: '2.0'
+                  id: 1569
+                  method: private/disable_cancel_on_disconnect
+                  params:
+                    scope: account
+                description: JSON-RPC Request Example
+        description: JSON-RPC request body
+      description: 'Disable Cancel On Disconnect for the connection.
+
+
+        When change is applied for the account, then every newly opened connection will start with **inactive** Cancel on Disconnect.
+
+
+        **WebSocket Only:** This method is designed exclusively for WebSocket connections. Attempting to use it via REST/HTTP will result in an error response.
+
+
+        **Scope:** `account:read_write`
+
+
+        [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fdisable_cancel_on_disconnect)
+
+
+        '
+      x-mint:
+        metadata:
+          title: private/disable_cancel_on_disconnect
+          og:title: private/disable_cancel_on_disconnect
+          keywords:
+          - private/disable_cancel_on_disconnect
+          - scope
+        href: /api-reference/session-management/private-disable_cancel_on_disconnect
+  /private/get_cancel_on_disconnect:
+    get:
+      tags:
+      - Session Management
+      parameters:
+      - name: scope
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - connection
+          - account
+        description: Specifies if Cancel On Disconnect change should be applied/checked for the current connection or the account (default - `connection`)<br/><br/> **NOTICE:** Scope `connection` can be used only when working via Websocket.
+      responses:
+        '200':
+          $ref: '#/components/responses/PrivateGetCancelOnDisconnectResponse'
+      requestBody:
+        content:
+          application/json:
+            examples:
+              request:
+                value:
+                  jsonrpc: '2.0'
+                  id: 220
+                  method: private/get_cancel_on_disconnect
+                  params:
+                    scope: account
+                description: JSON-RPC Request Example
+        description: JSON-RPC request body
+      description: 'Read current Cancel On Disconnect configuration for the account.
+
+
+        **Scope:** `account:read`
+
+
+        [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_cancel_on_disconnect)
+
+
+        '
+      x-mint:
+        metadata:
+          title: private/get_cancel_on_disconnect
+          og:title: private/get_cancel_on_disconnect
+          keywords:
+          - private/get_cancel_on_disconnect
+          - scope
+          - enabled
+        href: /api-reference/session-management/private-get_cancel_on_disconnect
+components:
+  schemas:
+    enabled_field:
+      example: true
+      type: boolean
+      description: Current configuration status
+    PrivateGetCancelOnDisconnectResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          type: object
+          properties:
+            scope:
+              $ref: '#/components/schemas/cod_scope'
+            enabled:
+              $ref: '#/components/schemas/enabled_field'
+      required:
+      - jsonrpc
+      - result
+      type: object
+    OkResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          type: string
+          enum:
+          - ok
+          description: Result of method execution. `ok` in case of success
+      required:
+      - jsonrpc
+      - result
+      type: object
+    cod_scope:
+      enum:
+      - connection
+      - account
+      type: string
+      description: Informs if Cancel on Disconnect was checked for the current connection or the account
+  responses:
+    OkResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OkResponse'
+          examples:
+            response:
+              value:
+                jsonrpc: '2.0'
+                id: 1569
+                result: ok
+              description: Response example
+      description: Success response
+    PrivateGetCancelOnDisconnectResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PrivateGetCancelOnDisconnectResponse'
+          examples:
+            response:
+              value:
+                jsonrpc: '2.0'
+                id: 220
+                result:
+                  scope: account
+                  enabled: false
+              description: Response example
+      description: Success response
