@@ -58,8 +58,6 @@ apis:
     url: https://docs.deribit.com/articles/connection-management-best-practices
   - type: RateLimits
     url: https://docs.deribit.com/articles/rate-limits
-  - type: Sandbox
-    url: wss://test.deribit.com/ws/api/v2
   - type: TermsOfService
     url: https://support.deribit.com/hc/en-us/sections/25944530944285-Terms-Of-Service-Overview
   - type: PrivacyPolicy
