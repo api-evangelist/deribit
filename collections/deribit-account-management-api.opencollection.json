@@ -1,0 +1,1026 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Deribit Account Management API",
+    "version": "2.1.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Account Management",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GET /private/get_positions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/private/get_positions",
+            "params": [
+              {
+                "name": "currency",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "kind",
+                "value": "",
+                "type": "query",
+                "description": "Kind filter on positions"
+              },
+              {
+                "name": "subaccount_id",
+                "value": "",
+                "type": "query",
+                "description": "The user id for the subaccount"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves all open positions for the authenticated account. Returns position details including size, average entry price, mark price, unrealized P&L, initial margin, maintenance margin, and other position-related information.\n\nResults can be filtered by currency and instrument kind (future, option, etc.). To retrieve positions for a specific subaccount, use the `subaccount_id` parameter.\n\n**Scope:** `trade:read`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_p"
+        },
+        {
+          "info": {
+            "name": "GET /private/get_position",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/private/get_position",
+            "params": [
+              {
+                "name": "instrument_name",
+                "value": "",
+                "type": "query",
+                "description": "Instrument name"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves the open position for a specific instrument. Returns detailed position information including size, average entry price, mark price, unrealized P&L, initial margin, maintenance margin, and other position-related metrics.\n\nIf no position exists for the specified instrument, the response will indicate a zero position.\n\n**Scope:** `trade:read`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_position)\n\n"
+        },
+        {
+          "info": {
+            "name": "GET /private/get_account_summary",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/private/get_account_summary",
+            "params": [
+              {
+                "name": "currency",
+                "value": "",
+                "type": "query",
+                "description": "The currency symbol"
+              },
+              {
+                "name": "subaccount_id",
+                "value": "",
+                "type": "query",
+                "description": "The user id for the subaccount"
+              },
+              {
+                "name": "extended",
+                "value": "",
+                "type": "query",
+                "description": "Include additional fields"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves the account summary for a specific currency. The summary includes balance, equity, available funds, initial margin, maintenance margin, and other margin-related information.\n\nTo retrieve the summary for a specific subaccount, use the `subaccount_id` parameter. When the `extended` parameter is set to `true`, additional account details such as account ID, username, email, and account type are included.\n\n**Scope:** `account:read`\n\n[Try in API console](https://test.deribit.com/api_console?"
+        },
+        {
+          "info": {
+            "name": "GET /private/get_account_summaries",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/private/get_account_summaries",
+            "params": [
+              {
+                "name": "subaccount_id",
+                "value": "",
+                "type": "query",
+                "description": "The user id for the subaccount"
+              },
+              {
+                "name": "extended",
+                "value": "",
+                "type": "query",
+                "description": "Include additional fields"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves a per-currency list of account summaries for the authenticated user. Each summary includes balance, equity, available funds, and margin information for each currency.\n\nTo retrieve summaries for a specific subaccount, use the `subaccount_id` parameter. When the `extended` parameter is set to `true`, additional account details such as account ID, username, email, and account type are included.\n\n**Scope:** `account:read`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2"
+        },
+        {
+          "info": {
+            "name": "GET /private/pme/simulate",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/private/pme/simulate",
+            "params": [
+              {
+                "name": "currency",
+                "value": "",
+                "type": "query",
+                "description": "The currency for which the Extended Risk Matrix will be calculated. Use `CROSS` for Cross Collateral simulation."
+              },
+              {
+                "name": "add_positions",
+                "value": "",
+                "type": "query",
+                "description": "If `true`, adds simulated positions to current positions, otherwise uses only simulated positions. By default `true`"
+              },
+              {
+                "name": "simulated_positions",
+                "value": "",
+                "type": "query",
+                "description": "Object with positions in following form: `{InstrumentName1: Position1, InstrumentName2: Position2...}`, for example `{\"BTC-PERPETUAL\": -1.0}` (or corresponding URI-encoding for GET). Size in base currency."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Calculates the Extended Risk Matrix (ERM) and detailed margin information for Portfolio Margin accounts. The ERM provides a comprehensive view of portfolio risk across different scenarios and market conditions.\n\nYou can calculate the ERM for a specific currency or for the entire Cross-Collateral portfolio. The response includes margin requirements, risk metrics, and scenario analysis that helps assess portfolio risk under various market conditions.\n\nUse this method to understand margin requireme"
+        },
+        {
+          "info": {
+            "name": "GET /private/simulate_portfolio",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/private/simulate_portfolio",
+            "params": [
+              {
+                "name": "currency",
+                "value": "",
+                "type": "query",
+                "description": "The currency symbol"
+              },
+              {
+                "name": "add_positions",
+                "value": "",
+                "type": "query",
+                "description": "If `true`, adds simulated positions to current positions, otherwise uses only simulated positions. By default `true`"
+              },
+              {
+                "name": "simulated_positions",
+                "value": "",
+                "type": "query",
+                "description": "Object with positions in following form: `{InstrumentName1: Position1, InstrumentName2: Position2...}`, for example `{\"BTC-PERPETUAL\": -1000.0}` (or corresponding URI-encoding for GET). For futures in USD, for options in base currency."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Calculates portfolio margin requirements and risk metrics for simulated positions or the current portfolio. This method helps you understand margin requirements before opening new positions or assess the impact of potential trades.\n\nYou can simulate adding new positions to the current portfolio or calculate margin for a completely simulated portfolio. The response includes initial margin, maintenance margin, available funds, and other risk metrics.\n\n**Note:** This method has a restricted rate li"
+        },
+        {
+          "info": {
+            "name": "GET /private/get_access_log",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/private/get_access_log",
+            "params": [
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The offset for pagination, default - `0`"
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "Number of requested items, default - `10`, maximum - `1000`"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves a log of API access attempts and authentication events for the authenticated account. The log includes information such as IP addresses, timestamps, API methods called, and authentication status.\n\nUse this method to monitor account security, review API usage patterns, and identify unauthorized access attempts. Results can be paginated using the `offset` and `count` parameters.\n\n**Scope:** `account:read`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_"
+        },
+        {
+          "info": {
+            "name": "GET /private/get_affiliate_program_info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/private/get_affiliate_program_info",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves information about the affiliate program status for the authenticated account. The response includes the number of referred affiliates, total payouts earned, pending payouts, and the unique affiliate referral link.\n\nUse this method to track your affiliate program performance and earnings.\n\n**📖 Related Support Article:** [Affiliate Program](https://support.deribit.com/hc/en-us/articles/25944777728797-Affiliate-Program)\n\n**Scope:** `account:read`\n\n[Try in API console](https://test.deribi"
+        },
+        {
+          "info": {
+            "name": "GET /private/enable_affiliate_program",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/private/enable_affiliate_program",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Enables the affiliate program for the authenticated account. Once enabled, you can earn commissions by referring new users to Deribit.\n\nAfter enabling, you will receive a unique affiliate link that can be shared with potential users. Commissions are paid based on the trading activity of referred users.\n\n**📖 Related Support Article:** [Affiliate Program](https://support.deribit.com/hc/en-us/articles/25944777728797-Affiliate-Program)\n\n**Scope:** `account:read_write`\n\n[Try in API console](https://"
+        },
+        {
+          "info": {
+            "name": "GET /private/change_margin_model",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/private/change_margin_model",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "Id of a (sub)account - by default current user id is used"
+              },
+              {
+                "name": "margin_model",
+                "value": "",
+                "type": "query",
+                "description": "Margin model"
+              },
+              {
+                "name": "dry_run",
+                "value": "",
+                "type": "query",
+                "description": "If `true` request returns the result without switching the margining model. Default: `false`"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Changes the margin model for the authenticated account or a specified subaccount. Margin models determine how margin requirements are calculated (e.g., Standard Margin vs. Portfolio Margin).\n\nChanging the margin model may affect margin requirements, available funds, and trading capabilities. Use the `dry_run` parameter to preview the impact of the change before applying it.\n\n**📖 Related Article:** [Margin types and usage](https://support.deribit.com/hc/en-us/articles/25944811317149-Margin-types"
+        },
+        {
+          "info": {
+            "name": "GET /private/get_user_locks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/private/get_user_locks",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves information about any account locks or restrictions currently active on the authenticated account. Account locks may be applied for security reasons, compliance requirements, or administrative purposes.\n\nThe response includes details about the type of lock, reason, and duration (if applicable). Some locks may prevent trading, withdrawals, or other account operations.\n\n**📖 Related Support Article:** [Emergency locking an account](https://support.deribit.com/hc/en-us/articles/2594460271"
+        },
+        {
+          "info": {
+            "name": "GET /private/set_self_trading_config",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/private/set_self_trading_config",
+            "params": [
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Self trading prevention behavior: `reject_taker` (reject the incoming order), `cancel_maker` (cancel the matched order in the book)"
+              },
+              {
+                "name": "extended_to_subaccounts",
+                "value": "",
+                "type": "query",
+                "description": "If value is `true` trading is prevented between subaccounts of given account, otherwise they are treated separately"
+              },
+              {
+                "name": "block_rfq_self_match_prevention",
+                "value": "",
+                "type": "query",
+                "description": "When Block RFQ Self Match Prevention is enabled, it ensures that RFQs cannot be executed between accounts that belong to the same legal entity. This setting is independent of the general self-match prevention settings and must be configured separately."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Configures self-trading prevention settings for the account. Self-trading occurs when orders from the same account (or related subaccounts) match against each other.\n\nYou can configure whether self-trading is allowed, blocked, or allowed only for specific scenarios. Settings can be extended to apply to subaccounts as well. For Block RFQ trading, separate self-match prevention settings are available.\n\n**📖 Related Support Article:** [Account settings page](https://support.deribit.com/hc/en-us/art"
+        },
+        {
+          "info": {
+            "name": "GET /private/set_disabled_trading_products",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/private/set_disabled_trading_products",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "Id of a (sub)account"
+              },
+              {
+                "name": "trading_products",
+                "value": "",
+                "type": "query",
+                "description": "List of available trading products. Available products: perpetual, futures, options, future_combos, option_combos, spots\n"
+              }
+            ]
+          },
+          "docs": "Configures which trading products (instruments, currencies, or instrument types) are disabled for a subaccount. Disabled products cannot be traded by the subaccount, providing a way to restrict trading activities.\n\nThis is useful for risk management and compliance purposes. Only the main account owner can modify trading product restrictions for subaccounts.\n\n**[TFA required](https://docs.deribit.com/articles/security-keys)**\n\n**Scope:** `account:read_write`\n\n[Try in API console](https://test.der"
+        },
+        {
+          "info": {
+            "name": "GET /private/disable_api_key",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/private/disable_api_key",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "API key ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Disables an API key, preventing it from being used to authenticate API requests. The key remains in your account but cannot be used until it is re-enabled.\n\nThis is useful for temporarily suspending access without permanently deleting the key. All requests using this key will be rejected until it is enabled again.\n\n**[TFA required](https://docs.deribit.com/articles/security-keys)**\n\n**📖 Related Article:** [Creating new API key on Deribit](https://docs.deribit.com/articles/creating-api-key)\n\n**S"
+        },
+        {
+          "info": {
+            "name": "GET /private/enable_api_key",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/private/enable_api_key",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "API key ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Enables a previously disabled API key, restoring its ability to authenticate API requests. The API key can be used immediately after being enabled.\n\n**📖 Related Article:** [Creating new API key on Deribit](https://docs.deribit.com/articles/creating-api-key)\n\n**Scope:** `account:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fenable_api_key)\n\n"
+        },
+        {
+          "info": {
+            "name": "GET /private/create_api_key",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/private/create_api_key",
+            "params": [
+              {
+                "name": "max_scope",
+                "value": "",
+                "type": "query",
+                "description": "Describes maximal access for tokens generated with given key. If scope is not provided, its value is set as none.\n\n**📖 Related Article:** [Access Scope](https://docs.deribit.com/articles/access-scope)\n"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Name of key (only letters, numbers and underscores allowed; maximum length - 16 characters)"
+              },
+              {
+                "name": "public_key",
+                "value": "",
+                "type": "query",
+                "description": "ED25519 or RSA PEM Encoded public key that should be used to create asymmetric API Key for signing requests/authentication requests with user's private key.<br></br> **📖 Related Article:** [Asymmetric API keys](https://docs.deribit.com/articles/asymmetric-api-keys)"
+              },
+              {
+                "name": "enabled_features",
+                "value": "",
+                "type": "query",
+                "description": "List of enabled advanced on-key features. Available options:<br> - `restricted_block_trades`: Limit the block_trade read the scope of the API key to block trades that have been made using this specific API key<br> - `block_trade_approval`: Block trades created using this API key require additional user approval. Methods that use `block_rfq` scope are not affected by Block Trade approval feature<br> "
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new API key with the specified scope and permissions. API keys are used for programmatic access to the Deribit API and can be restricted to specific operations and IP addresses.\n\nThe response includes both the API key ID and the secret key. Store the secret securely as it will not be displayed again. You can view the API key details (without the secret) using the `list_api_keys` method.\n\n**[TFA required](https://docs.deribit.com/articles/security-keys)**\n\n**📖 Related Articles:** \n- [C"
+        },
+        {
+          "info": {
+            "name": "GET /private/change_scope_in_api_key",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/private/change_scope_in_api_key",
+            "params": [
+              {
+                "name": "max_scope",
+                "value": "",
+                "type": "query",
+                "description": "Describes maximal access for tokens generated with given key. If scope is not provided, its value is set as none.\n\n**📖 Related Article:** [Access Scope](https://docs.deribit.com/articles/access-scope)\n"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "API key ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the scope (permissions) for an existing API key. The scope determines which operations the API key can perform (e.g., read-only, read-write, trading, etc.).\n\nWhen the scope is changed, the API key immediately loses access to operations outside the new scope. Applications using this key may need to be updated to reflect the new permissions.\n\n**[TFA required](https://docs.deribit.com/articles/security-keys)**\n\n**📖 Related Articles:** \n- [Creating new API key on Deribit](https://docs.derib"
+        },
+        {
+          "info": {
+            "name": "GET /private/change_api_key_name",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/private/change_api_key_name",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "API key ID"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Name of key (only letters, numbers and underscores allowed; maximum length - 16 characters)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the display name for an API key. The name is used for identification purposes in the API key list and does not affect the key's functionality or permissions.\n\n**📖 Related Article:** [Creating new API key on Deribit](https://docs.deribit.com/articles/creating-api-key)\n\n**Scope:** `account:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fchange_api_key_name)\n\n"
+        },
+        {
+          "info": {
+            "name": "GET /private/list_api_keys",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/private/list_api_keys"
+          },
+          "docs": "Retrieves a list of all API keys associated with the authenticated account. The response includes key details such as ID, name, scope, creation date, last usage, and status (enabled/disabled), but does not include the secret keys for security reasons.\n\nUse this method to review and manage your API keys, check their permissions, and monitor their usage.\n\n**[TFA required](https://docs.deribit.com/articles/security-keys)**\n\n**📖 Related Article:** [Creating new API key on Deribit](https://docs.deri"
+        },
+        {
+          "info": {
+            "name": "GET /private/reset_api_key",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/private/reset_api_key",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "API key ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generates a new secret key for an existing API key while keeping the same key ID and other properties. This is useful if the secret has been compromised or needs to be rotated for security purposes.\n\nThe old secret becomes invalid immediately, and the new secret is returned in the response. Store the new secret securely as it will not be displayed again. All applications using the old secret will need to be updated with the new secret.\n\n**📖 Related Article:** [Creating new API key on Deribit](h"
+        },
+        {
+          "info": {
+            "name": "GET /private/remove_api_key",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/private/remove_api_key",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "API key ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Permanently deletes an API key from your account. This operation cannot be undone. Once removed, the API key can no longer be used to authenticate requests, and all applications using this key will lose access.\n\nConsider disabling the key first if you want to temporarily suspend access, as disabled keys can be re-enabled later.\n\n**📖 Related Article:** [Creating new API key on Deribit](https://docs.deribit.com/articles/creating-api-key)\n\n**Scope:** `account:read_write`\n\n[Try in API console](http"
+        },
+        {
+          "info": {
+            "name": "GET /private/edit_api_key",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/private/edit_api_key",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "API key ID"
+              },
+              {
+                "name": "max_scope",
+                "value": "",
+                "type": "query",
+                "description": "Describes maximal access for tokens generated with given key. If scope is not provided, its value is set as none.\n\n**📖 Related Article:** [Access Scope](https://docs.deribit.com/articles/access-scope)\n"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Name of key (only letters, numbers and underscores allowed; maximum length - 16 characters)"
+              },
+              {
+                "name": "enabled",
+                "value": "",
+                "type": "query",
+                "description": "Enables/disables the API key. `true` to enable, `false` to disable"
+              },
+              {
+                "name": "enabled_features",
+                "value": "",
+                "type": "query",
+                "description": "List of enabled advanced on-key features. Available options:<br> - `restricted_block_trades`: Limit the block_trade read the scope of the API key to block trades that have been made using this specific API key<br> - `block_trade_approval`: Block trades created using this API key require additional user approval. Methods that use `block_rfq` scope are not affected by Block Trade approval feature<br> "
+              },
+              {
+                "name": "ip_whitelist",
+                "value": "",
+                "type": "query",
+                "description": "Whitelist provided IP address on a selected key"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates properties of an existing API key. You can modify the key name, scope, enabled status, features, and IP whitelist. At least one parameter must be provided.\n\nChanges take effect immediately. If you modify the scope, the API key will only have access to the newly specified permissions.\n\n**[TFA required](https://docs.deribit.com/articles/security-keys)**\n\n**📖 Related Articles:** \n- [Creating new API key on Deribit](https://docs.deribit.com/articles/creating-api-key)\n- [Access Scope](https:"
+        },
+        {
+          "info": {
+            "name": "GET /public/get_announcements",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/public/get_announcements",
+            "params": [
+              {
+                "name": "start_timestamp",
+                "value": "",
+                "type": "query",
+                "description": "The most recent timestamp to return the results for (milliseconds since the UNIX epoch)"
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "Maximum count of returned announcements, default - `5`, maximum - `50`"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves platform announcements and important notices. Announcements include system updates, maintenance schedules, new features, policy changes, and other important information.\n\nResults are returned in reverse chronological order (newest first). The default `start_timestamp` is the current time, and the `count` parameter must be between 1 and 50 (default is 5).\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_announcements)\n\n"
+        },
+        {
+          "info": {
+            "name": "GET /private/get_new_announcements",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/private/get_new_announcements",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves only unread announcements for the authenticated account. Announcements are marked as read when you use the `set_announcement_as_read` method or view them through the web interface.\n\nThis method is useful for displaying notification badges or highlighting new announcements that require the user's attention.\n\n**Scope:** `account:read`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_new_announcements)\n\n"
+        },
+        {
+          "info": {
+            "name": "GET /private/set_announcement_as_read",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/private/set_announcement_as_read",
+            "params": [
+              {
+                "name": "announcement_id",
+                "value": "",
+                "type": "query",
+                "description": "the ID of the announcement"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Marks a specific announcement as read. Once marked as read, the announcement will no longer appear in the `get_new_announcements` response, though it will still be available through `get_announcements`.\n\nThis helps track which announcements have been viewed and reduces notification clutter.\n\n**Scope:** `account:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fset_announcement_as_read)\n\n"
+        },
+        {
+          "info": {
+            "name": "GET /private/get_email_language",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/private/get_email_language",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves the currently configured language preference for email notifications. Returns the language code (e.g., `en`, `ko`, `zh`, `ja`, `ru`) that is used for all email communications sent to the account.\n\n**Scope:** `account:read`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_email_language)\n\n"
+        },
+        {
+          "info": {
+            "name": "GET /private/create_subaccount",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/private/create_subaccount",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new subaccount under the authenticated main account. Subaccounts allow you to organize trading activities and manage risk separately from the main account.\n\nThis method takes no parameters. The new subaccount will be created with default settings and can be configured using other subaccount management methods.\n\n**📖 Related Article:** [Managing Subaccounts](https://docs.deribit.com/articles/managing-subaccounts-api)\n\n**Scope:** `account:read_write` and mainaccount\n\n[Try in API console]"
+        },
+        {
+          "info": {
+            "name": "GET /private/change_subaccount_name",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/private/change_subaccount_name",
+            "params": [
+              {
+                "name": "sid",
+                "value": "",
+                "type": "query",
+                "description": "The user id for the subaccount"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "The new user name"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the display name (username) for a subaccount. The new name is used for identification purposes and does not affect the subaccount's functionality or access.\n\nOnly the main account owner can change subaccount names.\n\n**📖 Related Article:** [Managing Subaccounts](https://docs.deribit.com/articles/managing-subaccounts-api)\n\n**Scope:** `account:read_write` and mainaccount\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fchange_subaccount_name)\n\n"
+        },
+        {
+          "info": {
+            "name": "GET /private/set_email_language",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/private/set_email_language",
+            "params": [
+              {
+                "name": "language",
+                "value": "",
+                "type": "query",
+                "description": "The abbreviated language name. Valid values include `\"en\"`, `\"ko\"`, `\"zh\"`,  `\"ja\"`, `\"ru\"`"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Sets the preferred language for email notifications sent to the authenticated account. Supported languages include English (`en`), Korean (`ko`), Chinese (`zh`), Japanese (`ja`), and Russian (`ru`).\n\nAll future email notifications will be sent in the selected language. This setting does not affect the language of the web interface or API responses.\n\n**Scope:** `account:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fset_email_language)\n\n"
+        },
+        {
+          "info": {
+            "name": "GET /private/set_email_for_subaccount",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/private/set_email_for_subaccount",
+            "params": [
+              {
+                "name": "sid",
+                "value": "",
+                "type": "query",
+                "description": "The user id for the subaccount"
+              },
+              {
+                "name": "email",
+                "value": "",
+                "type": "query",
+                "description": "The email address for the subaccount"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Assigns an email address to a subaccount. This email can be used for direct login to the subaccount and for receiving notifications.\n\nThe email address owner will receive a confirmation email with a link to verify the email address. The email must be confirmed before it can be used for login.\n\n**[TFA required](https://docs.deribit.com/articles/security-keys)**\n\n**📖 Related Article:** [Managing Subaccounts](https://docs.deribit.com/articles/managing-subaccounts-api)\n\n**Scope:** `account:read_wri"
+        },
+        {
+          "info": {
+            "name": "GET /private/toggle_subaccount_login",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/private/toggle_subaccount_login",
+            "params": [
+              {
+                "name": "sid",
+                "value": "",
+                "type": "query",
+                "description": "The user id for the subaccount"
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query",
+                "description": "enable or disable login."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Enables or disables direct login access for a subaccount. When login is disabled, the subaccount cannot be accessed directly using email and password authentication, but can still be accessed through the main account.\n\nIf login is disabled while an active session exists for the subaccount, that session will be immediately terminated.\n\n**[TFA required](https://docs.deribit.com/articles/security-keys)**\n\n**📖 Related Article:** [Managing Subaccounts](https://docs.deribit.com/articles/managing-suba"
+        },
+        {
+          "info": {
+            "name": "GET /private/toggle_notifications_from_subaccount",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/private/toggle_notifications_from_subaccount",
+            "params": [
+              {
+                "name": "sid",
+                "value": "",
+                "type": "query",
+                "description": "The user id for the subaccount"
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query",
+                "description": "enable (`true`) or disable (`false`) notifications"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Enables or disables email and other notifications for a subaccount. When notifications are disabled, the subaccount will not receive email alerts, trade confirmations, or other notification messages.\n\nThis setting only affects notifications sent to the subaccount's email address. Notifications sent to the main account are not affected.\n\n**[TFA required](https://docs.deribit.com/articles/security-keys)**\n\n**📖 Related Article:** [Managing Subaccounts](https://docs.deribit.com/articles/managing-su"
+        },
+        {
+          "info": {
+            "name": "GET /private/get_subaccounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/private/get_subaccounts",
+            "params": [
+              {
+                "name": "with_portfolio",
+                "value": "",
+                "type": "query",
+                "description": "Portfolio flag: `true` for portfolio information, `false` for subaccount information only. `false` by default"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves information about all subaccounts associated with the main account. Returns details such as subaccount IDs, names, and status.\n\nWhen called from a subaccount, the response includes limited details for the main account and full details for the subaccount initiating the request.\n\nSet the `with_portfolio` parameter to `true` to include portfolio information (balances, positions, etc.) in the response. By default, only subaccount metadata is returned.\n\n**📖 Related Article:** [Managing Sub"
+        },
+        {
+          "info": {
+            "name": "GET /private/get_subaccounts_details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/private/get_subaccounts_details",
+            "params": [
+              {
+                "name": "currency",
+                "value": "",
+                "type": "query",
+                "description": "The currency symbol"
+              },
+              {
+                "name": "with_open_orders",
+                "value": "",
+                "type": "query",
+                "description": "Optional parameter to ask for open orders list, default: `false`"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves position details for all subaccounts for a specific currency. Returns positions aggregated across all subaccounts, including size, average entry price, mark price, and P&L information.\n\nOptionally include open orders for each subaccount by setting the `with_open_orders` parameter to `true`.\n\n**📖 Related Article:** [Managing Subaccounts](https://docs.deribit.com/articles/managing-subaccounts-api)\n\n**Scope:** `account:read`\n\n[Try in API console](https://test.deribit.com/api_console?meth"
+        },
+        {
+          "info": {
+            "name": "GET /private/remove_subaccount",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/private/remove_subaccount",
+            "params": [
+              {
+                "name": "subaccount_id",
+                "value": "",
+                "type": "query",
+                "description": "The user id for the subaccount"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Permanently removes a subaccount. The subaccount must be empty (no positions, no open orders, and zero balance) before it can be removed.\n\nThis operation cannot be undone. All subaccount data will be permanently deleted.\n\n**[TFA required](https://docs.deribit.com/articles/security-keys)**\n\n**📖 Related Article:** [Managing Subaccounts](https://docs.deribit.com/articles/managing-subaccounts-api)\n\n**Scope:** `account:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2F"
+        },
+        {
+          "info": {
+            "name": "GET /private/get_transaction_log",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/private/get_transaction_log",
+            "params": [
+              {
+                "name": "currency",
+                "value": "",
+                "type": "query",
+                "description": "The currency symbol"
+              },
+              {
+                "name": "start_timestamp",
+                "value": "",
+                "type": "query",
+                "description": "The earliest timestamp to return result from (milliseconds since the UNIX epoch)"
+              },
+              {
+                "name": "end_timestamp",
+                "value": "",
+                "type": "query",
+                "description": "The most recent timestamp to return result from (milliseconds since the UNIX epoch)"
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "The following keywords can be used to filter the results: `trade`, `maker`, `taker`, `open`, `close`, `liquidation`, `buy`, `sell`, `withdrawal`, `delivery`, `settlement`, `deposit`, `transfer`, `option`, `future`, `correction`, `block_trade`, `swap`. Plus withdrawal or transfer addresses"
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "Count of transaction log entries returned, default - `100`, maximum - `250`"
+              },
+              {
+                "name": "subaccount_id",
+                "value": "",
+                "type": "query",
+                "description": "Id of a subaccount"
+              },
+              {
+                "name": "continuation",
+                "value": "",
+                "type": "query",
+                "description": "Continuation token for pagination"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves a detailed transaction log for the authenticated account. The log includes all account activities such as trades, deposits, withdrawals, transfers, fees, and other balance-affecting operations.\n\nResults can be filtered by currency, time range, and transaction type. Use the `continuation` parameter for pagination when retrieving large transaction histories. To retrieve transactions for a specific subaccount, use the `subaccount_id` parameter.\n\n**History Limit:** This API method has **no"
+        },
+        {
+          "info": {
+            "name": "GET /private/list_custody_accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/private/list_custody_accounts",
+            "params": [
+              {
+                "name": "currency",
+                "value": "",
+                "type": "query",
+                "description": "The currency symbol"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves a list of all custody accounts associated with the authenticated account for a specific currency. Custody accounts are used for clients who require segregated custody of their assets.\n\nThe response includes custody account details such as account name, status, balances, and configuration settings.\n\n**📖 Related Support Article:** [Custody Options](https://support.deribit.com/hc/en-us/articles/26533163120413-Custody-Options)\n\n[Try in API console](https://test.deribit.com/api_console?met"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

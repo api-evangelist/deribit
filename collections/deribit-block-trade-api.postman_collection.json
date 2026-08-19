@@ -1,0 +1,1405 @@
+{
+  "item": [
+    {
+      "id": "304f4545-70a8-467d-8ab8-d32d6c92a217",
+      "name": "Block Trade",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e9f02a87-7e37-4145-8ade-604672a361d6",
+          "name": "Checks if a block trade can be executed without actually executing it. Use this method to verify that a block trade will succeed before proceeding with the actual execution.\n\n**📖 Related Article:** [Block Trading](https://docs.deribit.com/articles/block-trading-api)\n\n**Scope:** `block_trade:read`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fsimulate_block_trade)\n\n",
+          "request": {
+            "name": "Checks if a block trade can be executed without actually executing it. Use this method to verify that a block trade will succeed before proceeding with the actual execution.\n\n**📖 Related Article:** [Block Trading](https://docs.deribit.com/articles/block-trading-api)\n\n**Scope:** `block_trade:read`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fsimulate_block_trade)\n\n",
+            "description": {
+              "content": "Checks if a block trade can be executed without actually executing it. Use this method to verify that a block trade will succeed before proceeding with the actual execution.\n\n**📖 Related Article:** [Block Trading](https://docs.deribit.com/articles/block-trading-api)\n\n**Scope:** `block_trade:read`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fsimulate_block_trade)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "private",
+                "simulate_block_trade"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "role",
+                  "value": "<string>",
+                  "description": "Describes if user wants to be maker or taker of trades"
+                },
+                {
+                  "disabled": false,
+                  "key": "trades",
+                  "value": "{\"instrument_name\":\"<string>\",\"price\":\"<number>\",\"amount\":\"<number>\",\"direction\":\"<string>\"}",
+                  "description": "(Required) List of trades for block trade"
+                },
+                {
+                  "disabled": false,
+                  "key": "trades",
+                  "value": "{\"instrument_name\":\"<string>\",\"price\":\"<number>\",\"amount\":\"<number>\",\"direction\":\"<string>\"}",
+                  "description": "(Required) List of trades for block trade"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"method\": \"private/simulate_block_trade\",\n  \"params\": {\n    \"role\": \"maker\",\n    \"trades\": [\n      {\n        \"instrument_name\": \"BTC-PERPETUAL\",\n        \"direction\": \"buy\",\n        \"price\": 11624,\n        \"amount\": 40\n      },\n      {\n        \"instrument_name\": \"BTC-9AUG19-10250-P\",\n        \"direction\": \"buy\",\n        \"amount\": 1.2,\n        \"price\": 0.0707\n      }\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3024131e-17d5-412e-9c41-4340e75aab3d",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "private",
+                    "simulate_block_trade"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "role",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "trades",
+                      "value": "[object Object]"
+                    },
+                    {
+                      "key": "trades",
+                      "value": "[object Object]"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"method\": \"private/simulate_block_trade\",\n  \"params\": {\n    \"role\": \"maker\",\n    \"trades\": [\n      {\n        \"instrument_name\": \"BTC-PERPETUAL\",\n        \"direction\": \"buy\",\n        \"price\": 11624,\n        \"amount\": 40\n      },\n      {\n        \"instrument_name\": \"BTC-9AUG19-10250-P\",\n        \"direction\": \"buy\",\n        \"amount\": 1.2,\n        \"price\": 0.0707\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"result\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "00f0a834-9b8c-4259-b4bd-c753fbbe3020",
+          "name": "Verifies and creates a block trade signature. This is the first step in the block trade workflow - the first party calls this method to generate a signature that must be shared with the second party.\n\n**Note:** In the API, the `direction` field is always expressed from the maker's perspective. This means that when you accept a block trade as a taker, the direction shown in the API represents the opposite side of your trade. For example, if you are buying puts as a taker, the API will show the operation as a \"sell put\" (maker's perspective), and you will be verifying and accepting a \"sell put\" block trade.\n\n**📖 Related Article:** [Block Trading](https://docs.deribit.com/articles/block-trading-api)\n\n**Scope:** `block_trade:read`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fverify_block_trade)\n\n",
+          "request": {
+            "name": "Verifies and creates a block trade signature. This is the first step in the block trade workflow - the first party calls this method to generate a signature that must be shared with the second party.\n\n**Note:** In the API, the `direction` field is always expressed from the maker's perspective. This means that when you accept a block trade as a taker, the direction shown in the API represents the opposite side of your trade. For example, if you are buying puts as a taker, the API will show the operation as a \"sell put\" (maker's perspective), and you will be verifying and accepting a \"sell put\" block trade.\n\n**📖 Related Article:** [Block Trading](https://docs.deribit.com/articles/block-trading-api)\n\n**Scope:** `block_trade:read`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fverify_block_trade)\n\n",
+            "description": {
+              "content": "Verifies and creates a block trade signature. This is the first step in the block trade workflow - the first party calls this method to generate a signature that must be shared with the second party.\n\n**Note:** In the API, the `direction` field is always expressed from the maker's perspective. This means that when you accept a block trade as a taker, the direction shown in the API represents the opposite side of your trade. For example, if you are buying puts as a taker, the API will show the operation as a \"sell put\" (maker's perspective), and you will be verifying and accepting a \"sell put\" block trade.\n\n**📖 Related Article:** [Block Trading](https://docs.deribit.com/articles/block-trading-api)\n\n**Scope:** `block_trade:read`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fverify_block_trade)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "private",
+                "verify_block_trade"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "timestamp",
+                  "value": "<integer>",
+                  "description": "(Required) Timestamp, shared with other party (milliseconds since the UNIX epoch)"
+                },
+                {
+                  "disabled": false,
+                  "key": "nonce",
+                  "value": "<string>",
+                  "description": "(Required) Nonce, shared with other party"
+                },
+                {
+                  "disabled": false,
+                  "key": "role",
+                  "value": "<string>",
+                  "description": "(Required) Describes if user wants to be maker or taker of trades"
+                },
+                {
+                  "disabled": false,
+                  "key": "trades",
+                  "value": "{\"instrument_name\":\"<string>\",\"price\":\"<number>\",\"amount\":\"<number>\",\"direction\":\"<string>\"}",
+                  "description": "(Required) List of trades for block trade"
+                },
+                {
+                  "disabled": false,
+                  "key": "trades",
+                  "value": "{\"instrument_name\":\"<string>\",\"price\":\"<number>\",\"amount\":\"<number>\",\"direction\":\"<string>\"}",
+                  "description": "(Required) List of trades for block trade"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"method\": \"private/verify_block_trade\",\n  \"params\": {\n    \"nonce\": \"okpdjkdo\",\n    \"timestamp\": 1565172650935,\n    \"role\": \"maker\",\n    \"trades\": [\n      {\n        \"instrument_name\": \"BTC-PERPETUAL\",\n        \"direction\": \"buy\",\n        \"price\": 11624,\n        \"amount\": 40\n      },\n      {\n        \"instrument_name\": \"BTC-9AUG19-10250-P\",\n        \"direction\": \"buy\",\n        \"amount\": 1.2,\n        \"price\": 0.0707\n      }\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "bbf36e8c-b4d6-4f08-aace-eb6d07537c2c",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "private",
+                    "verify_block_trade"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "timestamp",
+                      "value": "1536569522277"
+                    },
+                    {
+                      "key": "nonce",
+                      "value": "bF1_gfgcsd"
+                    },
+                    {
+                      "key": "role",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "trades",
+                      "value": "[object Object]"
+                    },
+                    {
+                      "key": "trades",
+                      "value": "[object Object]"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"method\": \"private/verify_block_trade\",\n  \"params\": {\n    \"nonce\": \"okpdjkdo\",\n    \"timestamp\": 1565172650935,\n    \"role\": \"maker\",\n    \"trades\": [\n      {\n        \"instrument_name\": \"BTC-PERPETUAL\",\n        \"direction\": \"buy\",\n        \"price\": 11624,\n        \"amount\": 40\n      },\n      {\n        \"instrument_name\": \"BTC-9AUG19-10250-P\",\n        \"direction\": \"buy\",\n        \"amount\": 1.2,\n        \"price\": 0.0707\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"result\": {\n    \"signature\": \"1565172710935.1ESE83qh.g6fbgRd4VWagaJz7xdi2WaV-q-d3J0njoz1jZavuRudZJZif9uH8XdUAx1LHsu0E3e0ZG_xe1UPYlwo41xRVrkWU6OMgygDRafUkEmBuk9iLqjc9rh4\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e3050158-5f1f-4731-943f-6babcfcbce5a",
+          "name": "Executes a block trade. This is the second step in the block trade workflow - the second party calls this method with the signature received from the first party to execute the trade.\n\nThe whole request must be exactly the same as in [private/verify_block_trade](https://docs.deribit.com/api-reference/block-trade/private-verify_block_trade), only the `role` field should be set appropriately - this means that both sides have to agree on the same `timestamp`, `nonce`, and `trades` fields, and the server will ensure that the `role` field is different between sides (each party accepts their own role).\n\nUsing the same `timestamp` and `nonce` by both sides in [private/verify_block_trade](https://docs.deribit.com/api-reference/block-trade/private-verify_block_trade) ensures that even if unintentionally both sides execute the given block trade with a valid `counterparty_signature`, the block trade will be executed only once.\n\n**Note:** In the API, the `direction` field is always expressed from the maker's perspective. This means that when you accept a block trade as a taker, the direction shown in the API represents the opposite side of your trade. For example, if you are buying puts as a taker, the API will show the operation as a \"sell put\" (maker's perspective), and you will be verifying and accepting a \"sell put\" block trade.\n\n**📖 Related Article:** [Block Trading](https://docs.deribit.com/articles/block-trading-api)\n\n**Scope:** `block_trade:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fexecute_block_trade)\n\n",
+          "request": {
+            "name": "Executes a block trade. This is the second step in the block trade workflow - the second party calls this method with the signature received from the first party to execute the trade.\n\nThe whole request must be exactly the same as in [private/verify_block_trade](https://docs.deribit.com/api-reference/block-trade/private-verify_block_trade), only the `role` field should be set appropriately - this means that both sides have to agree on the same `timestamp`, `nonce`, and `trades` fields, and the server will ensure that the `role` field is different between sides (each party accepts their own role).\n\nUsing the same `timestamp` and `nonce` by both sides in [private/verify_block_trade](https://docs.deribit.com/api-reference/block-trade/private-verify_block_trade) ensures that even if unintentionally both sides execute the given block trade with a valid `counterparty_signature`, the block trade will be executed only once.\n\n**Note:** In the API, the `direction` field is always expressed from the maker's perspective. This means that when you accept a block trade as a taker, the direction shown in the API represents the opposite side of your trade. For example, if you are buying puts as a taker, the API will show the operation as a \"sell put\" (maker's perspective), and you will be verifying and accepting a \"sell put\" block trade.\n\n**📖 Related Article:** [Block Trading](https://docs.deribit.com/articles/block-trading-api)\n\n**Scope:** `block_trade:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fexecute_block_trade)\n\n",
+            "description": {
+              "content": "Executes a block trade. This is the second step in the block trade workflow - the second party calls this method with the signature received from the first party to execute the trade.\n\nThe whole request must be exactly the same as in [private/verify_block_trade](https://docs.deribit.com/api-reference/block-trade/private-verify_block_trade), only the `role` field should be set appropriately - this means that both sides have to agree on the same `timestamp`, `nonce`, and `trades` fields, and the server will ensure that the `role` field is different between sides (each party accepts their own role).\n\nUsing the same `timestamp` and `nonce` by both sides in [private/verify_block_trade](https://docs.deribit.com/api-reference/block-trade/private-verify_block_trade) ensures that even if unintentionally both sides execute the given block trade with a valid `counterparty_signature`, the block trade will be executed only once.\n\n**Note:** In the API, the `direction` field is always expressed from the maker's perspective. This means that when you accept a block trade as a taker, the direction shown in the API represents the opposite side of your trade. For example, if you are buying puts as a taker, the API will show the operation as a \"sell put\" (maker's perspective), and you will be verifying and accepting a \"sell put\" block trade.\n\n**📖 Related Article:** [Block Trading](https://docs.deribit.com/articles/block-trading-api)\n\n**Scope:** `block_trade:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fexecute_block_trade)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "private",
+                "execute_block_trade"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "timestamp",
+                  "value": "<integer>",
+                  "description": "(Required) Timestamp, shared with other party (milliseconds since the UNIX epoch)"
+                },
+                {
+                  "disabled": false,
+                  "key": "nonce",
+                  "value": "<string>",
+                  "description": "(Required) Nonce, shared with other party"
+                },
+                {
+                  "disabled": false,
+                  "key": "role",
+                  "value": "<string>",
+                  "description": "(Required) Describes if user wants to be maker or taker of trades"
+                },
+                {
+                  "disabled": false,
+                  "key": "trades",
+                  "value": "{\"instrument_name\":\"<string>\",\"price\":\"<number>\",\"amount\":\"<number>\",\"direction\":\"<string>\"}",
+                  "description": "(Required) List of trades for block trade"
+                },
+                {
+                  "disabled": false,
+                  "key": "trades",
+                  "value": "{\"instrument_name\":\"<string>\",\"price\":\"<number>\",\"amount\":\"<number>\",\"direction\":\"<string>\"}",
+                  "description": "(Required) List of trades for block trade"
+                },
+                {
+                  "disabled": false,
+                  "key": "counterparty_signature",
+                  "value": "<string>",
+                  "description": "(Required) Signature of block trade generated by `private/verify_block_trade_method`"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"method\": \"private/execute_block_trade\",\n  \"params\": {\n    \"nonce\": \"bszyprbq\",\n    \"timestamp\": 1590485535899,\n    \"role\": \"maker\",\n    \"trades\": [\n      {\n        \"instrument_name\": \"BTC-PERPETUAL\",\n        \"direction\": \"sell\",\n        \"price\": 8900,\n        \"amount\": 200000\n      },\n      {\n        \"instrument_name\": \"BTC-28MAY20-9000-C\",\n        \"direction\": \"sell\",\n        \"amount\": 5,\n        \"price\": 0.0133\n      }\n    ],\n    \"counterparty_signature\": \"1590485595899.1Mn52L_Q.lNyNBzXXo-_QBT_wDuMgnhA7uS9tBqdQ5TLN6rxbuoAiQhyaJYGJrm5IV_9enp9niY_x8D60AJLm3yEKPUY1Dv3T0TW0n5-ADPpJF7Fpj0eVDZpZ6QCdX8snBWrSJ0TtqevnO64RCBlN1dIm2T70PP9dlhiqPDAUYI4fpB1vLYI\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "753d1977-08ba-4d32-b01a-5f4ce8a8df53",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "private",
+                    "execute_block_trade"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "timestamp",
+                      "value": "1536569522277"
+                    },
+                    {
+                      "key": "nonce",
+                      "value": "bF1_gfgcsd"
+                    },
+                    {
+                      "key": "role",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "trades",
+                      "value": "[object Object]"
+                    },
+                    {
+                      "key": "trades",
+                      "value": "[object Object]"
+                    },
+                    {
+                      "key": "counterparty_signature",
+                      "value": "1565173369982.1M9tO0Q-.z9n9WyZUU5op9pEz6Jtd2CI71QxQMMsCZAexnIfK9HQRT1pKH3clxeIbY7Bqm-yMcWIoE3IfCDPW5VEdiN-6oS0YkKUyXPD500MUf3ULKhfkmH81EZs"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"method\": \"private/execute_block_trade\",\n  \"params\": {\n    \"nonce\": \"bszyprbq\",\n    \"timestamp\": 1590485535899,\n    \"role\": \"maker\",\n    \"trades\": [\n      {\n        \"instrument_name\": \"BTC-PERPETUAL\",\n        \"direction\": \"sell\",\n        \"price\": 8900,\n        \"amount\": 200000\n      },\n      {\n        \"instrument_name\": \"BTC-28MAY20-9000-C\",\n        \"direction\": \"sell\",\n        \"amount\": 5,\n        \"price\": 0.0133\n      }\n    ],\n    \"counterparty_signature\": \"1590485595899.1Mn52L_Q.lNyNBzXXo-_QBT_wDuMgnhA7uS9tBqdQ5TLN6rxbuoAiQhyaJYGJrm5IV_9enp9niY_x8D60AJLm3yEKPUY1Dv3T0TW0n5-ADPpJF7Fpj0eVDZpZ6QCdX8snBWrSJ0TtqevnO64RCBlN1dIm2T70PP9dlhiqPDAUYI4fpB1vLYI\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"result\": {\n    \"trades\": [\n      {\n        \"trade_seq\": 37,\n        \"trade_id\": \"92437\",\n        \"timestamp\": 1565089523719,\n        \"tick_direction\": 3,\n        \"state\": \"filled\",\n        \"price\": 0.0001,\n        \"order_type\": \"limit\",\n        \"order_id\": \"343062\",\n        \"matching_id\": null,\n        \"liquidity\": \"T\",\n        \"iv\": 0,\n        \"instrument_name\": \"BTC-9AUG19-10250-C\",\n        \"index_price\": 11738,\n        \"fee_currency\": \"BTC\",\n        \"fee\": 0.00025,\n        \"direction\": \"sell\",\n        \"block_trade_id\": \"61\",\n        \"amount\": 10\n      },\n      {\n        \"trade_seq\": 25350,\n        \"trade_id\": \"92435\",\n        \"timestamp\": 1565089523719,\n        \"tick_direction\": 3,\n        \"state\": \"filled\",\n        \"price\": 11590,\n        \"order_type\": \"limit\",\n        \"order_id\": \"343058\",\n        \"matching_id\": null,\n        \"liquidity\": \"T\",\n        \"instrument_name\": \"BTC-PERPETUAL\",\n        \"index_price\": 11737.98,\n        \"fee_currency\": \"BTC\",\n        \"fee\": 0.00000164,\n        \"direction\": \"buy\",\n        \"block_trade_id\": \"61\",\n        \"amount\": 190\n      }\n    ],\n    \"timestamp\": 1565089523720,\n    \"id\": \"61\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1d6a7dce-d9eb-4225-be4b-757d075994dd",
+          "name": "Invalidates a block trade signature, effectively cancelling the block trade. This can be called at any time before [private/execute_block_trade](https://docs.deribit.com/api-reference/block-trade/private-execute_block_trade) is called.\n\n**📖 Related Article:** [Block Trading](https://docs.deribit.com/articles/block-trading-api)\n\n**Scope:** `block_trade:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Finvalidate_block_trade_signature)\n\n",
+          "request": {
+            "name": "Invalidates a block trade signature, effectively cancelling the block trade. This can be called at any time before [private/execute_block_trade](https://docs.deribit.com/api-reference/block-trade/private-execute_block_trade) is called.\n\n**📖 Related Article:** [Block Trading](https://docs.deribit.com/articles/block-trading-api)\n\n**Scope:** `block_trade:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Finvalidate_block_trade_signature)\n\n",
+            "description": {
+              "content": "Invalidates a block trade signature, effectively cancelling the block trade. This can be called at any time before [private/execute_block_trade](https://docs.deribit.com/api-reference/block-trade/private-execute_block_trade) is called.\n\n**📖 Related Article:** [Block Trading](https://docs.deribit.com/articles/block-trading-api)\n\n**Scope:** `block_trade:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Finvalidate_block_trade_signature)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "private",
+                "invalidate_block_trade_signature"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "signature",
+                  "value": "<string>",
+                  "description": "(Required) Signature of block trade that will be invalidated"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"method\": \"private/invalidate_block_trade_signature\",\n  \"params\": {\n    \"signature\": \"1565173369982.1M9tO0Q-.z9n9WyZUU5op9pEz6Jtd2CI71QxQMMsCZAexnIfK9HQRT1pKH3clxeIbY7Bqm-yMcWIoE3IfCDPW5VEdiN-6oS0YkKUyXPD500MUf3ULKhfkmH81EZs\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e187c744-1af8-4c95-949d-68b2b9f44042",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "private",
+                    "invalidate_block_trade_signature"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "signature",
+                      "value": "1565173369982.1M9tO0Q-.z9n9WyZUU5op9pEz6Jtd2CI71QxQMMsCZAexnIfK9HQRT1pKH3clxeIbY7Bqm-yMcWIoE3IfCDPW5VEdiN-6oS0YkKUyXPD500MUf3ULKhfkmH81EZs"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"method\": \"private/invalidate_block_trade_signature\",\n  \"params\": {\n    \"signature\": \"1565173369982.1M9tO0Q-.z9n9WyZUU5op9pEz6Jtd2CI71QxQMMsCZAexnIfK9HQRT1pKH3clxeIbY7Bqm-yMcWIoE3IfCDPW5VEdiN-6oS0YkKUyXPD500MUf3ULKhfkmH81EZs\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1569,\n  \"result\": \"ok\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "08ce59f8-0038-4a4c-8713-90c691fadcd9",
+          "name": "Returns information about a specific block trade identified by `block_trade_id`.\n\n**📖 Related Article:** [Block Trading](https://docs.deribit.com/articles/block-trading-api)\n\n**Scope:** `block_trade:read`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_block_trade)\n\n",
+          "request": {
+            "name": "Returns information about a specific block trade identified by `block_trade_id`.\n\n**📖 Related Article:** [Block Trading](https://docs.deribit.com/articles/block-trading-api)\n\n**Scope:** `block_trade:read`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_block_trade)\n\n",
+            "description": {
+              "content": "Returns information about a specific block trade identified by `block_trade_id`.\n\n**📖 Related Article:** [Block Trading](https://docs.deribit.com/articles/block-trading-api)\n\n**Scope:** `block_trade:read`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_block_trade)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "private",
+                "get_block_trade"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<string>",
+                  "description": "(Required) Block trade id"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"method\": \"private/get_block_trade\",\n  \"params\": {\n    \"id\": \"61\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "61e521c6-270d-448a-9de0-0d9f6adf6d90",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "private",
+                    "get_block_trade"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "154"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"method\": \"private/get_block_trade\",\n  \"params\": {\n    \"id\": \"61\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"result\": {\n    \"trades\": [\n      {\n        \"trade_seq\": 37,\n        \"trade_id\": \"92437\",\n        \"timestamp\": 1565089523719,\n        \"tick_direction\": 3,\n        \"state\": \"filled\",\n        \"price\": 0.0001,\n        \"order_type\": \"limit\",\n        \"order_id\": \"343062\",\n        \"matching_id\": null,\n        \"liquidity\": \"T\",\n        \"iv\": 0,\n        \"instrument_name\": \"BTC-9AUG19-10250-C\",\n        \"index_price\": 11738,\n        \"fee_currency\": \"BTC\",\n        \"fee\": 0.00025,\n        \"direction\": \"sell\",\n        \"block_trade_id\": \"61\",\n        \"amount\": 10\n      },\n      {\n        \"trade_seq\": 25350,\n        \"trade_id\": \"92435\",\n        \"timestamp\": 1565089523719,\n        \"tick_direction\": 3,\n        \"state\": \"filled\",\n        \"price\": 11590,\n        \"order_type\": \"limit\",\n        \"order_id\": \"343058\",\n        \"matching_id\": null,\n        \"liquidity\": \"T\",\n        \"instrument_name\": \"BTC-PERPETUAL\",\n        \"index_price\": 11737.98,\n        \"fee_currency\": \"BTC\",\n        \"fee\": 0.00000164,\n        \"direction\": \"buy\",\n        \"block_trade_id\": \"61\",\n        \"amount\": 190\n      }\n    ],\n    \"timestamp\": 1565089523720,\n    \"id\": \"61\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ee5b6629-5c1d-4a21-bef7-9bb23ff4bb7d",
+          "name": "Returns a list of the user's block trades. If currency is not provided, returns block trades for all currencies. `block_rfq_id` can be provided to receive block trades related to that particular Block RFQ.\n\n**📖 Related Article:** [Block Trading](https://docs.deribit.com/articles/block-trading-api)\n\n**Scope:** `block_trade:read`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_block_trades)\n\n",
+          "request": {
+            "name": "Returns a list of the user's block trades. If currency is not provided, returns block trades for all currencies. `block_rfq_id` can be provided to receive block trades related to that particular Block RFQ.\n\n**📖 Related Article:** [Block Trading](https://docs.deribit.com/articles/block-trading-api)\n\n**Scope:** `block_trade:read`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_block_trades)\n\n",
+            "description": {
+              "content": "Returns a list of the user's block trades. If currency is not provided, returns block trades for all currencies. `block_rfq_id` can be provided to receive block trades related to that particular Block RFQ.\n\n**📖 Related Article:** [Block Trading](https://docs.deribit.com/articles/block-trading-api)\n\n**Scope:** `block_trade:read`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_block_trades)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "private",
+                "get_block_trades"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "currency",
+                  "value": "<string>",
+                  "description": "The currency symbol"
+                },
+                {
+                  "disabled": false,
+                  "key": "count",
+                  "value": "<integer>",
+                  "description": "Count of Block Trades returned, maximum - `101`"
+                },
+                {
+                  "disabled": false,
+                  "key": "start_id",
+                  "value": "<string>",
+                  "description": "Response will contain block trades older than the one provided in this field"
+                },
+                {
+                  "disabled": false,
+                  "key": "end_id",
+                  "value": "<string>",
+                  "description": "The id of the oldest block trade to be returned, `start_id` is required with `end_id`"
+                },
+                {
+                  "disabled": false,
+                  "key": "block_rfq_id",
+                  "value": "<integer>",
+                  "description": "ID of the Block RFQ"
+                },
+                {
+                  "disabled": false,
+                  "key": "broker_code",
+                  "value": "<string>",
+                  "description": "Broker code to filter block trades. Only broker clients can use `broker_code` to filter broker block trades. Use `any` for all block trades."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"method\": \"private/get_block_trades\",\n  \"params\": {\n    \"currency\": \"BTC\",\n    \"count\": 1\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4e5b1c1d-2987-4444-8e17-364b6b6a5abf",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "private",
+                    "get_block_trades"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "currency",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "count",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "start_id",
+                      "value": "154"
+                    },
+                    {
+                      "key": "end_id",
+                      "value": "154"
+                    },
+                    {
+                      "key": "block_rfq_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "broker_code",
+                      "value": "2krM7sJsx"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"method\": \"private/get_block_trades\",\n  \"params\": {\n    \"currency\": \"BTC\",\n    \"count\": 1\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"result\": [\n    {\n      \"trades\": [\n        {\n          \"trade_seq\": 4,\n          \"trade_id\": \"92462\",\n          \"timestamp\": 1565093070164,\n          \"tick_direction\": 2,\n          \"state\": \"filled\",\n          \"price\": 0.0151,\n          \"order_type\": \"limit\",\n          \"order_id\": \"343121\",\n          \"matching_id\": null,\n          \"liquidity\": \"M\",\n          \"iv\": 72.38,\n          \"instrument_name\": \"BTC-9AUG19-11500-P\",\n          \"index_price\": 11758.65,\n          \"fee_currency\": \"BTC\",\n          \"fee\": 0,\n          \"direction\": \"sell\",\n          \"block_trade_id\": \"66\",\n          \"amount\": 2.3\n        },\n        {\n          \"trade_seq\": 41,\n          \"trade_id\": \"92460\",\n          \"timestamp\": 1565093070164,\n          \"tick_direction\": 2,\n          \"state\": \"filled\",\n          \"price\": 11753,\n          \"order_type\": \"limit\",\n          \"order_id\": \"343117\",\n          \"matching_id\": null,\n          \"liquidity\": \"M\",\n          \"instrument_name\": \"BTC-9AUG19\",\n          \"index_price\": 11758.65,\n          \"fee_currency\": \"BTC\",\n          \"fee\": 0,\n          \"direction\": \"sell\",\n          \"block_trade_id\": \"66\",\n          \"amount\": 50\n        }\n      ],\n      \"timestamp\": 1565093070165,\n      \"id\": \"66\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b74d8b46-3925-410c-930f-7ab771d08f47",
+          "name": "Provides a list of block trade requests including pending approvals, declined trades, and expired trades. `timestamp` and `nonce` received in response can be used with [private/approve_block_trade](https://docs.deribit.com/api-reference/block-trade/private-approve_block_trade) or [private/reject_block_trade](https://docs.deribit.com/api-reference/block-trade/private-reject_block_trade) to approve or reject the pending block trade.\n\nTo use the block trade approval feature, an [additional API key setting feature](https://docs.deribit.com/articles/creating-api-key#block-trade-approval-feature) called `enabled_features: block_trade_approval` is required. This key has to be given to the broker/registered partner who performs the trades on behalf of the user for the feature to be active. If the user wants to approve the trade, they must approve it from a different API key that doesn't have this feature enabled.\n\nOnly broker clients can use `broker_code` to query for their broker block trade requests.\n\n**📖 Related Article:** [Block Trading](https://docs.deribit.com/articles/block-trading-api)\n\n**Scope:** `block_trade:read`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_block_trade_requests)\n\n",
+          "request": {
+            "name": "Provides a list of block trade requests including pending approvals, declined trades, and expired trades. `timestamp` and `nonce` received in response can be used with [private/approve_block_trade](https://docs.deribit.com/api-reference/block-trade/private-approve_block_trade) or [private/reject_block_trade](https://docs.deribit.com/api-reference/block-trade/private-reject_block_trade) to approve or reject the pending block trade.\n\nTo use the block trade approval feature, an [additional API key setting feature](https://docs.deribit.com/articles/creating-api-key#block-trade-approval-feature) called `enabled_features: block_trade_approval` is required. This key has to be given to the broker/registered partner who performs the trades on behalf of the user for the feature to be active. If the user wants to approve the trade, they must approve it from a different API key that doesn't have this feature enabled.\n\nOnly broker clients can use `broker_code` to query for their broker block trade requests.\n\n**📖 Related Article:** [Block Trading](https://docs.deribit.com/articles/block-trading-api)\n\n**Scope:** `block_trade:read`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_block_trade_requests)\n\n",
+            "description": {
+              "content": "Provides a list of block trade requests including pending approvals, declined trades, and expired trades. `timestamp` and `nonce` received in response can be used with [private/approve_block_trade](https://docs.deribit.com/api-reference/block-trade/private-approve_block_trade) or [private/reject_block_trade](https://docs.deribit.com/api-reference/block-trade/private-reject_block_trade) to approve or reject the pending block trade.\n\nTo use the block trade approval feature, an [additional API key setting feature](https://docs.deribit.com/articles/creating-api-key#block-trade-approval-feature) called `enabled_features: block_trade_approval` is required. This key has to be given to the broker/registered partner who performs the trades on behalf of the user for the feature to be active. If the user wants to approve the trade, they must approve it from a different API key that doesn't have this feature enabled.\n\nOnly broker clients can use `broker_code` to query for their broker block trade requests.\n\n**📖 Related Article:** [Block Trading](https://docs.deribit.com/articles/block-trading-api)\n\n**Scope:** `block_trade:read`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_block_trade_requests)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "private",
+                "get_block_trade_requests"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "broker_code",
+                  "value": "<string>",
+                  "description": "Broker code to filter block trade requests. Only broker clients can use `broker_code` to query for their executed broker block trades."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"method\": \"private/get_block_trade_requests\",\n  \"params\": {\n    \"broker_code\": \"jpqYKgg1\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "059e3b86-0063-4db1-8ea2-318d43c431e8",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "private",
+                    "get_block_trade_requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "broker_code",
+                      "value": "jpqYKgg1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"method\": \"private/get_block_trade_requests\",\n  \"params\": {\n    \"broker_code\": \"jpqYKgg1\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"result\": [\n    {\n      \"timestamp\": 1742824052538,\n      \"state\": {\n        \"timestamp\": 1742824052539,\n        \"value\": \"initial\"\n      },\n      \"username\": \"Trader\",\n      \"user_id\": 8,\n      \"role\": \"taker\",\n      \"trades\": [\n        {\n          \"amount\": 100000,\n          \"direction\": \"buy\",\n          \"price\": 87516.83,\n          \"instrument_name\": \"BTC-PERPETUAL\"\n        }\n      ],\n      \"broker_code\": \"jpqYKgg1\",\n      \"broker_name\": \"Test Broker\",\n      \"counterparty_state\": {\n        \"timestamp\": 1742824052538,\n        \"value\": \"approved\"\n      },\n      \"nonce\": \"29rKkuD3NSBPet4njrpNWEuHBm9s\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "754534cd-1267-42b4-b1cf-45d0981116e3",
+          "name": "Approves a pending block trade. `nonce` and `timestamp` are used to identify the block trade while `role` should be opposite to the trading counterparty.\n\nUse [private/get_block_trade_requests](https://docs.deribit.com/api-reference/block-trade/private-get_block_trade_requests) to retrieve pending block trades that require approval.\n\nTo use the block trade approval feature, an [additional API key setting feature](https://docs.deribit.com/articles/creating-api-key#block-trade-approval-feature) called `enabled_features: block_trade_approval` is required. This key has to be given to the broker/registered partner who performs the trades on behalf of the user for the feature to be active. If the user wants to approve the trade, they must approve it from a different API key that doesn't have this feature enabled.\n\n**📖 Related Article:** [Block Trading](https://docs.deribit.com/articles/block-trading-api)\n\n**Scope:** `block_trade:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fapprove_block_trade)\n\n",
+          "request": {
+            "name": "Approves a pending block trade. `nonce` and `timestamp` are used to identify the block trade while `role` should be opposite to the trading counterparty.\n\nUse [private/get_block_trade_requests](https://docs.deribit.com/api-reference/block-trade/private-get_block_trade_requests) to retrieve pending block trades that require approval.\n\nTo use the block trade approval feature, an [additional API key setting feature](https://docs.deribit.com/articles/creating-api-key#block-trade-approval-feature) called `enabled_features: block_trade_approval` is required. This key has to be given to the broker/registered partner who performs the trades on behalf of the user for the feature to be active. If the user wants to approve the trade, they must approve it from a different API key that doesn't have this feature enabled.\n\n**📖 Related Article:** [Block Trading](https://docs.deribit.com/articles/block-trading-api)\n\n**Scope:** `block_trade:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fapprove_block_trade)\n\n",
+            "description": {
+              "content": "Approves a pending block trade. `nonce` and `timestamp` are used to identify the block trade while `role` should be opposite to the trading counterparty.\n\nUse [private/get_block_trade_requests](https://docs.deribit.com/api-reference/block-trade/private-get_block_trade_requests) to retrieve pending block trades that require approval.\n\nTo use the block trade approval feature, an [additional API key setting feature](https://docs.deribit.com/articles/creating-api-key#block-trade-approval-feature) called `enabled_features: block_trade_approval` is required. This key has to be given to the broker/registered partner who performs the trades on behalf of the user for the feature to be active. If the user wants to approve the trade, they must approve it from a different API key that doesn't have this feature enabled.\n\n**📖 Related Article:** [Block Trading](https://docs.deribit.com/articles/block-trading-api)\n\n**Scope:** `block_trade:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fapprove_block_trade)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "private",
+                "approve_block_trade"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "timestamp",
+                  "value": "<integer>",
+                  "description": "(Required) Timestamp, shared with other party (milliseconds since the UNIX epoch)"
+                },
+                {
+                  "disabled": false,
+                  "key": "nonce",
+                  "value": "<string>",
+                  "description": "(Required) Nonce, shared with other party"
+                },
+                {
+                  "disabled": false,
+                  "key": "role",
+                  "value": "<string>",
+                  "description": "(Required) Describes if user wants to be maker or taker of trades"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"method\": \"private/approve_block_trade\",\n  \"params\": {\n    \"timestamp\": 1711468813551,\n    \"nonce\": \"bt-468nha\",\n    \"role\": \"maker\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "389f9476-201d-4934-a939-7632482d2e7a",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "private",
+                    "approve_block_trade"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "timestamp",
+                      "value": "1536569522277"
+                    },
+                    {
+                      "key": "nonce",
+                      "value": "bF1_gfgcsd"
+                    },
+                    {
+                      "key": "role",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"method\": \"private/approve_block_trade\",\n  \"params\": {\n    \"timestamp\": 1711468813551,\n    \"nonce\": \"bt-468nha\",\n    \"role\": \"maker\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1569,\n  \"result\": \"ok\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0f5d5f6d-8500-46f6-bc48-e5d0029eb428",
+          "name": "Rejects a pending block trade. `nonce` and `timestamp` are used to identify the block trade while `role` should be opposite to the trading counterparty.\n\nUse [private/get_block_trade_requests](https://docs.deribit.com/api-reference/block-trade/private-get_block_trade_requests) to retrieve pending block trades that require approval.\n\nTo use the block trade approval feature, an [additional API key setting feature](https://docs.deribit.com/articles/creating-api-key#block-trade-approval-feature) called `enabled_features: block_trade_approval` is required. This key has to be given to the broker/registered partner who performs the trades on behalf of the user for the feature to be active. If the user wants to approve the trade, they must approve it from a different API key that doesn't have this feature enabled.\n\n**📖 Related Article:** [Block Trading](https://docs.deribit.com/articles/block-trading-api)\n\n**Scope:** `block_trade:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Freject_block_trade)\n\n",
+          "request": {
+            "name": "Rejects a pending block trade. `nonce` and `timestamp` are used to identify the block trade while `role` should be opposite to the trading counterparty.\n\nUse [private/get_block_trade_requests](https://docs.deribit.com/api-reference/block-trade/private-get_block_trade_requests) to retrieve pending block trades that require approval.\n\nTo use the block trade approval feature, an [additional API key setting feature](https://docs.deribit.com/articles/creating-api-key#block-trade-approval-feature) called `enabled_features: block_trade_approval` is required. This key has to be given to the broker/registered partner who performs the trades on behalf of the user for the feature to be active. If the user wants to approve the trade, they must approve it from a different API key that doesn't have this feature enabled.\n\n**📖 Related Article:** [Block Trading](https://docs.deribit.com/articles/block-trading-api)\n\n**Scope:** `block_trade:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Freject_block_trade)\n\n",
+            "description": {
+              "content": "Rejects a pending block trade. `nonce` and `timestamp` are used to identify the block trade while `role` should be opposite to the trading counterparty.\n\nUse [private/get_block_trade_requests](https://docs.deribit.com/api-reference/block-trade/private-get_block_trade_requests) to retrieve pending block trades that require approval.\n\nTo use the block trade approval feature, an [additional API key setting feature](https://docs.deribit.com/articles/creating-api-key#block-trade-approval-feature) called `enabled_features: block_trade_approval` is required. This key has to be given to the broker/registered partner who performs the trades on behalf of the user for the feature to be active. If the user wants to approve the trade, they must approve it from a different API key that doesn't have this feature enabled.\n\n**📖 Related Article:** [Block Trading](https://docs.deribit.com/articles/block-trading-api)\n\n**Scope:** `block_trade:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Freject_block_trade)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "private",
+                "reject_block_trade"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "timestamp",
+                  "value": "<integer>",
+                  "description": "(Required) Timestamp, shared with other party (milliseconds since the UNIX epoch)"
+                },
+                {
+                  "disabled": false,
+                  "key": "nonce",
+                  "value": "<string>",
+                  "description": "(Required) Nonce, shared with other party"
+                },
+                {
+                  "disabled": false,
+                  "key": "role",
+                  "value": "<string>",
+                  "description": "(Required) Describes if user wants to be maker or taker of trades"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"method\": \"private/reject_block_trade\",\n  \"params\": {\n    \"timestamp\": 1711468813551,\n    \"nonce\": \"bt-468nha\",\n    \"role\": \"maker\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a8697f54-afe0-4dc0-b3e9-08df86f6cb3f",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "private",
+                    "reject_block_trade"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "timestamp",
+                      "value": "1536569522277"
+                    },
+                    {
+                      "key": "nonce",
+                      "value": "bF1_gfgcsd"
+                    },
+                    {
+                      "key": "role",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"method\": \"private/reject_block_trade\",\n  \"params\": {\n    \"timestamp\": 1711468813551,\n    \"nonce\": \"bt-468nha\",\n    \"role\": \"maker\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1569,\n  \"result\": \"ok\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "88b96a2d-39e4-40f5-b06c-244f9349115c",
+          "name": "**Broker Method** Returns list of broker block trades. If currency is not provided, returns broker block trades for all currencies.\n\n**Scope:** `block_trade:read`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_broker_trades)\n\n",
+          "request": {
+            "name": "**Broker Method** Returns list of broker block trades. If currency is not provided, returns broker block trades for all currencies.\n\n**Scope:** `block_trade:read`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_broker_trades)\n\n",
+            "description": {
+              "content": "**Broker Method** Returns list of broker block trades. If currency is not provided, returns broker block trades for all currencies.\n\n**Scope:** `block_trade:read`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_broker_trades)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "private",
+                "get_broker_trades"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "currency",
+                  "value": "<string>",
+                  "description": "The currency symbol"
+                },
+                {
+                  "disabled": false,
+                  "key": "count",
+                  "value": "<integer>",
+                  "description": "Number of requested items, default - `20`, maximum - `1000`"
+                },
+                {
+                  "disabled": false,
+                  "key": "start_id",
+                  "value": "<string>",
+                  "description": "Response will contain block trades older than the one provided in this field"
+                },
+                {
+                  "disabled": false,
+                  "key": "end_id",
+                  "value": "<string>",
+                  "description": "The id of the oldest block trade to be returned, `start_id` is required with `end_id`"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"method\": \"private/get_broker_trades\",\n  \"params\": {\n    \"currency\": \"BTC\",\n    \"count\": 1\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d0dc452d-11eb-4c4f-a324-2af50c645952",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "private",
+                    "get_broker_trades"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "currency",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "count",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "start_id",
+                      "value": "154"
+                    },
+                    {
+                      "key": "end_id",
+                      "value": "154"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"method\": \"private/get_broker_trades\",\n  \"params\": {\n    \"currency\": \"BTC\",\n    \"count\": 1\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"result\": {\n    \"history\": [\n      {\n        \"id\": \"BLOCK-7\",\n        \"timestamp\": 1747239767111,\n        \"trades\": [\n          {\n            \"timestamp\": 1747239767111,\n            \"amount\": 100000,\n            \"direction\": \"buy\",\n            \"price\": 102079.75,\n            \"index_price\": 102079.75,\n            \"instrument_name\": \"BTC-PERPETUAL\",\n            \"trade_seq\": 7,\n            \"mark_price\": 102079.75,\n            \"tick_direction\": 1,\n            \"contracts\": 10000,\n            \"trade_id\": \"7\",\n            \"block_trade_id\": \"BLOCK-7\",\n            \"block_trade_leg_count\": 1\n          }\n        ],\n        \"maker\": {\n          \"user_id\": \"****009\",\n          \"client_id\": 2,\n          \"client_name\": \"Test Client 2\",\n          \"client_link_name\": \"Test Client 2 l\",\n          \"client_link_id\": 2\n        },\n        \"taker\": {\n          \"user_id\": \"****008\",\n          \"client_id\": 1,\n          \"client_name\": \"Test Client 1\",\n          \"client_link_name\": \"Test Client 1 l\",\n          \"client_link_id\": 1\n        }\n      }\n    ],\n    \"next_start_id\": 6\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cd4a8971-ac98-4351-a3b0-d74aa6353e70",
+          "name": "**Broker Method** Provides a list of broker block trade requests including pending approvals, declined trades, and expired trades. `timestamp` and `nonce` received in response can be used to approve or reject the pending broker block trade. This method takes no parameters.\n\n**Scope:** `block_trade:read`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_broker_trade_requests)\n\n",
+          "request": {
+            "name": "**Broker Method** Provides a list of broker block trade requests including pending approvals, declined trades, and expired trades. `timestamp` and `nonce` received in response can be used to approve or reject the pending broker block trade. This method takes no parameters.\n\n**Scope:** `block_trade:read`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_broker_trade_requests)\n\n",
+            "description": {
+              "content": "**Broker Method** Provides a list of broker block trade requests including pending approvals, declined trades, and expired trades. `timestamp` and `nonce` received in response can be used to approve or reject the pending broker block trade. This method takes no parameters.\n\n**Scope:** `block_trade:read`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_broker_trade_requests)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "private",
+                "get_broker_trade_requests"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 7,\n  \"method\": \"private/get_broker_trade_requests\",\n  \"params\": {}\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "731635e9-5a20-4687-bd7f-c766f959fb3f",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "private",
+                    "get_broker_trade_requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 7,\n  \"method\": \"private/get_broker_trade_requests\",\n  \"params\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 7,\n  \"result\": [\n    {\n      \"timestamp\": 1742824052547,\n      \"state\": \"activated\",\n      \"trades\": [\n        {\n          \"amount\": 100000,\n          \"direction\": \"buy\",\n          \"price\": 87516.83,\n          \"instrument_name\": \"BTC-PERPETUAL\"\n        }\n      ],\n      \"maker\": {\n        \"state\": \"initial\",\n        \"client_id\": 1,\n        \"user_id\": \"***009\",\n        \"client_name\": \"Test Client\",\n        \"client_link_name\": \"Test Client 2\",\n        \"client_link_id\": 2\n      },\n      \"taker\": {\n        \"state\": \"initial\",\n        \"client_id\": 1,\n        \"user_id\": \"***008\",\n        \"client_name\": \"Test Client\",\n        \"client_link_name\": \"Test Client 1\",\n        \"client_link_id\": 1\n      },\n      \"nonce\": \"3WqPoAsmde9aXCSEBVUmi2XxGkgA\"\n    },\n    {\n      \"timestamp\": 1742824052538,\n      \"state\": \"activated\",\n      \"trades\": [\n        {\n          \"amount\": 100000,\n          \"direction\": \"buy\",\n          \"price\": 87516.83,\n          \"instrument_name\": \"BTC-PERPETUAL\"\n        }\n      ],\n      \"maker\": {\n        \"state\": \"approved\",\n        \"client_id\": 1,\n        \"user_id\": \"***009\",\n        \"client_name\": \"Test Client\",\n        \"client_link_name\": \"Test Client 2\",\n        \"client_link_id\": 2\n      },\n      \"taker\": {\n        \"state\": \"initial\",\n        \"client_id\": 1,\n        \"user_id\": \"***008\",\n        \"client_name\": \"Test Client\",\n        \"client_link_name\": \"Test Client 1\",\n        \"client_link_id\": 1\n      },\n      \"nonce\": \"29rKkuD3NSBPet4njrpNWEuHBm9s\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://test.deribit.com/api/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "dd9dcff0-625c-416b-aa17-6e25a67727d0",
+    "name": "Deribit Account Management Block Trade API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

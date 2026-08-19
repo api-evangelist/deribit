@@ -1,0 +1,157 @@
+{
+  "item": [
+    {
+      "id": "8e2bae49-4e8e-4b09-99ab-d33f2bba4ea4",
+      "name": "Mark Price",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "45a9fad4-dbb3-4df3-a6c1-73ae6c0bc36f",
+          "name": "Retrieves 5-minute historical mark price data for an instrument. Mark prices are used for margin calculations and position valuations.\n\n**Note:** Currently, mark price history is available only for a subset of options that participate in volatility index calculations. All other instruments, including futures and perpetuals, will return an empty list.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_mark_price_history)\n\n",
+          "request": {
+            "name": "Retrieves 5-minute historical mark price data for an instrument. Mark prices are used for margin calculations and position valuations.\n\n**Note:** Currently, mark price history is available only for a subset of options that participate in volatility index calculations. All other instruments, including futures and perpetuals, will return an empty list.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_mark_price_history)\n\n",
+            "description": {
+              "content": "Retrieves 5-minute historical mark price data for an instrument. Mark prices are used for margin calculations and position valuations.\n\n**Note:** Currently, mark price history is available only for a subset of options that participate in volatility index calculations. All other instruments, including futures and perpetuals, will return an empty list.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_mark_price_history)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "get_mark_price_history"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "instrument_name",
+                  "value": "<string>",
+                  "description": "(Required) Instrument name"
+                },
+                {
+                  "disabled": false,
+                  "key": "start_timestamp",
+                  "value": "<integer>",
+                  "description": "(Required) The earliest timestamp to return result from (milliseconds since the UNIX epoch)"
+                },
+                {
+                  "disabled": false,
+                  "key": "end_timestamp",
+                  "value": "<integer>",
+                  "description": "(Required) The most recent timestamp to return result from (milliseconds since the UNIX epoch)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"method\": \"public/get_mark_price_history\",\n  \"params\": {\n    \"instrument_name\": \"BTC-25JUN21-50000-C\",\n    \"start_timestamp\": 1609376800000,\n    \"end_timestamp\": 1609376810000\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4ecc7659-86b2-4680-8e36-df073d7a153d",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "get_mark_price_history"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "instrument_name",
+                      "value": "BTC-PERPETUAL"
+                    },
+                    {
+                      "key": "start_timestamp",
+                      "value": "1536569522277"
+                    },
+                    {
+                      "key": "end_timestamp",
+                      "value": "1536569522277"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"method\": \"public/get_mark_price_history\",\n  \"params\": {\n    \"instrument_name\": \"BTC-25JUN21-50000-C\",\n    \"start_timestamp\": 1609376800000,\n    \"end_timestamp\": 1609376810000\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 25,\n  \"result\": [\n    [\n      1608142381229,\n      0.5165791606037885\n    ],\n    [\n      1608142380231,\n      0.5165737855432504\n    ],\n    [\n      1608142379227,\n      0.5165768236356326\n    ]\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://test.deribit.com/api/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "e8d4d6b3-0894-491c-8691-3252e73d43cb",
+    "name": "Deribit Account Management Mark Price API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

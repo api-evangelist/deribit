@@ -1,0 +1,1280 @@
+{
+  "item": [
+    {
+      "id": "01dd2e14-c004-40b2-b728-9b2c65ad54ed",
+      "name": "WebSocket Only",
+      "description": {
+        "content": "Can only be used over websockets.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9799e9cb-910d-4de3-b0b2-2b9e5919942a",
+          "name": "Gracefully terminate the current WebSocket connection and optionally invalidate all tokens associated with the session.\n\nThis method provides a clean way to close WebSocket connections while preserving active orders when [**Cancel On Disconnect (COD)**](https://docs.deribit.com/api-reference/session-management/private-enable_cancel_on_disconnect) is enabled.\n\n**Use Cases:**\n\n- **Clean Shutdown:** Properly close WebSocket connections during application shutdown or restart\n- **Order Preservation:** Close connections without triggering order cancellations when COD is enabled\n- **Session Management:** Invalidate tokens to ensure security when closing connections\n- **Maintenance Operations:** Temporarily disconnect for system maintenance without affecting trading positions\n\n**Cancel On Disconnect (COD) Behavior:**\n\nWhen Cancel On Disconnect is enabled for your connection, this method provides a safe way to close the connection without triggering automatic order cancellations. This is different from other disconnection scenarios:\n\n- **Graceful logout** (this method): Orders are **NOT cancelled**, even if COD is enabled\n- **Unexpected disconnection:** Orders are **cancelled** if COD is enabled\n- **Inactivity timeout:** Orders are **cancelled** if COD is enabled\n- **Heartbeat failure:** Orders are **cancelled** if COD is enabled\n\nThis distinction allows you to perform planned disconnections (e.g., for maintenance, updates, or reconnection) while preserving your active orders.\n\n**WebSocket Only:**\n\nThis method is designed exclusively for WebSocket connections. Attempting to use it via REST/HTTP will result in a 400 error response.\n\n**Note:** This method has no response. The WebSocket connection is closed immediately after the request is processed.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Flogout)\n\n",
+          "request": {
+            "name": "Gracefully terminate the current WebSocket connection and optionally invalidate all tokens associated with the session.\n\nThis method provides a clean way to close WebSocket connections while preserving active orders when [**Cancel On Disconnect (COD)**](https://docs.deribit.com/api-reference/session-management/private-enable_cancel_on_disconnect) is enabled.\n\n**Use Cases:**\n\n- **Clean Shutdown:** Properly close WebSocket connections during application shutdown or restart\n- **Order Preservation:** Close connections without triggering order cancellations when COD is enabled\n- **Session Management:** Invalidate tokens to ensure security when closing connections\n- **Maintenance Operations:** Temporarily disconnect for system maintenance without affecting trading positions\n\n**Cancel On Disconnect (COD) Behavior:**\n\nWhen Cancel On Disconnect is enabled for your connection, this method provides a safe way to close the connection without triggering automatic order cancellations. This is different from other disconnection scenarios:\n\n- **Graceful logout** (this method): Orders are **NOT cancelled**, even if COD is enabled\n- **Unexpected disconnection:** Orders are **cancelled** if COD is enabled\n- **Inactivity timeout:** Orders are **cancelled** if COD is enabled\n- **Heartbeat failure:** Orders are **cancelled** if COD is enabled\n\nThis distinction allows you to perform planned disconnections (e.g., for maintenance, updates, or reconnection) while preserving your active orders.\n\n**WebSocket Only:**\n\nThis method is designed exclusively for WebSocket connections. Attempting to use it via REST/HTTP will result in a 400 error response.\n\n**Note:** This method has no response. The WebSocket connection is closed immediately after the request is processed.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Flogout)\n\n",
+            "description": {
+              "content": "Gracefully terminate the current WebSocket connection and optionally invalidate all tokens associated with the session.\n\nThis method provides a clean way to close WebSocket connections while preserving active orders when [**Cancel On Disconnect (COD)**](https://docs.deribit.com/api-reference/session-management/private-enable_cancel_on_disconnect) is enabled.\n\n**Use Cases:**\n\n- **Clean Shutdown:** Properly close WebSocket connections during application shutdown or restart\n- **Order Preservation:** Close connections without triggering order cancellations when COD is enabled\n- **Session Management:** Invalidate tokens to ensure security when closing connections\n- **Maintenance Operations:** Temporarily disconnect for system maintenance without affecting trading positions\n\n**Cancel On Disconnect (COD) Behavior:**\n\nWhen Cancel On Disconnect is enabled for your connection, this method provides a safe way to close the connection without triggering automatic order cancellations. This is different from other disconnection scenarios:\n\n- **Graceful logout** (this method): Orders are **NOT cancelled**, even if COD is enabled\n- **Unexpected disconnection:** Orders are **cancelled** if COD is enabled\n- **Inactivity timeout:** Orders are **cancelled** if COD is enabled\n- **Heartbeat failure:** Orders are **cancelled** if COD is enabled\n\nThis distinction allows you to perform planned disconnections (e.g., for maintenance, updates, or reconnection) while preserving your active orders.\n\n**WebSocket Only:**\n\nThis method is designed exclusively for WebSocket connections. Attempting to use it via REST/HTTP will result in a 400 error response.\n\n**Note:** This method has no response. The WebSocket connection is closed immediately after the request is processed.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Flogout)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "private",
+                "logout"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "invalidate_token",
+                  "value": "<boolean>",
+                  "description": "<b>Token Invalidation:</b> By default, all tokens created during the current session are invalidated when you call this method. You can control this behavior using this parameter: <ul><li><b>invalidate_token=true</b> (default): All session tokens are invalidated, requiring re-authentication for new connections</li><li><b>invalidate_token=false</b>: Tokens remain valid, allowing you to reconnect using the same authentication</li></ul>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 42,\n  \"method\": \"private/logout\",\n  \"params\": {\n    \"access_token\": \"1529453804065.h2QrBgvn.oS36pCOmuK9EX7954lzCSkUioEtTMg7F5ShToM0ZfYlqU05OquXkQIe2_DDEkPhzmoPp1fBp0ycXShR_0jf-SMSXEdVqxLRWuOw-_StG5BMjToiAl27CbHY4P92MPhlMblTOtTImE81-5dFdyDVydpBwmlfKM3OSQ39kulP9bbfw-2jhyegOL0AgqJTY_tj554oHCQFTbq0A0ZWukukmxL2yu6iy34XdzaJB26Igy-3UxGBMwFu53EhjKBweh7xyP2nDm57-wybndJMtSyTGDXH3vjBVclo1iup5yRP\",\n    \"invalidate_token\": true\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e00bef1c-aa9a-411c-b575-49686ce20ea0",
+              "name": "Connection closed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "private",
+                    "logout"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "invalidate_token",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 42,\n  \"method\": \"private/logout\",\n  \"params\": {\n    \"access_token\": \"1529453804065.h2QrBgvn.oS36pCOmuK9EX7954lzCSkUioEtTMg7F5ShToM0ZfYlqU05OquXkQIe2_DDEkPhzmoPp1fBp0ycXShR_0jf-SMSXEdVqxLRWuOw-_StG5BMjToiAl27CbHY4P92MPhlMblTOtTImE81-5dFdyDVydpBwmlfKM3OSQ39kulP9bbfw-2jhyegOL0AgqJTY_tj554oHCQFTbq0A0ZWukukmxL2yu6iy34XdzaJB26Igy-3UxGBMwFu53EhjKBweh7xyP2nDm57-wybndJMtSyTGDXH3vjBVclo1iup5yRP\",\n    \"invalidate_token\": true\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bf651564-434d-4e7e-8bb0-38a8f7369a7d",
+          "name": "Signals the WebSocket connection to send and request heartbeats. Heartbeats can be used to detect stale connections.\n\nWhen heartbeats have been set up, the API server will send `heartbeat` messages and `test_request` messages. Your software should respond to `test_request` messages by sending a `/api/v2/public/test` request. If your software fails to do so, the API server will immediately close the connection. If your account is configured to cancel on disconnect, any orders opened over the connection will be cancelled.\n\n**WebSocket Only:** This method is designed exclusively for WebSocket connections. Attempting to use it via REST/HTTP will result in an error response.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fset_heartbeat)\n\n",
+          "request": {
+            "name": "Signals the WebSocket connection to send and request heartbeats. Heartbeats can be used to detect stale connections.\n\nWhen heartbeats have been set up, the API server will send `heartbeat` messages and `test_request` messages. Your software should respond to `test_request` messages by sending a `/api/v2/public/test` request. If your software fails to do so, the API server will immediately close the connection. If your account is configured to cancel on disconnect, any orders opened over the connection will be cancelled.\n\n**WebSocket Only:** This method is designed exclusively for WebSocket connections. Attempting to use it via REST/HTTP will result in an error response.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fset_heartbeat)\n\n",
+            "description": {
+              "content": "Signals the WebSocket connection to send and request heartbeats. Heartbeats can be used to detect stale connections.\n\nWhen heartbeats have been set up, the API server will send `heartbeat` messages and `test_request` messages. Your software should respond to `test_request` messages by sending a `/api/v2/public/test` request. If your software fails to do so, the API server will immediately close the connection. If your account is configured to cancel on disconnect, any orders opened over the connection will be cancelled.\n\n**WebSocket Only:** This method is designed exclusively for WebSocket connections. Attempting to use it via REST/HTTP will result in an error response.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fset_heartbeat)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "set_heartbeat"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "interval",
+                  "value": "<number>",
+                  "description": "(Required) The heartbeat interval in seconds, but not less than 10"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 9098,\n  \"method\": \"public/set_heartbeat\",\n  \"params\": {\n    \"interval\": 30\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "81ef1948-53af-4922-8925-98f32c5532c3",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "set_heartbeat"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "interval",
+                      "value": "30"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 9098,\n  \"method\": \"public/set_heartbeat\",\n  \"params\": {\n    \"interval\": 30\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1569,\n  \"result\": \"ok\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "beb6b164-683e-461a-a03d-4dd4877e855e",
+          "name": "Stop sending heartbeat messages. This method takes no parameters.\n\n**WebSocket Only:** This method is designed exclusively for WebSocket connections. Attempting to use it via REST/HTTP will result in an error response.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fdisable_heartbeat)\n\n",
+          "request": {
+            "name": "Stop sending heartbeat messages. This method takes no parameters.\n\n**WebSocket Only:** This method is designed exclusively for WebSocket connections. Attempting to use it via REST/HTTP will result in an error response.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fdisable_heartbeat)\n\n",
+            "description": {
+              "content": "Stop sending heartbeat messages. This method takes no parameters.\n\n**WebSocket Only:** This method is designed exclusively for WebSocket connections. Attempting to use it via REST/HTTP will result in an error response.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fdisable_heartbeat)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "disable_heartbeat"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 3562,\n  \"method\": \"public/disable_heartbeat\",\n  \"params\": {}\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8917f4cf-bd1a-47de-ac66-5078553fe273",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "disable_heartbeat"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 3562,\n  \"method\": \"public/disable_heartbeat\",\n  \"params\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1569,\n  \"result\": \"ok\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6a65be88-a02b-4829-b396-8585ea8a478a",
+          "name": "Subscribe to one or more channels. This is the same method as `/private/subscribe`, but it can only be used for 'public' channels.\n\nFor a complete list of available subscription channels and their notification formats, see [Notifications and Subscriptions](https://docs.deribit.com/articles/notifications).\n\n**Note - This method has distinct API rate limiting requirements:** Sustained rate: ~3.3 requests/second. For more information, see [Rate Limits](https://docs.deribit.com/articles/rate-limits).\n\n**📖 Related Article:** [Market Data Collection Best Practices](https://docs.deribit.com/articles/market-data-collection-best-practices)\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fsubscribe)\n\n",
+          "request": {
+            "name": "Subscribe to one or more channels. This is the same method as `/private/subscribe`, but it can only be used for 'public' channels.\n\nFor a complete list of available subscription channels and their notification formats, see [Notifications and Subscriptions](https://docs.deribit.com/articles/notifications).\n\n**Note - This method has distinct API rate limiting requirements:** Sustained rate: ~3.3 requests/second. For more information, see [Rate Limits](https://docs.deribit.com/articles/rate-limits).\n\n**📖 Related Article:** [Market Data Collection Best Practices](https://docs.deribit.com/articles/market-data-collection-best-practices)\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fsubscribe)\n\n",
+            "description": {
+              "content": "Subscribe to one or more channels. This is the same method as `/private/subscribe`, but it can only be used for 'public' channels.\n\nFor a complete list of available subscription channels and their notification formats, see [Notifications and Subscriptions](https://docs.deribit.com/articles/notifications).\n\n**Note - This method has distinct API rate limiting requirements:** Sustained rate: ~3.3 requests/second. For more information, see [Rate Limits](https://docs.deribit.com/articles/rate-limits).\n\n**📖 Related Article:** [Market Data Collection Best Practices](https://docs.deribit.com/articles/market-data-collection-best-practices)\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fsubscribe)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "subscribe"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "channels",
+                  "value": "<string>",
+                  "description": "(Required) A list of channels to subscribe to. See [Notifications and Subscriptions](https://docs.deribit.com/articles/notifications) for all available channels."
+                },
+                {
+                  "disabled": false,
+                  "key": "channels",
+                  "value": "<string>",
+                  "description": "(Required) A list of channels to subscribe to. See [Notifications and Subscriptions](https://docs.deribit.com/articles/notifications) for all available channels."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 3600,\n  \"method\": \"public/subscribe\",\n  \"params\": {\n    \"channels\": [\n      \"deribit_price_index.btc_usd\"\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "63151c30-87a7-417f-ba82-e834e8918f5c",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "subscribe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "channels",
+                      "value": "deribit_price_index.btc_usd"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 3600,\n  \"method\": \"public/subscribe\",\n  \"params\": {\n    \"channels\": [\n      \"deribit_price_index.btc_usd\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 4235,\n  \"result\": [\n    \"deribit_price_index.btc_usd\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e1351844-2d40-4fc0-8f1d-0bfa95a1bd1b",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "subscribe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "channels",
+                      "value": "deribit_price_index.btc_usd"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 3600,\n  \"method\": \"public/subscribe\",\n  \"params\": {\n    \"channels\": [\n      \"deribit_price_index.btc_usd\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"message\": \"string\",\n  \"error\": 9392,\n  \"id\": 5577\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "40c94913-2b89-4f17-a7c7-f101f6940e02",
+          "name": "Unsubscribe from one or more channels. The response contains only the channels that were successfully unsubscribed in this request.\n\nFor a complete list of available subscription channels and their notification formats, see [Notifications and Subscriptions](https://docs.deribit.com/articles/notifications).\n\n**Note:** The `result` field in the response contains only the channels that were successfully processed and unsubscribed from this specific request. It does not include all previously subscribed topics. If a channel in the request is invalid, not subscribed, or fails validation, it will not appear in the result.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Funsubscribe)\n\n",
+          "request": {
+            "name": "Unsubscribe from one or more channels. The response contains only the channels that were successfully unsubscribed in this request.\n\nFor a complete list of available subscription channels and their notification formats, see [Notifications and Subscriptions](https://docs.deribit.com/articles/notifications).\n\n**Note:** The `result` field in the response contains only the channels that were successfully processed and unsubscribed from this specific request. It does not include all previously subscribed topics. If a channel in the request is invalid, not subscribed, or fails validation, it will not appear in the result.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Funsubscribe)\n\n",
+            "description": {
+              "content": "Unsubscribe from one or more channels. The response contains only the channels that were successfully unsubscribed in this request.\n\nFor a complete list of available subscription channels and their notification formats, see [Notifications and Subscriptions](https://docs.deribit.com/articles/notifications).\n\n**Note:** The `result` field in the response contains only the channels that were successfully processed and unsubscribed from this specific request. It does not include all previously subscribed topics. If a channel in the request is invalid, not subscribed, or fails validation, it will not appear in the result.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Funsubscribe)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "unsubscribe"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "channels",
+                  "value": "<string>",
+                  "description": "(Required) A list of channels to unsubscribe from. Only successfully unsubscribed channels will be returned in the result. See [Notifications and Subscriptions](https://docs.deribit.com/articles/notifications) for all available channels."
+                },
+                {
+                  "disabled": false,
+                  "key": "channels",
+                  "value": "<string>",
+                  "description": "(Required) A list of channels to unsubscribe from. Only successfully unsubscribed channels will be returned in the result. See [Notifications and Subscriptions](https://docs.deribit.com/articles/notifications) for all available channels."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 8691,\n  \"method\": \"public/unsubscribe\",\n  \"params\": {\n    \"channels\": [\n      \"deribit_price_index.btc_usd\"\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d690294b-9e6c-496c-b1f5-8ca34b4e1341",
+              "name": "Successfully unsubscribed from channels",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "unsubscribe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "channels",
+                      "value": "deribit_price_index.btc_usd"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 8691,\n  \"method\": \"public/unsubscribe\",\n  \"params\": {\n    \"channels\": [\n      \"deribit_price_index.btc_usd\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 3370,\n  \"result\": [\n    \"deribit_price_index.btc_usd\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "85094226-4f1b-41c1-a904-fc4065a03789",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "unsubscribe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "channels",
+                      "value": "deribit_price_index.btc_usd"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 8691,\n  \"method\": \"public/unsubscribe\",\n  \"params\": {\n    \"channels\": [\n      \"deribit_price_index.btc_usd\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"message\": \"string\",\n  \"error\": 9392,\n  \"id\": 5577\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b74a7e87-8697-443d-a425-76209c9d4b7d",
+          "name": "Unsubscribe from all the channels subscribed so far. This method takes no parameters.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Funsubscribe_all)\n\n",
+          "request": {
+            "name": "Unsubscribe from all the channels subscribed so far. This method takes no parameters.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Funsubscribe_all)\n\n",
+            "description": {
+              "content": "Unsubscribe from all the channels subscribed so far. This method takes no parameters.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Funsubscribe_all)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "unsubscribe_all"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 153,\n  \"method\": \"public/unsubscribe_all\",\n  \"params\": {}\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "91f44b46-7947-4788-8a5f-601ad15b2a78",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "unsubscribe_all"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 153,\n  \"method\": \"public/unsubscribe_all\",\n  \"params\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1569,\n  \"result\": \"ok\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ee6e177a-097a-4b3f-9e5b-85f210356445",
+          "name": "Subscribe to one or more channels. The name of the channel determines what information will be provided, and in what form.\n\nFor a complete list of available subscription channels and their notification formats, see [Notifications and Subscriptions](https://docs.deribit.com/articles/notifications).\n\n**Note - This method has distinct API rate limiting requirements:** Sustained rate: ~3.3 requests/second. For more information, see [Rate Limits](https://docs.deribit.com/articles/rate-limits).\n\n**📖 Related Article:** [Market Data Collection Best Practices](https://docs.deribit.com/articles/market-data-collection-best-practices)\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fsubscribe)\n\n",
+          "request": {
+            "name": "Subscribe to one or more channels. The name of the channel determines what information will be provided, and in what form.\n\nFor a complete list of available subscription channels and their notification formats, see [Notifications and Subscriptions](https://docs.deribit.com/articles/notifications).\n\n**Note - This method has distinct API rate limiting requirements:** Sustained rate: ~3.3 requests/second. For more information, see [Rate Limits](https://docs.deribit.com/articles/rate-limits).\n\n**📖 Related Article:** [Market Data Collection Best Practices](https://docs.deribit.com/articles/market-data-collection-best-practices)\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fsubscribe)\n\n",
+            "description": {
+              "content": "Subscribe to one or more channels. The name of the channel determines what information will be provided, and in what form.\n\nFor a complete list of available subscription channels and their notification formats, see [Notifications and Subscriptions](https://docs.deribit.com/articles/notifications).\n\n**Note - This method has distinct API rate limiting requirements:** Sustained rate: ~3.3 requests/second. For more information, see [Rate Limits](https://docs.deribit.com/articles/rate-limits).\n\n**📖 Related Article:** [Market Data Collection Best Practices](https://docs.deribit.com/articles/market-data-collection-best-practices)\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fsubscribe)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "private",
+                "subscribe"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "channels",
+                  "value": "<string>",
+                  "description": "(Required) A list of channels to subscribe to. See [Notifications and Subscriptions](https://docs.deribit.com/articles/notifications) for all available channels."
+                },
+                {
+                  "disabled": false,
+                  "key": "channels",
+                  "value": "<string>",
+                  "description": "(Required) A list of channels to subscribe to. See [Notifications and Subscriptions](https://docs.deribit.com/articles/notifications) for all available channels."
+                },
+                {
+                  "disabled": false,
+                  "key": "label",
+                  "value": "<string>",
+                  "description": "Optional label which will be added to notifications of private channels (max 16 characters)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 4235,\n  \"method\": \"private/subscribe\",\n  \"params\": {\n    \"channels\": [\n      \"deribit_price_index.btc_usd\"\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2e232196-3a27-4591-ae8c-ceec3ced0e96",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "private",
+                    "subscribe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "channels",
+                      "value": "deribit_price_index.btc_usd"
+                    },
+                    {
+                      "key": "label",
+                      "value": "TestLabel1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 4235,\n  \"method\": \"private/subscribe\",\n  \"params\": {\n    \"channels\": [\n      \"deribit_price_index.btc_usd\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 4235,\n  \"result\": [\n    \"deribit_price_index.btc_usd\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "01e654d5-dc52-4bfb-a676-54e4fc518204",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "private",
+                    "subscribe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "channels",
+                      "value": "deribit_price_index.btc_usd"
+                    },
+                    {
+                      "key": "label",
+                      "value": "TestLabel1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 4235,\n  \"method\": \"private/subscribe\",\n  \"params\": {\n    \"channels\": [\n      \"deribit_price_index.btc_usd\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"message\": \"string\",\n  \"error\": 9392,\n  \"id\": 5577\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "225aef50-94c3-4adf-b1e8-0d29ccc8581a",
+          "name": "Unsubscribe from one or more channels. The response contains only the channels that were successfully unsubscribed in this request.\n\nFor a complete list of available subscription channels and their notification formats, see [Notifications and Subscriptions](https://docs.deribit.com/articles/notifications).\n\n**Note:** The `result` field in the response contains only the channels that were successfully processed and unsubscribed from this specific request. It does not include all previously subscribed topics. If a channel in the request is invalid, not subscribed, or fails validation, it will not appear in the result.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Funsubscribe)\n\n",
+          "request": {
+            "name": "Unsubscribe from one or more channels. The response contains only the channels that were successfully unsubscribed in this request.\n\nFor a complete list of available subscription channels and their notification formats, see [Notifications and Subscriptions](https://docs.deribit.com/articles/notifications).\n\n**Note:** The `result` field in the response contains only the channels that were successfully processed and unsubscribed from this specific request. It does not include all previously subscribed topics. If a channel in the request is invalid, not subscribed, or fails validation, it will not appear in the result.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Funsubscribe)\n\n",
+            "description": {
+              "content": "Unsubscribe from one or more channels. The response contains only the channels that were successfully unsubscribed in this request.\n\nFor a complete list of available subscription channels and their notification formats, see [Notifications and Subscriptions](https://docs.deribit.com/articles/notifications).\n\n**Note:** The `result` field in the response contains only the channels that were successfully processed and unsubscribed from this specific request. It does not include all previously subscribed topics. If a channel in the request is invalid, not subscribed, or fails validation, it will not appear in the result.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Funsubscribe)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "private",
+                "unsubscribe"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "channels",
+                  "value": "<string>",
+                  "description": "(Required) A list of channels to unsubscribe from. Only successfully unsubscribed channels will be returned in the result. See [Notifications and Subscriptions](https://docs.deribit.com/articles/notifications) for all available channels."
+                },
+                {
+                  "disabled": false,
+                  "key": "channels",
+                  "value": "<string>",
+                  "description": "(Required) A list of channels to unsubscribe from. Only successfully unsubscribed channels will be returned in the result. See [Notifications and Subscriptions](https://docs.deribit.com/articles/notifications) for all available channels."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 3370,\n  \"method\": \"private/unsubscribe\",\n  \"params\": {\n    \"channels\": [\n      \"deribit_price_index.btc_usd\"\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d99fc6b8-560e-41a3-bd67-cf197f9aacc4",
+              "name": "Successfully unsubscribed from channels",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "private",
+                    "unsubscribe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "channels",
+                      "value": "deribit_price_index.btc_usd"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 3370,\n  \"method\": \"private/unsubscribe\",\n  \"params\": {\n    \"channels\": [\n      \"deribit_price_index.btc_usd\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 3370,\n  \"result\": [\n    \"deribit_price_index.btc_usd\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2bba3f39-87db-44b3-a1f5-2c010d6ba63e",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "private",
+                    "unsubscribe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "channels",
+                      "value": "deribit_price_index.btc_usd"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 3370,\n  \"method\": \"private/unsubscribe\",\n  \"params\": {\n    \"channels\": [\n      \"deribit_price_index.btc_usd\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"message\": \"string\",\n  \"error\": 9392,\n  \"id\": 5577\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "22c9bd5b-f680-4f2d-a7f1-a277f1c674b4",
+          "name": "Unsubscribe from all the channels subscribed so far. This method takes no parameters.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Funsubscribe_all)\n\n",
+          "request": {
+            "name": "Unsubscribe from all the channels subscribed so far. This method takes no parameters.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Funsubscribe_all)\n\n",
+            "description": {
+              "content": "Unsubscribe from all the channels subscribed so far. This method takes no parameters.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Funsubscribe_all)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "private",
+                "unsubscribe_all"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 154,\n  \"method\": \"private/unsubscribe_all\",\n  \"params\": {}\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "57532ce9-34df-47b2-826e-93c1255dcb69",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "private",
+                    "unsubscribe_all"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 154,\n  \"method\": \"private/unsubscribe_all\",\n  \"params\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1569,\n  \"result\": \"ok\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "948cf886-dfba-4643-b853-a7b3484dc57d",
+          "name": "Method used to introduce the client software connected to Deribit platform over websocket. Provided data may have an impact on the maintained connection and will be collected for internal statistical purposes. In response, Deribit will also introduce itself.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fhello)\n\n",
+          "request": {
+            "name": "Method used to introduce the client software connected to Deribit platform over websocket. Provided data may have an impact on the maintained connection and will be collected for internal statistical purposes. In response, Deribit will also introduce itself.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fhello)\n\n",
+            "description": {
+              "content": "Method used to introduce the client software connected to Deribit platform over websocket. Provided data may have an impact on the maintained connection and will be collected for internal statistical purposes. In response, Deribit will also introduce itself.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fhello)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "hello"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "client_name",
+                  "value": "<string>",
+                  "description": "(Required) Client software name"
+                },
+                {
+                  "disabled": false,
+                  "key": "client_version",
+                  "value": "<string>",
+                  "description": "(Required) Client software version"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 2841,\n  \"method\": \"public/hello\",\n  \"params\": {\n    \"client_name\": \"My Trading Software\",\n    \"client_version\": \"1.0.2\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "47162fd4-8cbc-4b37-b0a0-9ce3726b781b",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "hello"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "client_name",
+                      "value": "My Trading Software"
+                    },
+                    {
+                      "key": "client_version",
+                      "value": "1.0.2"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 2841,\n  \"method\": \"public/hello\",\n  \"params\": {\n    \"client_name\": \"My Trading Software\",\n    \"client_version\": \"1.0.2\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 8212,\n  \"result\": {\n    \"version\": \"1.2.26\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://test.deribit.com/api/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "1f429abd-8685-4e88-a29e-5068dc69d17f",
+    "name": "Deribit Account Management WebSocket Only API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Can only be used over websockets.",
+      "type": "text/plain"
+    }
+  }
+}

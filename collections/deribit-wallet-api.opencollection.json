@@ -1,0 +1,961 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Deribit Account Management Wallet API",
+    "version": "2.1.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Wallet",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GET /private/get_deposits",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/private/get_deposits",
+            "params": [
+              {
+                "name": "currency",
+                "value": "",
+                "type": "query",
+                "description": "The currency symbol"
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "Number of requested items, default - `10`, maximum - `1000`"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The offset for pagination, default - `0`"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieve the latest user deposits. Returns a list of deposit transactions with their status, amounts, addresses, confirmations, and other relevant details.\n\n**📖 Related Article:** [Managing Deposits](https://docs.deribit.com/articles/managing-deposits-api)\n\n**Scope:** `wallet:read`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_deposits)\n\n"
+        },
+        {
+          "info": {
+            "name": "GET /private/create_deposit_address",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/private/create_deposit_address",
+            "params": [
+              {
+                "name": "currency",
+                "value": "",
+                "type": "query",
+                "description": "The currency symbol"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new deposit address for the specified currency. Each currency can have multiple deposit addresses. Use this method to generate a new address for receiving deposits.\n\n**Note:**\n\nFor Bitcoin, a new address can be generated every 24 hours.\n\nFor ERC20, Solana and XRP only one address can be generated.\n\n**Note:**\n\nIf an ERC20 address is generated, this address will be automatically added for every asset that uses ERC20 addresses.\n\n**📖 Related Article:** [Managing Deposits](https://docs.der"
+        },
+        {
+          "info": {
+            "name": "GET /private/get_current_deposit_address",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/private/get_current_deposit_address",
+            "params": [
+              {
+                "name": "currency",
+                "value": "",
+                "type": "query",
+                "description": "The currency symbol"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieve the current deposit address for the specified currency. Returns the most recently created or used deposit address for receiving funds.\n\n**📖 Related Article:** [Managing Deposits](https://docs.deribit.com/articles/managing-deposits-api)\n\n**Scope:** `wallet:read`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_current_deposit_address)\n\n"
+        },
+        {
+          "info": {
+            "name": "GET /private/withdraw",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/private/withdraw",
+            "params": [
+              {
+                "name": "currency",
+                "value": "",
+                "type": "query",
+                "description": "The currency symbol"
+              },
+              {
+                "name": "address",
+                "value": "",
+                "type": "query",
+                "description": "Address in currency format, it must be in address book"
+              },
+              {
+                "name": "amount",
+                "value": "",
+                "type": "query",
+                "description": "Amount of funds to be withdrawn"
+              },
+              {
+                "name": "priority",
+                "value": "",
+                "type": "query",
+                "description": "Withdrawal priority, optional for BTC, default: `high`"
+              },
+              {
+                "name": "nonce",
+                "value": "",
+                "type": "query",
+                "description": "Optional idempotency nonce. If provided, subsequent requests with the same nonce will return the previously created transaction instead of creating a new one. Must be 8-128 characters. The nonce is persisted on the resulting transaction and returned in the response."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new withdrawal request. This method allows you to withdraw funds from your account to an external address. The withdrawal can be configured with priority settings and must use an address from your address book.\n\n**Withdrawal Checks & Balance Updates**\n\nWithdrawal funds are checked twice: when a user requests a withdrawal and again when they confirm it via the email link. If available funds decrease between these steps, the withdrawal may be rejected.\n\nA withdrawal may also be rejected "
+        },
+        {
+          "info": {
+            "name": "GET /private/cancel_withdrawal",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/private/cancel_withdrawal",
+            "params": [
+              {
+                "name": "currency",
+                "value": "",
+                "type": "query",
+                "description": "The currency symbol"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "The withdrawal id"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Cancels a pending withdrawal request. This method allows you to cancel a withdrawal that has not yet been processed. Once a withdrawal is processed, it cannot be cancelled.\n\n**📖 Related Article:** [Managing Withdrawals](https://docs.deribit.com/articles/managing-withdrawals-api)\n\n**Scope:** `wallet:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fcancel_withdrawal)\n\n"
+        },
+        {
+          "info": {
+            "name": "GET /private/get_withdrawals",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/private/get_withdrawals",
+            "params": [
+              {
+                "name": "currency",
+                "value": "",
+                "type": "query",
+                "description": "The currency symbol"
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "Number of requested items, default - `10`, maximum - `1000`"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The offset for pagination, default - `0`"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieve the latest user withdrawals. Returns a list of withdrawal requests with their status, amounts, addresses, and other relevant details.\n\n**📖 Related Article:** [Managing Withdrawals](https://docs.deribit.com/articles/managing-withdrawals-api)\n\n**Scope:** `wallet:read`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_withdrawals)\n\n"
+        },
+        {
+          "info": {
+            "name": "GET /private/get_address_book",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/private/get_address_book",
+            "params": [
+              {
+                "name": "currency",
+                "value": "",
+                "type": "query",
+                "description": "The currency symbol"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Address book type"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves the address book entries of the given type. Returns all saved addresses that can be used for withdrawals, along with their labels and beneficiary information if available.\n\n**📖 Related Article:** [Managing Withdrawals](https://docs.deribit.com/articles/managing-withdrawals-api)\n\n**Scope:** `wallet:read`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_address_book)\n\n"
+        },
+        {
+          "info": {
+            "name": "GET /private/add_to_address_book",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/private/add_to_address_book",
+            "params": [
+              {
+                "name": "currency",
+                "value": "",
+                "type": "query",
+                "description": "The currency symbol"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Address book type"
+              },
+              {
+                "name": "address",
+                "value": "",
+                "type": "query",
+                "description": "Address in currency format"
+              },
+              {
+                "name": "label",
+                "value": "",
+                "type": "query",
+                "description": "Label of the address book entry"
+              },
+              {
+                "name": "beneficiary_vasp_name",
+                "value": "",
+                "type": "query",
+                "description": "Name of beneficiary VASP"
+              },
+              {
+                "name": "beneficiary_vasp_did",
+                "value": "",
+                "type": "query",
+                "description": "DID of beneficiary VASP"
+              },
+              {
+                "name": "beneficiary_vasp_website",
+                "value": "",
+                "type": "query",
+                "description": "Website of the beneficiary VASP. Required if the address book entry is associated with a VASP that is not included in the list of known VASPs"
+              },
+              {
+                "name": "beneficiary_first_name",
+                "value": "",
+                "type": "query",
+                "description": "First name of beneficiary (if beneficiary is a person)"
+              },
+              {
+                "name": "beneficiary_last_name",
+                "value": "",
+                "type": "query",
+                "description": "First name of beneficiary (if beneficiary is a person)"
+              },
+              {
+                "name": "beneficiary_company_name",
+                "value": "",
+                "type": "query",
+                "description": "Beneficiary company name (if beneficiary is a company)"
+              },
+              {
+                "name": "beneficiary_address",
+                "value": "",
+                "type": "query",
+                "description": "Geographical address of the beneficiary"
+              },
+              {
+                "name": "agreed",
+                "value": "",
+                "type": "query",
+                "description": "Indicates that the user agreed to shared provided information with 3rd parties"
+              },
+              {
+                "name": "personal",
+                "value": "",
+                "type": "query",
+                "description": "The user confirms that he provided address belongs to him and he has access to it via an un-hosted wallet software"
+              },
+              {
+                "name": "extra_currencies",
+                "value": "",
+                "type": "query",
+                "description": "The user can pass a list of currencies to add the address for. It is currently available ONLY for ERC20 currencies. Without passing this paramater for an ERC20 currency, the address will be added to ALL of the ERC20 currencies."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds a new address to the address book. The address book allows you to store addresses for withdrawals, along with beneficiary information for compliance purposes.\n\n**📖 Related Article:** [Managing Withdrawals](https://docs.deribit.com/articles/managing-withdrawals-api)\n\n**Scope:** `wallet:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fadd_to_address_book)\n\n"
+        },
+        {
+          "info": {
+            "name": "GET /private/remove_from_address_book",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/private/remove_from_address_book",
+            "params": [
+              {
+                "name": "currency",
+                "value": "",
+                "type": "query",
+                "description": "The currency symbol"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Address book type"
+              },
+              {
+                "name": "address",
+                "value": "",
+                "type": "query",
+                "description": "Address in currency format, it must be in address book"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Removes an entry from the address book. This method allows you to delete a saved address that is no longer needed.\n\n**📖 Related Article:** [Managing Withdrawals](https://docs.deribit.com/articles/managing-withdrawals-api)\n\n**Scope:** `wallet:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fremove_from_address_book)\n\n"
+        },
+        {
+          "info": {
+            "name": "GET /private/update_in_address_book",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/private/update_in_address_book",
+            "params": [
+              {
+                "name": "currency",
+                "value": "",
+                "type": "query",
+                "description": "The currency symbol"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Address book type"
+              },
+              {
+                "name": "address",
+                "value": "",
+                "type": "query",
+                "description": "Address in currency format, it must be in address book"
+              },
+              {
+                "name": "beneficiary_vasp_name",
+                "value": "",
+                "type": "query",
+                "description": "Name of beneficiary VASP"
+              },
+              {
+                "name": "beneficiary_vasp_did",
+                "value": "",
+                "type": "query",
+                "description": "DID of beneficiary VASP"
+              },
+              {
+                "name": "beneficiary_vasp_website",
+                "value": "",
+                "type": "query",
+                "description": "Website of the beneficiary VASP. Required if the address book entry is associated with a VASP that is not included in the list of known VASPs"
+              },
+              {
+                "name": "beneficiary_first_name",
+                "value": "",
+                "type": "query",
+                "description": "First name of beneficiary (if beneficiary is a person)"
+              },
+              {
+                "name": "beneficiary_last_name",
+                "value": "",
+                "type": "query",
+                "description": "First name of beneficiary (if beneficiary is a person)"
+              },
+              {
+                "name": "beneficiary_company_name",
+                "value": "",
+                "type": "query",
+                "description": "Beneficiary company name (if beneficiary is a company)"
+              },
+              {
+                "name": "beneficiary_address",
+                "value": "",
+                "type": "query",
+                "description": "Geographical address of the beneficiary"
+              },
+              {
+                "name": "agreed",
+                "value": "",
+                "type": "query",
+                "description": "Indicates that the user agreed to shared provided information with 3rd parties"
+              },
+              {
+                "name": "personal",
+                "value": "",
+                "type": "query",
+                "description": "The user confirms that he provided address belongs to him and he has access to it via an un-hosted wallet software"
+              },
+              {
+                "name": "label",
+                "value": "",
+                "type": "query",
+                "description": "Label of the address book entry"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates beneficiary information for an address in the address book. This method allows you to add or modify beneficiary details required for compliance purposes when making withdrawals to certain addresses.\n\n**📖 Related Article:** [Managing Withdrawals](https://docs.deribit.com/articles/managing-withdrawals-api)\n\n**Scope:** `wallet:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fupdate_in_address_book)\n\n"
+        },
+        {
+          "info": {
+            "name": "GET /private/save_address_beneficiary",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/private/save_address_beneficiary",
+            "params": [
+              {
+                "name": "currency",
+                "value": "",
+                "type": "query",
+                "description": "The currency symbol"
+              },
+              {
+                "name": "address",
+                "value": "",
+                "type": "query",
+                "description": "Address in currency format"
+              },
+              {
+                "name": "tag",
+                "value": "",
+                "type": "query",
+                "description": "Tag for XRP addresses"
+              },
+              {
+                "name": "agreed",
+                "value": "",
+                "type": "query",
+                "description": "Indicates that the user agreed to shared provided information with 3rd parties"
+              },
+              {
+                "name": "personal",
+                "value": "",
+                "type": "query",
+                "description": "The user confirms that he provided address belongs to him and he has access to it via an un-hosted wallet software"
+              },
+              {
+                "name": "unhosted",
+                "value": "",
+                "type": "query",
+                "description": "Indicates if the address belongs to an unhosted wallet"
+              },
+              {
+                "name": "beneficiary_vasp_name",
+                "value": "",
+                "type": "query",
+                "description": "Name of beneficiary VASP"
+              },
+              {
+                "name": "beneficiary_vasp_did",
+                "value": "",
+                "type": "query",
+                "description": "DID of beneficiary VASP"
+              },
+              {
+                "name": "beneficiary_vasp_website",
+                "value": "",
+                "type": "query",
+                "description": "Website of the beneficiary VASP. Required if the address book entry is associated with a VASP that is not included in the list of known VASPs"
+              },
+              {
+                "name": "beneficiary_first_name",
+                "value": "",
+                "type": "query",
+                "description": "First name of beneficiary (if beneficiary is a person)"
+              },
+              {
+                "name": "beneficiary_last_name",
+                "value": "",
+                "type": "query",
+                "description": "First name of beneficiary (if beneficiary is a person)"
+              },
+              {
+                "name": "beneficiary_company_name",
+                "value": "",
+                "type": "query",
+                "description": "Beneficiary company name (if beneficiary is a company)"
+              },
+              {
+                "name": "beneficiary_address",
+                "value": "",
+                "type": "query",
+                "description": "Geographical address of the beneficiary"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Saves beneficiary information for an address. This method allows you to store beneficiary details required for compliance purposes, including VASP information, personal details, and wallet type classification.\n\n**📖 Related Article:** [Managing Withdrawals](https://docs.deribit.com/articles/managing-withdrawals-api)\n\n**Scope:** `wallet:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fsave_address_beneficiary)\n\n"
+        },
+        {
+          "info": {
+            "name": "GET /private/get_address_beneficiary",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/private/get_address_beneficiary",
+            "params": [
+              {
+                "name": "currency",
+                "value": "",
+                "type": "query",
+                "description": "The currency symbol"
+              },
+              {
+                "name": "address",
+                "value": "",
+                "type": "query",
+                "description": "Address in currency format"
+              },
+              {
+                "name": "tag",
+                "value": "",
+                "type": "query",
+                "description": "Tag for XRP addresses"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves beneficiary information for a specific address. Returns the stored beneficiary details including VASP information, personal details, and wallet type classification.\n\n**📖 Related Article:** [Managing Withdrawals](https://docs.deribit.com/articles/managing-withdrawals-api)\n\n**Scope:** `wallet:read`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_address_beneficiary)\n\n"
+        },
+        {
+          "info": {
+            "name": "GET /private/delete_address_beneficiary",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/private/delete_address_beneficiary",
+            "params": [
+              {
+                "name": "currency",
+                "value": "",
+                "type": "query",
+                "description": "The currency symbol"
+              },
+              {
+                "name": "address",
+                "value": "",
+                "type": "query",
+                "description": "Address in currency format"
+              },
+              {
+                "name": "tag",
+                "value": "",
+                "type": "query",
+                "description": "Tag for XRP addresses"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deletes beneficiary information for a specific address.\n\n**📖 Related Article:** [Managing Withdrawals](https://docs.deribit.com/articles/managing-withdrawals-api)\n\n**Scope:** `wallet:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fdelete_address_beneficiary)\n\n"
+        },
+        {
+          "info": {
+            "name": "GET /private/list_address_beneficiaries",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/private/list_address_beneficiaries",
+            "params": [
+              {
+                "name": "currency",
+                "value": "",
+                "type": "query",
+                "description": "The currency symbol"
+              },
+              {
+                "name": "address",
+                "value": "",
+                "type": "query",
+                "description": "Address in currency format"
+              },
+              {
+                "name": "tag",
+                "value": "",
+                "type": "query",
+                "description": "Tag for XRP addresses"
+              },
+              {
+                "name": "created_before",
+                "value": "",
+                "type": "query",
+                "description": "Filter by creation timestamp (before)"
+              },
+              {
+                "name": "created_after",
+                "value": "",
+                "type": "query",
+                "description": "Filter by creation timestamp (after)"
+              },
+              {
+                "name": "updated_before",
+                "value": "",
+                "type": "query",
+                "description": "Filter by update timestamp (before)"
+              },
+              {
+                "name": "updated_after",
+                "value": "",
+                "type": "query",
+                "description": "Filter by update timestamp (after)"
+              },
+              {
+                "name": "personal",
+                "value": "",
+                "type": "query",
+                "description": "Filter by personal wallet flag"
+              },
+              {
+                "name": "unhosted",
+                "value": "",
+                "type": "query",
+                "description": "Filter by unhosted wallet flag"
+              },
+              {
+                "name": "beneficiary_vasp_name",
+                "value": "",
+                "type": "query",
+                "description": "Filter by beneficiary VASP name"
+              },
+              {
+                "name": "beneficiary_vasp_did",
+                "value": "",
+                "type": "query",
+                "description": "Filter by beneficiary VASP DID"
+              },
+              {
+                "name": "beneficiary_vasp_website",
+                "value": "",
+                "type": "query",
+                "description": "Website of the beneficiary VASP. Required if the address book entry is associated with a VASP that is not included in the list of known VASPs"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return"
+              },
+              {
+                "name": "continuation",
+                "value": "",
+                "type": "query",
+                "description": "Continuation token for pagination"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Lists address beneficiaries with optional filtering and pagination. Returns all saved beneficiary information for addresses, with support for filtering by currency, address, wallet type, VASP details, and date ranges.\n\n**📖 Related Article:** [Managing Withdrawals](https://docs.deribit.com/articles/managing-withdrawals-api)\n\n**Scope:** `wallet:read`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Flist_address_beneficiaries)\n\n"
+        },
+        {
+          "info": {
+            "name": "GET /private/submit_transfer_to_subaccount",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/private/submit_transfer_to_subaccount",
+            "params": [
+              {
+                "name": "currency",
+                "value": "",
+                "type": "query",
+                "description": "The currency symbol"
+              },
+              {
+                "name": "amount",
+                "value": "",
+                "type": "query",
+                "description": "Amount of funds to be transferred"
+              },
+              {
+                "name": "destination",
+                "value": "",
+                "type": "query",
+                "description": "Id of destination subaccount. Can be found in `My Account >> Subaccounts` tab"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Transfer funds from the main account to a subaccount.\n\n**📖 Related Article:** [Managing Transfers](https://docs.deribit.com/articles/managing-transfers-api)\n\n**Scope:** `wallets:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fsubmit_transfer_to_subaccount)\n\n"
+        },
+        {
+          "info": {
+            "name": "GET /private/submit_transfer_between_subaccounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/private/submit_transfer_between_subaccounts",
+            "params": [
+              {
+                "name": "currency",
+                "value": "",
+                "type": "query",
+                "description": "The currency symbol"
+              },
+              {
+                "name": "amount",
+                "value": "",
+                "type": "query",
+                "description": "Amount of funds to be transferred"
+              },
+              {
+                "name": "destination",
+                "value": "",
+                "type": "query",
+                "description": "Id of destination subaccount. Can be found in `My Account >> Subaccounts` tab"
+              },
+              {
+                "name": "source",
+                "value": "",
+                "type": "query",
+                "description": "Id of the source (sub)account. Can be found in `My Account >> Subaccounts` tab. By default, it is the Id of the account which made the request. However, if a different \"source\" is specified, the user must possess the mainaccount scope, and only other subaccounts can be designated as the source."
+              },
+              {
+                "name": "nonce",
+                "value": "",
+                "type": "query",
+                "description": "Optional idempotency nonce. If provided, subsequent requests with the same nonce will return the previously created transaction instead of creating a new one. Must be 8-128 characters. The nonce is persisted on the resulting transaction and returned in the response."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Transfer funds between two subaccounts or between a subaccount and the main account.\n\n**📖 Related Article:** [Managing Transfers](https://docs.deribit.com/articles/managing-transfers-api)\n\n**Scope:** `wallets:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fsubmit_transfer_between_subaccounts)\n\n"
+        },
+        {
+          "info": {
+            "name": "GET /private/submit_transfer_to_user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/private/submit_transfer_to_user",
+            "params": [
+              {
+                "name": "currency",
+                "value": "",
+                "type": "query",
+                "description": "The currency symbol"
+              },
+              {
+                "name": "amount",
+                "value": "",
+                "type": "query",
+                "description": "Amount of funds to be transferred"
+              },
+              {
+                "name": "destination",
+                "value": "",
+                "type": "query",
+                "description": "Destination wallet's address taken from address book"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Transfer funds to another user. This method allows you to send funds from your main account to another Deribit user's account. The transfer is processed internally and does not require blockchain transactions.\n\n**📖 Related Article:** [Managing Transfers](https://docs.deribit.com/articles/managing-transfers-api)\n\n**Scope:** `wallet:read_write` and mainaccount\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fsubmit_transfer_to_user)\n\n"
+        },
+        {
+          "info": {
+            "name": "GET /private/get_transfers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/private/get_transfers",
+            "params": [
+              {
+                "name": "currency",
+                "value": "",
+                "type": "query",
+                "description": "The currency symbol"
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "Number of requested items, default - `10`, maximum - `1000`"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The offset for pagination, default - `0`"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieve the user's transfers list. Returns a list of internal transfers between accounts, subaccounts, or to other users, including their status, amounts, and other relevant details.\n\n**📖 Related Article:** [Managing Transfers](https://docs.deribit.com/articles/managing-transfers-api)\n\n**Scope:** `wallet:read`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_transfers)\n\n"
+        },
+        {
+          "info": {
+            "name": "GET /private/cancel_transfer_by_id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/private/cancel_transfer_by_id",
+            "params": [
+              {
+                "name": "currency",
+                "value": "",
+                "type": "query",
+                "description": "The currency symbol"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "Id of transfer"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Cancel a pending transfer by its ID. This method allows you to cancel a transfer that has not yet been processed. Once a transfer is processed, it cannot be cancelled.\n\n**📖 Related Article:** [Managing Transfers](https://docs.deribit.com/articles/managing-transfers-api)\n\n**Scope:** `wallet:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fcancel_transfer_by_id)\n\n"
+        },
+        {
+          "info": {
+            "name": "GET /private/get_reward_eligibility",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/private/get_reward_eligibility",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns reward eligibility status and APR data for all supported currencies.\n\nThis method takes no parameters.\n\n**📖 Related Support Article:** [Yield reward-bearing coins](https://support.deribit.com/hc/en-us/articles/31424939199261-Yield-reward-bearing-coins)\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_reward_eligibility)\n\n"
+        },
+        {
+          "info": {
+            "name": "GET /private/set_clearance_originator",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/private/set_clearance_originator",
+            "params": [
+              {
+                "name": "deposit_id",
+                "value": "",
+                "type": "query",
+                "description": "Id of the deposit"
+              },
+              {
+                "name": "originator",
+                "value": "",
+                "type": "query",
+                "description": "Information about the originator of the deposit"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Sets originator of the deposit\n\n**Scope:** `wallet:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fset_clearance_originator)\n\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

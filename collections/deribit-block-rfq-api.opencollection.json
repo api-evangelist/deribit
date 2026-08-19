@@ -1,0 +1,523 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Deribit Account Management Block RFQ API",
+    "version": "2.1.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Block RFQ",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GET /private/get_block_rfqs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/private/get_block_rfqs",
+            "params": [
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "Count of Block RFQs returned, maximum - `1000`"
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query",
+                "description": "State of Block RFQ"
+              },
+              {
+                "name": "role",
+                "value": "",
+                "type": "query",
+                "description": "Role of the user in Block RFQ. When the `any` role is selected, the method returns all Block RFQs in which the user has participated, either as the `taker` or as a `maker`"
+              },
+              {
+                "name": "continuation",
+                "value": "",
+                "type": "query",
+                "description": "The continuation parameter specifies the starting point for fetching historical Block RFQs. When provided, the endpoint returns Block RFQs, starting from the specified ID and continuing backward (e.g., if `continuation` is 50, results will include Block RFQs of ID 49, 48, etc.)"
+              },
+              {
+                "name": "block_rfq_id",
+                "value": "",
+                "type": "query",
+                "description": "ID of the Block RFQ"
+              },
+              {
+                "name": "currency",
+                "value": "",
+                "type": "query",
+                "description": "The currency symbol"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns a list of Block RFQs that were either created by the user or assigned to them as a maker, sorted in descending order.\n\n`trades` and `mark_price` are only visible for the filled Block RFQ. When a `block_rfq_id` is specified, only that particular Block RFQ will be returned. If called by a `taker`, response will additionally include `makers` list and `label` if previously provided. If called by the `maker`, the `trades` will include the maker's alias, but only for trades in which this maker"
+        },
+        {
+          "info": {
+            "name": "GET /private/create_block_rfq",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/private/create_block_rfq",
+            "params": [
+              {
+                "name": "legs",
+                "value": "",
+                "type": "query",
+                "description": "List of legs used to create Block RFQ"
+              },
+              {
+                "name": "trade_allocations",
+                "value": "",
+                "type": "query",
+                "description": "List of allocations for Block RFQ pre-allocation. Allows to split amount between different (sub)accounts or broker clients. Each allocation must specify either `user_id` (for direct allocation) or `client_info` object (for broker allocation), and amount."
+              },
+              {
+                "name": "hedge",
+                "value": "",
+                "type": "query",
+                "description": "Hedge leg of the Block RFQ. There is only one hedge leg allowed per Block RFQ"
+              },
+              {
+                "name": "label",
+                "value": "",
+                "type": "query",
+                "description": "User defined label for the Block RFQ (maximum 64 characters)"
+              },
+              {
+                "name": "makers",
+                "value": "",
+                "type": "query",
+                "description": "List of targeted Block RFQ makers. Only those makers will be notified about created Block RFQ. If the list is empty, all available makers will be targeted."
+              },
+              {
+                "name": "disclosed",
+                "value": "",
+                "type": "query",
+                "description": "Determines whether the RFQ is non-anonymous, revealing both taker and maker aliases. It can be set to `false` (anonymous mode) only when at least 5 makers are targeted. Default value is `true`."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "**Taker method**\n\nCreates a new Block RFQ. Use [private/get_block_rfqs](https://docs.deribit.com/api-reference/block-rfq/private-get_block_rfqs) to retrieve Block RFQ information.\n\n**Block RFQ pre-allocation:** The taker can split the total amount between different (sub)accounts using the `trade_allocations` parameter. The taker can also allocate to himself. Each allocation must specify either `user_id` (for direct allocation) or `client_info` object (for broker allocation), and `amount`.\n\n**📖 "
+        },
+        {
+          "info": {
+            "name": "GET /private/cancel_block_rfq",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/private/cancel_block_rfq",
+            "params": [
+              {
+                "name": "block_rfq_id",
+                "value": "",
+                "type": "query",
+                "description": "ID of the Block RFQ"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "**Taker method**\n\nCancels a Block RFQ using the specified `block_rfq_id`.\n\nUse [private/get_block_rfqs](https://docs.deribit.com/api-reference/block-rfq/private-get_block_rfqs) to retrieve Block RFQ information, or [private/create_block_rfq](https://docs.deribit.com/api-reference/block-rfq/private-create_block_rfq) to create a new Block RFQ.\n\n**📖 Related Article:** [Deribit Block RFQ API walkthrough](https://docs.deribit.com/articles/block-rfq-api-walkthrough)\n\n**Scope:** `block_rfq:read_write`"
+        },
+        {
+          "info": {
+            "name": "GET /private/accept_block_rfq",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/private/accept_block_rfq",
+            "params": [
+              {
+                "name": "block_rfq_id",
+                "value": "",
+                "type": "query",
+                "description": "ID of the Block RFQ"
+              },
+              {
+                "name": "price",
+                "value": "",
+                "type": "query",
+                "description": "Maximum acceptable price for execution"
+              },
+              {
+                "name": "amount",
+                "value": "",
+                "type": "query",
+                "description": "This value multiplied by the ratio of a leg gives trade size on that leg."
+              },
+              {
+                "name": "direction",
+                "value": "",
+                "type": "query",
+                "description": "Direction of the trade from the taker perspective"
+              },
+              {
+                "name": "hedge",
+                "value": "",
+                "type": "query",
+                "description": "Hedge leg of the Block RFQ. There is only one hedge leg allowed per Block RFQ"
+              },
+              {
+                "name": "legs",
+                "value": "",
+                "type": "query",
+                "description": "List of legs used to trade Block RFQ"
+              },
+              {
+                "name": "time_in_force",
+                "value": "",
+                "type": "query",
+                "description": "Specifies how long the order should remain active"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "**Taker method**\n\nAllows Block RFQ taker to accept a quote by sending a single crossing price. The order can be either filled immediately (`fill_or_kill`) or remain active until cancelled (`good_til_cancelled`).\n\n**Note:** After Block RFQ creation, a grace period of 5 seconds begins, during which the taker cannot see quotes or trade the Block RFQ.\n\nUse [private/get_block_rfqs](https://docs.deribit.com/api-reference/block-rfq/private-get_block_rfqs) to retrieve Block RFQ information, or [private/"
+        },
+        {
+          "info": {
+            "name": "GET /private/cancel_block_rfq_trigger",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/private/cancel_block_rfq_trigger",
+            "params": [
+              {
+                "name": "block_rfq_id",
+                "value": "",
+                "type": "query",
+                "description": "ID of the Block RFQ"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "**Taker method**\n\nAllows Block RFQ taker to cancel an active trigger for a Block RFQ. The response includes the full Block RFQ object with the trade trigger state set to cancelled.\n\nUse [private/get_block_rfqs](https://docs.deribit.com/api-reference/block-rfq/private-get_block_rfqs) to retrieve Block RFQ information.\n\n**📖 Related Article:** [Deribit Block RFQ API walkthrough](https://docs.deribit.com/articles/block-rfq-api-walkthrough)\n\n**Scope:** `block_rfq:read_write`\n\n[Try in API console](ht"
+        },
+        {
+          "info": {
+            "name": "GET /private/get_block_rfq_quotes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/private/get_block_rfq_quotes",
+            "params": [
+              {
+                "name": "block_rfq_id",
+                "value": "",
+                "type": "query",
+                "description": "ID of the Block RFQ"
+              },
+              {
+                "name": "label",
+                "value": "",
+                "type": "query",
+                "description": "User defined label for the Block RFQ quote (maximum 64 characters). Used to identify quotes of a selected Block RFQ"
+              },
+              {
+                "name": "block_rfq_quote_id",
+                "value": "",
+                "type": "query",
+                "description": "ID of the Block RFQ quote"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "**Maker method**\n\nRetrieves all open quotes for Block RFQs. When a `block_rfq_id` is specified, only the open quotes for that particular Block RFQ will be returned. When a `label` is specified, all quotes with this label are returned. `block_rfq_quote_id` returns one specific quote.\n\nUse [private/add_block_rfq_quote](https://docs.deribit.com/api-reference/block-rfq/private-add_block_rfq_quote) to add quotes, or [private/get_block_rfqs](https://docs.deribit.com/api-reference/block-rfq/private-get"
+        },
+        {
+          "info": {
+            "name": "GET /private/add_block_rfq_quote",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/private/add_block_rfq_quote",
+            "params": [
+              {
+                "name": "label",
+                "value": "",
+                "type": "query",
+                "description": "User defined label for the Block RFQ quote (maximum 64 characters). Used to identify quotes of a selected Block RFQ"
+              },
+              {
+                "name": "block_rfq_id",
+                "value": "",
+                "type": "query",
+                "description": "ID of the Block RFQ"
+              },
+              {
+                "name": "amount",
+                "value": "",
+                "type": "query",
+                "description": "This value multiplied by the ratio of a leg gives trade size on that leg."
+              },
+              {
+                "name": "direction",
+                "value": "",
+                "type": "query",
+                "description": "Direction of trade from the maker perspective"
+              },
+              {
+                "name": "legs",
+                "value": "",
+                "type": "query",
+                "description": "List of legs used for Block RFQ quote"
+              },
+              {
+                "name": "hedge",
+                "value": "",
+                "type": "query",
+                "description": "Hedge leg of the Block RFQ. There is only one hedge leg allowed per Block RFQ"
+              },
+              {
+                "name": "execution_instruction",
+                "value": "",
+                "type": "query",
+                "description": "<p>Execution instruction of the quote. Default - `any_part_of`</p> <ul> <li>`\"all_or_none (AON)\"` - The quote can only be filled entirely or not at all, ensuring that its amount matches the amount specified in the Block RFQ. Additionally, 'all_or_none' quotes have priority over 'any_part_of' quotes at the same price level.</li> <li>`\"any_part_of (APO)\"` - The quote can be filled either partially or fully, with the filled amount potentially being less than the Block RFQ amount.</li> </ul>"
+              },
+              {
+                "name": "price",
+                "value": "",
+                "type": "query",
+                "description": "Aggregated price used for quoting future spreads."
+              },
+              {
+                "name": "expires_at",
+                "value": "",
+                "type": "query",
+                "description": "The timestamp when the quote expires (milliseconds since the Unix epoch)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "**Maker method**\n\nAdds a quote to an existing Block RFQ. To calculate individual leg prices, use [private/get_leg_prices](https://docs.deribit.com/api-reference/combo-books/private-get_leg_prices).\n\nUse [private/get_block_rfqs](https://docs.deribit.com/api-reference/block-rfq/private-get_block_rfqs) to retrieve Block RFQ information, or [private/edit_block_rfq_quote](https://docs.deribit.com/api-reference/block-rfq/private-edit_block_rfq_quote) to modify an existing quote.\n\n**📖 Related Article:"
+        },
+        {
+          "info": {
+            "name": "GET /private/edit_block_rfq_quote",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/private/edit_block_rfq_quote",
+            "params": [
+              {
+                "name": "legs",
+                "value": "",
+                "type": "query",
+                "description": "List of legs used for Block RFQ quote"
+              },
+              {
+                "name": "amount",
+                "value": "",
+                "type": "query",
+                "description": "This value multiplied by the ratio of a leg gives trade size on that leg."
+              },
+              {
+                "name": "block_rfq_quote_id",
+                "value": "",
+                "type": "query",
+                "description": "ID of the Block RFQ quote"
+              },
+              {
+                "name": "label",
+                "value": "",
+                "type": "query",
+                "description": "User defined label for the Block RFQ quote (maximum 64 characters). Used to identify quotes of a selected Block RFQ"
+              },
+              {
+                "name": "hedge",
+                "value": "",
+                "type": "query",
+                "description": "Hedge leg of the Block RFQ. There is only one hedge leg allowed per Block RFQ"
+              },
+              {
+                "name": "block_rfq_id",
+                "value": "",
+                "type": "query",
+                "description": "ID of the Block RFQ"
+              },
+              {
+                "name": "price",
+                "value": "",
+                "type": "query",
+                "description": "Aggregated price used for quoting future spreads."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "**Maker method**\n\nEdits a Block RFQ quote using the specified `block_rfq_quote_id`. Alternatively, you can use a combination of `block_rfq_id` and `label` to edit the quote.\n\nUse [private/add_block_rfq_quote](https://docs.deribit.com/api-reference/block-rfq/private-add_block_rfq_quote) to add new quotes, or [private/cancel_block_rfq_quote](https://docs.deribit.com/api-reference/block-rfq/private-cancel_block_rfq_quote) to cancel quotes.\n\n**📖 Related Article:** [Deribit Block RFQ API walkthrough"
+        },
+        {
+          "info": {
+            "name": "GET /private/cancel_block_rfq_quote",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/private/cancel_block_rfq_quote",
+            "params": [
+              {
+                "name": "block_rfq_quote_id",
+                "value": "",
+                "type": "query",
+                "description": "ID of the Block RFQ quote"
+              },
+              {
+                "name": "label",
+                "value": "",
+                "type": "query",
+                "description": "User defined label for the Block RFQ quote (maximum 64 characters). Used to identify quotes of a selected Block RFQ"
+              },
+              {
+                "name": "block_rfq_id",
+                "value": "",
+                "type": "query",
+                "description": "ID of the Block RFQ"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "**Maker method**\n\nCancels a single Block RFQ quote. You can identify the quote to cancel using either:\n\n- `block_rfq_quote_id` - the unique ID of the quote\n- `block_rfq_id` + `label` - the Block RFQ ID and the quote label\n\n**Note:** Mass cancellation by label is not supported. This method cancels only one quote at a time. To cancel all quotes, use [private/cancel_all_block_rfq_quotes](https://docs.deribit.com/api-reference/block-rfq/private-cancel_all_block_rfq_quotes).\n\n**📖 Related Article:** "
+        },
+        {
+          "info": {
+            "name": "GET /private/cancel_all_block_rfq_quotes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/private/cancel_all_block_rfq_quotes",
+            "params": [
+              {
+                "name": "block_rfq_id",
+                "value": "",
+                "type": "query",
+                "description": "ID of the Block RFQ"
+              },
+              {
+                "name": "detailed",
+                "value": "",
+                "type": "query",
+                "description": "When `detailed` is set to `true`, the output format is changed to include a list of all cancelled orders.\n\n**📖 Related Article:** [Detailed Response for Cancel Methods](https://docs.deribit.com/articles/json-rpc-overview#detailed-response-for-cancel-methods)\n\nDefault: `false`\n"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "**Maker method**\n\nCancels all user quotes in all Block RFQs. Optionally cancels all quotes in a specific RFQ if the `block_rfq_id` is provided.\n\n**Note:** Mass cancellation by label is not supported. This method will cancel all quotes regardless of their labels. To cancel a single quote, use [private/cancel_block_rfq_quote](https://docs.deribit.com/api-reference/block-rfq/private-cancel_block_rfq_quote).\n\n**📖 Related Article:** [Deribit Block RFQ API walkthrough](https://docs.deribit.com/articl"
+        },
+        {
+          "info": {
+            "name": "GET /private/get_block_rfq_makers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/private/get_block_rfq_makers",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns a list of all available Block RFQ makers. This method takes no parameters.\n\nUse this method to retrieve the list of makers that can be specified when creating a Block RFQ with [private/create_block_rfq](https://docs.deribit.com/api-reference/block-rfq/private-create_block_rfq).\n\n**📖 Related Article:** [Deribit Block RFQ API walkthrough](https://docs.deribit.com/articles/block-rfq-api-walkthrough)\n\n**Scope:** `block_rfq:read`\n\n[Try in API console](https://test.deribit.com/api_console?met"
+        },
+        {
+          "info": {
+            "name": "GET /public/get_block_rfq_trades",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/public/get_block_rfq_trades",
+            "params": [
+              {
+                "name": "currency",
+                "value": "",
+                "type": "query",
+                "description": "The currency symbol or `\"any\"` for all"
+              },
+              {
+                "name": "continuation",
+                "value": "",
+                "type": "query",
+                "description": "Continuation token for pagination. Consists of `timestamp` and `block_rfq_id`."
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "Count of Block RFQs returned, maximum - `1000`"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns a list of recent Block RFQ trades. Can be optionally filtered by currency.\n\nThis is a public method that provides market data about completed Block RFQ trades. For private Block RFQ information, use [private/get_block_rfqs](https://docs.deribit.com/api-reference/block-rfq/private-get_block_rfqs).\n\n**📖 Related Article:** [Deribit Block RFQ API walkthrough](https://docs.deribit.com/articles/block-rfq-api-walkthrough)\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpub"
+        },
+        {
+          "info": {
+            "name": "GET /private/get_block_rfq_user_info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/private/get_block_rfq_user_info",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns identity and rating information for the requesting account and its subaccounts. Includes both group-level and individual user-level alias data, if available.\n\nThis information is useful for understanding your Block RFQ maker identity and rating when participating in Block RFQ trades.\n\n**📖 Related Article:** [Deribit Block RFQ API walkthrough](https://docs.deribit.com/articles/block-rfq-api-walkthrough)\n\n**Scope:** `block_rfq:read`\n\n[Try in API console](https://test.deribit.com/api_conso"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

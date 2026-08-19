@@ -1,0 +1,872 @@
+{
+  "item": [
+    {
+      "id": "7a31d8ba-e546-479a-9172-603a540258c4",
+      "name": "Subscription Management",
+      "description": {
+        "content": "Subscription works as [notifications](#notifications), so users will automatically (after subscribing) receive messages from the server. Overview for each channel response format is described in [subscriptions](#subscriptions) section.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "dcb15265-3552-4f99-8e97-c6592c92d7f4",
+          "name": "Subscribe to one or more channels. This is the same method as `/private/subscribe`, but it can only be used for 'public' channels.\n\nFor a complete list of available subscription channels and their notification formats, see [Notifications and Subscriptions](https://docs.deribit.com/articles/notifications).\n\n**Note - This method has distinct API rate limiting requirements:** Sustained rate: ~3.3 requests/second. For more information, see [Rate Limits](https://docs.deribit.com/articles/rate-limits).\n\n**📖 Related Article:** [Market Data Collection Best Practices](https://docs.deribit.com/articles/market-data-collection-best-practices)\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fsubscribe)\n\n",
+          "request": {
+            "name": "Subscribe to one or more channels. This is the same method as `/private/subscribe`, but it can only be used for 'public' channels.\n\nFor a complete list of available subscription channels and their notification formats, see [Notifications and Subscriptions](https://docs.deribit.com/articles/notifications).\n\n**Note - This method has distinct API rate limiting requirements:** Sustained rate: ~3.3 requests/second. For more information, see [Rate Limits](https://docs.deribit.com/articles/rate-limits).\n\n**📖 Related Article:** [Market Data Collection Best Practices](https://docs.deribit.com/articles/market-data-collection-best-practices)\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fsubscribe)\n\n",
+            "description": {
+              "content": "Subscribe to one or more channels. This is the same method as `/private/subscribe`, but it can only be used for 'public' channels.\n\nFor a complete list of available subscription channels and their notification formats, see [Notifications and Subscriptions](https://docs.deribit.com/articles/notifications).\n\n**Note - This method has distinct API rate limiting requirements:** Sustained rate: ~3.3 requests/second. For more information, see [Rate Limits](https://docs.deribit.com/articles/rate-limits).\n\n**📖 Related Article:** [Market Data Collection Best Practices](https://docs.deribit.com/articles/market-data-collection-best-practices)\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fsubscribe)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "subscribe"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "channels",
+                  "value": "<string>",
+                  "description": "(Required) A list of channels to subscribe to. See [Notifications and Subscriptions](https://docs.deribit.com/articles/notifications) for all available channels."
+                },
+                {
+                  "disabled": false,
+                  "key": "channels",
+                  "value": "<string>",
+                  "description": "(Required) A list of channels to subscribe to. See [Notifications and Subscriptions](https://docs.deribit.com/articles/notifications) for all available channels."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 3600,\n  \"method\": \"public/subscribe\",\n  \"params\": {\n    \"channels\": [\n      \"deribit_price_index.btc_usd\"\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5a060b61-5801-4c5b-a9bc-4f3fa3fd9a87",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "subscribe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "channels",
+                      "value": "deribit_price_index.btc_usd"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 3600,\n  \"method\": \"public/subscribe\",\n  \"params\": {\n    \"channels\": [\n      \"deribit_price_index.btc_usd\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 4235,\n  \"result\": [\n    \"deribit_price_index.btc_usd\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "131cf2f0-0743-4af6-ba35-b89189ddeed7",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "subscribe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "channels",
+                      "value": "deribit_price_index.btc_usd"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 3600,\n  \"method\": \"public/subscribe\",\n  \"params\": {\n    \"channels\": [\n      \"deribit_price_index.btc_usd\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"message\": \"string\",\n  \"error\": 5672,\n  \"id\": 7072\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "92a5d5c9-bc75-4b84-b680-9831b5613d61",
+          "name": "Unsubscribe from one or more channels. The response contains only the channels that were successfully unsubscribed in this request.\n\nFor a complete list of available subscription channels and their notification formats, see [Notifications and Subscriptions](https://docs.deribit.com/articles/notifications).\n\n**Note:** The `result` field in the response contains only the channels that were successfully processed and unsubscribed from this specific request. It does not include all previously subscribed topics. If a channel in the request is invalid, not subscribed, or fails validation, it will not appear in the result.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Funsubscribe)\n\n",
+          "request": {
+            "name": "Unsubscribe from one or more channels. The response contains only the channels that were successfully unsubscribed in this request.\n\nFor a complete list of available subscription channels and their notification formats, see [Notifications and Subscriptions](https://docs.deribit.com/articles/notifications).\n\n**Note:** The `result` field in the response contains only the channels that were successfully processed and unsubscribed from this specific request. It does not include all previously subscribed topics. If a channel in the request is invalid, not subscribed, or fails validation, it will not appear in the result.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Funsubscribe)\n\n",
+            "description": {
+              "content": "Unsubscribe from one or more channels. The response contains only the channels that were successfully unsubscribed in this request.\n\nFor a complete list of available subscription channels and their notification formats, see [Notifications and Subscriptions](https://docs.deribit.com/articles/notifications).\n\n**Note:** The `result` field in the response contains only the channels that were successfully processed and unsubscribed from this specific request. It does not include all previously subscribed topics. If a channel in the request is invalid, not subscribed, or fails validation, it will not appear in the result.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Funsubscribe)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "unsubscribe"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "channels",
+                  "value": "<string>",
+                  "description": "(Required) A list of channels to unsubscribe from. Only successfully unsubscribed channels will be returned in the result. See [Notifications and Subscriptions](https://docs.deribit.com/articles/notifications) for all available channels."
+                },
+                {
+                  "disabled": false,
+                  "key": "channels",
+                  "value": "<string>",
+                  "description": "(Required) A list of channels to unsubscribe from. Only successfully unsubscribed channels will be returned in the result. See [Notifications and Subscriptions](https://docs.deribit.com/articles/notifications) for all available channels."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 8691,\n  \"method\": \"public/unsubscribe\",\n  \"params\": {\n    \"channels\": [\n      \"deribit_price_index.btc_usd\"\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8c1e03f2-b7aa-4cb4-9b24-a1875a58ca72",
+              "name": "Successfully unsubscribed from channels",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "unsubscribe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "channels",
+                      "value": "deribit_price_index.btc_usd"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 8691,\n  \"method\": \"public/unsubscribe\",\n  \"params\": {\n    \"channels\": [\n      \"deribit_price_index.btc_usd\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 3370,\n  \"result\": [\n    \"deribit_price_index.btc_usd\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dbf7110c-aa33-4f13-8448-e74f4b4c94ca",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "unsubscribe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "channels",
+                      "value": "deribit_price_index.btc_usd"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 8691,\n  \"method\": \"public/unsubscribe\",\n  \"params\": {\n    \"channels\": [\n      \"deribit_price_index.btc_usd\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"message\": \"string\",\n  \"error\": 5672,\n  \"id\": 7072\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ff57a9c5-caa7-40e1-9b67-487bf4b35197",
+          "name": "Unsubscribe from all the channels subscribed so far. This method takes no parameters.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Funsubscribe_all)\n\n",
+          "request": {
+            "name": "Unsubscribe from all the channels subscribed so far. This method takes no parameters.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Funsubscribe_all)\n\n",
+            "description": {
+              "content": "Unsubscribe from all the channels subscribed so far. This method takes no parameters.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Funsubscribe_all)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "unsubscribe_all"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 153,\n  \"method\": \"public/unsubscribe_all\",\n  \"params\": {}\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3ef52bff-b5fc-45cd-9396-7773be42d7d8",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "unsubscribe_all"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 153,\n  \"method\": \"public/unsubscribe_all\",\n  \"params\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1569,\n  \"result\": \"ok\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "831a9d0f-7723-4524-9b54-d67521496701",
+          "name": "Subscribe to one or more channels. The name of the channel determines what information will be provided, and in what form.\n\nFor a complete list of available subscription channels and their notification formats, see [Notifications and Subscriptions](https://docs.deribit.com/articles/notifications).\n\n**Note - This method has distinct API rate limiting requirements:** Sustained rate: ~3.3 requests/second. For more information, see [Rate Limits](https://docs.deribit.com/articles/rate-limits).\n\n**📖 Related Article:** [Market Data Collection Best Practices](https://docs.deribit.com/articles/market-data-collection-best-practices)\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fsubscribe)\n\n",
+          "request": {
+            "name": "Subscribe to one or more channels. The name of the channel determines what information will be provided, and in what form.\n\nFor a complete list of available subscription channels and their notification formats, see [Notifications and Subscriptions](https://docs.deribit.com/articles/notifications).\n\n**Note - This method has distinct API rate limiting requirements:** Sustained rate: ~3.3 requests/second. For more information, see [Rate Limits](https://docs.deribit.com/articles/rate-limits).\n\n**📖 Related Article:** [Market Data Collection Best Practices](https://docs.deribit.com/articles/market-data-collection-best-practices)\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fsubscribe)\n\n",
+            "description": {
+              "content": "Subscribe to one or more channels. The name of the channel determines what information will be provided, and in what form.\n\nFor a complete list of available subscription channels and their notification formats, see [Notifications and Subscriptions](https://docs.deribit.com/articles/notifications).\n\n**Note - This method has distinct API rate limiting requirements:** Sustained rate: ~3.3 requests/second. For more information, see [Rate Limits](https://docs.deribit.com/articles/rate-limits).\n\n**📖 Related Article:** [Market Data Collection Best Practices](https://docs.deribit.com/articles/market-data-collection-best-practices)\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fsubscribe)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "private",
+                "subscribe"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "channels",
+                  "value": "<string>",
+                  "description": "(Required) A list of channels to subscribe to. See [Notifications and Subscriptions](https://docs.deribit.com/articles/notifications) for all available channels."
+                },
+                {
+                  "disabled": false,
+                  "key": "channels",
+                  "value": "<string>",
+                  "description": "(Required) A list of channels to subscribe to. See [Notifications and Subscriptions](https://docs.deribit.com/articles/notifications) for all available channels."
+                },
+                {
+                  "disabled": false,
+                  "key": "label",
+                  "value": "<string>",
+                  "description": "Optional label which will be added to notifications of private channels (max 16 characters)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 4235,\n  \"method\": \"private/subscribe\",\n  \"params\": {\n    \"channels\": [\n      \"deribit_price_index.btc_usd\"\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7974401d-3a16-461d-97d5-099d16d6739f",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "private",
+                    "subscribe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "channels",
+                      "value": "deribit_price_index.btc_usd"
+                    },
+                    {
+                      "key": "label",
+                      "value": "TestLabel1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 4235,\n  \"method\": \"private/subscribe\",\n  \"params\": {\n    \"channels\": [\n      \"deribit_price_index.btc_usd\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 4235,\n  \"result\": [\n    \"deribit_price_index.btc_usd\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d8d83729-54dd-4cec-b1ba-f34d2568105f",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "private",
+                    "subscribe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "channels",
+                      "value": "deribit_price_index.btc_usd"
+                    },
+                    {
+                      "key": "label",
+                      "value": "TestLabel1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 4235,\n  \"method\": \"private/subscribe\",\n  \"params\": {\n    \"channels\": [\n      \"deribit_price_index.btc_usd\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"message\": \"string\",\n  \"error\": 5672,\n  \"id\": 7072\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d0cc5abb-4f39-4171-96e4-4b999efecb3f",
+          "name": "Unsubscribe from one or more channels. The response contains only the channels that were successfully unsubscribed in this request.\n\nFor a complete list of available subscription channels and their notification formats, see [Notifications and Subscriptions](https://docs.deribit.com/articles/notifications).\n\n**Note:** The `result` field in the response contains only the channels that were successfully processed and unsubscribed from this specific request. It does not include all previously subscribed topics. If a channel in the request is invalid, not subscribed, or fails validation, it will not appear in the result.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Funsubscribe)\n\n",
+          "request": {
+            "name": "Unsubscribe from one or more channels. The response contains only the channels that were successfully unsubscribed in this request.\n\nFor a complete list of available subscription channels and their notification formats, see [Notifications and Subscriptions](https://docs.deribit.com/articles/notifications).\n\n**Note:** The `result` field in the response contains only the channels that were successfully processed and unsubscribed from this specific request. It does not include all previously subscribed topics. If a channel in the request is invalid, not subscribed, or fails validation, it will not appear in the result.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Funsubscribe)\n\n",
+            "description": {
+              "content": "Unsubscribe from one or more channels. The response contains only the channels that were successfully unsubscribed in this request.\n\nFor a complete list of available subscription channels and their notification formats, see [Notifications and Subscriptions](https://docs.deribit.com/articles/notifications).\n\n**Note:** The `result` field in the response contains only the channels that were successfully processed and unsubscribed from this specific request. It does not include all previously subscribed topics. If a channel in the request is invalid, not subscribed, or fails validation, it will not appear in the result.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Funsubscribe)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "private",
+                "unsubscribe"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "channels",
+                  "value": "<string>",
+                  "description": "(Required) A list of channels to unsubscribe from. Only successfully unsubscribed channels will be returned in the result. See [Notifications and Subscriptions](https://docs.deribit.com/articles/notifications) for all available channels."
+                },
+                {
+                  "disabled": false,
+                  "key": "channels",
+                  "value": "<string>",
+                  "description": "(Required) A list of channels to unsubscribe from. Only successfully unsubscribed channels will be returned in the result. See [Notifications and Subscriptions](https://docs.deribit.com/articles/notifications) for all available channels."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 3370,\n  \"method\": \"private/unsubscribe\",\n  \"params\": {\n    \"channels\": [\n      \"deribit_price_index.btc_usd\"\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "35bcbcc2-dc4c-493e-956e-0713dde2f179",
+              "name": "Successfully unsubscribed from channels",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "private",
+                    "unsubscribe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "channels",
+                      "value": "deribit_price_index.btc_usd"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 3370,\n  \"method\": \"private/unsubscribe\",\n  \"params\": {\n    \"channels\": [\n      \"deribit_price_index.btc_usd\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 3370,\n  \"result\": [\n    \"deribit_price_index.btc_usd\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "162ab42f-93b0-4f81-8f10-847d30601b64",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "private",
+                    "unsubscribe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "channels",
+                      "value": "deribit_price_index.btc_usd"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 3370,\n  \"method\": \"private/unsubscribe\",\n  \"params\": {\n    \"channels\": [\n      \"deribit_price_index.btc_usd\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"message\": \"string\",\n  \"error\": 5672,\n  \"id\": 7072\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f538a790-8be6-4a2f-9703-538baba92c6f",
+          "name": "Unsubscribe from all the channels subscribed so far. This method takes no parameters.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Funsubscribe_all)\n\n",
+          "request": {
+            "name": "Unsubscribe from all the channels subscribed so far. This method takes no parameters.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Funsubscribe_all)\n\n",
+            "description": {
+              "content": "Unsubscribe from all the channels subscribed so far. This method takes no parameters.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Funsubscribe_all)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "private",
+                "unsubscribe_all"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 154,\n  \"method\": \"private/unsubscribe_all\",\n  \"params\": {}\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6698e8e8-53bd-409a-8072-de601809d64c",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "private",
+                    "unsubscribe_all"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 154,\n  \"method\": \"private/unsubscribe_all\",\n  \"params\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1569,\n  \"result\": \"ok\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://test.deribit.com/api/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "7a4afe68-733e-4086-a551-12fcd6b67a0c",
+    "name": "Deribit Account Management Subscription Management API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Subscription works as [notifications](#notifications), so users will automatically (after subscribing) receive messages from the server. Overview for each channel response format is described in [subscriptions](#subscriptions) section.",
+      "type": "text/plain"
+    }
+  }
+}

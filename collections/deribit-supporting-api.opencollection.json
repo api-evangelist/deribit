@@ -1,0 +1,100 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Deribit Account Management Supporting API",
+    "version": "2.1.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Supporting",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GET /public/hello",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/public/hello",
+            "params": [
+              {
+                "name": "client_name",
+                "value": "",
+                "type": "query",
+                "description": "Client software name"
+              },
+              {
+                "name": "client_version",
+                "value": "",
+                "type": "query",
+                "description": "Client software version"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Method used to introduce the client software connected to Deribit platform over websocket. Provided data may have an impact on the maintained connection and will be collected for internal statistical purposes. In response, Deribit will also introduce itself.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fhello)\n\n"
+        },
+        {
+          "info": {
+            "name": "GET /public/status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/public/status",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Method used to get information about locked currencies\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fstatus)\n\n"
+        },
+        {
+          "info": {
+            "name": "GET /public/test",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/public/test",
+            "params": [
+              {
+                "name": "expected_result",
+                "value": "",
+                "type": "query",
+                "description": "The value \"exception\" will trigger an error response. This may be useful for testing wrapper libraries."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Tests the connection to the API server, and returns its version. You can use this to make sure the API is reachable, and matches the expected version.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Ftest)\n\n"
+        },
+        {
+          "info": {
+            "name": "GET /public/get_time",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/public/get_time",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves the current time (in milliseconds). This API endpoint can be used to check the clock skew between your software and Deribit's systems.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_time)\n\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

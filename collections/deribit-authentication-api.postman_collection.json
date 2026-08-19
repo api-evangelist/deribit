@@ -1,0 +1,562 @@
+{
+  "item": [
+    {
+      "id": "20f9f89e-9d05-4793-9d88-ba5ddd1dfda0",
+      "name": "Authentication",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "19c8cc9e-947c-4878-82dd-5c4404db9092",
+          "name": "Retrieve an OAuth access token, to be used for authentication of 'private' requests.\n\n**📖 Related Article:** [Authentication](https://docs.deribit.com/articles/authentication)\n\n**Authentication Methods:**\n\nThree methods of authentication are supported:\n\n\n- ``client_credentials`` - Using the client id and client secret that can be found on the API page on the website. This is the simplest method, suitable for server-to-server applications and quick setup.\n\n- ``client_signature`` - Enhanced security method that uses a cryptographic signature instead of sending the client secret directly. You generate an HMAC-SHA256 signature of a string containing a timestamp, a random nonce, and optional data, using your Client Secret as the key. This method requires `` `client_id` ``, `` `timestamp` `` (current time in milliseconds), `` `nonce` ``, `` `signature` ``, and optionally a `` `data` `` field. Deribit verifies the signature instead of requiring the raw secret. Best for enhanced security, asymmetric key pairs, and avoiding secret transmission. See the [Client Signature (WebSocket) guide](https://docs.deribit.com/articles/authentication#client-signature-websocket) for detailed signature calculation instructions.\n\n- ``refresh_token`` - Using a refresh token that was received from an earlier invocation. This allows you to obtain a new access token without re-supplying your Client ID and Client Secret. Best for long-lived sessions, token renewal, and avoiding re-authentication.\n\n\n**Response:**\n\nThe response will contain an access token, expiration period (number of seconds that the token is valid) and a refresh token that can be used to get a new set of tokens.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fauth)\n\n",
+          "request": {
+            "name": "Retrieve an OAuth access token, to be used for authentication of 'private' requests.\n\n**📖 Related Article:** [Authentication](https://docs.deribit.com/articles/authentication)\n\n**Authentication Methods:**\n\nThree methods of authentication are supported:\n\n\n- ``client_credentials`` - Using the client id and client secret that can be found on the API page on the website. This is the simplest method, suitable for server-to-server applications and quick setup.\n\n- ``client_signature`` - Enhanced security method that uses a cryptographic signature instead of sending the client secret directly. You generate an HMAC-SHA256 signature of a string containing a timestamp, a random nonce, and optional data, using your Client Secret as the key. This method requires `` `client_id` ``, `` `timestamp` `` (current time in milliseconds), `` `nonce` ``, `` `signature` ``, and optionally a `` `data` `` field. Deribit verifies the signature instead of requiring the raw secret. Best for enhanced security, asymmetric key pairs, and avoiding secret transmission. See the [Client Signature (WebSocket) guide](https://docs.deribit.com/articles/authentication#client-signature-websocket) for detailed signature calculation instructions.\n\n- ``refresh_token`` - Using a refresh token that was received from an earlier invocation. This allows you to obtain a new access token without re-supplying your Client ID and Client Secret. Best for long-lived sessions, token renewal, and avoiding re-authentication.\n\n\n**Response:**\n\nThe response will contain an access token, expiration period (number of seconds that the token is valid) and a refresh token that can be used to get a new set of tokens.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fauth)\n\n",
+            "description": {
+              "content": "Retrieve an OAuth access token, to be used for authentication of 'private' requests.\n\n**📖 Related Article:** [Authentication](https://docs.deribit.com/articles/authentication)\n\n**Authentication Methods:**\n\nThree methods of authentication are supported:\n\n\n- ``client_credentials`` - Using the client id and client secret that can be found on the API page on the website. This is the simplest method, suitable for server-to-server applications and quick setup.\n\n- ``client_signature`` - Enhanced security method that uses a cryptographic signature instead of sending the client secret directly. You generate an HMAC-SHA256 signature of a string containing a timestamp, a random nonce, and optional data, using your Client Secret as the key. This method requires `` `client_id` ``, `` `timestamp` `` (current time in milliseconds), `` `nonce` ``, `` `signature` ``, and optionally a `` `data` `` field. Deribit verifies the signature instead of requiring the raw secret. Best for enhanced security, asymmetric key pairs, and avoiding secret transmission. See the [Client Signature (WebSocket) guide](https://docs.deribit.com/articles/authentication#client-signature-websocket) for detailed signature calculation instructions.\n\n- ``refresh_token`` - Using a refresh token that was received from an earlier invocation. This allows you to obtain a new access token without re-supplying your Client ID and Client Secret. Best for long-lived sessions, token renewal, and avoiding re-authentication.\n\n\n**Response:**\n\nThe response will contain an access token, expiration period (number of seconds that the token is valid) and a refresh token that can be used to get a new set of tokens.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fauth)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "auth"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "grant_type",
+                  "value": "<string>",
+                  "description": "(Required) Method of authentication"
+                },
+                {
+                  "disabled": false,
+                  "key": "client_id",
+                  "value": "<string>",
+                  "description": "(Required) Required for grant type `` `client_credentials` `` and `` `client_signature` ``"
+                },
+                {
+                  "disabled": false,
+                  "key": "client_secret",
+                  "value": "<string>",
+                  "description": "(Required) Required for grant type `` `client_credentials` ``"
+                },
+                {
+                  "disabled": false,
+                  "key": "refresh_token",
+                  "value": "<string>",
+                  "description": "(Required) Required for grant type `` `refresh_token` ``"
+                },
+                {
+                  "disabled": false,
+                  "key": "timestamp",
+                  "value": "<integer>",
+                  "description": "(Required) Required for grant type `` `client_signature` ``.\n\nProvides time when request has been generated (milliseconds since the UNIX epoch).\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "signature",
+                  "value": "<string>",
+                  "description": "(Required) Required for grant type `` `client_signature` ``.\n\nIt's a cryptographic signature calculated over provided fields using user **secret key**. The signature should be calculated as an HMAC (Hash-based Message Authentication Code) with `` `SHA256` `` hash algorithm.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "nonce",
+                  "value": "<string>",
+                  "description": "Optional for grant type `` `client_signature` ``.\n\nDelivers user generated initialization vector for the server token.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "data",
+                  "value": "<string>",
+                  "description": "Optional for grant type `` `client_signature` ``.\n\nContains any user specific value.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "state",
+                  "value": "<string>",
+                  "description": "Will be passed back in the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "scope",
+                  "value": "<string>",
+                  "description": "Describes type of the access for assigned token.\n\n\n**Possible values:**\n\n- `` `connection` ``\n- `` `session:name` ``\n- `` `trade:[read, read_write, none]` ``\n- `` `wallet:[read, read_write, none]` ``\n- `` `account:[read, read_write, none]` ``\n- `` `expires:NUMBER` ``\n- `` `ip:ADDR` ``\n\n\nDetails are elucidated in [Access scope](https://docs.deribit.com/articles/access-scope)\n"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 9929,\n  \"method\": \"public/auth\",\n  \"params\": {\n    \"grant_type\": \"client_credentials\",\n    \"client_id\": \"fo7WAPRm4P\",\n    \"client_secret\": \"W0H6FJW4IRPZ1MOQ8FP6KMC5RZDUUKXS\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "70ef75d9-55b5-4f3e-ac70-534d90f7db01",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "auth"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "grant_type",
+                      "value": "client_credentials"
+                    },
+                    {
+                      "key": "client_id",
+                      "value": "fo7WAPRm4P"
+                    },
+                    {
+                      "key": "client_secret",
+                      "value": "W0H6FJW4IRPZ1MOQ8FP6KMC5RZDUUKXS"
+                    },
+                    {
+                      "key": "refresh_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "timestamp",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "signature",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nonce",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "data",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "scope",
+                      "value": "connection"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 9929,\n  \"method\": \"public/auth\",\n  \"params\": {\n    \"grant_type\": \"client_credentials\",\n    \"client_id\": \"fo7WAPRm4P\",\n    \"client_secret\": \"W0H6FJW4IRPZ1MOQ8FP6KMC5RZDUUKXS\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 9929,\n  \"result\": {\n    \"access_token\": \"1582628593469.1MbQ-J_4.CBP-OqOwm_FBdMYj4cRK2dMXyHPfBtXGpzLxhWg31nHu3H_Q60FpE5_vqUBEQGSiMrIGzw3nC37NMb9d1tpBNqBOM_Ql9pXOmgtV9Yj3Pq1c6BqC6dU6eTxHMFO67x8GpJxqw_QcKP5IepwGBD-gfKSHfAv9AEnLJkNu3JkMJBdLToY1lrBnuedF3dU_uARm\",\n    \"expires_in\": 31536000,\n    \"refresh_token\": \"1582628593469.1GP4rQd0.A9Wa78o5kFRIUP49mScaD1CqHgiK50HOl2VA6kCtWa8BQZU5Dr03BhcbXPNvEh3I_MVixKZXnyoBeKJwLl8LXnfo180ckAiPj3zOclcUu4zkXuF3NNP3sTPcDf1B3C1CwMKkJ1NOcf1yPmRbsrd7hbgQ-hLa40tfx6Oa-85ymm_3Z65LZcnCeLrqlj_A9jM\",\n    \"scope\": \"connection mainaccount\",\n    \"enabled_features\": [],\n    \"token_type\": \"bearer\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8544a3b2-dc5b-4cea-971a-39e45c14448a",
+          "name": "Generates a token for a new subject id. This method can be used to switch between subaccounts.\n\n**📖 Related Articles:** \n- [Fork and Exchange Tokens](https://docs.deribit.com/articles/authentication#fork-and-exchange-tokens)\n- [Managing Subaccounts](https://docs.deribit.com/articles/managing-subaccounts-api)\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fexchange_token)\n\n",
+          "request": {
+            "name": "Generates a token for a new subject id. This method can be used to switch between subaccounts.\n\n**📖 Related Articles:** \n- [Fork and Exchange Tokens](https://docs.deribit.com/articles/authentication#fork-and-exchange-tokens)\n- [Managing Subaccounts](https://docs.deribit.com/articles/managing-subaccounts-api)\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fexchange_token)\n\n",
+            "description": {
+              "content": "Generates a token for a new subject id. This method can be used to switch between subaccounts.\n\n**📖 Related Articles:** \n- [Fork and Exchange Tokens](https://docs.deribit.com/articles/authentication#fork-and-exchange-tokens)\n- [Managing Subaccounts](https://docs.deribit.com/articles/managing-subaccounts-api)\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fexchange_token)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "exchange_token"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "refresh_token",
+                  "value": "<string>",
+                  "description": "(Required) Refresh token"
+                },
+                {
+                  "disabled": false,
+                  "key": "subject_id",
+                  "value": "<integer>",
+                  "description": "(Required) New subject id"
+                },
+                {
+                  "disabled": false,
+                  "key": "scope",
+                  "value": "<string>",
+                  "description": "Optional scope override for the new session. Cannot exceed caller's permissions. Supports `session` scope for direct session creation during token exchange."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 7619,\n  \"method\": \"public/exchange_token\",\n  \"params\": {\n    \"refresh_token\": \"1568800656974.1CWcuzUS.MGy49NK4hpTwvR1OYWfpqMEkH4T4oDg4tNIcrM7KdeyxXRcSFqiGzA_D4Cn7mqWocHmlS89FFmUYcmaN2H7lNKKTnhRg5EtrzsFCCiuyN0Wv9y-LbGLV3-Ojv_kbD50FoScQ8BDXS5b_w6Ir1MqEdQ3qFZ3MLcvlPiIgG2BqyJX3ybYnVpIlrVrrdYD1-lkjLcjxOBNJvvUKNUAzkQ\",\n    \"subject_id\": 10\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a09de39f-9a2c-4d8e-9ffa-1dc2c817abfa",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "exchange_token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "refresh_token",
+                      "value": "1568800656974.1CWcuzUS.MGy49NK4hpTwvR1OYWfpqMEkH4T4oDg4tNIcrM7KdeyxXRcSFqiGzA_D4Cn7mqWocHmlS89FFmUYcmaN2H7lNKKTnhRg5EtrzsFCCiuyN0Wv9y-LbGLV3-Ojv_kbD50FoScQ8BDXS5b_w6Ir1MqEdQ3qFZ3MLcvlPiIgG2BqyJX3ybYnVpIlrVrrdYD1-lkjLcjxOBNJvvUKNUAzkQ"
+                    },
+                    {
+                      "key": "subject_id",
+                      "value": "10"
+                    },
+                    {
+                      "key": "scope",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 7619,\n  \"method\": \"public/exchange_token\",\n  \"params\": {\n    \"refresh_token\": \"1568800656974.1CWcuzUS.MGy49NK4hpTwvR1OYWfpqMEkH4T4oDg4tNIcrM7KdeyxXRcSFqiGzA_D4Cn7mqWocHmlS89FFmUYcmaN2H7lNKKTnhRg5EtrzsFCCiuyN0Wv9y-LbGLV3-Ojv_kbD50FoScQ8BDXS5b_w6Ir1MqEdQ3qFZ3MLcvlPiIgG2BqyJX3ybYnVpIlrVrrdYD1-lkjLcjxOBNJvvUKNUAzkQ\",\n    \"subject_id\": 10\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 9929,\n  \"result\": {\n    \"access_token\": \"1582628593469.1MbQ-J_4.CBP-OqOwm_FBdMYj4cRK2dMXyHPfBtXGpzLxhWg31nHu3H_Q60FpE5_vqUBEQGSiMrIGzw3nC37NMb9d1tpBNqBOM_Ql9pXOmgtV9Yj3Pq1c6BqC6dU6eTxHMFO67x8GpJxqw_QcKP5IepwGBD-gfKSHfAv9AEnLJkNu3JkMJBdLToY1lrBnuedF3dU_uARm\",\n    \"expires_in\": 31536000,\n    \"refresh_token\": \"1582628593469.1GP4rQd0.A9Wa78o5kFRIUP49mScaD1CqHgiK50HOl2VA6kCtWa8BQZU5Dr03BhcbXPNvEh3I_MVixKZXnyoBeKJwLl8LXnfo180ckAiPj3zOclcUu4zkXuF3NNP3sTPcDf1B3C1CwMKkJ1NOcf1yPmRbsrd7hbgQ-hLa40tfx6Oa-85ymm_3Z65LZcnCeLrqlj_A9jM\",\n    \"scope\": \"session:named_session mainaccount\",\n    \"token_type\": \"bearer\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "325c64c2-a36c-4d3b-a3b2-891073519919",
+          "name": "Generates a token for a new named session. This method can be used only with session scoped tokens.\n\n**📖 More Details:** [Fork and Exchange Tokens](https://docs.deribit.com/articles/authentication#fork-and-exchange-tokens)\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Ffork_token)\n\n",
+          "request": {
+            "name": "Generates a token for a new named session. This method can be used only with session scoped tokens.\n\n**📖 More Details:** [Fork and Exchange Tokens](https://docs.deribit.com/articles/authentication#fork-and-exchange-tokens)\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Ffork_token)\n\n",
+            "description": {
+              "content": "Generates a token for a new named session. This method can be used only with session scoped tokens.\n\n**📖 More Details:** [Fork and Exchange Tokens](https://docs.deribit.com/articles/authentication#fork-and-exchange-tokens)\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Ffork_token)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "fork_token"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "refresh_token",
+                  "value": "<string>",
+                  "description": "(Required) Refresh token"
+                },
+                {
+                  "disabled": false,
+                  "key": "session_name",
+                  "value": "<string>",
+                  "description": "(Required) New session name"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 7620,\n  \"method\": \"public/fork_token\",\n  \"params\": {\n    \"refresh_token\": \"1568800656974.1CWcuzUS.MGy49NK4hpTwvR1OYWfpqMEkH4T4oDg4tNIcrM7KdeyxXRcSFqiGzA_D4Cn7mqWocHmlS89FFmUYcmaN2H7lNKKTnhRg5EtrzsFCCiuyN0Wv9y-LbGLV3-Ojv_kbD50FoScQ8BDXS5b_w6Ir1MqEdQ3qFZ3MLcvlPiIgG2BqyJX3ybYnVpIlrVrrdYD1-lkjLcjxOBNJvvUKNUAzkQ\",\n    \"session_name\": \"forked_session_name\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "91a31ad8-fc9b-4bd1-9f2f-85a64b41470d",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "fork_token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "refresh_token",
+                      "value": "1568800656974.1CWcuzUS.MGy49NK4hpTwvR1OYWfpqMEkH4T4oDg4tNIcrM7KdeyxXRcSFqiGzA_D4Cn7mqWocHmlS89FFmUYcmaN2H7lNKKTnhRg5EtrzsFCCiuyN0Wv9y-LbGLV3-Ojv_kbD50FoScQ8BDXS5b_w6Ir1MqEdQ3qFZ3MLcvlPiIgG2BqyJX3ybYnVpIlrVrrdYD1-lkjLcjxOBNJvvUKNUAzkQ"
+                    },
+                    {
+                      "key": "session_name",
+                      "value": "forked_session_name"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 7620,\n  \"method\": \"public/fork_token\",\n  \"params\": {\n    \"refresh_token\": \"1568800656974.1CWcuzUS.MGy49NK4hpTwvR1OYWfpqMEkH4T4oDg4tNIcrM7KdeyxXRcSFqiGzA_D4Cn7mqWocHmlS89FFmUYcmaN2H7lNKKTnhRg5EtrzsFCCiuyN0Wv9y-LbGLV3-Ojv_kbD50FoScQ8BDXS5b_w6Ir1MqEdQ3qFZ3MLcvlPiIgG2BqyJX3ybYnVpIlrVrrdYD1-lkjLcjxOBNJvvUKNUAzkQ\",\n    \"session_name\": \"forked_session_name\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 9929,\n  \"result\": {\n    \"access_token\": \"1582628593469.1MbQ-J_4.CBP-OqOwm_FBdMYj4cRK2dMXyHPfBtXGpzLxhWg31nHu3H_Q60FpE5_vqUBEQGSiMrIGzw3nC37NMb9d1tpBNqBOM_Ql9pXOmgtV9Yj3Pq1c6BqC6dU6eTxHMFO67x8GpJxqw_QcKP5IepwGBD-gfKSHfAv9AEnLJkNu3JkMJBdLToY1lrBnuedF3dU_uARm\",\n    \"expires_in\": 31536000,\n    \"refresh_token\": \"1582628593469.1GP4rQd0.A9Wa78o5kFRIUP49mScaD1CqHgiK50HOl2VA6kCtWa8BQZU5Dr03BhcbXPNvEh3I_MVixKZXnyoBeKJwLl8LXnfo180ckAiPj3zOclcUu4zkXuF3NNP3sTPcDf1B3C1CwMKkJ1NOcf1yPmRbsrd7hbgQ-hLa40tfx6Oa-85ymm_3Z65LZcnCeLrqlj_A9jM\",\n    \"scope\": \"session:named_session mainaccount\",\n    \"token_type\": \"bearer\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fe53aa49-b786-4718-bff9-ec4e8a3e72d2",
+          "name": "Gracefully terminate the current WebSocket connection and optionally invalidate all tokens associated with the session.\n\nThis method provides a clean way to close WebSocket connections while preserving active orders when [**Cancel On Disconnect (COD)**](https://docs.deribit.com/api-reference/session-management/private-enable_cancel_on_disconnect) is enabled.\n\n**Use Cases:**\n\n- **Clean Shutdown:** Properly close WebSocket connections during application shutdown or restart\n- **Order Preservation:** Close connections without triggering order cancellations when COD is enabled\n- **Session Management:** Invalidate tokens to ensure security when closing connections\n- **Maintenance Operations:** Temporarily disconnect for system maintenance without affecting trading positions\n\n**Cancel On Disconnect (COD) Behavior:**\n\nWhen Cancel On Disconnect is enabled for your connection, this method provides a safe way to close the connection without triggering automatic order cancellations. This is different from other disconnection scenarios:\n\n- **Graceful logout** (this method): Orders are **NOT cancelled**, even if COD is enabled\n- **Unexpected disconnection:** Orders are **cancelled** if COD is enabled\n- **Inactivity timeout:** Orders are **cancelled** if COD is enabled\n- **Heartbeat failure:** Orders are **cancelled** if COD is enabled\n\nThis distinction allows you to perform planned disconnections (e.g., for maintenance, updates, or reconnection) while preserving your active orders.\n\n**WebSocket Only:**\n\nThis method is designed exclusively for WebSocket connections. Attempting to use it via REST/HTTP will result in a 400 error response.\n\n**Note:** This method has no response. The WebSocket connection is closed immediately after the request is processed.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Flogout)\n\n",
+          "request": {
+            "name": "Gracefully terminate the current WebSocket connection and optionally invalidate all tokens associated with the session.\n\nThis method provides a clean way to close WebSocket connections while preserving active orders when [**Cancel On Disconnect (COD)**](https://docs.deribit.com/api-reference/session-management/private-enable_cancel_on_disconnect) is enabled.\n\n**Use Cases:**\n\n- **Clean Shutdown:** Properly close WebSocket connections during application shutdown or restart\n- **Order Preservation:** Close connections without triggering order cancellations when COD is enabled\n- **Session Management:** Invalidate tokens to ensure security when closing connections\n- **Maintenance Operations:** Temporarily disconnect for system maintenance without affecting trading positions\n\n**Cancel On Disconnect (COD) Behavior:**\n\nWhen Cancel On Disconnect is enabled for your connection, this method provides a safe way to close the connection without triggering automatic order cancellations. This is different from other disconnection scenarios:\n\n- **Graceful logout** (this method): Orders are **NOT cancelled**, even if COD is enabled\n- **Unexpected disconnection:** Orders are **cancelled** if COD is enabled\n- **Inactivity timeout:** Orders are **cancelled** if COD is enabled\n- **Heartbeat failure:** Orders are **cancelled** if COD is enabled\n\nThis distinction allows you to perform planned disconnections (e.g., for maintenance, updates, or reconnection) while preserving your active orders.\n\n**WebSocket Only:**\n\nThis method is designed exclusively for WebSocket connections. Attempting to use it via REST/HTTP will result in a 400 error response.\n\n**Note:** This method has no response. The WebSocket connection is closed immediately after the request is processed.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Flogout)\n\n",
+            "description": {
+              "content": "Gracefully terminate the current WebSocket connection and optionally invalidate all tokens associated with the session.\n\nThis method provides a clean way to close WebSocket connections while preserving active orders when [**Cancel On Disconnect (COD)**](https://docs.deribit.com/api-reference/session-management/private-enable_cancel_on_disconnect) is enabled.\n\n**Use Cases:**\n\n- **Clean Shutdown:** Properly close WebSocket connections during application shutdown or restart\n- **Order Preservation:** Close connections without triggering order cancellations when COD is enabled\n- **Session Management:** Invalidate tokens to ensure security when closing connections\n- **Maintenance Operations:** Temporarily disconnect for system maintenance without affecting trading positions\n\n**Cancel On Disconnect (COD) Behavior:**\n\nWhen Cancel On Disconnect is enabled for your connection, this method provides a safe way to close the connection without triggering automatic order cancellations. This is different from other disconnection scenarios:\n\n- **Graceful logout** (this method): Orders are **NOT cancelled**, even if COD is enabled\n- **Unexpected disconnection:** Orders are **cancelled** if COD is enabled\n- **Inactivity timeout:** Orders are **cancelled** if COD is enabled\n- **Heartbeat failure:** Orders are **cancelled** if COD is enabled\n\nThis distinction allows you to perform planned disconnections (e.g., for maintenance, updates, or reconnection) while preserving your active orders.\n\n**WebSocket Only:**\n\nThis method is designed exclusively for WebSocket connections. Attempting to use it via REST/HTTP will result in a 400 error response.\n\n**Note:** This method has no response. The WebSocket connection is closed immediately after the request is processed.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Flogout)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "private",
+                "logout"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "invalidate_token",
+                  "value": "<boolean>",
+                  "description": "<b>Token Invalidation:</b> By default, all tokens created during the current session are invalidated when you call this method. You can control this behavior using this parameter: <ul><li><b>invalidate_token=true</b> (default): All session tokens are invalidated, requiring re-authentication for new connections</li><li><b>invalidate_token=false</b>: Tokens remain valid, allowing you to reconnect using the same authentication</li></ul>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 42,\n  \"method\": \"private/logout\",\n  \"params\": {\n    \"access_token\": \"1529453804065.h2QrBgvn.oS36pCOmuK9EX7954lzCSkUioEtTMg7F5ShToM0ZfYlqU05OquXkQIe2_DDEkPhzmoPp1fBp0ycXShR_0jf-SMSXEdVqxLRWuOw-_StG5BMjToiAl27CbHY4P92MPhlMblTOtTImE81-5dFdyDVydpBwmlfKM3OSQ39kulP9bbfw-2jhyegOL0AgqJTY_tj554oHCQFTbq0A0ZWukukmxL2yu6iy34XdzaJB26Igy-3UxGBMwFu53EhjKBweh7xyP2nDm57-wybndJMtSyTGDXH3vjBVclo1iup5yRP\",\n    \"invalidate_token\": true\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6f6740f8-fd8a-4741-b466-3ae4d3cc8180",
+              "name": "Connection closed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "private",
+                    "logout"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "invalidate_token",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 42,\n  \"method\": \"private/logout\",\n  \"params\": {\n    \"access_token\": \"1529453804065.h2QrBgvn.oS36pCOmuK9EX7954lzCSkUioEtTMg7F5ShToM0ZfYlqU05OquXkQIe2_DDEkPhzmoPp1fBp0ycXShR_0jf-SMSXEdVqxLRWuOw-_StG5BMjToiAl27CbHY4P92MPhlMblTOtTImE81-5dFdyDVydpBwmlfKM3OSQ39kulP9bbfw-2jhyegOL0AgqJTY_tj554oHCQFTbq0A0ZWukukmxL2yu6iy34XdzaJB26Igy-3UxGBMwFu53EhjKBweh7xyP2nDm57-wybndJMtSyTGDXH3vjBVclo1iup5yRP\",\n    \"invalidate_token\": true\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://test.deribit.com/api/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "04ca3f38-6d9a-4b70-ae73-65f576ebcc30",
+    "name": "Deribit Account Management Authentication API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

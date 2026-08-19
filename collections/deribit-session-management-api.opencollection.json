@@ -1,0 +1,125 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Deribit Account Management Session Management API",
+    "version": "2.1.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Session Management",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GET /public/set_heartbeat",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/public/set_heartbeat",
+            "params": [
+              {
+                "name": "interval",
+                "value": "",
+                "type": "query",
+                "description": "The heartbeat interval in seconds, but not less than 10"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Signals the WebSocket connection to send and request heartbeats. Heartbeats can be used to detect stale connections.\n\nWhen heartbeats have been set up, the API server will send `heartbeat` messages and `test_request` messages. Your software should respond to `test_request` messages by sending a `/api/v2/public/test` request. If your software fails to do so, the API server will immediately close the connection. If your account is configured to cancel on disconnect, any orders opened over the conn"
+        },
+        {
+          "info": {
+            "name": "GET /public/disable_heartbeat",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/public/disable_heartbeat",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Stop sending heartbeat messages. This method takes no parameters.\n\n**WebSocket Only:** This method is designed exclusively for WebSocket connections. Attempting to use it via REST/HTTP will result in an error response.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fdisable_heartbeat)\n\n"
+        },
+        {
+          "info": {
+            "name": "GET /private/enable_cancel_on_disconnect",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/private/enable_cancel_on_disconnect",
+            "params": [
+              {
+                "name": "scope",
+                "value": "",
+                "type": "query",
+                "description": "Specifies if Cancel On Disconnect change should be applied/checked for the current connection or the account (default - `connection`)<br/><br/> **NOTICE:** Scope `connection` can be used only when working via Websocket."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Enable Cancel On Disconnect for the connection. After enabling, all orders created via this connection will be automatically cancelled when the connection is closed.\n\nCancel is triggered in the following cases: when the TCP connection is properly terminated, when the connection is closed due to 10 minutes of inactivity, or when a heartbeat detects a disconnection. To reduce the inactivity timeout, consider using [public/set_heartbeat](https://docs.deribit.com/api-reference/session-management/pub"
+        },
+        {
+          "info": {
+            "name": "GET /private/disable_cancel_on_disconnect",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/private/disable_cancel_on_disconnect",
+            "params": [
+              {
+                "name": "scope",
+                "value": "",
+                "type": "query",
+                "description": "Specifies if Cancel On Disconnect change should be applied/checked for the current connection or the account (default - `connection`)<br/><br/> **NOTICE:** Scope `connection` can be used only when working via Websocket."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Disable Cancel On Disconnect for the connection.\n\nWhen change is applied for the account, then every newly opened connection will start with **inactive** Cancel on Disconnect.\n\n**WebSocket Only:** This method is designed exclusively for WebSocket connections. Attempting to use it via REST/HTTP will result in an error response.\n\n**Scope:** `account:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fdisable_cancel_on_disconnect)\n\n"
+        },
+        {
+          "info": {
+            "name": "GET /private/get_cancel_on_disconnect",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/private/get_cancel_on_disconnect",
+            "params": [
+              {
+                "name": "scope",
+                "value": "",
+                "type": "query",
+                "description": "Specifies if Cancel On Disconnect change should be applied/checked for the current connection or the account (default - `connection`)<br/><br/> **NOTICE:** Scope `connection` can be used only when working via Websocket."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Read current Cancel On Disconnect configuration for the account.\n\n**Scope:** `account:read`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_cancel_on_disconnect)\n\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

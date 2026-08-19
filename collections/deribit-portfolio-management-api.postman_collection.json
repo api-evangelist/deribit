@@ -1,0 +1,257 @@
+{
+  "item": [
+    {
+      "id": "359c4c5b-2139-4619-9903-4df4c57cf134",
+      "name": "Portfolio Management",
+      "description": {
+        "content": "Endpoints that operate on the authenticated portfolio.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "00bfaa14-6c12-4a97-b69c-bdda58dfd9a7",
+          "name": "Mass Cancel",
+          "request": {
+            "name": "Mass Cancel",
+            "description": {
+              "content": "Cancels all open orders and quotes belonging to the authenticated portfolio. No filter parameters are accepted — the cancel applies to every instrument and every side.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "private",
+                "cancel_all"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "2dabc1ff-ebec-48a5-944c-ae64ec47915c",
+              "name": "All open orders and quotes cancelled successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "private",
+                    "cancel_all"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"result\": 42\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0b73a742-2731-4fbf-864e-aee5cf274d79",
+          "name": "Lock Portfolio",
+          "request": {
+            "name": "Lock Portfolio",
+            "description": {
+              "content": "Locks the authenticated portfolio. All currently open `DIRECT_ACCESS` orders and quotes for this portfolio are cancelled immediately. New `DIRECT_ACCESS` orders and quotes are rejected until the portfolio is unlocked.\n\nREST-submitted orders are not affected by the lock state.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "private",
+                "lock_portfolio"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "e3e19ea7-97cc-4f58-b267-0dc09dca02d9",
+              "name": "Portfolio locked successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "private",
+                    "lock_portfolio"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"result\": \"ok\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a2daa790-66b0-4091-9c41-cb7c5d8940c8",
+          "name": "Unlock Portfolio",
+          "request": {
+            "name": "Unlock Portfolio",
+            "description": {
+              "content": "Unlocks the authenticated portfolio, resuming normal acceptance of `DIRECT_ACCESS` orders and quotes.\n\nUnlocking the portfolio does **not** restore any previously cancelled orders.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "private",
+                "unlock_portfolio"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "57b16154-cf0b-4cf5-8e51-44233485c28b",
+              "name": "Portfolio unlocked successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "private",
+                    "unlock_portfolio"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"result\": \"ok\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://test.deribit.com/api/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "bdfabeec-f6e8-42e3-8029-59dc6ffea670",
+    "name": "Deribit Account Management Portfolio Management API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Endpoints that operate on the authenticated portfolio.",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,3753 @@
+{
+  "item": [
+    {
+      "id": "fbee4048-88f5-480d-b9d5-4222c48de1e8",
+      "name": "Market Data",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a6c7ad31-fbb7-407b-8a20-1ba534b0292f",
+          "name": "Retrieves the order book (bids and asks) for a given instrument, along with other market values such as best bid/ask prices, last trade price, mark price, and index price.\n\nThe order book depth can be controlled using the `depth` parameter, which accepts values from 1 to 10000. The response includes price levels sorted by price (bids descending, asks ascending).\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_order_book)\n\n",
+          "request": {
+            "name": "Retrieves the order book (bids and asks) for a given instrument, along with other market values such as best bid/ask prices, last trade price, mark price, and index price.\n\nThe order book depth can be controlled using the `depth` parameter, which accepts values from 1 to 10000. The response includes price levels sorted by price (bids descending, asks ascending).\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_order_book)\n\n",
+            "description": {
+              "content": "Retrieves the order book (bids and asks) for a given instrument, along with other market values such as best bid/ask prices, last trade price, mark price, and index price.\n\nThe order book depth can be controlled using the `depth` parameter, which accepts values from 1 to 10000. The response includes price levels sorted by price (bids descending, asks ascending).\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_order_book)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "get_order_book"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "instrument_name",
+                  "value": "<string>",
+                  "description": "(Required) The instrument name for which to retrieve the order book, see [`public/get_instruments`](#public-get_instruments) to obtain instrument names."
+                },
+                {
+                  "disabled": false,
+                  "key": "depth",
+                  "value": "<integer>",
+                  "description": "The number of entries to return for bids and asks, maximum - `10000`."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 8772,\n  \"method\": \"public/get_order_book\",\n  \"params\": {\n    \"instrument_name\": \"BTC-PERPETUAL\",\n    \"depth\": 5\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "008c133b-9d10-4f21-9d36-a4a65a57182d",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "get_order_book"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "instrument_name",
+                      "value": "BTC-PERPETUAL"
+                    },
+                    {
+                      "key": "depth",
+                      "value": "5"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 8772,\n  \"method\": \"public/get_order_book\",\n  \"params\": {\n    \"instrument_name\": \"BTC-PERPETUAL\",\n    \"depth\": 5\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 8772,\n  \"result\": {\n    \"timestamp\": 1550757626706,\n    \"stats\": {\n      \"volume\": 93.35589552,\n      \"price_change\": 0.6913,\n      \"low\": 3940.75,\n      \"high\": 3976.25\n    },\n    \"state\": \"open\",\n    \"settlement_price\": 3925.85,\n    \"open_interest\": 45.27600333464605,\n    \"min_price\": 3932.22,\n    \"max_price\": 3971.74,\n    \"mark_price\": 3931.97,\n    \"last_price\": 3955.75,\n    \"instrument_name\": \"BTC-PERPETUAL\",\n    \"index_price\": 3910.46,\n    \"funding_8h\": 0.00455263,\n    \"current_funding\": 0.00500063,\n    \"change_id\": 474988,\n    \"bids\": [\n      [\n        3955.75,\n        30\n      ],\n      [\n        3940.75,\n        102020\n      ],\n      [\n        3423,\n        42840\n      ]\n    ],\n    \"best_bid_price\": 3955.75,\n    \"best_bid_amount\": 30,\n    \"best_ask_price\": 0,\n    \"best_ask_amount\": 0,\n    \"asks\": []\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b5e9f62d-daa2-40f2-86c7-5b53d4def33b",
+          "name": "Retrieves the order book (bids and asks) for a given instrument ID, along with other market values such as best bid/ask prices, last trade price, mark price, and index price.\n\nThis method is similar to `get_order_book` but uses instrument ID instead of instrument name. The order book depth can be controlled using the `depth` parameter, which accepts values from 1 to 10000.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_order_book_by_instrument_id)\n\n",
+          "request": {
+            "name": "Retrieves the order book (bids and asks) for a given instrument ID, along with other market values such as best bid/ask prices, last trade price, mark price, and index price.\n\nThis method is similar to `get_order_book` but uses instrument ID instead of instrument name. The order book depth can be controlled using the `depth` parameter, which accepts values from 1 to 10000.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_order_book_by_instrument_id)\n\n",
+            "description": {
+              "content": "Retrieves the order book (bids and asks) for a given instrument ID, along with other market values such as best bid/ask prices, last trade price, mark price, and index price.\n\nThis method is similar to `get_order_book` but uses instrument ID instead of instrument name. The order book depth can be controlled using the `depth` parameter, which accepts values from 1 to 10000.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_order_book_by_instrument_id)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "get_order_book_by_instrument_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "instrument_id",
+                  "value": "<integer>",
+                  "description": "(Required) The instrument ID for which to retrieve the order book, see [`public/get_instruments`](#public-get_instruments) to obtain instrument IDs."
+                },
+                {
+                  "disabled": false,
+                  "key": "depth",
+                  "value": "<integer>",
+                  "description": "The number of entries to return for bids and asks, maximum - `10000`."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c44dfa05-802c-4604-b42c-b57a46f0a920",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "get_order_book_by_instrument_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "instrument_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "depth",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 8772,\n  \"result\": {\n    \"timestamp\": 1550757626706,\n    \"stats\": {\n      \"volume\": 93.35589552,\n      \"price_change\": 0.6913,\n      \"low\": 3940.75,\n      \"high\": 3976.25\n    },\n    \"state\": \"open\",\n    \"settlement_price\": 3925.85,\n    \"open_interest\": 45.27600333464605,\n    \"min_price\": 3932.22,\n    \"max_price\": 3971.74,\n    \"mark_price\": 3931.97,\n    \"last_price\": 3955.75,\n    \"instrument_name\": \"BTC-PERPETUAL\",\n    \"index_price\": 3910.46,\n    \"funding_8h\": 0.00455263,\n    \"current_funding\": 0.00500063,\n    \"change_id\": 474988,\n    \"bids\": [\n      [\n        3955.75,\n        30\n      ],\n      [\n        3940.75,\n        102020\n      ],\n      [\n        3423,\n        42840\n      ]\n    ],\n    \"best_bid_price\": 3955.75,\n    \"best_bid_amount\": 30,\n    \"best_ask_price\": 0,\n    \"best_ask_amount\": 0,\n    \"asks\": []\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "873c70a2-0763-4f44-b50f-8c574d6a8b61",
+          "name": "Retrieves historical settlement, delivery, and bankruptcy events from all instruments within a given currency. Settlements occur when futures or options contracts expire and are settled at the delivery price.\n\nResults can be filtered by settlement type and timestamp. Use pagination parameters (`count` and `continuation`) to retrieve large settlement histories. This data is useful for analyzing historical contract settlements and understanding market events.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_last_settlements_by_currency)\n\n",
+          "request": {
+            "name": "Retrieves historical settlement, delivery, and bankruptcy events from all instruments within a given currency. Settlements occur when futures or options contracts expire and are settled at the delivery price.\n\nResults can be filtered by settlement type and timestamp. Use pagination parameters (`count` and `continuation`) to retrieve large settlement histories. This data is useful for analyzing historical contract settlements and understanding market events.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_last_settlements_by_currency)\n\n",
+            "description": {
+              "content": "Retrieves historical settlement, delivery, and bankruptcy events from all instruments within a given currency. Settlements occur when futures or options contracts expire and are settled at the delivery price.\n\nResults can be filtered by settlement type and timestamp. Use pagination parameters (`count` and `continuation`) to retrieve large settlement histories. This data is useful for analyzing historical contract settlements and understanding market events.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_last_settlements_by_currency)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "get_last_settlements_by_currency"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "currency",
+                  "value": "<string>",
+                  "description": "(Required) The currency symbol"
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "Settlement type"
+                },
+                {
+                  "disabled": false,
+                  "key": "count",
+                  "value": "<integer>",
+                  "description": "Number of requested items, default - `20`, maximum - `1000`"
+                },
+                {
+                  "disabled": false,
+                  "key": "continuation",
+                  "value": "<string>",
+                  "description": "Continuation token for pagination"
+                },
+                {
+                  "disabled": false,
+                  "key": "search_start_timestamp",
+                  "value": "<integer>",
+                  "description": "The latest timestamp to return result from (milliseconds since the UNIX epoch)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 4497,\n  \"method\": \"public/get_last_settlements_by_currency\",\n  \"params\": {\n    \"currency\": \"BTC\",\n    \"type\": \"delivery\",\n    \"count\": 2\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e11e6c62-1573-493c-8846-9cc4c16aaa7b",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "get_last_settlements_by_currency"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "currency",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "count",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "continuation",
+                      "value": "xY7T6cutS3t2B9YtaDkE6TS379oKnkzTvmEDUnEUP2Msa9xKWNNaT"
+                    },
+                    {
+                      "key": "search_start_timestamp",
+                      "value": "1536569522277"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 4497,\n  \"method\": \"public/get_last_settlements_by_currency\",\n  \"params\": {\n    \"currency\": \"BTC\",\n    \"type\": \"delivery\",\n    \"count\": 2\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 5482,\n  \"result\": {\n    \"settlements\": [\n      {\n        \"type\": \"settlement\",\n        \"timestamp\": 1550502000023,\n        \"session_profit_loss\": 0.116509752,\n        \"profit_loss\": -9.999999999886402e-10,\n        \"position\": 240,\n        \"mark_price\": 3578.16,\n        \"instrument_name\": \"BTC-22FEB19\",\n        \"index_price\": 3796.43\n      }\n    ],\n    \"continuation\": \"2Z7mdtavzYvfuyYcHkJXvPTr9ZSMsEzM3sLCH7AbYEDd1AzTXY2hnhegQDiaP1TtU4b5iSJZ4\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8de005e7-1d9c-48e4-99b0-ca64bce7653b",
+          "name": "Retrieves summary information such as open interest, 24-hour volume, best bid/ask prices, last trade price, and other market statistics for all instruments in a given currency.\n\nResults can be filtered by instrument kind (future, option, etc.). This method provides a quick overview of market activity across all instruments for a currency.\n\n**Note:** For real-time updates, we recommend using the WebSocket subscription to `ticker.{instrument_name}.{interval}` instead of polling this endpoint.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_book_summary_by_currency)\n\n",
+          "request": {
+            "name": "Retrieves summary information such as open interest, 24-hour volume, best bid/ask prices, last trade price, and other market statistics for all instruments in a given currency.\n\nResults can be filtered by instrument kind (future, option, etc.). This method provides a quick overview of market activity across all instruments for a currency.\n\n**Note:** For real-time updates, we recommend using the WebSocket subscription to `ticker.{instrument_name}.{interval}` instead of polling this endpoint.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_book_summary_by_currency)\n\n",
+            "description": {
+              "content": "Retrieves summary information such as open interest, 24-hour volume, best bid/ask prices, last trade price, and other market statistics for all instruments in a given currency.\n\nResults can be filtered by instrument kind (future, option, etc.). This method provides a quick overview of market activity across all instruments for a currency.\n\n**Note:** For real-time updates, we recommend using the WebSocket subscription to `ticker.{instrument_name}.{interval}` instead of polling this endpoint.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_book_summary_by_currency)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "get_book_summary_by_currency"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "currency",
+                  "value": "<string>",
+                  "description": "(Required) The currency symbol"
+                },
+                {
+                  "disabled": false,
+                  "key": "kind",
+                  "value": "<string>",
+                  "description": "Instrument kind, if not provided instruments of all kinds are considered"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 9344,\n  \"method\": \"public/get_book_summary_by_currency\",\n  \"params\": {\n    \"currency\": \"BTC\",\n    \"kind\": \"future\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "70543989-1987-4835-8559-46e005ba467e",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "get_book_summary_by_currency"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "currency",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "kind",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 9344,\n  \"method\": \"public/get_book_summary_by_currency\",\n  \"params\": {\n    \"currency\": \"BTC\",\n    \"kind\": \"future\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 3659,\n  \"result\": [\n    {\n      \"volume\": 0.55,\n      \"underlying_price\": 121.38,\n      \"underlying_index\": \"index_price\",\n      \"quote_currency\": \"USD\",\n      \"price_change\": -26.7793594,\n      \"open_interest\": 0.55,\n      \"mid_price\": 0.2444,\n      \"mark_price\": 80,\n      \"low\": 0.34,\n      \"last\": 0.34,\n      \"interest_rate\": 0.207,\n      \"instrument_name\": \"ETH-22FEB19-140-P\",\n      \"high\": 0.34,\n      \"creation_timestamp\": 1550227952163,\n      \"bid_price\": 0.1488,\n      \"base_currency\": \"ETH\",\n      \"ask_price\": 0.34\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6c20f451-e5b5-49b3-a9db-2a0845145526",
+          "name": "Retrieves summary information such as open interest, 24-hour volume, best bid/ask prices, last trade price, mark price, and other market statistics for a specific instrument.\n\nThis method provides a quick overview of current market activity and liquidity for a single instrument.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_book_summary_by_instrument)\n\n",
+          "request": {
+            "name": "Retrieves summary information such as open interest, 24-hour volume, best bid/ask prices, last trade price, mark price, and other market statistics for a specific instrument.\n\nThis method provides a quick overview of current market activity and liquidity for a single instrument.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_book_summary_by_instrument)\n\n",
+            "description": {
+              "content": "Retrieves summary information such as open interest, 24-hour volume, best bid/ask prices, last trade price, mark price, and other market statistics for a specific instrument.\n\nThis method provides a quick overview of current market activity and liquidity for a single instrument.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_book_summary_by_instrument)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "get_book_summary_by_instrument"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "instrument_name",
+                  "value": "<string>",
+                  "description": "(Required) Instrument name"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 3659,\n  \"method\": \"public/get_book_summary_by_instrument\",\n  \"params\": {\n    \"instrument_name\": \"ETH-22FEB19-140-P\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "dc8537a4-521f-4657-8c0d-a7ce8289917a",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "get_book_summary_by_instrument"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "instrument_name",
+                      "value": "BTC-PERPETUAL"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 3659,\n  \"method\": \"public/get_book_summary_by_instrument\",\n  \"params\": {\n    \"instrument_name\": \"ETH-22FEB19-140-P\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 3659,\n  \"result\": [\n    {\n      \"volume\": 0.55,\n      \"underlying_price\": 121.38,\n      \"underlying_index\": \"index_price\",\n      \"quote_currency\": \"USD\",\n      \"price_change\": -26.7793594,\n      \"open_interest\": 0.55,\n      \"mid_price\": 0.2444,\n      \"mark_price\": 80,\n      \"low\": 0.34,\n      \"last\": 0.34,\n      \"interest_rate\": 0.207,\n      \"instrument_name\": \"ETH-22FEB19-140-P\",\n      \"high\": 0.34,\n      \"creation_timestamp\": 1550227952163,\n      \"bid_price\": 0.1488,\n      \"base_currency\": \"ETH\",\n      \"ask_price\": 0.34\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3aaed634-392f-4862-bbe8-90908bf7136d",
+          "name": "Retrieves historical settlement, delivery, and bankruptcy events for a specific instrument. Settlements occur when futures or options contracts expire and are settled at the delivery price.\n\nResults can be filtered by settlement type and timestamp. Use pagination parameters (`count` and `continuation`) to retrieve large settlement histories. This method is useful for tracking settlement history for a specific instrument.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_last_settlements_by_instrument)\n\n",
+          "request": {
+            "name": "Retrieves historical settlement, delivery, and bankruptcy events for a specific instrument. Settlements occur when futures or options contracts expire and are settled at the delivery price.\n\nResults can be filtered by settlement type and timestamp. Use pagination parameters (`count` and `continuation`) to retrieve large settlement histories. This method is useful for tracking settlement history for a specific instrument.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_last_settlements_by_instrument)\n\n",
+            "description": {
+              "content": "Retrieves historical settlement, delivery, and bankruptcy events for a specific instrument. Settlements occur when futures or options contracts expire and are settled at the delivery price.\n\nResults can be filtered by settlement type and timestamp. Use pagination parameters (`count` and `continuation`) to retrieve large settlement histories. This method is useful for tracking settlement history for a specific instrument.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_last_settlements_by_instrument)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "get_last_settlements_by_instrument"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "instrument_name",
+                  "value": "<string>",
+                  "description": "(Required) Instrument name"
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "Settlement type"
+                },
+                {
+                  "disabled": false,
+                  "key": "count",
+                  "value": "<integer>",
+                  "description": "Number of requested items, default - `20`, maximum - `1000`"
+                },
+                {
+                  "disabled": false,
+                  "key": "continuation",
+                  "value": "<string>",
+                  "description": "Continuation token for pagination"
+                },
+                {
+                  "disabled": false,
+                  "key": "search_start_timestamp",
+                  "value": "<integer>",
+                  "description": "The latest timestamp to return result from (milliseconds since the UNIX epoch)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 5482,\n  \"method\": \"public/get_last_settlements_by_instrument\",\n  \"params\": {\n    \"instrument_name\": \"BTC-22FEB19\",\n    \"type\": \"settlement\",\n    \"count\": 1\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "33f5e973-f554-4ee8-8dab-6b46d9f9fc2f",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "get_last_settlements_by_instrument"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "instrument_name",
+                      "value": "BTC-PERPETUAL"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "count",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "continuation",
+                      "value": "xY7T6cutS3t2B9YtaDkE6TS379oKnkzTvmEDUnEUP2Msa9xKWNNaT"
+                    },
+                    {
+                      "key": "search_start_timestamp",
+                      "value": "1536569522277"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 5482,\n  \"method\": \"public/get_last_settlements_by_instrument\",\n  \"params\": {\n    \"instrument_name\": \"BTC-22FEB19\",\n    \"type\": \"settlement\",\n    \"count\": 1\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 5482,\n  \"result\": {\n    \"settlements\": [\n      {\n        \"type\": \"settlement\",\n        \"timestamp\": 1550502000023,\n        \"session_profit_loss\": 0.116509752,\n        \"profit_loss\": -9.999999999886402e-10,\n        \"position\": 240,\n        \"mark_price\": 3578.16,\n        \"instrument_name\": \"BTC-22FEB19\",\n        \"index_price\": 3796.43\n      }\n    ],\n    \"continuation\": \"2Z7mdtavzYvfuyYcHkJXvPTr9ZSMsEzM3sLCH7AbYEDd1AzTXY2hnhegQDiaP1TtU4b5iSJZ4\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7d02943e-cfbe-482f-af64-0be5c5b47609",
+          "name": "Retrieves the contract size (also known as contract multiplier) for a given instrument. The contract size determines how many units of the underlying asset one contract represents.\n\nThis value is essential for calculating position values, margin requirements, and P&L calculations. Different instruments may have different contract sizes.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_contract_size)\n\n",
+          "request": {
+            "name": "Retrieves the contract size (also known as contract multiplier) for a given instrument. The contract size determines how many units of the underlying asset one contract represents.\n\nThis value is essential for calculating position values, margin requirements, and P&L calculations. Different instruments may have different contract sizes.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_contract_size)\n\n",
+            "description": {
+              "content": "Retrieves the contract size (also known as contract multiplier) for a given instrument. The contract size determines how many units of the underlying asset one contract represents.\n\nThis value is essential for calculating position values, margin requirements, and P&L calculations. Different instruments may have different contract sizes.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_contract_size)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "get_contract_size"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "instrument_name",
+                  "value": "<string>",
+                  "description": "(Required) Instrument name"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cf5d29a3-f424-4a2f-996e-bca80e6f8c4b",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "get_contract_size"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "instrument_name",
+                      "value": "BTC-PERPETUAL"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"result\": {\n    \"contract_size\": 10\n  },\n  \"id\": 5532\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2a78948c-5361-4974-895c-0c763bbca8af",
+          "name": "Retrieves aggregated 24-hour trade volumes for different instrument types and currencies. The volume statistics include all executed trades across the platform.\n\n**Note:** Position moves are not included in this volume. Block trades and Block RFQ trades are included in the volume calculations.\n\nUse the `extended` parameter to include additional volume statistics and breakdowns.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_trade_volumes)\n\n",
+          "request": {
+            "name": "Retrieves aggregated 24-hour trade volumes for different instrument types and currencies. The volume statistics include all executed trades across the platform.\n\n**Note:** Position moves are not included in this volume. Block trades and Block RFQ trades are included in the volume calculations.\n\nUse the `extended` parameter to include additional volume statistics and breakdowns.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_trade_volumes)\n\n",
+            "description": {
+              "content": "Retrieves aggregated 24-hour trade volumes for different instrument types and currencies. The volume statistics include all executed trades across the platform.\n\n**Note:** Position moves are not included in this volume. Block trades and Block RFQ trades are included in the volume calculations.\n\nUse the `extended` parameter to include additional volume statistics and breakdowns.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_trade_volumes)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "get_trade_volumes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "extended",
+                  "value": "<boolean>",
+                  "description": "Request for extended statistics. Including also 7 and 30 days volumes (default false)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b16d8af0-b472-4504-9fb7-9281169be28f",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "get_trade_volumes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "extended",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 6387,\n  \"result\": [\n    {\n      \"puts_volume\": 48,\n      \"futures_volume\": 6.25578452,\n      \"currency\": \"BTC\",\n      \"calls_volume\": 145,\n      \"spot_volume\": 11.1\n    },\n    {\n      \"puts_volume\": 122.65,\n      \"futures_volume\": 374.392173,\n      \"currency\": \"ETH\",\n      \"calls_volume\": 37.4,\n      \"spot_volume\": 57.7\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "037023f2-b26f-476e-9150-0c2a7ec6227e",
+          "name": "Retrieves the current index price value for a given index name. Index prices are used as reference prices for mark price calculations and settlement.\n\nUse `get_index_price_names` or `get_supported_index_names` to retrieve available index names.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_index_price)\n\n",
+          "request": {
+            "name": "Retrieves the current index price value for a given index name. Index prices are used as reference prices for mark price calculations and settlement.\n\nUse `get_index_price_names` or `get_supported_index_names` to retrieve available index names.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_index_price)\n\n",
+            "description": {
+              "content": "Retrieves the current index price value for a given index name. Index prices are used as reference prices for mark price calculations and settlement.\n\nUse `get_index_price_names` or `get_supported_index_names` to retrieve available index names.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_index_price)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "get_index_price"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "index_name",
+                  "value": "<string>",
+                  "description": "(Required) Index identifier, matches (base) cryptocurrency with quote currency"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fcb7f0e5-2441-4055-ab4e-1c5e772ac4f6",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "get_index_price"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "index_name",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"result\": {\n    \"index_price\": 11628.81,\n    \"estimated_delivery_price\": 11628.81\n  },\n  \"id\": 9497\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "71fd3d2f-f8ac-43a1-861f-2148172fa188",
+          "name": "Retrieves the identifiers (names) of all supported price indexes. Price indexes are reference prices used for mark price calculations, settlement, and other market operations.\n\nWhen the `extended` parameter is set to `true`, the response includes additional information such as whether future combo creation and option combo creation are enabled for each index.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_index_price_names)\n\n",
+          "request": {
+            "name": "Retrieves the identifiers (names) of all supported price indexes. Price indexes are reference prices used for mark price calculations, settlement, and other market operations.\n\nWhen the `extended` parameter is set to `true`, the response includes additional information such as whether future combo creation and option combo creation are enabled for each index.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_index_price_names)\n\n",
+            "description": {
+              "content": "Retrieves the identifiers (names) of all supported price indexes. Price indexes are reference prices used for mark price calculations, settlement, and other market operations.\n\nWhen the `extended` parameter is set to `true`, the response includes additional information such as whether future combo creation and option combo creation are enabled for each index.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_index_price_names)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "get_index_price_names"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "extended",
+                  "value": "false",
+                  "description": "When set to `true`, returns additional information including `future_combo_creation_enabled` and `option_combo_creation_enabled` for each index"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"method\": \"public/get_index_price_names\",\n  \"params\": {\n    \"extended\": true\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a87b91d1-3afd-4134-959d-77f942be01e4",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "get_index_price_names"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "extended",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"method\": \"public/get_index_price_names\",\n  \"params\": {\n    \"extended\": true\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 25718,\n  \"result\": [\n    \"btc_eth\",\n    \"btc_usdc\",\n    \"eth_usdc\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4685e4bd-d83d-4fea-af7e-e8a970fdea8b",
+          "name": "Retrieves the identifiers (names) of all supported price indexes, optionally filtered by index type. Price indexes are reference prices used for mark price calculations, settlement, and other market operations.\n\nUse the `type` parameter to filter indexes by type (e.g., spot, futures, etc.). This method helps discover available indexes for use with other API methods.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_supported_index_names)\n\n",
+          "request": {
+            "name": "Retrieves the identifiers (names) of all supported price indexes, optionally filtered by index type. Price indexes are reference prices used for mark price calculations, settlement, and other market operations.\n\nUse the `type` parameter to filter indexes by type (e.g., spot, futures, etc.). This method helps discover available indexes for use with other API methods.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_supported_index_names)\n\n",
+            "description": {
+              "content": "Retrieves the identifiers (names) of all supported price indexes, optionally filtered by index type. Price indexes are reference prices used for mark price calculations, settlement, and other market operations.\n\nUse the `type` parameter to filter indexes by type (e.g., spot, futures, etc.). This method helps discover available indexes for use with other API methods.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_supported_index_names)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "get_supported_index_names"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "Type of a cryptocurrency price index"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "086a6271-5d5c-4d7d-803d-90e0c1f6e45c",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "get_supported_index_names"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 25718,\n  \"result\": [\n    \"btc_eth\",\n    \"btc_usdc\",\n    \"eth_usdc\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ba349ee1-ba3e-45d7-b862-2d8e6e49b382",
+          "name": "Retrieves available trading instruments. This method can be used to see which instruments are available for trading, or which instruments have recently expired.\n\n**Note - This method has distinct API rate limiting requirements:** Sustained rate: 1 request/second. To avoid rate limits, we recommend using either the REST requests for server-cached data or the WebSocket subscription to [instrument_state.{kind}.{currency}](https://docs.deribit.com/api-reference/subscription-channels/instrument-state-kind-currency) for real-time updates. For more information, see [Rate Limits](https://support.deribit.com/hc/en-us/articles/25944617523357-Rate-Limits).\n\nResults can be filtered by currency and instrument kind (future, option, etc.). Set the `expired` parameter to `true` to retrieve recently expired instruments instead of active ones.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_instruments)\n\n",
+          "request": {
+            "name": "Retrieves available trading instruments. This method can be used to see which instruments are available for trading, or which instruments have recently expired.\n\n**Note - This method has distinct API rate limiting requirements:** Sustained rate: 1 request/second. To avoid rate limits, we recommend using either the REST requests for server-cached data or the WebSocket subscription to [instrument_state.{kind}.{currency}](https://docs.deribit.com/api-reference/subscription-channels/instrument-state-kind-currency) for real-time updates. For more information, see [Rate Limits](https://support.deribit.com/hc/en-us/articles/25944617523357-Rate-Limits).\n\nResults can be filtered by currency and instrument kind (future, option, etc.). Set the `expired` parameter to `true` to retrieve recently expired instruments instead of active ones.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_instruments)\n\n",
+            "description": {
+              "content": "Retrieves available trading instruments. This method can be used to see which instruments are available for trading, or which instruments have recently expired.\n\n**Note - This method has distinct API rate limiting requirements:** Sustained rate: 1 request/second. To avoid rate limits, we recommend using either the REST requests for server-cached data or the WebSocket subscription to [instrument_state.{kind}.{currency}](https://docs.deribit.com/api-reference/subscription-channels/instrument-state-kind-currency) for real-time updates. For more information, see [Rate Limits](https://support.deribit.com/hc/en-us/articles/25944617523357-Rate-Limits).\n\nResults can be filtered by currency and instrument kind (future, option, etc.). Set the `expired` parameter to `true` to retrieve recently expired instruments instead of active ones.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_instruments)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "get_instruments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "currency",
+                  "value": "<string>",
+                  "description": "(Required) The currency symbol or `\"any\"` for all"
+                },
+                {
+                  "disabled": false,
+                  "key": "kind",
+                  "value": "<string>",
+                  "description": "Instrument kind, if not provided instruments of all kinds are considered"
+                },
+                {
+                  "disabled": false,
+                  "key": "expired",
+                  "value": "false",
+                  "description": "Set to true to show recently expired instruments instead of active ones."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"method\": \"public/get_instruments\",\n  \"params\": {\n    \"currency\": \"BTC\",\n    \"kind\": \"future\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5d91ec26-5191-4fd2-b195-a5fb9605e53f",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "get_instruments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "currency",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "kind",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "expired",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"method\": \"public/get_instruments\",\n  \"params\": {\n    \"currency\": \"BTC\",\n    \"kind\": \"future\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"result\": [\n    {\n      \"tick_size\": 2.5,\n      \"tick_size_steps\": [],\n      \"taker_commission\": 0.0005,\n      \"settlement_period\": \"month\",\n      \"settlement_currency\": \"BTC\",\n      \"quote_currency\": \"USD\",\n      \"price_index\": \"btc_usd\",\n      \"min_trade_amount\": 10,\n      \"max_liquidation_commission\": 0.0075,\n      \"max_leverage\": 50,\n      \"maker_commission\": 0,\n      \"kind\": \"future\",\n      \"is_active\": true,\n      \"instrument_name\": \"BTC-29SEP23\",\n      \"instrument_id\": 138583,\n      \"instrument_type\": \"reversed\",\n      \"expiration_timestamp\": 1695974400000,\n      \"creation_timestamp\": 1664524802000,\n      \"counter_currency\": \"USD\",\n      \"contract_size\": 10,\n      \"block_trade_tick_size\": 0.01,\n      \"block_trade_min_trade_amount\": 200000,\n      \"block_trade_commission\": 0.00025,\n      \"base_currency\": \"BTC\",\n      \"state\": \"open\"\n    },\n    {\n      \"tick_size\": 0.5,\n      \"tick_size_steps\": [],\n      \"taker_commission\": 0.0005,\n      \"settlement_period\": \"perpetual\",\n      \"settlement_currency\": \"BTC\",\n      \"quote_currency\": \"USD\",\n      \"price_index\": \"btc_usd\",\n      \"min_trade_amount\": 10,\n      \"max_liquidation_commission\": 0.0075,\n      \"max_leverage\": 50,\n      \"maker_commission\": 0,\n      \"kind\": \"future\",\n      \"is_active\": true,\n      \"instrument_name\": \"BTC-PERPETUAL\",\n      \"instrument_id\": 124972,\n      \"instrument_type\": \"reversed\",\n      \"expiration_timestamp\": 32503708800000,\n      \"creation_timestamp\": 1534167754000,\n      \"counter_currency\": \"USD\",\n      \"contract_size\": 10,\n      \"block_trade_tick_size\": 0.01,\n      \"block_trade_min_trade_amount\": 200000,\n      \"block_trade_commission\": 0.00025,\n      \"base_currency\": \"BTC\",\n      \"state\": \"open\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "227fa6f9-2443-49d2-a98a-e0a0629d597e",
+          "name": "Retrieves detailed information about a specific instrument, including instrument specifications, contract details, tick size, settlement currency, expiration date (for futures and options), strike price (for options), and other instrument parameters.\n\nThis method is useful for obtaining instrument metadata needed for trading operations and calculations.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_instrument)\n\n",
+          "request": {
+            "name": "Retrieves detailed information about a specific instrument, including instrument specifications, contract details, tick size, settlement currency, expiration date (for futures and options), strike price (for options), and other instrument parameters.\n\nThis method is useful for obtaining instrument metadata needed for trading operations and calculations.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_instrument)\n\n",
+            "description": {
+              "content": "Retrieves detailed information about a specific instrument, including instrument specifications, contract details, tick size, settlement currency, expiration date (for futures and options), strike price (for options), and other instrument parameters.\n\nThis method is useful for obtaining instrument metadata needed for trading operations and calculations.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_instrument)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "get_instrument"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "instrument_name",
+                  "value": "<string>",
+                  "description": "(Required) Instrument name"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 2,\n  \"method\": \"public/get_instrument\",\n  \"params\": {\n    \"instrument_name\": \"BTC-13JAN23-16000-P\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "dcce8b4b-ed9c-4f72-ad1f-f7cd494d2d16",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "get_instrument"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "instrument_name",
+                      "value": "BTC-PERPETUAL"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 2,\n  \"method\": \"public/get_instrument\",\n  \"params\": {\n    \"instrument_name\": \"BTC-13JAN23-16000-P\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 2,\n  \"result\": {\n    \"tick_size\": 0.0005,\n    \"tick_size_steps\": [\n      {\n        \"above_price\": 120,\n        \"tick_size\": 0.001\n      },\n      {\n        \"above_price\": 200,\n        \"tick_size\": 0.003\n      }\n    ],\n    \"taker_commission\": 0.0003,\n    \"strike\": 16000,\n    \"settlement_period\": \"week\",\n    \"settlement_currency\": \"BTC\",\n    \"quote_currency\": \"BTC\",\n    \"price_index\": \"btc_usd\",\n    \"option_type\": \"put\",\n    \"min_trade_amount\": 0.1,\n    \"maker_commission\": 0.0003,\n    \"kind\": \"option\",\n    \"is_active\": true,\n    \"instrument_name\": \"BTC-13JAN23-16000-P\",\n    \"instrument_id\": 144613,\n    \"expiration_timestamp\": 1673596800000,\n    \"creation_timestamp\": 1671696002000,\n    \"counter_currency\": \"USD\",\n    \"contract_size\": 1,\n    \"block_trade_tick_size\": 0.0001,\n    \"block_trade_min_trade_amount\": 25,\n    \"block_trade_commission\": 0.00015,\n    \"base_currency\": \"BTC\",\n    \"state\": \"open\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "489c2e41-df44-4539-93a2-761e6cfe7471",
+          "name": "Provides historical volatility data for a given cryptocurrency. Historical volatility measures the degree of price variation over a past period and is useful for risk assessment and option pricing.\n\nThe response includes volatility statistics calculated from historical price movements. This data can be used for portfolio risk analysis and understanding market conditions.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_historical_volatility)\n\n",
+          "request": {
+            "name": "Provides historical volatility data for a given cryptocurrency. Historical volatility measures the degree of price variation over a past period and is useful for risk assessment and option pricing.\n\nThe response includes volatility statistics calculated from historical price movements. This data can be used for portfolio risk analysis and understanding market conditions.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_historical_volatility)\n\n",
+            "description": {
+              "content": "Provides historical volatility data for a given cryptocurrency. Historical volatility measures the degree of price variation over a past period and is useful for risk assessment and option pricing.\n\nThe response includes volatility statistics calculated from historical price movements. This data can be used for portfolio risk analysis and understanding market conditions.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_historical_volatility)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "get_historical_volatility"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "currency",
+                  "value": "<string>",
+                  "description": "(Required) The currency symbol"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 8387,\n  \"method\": \"public/get_historical_volatility\",\n  \"params\": {\n    \"currency\": \"BTC\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7ed7b23f-3427-4994-bca2-be58db704ab0",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "get_historical_volatility"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "currency",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 8387,\n  \"method\": \"public/get_historical_volatility\",\n  \"params\": {\n    \"currency\": \"BTC\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 8387,\n  \"result\": [\n    [\n      1549720800000,\n      14.747743607344217\n    ],\n    [\n      1549720800000,\n      14.747743607344217\n    ],\n    [\n      1549724400000,\n      14.74257778551467\n    ],\n    [\n      1549728000000,\n      14.73502799931767\n    ],\n    [\n      1549731600000,\n      14.73502799931767\n    ],\n    [\n      1549735200000,\n      14.73502799931767\n    ],\n    [\n      1550228400000,\n      46.371891307340015\n    ]\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "292aa1fc-d791-47ad-8bfc-15e7f98757b2",
+          "name": "Retrieves hourly historical funding rate (interest rate) data for a PERPETUAL instrument over a specified time period. Funding rates are periodic payments exchanged between long and short positions in perpetual contracts.\n\nThe response includes hourly funding rate values, which can be used to analyze funding rate trends and calculate historical funding costs. This method is applicable only for PERPETUAL instruments.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_funding_rate_history)\n\n",
+          "request": {
+            "name": "Retrieves hourly historical funding rate (interest rate) data for a PERPETUAL instrument over a specified time period. Funding rates are periodic payments exchanged between long and short positions in perpetual contracts.\n\nThe response includes hourly funding rate values, which can be used to analyze funding rate trends and calculate historical funding costs. This method is applicable only for PERPETUAL instruments.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_funding_rate_history)\n\n",
+            "description": {
+              "content": "Retrieves hourly historical funding rate (interest rate) data for a PERPETUAL instrument over a specified time period. Funding rates are periodic payments exchanged between long and short positions in perpetual contracts.\n\nThe response includes hourly funding rate values, which can be used to analyze funding rate trends and calculate historical funding costs. This method is applicable only for PERPETUAL instruments.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_funding_rate_history)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "get_funding_rate_history"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "instrument_name",
+                  "value": "<string>",
+                  "description": "(Required) Instrument name"
+                },
+                {
+                  "disabled": false,
+                  "key": "start_timestamp",
+                  "value": "<integer>",
+                  "description": "(Required) The earliest timestamp to return result from (milliseconds since the UNIX epoch)"
+                },
+                {
+                  "disabled": false,
+                  "key": "end_timestamp",
+                  "value": "<integer>",
+                  "description": "(Required) The most recent timestamp to return result from (milliseconds since the UNIX epoch)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 7617,\n  \"method\": \"public/get_funding_rate_history\",\n  \"params\": {\n    \"instrument_name\": \"BTC-PERPETUAL\",\n    \"start_timestamp\": 1569888000000,\n    \"end_timestamp\": 1569902400000\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f4f68c7b-2d50-49a0-88cd-e260c28c4aee",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "get_funding_rate_history"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "instrument_name",
+                      "value": "BTC-PERPETUAL"
+                    },
+                    {
+                      "key": "start_timestamp",
+                      "value": "1536569522277"
+                    },
+                    {
+                      "key": "end_timestamp",
+                      "value": "1536569522277"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 7617,\n  \"method\": \"public/get_funding_rate_history\",\n  \"params\": {\n    \"instrument_name\": \"BTC-PERPETUAL\",\n    \"start_timestamp\": 1569888000000,\n    \"end_timestamp\": 1569902400000\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 7617,\n  \"result\": [\n    {\n      \"timestamp\": 1569891600000,\n      \"index_price\": 8222.87,\n      \"prev_index_price\": 8305.72,\n      \"interest_8h\": -0.00009234260068476106,\n      \"interest_1h\": -4.739622041017375e-7\n    },\n    {\n      \"timestamp\": 1569895200000,\n      \"index_price\": 8286.49,\n      \"prev_index_price\": 8222.87,\n      \"interest_8h\": -0.00006720918180255509,\n      \"interest_1h\": -2.8583510923267753e-7\n    },\n    {\n      \"timestamp\": 1569898800000,\n      \"index_price\": 8431.97,\n      \"prev_index_price\": 8286.49,\n      \"interest_8h\": -0.00003544496169694662,\n      \"interest_1h\": -0.000003815906848177951\n    },\n    {\n      \"timestamp\": 1569902400000,\n      \"index_price\": 8422.36,\n      \"prev_index_price\": 8431.97,\n      \"interest_8h\": -0.00001404147515584998,\n      \"interest_1h\": 8.312033064379086e-7\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5d8301df-2a6a-4da7-82ac-703f56f43680",
+          "name": "Retrieves the funding rate (interest rate) value for a perpetual instrument over a specified time period. Funding rates are periodic payments exchanged between long and short positions in perpetual contracts.\n\nThis method is applicable only for PERPETUAL instruments. The funding rate is typically expressed as a percentage and is used to keep the perpetual contract price aligned with the underlying index price.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_funding_rate_value)\n\n",
+          "request": {
+            "name": "Retrieves the funding rate (interest rate) value for a perpetual instrument over a specified time period. Funding rates are periodic payments exchanged between long and short positions in perpetual contracts.\n\nThis method is applicable only for PERPETUAL instruments. The funding rate is typically expressed as a percentage and is used to keep the perpetual contract price aligned with the underlying index price.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_funding_rate_value)\n\n",
+            "description": {
+              "content": "Retrieves the funding rate (interest rate) value for a perpetual instrument over a specified time period. Funding rates are periodic payments exchanged between long and short positions in perpetual contracts.\n\nThis method is applicable only for PERPETUAL instruments. The funding rate is typically expressed as a percentage and is used to keep the perpetual contract price aligned with the underlying index price.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_funding_rate_value)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "get_funding_rate_value"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "instrument_name",
+                  "value": "<string>",
+                  "description": "(Required) Instrument name"
+                },
+                {
+                  "disabled": false,
+                  "key": "start_timestamp",
+                  "value": "<integer>",
+                  "description": "(Required) The earliest timestamp to return result from (milliseconds since the UNIX epoch)"
+                },
+                {
+                  "disabled": false,
+                  "key": "end_timestamp",
+                  "value": "<integer>",
+                  "description": "(Required) The most recent timestamp to return result from (milliseconds since the UNIX epoch)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 7617,\n  \"method\": \"public/get_funding_rate_value\",\n  \"params\": {\n    \"instrument_name\": \"BTC-PERPETUAL\",\n    \"start_timestamp\": 1569888000000,\n    \"end_timestamp\": 1569974400000\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3b2ff167-f700-4171-a37d-987171f7c7de",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "get_funding_rate_value"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "instrument_name",
+                      "value": "BTC-PERPETUAL"
+                    },
+                    {
+                      "key": "start_timestamp",
+                      "value": "1536569522277"
+                    },
+                    {
+                      "key": "end_timestamp",
+                      "value": "1536569522277"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 7617,\n  \"method\": \"public/get_funding_rate_value\",\n  \"params\": {\n    \"instrument_name\": \"BTC-PERPETUAL\",\n    \"start_timestamp\": 1569888000000,\n    \"end_timestamp\": 1569974400000\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 7617,\n  \"result\": -0.00025056853702101664\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c77cabd3-c917-4a29-999f-1c40d6ffdd63",
+          "name": "Returns historical price index chart data for the specified index name and time range. The data is formatted for use in charting applications and shows price index values over time.\n\nUse the `range` parameter to specify the time period for which to retrieve chart data. This method is useful for visualizing price index trends and historical movements.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_index_chart_data)\n\n",
+          "request": {
+            "name": "Returns historical price index chart data for the specified index name and time range. The data is formatted for use in charting applications and shows price index values over time.\n\nUse the `range` parameter to specify the time period for which to retrieve chart data. This method is useful for visualizing price index trends and historical movements.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_index_chart_data)\n\n",
+            "description": {
+              "content": "Returns historical price index chart data for the specified index name and time range. The data is formatted for use in charting applications and shows price index values over time.\n\nUse the `range` parameter to specify the time period for which to retrieve chart data. This method is useful for visualizing price index trends and historical movements.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_index_chart_data)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "get_index_chart_data"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "index_name",
+                  "value": "<string>",
+                  "description": "(Required) Index identifier, matches (base) cryptocurrency with quote currency"
+                },
+                {
+                  "disabled": false,
+                  "key": "range",
+                  "value": "<string>",
+                  "description": "(Required) Range of the data to return"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"method\": \"public/get_index_chart_data\",\n  \"params\": {\n    \"index_name\": \"btc_usd\",\n    \"range\": \"1m\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0ccd814a-8477-4dbb-95b9-159b694816c8",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "get_index_chart_data"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "index_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "range",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"method\": \"public/get_index_chart_data\",\n  \"params\": {\n    \"index_name\": \"btc_usd\",\n    \"range\": \"1m\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"result\": [\n    [\n      1573228800000,\n      8751.7138636\n    ],\n    [\n      1573232400000,\n      8751.7138636\n    ],\n    [\n      1573236000000,\n      8751.7138636\n    ],\n    [\n      1573239600000,\n      8751.7138636\n    ],\n    [\n      1573243200000,\n      8751.7138636\n    ]\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2dbd3573-4582-4f19-a4c1-ac3bf6e4e040",
+          "name": "Retrieves 5-minute historical mark price data for an instrument. Mark prices are used for margin calculations and position valuations.\n\n**Note:** Currently, mark price history is available only for a subset of options that participate in volatility index calculations. All other instruments, including futures and perpetuals, will return an empty list.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_mark_price_history)\n\n",
+          "request": {
+            "name": "Retrieves 5-minute historical mark price data for an instrument. Mark prices are used for margin calculations and position valuations.\n\n**Note:** Currently, mark price history is available only for a subset of options that participate in volatility index calculations. All other instruments, including futures and perpetuals, will return an empty list.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_mark_price_history)\n\n",
+            "description": {
+              "content": "Retrieves 5-minute historical mark price data for an instrument. Mark prices are used for margin calculations and position valuations.\n\n**Note:** Currently, mark price history is available only for a subset of options that participate in volatility index calculations. All other instruments, including futures and perpetuals, will return an empty list.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_mark_price_history)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "get_mark_price_history"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "instrument_name",
+                  "value": "<string>",
+                  "description": "(Required) Instrument name"
+                },
+                {
+                  "disabled": false,
+                  "key": "start_timestamp",
+                  "value": "<integer>",
+                  "description": "(Required) The earliest timestamp to return result from (milliseconds since the UNIX epoch)"
+                },
+                {
+                  "disabled": false,
+                  "key": "end_timestamp",
+                  "value": "<integer>",
+                  "description": "(Required) The most recent timestamp to return result from (milliseconds since the UNIX epoch)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"method\": \"public/get_mark_price_history\",\n  \"params\": {\n    \"instrument_name\": \"BTC-25JUN21-50000-C\",\n    \"start_timestamp\": 1609376800000,\n    \"end_timestamp\": 1609376810000\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5a9658de-8187-458f-b1dc-7a89308da5d9",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "get_mark_price_history"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "instrument_name",
+                      "value": "BTC-PERPETUAL"
+                    },
+                    {
+                      "key": "start_timestamp",
+                      "value": "1536569522277"
+                    },
+                    {
+                      "key": "end_timestamp",
+                      "value": "1536569522277"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"method\": \"public/get_mark_price_history\",\n  \"params\": {\n    \"instrument_name\": \"BTC-25JUN21-50000-C\",\n    \"start_timestamp\": 1609376800000,\n    \"end_timestamp\": 1609376810000\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 25,\n  \"result\": [\n    [\n      1608142381229,\n      0.5165791606037885\n    ],\n    [\n      1608142380231,\n      0.5165737855432504\n    ],\n    [\n      1608142379227,\n      0.5165768236356326\n    ]\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "22c0842b-9981-4516-a458-32de56cf3adf",
+          "name": "Retrieves all available expiration timestamps for instruments. This method can be used to discover which expiration dates are available for trading, which is useful for finding instruments with specific expiration dates.\n\nResults can be filtered by settlement currency, instrument kind (future or option), and currency pair. The response includes expiration timestamps in milliseconds since the UNIX epoch.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_expirations)\n\n",
+          "request": {
+            "name": "Retrieves all available expiration timestamps for instruments. This method can be used to discover which expiration dates are available for trading, which is useful for finding instruments with specific expiration dates.\n\nResults can be filtered by settlement currency, instrument kind (future or option), and currency pair. The response includes expiration timestamps in milliseconds since the UNIX epoch.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_expirations)\n\n",
+            "description": {
+              "content": "Retrieves all available expiration timestamps for instruments. This method can be used to discover which expiration dates are available for trading, which is useful for finding instruments with specific expiration dates.\n\nResults can be filtered by settlement currency, instrument kind (future or option), and currency pair. The response includes expiration timestamps in milliseconds since the UNIX epoch.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_expirations)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "get_expirations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "currency",
+                  "value": "<string>",
+                  "description": "(Required) The currency symbol or `\"any\"` for all or '\"grouped\"' for all grouped by currency"
+                },
+                {
+                  "disabled": false,
+                  "key": "kind",
+                  "value": "<string>",
+                  "description": "(Required) Instrument kind, `\"future\"` or `\"option\"` or `\"any\"`"
+                },
+                {
+                  "disabled": false,
+                  "key": "currency_pair",
+                  "value": "<string>",
+                  "description": "The currency pair symbol"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"method\": \"public/get_expirations\",\n  \"params\": {\n    \"currency\": \"any\",\n    \"kind\": \"any\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "37b99c43-29da-4952-be76-fc4854c2daf0",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "get_expirations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "currency",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "kind",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "currency_pair",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"method\": \"public/get_expirations\",\n  \"params\": {\n    \"currency\": \"any\",\n    \"kind\": \"any\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"result\": {\n    \"future\": [\n      \"21SEP24\",\n      \"22SEP24\",\n      \"PERPETUAL\"\n    ],\n    \"option\": [\n      \"21SEP24\",\n      \"22SEP24\",\n      \"23SEP24\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5e301bd7-103c-4083-9287-20408edfe8fa",
+          "name": "Retrieves historical Annual Percentage Rate (APR) data for yield-generating tokens. APR represents the annualized return rate for holding these tokens on Deribit.\n\nThis method is only applicable to yield-generating tokens: `USDE`, `STETH`, `USDC`, and `BUILD`. Use the `limit` parameter to specify the number of days to retrieve (default 365, maximum 365), and `before` to retrieve APR history before a specific epoch day.\n\n**📖 Related Support Article:** [Yield reward-bearing coins](https://support.deribit.com/hc/en-us/articles/31424939199261-Yield-reward-bearing-coins)\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_apr_history)\n\n",
+          "request": {
+            "name": "Retrieves historical Annual Percentage Rate (APR) data for yield-generating tokens. APR represents the annualized return rate for holding these tokens on Deribit.\n\nThis method is only applicable to yield-generating tokens: `USDE`, `STETH`, `USDC`, and `BUILD`. Use the `limit` parameter to specify the number of days to retrieve (default 365, maximum 365), and `before` to retrieve APR history before a specific epoch day.\n\n**📖 Related Support Article:** [Yield reward-bearing coins](https://support.deribit.com/hc/en-us/articles/31424939199261-Yield-reward-bearing-coins)\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_apr_history)\n\n",
+            "description": {
+              "content": "Retrieves historical Annual Percentage Rate (APR) data for yield-generating tokens. APR represents the annualized return rate for holding these tokens on Deribit.\n\nThis method is only applicable to yield-generating tokens: `USDE`, `STETH`, `USDC`, and `BUILD`. Use the `limit` parameter to specify the number of days to retrieve (default 365, maximum 365), and `before` to retrieve APR history before a specific epoch day.\n\n**📖 Related Support Article:** [Yield reward-bearing coins](https://support.deribit.com/hc/en-us/articles/31424939199261-Yield-reward-bearing-coins)\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_apr_history)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "get_apr_history"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "currency",
+                  "value": "<string>",
+                  "description": "(Required) Currency for which to retrieve APR history"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Number of days to retrieve (default `365`, maximum `365`)"
+                },
+                {
+                  "disabled": false,
+                  "key": "before",
+                  "value": "<integer>",
+                  "description": "Used to receive APR history before given epoch day"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"method\": \"public/get_apr_history\",\n  \"params\": {\n    \"currency\": \"steth\",\n    \"limit\": 5\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "426d413e-1e30-4944-80b1-a6763b8c049c",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "get_apr_history"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "currency",
+                      "value": "steth"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "5"
+                    },
+                    {
+                      "key": "before",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"method\": \"public/get_apr_history\",\n  \"params\": {\n    \"currency\": \"steth\",\n    \"limit\": 5\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"result\": {\n    \"data\": [\n      {\n        \"day\": 20200,\n        \"apr\": 2.814\n      },\n      {\n        \"day\": 20199,\n        \"apr\": 2.749\n      },\n      {\n        \"day\": 20198,\n        \"apr\": 2.684\n      },\n      {\n        \"day\": 20197,\n        \"apr\": 2.667\n      },\n      {\n        \"day\": 20196,\n        \"apr\": 2.722\n      }\n    ],\n    \"continuation\": 20196\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "71506a4a-eaee-45c8-b014-30f7ffb50ec7",
+          "name": "Retrieves the latest trades that have occurred for a specific instrument. Returns trade details including price, amount, direction, timestamp, and trade ID.\n\nResults can be filtered by sequence number range or timestamp range. Use the `count` parameter to limit the number of trades returned, and `sorting` to control the order (ascending or descending by trade ID).\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_last_trades_by_instrument)\n\n",
+          "request": {
+            "name": "Retrieves the latest trades that have occurred for a specific instrument. Returns trade details including price, amount, direction, timestamp, and trade ID.\n\nResults can be filtered by sequence number range or timestamp range. Use the `count` parameter to limit the number of trades returned, and `sorting` to control the order (ascending or descending by trade ID).\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_last_trades_by_instrument)\n\n",
+            "description": {
+              "content": "Retrieves the latest trades that have occurred for a specific instrument. Returns trade details including price, amount, direction, timestamp, and trade ID.\n\nResults can be filtered by sequence number range or timestamp range. Use the `count` parameter to limit the number of trades returned, and `sorting` to control the order (ascending or descending by trade ID).\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_last_trades_by_instrument)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "get_last_trades_by_instrument"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "instrument_name",
+                  "value": "<string>",
+                  "description": "(Required) Instrument name"
+                },
+                {
+                  "disabled": false,
+                  "key": "start_seq",
+                  "value": "<integer>",
+                  "description": "The sequence number of the first trade to be returned"
+                },
+                {
+                  "disabled": false,
+                  "key": "end_seq",
+                  "value": "<integer>",
+                  "description": "The sequence number of the last trade to be returned"
+                },
+                {
+                  "disabled": false,
+                  "key": "start_timestamp",
+                  "value": "<integer>",
+                  "description": "The earliest timestamp to return result from (milliseconds since the UNIX epoch). When param is provided trades are returned from the earliest"
+                },
+                {
+                  "disabled": false,
+                  "key": "end_timestamp",
+                  "value": "<integer>",
+                  "description": "The most recent timestamp to return result from (milliseconds since the UNIX epoch). Only one of params: start_timestamp, end_timestamp is truly required"
+                },
+                {
+                  "disabled": false,
+                  "key": "count",
+                  "value": "<integer>",
+                  "description": "Number of requested items, default - `10`, maximum - `1000`"
+                },
+                {
+                  "disabled": false,
+                  "key": "sorting",
+                  "value": "<string>",
+                  "description": "Direction of results sorting (`default` value means no sorting, results will be returned in order in which they left the database)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 9267,\n  \"method\": \"public/get_last_trades_by_instrument\",\n  \"params\": {\n    \"instrument_name\": \"BTC-PERPETUAL\",\n    \"count\": 1\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "183da04d-77d3-40fa-b757-5a781f497cf2",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "get_last_trades_by_instrument"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "instrument_name",
+                      "value": "BTC-PERPETUAL"
+                    },
+                    {
+                      "key": "start_seq",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "end_seq",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "start_timestamp",
+                      "value": "1536569522277"
+                    },
+                    {
+                      "key": "end_timestamp",
+                      "value": "1536569522277"
+                    },
+                    {
+                      "key": "count",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "sorting",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 9267,\n  \"method\": \"public/get_last_trades_by_instrument\",\n  \"params\": {\n    \"instrument_name\": \"BTC-PERPETUAL\",\n    \"count\": 1\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1469,\n  \"result\": {\n    \"trades\": [\n      {\n        \"trade_seq\": 467,\n        \"trade_id\": \"415305279\",\n        \"timestamp\": 1770984454552,\n        \"tick_direction\": 2,\n        \"price\": 0.0525,\n        \"mark_price\": 0.05253883,\n        \"iv\": 45.91,\n        \"instrument_name\": \"BTC-24APR26-72000-C\",\n        \"index_price\": 66930.31,\n        \"direction\": \"buy\",\n        \"amount\": 3,\n        \"contracts\": 3\n      }\n    ],\n    \"has_more\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7a934e1e-d975-4c5d-a073-ad9c4b08781e",
+          "name": "Retrieves the latest trades that have occurred for a specific instrument within a specified time range. Returns trade details including price, amount, direction, timestamp, and trade ID.\n\nUse the `count` parameter to limit the number of trades returned, and `sorting` to control the order (ascending or descending by trade ID). This method is useful for analyzing trading activity over specific time periods.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_last_trades_by_instrument_and_time)\n\n",
+          "request": {
+            "name": "Retrieves the latest trades that have occurred for a specific instrument within a specified time range. Returns trade details including price, amount, direction, timestamp, and trade ID.\n\nUse the `count` parameter to limit the number of trades returned, and `sorting` to control the order (ascending or descending by trade ID). This method is useful for analyzing trading activity over specific time periods.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_last_trades_by_instrument_and_time)\n\n",
+            "description": {
+              "content": "Retrieves the latest trades that have occurred for a specific instrument within a specified time range. Returns trade details including price, amount, direction, timestamp, and trade ID.\n\nUse the `count` parameter to limit the number of trades returned, and `sorting` to control the order (ascending or descending by trade ID). This method is useful for analyzing trading activity over specific time periods.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_last_trades_by_instrument_and_time)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "get_last_trades_by_instrument_and_time"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "instrument_name",
+                  "value": "<string>",
+                  "description": "(Required) Instrument name"
+                },
+                {
+                  "disabled": false,
+                  "key": "start_timestamp",
+                  "value": "<integer>",
+                  "description": "(Required) The earliest timestamp to return result from (milliseconds since the UNIX epoch). When param is provided trades are returned from the earliest"
+                },
+                {
+                  "disabled": false,
+                  "key": "end_timestamp",
+                  "value": "<integer>",
+                  "description": "(Required) The most recent timestamp to return result from (milliseconds since the UNIX epoch). Only one of params: start_timestamp, end_timestamp is truly required"
+                },
+                {
+                  "disabled": false,
+                  "key": "count",
+                  "value": "<integer>",
+                  "description": "Number of requested items, default - `10`, maximum - `1000`"
+                },
+                {
+                  "disabled": false,
+                  "key": "sorting",
+                  "value": "<string>",
+                  "description": "Direction of results sorting (`default` value means no sorting, results will be returned in order in which they left the database)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 3983,\n  \"method\": \"public/get_last_trades_by_instrument_and_time\",\n  \"params\": {\n    \"instrument_name\": \"ETH-PERPETUAL\",\n    \"end_timestamp\": 1590480022768,\n    \"count\": 1\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5ab1922b-fd4f-4e27-bd28-8f89a035b84a",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "get_last_trades_by_instrument_and_time"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "instrument_name",
+                      "value": "BTC-PERPETUAL"
+                    },
+                    {
+                      "key": "start_timestamp",
+                      "value": "1536569522277"
+                    },
+                    {
+                      "key": "end_timestamp",
+                      "value": "1536569522277"
+                    },
+                    {
+                      "key": "count",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "sorting",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 3983,\n  \"method\": \"public/get_last_trades_by_instrument_and_time\",\n  \"params\": {\n    \"instrument_name\": \"ETH-PERPETUAL\",\n    \"end_timestamp\": 1590480022768,\n    \"count\": 1\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1469,\n  \"result\": {\n    \"trades\": [\n      {\n        \"trade_seq\": 467,\n        \"trade_id\": \"415305279\",\n        \"timestamp\": 1770984454552,\n        \"tick_direction\": 2,\n        \"price\": 0.0525,\n        \"mark_price\": 0.05253883,\n        \"iv\": 45.91,\n        \"instrument_name\": \"BTC-24APR26-72000-C\",\n        \"index_price\": 66930.31,\n        \"direction\": \"buy\",\n        \"amount\": 3,\n        \"contracts\": 3\n      }\n    ],\n    \"has_more\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b5b0a2b6-365f-4299-9a0a-0f78dff76072",
+          "name": "Retrieves the latest trades that have occurred for instruments in a specific currency. Returns trade details including price, amount, direction, timestamp, and trade ID for all instruments in the currency.\n\nResults can be filtered by instrument kind and trade ID range or timestamp range. Use the `count` parameter to limit the number of trades returned, and `sorting` to control the order (ascending or descending by trade ID).\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_last_trades_by_currency)\n\n",
+          "request": {
+            "name": "Retrieves the latest trades that have occurred for instruments in a specific currency. Returns trade details including price, amount, direction, timestamp, and trade ID for all instruments in the currency.\n\nResults can be filtered by instrument kind and trade ID range or timestamp range. Use the `count` parameter to limit the number of trades returned, and `sorting` to control the order (ascending or descending by trade ID).\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_last_trades_by_currency)\n\n",
+            "description": {
+              "content": "Retrieves the latest trades that have occurred for instruments in a specific currency. Returns trade details including price, amount, direction, timestamp, and trade ID for all instruments in the currency.\n\nResults can be filtered by instrument kind and trade ID range or timestamp range. Use the `count` parameter to limit the number of trades returned, and `sorting` to control the order (ascending or descending by trade ID).\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_last_trades_by_currency)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "get_last_trades_by_currency"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "currency",
+                  "value": "<string>",
+                  "description": "(Required) The currency symbol"
+                },
+                {
+                  "disabled": false,
+                  "key": "kind",
+                  "value": "<string>",
+                  "description": "Instrument kind, `\"combo\"` for any combo or `\"any\"` for all. If not provided instruments of all kinds are considered"
+                },
+                {
+                  "disabled": false,
+                  "key": "start_id",
+                  "value": "<string>",
+                  "description": "The ID of the first trade to be returned. Number for BTC trades, or hyphen name in ex. `\"ETH-15\"` # `\"ETH_USDC-16\"`"
+                },
+                {
+                  "disabled": false,
+                  "key": "end_id",
+                  "value": "<string>",
+                  "description": "The ID of the last trade to be returned. Number for BTC trades, or hyphen name in ex. `\"ETH-15\"` # `\"ETH_USDC-16\"`"
+                },
+                {
+                  "disabled": false,
+                  "key": "start_timestamp",
+                  "value": "<integer>",
+                  "description": "The earliest timestamp to return result from (milliseconds since the UNIX epoch). When param is provided trades are returned from the earliest"
+                },
+                {
+                  "disabled": false,
+                  "key": "end_timestamp",
+                  "value": "<integer>",
+                  "description": "The most recent timestamp to return result from (milliseconds since the UNIX epoch). Only one of params: start_timestamp, end_timestamp is truly required"
+                },
+                {
+                  "disabled": false,
+                  "key": "count",
+                  "value": "<integer>",
+                  "description": "Number of requested items, default - `10`, maximum - `1000`"
+                },
+                {
+                  "disabled": false,
+                  "key": "sorting",
+                  "value": "<string>",
+                  "description": "Direction of results sorting (`default` value means no sorting, results will be returned in order in which they left the database)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 9290,\n  \"method\": \"public/get_last_trades_by_currency\",\n  \"params\": {\n    \"currency\": \"BTC\",\n    \"count\": 3\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "cd32fd9f-e3d7-4b70-b0d1-624c38b3d2a6",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "get_last_trades_by_currency"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "currency",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "kind",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start_timestamp",
+                      "value": "1536569522277"
+                    },
+                    {
+                      "key": "end_timestamp",
+                      "value": "1536569522277"
+                    },
+                    {
+                      "key": "count",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "sorting",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 9290,\n  \"method\": \"public/get_last_trades_by_currency\",\n  \"params\": {\n    \"currency\": \"BTC\",\n    \"count\": 3\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1469,\n  \"result\": {\n    \"trades\": [\n      {\n        \"trade_seq\": 467,\n        \"trade_id\": \"415305279\",\n        \"timestamp\": 1770984454552,\n        \"tick_direction\": 2,\n        \"price\": 0.0525,\n        \"mark_price\": 0.05253883,\n        \"iv\": 45.91,\n        \"instrument_name\": \"BTC-24APR26-72000-C\",\n        \"index_price\": 66930.31,\n        \"direction\": \"buy\",\n        \"amount\": 3,\n        \"contracts\": 3\n      }\n    ],\n    \"has_more\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7729707d-8c2e-407e-a6e9-2af8db6f24c4",
+          "name": "Retrieves the latest trades that have occurred for instruments in a specific currency within a specified time range. Returns trade details including price, amount, direction, timestamp, and trade ID.\n\nResults can be filtered by instrument kind. Use the `count` parameter to limit the number of trades returned, and `sorting` to control the order (ascending or descending by trade ID).\n\n> **Note:** This endpoint only returns trades from the last **24 hours**. Requests with `start_timestamp` older than 24 hours will return an empty result without an error.\n\n**Scope:** `trade:read`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_last_trades_by_currency_and_time)\n\n",
+          "request": {
+            "name": "Retrieves the latest trades that have occurred for instruments in a specific currency within a specified time range. Returns trade details including price, amount, direction, timestamp, and trade ID.\n\nResults can be filtered by instrument kind. Use the `count` parameter to limit the number of trades returned, and `sorting` to control the order (ascending or descending by trade ID).\n\n> **Note:** This endpoint only returns trades from the last **24 hours**. Requests with `start_timestamp` older than 24 hours will return an empty result without an error.\n\n**Scope:** `trade:read`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_last_trades_by_currency_and_time)\n\n",
+            "description": {
+              "content": "Retrieves the latest trades that have occurred for instruments in a specific currency within a specified time range. Returns trade details including price, amount, direction, timestamp, and trade ID.\n\nResults can be filtered by instrument kind. Use the `count` parameter to limit the number of trades returned, and `sorting` to control the order (ascending or descending by trade ID).\n\n> **Note:** This endpoint only returns trades from the last **24 hours**. Requests with `start_timestamp` older than 24 hours will return an empty result without an error.\n\n**Scope:** `trade:read`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_last_trades_by_currency_and_time)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "get_last_trades_by_currency_and_time"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "currency",
+                  "value": "<string>",
+                  "description": "(Required) The currency symbol"
+                },
+                {
+                  "disabled": false,
+                  "key": "kind",
+                  "value": "<string>",
+                  "description": "Instrument kind, `\"combo\"` for any combo or `\"any\"` for all. If not provided instruments of all kinds are considered"
+                },
+                {
+                  "disabled": false,
+                  "key": "start_timestamp",
+                  "value": "<integer>",
+                  "description": "(Required) The earliest timestamp to return result from (milliseconds since the UNIX epoch). When param is provided trades are returned from the earliest"
+                },
+                {
+                  "disabled": false,
+                  "key": "end_timestamp",
+                  "value": "<integer>",
+                  "description": "(Required) The most recent timestamp to return result from (milliseconds since the UNIX epoch). Only one of params: start_timestamp, end_timestamp is truly required"
+                },
+                {
+                  "disabled": false,
+                  "key": "count",
+                  "value": "<integer>",
+                  "description": "Number of requested items, default - `10`, maximum - `1000`"
+                },
+                {
+                  "disabled": false,
+                  "key": "sorting",
+                  "value": "<string>",
+                  "description": "Direction of results sorting (`default` value means no sorting, results will be returned in order in which they left the database)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1469,\n  \"method\": \"public/get_last_trades_by_currency_and_time\",\n  \"params\": {\n    \"currency\": \"BTC\",\n    \"start_timestamp\": 1590470022768,\n    \"end_timestamp\": 1590480022768,\n    \"count\": 1\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a9c91bed-d54f-452c-b1e2-8e1c8eee37a3",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "get_last_trades_by_currency_and_time"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "currency",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "kind",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start_timestamp",
+                      "value": "1536569522277"
+                    },
+                    {
+                      "key": "end_timestamp",
+                      "value": "1536569522277"
+                    },
+                    {
+                      "key": "count",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "sorting",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1469,\n  \"method\": \"public/get_last_trades_by_currency_and_time\",\n  \"params\": {\n    \"currency\": \"BTC\",\n    \"start_timestamp\": 1590470022768,\n    \"end_timestamp\": 1590480022768,\n    \"count\": 1\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1469,\n  \"result\": {\n    \"trades\": [\n      {\n        \"trade_seq\": 467,\n        \"trade_id\": \"415305279\",\n        \"timestamp\": 1770984454552,\n        \"tick_direction\": 2,\n        \"price\": 0.0525,\n        \"mark_price\": 0.05253883,\n        \"iv\": 45.91,\n        \"instrument_name\": \"BTC-24APR26-72000-C\",\n        \"index_price\": 66930.31,\n        \"direction\": \"buy\",\n        \"amount\": 3,\n        \"contracts\": 3\n      }\n    ],\n    \"has_more\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "935e7c73-74a5-4fc4-8f92-fa378be60062",
+          "name": "Retrieves all cryptocurrencies supported by the Deribit API. Returns a list of available currencies with their codes and basic information.\n\nThis method takes no parameters and is useful for discovering which currencies are available for trading on the platform.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_currencies)\n\n",
+          "request": {
+            "name": "Retrieves all cryptocurrencies supported by the Deribit API. Returns a list of available currencies with their codes and basic information.\n\nThis method takes no parameters and is useful for discovering which currencies are available for trading on the platform.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_currencies)\n\n",
+            "description": {
+              "content": "Retrieves all cryptocurrencies supported by the Deribit API. Returns a list of available currencies with their codes and basic information.\n\nThis method takes no parameters and is useful for discovering which currencies are available for trading on the platform.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_currencies)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "get_currencies"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 7538,\n  \"method\": \"public/get_currencies\",\n  \"params\": {}\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2f638885-9a62-42a2-b31e-3bd9c08063fc",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "get_currencies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 7538,\n  \"method\": \"public/get_currencies\",\n  \"params\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 7538,\n  \"result\": [\n    {\n      \"coin_type\": \"ETHER\",\n      \"currency\": \"ETH\",\n      \"currency_long\": \"Ethereum\",\n      \"min_confirmations\": 1,\n      \"min_withdrawal_fee\": 0.0001,\n      \"withdrawal_fee\": 0.0006,\n      \"withdrawal_priorities\": [],\n      \"network_currency\": \"ETH\",\n      \"network_fee\": 0.0006,\n      \"decimals\": 6\n    },\n    {\n      \"coin_type\": \"BITCOIN\",\n      \"currency\": \"BTC\",\n      \"currency_long\": \"Bitcoin\",\n      \"min_confirmations\": 1,\n      \"min_withdrawal_fee\": 0.0001,\n      \"withdrawal_fee\": 0.0001,\n      \"withdrawal_priorities\": [\n        {\n          \"value\": 0.15,\n          \"name\": \"very_low\"\n        },\n        {\n          \"value\": 1.5,\n          \"name\": \"very_high\"\n        }\n      ],\n      \"network_currency\": \"BTC\",\n      \"network_fee\": 0.0001,\n      \"decimals\": 8\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2512821f-81b1-419c-943d-46cd3b82cbf9",
+          "name": "Retrieves funding rate chart data points for a PERPETUAL instrument within a given time period. The data is formatted for use in charting applications and includes funding rate values at regular intervals.\n\nUse the `length` parameter to specify the time period for which to retrieve chart data. This method is useful for visualizing funding rate trends over time.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_funding_chart_data)\n\n",
+          "request": {
+            "name": "Retrieves funding rate chart data points for a PERPETUAL instrument within a given time period. The data is formatted for use in charting applications and includes funding rate values at regular intervals.\n\nUse the `length` parameter to specify the time period for which to retrieve chart data. This method is useful for visualizing funding rate trends over time.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_funding_chart_data)\n\n",
+            "description": {
+              "content": "Retrieves funding rate chart data points for a PERPETUAL instrument within a given time period. The data is formatted for use in charting applications and includes funding rate values at regular intervals.\n\nUse the `length` parameter to specify the time period for which to retrieve chart data. This method is useful for visualizing funding rate trends over time.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_funding_chart_data)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "get_funding_chart_data"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "instrument_name",
+                  "value": "<string>",
+                  "description": "(Required) Instrument name"
+                },
+                {
+                  "disabled": false,
+                  "key": "length",
+                  "value": "<string>",
+                  "description": "(Required) Specifies time period. `8h` - 8 hours, `24h` - 24 hours, `1m` - 1 month"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f14122b5-5444-484e-a127-4516ed6199de",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "get_funding_chart_data"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "instrument_name",
+                      "value": "BTC-PERPETUAL"
+                    },
+                    {
+                      "key": "length",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"result\": {\n    \"current_interest\": 0.005000670552845,\n    \"data\": [\n      {\n        \"timestamp\": 1536569522277,\n        \"index_price\": 8247.27,\n        \"interest_8h\": 0.004999511380756577\n      },\n      {\n        \"timestamp\": 1536569522277,\n        \"index_price\": 8247.27,\n        \"interest_8h\": 0.004999511380756577\n      }\n    ],\n    \"interest_8h\": 0.0040080896931\n  },\n  \"id\": 2721\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "429184c2-8cdd-4f73-b523-64f09da707a9",
+          "name": "Retrieves publicly available market data formatted for generating TradingView-compatible candle charts. The data includes open, high, low, close (OHLC) prices and volume for specified time intervals.\n\nUse the `chart_resolution` parameter to specify the candle interval (e.g., 1m, 5m, 1h, 1d). This method provides the standard format used by TradingView and other charting platforms.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_tradingview_chart_data)\n\n",
+          "request": {
+            "name": "Retrieves publicly available market data formatted for generating TradingView-compatible candle charts. The data includes open, high, low, close (OHLC) prices and volume for specified time intervals.\n\nUse the `chart_resolution` parameter to specify the candle interval (e.g., 1m, 5m, 1h, 1d). This method provides the standard format used by TradingView and other charting platforms.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_tradingview_chart_data)\n\n",
+            "description": {
+              "content": "Retrieves publicly available market data formatted for generating TradingView-compatible candle charts. The data includes open, high, low, close (OHLC) prices and volume for specified time intervals.\n\nUse the `chart_resolution` parameter to specify the candle interval (e.g., 1m, 5m, 1h, 1d). This method provides the standard format used by TradingView and other charting platforms.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_tradingview_chart_data)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "get_tradingview_chart_data"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "instrument_name",
+                  "value": "<string>",
+                  "description": "(Required) Instrument name"
+                },
+                {
+                  "disabled": false,
+                  "key": "start_timestamp",
+                  "value": "<integer>",
+                  "description": "(Required) The earliest timestamp to return result from (milliseconds since the UNIX epoch)"
+                },
+                {
+                  "disabled": false,
+                  "key": "end_timestamp",
+                  "value": "<integer>",
+                  "description": "(Required) The most recent timestamp to return result from (milliseconds since the UNIX epoch)"
+                },
+                {
+                  "disabled": false,
+                  "key": "resolution",
+                  "value": "<string>",
+                  "description": "(Required) Chart bars resolution given in full minutes or keyword `1D` (only some specific resolutions are supported)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 833,\n  \"method\": \"public/get_tradingview_chart_data\",\n  \"params\": {\n    \"instrument_name\": \"BTC-5APR19\",\n    \"start_timestamp\": 1554373800000,\n    \"end_timestamp\": 1554376800000,\n    \"resolution\": \"30\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "289d087f-6417-4152-8d15-e2e70190c20f",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "get_tradingview_chart_data"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "instrument_name",
+                      "value": "BTC-PERPETUAL"
+                    },
+                    {
+                      "key": "start_timestamp",
+                      "value": "1536569522277"
+                    },
+                    {
+                      "key": "end_timestamp",
+                      "value": "1536569522277"
+                    },
+                    {
+                      "key": "resolution",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 833,\n  \"method\": \"public/get_tradingview_chart_data\",\n  \"params\": {\n    \"instrument_name\": \"BTC-5APR19\",\n    \"start_timestamp\": 1554373800000,\n    \"end_timestamp\": 1554376800000,\n    \"resolution\": \"30\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 833,\n  \"result\": {\n    \"volume\": [\n      19.007942601,\n      20.095877981\n    ],\n    \"cost\": [\n      19000,\n      23400\n    ],\n    \"ticks\": [\n      1554373800000,\n      1554375600000\n    ],\n    \"status\": \"ok\",\n    \"open\": [\n      4963.42,\n      4986.29\n    ],\n    \"low\": [\n      4728.94,\n      4726.6\n    ],\n    \"high\": [\n      5185.45,\n      5250.87\n    ],\n    \"close\": [\n      5052.95,\n      5013.59\n    ]\n  },\n  \"usIn\": 1554381680742493,\n  \"usOut\": 1554381680742698,\n  \"usDiff\": 205,\n  \"testnet\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "92358ed5-48be-4dec-9d96-ce20769437f4",
+          "name": "Retrieves volatility index (VIX) chart data formatted as candles. Volatility indexes measure market expectations of future volatility and are useful for risk assessment and trading strategies.\n\nUse the `vix_resolution` parameter to specify the candle interval. The data shows historical volatility index values over time and is formatted for use in charting applications.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_volatility_index_data)\n\n",
+          "request": {
+            "name": "Retrieves volatility index (VIX) chart data formatted as candles. Volatility indexes measure market expectations of future volatility and are useful for risk assessment and trading strategies.\n\nUse the `vix_resolution` parameter to specify the candle interval. The data shows historical volatility index values over time and is formatted for use in charting applications.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_volatility_index_data)\n\n",
+            "description": {
+              "content": "Retrieves volatility index (VIX) chart data formatted as candles. Volatility indexes measure market expectations of future volatility and are useful for risk assessment and trading strategies.\n\nUse the `vix_resolution` parameter to specify the candle interval. The data shows historical volatility index values over time and is formatted for use in charting applications.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_volatility_index_data)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "get_volatility_index_data"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "currency",
+                  "value": "<string>",
+                  "description": "(Required) The currency symbol"
+                },
+                {
+                  "disabled": false,
+                  "key": "start_timestamp",
+                  "value": "<integer>",
+                  "description": "(Required) The earliest timestamp to return result from (milliseconds since the UNIX epoch)"
+                },
+                {
+                  "disabled": false,
+                  "key": "end_timestamp",
+                  "value": "<integer>",
+                  "description": "(Required) The most recent timestamp to return result from (milliseconds since the UNIX epoch)"
+                },
+                {
+                  "disabled": false,
+                  "key": "resolution",
+                  "value": "<string>",
+                  "description": "(Required) Time resolution given in full seconds or keyword `1D` (only some specific resolutions are supported)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 833,\n  \"method\": \"public/get_volatility_index_data\",\n  \"params\": {\n    \"currency\": \"BTC\",\n    \"start_timestamp\": 1599373800000,\n    \"end_timestamp\": 1599376800000,\n    \"resolution\": \"60\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "981b2fc8-1af3-40d3-bdd2-5eff2a3fb716",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "get_volatility_index_data"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "currency",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start_timestamp",
+                      "value": "1536569522277"
+                    },
+                    {
+                      "key": "end_timestamp",
+                      "value": "1536569522277"
+                    },
+                    {
+                      "key": "resolution",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 833,\n  \"method\": \"public/get_volatility_index_data\",\n  \"params\": {\n    \"currency\": \"BTC\",\n    \"start_timestamp\": 1599373800000,\n    \"end_timestamp\": 1599376800000,\n    \"resolution\": \"60\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 5,\n  \"result\": {\n    \"data\": [\n      [\n        1598019300000,\n        0.210084879,\n        0.212860821,\n        0.210084879,\n        0.212860821\n      ],\n      [\n        1598019360000,\n        0.212869011,\n        0.212987527,\n        0.212869011,\n        0.212987527\n      ],\n      [\n        1598019420000,\n        0.212987723,\n        0.212992597,\n        0.212987723,\n        0.212992597\n      ]\n    ],\n    \"continuation\": null\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d51a30fb-fb80-4c50-ab73-0a4b426a54d7",
+          "name": "Retrieves the ticker (24-hour statistics) for a specific instrument. The ticker includes the last trade price, best bid/ask prices, 24-hour high/low, 24-hour volume, open interest, mark price, and other market statistics.\n\nThis is a lightweight method for getting current market data for a single instrument. For real-time updates, consider using WebSocket subscriptions to ticker channels.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fticker)\n\n",
+          "request": {
+            "name": "Retrieves the ticker (24-hour statistics) for a specific instrument. The ticker includes the last trade price, best bid/ask prices, 24-hour high/low, 24-hour volume, open interest, mark price, and other market statistics.\n\nThis is a lightweight method for getting current market data for a single instrument. For real-time updates, consider using WebSocket subscriptions to ticker channels.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fticker)\n\n",
+            "description": {
+              "content": "Retrieves the ticker (24-hour statistics) for a specific instrument. The ticker includes the last trade price, best bid/ask prices, 24-hour high/low, 24-hour volume, open interest, mark price, and other market statistics.\n\nThis is a lightweight method for getting current market data for a single instrument. For real-time updates, consider using WebSocket subscriptions to ticker channels.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fticker)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "ticker"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "instrument_name",
+                  "value": "<string>",
+                  "description": "(Required) Instrument name"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 8106,\n  \"method\": \"public/ticker\",\n  \"params\": {\n    \"instrument_name\": \"BTC-PERPETUAL\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ffa6f064-d9c2-4b76-8b75-a6aa6106db9f",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "ticker"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "instrument_name",
+                      "value": "BTC-PERPETUAL"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 8106,\n  \"method\": \"public/ticker\",\n  \"params\": {\n    \"instrument_name\": \"BTC-PERPETUAL\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 8106,\n  \"result\": {\n    \"best_ask_amount\": 53040,\n    \"best_ask_price\": 36290,\n    \"best_bid_amount\": 4600,\n    \"best_bid_price\": 36289.5,\n    \"current_funding\": 0,\n    \"estimated_delivery_price\": 36297.02,\n    \"funding_8h\": 0.00002203,\n    \"index_price\": 36297.02,\n    \"instrument_name\": \"BTC-PERPETUAL\",\n    \"interest_value\": 1.7362511643080387,\n    \"last_price\": 36289.5,\n    \"mark_price\": 36288.31,\n    \"max_price\": 36833.4,\n    \"min_price\": 35744.73,\n    \"open_interest\": 502231260,\n    \"settlement_price\": 36169.49,\n    \"state\": \"open\",\n    \"stats\": {\n      \"high\": 36824.5,\n      \"low\": 35213.5,\n      \"price_change\": 0.2362,\n      \"volume\": 7831.26548117,\n      \"volume_usd\": 282615600\n    },\n    \"timestamp\": 1623059681955\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5a6c8878-bbd6-4cf9-87dd-94cb02c63a66",
+          "name": "Retrieves historical delivery prices for a given index. Delivery prices are the settlement prices used when futures or options contracts expire and are settled.\n\nResults can be paginated using the `offset` and `count` parameters. This method is useful for analyzing historical settlement prices and understanding how contracts have been settled over time.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_delivery_prices)\n\n",
+          "request": {
+            "name": "Retrieves historical delivery prices for a given index. Delivery prices are the settlement prices used when futures or options contracts expire and are settled.\n\nResults can be paginated using the `offset` and `count` parameters. This method is useful for analyzing historical settlement prices and understanding how contracts have been settled over time.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_delivery_prices)\n\n",
+            "description": {
+              "content": "Retrieves historical delivery prices for a given index. Delivery prices are the settlement prices used when futures or options contracts expire and are settled.\n\nResults can be paginated using the `offset` and `count` parameters. This method is useful for analyzing historical settlement prices and understanding how contracts have been settled over time.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_delivery_prices)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "get_delivery_prices"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "index_name",
+                  "value": "<string>",
+                  "description": "(Required) Index identifier, matches (base) cryptocurrency with quote currency"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The offset for pagination, default - `0`"
+                },
+                {
+                  "disabled": false,
+                  "key": "count",
+                  "value": "<integer>",
+                  "description": "Number of requested items, default - `10`, maximum - `1000`"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 3601,\n  \"method\": \"public/get_delivery_prices\",\n  \"params\": {\n    \"index_name\": \"btc_usd\",\n    \"offset\": 0,\n    \"count\": 5\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "80f46684-9d5b-47cc-9d85-32e5461a06a5",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "get_delivery_prices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "index_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "10"
+                    },
+                    {
+                      "key": "count",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 3601,\n  \"method\": \"public/get_delivery_prices\",\n  \"params\": {\n    \"index_name\": \"btc_usd\",\n    \"offset\": 0,\n    \"count\": 5\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 3601,\n  \"result\": {\n    \"data\": [\n      {\n        \"date\": \"2020-01-02\",\n        \"delivery_price\": 7131.214606410254\n      },\n      {\n        \"date\": \"2019-12-21\",\n        \"delivery_price\": 7150.943217777777\n      },\n      {\n        \"date\": \"2019-12-20\",\n        \"delivery_price\": 7175.988445532345\n      },\n      {\n        \"date\": \"2019-12-19\",\n        \"delivery_price\": 7189.540776143791\n      },\n      {\n        \"date\": \"2019-12-18\",\n        \"delivery_price\": 6698.353743857118\n      }\n    ],\n    \"records_total\": 58\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "52ef1590-ae64-42d4-b566-ed42258bc4e9",
+          "name": "List Instruments",
+          "request": {
+            "name": "List Instruments",
+            "description": {
+              "content": "Returns the list of tradeable instruments, optionally filtered by base currency, instrument kind, and expiration status. This endpoint is public — no authentication is required.\n\nFilter semantics:\n- `currency` filters by the **base** currency of the instrument's currency pair (case-insensitive match).\n- `kind` filters by instrument type (case-insensitive match against the `kind` value enum).\n- `expired = true` returns only instruments whose `expiration_timestamp` is in the past; `expired = false` returns only non-expired instruments. Omit the parameter to get both.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "public",
+                "get_instruments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "currency",
+                  "value": "<string>",
+                  "description": "Filter by the base currency of the instrument's currency pair (e.g. `BTC`, `ETH`, `AVAX`). Case-insensitive."
+                },
+                {
+                  "disabled": false,
+                  "key": "kind",
+                  "value": "<string>",
+                  "description": "Filter by instrument kind. Case-insensitive."
+                },
+                {
+                  "disabled": false,
+                  "key": "expired",
+                  "value": "<boolean>",
+                  "description": "When `true`, return only expired instruments. When `false`, return only currently-active (non-expired) instruments. Omit to return both."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2b697921-a085-4ccc-bf78-3c6ed9e76b90",
+              "name": "List of instruments matching the supplied filters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "public",
+                    "get_instruments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "currency",
+                      "value": "BTC"
+                    },
+                    {
+                      "key": "kind",
+                      "value": "perp_future"
+                    },
+                    {
+                      "key": "expired",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"result\": [\n    {\n      \"instrument_id\": 124942,\n      \"instrument_name\": \"ETH-PERPETUAL\",\n      \"kind\": \"perp_future\",\n      \"product_group\": \"ETH\",\n      \"base_currency\": \"ETH\",\n      \"quote_currency\": \"USDC\",\n      \"settlement_currency\": \"USDC\",\n      \"tick_size\": 0.01,\n      \"is_active\": true,\n      \"creation_timestamp\": 1747500000000\n    },\n    {\n      \"instrument_id\": 200001,\n      \"instrument_name\": \"BTC-30MAY26-70000-C\",\n      \"kind\": \"option\",\n      \"product_group\": \"BTC\",\n      \"base_currency\": \"BTC\",\n      \"quote_currency\": \"USDC\",\n      \"settlement_currency\": \"USDC\",\n      \"tick_size\": 0.5,\n      \"strike\": 70000,\n      \"option_type\": \"call\",\n      \"is_active\": true,\n      \"expiration_timestamp\": 1779148800000,\n      \"creation_timestamp\": 1748400000000\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ee207e74-4930-48e5-942f-941fd6c95a21",
+              "name": "Internal server error while building the instrument list.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "public",
+                    "get_instruments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "currency",
+                      "value": "BTC"
+                    },
+                    {
+                      "key": "kind",
+                      "value": "perp_future"
+                    },
+                    {
+                      "key": "expired",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": 1686,\n    \"message\": \"string\",\n    \"data\": {}\n  },\n  \"id\": 6245\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://test.deribit.com/api/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "ada80930-3ccb-42e5-b9aa-9cb0b10345d4",
+    "name": "Deribit Account Management Market Data API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

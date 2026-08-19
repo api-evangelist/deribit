@@ -1,0 +1,545 @@
+{
+  "item": [
+    {
+      "id": "a5c8ea0e-14f1-4f3f-9223-fd1de3fc2e29",
+      "name": "Session Management",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "73f46deb-09a9-4bf5-89d1-122ddfd4b0e9",
+          "name": "Signals the WebSocket connection to send and request heartbeats. Heartbeats can be used to detect stale connections.\n\nWhen heartbeats have been set up, the API server will send `heartbeat` messages and `test_request` messages. Your software should respond to `test_request` messages by sending a `/api/v2/public/test` request. If your software fails to do so, the API server will immediately close the connection. If your account is configured to cancel on disconnect, any orders opened over the connection will be cancelled.\n\n**WebSocket Only:** This method is designed exclusively for WebSocket connections. Attempting to use it via REST/HTTP will result in an error response.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fset_heartbeat)\n\n",
+          "request": {
+            "name": "Signals the WebSocket connection to send and request heartbeats. Heartbeats can be used to detect stale connections.\n\nWhen heartbeats have been set up, the API server will send `heartbeat` messages and `test_request` messages. Your software should respond to `test_request` messages by sending a `/api/v2/public/test` request. If your software fails to do so, the API server will immediately close the connection. If your account is configured to cancel on disconnect, any orders opened over the connection will be cancelled.\n\n**WebSocket Only:** This method is designed exclusively for WebSocket connections. Attempting to use it via REST/HTTP will result in an error response.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fset_heartbeat)\n\n",
+            "description": {
+              "content": "Signals the WebSocket connection to send and request heartbeats. Heartbeats can be used to detect stale connections.\n\nWhen heartbeats have been set up, the API server will send `heartbeat` messages and `test_request` messages. Your software should respond to `test_request` messages by sending a `/api/v2/public/test` request. If your software fails to do so, the API server will immediately close the connection. If your account is configured to cancel on disconnect, any orders opened over the connection will be cancelled.\n\n**WebSocket Only:** This method is designed exclusively for WebSocket connections. Attempting to use it via REST/HTTP will result in an error response.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fset_heartbeat)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "set_heartbeat"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "interval",
+                  "value": "<number>",
+                  "description": "(Required) The heartbeat interval in seconds, but not less than 10"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 9098,\n  \"method\": \"public/set_heartbeat\",\n  \"params\": {\n    \"interval\": 30\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2b2362b5-b750-4499-8b07-b6cae07bae17",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "set_heartbeat"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "interval",
+                      "value": "30"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 9098,\n  \"method\": \"public/set_heartbeat\",\n  \"params\": {\n    \"interval\": 30\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1569,\n  \"result\": \"ok\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "80225f92-29bb-4ca6-81c0-972f8a741d1a",
+          "name": "Stop sending heartbeat messages. This method takes no parameters.\n\n**WebSocket Only:** This method is designed exclusively for WebSocket connections. Attempting to use it via REST/HTTP will result in an error response.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fdisable_heartbeat)\n\n",
+          "request": {
+            "name": "Stop sending heartbeat messages. This method takes no parameters.\n\n**WebSocket Only:** This method is designed exclusively for WebSocket connections. Attempting to use it via REST/HTTP will result in an error response.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fdisable_heartbeat)\n\n",
+            "description": {
+              "content": "Stop sending heartbeat messages. This method takes no parameters.\n\n**WebSocket Only:** This method is designed exclusively for WebSocket connections. Attempting to use it via REST/HTTP will result in an error response.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fdisable_heartbeat)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "disable_heartbeat"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 3562,\n  \"method\": \"public/disable_heartbeat\",\n  \"params\": {}\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "95bc0fe4-3e2e-4b77-a2b4-465f382c99e8",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "disable_heartbeat"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 3562,\n  \"method\": \"public/disable_heartbeat\",\n  \"params\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1569,\n  \"result\": \"ok\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7ddc79c7-1eb6-4f36-95d3-45a887e4ee2d",
+          "name": "Enable Cancel On Disconnect for the connection. After enabling, all orders created via this connection will be automatically cancelled when the connection is closed.\n\nCancel is triggered in the following cases: when the TCP connection is properly terminated, when the connection is closed due to 10 minutes of inactivity, or when a heartbeat detects a disconnection. To reduce the inactivity timeout, consider using [public/set_heartbeat](https://docs.deribit.com/api-reference/session-management/public-set_heartbeat).\n\n**Note:** If the connection is gracefully closed using [private/logout](https://docs.deribit.com/api-reference/authentication/private-logout), cancel-on-disconnect will **not** be triggered.\n\n**Notice:** Cancel-on-Disconnect does not affect orders created by other connections - they will remain active! When change is applied on the `account` scope, then every newly opened connection will start with **active** Cancel on Disconnect.\n\n**WebSocket Only:** This method is designed exclusively for WebSocket connections. Attempting to use it via REST/HTTP will result in an error response.\n\n**Scope:** `account:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fenable_cancel_on_disconnect)\n\n",
+          "request": {
+            "name": "Enable Cancel On Disconnect for the connection. After enabling, all orders created via this connection will be automatically cancelled when the connection is closed.\n\nCancel is triggered in the following cases: when the TCP connection is properly terminated, when the connection is closed due to 10 minutes of inactivity, or when a heartbeat detects a disconnection. To reduce the inactivity timeout, consider using [public/set_heartbeat](https://docs.deribit.com/api-reference/session-management/public-set_heartbeat).\n\n**Note:** If the connection is gracefully closed using [private/logout](https://docs.deribit.com/api-reference/authentication/private-logout), cancel-on-disconnect will **not** be triggered.\n\n**Notice:** Cancel-on-Disconnect does not affect orders created by other connections - they will remain active! When change is applied on the `account` scope, then every newly opened connection will start with **active** Cancel on Disconnect.\n\n**WebSocket Only:** This method is designed exclusively for WebSocket connections. Attempting to use it via REST/HTTP will result in an error response.\n\n**Scope:** `account:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fenable_cancel_on_disconnect)\n\n",
+            "description": {
+              "content": "Enable Cancel On Disconnect for the connection. After enabling, all orders created via this connection will be automatically cancelled when the connection is closed.\n\nCancel is triggered in the following cases: when the TCP connection is properly terminated, when the connection is closed due to 10 minutes of inactivity, or when a heartbeat detects a disconnection. To reduce the inactivity timeout, consider using [public/set_heartbeat](https://docs.deribit.com/api-reference/session-management/public-set_heartbeat).\n\n**Note:** If the connection is gracefully closed using [private/logout](https://docs.deribit.com/api-reference/authentication/private-logout), cancel-on-disconnect will **not** be triggered.\n\n**Notice:** Cancel-on-Disconnect does not affect orders created by other connections - they will remain active! When change is applied on the `account` scope, then every newly opened connection will start with **active** Cancel on Disconnect.\n\n**WebSocket Only:** This method is designed exclusively for WebSocket connections. Attempting to use it via REST/HTTP will result in an error response.\n\n**Scope:** `account:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fenable_cancel_on_disconnect)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "private",
+                "enable_cancel_on_disconnect"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "scope",
+                  "value": "<string>",
+                  "description": "Specifies if Cancel On Disconnect change should be applied/checked for the current connection or the account (default - `connection`)<br/><br/> **NOTICE:** Scope `connection` can be used only when working via Websocket."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 7859,\n  \"method\": \"private/enable_cancel_on_disconnect\",\n  \"params\": {\n    \"scope\": \"account\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2324bf2d-6a01-4b85-a99c-345ba45b41c6",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "private",
+                    "enable_cancel_on_disconnect"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "scope",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 7859,\n  \"method\": \"private/enable_cancel_on_disconnect\",\n  \"params\": {\n    \"scope\": \"account\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1569,\n  \"result\": \"ok\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "29cf242e-5aef-41f2-ad27-bfff5c8cbf08",
+          "name": "Disable Cancel On Disconnect for the connection.\n\nWhen change is applied for the account, then every newly opened connection will start with **inactive** Cancel on Disconnect.\n\n**WebSocket Only:** This method is designed exclusively for WebSocket connections. Attempting to use it via REST/HTTP will result in an error response.\n\n**Scope:** `account:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fdisable_cancel_on_disconnect)\n\n",
+          "request": {
+            "name": "Disable Cancel On Disconnect for the connection.\n\nWhen change is applied for the account, then every newly opened connection will start with **inactive** Cancel on Disconnect.\n\n**WebSocket Only:** This method is designed exclusively for WebSocket connections. Attempting to use it via REST/HTTP will result in an error response.\n\n**Scope:** `account:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fdisable_cancel_on_disconnect)\n\n",
+            "description": {
+              "content": "Disable Cancel On Disconnect for the connection.\n\nWhen change is applied for the account, then every newly opened connection will start with **inactive** Cancel on Disconnect.\n\n**WebSocket Only:** This method is designed exclusively for WebSocket connections. Attempting to use it via REST/HTTP will result in an error response.\n\n**Scope:** `account:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fdisable_cancel_on_disconnect)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "private",
+                "disable_cancel_on_disconnect"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "scope",
+                  "value": "<string>",
+                  "description": "Specifies if Cancel On Disconnect change should be applied/checked for the current connection or the account (default - `connection`)<br/><br/> **NOTICE:** Scope `connection` can be used only when working via Websocket."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1569,\n  \"method\": \"private/disable_cancel_on_disconnect\",\n  \"params\": {\n    \"scope\": \"account\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7d55e3d5-d1c3-4514-9c9e-8e7394bbd5dd",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "private",
+                    "disable_cancel_on_disconnect"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "scope",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1569,\n  \"method\": \"private/disable_cancel_on_disconnect\",\n  \"params\": {\n    \"scope\": \"account\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1569,\n  \"result\": \"ok\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4005992e-9e25-4e1a-9487-52d3b6a6a94a",
+          "name": "Read current Cancel On Disconnect configuration for the account.\n\n**Scope:** `account:read`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_cancel_on_disconnect)\n\n",
+          "request": {
+            "name": "Read current Cancel On Disconnect configuration for the account.\n\n**Scope:** `account:read`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_cancel_on_disconnect)\n\n",
+            "description": {
+              "content": "Read current Cancel On Disconnect configuration for the account.\n\n**Scope:** `account:read`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_cancel_on_disconnect)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "private",
+                "get_cancel_on_disconnect"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "scope",
+                  "value": "<string>",
+                  "description": "Specifies if Cancel On Disconnect change should be applied/checked for the current connection or the account (default - `connection`)<br/><br/> **NOTICE:** Scope `connection` can be used only when working via Websocket."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 220,\n  \"method\": \"private/get_cancel_on_disconnect\",\n  \"params\": {\n    \"scope\": \"account\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6d60f28a-9873-4acc-9642-762aa240db2d",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "private",
+                    "get_cancel_on_disconnect"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "scope",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 220,\n  \"method\": \"private/get_cancel_on_disconnect\",\n  \"params\": {\n    \"scope\": \"account\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 220,\n  \"result\": {\n    \"scope\": \"account\",\n    \"enabled\": false\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://test.deribit.com/api/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "2e064531-3430-48ca-a3e3-a89901f93f23",
+    "name": "Deribit Account Management Session Management API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

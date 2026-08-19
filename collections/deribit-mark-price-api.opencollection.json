@@ -1,0 +1,53 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Deribit Account Management Mark Price API",
+    "version": "2.1.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Mark Price",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GET /public/get_mark_price_history",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/public/get_mark_price_history",
+            "params": [
+              {
+                "name": "instrument_name",
+                "value": "",
+                "type": "query",
+                "description": "Instrument name"
+              },
+              {
+                "name": "start_timestamp",
+                "value": "",
+                "type": "query",
+                "description": "The earliest timestamp to return result from (milliseconds since the UNIX epoch)"
+              },
+              {
+                "name": "end_timestamp",
+                "value": "",
+                "type": "query",
+                "description": "The most recent timestamp to return result from (milliseconds since the UNIX epoch)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves 5-minute historical mark price data for an instrument. Mark prices are used for margin calculations and position valuations.\n\n**Note:** Currently, mark price history is available only for a subset of options that participate in volatility index calculations. All other instruments, including futures and perpetuals, will return an empty list.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_mark_price_history)\n\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

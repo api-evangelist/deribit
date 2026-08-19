@@ -1,0 +1,1803 @@
+{
+  "item": [
+    {
+      "id": "09e21cdb-fb07-4fc8-88be-fe64bb677c23",
+      "name": "Block RFQ",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8d23dfb3-704e-4012-aeb4-9dd8f978e61a",
+          "name": "Returns a list of Block RFQs that were either created by the user or assigned to them as a maker, sorted in descending order.\n\n`trades` and `mark_price` are only visible for the filled Block RFQ. When a `block_rfq_id` is specified, only that particular Block RFQ will be returned. If called by a `taker`, response will additionally include `makers` list and `label` if previously provided. If called by the `maker`, the `trades` will include the maker's alias, but only for trades in which this maker participated. Can be optionally filtered by currency.\n\nUse [private/get_block_rfq_quotes](https://docs.deribit.com/api-reference/block-rfq/private-get_block_rfq_quotes) to retrieve quotes for Block RFQs.\n\n**📖 Related Article:** [Deribit Block RFQ API walkthrough](https://docs.deribit.com/articles/block-rfq-api-walkthrough)\n\n**Scope:** `block_rfq:read`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_block_rfqs)\n\n",
+          "request": {
+            "name": "Returns a list of Block RFQs that were either created by the user or assigned to them as a maker, sorted in descending order.\n\n`trades` and `mark_price` are only visible for the filled Block RFQ. When a `block_rfq_id` is specified, only that particular Block RFQ will be returned. If called by a `taker`, response will additionally include `makers` list and `label` if previously provided. If called by the `maker`, the `trades` will include the maker's alias, but only for trades in which this maker participated. Can be optionally filtered by currency.\n\nUse [private/get_block_rfq_quotes](https://docs.deribit.com/api-reference/block-rfq/private-get_block_rfq_quotes) to retrieve quotes for Block RFQs.\n\n**📖 Related Article:** [Deribit Block RFQ API walkthrough](https://docs.deribit.com/articles/block-rfq-api-walkthrough)\n\n**Scope:** `block_rfq:read`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_block_rfqs)\n\n",
+            "description": {
+              "content": "Returns a list of Block RFQs that were either created by the user or assigned to them as a maker, sorted in descending order.\n\n`trades` and `mark_price` are only visible for the filled Block RFQ. When a `block_rfq_id` is specified, only that particular Block RFQ will be returned. If called by a `taker`, response will additionally include `makers` list and `label` if previously provided. If called by the `maker`, the `trades` will include the maker's alias, but only for trades in which this maker participated. Can be optionally filtered by currency.\n\nUse [private/get_block_rfq_quotes](https://docs.deribit.com/api-reference/block-rfq/private-get_block_rfq_quotes) to retrieve quotes for Block RFQs.\n\n**📖 Related Article:** [Deribit Block RFQ API walkthrough](https://docs.deribit.com/articles/block-rfq-api-walkthrough)\n\n**Scope:** `block_rfq:read`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_block_rfqs)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "private",
+                "get_block_rfqs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "count",
+                  "value": "<integer>",
+                  "description": "Count of Block RFQs returned, maximum - `1000`"
+                },
+                {
+                  "disabled": false,
+                  "key": "state",
+                  "value": "<string>",
+                  "description": "State of Block RFQ"
+                },
+                {
+                  "disabled": false,
+                  "key": "role",
+                  "value": "<string>",
+                  "description": "Role of the user in Block RFQ. When the `any` role is selected, the method returns all Block RFQs in which the user has participated, either as the `taker` or as a `maker`"
+                },
+                {
+                  "disabled": false,
+                  "key": "continuation",
+                  "value": "<integer>",
+                  "description": "The continuation parameter specifies the starting point for fetching historical Block RFQs. When provided, the endpoint returns Block RFQs, starting from the specified ID and continuing backward (e.g., if `continuation` is 50, results will include Block RFQs of ID 49, 48, etc.)"
+                },
+                {
+                  "disabled": false,
+                  "key": "block_rfq_id",
+                  "value": "<integer>",
+                  "description": "ID of the Block RFQ"
+                },
+                {
+                  "disabled": false,
+                  "key": "currency",
+                  "value": "<string>",
+                  "description": "The currency symbol"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"method\": \"private/get_block_rfqs\",\n  \"params\": {\n    \"count\": 20,\n    \"state\": \"open\",\n    \"role\": \"maker\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "bb6b9192-7ec1-47eb-8b7a-f1739d00b89a",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "private",
+                    "get_block_rfqs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "count",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "role",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "continuation",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "block_rfq_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"method\": \"private/get_block_rfqs\",\n  \"params\": {\n    \"count\": 20,\n    \"state\": \"open\",\n    \"role\": \"maker\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"result\": {\n    \"continuation\": null,\n    \"block_rfqs\": [\n      {\n        \"state\": \"open\",\n        \"amount\": 40000,\n        \"role\": \"maker\",\n        \"combo_id\": \"BTC-15NOV24\",\n        \"legs\": [\n          {\n            \"direction\": \"sell\",\n            \"instrument_name\": \"BTC-15NOV24\",\n            \"ratio\": 1\n          }\n        ],\n        \"creation_timestamp\": 1731062457741,\n        \"block_rfq_id\": 508,\n        \"expiration_timestamp\": 1731062757741,\n        \"hedge\": {\n          \"amount\": 10,\n          \"direction\": \"buy\",\n          \"price\": 70000,\n          \"instrument_name\": \"BTC-PERPETUAL\"\n        },\n        \"taker_rating\": \"1-2\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "23565d26-546f-463e-9de5-cd7b6ccb6857",
+          "name": "**Taker method**\n\nCreates a new Block RFQ. Use [private/get_block_rfqs](https://docs.deribit.com/api-reference/block-rfq/private-get_block_rfqs) to retrieve Block RFQ information.\n\n**Block RFQ pre-allocation:** The taker can split the total amount between different (sub)accounts using the `trade_allocations` parameter. The taker can also allocate to himself. Each allocation must specify either `user_id` (for direct allocation) or `client_info` object (for broker allocation), and `amount`.\n\n**📖 Related Article:** [Deribit Block RFQ API walkthrough](https://docs.deribit.com/articles/block-rfq-api-walkthrough)\n\n**Scope:** `block_rfq:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fcreate_block_rfq)\n\n",
+          "request": {
+            "name": "**Taker method**\n\nCreates a new Block RFQ. Use [private/get_block_rfqs](https://docs.deribit.com/api-reference/block-rfq/private-get_block_rfqs) to retrieve Block RFQ information.\n\n**Block RFQ pre-allocation:** The taker can split the total amount between different (sub)accounts using the `trade_allocations` parameter. The taker can also allocate to himself. Each allocation must specify either `user_id` (for direct allocation) or `client_info` object (for broker allocation), and `amount`.\n\n**📖 Related Article:** [Deribit Block RFQ API walkthrough](https://docs.deribit.com/articles/block-rfq-api-walkthrough)\n\n**Scope:** `block_rfq:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fcreate_block_rfq)\n\n",
+            "description": {
+              "content": "**Taker method**\n\nCreates a new Block RFQ. Use [private/get_block_rfqs](https://docs.deribit.com/api-reference/block-rfq/private-get_block_rfqs) to retrieve Block RFQ information.\n\n**Block RFQ pre-allocation:** The taker can split the total amount between different (sub)accounts using the `trade_allocations` parameter. The taker can also allocate to himself. Each allocation must specify either `user_id` (for direct allocation) or `client_info` object (for broker allocation), and `amount`.\n\n**📖 Related Article:** [Deribit Block RFQ API walkthrough](https://docs.deribit.com/articles/block-rfq-api-walkthrough)\n\n**Scope:** `block_rfq:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fcreate_block_rfq)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "private",
+                "create_block_rfq"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "legs",
+                  "value": "{\"instrument_name\":\"<string>\",\"amount\":\"<number>\",\"direction\":\"<string>\"}",
+                  "description": "(Required) List of legs used to create Block RFQ"
+                },
+                {
+                  "disabled": false,
+                  "key": "legs",
+                  "value": "{\"instrument_name\":\"<string>\",\"amount\":\"<number>\",\"direction\":\"<string>\"}",
+                  "description": "(Required) List of legs used to create Block RFQ"
+                },
+                {
+                  "disabled": false,
+                  "key": "trade_allocations",
+                  "value": "{\"user_id\":\"<integer>\",\"client_info\":{\"client_id\":\"<integer>\",\"client_link_id\":\"<integer>\"},\"amount\":\"<number>\"}",
+                  "description": "List of allocations for Block RFQ pre-allocation. Allows to split amount between different (sub)accounts or broker clients. Each allocation must specify either `user_id` (for direct allocation) or `client_info` object (for broker allocation), and amount."
+                },
+                {
+                  "disabled": false,
+                  "key": "trade_allocations",
+                  "value": "{\"user_id\":\"<integer>\",\"client_info\":{\"client_id\":\"<integer>\",\"client_link_id\":\"<integer>\"},\"amount\":\"<number>\"}",
+                  "description": "List of allocations for Block RFQ pre-allocation. Allows to split amount between different (sub)accounts or broker clients. Each allocation must specify either `user_id` (for direct allocation) or `client_info` object (for broker allocation), and amount."
+                },
+                {
+                  "disabled": false,
+                  "key": "hedge",
+                  "value": "<string>",
+                  "description": "Hedge leg of the Block RFQ. There is only one hedge leg allowed per Block RFQ"
+                },
+                {
+                  "disabled": false,
+                  "key": "label",
+                  "value": "<string>",
+                  "description": "User defined label for the Block RFQ (maximum 64 characters)"
+                },
+                {
+                  "disabled": false,
+                  "key": "makers",
+                  "value": "<string>",
+                  "description": "List of targeted Block RFQ makers. Only those makers will be notified about created Block RFQ. If the list is empty, all available makers will be targeted."
+                },
+                {
+                  "disabled": false,
+                  "key": "makers",
+                  "value": "<string>",
+                  "description": "List of targeted Block RFQ makers. Only those makers will be notified about created Block RFQ. If the list is empty, all available makers will be targeted."
+                },
+                {
+                  "disabled": false,
+                  "key": "disclosed",
+                  "value": "<boolean>",
+                  "description": "Determines whether the RFQ is non-anonymous, revealing both taker and maker aliases. It can be set to `false` (anonymous mode) only when at least 5 makers are targeted. Default value is `true`."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"method\": \"private/create_block_rfq\",\n  \"params\": {\n    \"legs\": [\n      {\n        \"instrument_name\": \"BTC-15NOV24\",\n        \"amount\": 20000,\n        \"direction\": \"sell\"\n      }\n    ],\n    \"hedge\": {\n      \"amount\": 10,\n      \"direction\": \"buy\",\n      \"price\": 70000,\n      \"instrument_name\": \"BTC-PERPETUAL\"\n    },\n    \"label\": \"example\",\n    \"makers\": [\n      \"MAKER1\"\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "10de7261-6752-4431-b2f2-fbb5d7e57b95",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "private",
+                    "create_block_rfq"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "legs",
+                      "value": "[object Object]"
+                    },
+                    {
+                      "key": "legs",
+                      "value": "[object Object]"
+                    },
+                    {
+                      "key": "trade_allocations",
+                      "value": "[object Object]"
+                    },
+                    {
+                      "key": "trade_allocations",
+                      "value": "[object Object]"
+                    },
+                    {
+                      "key": "hedge",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "label",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "makers",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "makers",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "disclosed",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"method\": \"private/create_block_rfq\",\n  \"params\": {\n    \"legs\": [\n      {\n        \"instrument_name\": \"BTC-15NOV24\",\n        \"amount\": 20000,\n        \"direction\": \"sell\"\n      }\n    ],\n    \"hedge\": {\n      \"amount\": 10,\n      \"direction\": \"buy\",\n      \"price\": 70000,\n      \"instrument_name\": \"BTC-PERPETUAL\"\n    },\n    \"label\": \"example\",\n    \"makers\": [\n      \"MAKER1\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"result\": {\n    \"label\": \"example\",\n    \"state\": \"created\",\n    \"amount\": 20000,\n    \"role\": \"taker\",\n    \"bids\": [],\n    \"asks\": [],\n    \"combo_id\": \"BTC-15NOV24\",\n    \"legs\": [\n      {\n        \"direction\": \"sell\",\n        \"instrument_name\": \"BTC-15NOV24\",\n        \"ratio\": 1\n      }\n    ],\n    \"creation_timestamp\": 1731062187555,\n    \"block_rfq_id\": 507,\n    \"expiration_timestamp\": 1731062487555,\n    \"hedge\": {\n      \"amount\": 10,\n      \"direction\": \"buy\",\n      \"price\": 70000,\n      \"instrument_name\": \"BTC-PERPETUAL\"\n    },\n    \"makers\": [\n      \"MAKER1\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e644ee31-27b6-4159-a9ad-9322bc222072",
+          "name": "**Taker method**\n\nCancels a Block RFQ using the specified `block_rfq_id`.\n\nUse [private/get_block_rfqs](https://docs.deribit.com/api-reference/block-rfq/private-get_block_rfqs) to retrieve Block RFQ information, or [private/create_block_rfq](https://docs.deribit.com/api-reference/block-rfq/private-create_block_rfq) to create a new Block RFQ.\n\n**📖 Related Article:** [Deribit Block RFQ API walkthrough](https://docs.deribit.com/articles/block-rfq-api-walkthrough)\n\n**Scope:** `block_rfq:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fcancel_block_rfq)\n\n",
+          "request": {
+            "name": "**Taker method**\n\nCancels a Block RFQ using the specified `block_rfq_id`.\n\nUse [private/get_block_rfqs](https://docs.deribit.com/api-reference/block-rfq/private-get_block_rfqs) to retrieve Block RFQ information, or [private/create_block_rfq](https://docs.deribit.com/api-reference/block-rfq/private-create_block_rfq) to create a new Block RFQ.\n\n**📖 Related Article:** [Deribit Block RFQ API walkthrough](https://docs.deribit.com/articles/block-rfq-api-walkthrough)\n\n**Scope:** `block_rfq:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fcancel_block_rfq)\n\n",
+            "description": {
+              "content": "**Taker method**\n\nCancels a Block RFQ using the specified `block_rfq_id`.\n\nUse [private/get_block_rfqs](https://docs.deribit.com/api-reference/block-rfq/private-get_block_rfqs) to retrieve Block RFQ information, or [private/create_block_rfq](https://docs.deribit.com/api-reference/block-rfq/private-create_block_rfq) to create a new Block RFQ.\n\n**📖 Related Article:** [Deribit Block RFQ API walkthrough](https://docs.deribit.com/articles/block-rfq-api-walkthrough)\n\n**Scope:** `block_rfq:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fcancel_block_rfq)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "private",
+                "cancel_block_rfq"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "block_rfq_id",
+                  "value": "<integer>",
+                  "description": "(Required) ID of the Block RFQ"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"method\": \"private/cancel_block_rfq\",\n  \"params\": {\n    \"block_rfq_id\": 366\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f60f481e-ea27-4345-ba54-837508922b75",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "private",
+                    "cancel_block_rfq"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "block_rfq_id",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"method\": \"private/cancel_block_rfq\",\n  \"params\": {\n    \"block_rfq_id\": 366\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"result\": {\n    \"creation_timestamp\": 1729855159611,\n    \"block_rfq_id\": 366,\n    \"expiration_timestamp\": 1729855459611,\n    \"role\": \"taker\",\n    \"asks\": [],\n    \"bids\": [],\n    \"makers\": [],\n    \"amount\": 100000,\n    \"legs\": [\n      {\n        \"ratio\": 1,\n        \"instrument_name\": \"BTC-1NOV24\",\n        \"direction\": \"sell\"\n      },\n      {\n        \"ratio\": 1,\n        \"instrument_name\": \"BTC-PERPETUAL\",\n        \"direction\": \"buy\"\n      }\n    ],\n    \"combo_id\": \"BTC-FS-1NOV24_PERP\",\n    \"state\": \"cancelled\",\n    \"label\": \"example\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "095efd78-78da-47da-94f4-823444f32ced",
+          "name": "**Taker method**\n\nAllows Block RFQ taker to accept a quote by sending a single crossing price. The order can be either filled immediately (`fill_or_kill`) or remain active until cancelled (`good_til_cancelled`).\n\n**Note:** After Block RFQ creation, a grace period of 5 seconds begins, during which the taker cannot see quotes or trade the Block RFQ.\n\nUse [private/get_block_rfqs](https://docs.deribit.com/api-reference/block-rfq/private-get_block_rfqs) to retrieve Block RFQ information, or [private/cancel_block_rfq](https://docs.deribit.com/api-reference/block-rfq/private-cancel_block_rfq) to cancel a Block RFQ.\n\n**📖 Related Article:** [Deribit Block RFQ API walkthrough](https://docs.deribit.com/articles/block-rfq-api-walkthrough)\n\n**Scope:** `block_rfq:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Faccept_block_rfq)\n\n",
+          "request": {
+            "name": "**Taker method**\n\nAllows Block RFQ taker to accept a quote by sending a single crossing price. The order can be either filled immediately (`fill_or_kill`) or remain active until cancelled (`good_til_cancelled`).\n\n**Note:** After Block RFQ creation, a grace period of 5 seconds begins, during which the taker cannot see quotes or trade the Block RFQ.\n\nUse [private/get_block_rfqs](https://docs.deribit.com/api-reference/block-rfq/private-get_block_rfqs) to retrieve Block RFQ information, or [private/cancel_block_rfq](https://docs.deribit.com/api-reference/block-rfq/private-cancel_block_rfq) to cancel a Block RFQ.\n\n**📖 Related Article:** [Deribit Block RFQ API walkthrough](https://docs.deribit.com/articles/block-rfq-api-walkthrough)\n\n**Scope:** `block_rfq:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Faccept_block_rfq)\n\n",
+            "description": {
+              "content": "**Taker method**\n\nAllows Block RFQ taker to accept a quote by sending a single crossing price. The order can be either filled immediately (`fill_or_kill`) or remain active until cancelled (`good_til_cancelled`).\n\n**Note:** After Block RFQ creation, a grace period of 5 seconds begins, during which the taker cannot see quotes or trade the Block RFQ.\n\nUse [private/get_block_rfqs](https://docs.deribit.com/api-reference/block-rfq/private-get_block_rfqs) to retrieve Block RFQ information, or [private/cancel_block_rfq](https://docs.deribit.com/api-reference/block-rfq/private-cancel_block_rfq) to cancel a Block RFQ.\n\n**📖 Related Article:** [Deribit Block RFQ API walkthrough](https://docs.deribit.com/articles/block-rfq-api-walkthrough)\n\n**Scope:** `block_rfq:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Faccept_block_rfq)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "private",
+                "accept_block_rfq"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "block_rfq_id",
+                  "value": "<integer>",
+                  "description": "(Required) ID of the Block RFQ"
+                },
+                {
+                  "disabled": false,
+                  "key": "price",
+                  "value": "<number>",
+                  "description": "(Required) Maximum acceptable price for execution"
+                },
+                {
+                  "disabled": false,
+                  "key": "amount",
+                  "value": "<number>",
+                  "description": "(Required) This value multiplied by the ratio of a leg gives trade size on that leg."
+                },
+                {
+                  "disabled": false,
+                  "key": "direction",
+                  "value": "<string>",
+                  "description": "(Required) Direction of the trade from the taker perspective"
+                },
+                {
+                  "disabled": false,
+                  "key": "hedge",
+                  "value": "<string>",
+                  "description": "Hedge leg of the Block RFQ. There is only one hedge leg allowed per Block RFQ"
+                },
+                {
+                  "disabled": false,
+                  "key": "legs",
+                  "value": "{\"instrument_name\":\"<string>\",\"direction\":\"<string>\",\"ratio\":\"<integer>\"}",
+                  "description": "(Required) List of legs used to trade Block RFQ"
+                },
+                {
+                  "disabled": false,
+                  "key": "legs",
+                  "value": "{\"instrument_name\":\"<string>\",\"direction\":\"<string>\",\"ratio\":\"<integer>\"}",
+                  "description": "(Required) List of legs used to trade Block RFQ"
+                },
+                {
+                  "disabled": false,
+                  "key": "time_in_force",
+                  "value": "<string>",
+                  "description": "(Required) Specifies how long the order should remain active"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"method\": \"private/accept_block_rfq\",\n  \"params\": {\n    \"block_rfq_id\": 1,\n    \"legs\": [\n      {\n        \"instrument_name\": \"BTC-8NOV24-70000-C\",\n        \"ratio\": 1,\n        \"direction\": \"buy\"\n      },\n      {\n        \"instrument_name\": \"BTC-8NOV24-72000-C\",\n        \"ratio\": 1,\n        \"direction\": \"sell\"\n      }\n    ],\n    \"price\": 0.01,\n    \"direction\": \"buy\",\n    \"amount\": 100,\n    \"time_in_force\": \"fill_or_kill\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "dfe8477b-07c5-4734-915c-bfba058f56e4",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "private",
+                    "accept_block_rfq"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "block_rfq_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "price",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "amount",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "direction",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "hedge",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "legs",
+                      "value": "[object Object]"
+                    },
+                    {
+                      "key": "legs",
+                      "value": "[object Object]"
+                    },
+                    {
+                      "key": "time_in_force",
+                      "value": "fill_or_kill"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"method\": \"private/accept_block_rfq\",\n  \"params\": {\n    \"block_rfq_id\": 1,\n    \"legs\": [\n      {\n        \"instrument_name\": \"BTC-8NOV24-70000-C\",\n        \"ratio\": 1,\n        \"direction\": \"buy\"\n      },\n      {\n        \"instrument_name\": \"BTC-8NOV24-72000-C\",\n        \"ratio\": 1,\n        \"direction\": \"sell\"\n      }\n    ],\n    \"price\": 0.01,\n    \"direction\": \"buy\",\n    \"amount\": 100,\n    \"time_in_force\": \"fill_or_kill\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"result\": {\n    \"block_trades\": [\n      {\n        \"id\": \"BLOCK-423\",\n        \"timestamp\": 1730798381504,\n        \"trades\": [\n          {\n            \"timestamp\": 1730798381502,\n            \"state\": \"filled\",\n            \"fee\": 1.5e-7,\n            \"amount\": 100,\n            \"direction\": \"buy\",\n            \"price\": 69696.8,\n            \"index_price\": 70000,\n            \"profit_loss\": 0,\n            \"instrument_name\": \"BTC-8NOV24-70000-C\",\n            \"trade_seq\": 113,\n            \"mark_price\": 0.03,\n            \"order_id\": \"2899\",\n            \"matching_id\": null,\n            \"tick_direction\": 2,\n            \"combo_id\": \"BTC-CS-8NOV24-70000_72000\",\n            \"block_rfq_id\": 1,\n            \"api\": true,\n            \"contracts\": 100,\n            \"post_only\": false,\n            \"block_trade_id\": \"BLOCK-423\",\n            \"trade_id\": \"771\",\n            \"order_type\": \"limit\",\n            \"mmp\": false,\n            \"risk_reducing\": false,\n            \"reduce_only\": false,\n            \"block_trade_leg_count\": 2,\n            \"self_trade\": false,\n            \"fee_currency\": \"BTC\",\n            \"liquidity\": \"T\"\n          },\n          {\n            \"timestamp\": 1730798381502,\n            \"state\": \"filled\",\n            \"fee\": 1.5e-7,\n            \"amount\": 100,\n            \"direction\": \"sell\",\n            \"price\": 69677.4,\n            \"index_price\": 70000,\n            \"profit_loss\": 0,\n            \"instrument_name\": \"BTC-8NOV24-72000-C\",\n            \"trade_seq\": 113,\n            \"mark_price\": 0.02,\n            \"order_id\": \"2900\",\n            \"matching_id\": null,\n            \"tick_direction\": 2,\n            \"combo_id\": \"BTC-CS-8NOV24-70000_72000\",\n            \"block_rfq_id\": 1,\n            \"api\": true,\n            \"contracts\": 100,\n            \"post_only\": false,\n            \"block_trade_id\": \"BLOCK-423\",\n            \"trade_id\": \"772\",\n            \"order_type\": \"limit\",\n            \"mmp\": false,\n            \"risk_reducing\": false,\n            \"reduce_only\": false,\n            \"block_trade_leg_count\": 2,\n            \"self_trade\": false,\n            \"fee_currency\": \"BTC\",\n            \"liquidity\": \"T\"\n          }\n        ]\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "46781493-33f5-4adf-8871-800d63adb9a3",
+          "name": "**Taker method**\n\nAllows Block RFQ taker to cancel an active trigger for a Block RFQ. The response includes the full Block RFQ object with the trade trigger state set to cancelled.\n\nUse [private/get_block_rfqs](https://docs.deribit.com/api-reference/block-rfq/private-get_block_rfqs) to retrieve Block RFQ information.\n\n**📖 Related Article:** [Deribit Block RFQ API walkthrough](https://docs.deribit.com/articles/block-rfq-api-walkthrough)\n\n**Scope:** `block_rfq:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fcancel_block_rfq_trigger)\n\n",
+          "request": {
+            "name": "**Taker method**\n\nAllows Block RFQ taker to cancel an active trigger for a Block RFQ. The response includes the full Block RFQ object with the trade trigger state set to cancelled.\n\nUse [private/get_block_rfqs](https://docs.deribit.com/api-reference/block-rfq/private-get_block_rfqs) to retrieve Block RFQ information.\n\n**📖 Related Article:** [Deribit Block RFQ API walkthrough](https://docs.deribit.com/articles/block-rfq-api-walkthrough)\n\n**Scope:** `block_rfq:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fcancel_block_rfq_trigger)\n\n",
+            "description": {
+              "content": "**Taker method**\n\nAllows Block RFQ taker to cancel an active trigger for a Block RFQ. The response includes the full Block RFQ object with the trade trigger state set to cancelled.\n\nUse [private/get_block_rfqs](https://docs.deribit.com/api-reference/block-rfq/private-get_block_rfqs) to retrieve Block RFQ information.\n\n**📖 Related Article:** [Deribit Block RFQ API walkthrough](https://docs.deribit.com/articles/block-rfq-api-walkthrough)\n\n**Scope:** `block_rfq:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fcancel_block_rfq_trigger)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "private",
+                "cancel_block_rfq_trigger"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "block_rfq_id",
+                  "value": "<integer>",
+                  "description": "(Required) ID of the Block RFQ"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"method\": \"private/cancel_block_rfq_trigger\",\n  \"params\": {\n    \"block_rfq_id\": 123\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b17a7841-c724-4c87-8260-980dbbc750f4",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "private",
+                    "cancel_block_rfq_trigger"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "block_rfq_id",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"method\": \"private/cancel_block_rfq_trigger\",\n  \"params\": {\n    \"block_rfq_id\": 123\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"result\": {\n    \"creation_timestamp\": 1730798381504,\n    \"expiration_timestamp\": 1730798481504,\n    \"block_rfq_id\": 123,\n    \"role\": \"taker\",\n    \"state\": \"open\",\n    \"taker_rating\": \"1-2\",\n    \"makers\": [\n      \"maker1\",\n      \"maker2\"\n    ],\n    \"amount\": 100,\n    \"min_trade_amount\": 10,\n    \"legs\": [\n      {\n        \"instrument_name\": \"BTC-8NOV24-70000-C\",\n        \"ratio\": 1\n      },\n      {\n        \"instrument_name\": \"BTC-8NOV24-72000-C\",\n        \"ratio\": 1\n      }\n    ],\n    \"combo_id\": \"BTC-CS-8NOV24-70000_72000\",\n    \"label\": \"My Block RFQ\",\n    \"app_name\": \"Example Application\",\n    \"mark_price\": 0.025,\n    \"disclosed\": false,\n    \"trade_trigger\": {\n      \"state\": \"cancelled\",\n      \"price\": 0.01,\n      \"direction\": \"buy\",\n      \"cancel_reason\": \"User cancelled\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6480eabe-bb1b-409f-9819-32efbd833a28",
+          "name": "**Maker method**\n\nRetrieves all open quotes for Block RFQs. When a `block_rfq_id` is specified, only the open quotes for that particular Block RFQ will be returned. When a `label` is specified, all quotes with this label are returned. `block_rfq_quote_id` returns one specific quote.\n\nUse [private/add_block_rfq_quote](https://docs.deribit.com/api-reference/block-rfq/private-add_block_rfq_quote) to add quotes, or [private/get_block_rfqs](https://docs.deribit.com/api-reference/block-rfq/private-get_block_rfqs) to retrieve Block RFQ information.\n\n**📖 Related Article:** [Deribit Block RFQ API walkthrough](https://docs.deribit.com/articles/block-rfq-api-walkthrough)\n\n**Scope:** `block_rfq:read`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_block_rfq_quotes)\n\n",
+          "request": {
+            "name": "**Maker method**\n\nRetrieves all open quotes for Block RFQs. When a `block_rfq_id` is specified, only the open quotes for that particular Block RFQ will be returned. When a `label` is specified, all quotes with this label are returned. `block_rfq_quote_id` returns one specific quote.\n\nUse [private/add_block_rfq_quote](https://docs.deribit.com/api-reference/block-rfq/private-add_block_rfq_quote) to add quotes, or [private/get_block_rfqs](https://docs.deribit.com/api-reference/block-rfq/private-get_block_rfqs) to retrieve Block RFQ information.\n\n**📖 Related Article:** [Deribit Block RFQ API walkthrough](https://docs.deribit.com/articles/block-rfq-api-walkthrough)\n\n**Scope:** `block_rfq:read`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_block_rfq_quotes)\n\n",
+            "description": {
+              "content": "**Maker method**\n\nRetrieves all open quotes for Block RFQs. When a `block_rfq_id` is specified, only the open quotes for that particular Block RFQ will be returned. When a `label` is specified, all quotes with this label are returned. `block_rfq_quote_id` returns one specific quote.\n\nUse [private/add_block_rfq_quote](https://docs.deribit.com/api-reference/block-rfq/private-add_block_rfq_quote) to add quotes, or [private/get_block_rfqs](https://docs.deribit.com/api-reference/block-rfq/private-get_block_rfqs) to retrieve Block RFQ information.\n\n**📖 Related Article:** [Deribit Block RFQ API walkthrough](https://docs.deribit.com/articles/block-rfq-api-walkthrough)\n\n**Scope:** `block_rfq:read`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_block_rfq_quotes)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "private",
+                "get_block_rfq_quotes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "block_rfq_id",
+                  "value": "<integer>",
+                  "description": "ID of the Block RFQ"
+                },
+                {
+                  "disabled": false,
+                  "key": "label",
+                  "value": "<string>",
+                  "description": "User defined label for the Block RFQ quote (maximum 64 characters). Used to identify quotes of a selected Block RFQ"
+                },
+                {
+                  "disabled": false,
+                  "key": "block_rfq_quote_id",
+                  "value": "<integer>",
+                  "description": "ID of the Block RFQ quote"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"method\": \"private/get_block_rfq_quotes\",\n  \"params\": {\n    \"block_rfq_id\": 1\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4bdfa93c-8afd-4e5f-9ead-5ca7bd9b8135",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "private",
+                    "get_block_rfq_quotes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "block_rfq_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "label",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "block_rfq_quote_id",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"method\": \"private/get_block_rfq_quotes\",\n  \"params\": {\n    \"block_rfq_id\": 1\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"result\": {\n    \"label\": \"example_quote\",\n    \"amount\": 20000,\n    \"direction\": \"buy\",\n    \"price\": 74600,\n    \"legs\": [\n      {\n        \"direction\": \"buy\",\n        \"price\": 74600,\n        \"instrument_name\": \"BTC-15NOV24\",\n        \"ratio\": 1\n      }\n    ],\n    \"creation_timestamp\": 1731076586371,\n    \"block_rfq_id\": 1,\n    \"replaced\": false,\n    \"filled_amount\": 0,\n    \"last_update_timestamp\": 1731076638591,\n    \"hedge\": {\n      \"amount\": 10,\n      \"direction\": \"buy\",\n      \"price\": 70000,\n      \"instrument_name\": \"BTC-PERPETUAL\"\n    },\n    \"block_rfq_quote_id\": 8,\n    \"quote_state\": \"open\",\n    \"execution_instruction\": \"all_or_none\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "72dcb7ac-6704-4158-a609-3d7d4a2b4bff",
+          "name": "**Maker method**\n\nAdds a quote to an existing Block RFQ. To calculate individual leg prices, use [private/get_leg_prices](https://docs.deribit.com/api-reference/combo-books/private-get_leg_prices).\n\nUse [private/get_block_rfqs](https://docs.deribit.com/api-reference/block-rfq/private-get_block_rfqs) to retrieve Block RFQ information, or [private/edit_block_rfq_quote](https://docs.deribit.com/api-reference/block-rfq/private-edit_block_rfq_quote) to modify an existing quote.\n\n**📖 Related Article:** [Deribit Block RFQ API walkthrough](https://docs.deribit.com/articles/block-rfq-api-walkthrough)\n\n**Scope:** `block_rfq:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fadd_block_rfq_quote)\n\n",
+          "request": {
+            "name": "**Maker method**\n\nAdds a quote to an existing Block RFQ. To calculate individual leg prices, use [private/get_leg_prices](https://docs.deribit.com/api-reference/combo-books/private-get_leg_prices).\n\nUse [private/get_block_rfqs](https://docs.deribit.com/api-reference/block-rfq/private-get_block_rfqs) to retrieve Block RFQ information, or [private/edit_block_rfq_quote](https://docs.deribit.com/api-reference/block-rfq/private-edit_block_rfq_quote) to modify an existing quote.\n\n**📖 Related Article:** [Deribit Block RFQ API walkthrough](https://docs.deribit.com/articles/block-rfq-api-walkthrough)\n\n**Scope:** `block_rfq:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fadd_block_rfq_quote)\n\n",
+            "description": {
+              "content": "**Maker method**\n\nAdds a quote to an existing Block RFQ. To calculate individual leg prices, use [private/get_leg_prices](https://docs.deribit.com/api-reference/combo-books/private-get_leg_prices).\n\nUse [private/get_block_rfqs](https://docs.deribit.com/api-reference/block-rfq/private-get_block_rfqs) to retrieve Block RFQ information, or [private/edit_block_rfq_quote](https://docs.deribit.com/api-reference/block-rfq/private-edit_block_rfq_quote) to modify an existing quote.\n\n**📖 Related Article:** [Deribit Block RFQ API walkthrough](https://docs.deribit.com/articles/block-rfq-api-walkthrough)\n\n**Scope:** `block_rfq:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fadd_block_rfq_quote)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "private",
+                "add_block_rfq_quote"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "label",
+                  "value": "<string>",
+                  "description": "User defined label for the Block RFQ quote (maximum 64 characters). Used to identify quotes of a selected Block RFQ"
+                },
+                {
+                  "disabled": false,
+                  "key": "block_rfq_id",
+                  "value": "<integer>",
+                  "description": "(Required) ID of the Block RFQ"
+                },
+                {
+                  "disabled": false,
+                  "key": "amount",
+                  "value": "<number>",
+                  "description": "(Required) This value multiplied by the ratio of a leg gives trade size on that leg."
+                },
+                {
+                  "disabled": false,
+                  "key": "direction",
+                  "value": "<string>",
+                  "description": "(Required) Direction of trade from the maker perspective"
+                },
+                {
+                  "disabled": false,
+                  "key": "legs",
+                  "value": "{\"instrument_name\":\"<string>\",\"price\":\"<number>\",\"ratio\":\"<integer>\",\"direction\":\"<string>\"}",
+                  "description": "(Required) List of legs used for Block RFQ quote"
+                },
+                {
+                  "disabled": false,
+                  "key": "legs",
+                  "value": "{\"instrument_name\":\"<string>\",\"price\":\"<number>\",\"ratio\":\"<integer>\",\"direction\":\"<string>\"}",
+                  "description": "(Required) List of legs used for Block RFQ quote"
+                },
+                {
+                  "disabled": false,
+                  "key": "hedge",
+                  "value": "<string>",
+                  "description": "Hedge leg of the Block RFQ. There is only one hedge leg allowed per Block RFQ"
+                },
+                {
+                  "disabled": false,
+                  "key": "execution_instruction",
+                  "value": "<string>",
+                  "description": "<p>Execution instruction of the quote. Default - `any_part_of`</p> <ul> <li>`\"all_or_none (AON)\"` - The quote can only be filled entirely or not at all, ensuring that its amount matches the amount specified in the Block RFQ. Additionally, 'all_or_none' quotes have priority over 'any_part_of' quotes at the same price level.</li> <li>`\"any_part_of (APO)\"` - The quote can be filled either partially or fully, with the filled amount potentially being less than the Block RFQ amount.</li> </ul>"
+                },
+                {
+                  "disabled": false,
+                  "key": "price",
+                  "value": "<number>",
+                  "description": "Aggregated price used for quoting future spreads."
+                },
+                {
+                  "disabled": false,
+                  "key": "expires_at",
+                  "value": "<integer>",
+                  "description": "The timestamp when the quote expires (milliseconds since the Unix epoch)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"method\": \"private/add_block_rfq_quote\",\n  \"params\": {\n    \"label\": \"example_quote\",\n    \"block_rfq_id\": 3,\n    \"amount\": 10000,\n    \"direction\": \"buy\",\n    \"legs\": [\n      {\n        \"instrument_name\": \"BTC-15NOV24\",\n        \"price\": 69600,\n        \"ratio\": \"1\",\n        \"direction\": \"buy\"\n      }\n    ],\n    \"hedge\": {\n      \"amount\": 10,\n      \"direction\": \"buy\",\n      \"price\": 70000,\n      \"instrument_name\": \"BTC-PERPETUAL\"\n    },\n    \"execution_instruction\": \"any_part_of\",\n    \"expires_at\": 1745312540321\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2b239417-c07f-4813-9e67-969935bd7c8a",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "private",
+                    "add_block_rfq_quote"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "label",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "block_rfq_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "amount",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "direction",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "legs",
+                      "value": "[object Object]"
+                    },
+                    {
+                      "key": "legs",
+                      "value": "[object Object]"
+                    },
+                    {
+                      "key": "hedge",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "execution_instruction",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "price",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "expires_at",
+                      "value": "1745312540321"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"method\": \"private/add_block_rfq_quote\",\n  \"params\": {\n    \"label\": \"example_quote\",\n    \"block_rfq_id\": 3,\n    \"amount\": 10000,\n    \"direction\": \"buy\",\n    \"legs\": [\n      {\n        \"instrument_name\": \"BTC-15NOV24\",\n        \"price\": 69600,\n        \"ratio\": \"1\",\n        \"direction\": \"buy\"\n      }\n    ],\n    \"hedge\": {\n      \"amount\": 10,\n      \"direction\": \"buy\",\n      \"price\": 70000,\n      \"instrument_name\": \"BTC-PERPETUAL\"\n    },\n    \"execution_instruction\": \"any_part_of\",\n    \"expires_at\": 1745312540321\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"result\": {\n    \"label\": \"example_quote\",\n    \"amount\": 10000,\n    \"direction\": \"buy\",\n    \"price\": 69600,\n    \"legs\": [\n      {\n        \"direction\": \"buy\",\n        \"price\": 69600,\n        \"instrument_name\": \"BTC-15NOV24\",\n        \"ratio\": 1\n      }\n    ],\n    \"creation_timestamp\": 1731076586371,\n    \"block_rfq_id\": 3,\n    \"replaced\": false,\n    \"filled_amount\": 0,\n    \"hedge\": {\n      \"amount\": 10,\n      \"direction\": \"buy\",\n      \"price\": 70000,\n      \"instrument_name\": \"BTC-PERPETUAL\"\n    },\n    \"last_update_timestamp\": 1731076586371,\n    \"block_rfq_quote_id\": 8,\n    \"quote_state\": \"open\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f5b9f3e5-3bc5-4b4e-a5d7-20c6fadd0b84",
+          "name": "**Maker method**\n\nEdits a Block RFQ quote using the specified `block_rfq_quote_id`. Alternatively, you can use a combination of `block_rfq_id` and `label` to edit the quote.\n\nUse [private/add_block_rfq_quote](https://docs.deribit.com/api-reference/block-rfq/private-add_block_rfq_quote) to add new quotes, or [private/cancel_block_rfq_quote](https://docs.deribit.com/api-reference/block-rfq/private-cancel_block_rfq_quote) to cancel quotes.\n\n**📖 Related Article:** [Deribit Block RFQ API walkthrough](https://docs.deribit.com/articles/block-rfq-api-walkthrough)\n\n**Scope:** `block_rfq:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fedit_block_rfq_quote)\n\n",
+          "request": {
+            "name": "**Maker method**\n\nEdits a Block RFQ quote using the specified `block_rfq_quote_id`. Alternatively, you can use a combination of `block_rfq_id` and `label` to edit the quote.\n\nUse [private/add_block_rfq_quote](https://docs.deribit.com/api-reference/block-rfq/private-add_block_rfq_quote) to add new quotes, or [private/cancel_block_rfq_quote](https://docs.deribit.com/api-reference/block-rfq/private-cancel_block_rfq_quote) to cancel quotes.\n\n**📖 Related Article:** [Deribit Block RFQ API walkthrough](https://docs.deribit.com/articles/block-rfq-api-walkthrough)\n\n**Scope:** `block_rfq:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fedit_block_rfq_quote)\n\n",
+            "description": {
+              "content": "**Maker method**\n\nEdits a Block RFQ quote using the specified `block_rfq_quote_id`. Alternatively, you can use a combination of `block_rfq_id` and `label` to edit the quote.\n\nUse [private/add_block_rfq_quote](https://docs.deribit.com/api-reference/block-rfq/private-add_block_rfq_quote) to add new quotes, or [private/cancel_block_rfq_quote](https://docs.deribit.com/api-reference/block-rfq/private-cancel_block_rfq_quote) to cancel quotes.\n\n**📖 Related Article:** [Deribit Block RFQ API walkthrough](https://docs.deribit.com/articles/block-rfq-api-walkthrough)\n\n**Scope:** `block_rfq:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fedit_block_rfq_quote)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "private",
+                "edit_block_rfq_quote"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "legs",
+                  "value": "{\"instrument_name\":\"<string>\",\"price\":\"<number>\",\"ratio\":\"<integer>\",\"direction\":\"<string>\"}",
+                  "description": "(Required) List of legs used for Block RFQ quote"
+                },
+                {
+                  "disabled": false,
+                  "key": "legs",
+                  "value": "{\"instrument_name\":\"<string>\",\"price\":\"<number>\",\"ratio\":\"<integer>\",\"direction\":\"<string>\"}",
+                  "description": "(Required) List of legs used for Block RFQ quote"
+                },
+                {
+                  "disabled": false,
+                  "key": "amount",
+                  "value": "<number>",
+                  "description": "(Required) This value multiplied by the ratio of a leg gives trade size on that leg."
+                },
+                {
+                  "disabled": false,
+                  "key": "block_rfq_quote_id",
+                  "value": "<integer>",
+                  "description": "ID of the Block RFQ quote"
+                },
+                {
+                  "disabled": false,
+                  "key": "label",
+                  "value": "<string>",
+                  "description": "User defined label for the Block RFQ quote (maximum 64 characters). Used to identify quotes of a selected Block RFQ"
+                },
+                {
+                  "disabled": false,
+                  "key": "hedge",
+                  "value": "<string>",
+                  "description": "Hedge leg of the Block RFQ. There is only one hedge leg allowed per Block RFQ"
+                },
+                {
+                  "disabled": false,
+                  "key": "block_rfq_id",
+                  "value": "<integer>",
+                  "description": "ID of the Block RFQ"
+                },
+                {
+                  "disabled": false,
+                  "key": "price",
+                  "value": "<number>",
+                  "description": "Aggregated price used for quoting future spreads."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"method\": \"private/edit_block_rfq_quote\",\n  \"params\": {\n    \"label\": \"example_quote\",\n    \"block_rfq_id\": 3,\n    \"amount\": 20000,\n    \"direction\": \"buy\",\n    \"legs\": [\n      {\n        \"instrument_name\": \"BTC-15NOV24\",\n        \"price\": 74600,\n        \"ratio\": \"1\",\n        \"direction\": \"buy\"\n      }\n    ],\n    \"hedge\": {\n      \"amount\": 10,\n      \"direction\": \"buy\",\n      \"price\": 70000,\n      \"instrument_name\": \"BTC-PERPETUAL\"\n    },\n    \"execution_instruction\": \"any_part_of\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1c9a8579-503c-40f9-8661-9f6c39e5c16e",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "private",
+                    "edit_block_rfq_quote"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "legs",
+                      "value": "[object Object]"
+                    },
+                    {
+                      "key": "legs",
+                      "value": "[object Object]"
+                    },
+                    {
+                      "key": "amount",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "block_rfq_quote_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "label",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "hedge",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "block_rfq_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "price",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"method\": \"private/edit_block_rfq_quote\",\n  \"params\": {\n    \"label\": \"example_quote\",\n    \"block_rfq_id\": 3,\n    \"amount\": 20000,\n    \"direction\": \"buy\",\n    \"legs\": [\n      {\n        \"instrument_name\": \"BTC-15NOV24\",\n        \"price\": 74600,\n        \"ratio\": \"1\",\n        \"direction\": \"buy\"\n      }\n    ],\n    \"hedge\": {\n      \"amount\": 10,\n      \"direction\": \"buy\",\n      \"price\": 70000,\n      \"instrument_name\": \"BTC-PERPETUAL\"\n    },\n    \"execution_instruction\": \"any_part_of\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"result\": {\n    \"label\": \"example_quote\",\n    \"amount\": 20000,\n    \"direction\": \"buy\",\n    \"price\": 74600,\n    \"legs\": [\n      {\n        \"direction\": \"buy\",\n        \"price\": 74600,\n        \"instrument_name\": \"BTC-15NOV24\",\n        \"ratio\": 1\n      }\n    ],\n    \"creation_timestamp\": 1731076586371,\n    \"block_rfq_id\": 3,\n    \"replaced\": true,\n    \"filled_amount\": 0,\n    \"last_update_timestamp\": 1731076638591,\n    \"hedge\": {\n      \"amount\": 10,\n      \"direction\": \"buy\",\n      \"price\": 70000,\n      \"instrument_name\": \"BTC-PERPETUAL\"\n    },\n    \"block_rfq_quote_id\": 8,\n    \"quote_state\": \"open\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "79e8a088-c4bf-416b-8061-adb3be7a5e8f",
+          "name": "**Maker method**\n\nCancels a single Block RFQ quote. You can identify the quote to cancel using either:\n\n- `block_rfq_quote_id` - the unique ID of the quote\n- `block_rfq_id` + `label` - the Block RFQ ID and the quote label\n\n**Note:** Mass cancellation by label is not supported. This method cancels only one quote at a time. To cancel all quotes, use [private/cancel_all_block_rfq_quotes](https://docs.deribit.com/api-reference/block-rfq/private-cancel_all_block_rfq_quotes).\n\n**📖 Related Article:** [Deribit Block RFQ API walkthrough](https://docs.deribit.com/articles/block-rfq-api-walkthrough)\n\n**Scope:** `block_rfq:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fcancel_block_rfq_quote)\n\n",
+          "request": {
+            "name": "**Maker method**\n\nCancels a single Block RFQ quote. You can identify the quote to cancel using either:\n\n- `block_rfq_quote_id` - the unique ID of the quote\n- `block_rfq_id` + `label` - the Block RFQ ID and the quote label\n\n**Note:** Mass cancellation by label is not supported. This method cancels only one quote at a time. To cancel all quotes, use [private/cancel_all_block_rfq_quotes](https://docs.deribit.com/api-reference/block-rfq/private-cancel_all_block_rfq_quotes).\n\n**📖 Related Article:** [Deribit Block RFQ API walkthrough](https://docs.deribit.com/articles/block-rfq-api-walkthrough)\n\n**Scope:** `block_rfq:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fcancel_block_rfq_quote)\n\n",
+            "description": {
+              "content": "**Maker method**\n\nCancels a single Block RFQ quote. You can identify the quote to cancel using either:\n\n- `block_rfq_quote_id` - the unique ID of the quote\n- `block_rfq_id` + `label` - the Block RFQ ID and the quote label\n\n**Note:** Mass cancellation by label is not supported. This method cancels only one quote at a time. To cancel all quotes, use [private/cancel_all_block_rfq_quotes](https://docs.deribit.com/api-reference/block-rfq/private-cancel_all_block_rfq_quotes).\n\n**📖 Related Article:** [Deribit Block RFQ API walkthrough](https://docs.deribit.com/articles/block-rfq-api-walkthrough)\n\n**Scope:** `block_rfq:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fcancel_block_rfq_quote)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "private",
+                "cancel_block_rfq_quote"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "block_rfq_quote_id",
+                  "value": "<integer>",
+                  "description": "ID of the Block RFQ quote"
+                },
+                {
+                  "disabled": false,
+                  "key": "label",
+                  "value": "<string>",
+                  "description": "User defined label for the Block RFQ quote (maximum 64 characters). Used to identify quotes of a selected Block RFQ"
+                },
+                {
+                  "disabled": false,
+                  "key": "block_rfq_id",
+                  "value": "<integer>",
+                  "description": "ID of the Block RFQ"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"method\": \"private/cancel_block_rfq_quote\",\n  \"params\": {\n    \"label\": \"example_quote\",\n    \"block_rfq_id\": 3\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d404e192-2aae-4154-b5df-261e9b2adc25",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "private",
+                    "cancel_block_rfq_quote"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "block_rfq_quote_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "label",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "block_rfq_id",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"method\": \"private/cancel_block_rfq_quote\",\n  \"params\": {\n    \"label\": \"example_quote\",\n    \"block_rfq_id\": 3\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"result\": {\n    \"label\": \"example_quote\",\n    \"amount\": 20000,\n    \"direction\": \"buy\",\n    \"price\": 74600,\n    \"legs\": [\n      {\n        \"direction\": \"buy\",\n        \"price\": 74600,\n        \"instrument_name\": \"BTC-15NOV24\",\n        \"ratio\": 1\n      }\n    ],\n    \"creation_timestamp\": 1731076586371,\n    \"block_rfq_id\": 3,\n    \"replaced\": false,\n    \"filled_amount\": 0,\n    \"last_update_timestamp\": 1731076655746,\n    \"hedge\": {\n      \"amount\": 10,\n      \"direction\": \"buy\",\n      \"price\": 70000,\n      \"instrument_name\": \"BTC-PERPETUAL\"\n    },\n    \"block_rfq_quote_id\": 8,\n    \"quote_state\": \"cancelled\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e2cec887-9397-4950-a7e3-618f16c6dae5",
+          "name": "**Maker method**\n\nCancels all user quotes in all Block RFQs. Optionally cancels all quotes in a specific RFQ if the `block_rfq_id` is provided.\n\n**Note:** Mass cancellation by label is not supported. This method will cancel all quotes regardless of their labels. To cancel a single quote, use [private/cancel_block_rfq_quote](https://docs.deribit.com/api-reference/block-rfq/private-cancel_block_rfq_quote).\n\n**📖 Related Article:** [Deribit Block RFQ API walkthrough](https://docs.deribit.com/articles/block-rfq-api-walkthrough)\n\n**Scope:** `block_rfq:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fcancel_all_block_rfq_quotes)\n\n",
+          "request": {
+            "name": "**Maker method**\n\nCancels all user quotes in all Block RFQs. Optionally cancels all quotes in a specific RFQ if the `block_rfq_id` is provided.\n\n**Note:** Mass cancellation by label is not supported. This method will cancel all quotes regardless of their labels. To cancel a single quote, use [private/cancel_block_rfq_quote](https://docs.deribit.com/api-reference/block-rfq/private-cancel_block_rfq_quote).\n\n**📖 Related Article:** [Deribit Block RFQ API walkthrough](https://docs.deribit.com/articles/block-rfq-api-walkthrough)\n\n**Scope:** `block_rfq:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fcancel_all_block_rfq_quotes)\n\n",
+            "description": {
+              "content": "**Maker method**\n\nCancels all user quotes in all Block RFQs. Optionally cancels all quotes in a specific RFQ if the `block_rfq_id` is provided.\n\n**Note:** Mass cancellation by label is not supported. This method will cancel all quotes regardless of their labels. To cancel a single quote, use [private/cancel_block_rfq_quote](https://docs.deribit.com/api-reference/block-rfq/private-cancel_block_rfq_quote).\n\n**📖 Related Article:** [Deribit Block RFQ API walkthrough](https://docs.deribit.com/articles/block-rfq-api-walkthrough)\n\n**Scope:** `block_rfq:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fcancel_all_block_rfq_quotes)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "private",
+                "cancel_all_block_rfq_quotes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "block_rfq_id",
+                  "value": "<integer>",
+                  "description": "ID of the Block RFQ"
+                },
+                {
+                  "disabled": false,
+                  "key": "detailed",
+                  "value": "<boolean>",
+                  "description": "When `detailed` is set to `true`, the output format is changed to include a list of all cancelled orders.\n\n**📖 Related Article:** [Detailed Response for Cancel Methods](https://docs.deribit.com/articles/json-rpc-overview#detailed-response-for-cancel-methods)\n\nDefault: `false`\n"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 24,\n  \"method\": \"private/cancel_all_block_rfq_quotes\",\n  \"params\": {\n    \"block_rfq_id\": 154\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "538dc29d-a992-4d4a-9f8f-24865e84f473",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "private",
+                    "cancel_all_block_rfq_quotes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "block_rfq_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "detailed",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 24,\n  \"method\": \"private/cancel_all_block_rfq_quotes\",\n  \"params\": {\n    \"block_rfq_id\": 154\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"result\": 1\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f54910b2-0c0d-40f2-9860-578442428d18",
+          "name": "Returns a list of all available Block RFQ makers. This method takes no parameters.\n\nUse this method to retrieve the list of makers that can be specified when creating a Block RFQ with [private/create_block_rfq](https://docs.deribit.com/api-reference/block-rfq/private-create_block_rfq).\n\n**📖 Related Article:** [Deribit Block RFQ API walkthrough](https://docs.deribit.com/articles/block-rfq-api-walkthrough)\n\n**Scope:** `block_rfq:read`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_block_rfq_makers)\n\n",
+          "request": {
+            "name": "Returns a list of all available Block RFQ makers. This method takes no parameters.\n\nUse this method to retrieve the list of makers that can be specified when creating a Block RFQ with [private/create_block_rfq](https://docs.deribit.com/api-reference/block-rfq/private-create_block_rfq).\n\n**📖 Related Article:** [Deribit Block RFQ API walkthrough](https://docs.deribit.com/articles/block-rfq-api-walkthrough)\n\n**Scope:** `block_rfq:read`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_block_rfq_makers)\n\n",
+            "description": {
+              "content": "Returns a list of all available Block RFQ makers. This method takes no parameters.\n\nUse this method to retrieve the list of makers that can be specified when creating a Block RFQ with [private/create_block_rfq](https://docs.deribit.com/api-reference/block-rfq/private-create_block_rfq).\n\n**📖 Related Article:** [Deribit Block RFQ API walkthrough](https://docs.deribit.com/articles/block-rfq-api-walkthrough)\n\n**Scope:** `block_rfq:read`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_block_rfq_makers)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "private",
+                "get_block_rfq_makers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"method\": \"private/get_block_rfq_makers\",\n  \"params\": {}\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c20a7094-27f7-490f-bba0-6552f5bb6d7f",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "private",
+                    "get_block_rfq_makers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"method\": \"private/get_block_rfq_makers\",\n  \"params\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"result\": [\n    \"MAKER1\",\n    \"MAKER2\",\n    \"MAKER3\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "78c256da-ae41-4754-8988-46301b7e1522",
+          "name": "Returns a list of recent Block RFQ trades. Can be optionally filtered by currency.\n\nThis is a public method that provides market data about completed Block RFQ trades. For private Block RFQ information, use [private/get_block_rfqs](https://docs.deribit.com/api-reference/block-rfq/private-get_block_rfqs).\n\n**📖 Related Article:** [Deribit Block RFQ API walkthrough](https://docs.deribit.com/articles/block-rfq-api-walkthrough)\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_block_rfq_trades)\n\n",
+          "request": {
+            "name": "Returns a list of recent Block RFQ trades. Can be optionally filtered by currency.\n\nThis is a public method that provides market data about completed Block RFQ trades. For private Block RFQ information, use [private/get_block_rfqs](https://docs.deribit.com/api-reference/block-rfq/private-get_block_rfqs).\n\n**📖 Related Article:** [Deribit Block RFQ API walkthrough](https://docs.deribit.com/articles/block-rfq-api-walkthrough)\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_block_rfq_trades)\n\n",
+            "description": {
+              "content": "Returns a list of recent Block RFQ trades. Can be optionally filtered by currency.\n\nThis is a public method that provides market data about completed Block RFQ trades. For private Block RFQ information, use [private/get_block_rfqs](https://docs.deribit.com/api-reference/block-rfq/private-get_block_rfqs).\n\n**📖 Related Article:** [Deribit Block RFQ API walkthrough](https://docs.deribit.com/articles/block-rfq-api-walkthrough)\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_block_rfq_trades)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "get_block_rfq_trades"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "currency",
+                  "value": "<string>",
+                  "description": "(Required) The currency symbol or `\"any\"` for all"
+                },
+                {
+                  "disabled": false,
+                  "key": "continuation",
+                  "value": "<string>",
+                  "description": "Continuation token for pagination. Consists of `timestamp` and `block_rfq_id`."
+                },
+                {
+                  "disabled": false,
+                  "key": "count",
+                  "value": "<integer>",
+                  "description": "Count of Block RFQs returned, maximum - `1000`"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"method\": \"public/get_block_rfq_trades\",\n  \"params\": {\n    \"currency\": \"BTC\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d24d87bd-e2a1-48c2-9ae1-4f2b22dae664",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "get_block_rfq_trades"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "currency",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "continuation",
+                      "value": "1738050297271:103"
+                    },
+                    {
+                      "key": "count",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"method\": \"public/get_block_rfq_trades\",\n  \"params\": {\n    \"currency\": \"BTC\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"result\": {\n    \"continuation\": \"1739739009234:6570\",\n    \"block_rfqs\": [\n      {\n        \"id\": 6611,\n        \"timestamp\": 1739803305362,\n        \"combo_id\": \"BTC-CS-28FEB25-100000_106000\",\n        \"legs\": [\n          {\n            \"price\": 0.1,\n            \"direction\": \"buy\",\n            \"instrument_name\": \"BTC-28FEB25-100000-C\",\n            \"ratio\": 1\n          },\n          {\n            \"price\": 0.05,\n            \"direction\": \"sell\",\n            \"instrument_name\": \"BTC-28FEB25-106000-C\",\n            \"ratio\": 1\n          }\n        ],\n        \"amount\": 12.5,\n        \"direction\": \"sell\",\n        \"mark_price\": 0.010356754,\n        \"trades\": [\n          {\n            \"price\": 0.05,\n            \"amount\": 12.5,\n            \"direction\": \"sell\",\n            \"hedge_amount\": 50\n          }\n        ],\n        \"hedge\": {\n          \"price\": 96000,\n          \"amount\": 50,\n          \"direction\": \"sell\",\n          \"instrument_name\": \"BTC-PERPETUAL\"\n        },\n        \"index_prices\": {\n          \"btc_usd\": 96000,\n          \"btc_usdc\": 95950\n        }\n      },\n      {\n        \"id\": 6600,\n        \"timestamp\": 1739774397766,\n        \"combo_id\": \"BTC-CS-28FEB25-100000_106000\",\n        \"legs\": [\n          {\n            \"price\": 0.1,\n            \"direction\": \"buy\",\n            \"instrument_name\": \"BTC-28FEB25-100000-C\",\n            \"ratio\": 1\n          },\n          {\n            \"price\": 0.05,\n            \"direction\": \"sell\",\n            \"instrument_name\": \"BTC-28FEB25-106000-C\",\n            \"ratio\": 1\n          }\n        ],\n        \"amount\": 12.5,\n        \"direction\": \"sell\",\n        \"mark_price\": 0.007458089,\n        \"trades\": [\n          {\n            \"price\": 0.05,\n            \"amount\": 12.5,\n            \"direction\": \"sell\",\n            \"hedge_amount\": 50\n          }\n        ],\n        \"hedge\": {\n          \"price\": 96000,\n          \"amount\": 50,\n          \"direction\": \"sell\",\n          \"instrument_name\": \"BTC-PERPETUAL\"\n        },\n        \"index_prices\": {\n          \"btc_usd\": 96000,\n          \"btc_usdc\": 95950\n        }\n      },\n      {\n        \"id\": 6579,\n        \"timestamp\": 1739743922308,\n        \"combo_id\": \"BTC-CS-17FEB25-89000_90000\",\n        \"legs\": [\n          {\n            \"price\": 0.08,\n            \"direction\": \"buy\",\n            \"instrument_name\": \"BTC-17FEB25-89000-C\",\n            \"ratio\": 1\n          },\n          {\n            \"price\": 0.075,\n            \"direction\": \"sell\",\n            \"instrument_name\": \"BTC-17FEB25-90000-C\",\n            \"ratio\": 1\n          }\n        ],\n        \"amount\": 12.5,\n        \"direction\": \"sell\",\n        \"mark_price\": 0.010314468,\n        \"trades\": [\n          {\n            \"price\": 0.005,\n            \"amount\": 12.5,\n            \"direction\": \"sell\"\n          }\n        ]\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2e119719-fbc2-4443-9d57-d82a0d584696",
+          "name": "Returns identity and rating information for the requesting account and its subaccounts. Includes both group-level and individual user-level alias data, if available.\n\nThis information is useful for understanding your Block RFQ maker identity and rating when participating in Block RFQ trades.\n\n**📖 Related Article:** [Deribit Block RFQ API walkthrough](https://docs.deribit.com/articles/block-rfq-api-walkthrough)\n\n**Scope:** `block_rfq:read`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_block_rfq_user_info)\n\n",
+          "request": {
+            "name": "Returns identity and rating information for the requesting account and its subaccounts. Includes both group-level and individual user-level alias data, if available.\n\nThis information is useful for understanding your Block RFQ maker identity and rating when participating in Block RFQ trades.\n\n**📖 Related Article:** [Deribit Block RFQ API walkthrough](https://docs.deribit.com/articles/block-rfq-api-walkthrough)\n\n**Scope:** `block_rfq:read`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_block_rfq_user_info)\n\n",
+            "description": {
+              "content": "Returns identity and rating information for the requesting account and its subaccounts. Includes both group-level and individual user-level alias data, if available.\n\nThis information is useful for understanding your Block RFQ maker identity and rating when participating in Block RFQ trades.\n\n**📖 Related Article:** [Deribit Block RFQ API walkthrough](https://docs.deribit.com/articles/block-rfq-api-walkthrough)\n\n**Scope:** `block_rfq:read`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_block_rfq_user_info)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "private",
+                "get_block_rfq_user_info"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"method\": \"private/get_block_rfq_user_info\",\n  \"params\": {}\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8f805a71-25de-4382-82af-d918780c0437",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "private",
+                    "get_block_rfq_user_info"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"method\": \"private/get_block_rfq_user_info\",\n  \"params\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"result\": {\n    \"parent\": {\n      \"identity\": \"MAKER1\",\n      \"is_maker\": true\n    },\n    \"users\": [\n      {\n        \"user_id\": 1,\n        \"taker_rating\": 98.5,\n        \"identity\": \"TAKER1\",\n        \"is_maker\": false\n      },\n      {\n        \"user_id\": 2,\n        \"taker_rating\": 97\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://test.deribit.com/api/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "591d3f6b-5632-4ee6-952f-3c86a713245f",
+    "name": "Deribit Account Management Block RFQ API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,145 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Deribit Account Management Combo Books API",
+    "version": "2.1.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Combo Books",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GET /public/get_combos",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/public/get_combos",
+            "params": [
+              {
+                "name": "currency",
+                "value": "",
+                "type": "query",
+                "description": "The currency symbol or `\"any\"` for all"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves information about active combos for the specified currency. Returns detailed information including leg structures and combo properties.\n\nFor a list of combo IDs only, use [public/get_combo_ids](https://docs.deribit.com/api-reference/combo-books/public-get_combo_ids). For details about a specific combo, use [public/get_combo_details](https://docs.deribit.com/api-reference/combo-books/public-get_combo_details).\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2"
+        },
+        {
+          "info": {
+            "name": "GET /public/get_combo_ids",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/public/get_combo_ids",
+            "params": [
+              {
+                "name": "currency",
+                "value": "",
+                "type": "query",
+                "description": "The currency symbol"
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query",
+                "description": "Combo state, if not provided combos of all states are considered"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves available combo IDs. This method can be used to get the list of all combos, or only the list of combos in the given state.\n\nUse [public/get_combo_details](https://docs.deribit.com/api-reference/combo-books/public-get_combo_details) to retrieve detailed information about a specific combo.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_combo_ids)\n\n"
+        },
+        {
+          "info": {
+            "name": "GET /public/get_combo_details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/public/get_combo_details",
+            "params": [
+              {
+                "name": "combo_id",
+                "value": "",
+                "type": "query",
+                "description": "Combo ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves detailed information about a specific combo, including its leg structure, state, and other properties.\n\nUse [public/get_combo_ids](https://docs.deribit.com/api-reference/combo-books/public-get_combo_ids) to get a list of available combo IDs.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_combo_details)\n\n"
+        },
+        {
+          "info": {
+            "name": "GET /private/create_combo",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/private/create_combo",
+            "params": [
+              {
+                "name": "trades",
+                "value": "",
+                "type": "query",
+                "description": "List of trades used to create a combo"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Verifies and creates a combo book or returns an existing combo matching the given trades. Combos allow trading on multiple instruments (futures and options) simultaneously as a single strategy.\n\nIf a combo matching the provided trades already exists, this method returns the existing combo. Otherwise, it creates a new combo book with the specified leg structure.\n\n**Scope:** `trade:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fcreate_combo)\n\n"
+        },
+        {
+          "info": {
+            "name": "GET /private/get_leg_prices",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/private/get_leg_prices",
+            "params": [
+              {
+                "name": "legs",
+                "value": "",
+                "type": "query",
+                "description": "List of legs for which the prices will be calculated"
+              },
+              {
+                "name": "price",
+                "value": "",
+                "type": "query",
+                "description": "Price for the whole leg structure"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns individual leg prices for a given combo structure based on an aggregated price of the strategy and the mark prices of the individual legs.\n\n**Note:** Leg prices change dynamically with mark price fluctuations, and the algorithm is calibrated only for conventional option structures and future spreads. This method supports both inverse strategies and known linear structures within a single currency pair.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_leg"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

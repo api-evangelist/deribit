@@ -1,0 +1,438 @@
+{
+  "item": [
+    {
+      "id": "4dca27cf-f835-44fd-8f1a-03ecd009a372",
+      "name": "Supporting",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1bb84f1d-c3fe-4d13-8675-c9c4e9351543",
+          "name": "Method used to introduce the client software connected to Deribit platform over websocket. Provided data may have an impact on the maintained connection and will be collected for internal statistical purposes. In response, Deribit will also introduce itself.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fhello)\n\n",
+          "request": {
+            "name": "Method used to introduce the client software connected to Deribit platform over websocket. Provided data may have an impact on the maintained connection and will be collected for internal statistical purposes. In response, Deribit will also introduce itself.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fhello)\n\n",
+            "description": {
+              "content": "Method used to introduce the client software connected to Deribit platform over websocket. Provided data may have an impact on the maintained connection and will be collected for internal statistical purposes. In response, Deribit will also introduce itself.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fhello)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "hello"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "client_name",
+                  "value": "<string>",
+                  "description": "(Required) Client software name"
+                },
+                {
+                  "disabled": false,
+                  "key": "client_version",
+                  "value": "<string>",
+                  "description": "(Required) Client software version"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 2841,\n  \"method\": \"public/hello\",\n  \"params\": {\n    \"client_name\": \"My Trading Software\",\n    \"client_version\": \"1.0.2\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2be4ace7-c05a-4b88-9f00-c2d8663cabf5",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "hello"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "client_name",
+                      "value": "My Trading Software"
+                    },
+                    {
+                      "key": "client_version",
+                      "value": "1.0.2"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 2841,\n  \"method\": \"public/hello\",\n  \"params\": {\n    \"client_name\": \"My Trading Software\",\n    \"client_version\": \"1.0.2\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 8212,\n  \"result\": {\n    \"version\": \"1.2.26\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2b6b469a-b605-4242-a6df-51d6d7fbf375",
+          "name": "Method used to get information about locked currencies\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fstatus)\n\n",
+          "request": {
+            "name": "Method used to get information about locked currencies\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fstatus)\n\n",
+            "description": {
+              "content": "Method used to get information about locked currencies\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fstatus)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "status"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 55,\n  \"method\": \"public/status\",\n  \"params\": {}\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "dab238ad-0156-4511-a8dc-dc2f834edbf3",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 55,\n  \"method\": \"public/status\",\n  \"params\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 55,\n  \"result\": {\n    \"locked_currencies\": [\n      \"BTC\",\n      \"ETH\"\n    ],\n    \"locked\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "76ee9c01-5a84-4034-9bcc-b1ad09bd6200",
+          "name": "Tests the connection to the API server, and returns its version. You can use this to make sure the API is reachable, and matches the expected version.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Ftest)\n\n",
+          "request": {
+            "name": "Tests the connection to the API server, and returns its version. You can use this to make sure the API is reachable, and matches the expected version.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Ftest)\n\n",
+            "description": {
+              "content": "Tests the connection to the API server, and returns its version. You can use this to make sure the API is reachable, and matches the expected version.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Ftest)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "test"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "expected_result",
+                  "value": "<string>",
+                  "description": "The value \"exception\" will trigger an error response. This may be useful for testing wrapper libraries."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 8212,\n  \"method\": \"public/test\",\n  \"params\": {}\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4090fcc9-0c93-4438-bb86-b01156b8bbe1",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "test"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "expected_result",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 8212,\n  \"method\": \"public/test\",\n  \"params\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 8212,\n  \"result\": {\n    \"version\": \"1.2.26\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c7871ac3-d104-4e81-9005-04d76ddcc582",
+          "name": "Retrieves the current time (in milliseconds). This API endpoint can be used to check the clock skew between your software and Deribit's systems.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_time)\n\n",
+          "request": {
+            "name": "Retrieves the current time (in milliseconds). This API endpoint can be used to check the clock skew between your software and Deribit's systems.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_time)\n\n",
+            "description": {
+              "content": "Retrieves the current time (in milliseconds). This API endpoint can be used to check the clock skew between your software and Deribit's systems.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_time)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "get_time"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 7365,\n  \"method\": \"public/get_time\",\n  \"params\": {}\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "817cbb64-6c99-4851-b389-fffc55746b65",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "get_time"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 7365,\n  \"method\": \"public/get_time\",\n  \"params\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 7365,\n  \"result\": 1550147385946\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://test.deribit.com/api/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "1715c29e-fb48-4606-a993-83b01e943d48",
+    "name": "Deribit Account Management Supporting API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

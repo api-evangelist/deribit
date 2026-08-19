@@ -1,0 +1,146 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Deribit Account Management Subscription Management API",
+    "version": "2.1.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Subscription Management",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GET /public/subscribe",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/public/subscribe",
+            "params": [
+              {
+                "name": "channels",
+                "value": "",
+                "type": "query",
+                "description": "A list of channels to subscribe to. See [Notifications and Subscriptions](https://docs.deribit.com/articles/notifications) for all available channels."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Subscribe to one or more channels. This is the same method as `/private/subscribe`, but it can only be used for 'public' channels.\n\nFor a complete list of available subscription channels and their notification formats, see [Notifications and Subscriptions](https://docs.deribit.com/articles/notifications).\n\n**Note - This method has distinct API rate limiting requirements:** Sustained rate: ~3.3 requests/second. For more information, see [Rate Limits](https://docs.deribit.com/articles/rate-limits)"
+        },
+        {
+          "info": {
+            "name": "GET /public/unsubscribe",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/public/unsubscribe",
+            "params": [
+              {
+                "name": "channels",
+                "value": "",
+                "type": "query",
+                "description": "A list of channels to unsubscribe from. Only successfully unsubscribed channels will be returned in the result. See [Notifications and Subscriptions](https://docs.deribit.com/articles/notifications) for all available channels."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Unsubscribe from one or more channels. The response contains only the channels that were successfully unsubscribed in this request.\n\nFor a complete list of available subscription channels and their notification formats, see [Notifications and Subscriptions](https://docs.deribit.com/articles/notifications).\n\n**Note:** The `result` field in the response contains only the channels that were successfully processed and unsubscribed from this specific request. It does not include all previously subscr"
+        },
+        {
+          "info": {
+            "name": "GET /public/unsubscribe_all",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/public/unsubscribe_all",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Unsubscribe from all the channels subscribed so far. This method takes no parameters.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Funsubscribe_all)\n\n"
+        },
+        {
+          "info": {
+            "name": "GET /private/subscribe",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/private/subscribe",
+            "params": [
+              {
+                "name": "channels",
+                "value": "",
+                "type": "query",
+                "description": "A list of channels to subscribe to. See [Notifications and Subscriptions](https://docs.deribit.com/articles/notifications) for all available channels."
+              },
+              {
+                "name": "label",
+                "value": "",
+                "type": "query",
+                "description": "Optional label which will be added to notifications of private channels (max 16 characters)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Subscribe to one or more channels. The name of the channel determines what information will be provided, and in what form.\n\nFor a complete list of available subscription channels and their notification formats, see [Notifications and Subscriptions](https://docs.deribit.com/articles/notifications).\n\n**Note - This method has distinct API rate limiting requirements:** Sustained rate: ~3.3 requests/second. For more information, see [Rate Limits](https://docs.deribit.com/articles/rate-limits).\n\n**📖 "
+        },
+        {
+          "info": {
+            "name": "GET /private/unsubscribe",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/private/unsubscribe",
+            "params": [
+              {
+                "name": "channels",
+                "value": "",
+                "type": "query",
+                "description": "A list of channels to unsubscribe from. Only successfully unsubscribed channels will be returned in the result. See [Notifications and Subscriptions](https://docs.deribit.com/articles/notifications) for all available channels."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Unsubscribe from one or more channels. The response contains only the channels that were successfully unsubscribed in this request.\n\nFor a complete list of available subscription channels and their notification formats, see [Notifications and Subscriptions](https://docs.deribit.com/articles/notifications).\n\n**Note:** The `result` field in the response contains only the channels that were successfully processed and unsubscribed from this specific request. It does not include all previously subscr"
+        },
+        {
+          "info": {
+            "name": "GET /private/unsubscribe_all",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/private/unsubscribe_all",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Unsubscribe from all the channels subscribed so far. This method takes no parameters.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Funsubscribe_all)\n\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

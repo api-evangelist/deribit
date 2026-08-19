@@ -1,0 +1,51 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Deribit Account Management Portfolio Management API",
+    "version": "2.1.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Portfolio Management",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Mass Cancel",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/api/v2/private/cancel_all"
+          },
+          "docs": "Cancels all open orders and quotes belonging to the authenticated portfolio. No filter parameters are accepted — the cancel applies to every instrument and every side."
+        },
+        {
+          "info": {
+            "name": "Lock Portfolio",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/api/v2/private/lock_portfolio"
+          },
+          "docs": "Locks the authenticated portfolio. All currently open `DIRECT_ACCESS` orders and quotes for this portfolio are cancelled immediately. New `DIRECT_ACCESS` orders and quotes are rejected until the portfolio is unlocked.\n\nREST-submitted orders are not affected by the lock state."
+        },
+        {
+          "info": {
+            "name": "Unlock Portfolio",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/api/v2/private/unlock_portfolio"
+          },
+          "docs": "Unlocks the authenticated portfolio, resuming normal acceptance of `DIRECT_ACCESS` orders and quotes.\n\nUnlocking the portfolio does **not** restore any previously cancelled orders."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

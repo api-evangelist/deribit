@@ -1,0 +1,182 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Deribit Account Management Authentication API",
+    "version": "2.1.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Authentication",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GET /public/auth",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/public/auth",
+            "params": [
+              {
+                "name": "grant_type",
+                "value": "",
+                "type": "query",
+                "description": "Method of authentication"
+              },
+              {
+                "name": "client_id",
+                "value": "",
+                "type": "query",
+                "description": "Required for grant type `` `client_credentials` `` and `` `client_signature` ``"
+              },
+              {
+                "name": "client_secret",
+                "value": "",
+                "type": "query",
+                "description": "Required for grant type `` `client_credentials` ``"
+              },
+              {
+                "name": "refresh_token",
+                "value": "",
+                "type": "query",
+                "description": "Required for grant type `` `refresh_token` ``"
+              },
+              {
+                "name": "timestamp",
+                "value": "",
+                "type": "query",
+                "description": "Required for grant type `` `client_signature` ``.\n\nProvides time when request has been generated (milliseconds since the UNIX epoch).\n"
+              },
+              {
+                "name": "signature",
+                "value": "",
+                "type": "query",
+                "description": "Required for grant type `` `client_signature` ``.\n\nIt's a cryptographic signature calculated over provided fields using user **secret key**. The signature should be calculated as an HMAC (Hash-based Message Authentication Code) with `` `SHA256` `` hash algorithm.\n"
+              },
+              {
+                "name": "nonce",
+                "value": "",
+                "type": "query",
+                "description": "Optional for grant type `` `client_signature` ``.\n\nDelivers user generated initialization vector for the server token.\n"
+              },
+              {
+                "name": "data",
+                "value": "",
+                "type": "query",
+                "description": "Optional for grant type `` `client_signature` ``.\n\nContains any user specific value.\n"
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query",
+                "description": "Will be passed back in the response."
+              },
+              {
+                "name": "scope",
+                "value": "",
+                "type": "query",
+                "description": "Describes type of the access for assigned token.\n\n\n**Possible values:**\n\n- `` `connection` ``\n- `` `session:name` ``\n- `` `trade:[read, read_write, none]` ``\n- `` `wallet:[read, read_write, none]` ``\n- `` `account:[read, read_write, none]` ``\n- `` `expires:NUMBER` ``\n- `` `ip:ADDR` ``\n\n\nDetails are elucidated in [Access scope](https://docs.deribit.com/articles/access-scope)\n"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieve an OAuth access token, to be used for authentication of 'private' requests.\n\n**📖 Related Article:** [Authentication](https://docs.deribit.com/articles/authentication)\n\n**Authentication Methods:**\n\nThree methods of authentication are supported:\n\n\n- ``client_credentials`` - Using the client id and client secret that can be found on the API page on the website. This is the simplest method, suitable for server-to-server applications and quick setup.\n\n- ``client_signature`` - Enhanced secur"
+        },
+        {
+          "info": {
+            "name": "GET /public/exchange_token",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/public/exchange_token",
+            "params": [
+              {
+                "name": "refresh_token",
+                "value": "",
+                "type": "query",
+                "description": "Refresh token"
+              },
+              {
+                "name": "subject_id",
+                "value": "",
+                "type": "query",
+                "description": "New subject id"
+              },
+              {
+                "name": "scope",
+                "value": "",
+                "type": "query",
+                "description": "Optional scope override for the new session. Cannot exceed caller's permissions. Supports `session` scope for direct session creation during token exchange."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generates a token for a new subject id. This method can be used to switch between subaccounts.\n\n**📖 Related Articles:** \n- [Fork and Exchange Tokens](https://docs.deribit.com/articles/authentication#fork-and-exchange-tokens)\n- [Managing Subaccounts](https://docs.deribit.com/articles/managing-subaccounts-api)\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fexchange_token)\n\n"
+        },
+        {
+          "info": {
+            "name": "GET /public/fork_token",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/public/fork_token",
+            "params": [
+              {
+                "name": "refresh_token",
+                "value": "",
+                "type": "query",
+                "description": "Refresh token"
+              },
+              {
+                "name": "session_name",
+                "value": "",
+                "type": "query",
+                "description": "New session name"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generates a token for a new named session. This method can be used only with session scoped tokens.\n\n**📖 More Details:** [Fork and Exchange Tokens](https://docs.deribit.com/articles/authentication#fork-and-exchange-tokens)\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Ffork_token)\n\n"
+        },
+        {
+          "info": {
+            "name": "GET /private/logout",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/private/logout",
+            "params": [
+              {
+                "name": "invalidate_token",
+                "value": "",
+                "type": "query",
+                "description": "<b>Token Invalidation:</b> By default, all tokens created during the current session are invalidated when you call this method. You can control this behavior using this parameter: <ul><li><b>invalidate_token=true</b> (default): All session tokens are invalidated, requiring re-authentication for new connections</li><li><b>invalidate_token=false</b>: Tokens remain valid, allowing you to reconnect using the same authentication</li></ul>"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Gracefully terminate the current WebSocket connection and optionally invalidate all tokens associated with the session.\n\nThis method provides a clean way to close WebSocket connections while preserving active orders when [**Cancel On Disconnect (COD)**](https://docs.deribit.com/api-reference/session-management/private-enable_cancel_on_disconnect) is enabled.\n\n**Use Cases:**\n\n- **Clean Shutdown:** Properly close WebSocket connections during application shutdown or restart\n- **Order Preservation:*"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

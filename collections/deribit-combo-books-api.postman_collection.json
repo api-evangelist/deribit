@@ -1,0 +1,597 @@
+{
+  "item": [
+    {
+      "id": "d0e7d58d-c9a4-40a2-9fd2-1c9b27204ad8",
+      "name": "Combo Books",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "cbd60405-8249-4781-b402-b0338b1e26d9",
+          "name": "Retrieves information about active combos for the specified currency. Returns detailed information including leg structures and combo properties.\n\nFor a list of combo IDs only, use [public/get_combo_ids](https://docs.deribit.com/api-reference/combo-books/public-get_combo_ids). For details about a specific combo, use [public/get_combo_details](https://docs.deribit.com/api-reference/combo-books/public-get_combo_details).\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_combos)\n\n",
+          "request": {
+            "name": "Retrieves information about active combos for the specified currency. Returns detailed information including leg structures and combo properties.\n\nFor a list of combo IDs only, use [public/get_combo_ids](https://docs.deribit.com/api-reference/combo-books/public-get_combo_ids). For details about a specific combo, use [public/get_combo_details](https://docs.deribit.com/api-reference/combo-books/public-get_combo_details).\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_combos)\n\n",
+            "description": {
+              "content": "Retrieves information about active combos for the specified currency. Returns detailed information including leg structures and combo properties.\n\nFor a list of combo IDs only, use [public/get_combo_ids](https://docs.deribit.com/api-reference/combo-books/public-get_combo_ids). For details about a specific combo, use [public/get_combo_details](https://docs.deribit.com/api-reference/combo-books/public-get_combo_details).\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_combos)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "get_combos"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "currency",
+                  "value": "<string>",
+                  "description": "(Required) The currency symbol or `\"any\"` for all"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 2,\n  \"method\": \"public/get_combos\",\n  \"params\": {\n    \"currency\": \"BTC\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c06ca28f-3f5c-40de-bf8a-613af864d5dc",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "get_combos"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "currency",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 2,\n  \"method\": \"public/get_combos\",\n  \"params\": {\n    \"currency\": \"BTC\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 2,\n  \"result\": [\n    {\n      \"state_timestamp\": 1650636265101,\n      \"state\": \"active\",\n      \"legs\": [\n        {\n          \"instrument_name\": \"BTC-29APR22-39300-C\",\n          \"amount\": 1\n        },\n        {\n          \"instrument_name\": \"BTC-29APR22-39600-C\",\n          \"amount\": -1\n        }\n      ],\n      \"id\": \"BTC-CS-29APR22-39300_39600\",\n      \"instrument_id\": 28,\n      \"creation_timestamp\": 1650636235000\n    },\n    {\n      \"state_timestamp\": 1650620605150,\n      \"state\": \"active\",\n      \"legs\": [\n        {\n          \"instrument_name\": \"BTC-PERPETUAL\",\n          \"amount\": -1\n        },\n        {\n          \"instrument_name\": \"BTC-29APR22\",\n          \"amount\": 1\n        }\n      ],\n      \"id\": \"BTC-FS-29APR22_PERP\",\n      \"instrument_id\": 27,\n      \"creation_timestamp\": 1650620575000\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "87b1603f-3aa8-4827-8e73-f03b27079942",
+          "name": "Retrieves available combo IDs. This method can be used to get the list of all combos, or only the list of combos in the given state.\n\nUse [public/get_combo_details](https://docs.deribit.com/api-reference/combo-books/public-get_combo_details) to retrieve detailed information about a specific combo.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_combo_ids)\n\n",
+          "request": {
+            "name": "Retrieves available combo IDs. This method can be used to get the list of all combos, or only the list of combos in the given state.\n\nUse [public/get_combo_details](https://docs.deribit.com/api-reference/combo-books/public-get_combo_details) to retrieve detailed information about a specific combo.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_combo_ids)\n\n",
+            "description": {
+              "content": "Retrieves available combo IDs. This method can be used to get the list of all combos, or only the list of combos in the given state.\n\nUse [public/get_combo_details](https://docs.deribit.com/api-reference/combo-books/public-get_combo_details) to retrieve detailed information about a specific combo.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_combo_ids)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "get_combo_ids"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "currency",
+                  "value": "<string>",
+                  "description": "(Required) The currency symbol"
+                },
+                {
+                  "disabled": false,
+                  "key": "state",
+                  "value": "<string>",
+                  "description": "Combo state, if not provided combos of all states are considered"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"method\": \"public/get_combo_ids\",\n  \"params\": {\n    \"currency\": \"BTC\",\n    \"state\": \"active\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "33e479a2-5b49-4ae1-9d2d-983627279eaa",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "get_combo_ids"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "currency",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "state",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"method\": \"public/get_combo_ids\",\n  \"params\": {\n    \"currency\": \"BTC\",\n    \"state\": \"active\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"result\": [\n    \"BTC-CS-29APR22-39300_39600\",\n    \"BTC-FS-29APR22_PERP\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0d95eec2-3e61-433e-9b92-778e0cdbf424",
+          "name": "Retrieves detailed information about a specific combo, including its leg structure, state, and other properties.\n\nUse [public/get_combo_ids](https://docs.deribit.com/api-reference/combo-books/public-get_combo_ids) to get a list of available combo IDs.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_combo_details)\n\n",
+          "request": {
+            "name": "Retrieves detailed information about a specific combo, including its leg structure, state, and other properties.\n\nUse [public/get_combo_ids](https://docs.deribit.com/api-reference/combo-books/public-get_combo_ids) to get a list of available combo IDs.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_combo_details)\n\n",
+            "description": {
+              "content": "Retrieves detailed information about a specific combo, including its leg structure, state, and other properties.\n\nUse [public/get_combo_ids](https://docs.deribit.com/api-reference/combo-books/public-get_combo_ids) to get a list of available combo IDs.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_combo_details)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "get_combo_details"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "combo_id",
+                  "value": "<string>",
+                  "description": "(Required) Combo ID"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 3,\n  \"method\": \"public/get_combo_details\",\n  \"params\": {\n    \"combo_id\": \"BTC-FS-29APR22_PERP\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c238ce33-5089-4efa-9cde-91cca0b6bec5",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "get_combo_details"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "combo_id",
+                      "value": "BTC-FS-31DEC21-PERP"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 3,\n  \"method\": \"public/get_combo_details\",\n  \"params\": {\n    \"combo_id\": \"BTC-FS-29APR22_PERP\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 3,\n  \"result\": {\n    \"state_timestamp\": 1650620605150,\n    \"state\": \"active\",\n    \"legs\": [\n      {\n        \"instrument_name\": \"BTC-PERPETUAL\",\n        \"amount\": -1\n      },\n      {\n        \"instrument_name\": \"BTC-29APR22\",\n        \"amount\": 1\n      }\n    ],\n    \"id\": \"BTC-FS-29APR22_PERP\",\n    \"instrument_id\": 27,\n    \"creation_timestamp\": 1650620575000\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8c0245e1-502b-45c4-9b8d-cf4849ca2233",
+          "name": "Verifies and creates a combo book or returns an existing combo matching the given trades. Combos allow trading on multiple instruments (futures and options) simultaneously as a single strategy.\n\nIf a combo matching the provided trades already exists, this method returns the existing combo. Otherwise, it creates a new combo book with the specified leg structure.\n\n**Scope:** `trade:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fcreate_combo)\n\n",
+          "request": {
+            "name": "Verifies and creates a combo book or returns an existing combo matching the given trades. Combos allow trading on multiple instruments (futures and options) simultaneously as a single strategy.\n\nIf a combo matching the provided trades already exists, this method returns the existing combo. Otherwise, it creates a new combo book with the specified leg structure.\n\n**Scope:** `trade:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fcreate_combo)\n\n",
+            "description": {
+              "content": "Verifies and creates a combo book or returns an existing combo matching the given trades. Combos allow trading on multiple instruments (futures and options) simultaneously as a single strategy.\n\nIf a combo matching the provided trades already exists, this method returns the existing combo. Otherwise, it creates a new combo book with the specified leg structure.\n\n**Scope:** `trade:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fcreate_combo)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "private",
+                "create_combo"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "trades",
+                  "value": "{\"instrument_name\":\"<string>\",\"amount\":\"<number>\",\"direction\":\"<string>\"}",
+                  "description": "(Required) List of trades used to create a combo"
+                },
+                {
+                  "disabled": false,
+                  "key": "trades",
+                  "value": "{\"instrument_name\":\"<string>\",\"amount\":\"<number>\",\"direction\":\"<string>\"}",
+                  "description": "(Required) List of trades used to create a combo"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 6,\n  \"method\": \"private/create_combo\",\n  \"params\": {\n    \"trades\": [\n      {\n        \"instrument_name\": \"BTC-29APR22-37500-C\",\n        \"amount\": \"1\",\n        \"direction\": \"buy\"\n      },\n      {\n        \"instrument_name\": \"BTC-29APR22-37500-P\",\n        \"amount\": \"1\",\n        \"direction\": \"sell\"\n      }\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "de9142a4-c216-478f-8d04-195a48956465",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "private",
+                    "create_combo"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "trades",
+                      "value": "[object Object]"
+                    },
+                    {
+                      "key": "trades",
+                      "value": "[object Object]"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 6,\n  \"method\": \"private/create_combo\",\n  \"params\": {\n    \"trades\": [\n      {\n        \"instrument_name\": \"BTC-29APR22-37500-C\",\n        \"amount\": \"1\",\n        \"direction\": \"buy\"\n      },\n      {\n        \"instrument_name\": \"BTC-29APR22-37500-P\",\n        \"amount\": \"1\",\n        \"direction\": \"sell\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 6,\n  \"result\": {\n    \"state_timestamp\": 1650960943922,\n    \"state\": \"active\",\n    \"legs\": [\n      {\n        \"instrument_name\": \"BTC-29APR22-37500-C\",\n        \"amount\": 1\n      },\n      {\n        \"instrument_name\": \"BTC-29APR22-37500-P\",\n        \"amount\": -1\n      }\n    ],\n    \"id\": \"BTC-REV-29APR22-37500\",\n    \"instrument_id\": 52,\n    \"creation_timestamp\": 1650960943000\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7f4c34ef-ef95-4d6c-951f-34b65ab61071",
+          "name": "Returns individual leg prices for a given combo structure based on an aggregated price of the strategy and the mark prices of the individual legs.\n\n**Note:** Leg prices change dynamically with mark price fluctuations, and the algorithm is calibrated only for conventional option structures and future spreads. This method supports both inverse strategies and known linear structures within a single currency pair.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_leg_prices)\n\n",
+          "request": {
+            "name": "Returns individual leg prices for a given combo structure based on an aggregated price of the strategy and the mark prices of the individual legs.\n\n**Note:** Leg prices change dynamically with mark price fluctuations, and the algorithm is calibrated only for conventional option structures and future spreads. This method supports both inverse strategies and known linear structures within a single currency pair.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_leg_prices)\n\n",
+            "description": {
+              "content": "Returns individual leg prices for a given combo structure based on an aggregated price of the strategy and the mark prices of the individual legs.\n\n**Note:** Leg prices change dynamically with mark price fluctuations, and the algorithm is calibrated only for conventional option structures and future spreads. This method supports both inverse strategies and known linear structures within a single currency pair.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_leg_prices)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "private",
+                "get_leg_prices"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "legs",
+                  "value": "{\"instrument_name\":\"<string>\",\"amount\":\"<number>\",\"direction\":\"<string>\"}",
+                  "description": "(Required) List of legs for which the prices will be calculated"
+                },
+                {
+                  "disabled": false,
+                  "key": "legs",
+                  "value": "{\"instrument_name\":\"<string>\",\"amount\":\"<number>\",\"direction\":\"<string>\"}",
+                  "description": "(Required) List of legs for which the prices will be calculated"
+                },
+                {
+                  "disabled": false,
+                  "key": "price",
+                  "value": "<number>",
+                  "description": "(Required) Price for the whole leg structure"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"method\": \"private/get_leg_prices\",\n  \"params\": {\n    \"price\": 0.6,\n    \"legs\": [\n      {\n        \"instrument_name\": \"BTC-1NOV24-67000-C\",\n        \"direction\": \"buy\",\n        \"amount\": 2\n      },\n      {\n        \"instrument_name\": \"BTC-1NOV24-66000-C\",\n        \"direction\": \"sell\",\n        \"amount\": 2\n      }\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "dc29ef70-7a3e-451c-967d-f7e04c960aee",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "private",
+                    "get_leg_prices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "legs",
+                      "value": "[object Object]"
+                    },
+                    {
+                      "key": "legs",
+                      "value": "[object Object]"
+                    },
+                    {
+                      "key": "price",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"method\": \"private/get_leg_prices\",\n  \"params\": {\n    \"price\": 0.6,\n    \"legs\": [\n      {\n        \"instrument_name\": \"BTC-1NOV24-67000-C\",\n        \"direction\": \"buy\",\n        \"amount\": 2\n      },\n      {\n        \"instrument_name\": \"BTC-1NOV24-66000-C\",\n        \"direction\": \"sell\",\n        \"amount\": 2\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"result\": {\n    \"legs\": [\n      {\n        \"ratio\": 1,\n        \"instrument_name\": \"BTC-1NOV24-67000-C\",\n        \"price\": 0.6001,\n        \"direction\": \"buy\"\n      },\n      {\n        \"ratio\": 1,\n        \"instrument_name\": \"BTC-1NOV24-66000-C\",\n        \"price\": 0.0001,\n        \"direction\": \"sell\"\n      }\n    ],\n    \"amount\": 2\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://test.deribit.com/api/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "8d44336d-5e45-41df-bbd6-de7d8a4c11b7",
+    "name": "Deribit Account Management Combo Books API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,3011 @@
+{
+  "item": [
+    {
+      "id": "29848035-5ca3-4c44-8e19-dfde5fb67851",
+      "name": "Wallet",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "24384fde-2b2d-424f-aa48-f72d7f978c65",
+          "name": "Retrieve the latest user deposits. Returns a list of deposit transactions with their status, amounts, addresses, confirmations, and other relevant details.\n\n**📖 Related Article:** [Managing Deposits](https://docs.deribit.com/articles/managing-deposits-api)\n\n**Scope:** `wallet:read`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_deposits)\n\n",
+          "request": {
+            "name": "Retrieve the latest user deposits. Returns a list of deposit transactions with their status, amounts, addresses, confirmations, and other relevant details.\n\n**📖 Related Article:** [Managing Deposits](https://docs.deribit.com/articles/managing-deposits-api)\n\n**Scope:** `wallet:read`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_deposits)\n\n",
+            "description": {
+              "content": "Retrieve the latest user deposits. Returns a list of deposit transactions with their status, amounts, addresses, confirmations, and other relevant details.\n\n**📖 Related Article:** [Managing Deposits](https://docs.deribit.com/articles/managing-deposits-api)\n\n**Scope:** `wallet:read`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_deposits)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "private",
+                "get_deposits"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "currency",
+                  "value": "<string>",
+                  "description": "(Required) The currency symbol"
+                },
+                {
+                  "disabled": false,
+                  "key": "count",
+                  "value": "<integer>",
+                  "description": "Number of requested items, default - `10`, maximum - `1000`"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The offset for pagination, default - `0`"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 5611,\n  \"method\": \"private/get_deposits\",\n  \"params\": {\n    \"currency\": \"BTC\",\n    \"count\": 10,\n    \"offset\": 0\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "bac41c78-ca62-4e70-b014-17ea59e36c2a",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "private",
+                    "get_deposits"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "currency",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "count",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 5611,\n  \"method\": \"private/get_deposits\",\n  \"params\": {\n    \"currency\": \"BTC\",\n    \"count\": 10,\n    \"offset\": 0\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 5611,\n  \"result\": {\n    \"count\": 1,\n    \"data\": [\n      {\n        \"address\": \"2N35qDKDY22zmJq9eSyiAerMD4enJ1xx6ax\",\n        \"amount\": 5,\n        \"currency\": \"BTC\",\n        \"received_timestamp\": 1549295017670,\n        \"state\": \"completed\",\n        \"transaction_id\": \"230669110fdaf0a0dbcdc079b6b8b43d5af29cc73683835b9bc6b3406c065fda\",\n        \"updated_timestamp\": 1549295130159\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "47c87184-4ca4-49a7-b9cb-d85513fb8af0",
+          "name": "Creates a new deposit address for the specified currency. Each currency can have multiple deposit addresses. Use this method to generate a new address for receiving deposits.\n\n**Note:**\n\nFor Bitcoin, a new address can be generated every 24 hours.\n\nFor ERC20, Solana and XRP only one address can be generated.\n\n**Note:**\n\nIf an ERC20 address is generated, this address will be automatically added for every asset that uses ERC20 addresses.\n\n**📖 Related Article:** [Managing Deposits](https://docs.deribit.com/articles/managing-deposits-api)\n\n**Scope:** `wallet:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fcreate_deposit_address)\n\n",
+          "request": {
+            "name": "Creates a new deposit address for the specified currency. Each currency can have multiple deposit addresses. Use this method to generate a new address for receiving deposits.\n\n**Note:**\n\nFor Bitcoin, a new address can be generated every 24 hours.\n\nFor ERC20, Solana and XRP only one address can be generated.\n\n**Note:**\n\nIf an ERC20 address is generated, this address will be automatically added for every asset that uses ERC20 addresses.\n\n**📖 Related Article:** [Managing Deposits](https://docs.deribit.com/articles/managing-deposits-api)\n\n**Scope:** `wallet:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fcreate_deposit_address)\n\n",
+            "description": {
+              "content": "Creates a new deposit address for the specified currency. Each currency can have multiple deposit addresses. Use this method to generate a new address for receiving deposits.\n\n**Note:**\n\nFor Bitcoin, a new address can be generated every 24 hours.\n\nFor ERC20, Solana and XRP only one address can be generated.\n\n**Note:**\n\nIf an ERC20 address is generated, this address will be automatically added for every asset that uses ERC20 addresses.\n\n**📖 Related Article:** [Managing Deposits](https://docs.deribit.com/articles/managing-deposits-api)\n\n**Scope:** `wallet:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fcreate_deposit_address)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "private",
+                "create_deposit_address"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "currency",
+                  "value": "<string>",
+                  "description": "(Required) The currency symbol"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 7538,\n  \"method\": \"private/create_deposit_address\",\n  \"params\": {\n    \"currency\": \"BTC\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "609bd2f0-59b4-4e30-9611-39fd43e2ba81",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "private",
+                    "create_deposit_address"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "currency",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 7538,\n  \"method\": \"private/create_deposit_address\",\n  \"params\": {\n    \"currency\": \"BTC\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 3461,\n  \"result\": {\n    \"address\": \"2N8udZGBc1hLRCFsU9kGwMPpmYUwMFTuCwB\",\n    \"creation_timestamp\": 1550575165170,\n    \"currency\": \"BTC\",\n    \"type\": \"deposit\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f9f679e0-7fc2-4e0c-adce-544a339661d6",
+          "name": "Retrieve the current deposit address for the specified currency. Returns the most recently created or used deposit address for receiving funds.\n\n**📖 Related Article:** [Managing Deposits](https://docs.deribit.com/articles/managing-deposits-api)\n\n**Scope:** `wallet:read`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_current_deposit_address)\n\n",
+          "request": {
+            "name": "Retrieve the current deposit address for the specified currency. Returns the most recently created or used deposit address for receiving funds.\n\n**📖 Related Article:** [Managing Deposits](https://docs.deribit.com/articles/managing-deposits-api)\n\n**Scope:** `wallet:read`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_current_deposit_address)\n\n",
+            "description": {
+              "content": "Retrieve the current deposit address for the specified currency. Returns the most recently created or used deposit address for receiving funds.\n\n**📖 Related Article:** [Managing Deposits](https://docs.deribit.com/articles/managing-deposits-api)\n\n**Scope:** `wallet:read`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_current_deposit_address)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "private",
+                "get_current_deposit_address"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "currency",
+                  "value": "<string>",
+                  "description": "(Required) The currency symbol"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 3461,\n  \"method\": \"private/get_current_deposit_address\",\n  \"params\": {\n    \"currency\": \"BTC\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6ebe5904-eda9-4fef-8f02-a8b9175f12e1",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "private",
+                    "get_current_deposit_address"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "currency",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 3461,\n  \"method\": \"private/get_current_deposit_address\",\n  \"params\": {\n    \"currency\": \"BTC\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 3461,\n  \"result\": {\n    \"address\": \"2N8udZGBc1hLRCFsU9kGwMPpmYUwMFTuCwB\",\n    \"creation_timestamp\": 1550575165170,\n    \"currency\": \"BTC\",\n    \"type\": \"deposit\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "050195e7-d2b4-4f6a-867a-7371769123ff",
+          "name": "Creates a new withdrawal request. This method allows you to withdraw funds from your account to an external address. The withdrawal can be configured with priority settings and must use an address from your address book.\n\n**Withdrawal Checks & Balance Updates**\n\nWithdrawal funds are checked twice: when a user requests a withdrawal and again when they confirm it via the email link. If available funds decrease between these steps, the withdrawal may be rejected.\n\nA withdrawal may also be rejected if the on-chain fee increases between the request and confirmation.\n\nThe withdrawal amount is deducted only after all checks pass and the transaction is scheduled. The web-interface Withdrawal tab displays all withdrawals regardless of their status (pending, cancelled, rejected, or completed).\n\n**📖 Related Article:** [Managing Withdrawals](https://docs.deribit.com/articles/managing-withdrawals-api)\n\n**Scope:** `wallet:read_write` and mainaccount\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fwithdraw)\n\n",
+          "request": {
+            "name": "Creates a new withdrawal request. This method allows you to withdraw funds from your account to an external address. The withdrawal can be configured with priority settings and must use an address from your address book.\n\n**Withdrawal Checks & Balance Updates**\n\nWithdrawal funds are checked twice: when a user requests a withdrawal and again when they confirm it via the email link. If available funds decrease between these steps, the withdrawal may be rejected.\n\nA withdrawal may also be rejected if the on-chain fee increases between the request and confirmation.\n\nThe withdrawal amount is deducted only after all checks pass and the transaction is scheduled. The web-interface Withdrawal tab displays all withdrawals regardless of their status (pending, cancelled, rejected, or completed).\n\n**📖 Related Article:** [Managing Withdrawals](https://docs.deribit.com/articles/managing-withdrawals-api)\n\n**Scope:** `wallet:read_write` and mainaccount\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fwithdraw)\n\n",
+            "description": {
+              "content": "Creates a new withdrawal request. This method allows you to withdraw funds from your account to an external address. The withdrawal can be configured with priority settings and must use an address from your address book.\n\n**Withdrawal Checks & Balance Updates**\n\nWithdrawal funds are checked twice: when a user requests a withdrawal and again when they confirm it via the email link. If available funds decrease between these steps, the withdrawal may be rejected.\n\nA withdrawal may also be rejected if the on-chain fee increases between the request and confirmation.\n\nThe withdrawal amount is deducted only after all checks pass and the transaction is scheduled. The web-interface Withdrawal tab displays all withdrawals regardless of their status (pending, cancelled, rejected, or completed).\n\n**📖 Related Article:** [Managing Withdrawals](https://docs.deribit.com/articles/managing-withdrawals-api)\n\n**Scope:** `wallet:read_write` and mainaccount\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fwithdraw)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "private",
+                "withdraw"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "currency",
+                  "value": "<string>",
+                  "description": "(Required) The currency symbol"
+                },
+                {
+                  "disabled": false,
+                  "key": "address",
+                  "value": "<string>",
+                  "description": "(Required) Address in currency format, it must be in address book"
+                },
+                {
+                  "disabled": false,
+                  "key": "amount",
+                  "value": "<number>",
+                  "description": "(Required) Amount of funds to be withdrawn"
+                },
+                {
+                  "disabled": false,
+                  "key": "priority",
+                  "value": "<string>",
+                  "description": "Withdrawal priority, optional for BTC, default: `high`"
+                },
+                {
+                  "disabled": false,
+                  "key": "nonce",
+                  "value": "<string>",
+                  "description": "Optional idempotency nonce. If provided, subsequent requests with the same nonce will return the previously created transaction instead of creating a new one. Must be 8-128 characters. The nonce is persisted on the resulting transaction and returned in the response."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 6931,\n  \"method\": \"private/withdraw\",\n  \"params\": {\n    \"currency\": \"BTC\",\n    \"address\": \"2NBqqD5GRJ8wHy1PYyCXTe9ke5226FhavBz\",\n    \"amount\": 0.4,\n    \"priority\": \"mid\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3ea61c59-ccaf-43d4-b2c1-30c54cfab838",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "private",
+                    "withdraw"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "currency",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "address",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "amount",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "priority",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nonce",
+                      "value": "bF1_gfgcsd"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 6931,\n  \"method\": \"private/withdraw\",\n  \"params\": {\n    \"currency\": \"BTC\",\n    \"address\": \"2NBqqD5GRJ8wHy1PYyCXTe9ke5226FhavBz\",\n    \"amount\": 0.4,\n    \"priority\": \"mid\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 7420,\n  \"result\": {\n    \"address\": \"2NBqqD5GRJ8wHy1PYyCXTe9ke5226FhavBz\",\n    \"amount\": 0.5,\n    \"confirmed_timestamp\": null,\n    \"created_timestamp\": 1550571443070,\n    \"currency\": \"BTC\",\n    \"fee\": 0.0001,\n    \"id\": 1,\n    \"priority\": 0.15,\n    \"state\": \"cancelled\",\n    \"transaction_id\": null,\n    \"updated_timestamp\": 1550571443070\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3cb4022e-e2e6-4149-a22c-d5d996554ed4",
+          "name": "Cancels a pending withdrawal request. This method allows you to cancel a withdrawal that has not yet been processed. Once a withdrawal is processed, it cannot be cancelled.\n\n**📖 Related Article:** [Managing Withdrawals](https://docs.deribit.com/articles/managing-withdrawals-api)\n\n**Scope:** `wallet:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fcancel_withdrawal)\n\n",
+          "request": {
+            "name": "Cancels a pending withdrawal request. This method allows you to cancel a withdrawal that has not yet been processed. Once a withdrawal is processed, it cannot be cancelled.\n\n**📖 Related Article:** [Managing Withdrawals](https://docs.deribit.com/articles/managing-withdrawals-api)\n\n**Scope:** `wallet:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fcancel_withdrawal)\n\n",
+            "description": {
+              "content": "Cancels a pending withdrawal request. This method allows you to cancel a withdrawal that has not yet been processed. Once a withdrawal is processed, it cannot be cancelled.\n\n**📖 Related Article:** [Managing Withdrawals](https://docs.deribit.com/articles/managing-withdrawals-api)\n\n**Scope:** `wallet:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fcancel_withdrawal)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "private",
+                "cancel_withdrawal"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "currency",
+                  "value": "<string>",
+                  "description": "(Required) The currency symbol"
+                },
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<number>",
+                  "description": "(Required) The withdrawal id"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 7420,\n  \"method\": \"private/cancel_withdrawal\",\n  \"params\": {\n    \"currency\": \"BTC\",\n    \"id\": 1\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b1042818-3dfc-4592-ac1e-de6b5de7b8d5",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "private",
+                    "cancel_withdrawal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "currency",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 7420,\n  \"method\": \"private/cancel_withdrawal\",\n  \"params\": {\n    \"currency\": \"BTC\",\n    \"id\": 1\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 7420,\n  \"result\": {\n    \"address\": \"2NBqqD5GRJ8wHy1PYyCXTe9ke5226FhavBz\",\n    \"amount\": 0.5,\n    \"confirmed_timestamp\": null,\n    \"created_timestamp\": 1550571443070,\n    \"currency\": \"BTC\",\n    \"fee\": 0.0001,\n    \"id\": 1,\n    \"priority\": 0.15,\n    \"state\": \"cancelled\",\n    \"transaction_id\": null,\n    \"updated_timestamp\": 1550571443070\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d7d85c4b-7121-4691-99a1-a24b3abb6a0a",
+          "name": "Retrieve the latest user withdrawals. Returns a list of withdrawal requests with their status, amounts, addresses, and other relevant details.\n\n**📖 Related Article:** [Managing Withdrawals](https://docs.deribit.com/articles/managing-withdrawals-api)\n\n**Scope:** `wallet:read`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_withdrawals)\n\n",
+          "request": {
+            "name": "Retrieve the latest user withdrawals. Returns a list of withdrawal requests with their status, amounts, addresses, and other relevant details.\n\n**📖 Related Article:** [Managing Withdrawals](https://docs.deribit.com/articles/managing-withdrawals-api)\n\n**Scope:** `wallet:read`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_withdrawals)\n\n",
+            "description": {
+              "content": "Retrieve the latest user withdrawals. Returns a list of withdrawal requests with their status, amounts, addresses, and other relevant details.\n\n**📖 Related Article:** [Managing Withdrawals](https://docs.deribit.com/articles/managing-withdrawals-api)\n\n**Scope:** `wallet:read`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_withdrawals)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "private",
+                "get_withdrawals"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "currency",
+                  "value": "<string>",
+                  "description": "(Required) The currency symbol"
+                },
+                {
+                  "disabled": false,
+                  "key": "count",
+                  "value": "<integer>",
+                  "description": "Number of requested items, default - `10`, maximum - `1000`"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The offset for pagination, default - `0`"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 2745,\n  \"method\": \"private/get_withdrawals\",\n  \"params\": {\n    \"currency\": \"BTC\",\n    \"count\": 10,\n    \"offset\": 0\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7576118e-bb5b-4c58-8814-f6d8d91e7554",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "private",
+                    "get_withdrawals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "currency",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "count",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 2745,\n  \"method\": \"private/get_withdrawals\",\n  \"params\": {\n    \"currency\": \"BTC\",\n    \"count\": 10,\n    \"offset\": 0\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 2745,\n  \"result\": {\n    \"count\": 1,\n    \"data\": [\n      {\n        \"address\": \"2NBqqD5GRJ8wHy1PYyCXTe9ke5226FhavBz\",\n        \"amount\": 0.5,\n        \"confirmed_timestamp\": null,\n        \"created_timestamp\": 1550571443070,\n        \"currency\": \"BTC\",\n        \"fee\": 0.0001,\n        \"id\": 1,\n        \"priority\": 0.15,\n        \"state\": \"unconfirmed\",\n        \"transaction_id\": null,\n        \"updated_timestamp\": 1550571443070\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "430b4faf-41fe-4481-a8fd-f4ab330ceb8e",
+          "name": "Retrieves the address book entries of the given type. Returns all saved addresses that can be used for withdrawals, along with their labels and beneficiary information if available.\n\n**📖 Related Article:** [Managing Withdrawals](https://docs.deribit.com/articles/managing-withdrawals-api)\n\n**Scope:** `wallet:read`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_address_book)\n\n",
+          "request": {
+            "name": "Retrieves the address book entries of the given type. Returns all saved addresses that can be used for withdrawals, along with their labels and beneficiary information if available.\n\n**📖 Related Article:** [Managing Withdrawals](https://docs.deribit.com/articles/managing-withdrawals-api)\n\n**Scope:** `wallet:read`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_address_book)\n\n",
+            "description": {
+              "content": "Retrieves the address book entries of the given type. Returns all saved addresses that can be used for withdrawals, along with their labels and beneficiary information if available.\n\n**📖 Related Article:** [Managing Withdrawals](https://docs.deribit.com/articles/managing-withdrawals-api)\n\n**Scope:** `wallet:read`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_address_book)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "private",
+                "get_address_book"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "currency",
+                  "value": "<string>",
+                  "description": "(Required) The currency symbol"
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "(Required) Address book type"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 31,\n  \"method\": \"private/get_address_book\",\n  \"params\": {\n    \"currency\": \"BTC\",\n    \"type\": \"withdrawal\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "fdb1f9dd-89ff-4fbf-babc-83c77401aeeb",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "private",
+                    "get_address_book"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "currency",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 31,\n  \"method\": \"private/get_address_book\",\n  \"params\": {\n    \"currency\": \"BTC\",\n    \"type\": \"withdrawal\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 31,\n  \"result\": [\n    {\n      \"waiting_timestamp\": 1720252232860,\n      \"creation_timestamp\": 1719993033041,\n      \"requires_confirmation_change\": false,\n      \"personal\": true,\n      \"info_required\": false,\n      \"beneficiary_first_name\": \"John\",\n      \"beneficiary_last_name\": \"Doe\",\n      \"beneficiary_address\": \"NL, Amsterdam, Street, 1\",\n      \"requires_confirmation\": true,\n      \"currency\": \"BTC\",\n      \"agreed\": true,\n      \"address\": \"2NBqqD5GRJ8wHy1PYyCXTe9ke5226FhavBz\",\n      \"type\": \"withdrawal\",\n      \"status\": \"waiting\",\n      \"label\": \"Main Address\"\n    },\n    {\n      \"waiting_timestamp\": 1720252232760,\n      \"creation_timestamp\": 1719993032041,\n      \"requires_confirmation_change\": false,\n      \"personal\": true,\n      \"info_required\": false,\n      \"beneficiary_company_name\": \"MyCompany\",\n      \"beneficiary_address\": \"NL, Haarlem, Street, 5\",\n      \"requires_confirmation\": false,\n      \"currency\": \"BTC\",\n      \"agreed\": true,\n      \"address\": \"bc1qar0srrr7xfkvy5l643lydnw9re59gtzzwf0uyj\",\n      \"type\": \"withdrawal\",\n      \"status\": \"waiting\",\n      \"label\": \"One More Address\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c88384c8-2ae9-4146-9660-a00e14790c17",
+          "name": "Adds a new address to the address book. The address book allows you to store addresses for withdrawals, along with beneficiary information for compliance purposes.\n\n**📖 Related Article:** [Managing Withdrawals](https://docs.deribit.com/articles/managing-withdrawals-api)\n\n**Scope:** `wallet:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fadd_to_address_book)\n\n",
+          "request": {
+            "name": "Adds a new address to the address book. The address book allows you to store addresses for withdrawals, along with beneficiary information for compliance purposes.\n\n**📖 Related Article:** [Managing Withdrawals](https://docs.deribit.com/articles/managing-withdrawals-api)\n\n**Scope:** `wallet:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fadd_to_address_book)\n\n",
+            "description": {
+              "content": "Adds a new address to the address book. The address book allows you to store addresses for withdrawals, along with beneficiary information for compliance purposes.\n\n**📖 Related Article:** [Managing Withdrawals](https://docs.deribit.com/articles/managing-withdrawals-api)\n\n**Scope:** `wallet:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fadd_to_address_book)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "private",
+                "add_to_address_book"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "currency",
+                  "value": "<string>",
+                  "description": "(Required) The currency symbol"
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "(Required) Address book type"
+                },
+                {
+                  "disabled": false,
+                  "key": "address",
+                  "value": "<string>",
+                  "description": "(Required) Address in currency format"
+                },
+                {
+                  "disabled": false,
+                  "key": "label",
+                  "value": "<string>",
+                  "description": "(Required) Label of the address book entry"
+                },
+                {
+                  "disabled": false,
+                  "key": "beneficiary_vasp_name",
+                  "value": "<string>",
+                  "description": "(Required) Name of beneficiary VASP"
+                },
+                {
+                  "disabled": false,
+                  "key": "beneficiary_vasp_did",
+                  "value": "<string>",
+                  "description": "(Required) DID of beneficiary VASP"
+                },
+                {
+                  "disabled": false,
+                  "key": "beneficiary_vasp_website",
+                  "value": "<string>",
+                  "description": "Website of the beneficiary VASP. Required if the address book entry is associated with a VASP that is not included in the list of known VASPs"
+                },
+                {
+                  "disabled": false,
+                  "key": "beneficiary_first_name",
+                  "value": "<string>",
+                  "description": "First name of beneficiary (if beneficiary is a person)"
+                },
+                {
+                  "disabled": false,
+                  "key": "beneficiary_last_name",
+                  "value": "<string>",
+                  "description": "First name of beneficiary (if beneficiary is a person)"
+                },
+                {
+                  "disabled": false,
+                  "key": "beneficiary_company_name",
+                  "value": "<string>",
+                  "description": "Beneficiary company name (if beneficiary is a company)"
+                },
+                {
+                  "disabled": false,
+                  "key": "beneficiary_address",
+                  "value": "<string>",
+                  "description": "(Required) Geographical address of the beneficiary"
+                },
+                {
+                  "disabled": false,
+                  "key": "agreed",
+                  "value": "<boolean>",
+                  "description": "(Required) Indicates that the user agreed to shared provided information with 3rd parties"
+                },
+                {
+                  "disabled": false,
+                  "key": "personal",
+                  "value": "<boolean>",
+                  "description": "(Required) The user confirms that he provided address belongs to him and he has access to it via an un-hosted wallet software"
+                },
+                {
+                  "disabled": false,
+                  "key": "extra_currencies",
+                  "value": "<string>",
+                  "description": "The user can pass a list of currencies to add the address for. It is currently available ONLY for ERC20 currencies. Without passing this paramater for an ERC20 currency, the address will be added to ALL of the ERC20 currencies."
+                },
+                {
+                  "disabled": false,
+                  "key": "extra_currencies",
+                  "value": "<string>",
+                  "description": "The user can pass a list of currencies to add the address for. It is currently available ONLY for ERC20 currencies. Without passing this paramater for an ERC20 currency, the address will be added to ALL of the ERC20 currencies."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 42,\n  \"method\": \"private/add_to_address_book\",\n  \"params\": {\n    \"currency\": \"BTC\",\n    \"type\": \"withdrawal\",\n    \"address\": \"bc1qar0srrr7xfkvy5l643lydnw9re59gtzzwf0uyj\",\n    \"label\": \"Main address\",\n    \"beneficiary_vasp_name\": \"Money`s Gone\",\n    \"beneficiary_vasp_did\": \"did:example:123456789abcdefghi\",\n    \"beneficiary_first_name\": \"John\",\n    \"beneficiary_last_name\": \"Doe\",\n    \"beneficiary_address\": \"NL, Amsterdam, Street, 1\",\n    \"agreed\": true,\n    \"personal\": false\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "10a08f69-bd99-445b-b69c-111abd88b5da",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "private",
+                    "add_to_address_book"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "currency",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "address",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "label",
+                      "value": "Main address"
+                    },
+                    {
+                      "key": "beneficiary_vasp_name",
+                      "value": "Money's Gone"
+                    },
+                    {
+                      "key": "beneficiary_vasp_did",
+                      "value": "did:example:123456789abcdefghi"
+                    },
+                    {
+                      "key": "beneficiary_vasp_website",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "beneficiary_first_name",
+                      "value": "John"
+                    },
+                    {
+                      "key": "beneficiary_last_name",
+                      "value": "Doe"
+                    },
+                    {
+                      "key": "beneficiary_company_name",
+                      "value": "Company Name"
+                    },
+                    {
+                      "key": "beneficiary_address",
+                      "value": "NL, Amsterdam, Street, 1"
+                    },
+                    {
+                      "key": "agreed",
+                      "value": "true"
+                    },
+                    {
+                      "key": "personal",
+                      "value": "true"
+                    },
+                    {
+                      "key": "extra_currencies",
+                      "value": "USDC"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 42,\n  \"method\": \"private/add_to_address_book\",\n  \"params\": {\n    \"currency\": \"BTC\",\n    \"type\": \"withdrawal\",\n    \"address\": \"bc1qar0srrr7xfkvy5l643lydnw9re59gtzzwf0uyj\",\n    \"label\": \"Main address\",\n    \"beneficiary_vasp_name\": \"Money`s Gone\",\n    \"beneficiary_vasp_did\": \"did:example:123456789abcdefghi\",\n    \"beneficiary_first_name\": \"John\",\n    \"beneficiary_last_name\": \"Doe\",\n    \"beneficiary_address\": \"NL, Amsterdam, Street, 1\",\n    \"agreed\": true,\n    \"personal\": false\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 42,\n  \"result\": {\n    \"address\": \"bc1qar0srrr7xfkvy5l643lydnw9re59gtzzwf0uyj\",\n    \"creation_timestamp\": 1536569522277,\n    \"currency\": \"BTC\",\n    \"type\": \"withdrawal\",\n    \"label\": \"Main address\",\n    \"beneficiary_vasp_name\": \"Money`s Gone\",\n    \"beneficiary_vasp_did\": \"did:example:123456789abcdefghi\",\n    \"beneficiary_first_name\": \"John\",\n    \"beneficiary_last_name\": \"Doe\",\n    \"beneficiary_address\": \"NL, Amsterdam, Street, 1\",\n    \"agreed\": true,\n    \"personal\": false,\n    \"info_required\": false\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ea00fdbc-b5e7-4aee-ad8a-d357c01264c9",
+          "name": "Removes an entry from the address book. This method allows you to delete a saved address that is no longer needed.\n\n**📖 Related Article:** [Managing Withdrawals](https://docs.deribit.com/articles/managing-withdrawals-api)\n\n**Scope:** `wallet:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fremove_from_address_book)\n\n",
+          "request": {
+            "name": "Removes an entry from the address book. This method allows you to delete a saved address that is no longer needed.\n\n**📖 Related Article:** [Managing Withdrawals](https://docs.deribit.com/articles/managing-withdrawals-api)\n\n**Scope:** `wallet:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fremove_from_address_book)\n\n",
+            "description": {
+              "content": "Removes an entry from the address book. This method allows you to delete a saved address that is no longer needed.\n\n**📖 Related Article:** [Managing Withdrawals](https://docs.deribit.com/articles/managing-withdrawals-api)\n\n**Scope:** `wallet:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fremove_from_address_book)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "private",
+                "remove_from_address_book"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "currency",
+                  "value": "<string>",
+                  "description": "(Required) The currency symbol"
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "(Required) Address book type"
+                },
+                {
+                  "disabled": false,
+                  "key": "address",
+                  "value": "<string>",
+                  "description": "(Required) Address in currency format, it must be in address book"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 42,\n  \"method\": \"private/remove_from_address_book\",\n  \"params\": {\n    \"currency\": \"BTC\",\n    \"type\": \"transfer\",\n    \"address\": \"bc1qar0srrr7xfkvy5l643lydnw9re59gtzzwf0uyj\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d86f7b77-1297-4fa9-8a35-ec281e4bed36",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "private",
+                    "remove_from_address_book"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "currency",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "address",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 42,\n  \"method\": \"private/remove_from_address_book\",\n  \"params\": {\n    \"currency\": \"BTC\",\n    \"type\": \"transfer\",\n    \"address\": \"bc1qar0srrr7xfkvy5l643lydnw9re59gtzzwf0uyj\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 42,\n  \"result\": \"ok\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ed914ad1-a177-481b-87c2-3453d1039a4d",
+          "name": "Updates beneficiary information for an address in the address book. This method allows you to add or modify beneficiary details required for compliance purposes when making withdrawals to certain addresses.\n\n**📖 Related Article:** [Managing Withdrawals](https://docs.deribit.com/articles/managing-withdrawals-api)\n\n**Scope:** `wallet:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fupdate_in_address_book)\n\n",
+          "request": {
+            "name": "Updates beneficiary information for an address in the address book. This method allows you to add or modify beneficiary details required for compliance purposes when making withdrawals to certain addresses.\n\n**📖 Related Article:** [Managing Withdrawals](https://docs.deribit.com/articles/managing-withdrawals-api)\n\n**Scope:** `wallet:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fupdate_in_address_book)\n\n",
+            "description": {
+              "content": "Updates beneficiary information for an address in the address book. This method allows you to add or modify beneficiary details required for compliance purposes when making withdrawals to certain addresses.\n\n**📖 Related Article:** [Managing Withdrawals](https://docs.deribit.com/articles/managing-withdrawals-api)\n\n**Scope:** `wallet:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fupdate_in_address_book)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "private",
+                "update_in_address_book"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "currency",
+                  "value": "<string>",
+                  "description": "(Required) The currency symbol"
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "(Required) Address book type"
+                },
+                {
+                  "disabled": false,
+                  "key": "address",
+                  "value": "<string>",
+                  "description": "(Required) Address in currency format, it must be in address book"
+                },
+                {
+                  "disabled": false,
+                  "key": "beneficiary_vasp_name",
+                  "value": "<string>",
+                  "description": "(Required) Name of beneficiary VASP"
+                },
+                {
+                  "disabled": false,
+                  "key": "beneficiary_vasp_did",
+                  "value": "<string>",
+                  "description": "(Required) DID of beneficiary VASP"
+                },
+                {
+                  "disabled": false,
+                  "key": "beneficiary_vasp_website",
+                  "value": "<string>",
+                  "description": "Website of the beneficiary VASP. Required if the address book entry is associated with a VASP that is not included in the list of known VASPs"
+                },
+                {
+                  "disabled": false,
+                  "key": "beneficiary_first_name",
+                  "value": "<string>",
+                  "description": "First name of beneficiary (if beneficiary is a person)"
+                },
+                {
+                  "disabled": false,
+                  "key": "beneficiary_last_name",
+                  "value": "<string>",
+                  "description": "First name of beneficiary (if beneficiary is a person)"
+                },
+                {
+                  "disabled": false,
+                  "key": "beneficiary_company_name",
+                  "value": "<string>",
+                  "description": "Beneficiary company name (if beneficiary is a company)"
+                },
+                {
+                  "disabled": false,
+                  "key": "beneficiary_address",
+                  "value": "<string>",
+                  "description": "(Required) Geographical address of the beneficiary"
+                },
+                {
+                  "disabled": false,
+                  "key": "agreed",
+                  "value": "<boolean>",
+                  "description": "(Required) Indicates that the user agreed to shared provided information with 3rd parties"
+                },
+                {
+                  "disabled": false,
+                  "key": "personal",
+                  "value": "<boolean>",
+                  "description": "(Required) The user confirms that he provided address belongs to him and he has access to it via an un-hosted wallet software"
+                },
+                {
+                  "disabled": false,
+                  "key": "label",
+                  "value": "<string>",
+                  "description": "(Required) Label of the address book entry"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 42,\n  \"method\": \"private/update_in_address_book\",\n  \"params\": {\n    \"currency\": \"BTC\",\n    \"type\": \"withdrawal\",\n    \"address\": \"bc1qar0srrr7xfkvy5l643lydnw9re59gtzzwf0uyj\",\n    \"label\": \"Main address\",\n    \"beneficiary_vasp_name\": \"Money`s Gone\",\n    \"beneficiary_vasp_did\": \"did:example:123456789abcdefghi\",\n    \"beneficiary_first_name\": \"John\",\n    \"beneficiary_last_name\": \"Doe\",\n    \"beneficiary_address\": \"NL, Amsterdam, Street, 1\",\n    \"agreed\": true,\n    \"personal\": false\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6162095d-380d-4acc-9ce5-e6889febfe55",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "private",
+                    "update_in_address_book"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "currency",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "address",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "beneficiary_vasp_name",
+                      "value": "Money's Gone"
+                    },
+                    {
+                      "key": "beneficiary_vasp_did",
+                      "value": "did:example:123456789abcdefghi"
+                    },
+                    {
+                      "key": "beneficiary_vasp_website",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "beneficiary_first_name",
+                      "value": "John"
+                    },
+                    {
+                      "key": "beneficiary_last_name",
+                      "value": "Doe"
+                    },
+                    {
+                      "key": "beneficiary_company_name",
+                      "value": "Company Name"
+                    },
+                    {
+                      "key": "beneficiary_address",
+                      "value": "NL, Amsterdam, Street, 1"
+                    },
+                    {
+                      "key": "agreed",
+                      "value": "true"
+                    },
+                    {
+                      "key": "personal",
+                      "value": "true"
+                    },
+                    {
+                      "key": "label",
+                      "value": "Main address"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 42,\n  \"method\": \"private/update_in_address_book\",\n  \"params\": {\n    \"currency\": \"BTC\",\n    \"type\": \"withdrawal\",\n    \"address\": \"bc1qar0srrr7xfkvy5l643lydnw9re59gtzzwf0uyj\",\n    \"label\": \"Main address\",\n    \"beneficiary_vasp_name\": \"Money`s Gone\",\n    \"beneficiary_vasp_did\": \"did:example:123456789abcdefghi\",\n    \"beneficiary_first_name\": \"John\",\n    \"beneficiary_last_name\": \"Doe\",\n    \"beneficiary_address\": \"NL, Amsterdam, Street, 1\",\n    \"agreed\": true,\n    \"personal\": false\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 42,\n  \"result\": \"ok\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c89a440b-3b3e-4efb-bf16-cdf5da396fb2",
+          "name": "Saves beneficiary information for an address. This method allows you to store beneficiary details required for compliance purposes, including VASP information, personal details, and wallet type classification.\n\n**📖 Related Article:** [Managing Withdrawals](https://docs.deribit.com/articles/managing-withdrawals-api)\n\n**Scope:** `wallet:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fsave_address_beneficiary)\n\n",
+          "request": {
+            "name": "Saves beneficiary information for an address. This method allows you to store beneficiary details required for compliance purposes, including VASP information, personal details, and wallet type classification.\n\n**📖 Related Article:** [Managing Withdrawals](https://docs.deribit.com/articles/managing-withdrawals-api)\n\n**Scope:** `wallet:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fsave_address_beneficiary)\n\n",
+            "description": {
+              "content": "Saves beneficiary information for an address. This method allows you to store beneficiary details required for compliance purposes, including VASP information, personal details, and wallet type classification.\n\n**📖 Related Article:** [Managing Withdrawals](https://docs.deribit.com/articles/managing-withdrawals-api)\n\n**Scope:** `wallet:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fsave_address_beneficiary)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "private",
+                "save_address_beneficiary"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "currency",
+                  "value": "<string>",
+                  "description": "(Required) The currency symbol"
+                },
+                {
+                  "disabled": false,
+                  "key": "address",
+                  "value": "<string>",
+                  "description": "(Required) Address in currency format"
+                },
+                {
+                  "disabled": false,
+                  "key": "tag",
+                  "value": "<string>",
+                  "description": "Tag for XRP addresses"
+                },
+                {
+                  "disabled": false,
+                  "key": "agreed",
+                  "value": "<boolean>",
+                  "description": "(Required) Indicates that the user agreed to shared provided information with 3rd parties"
+                },
+                {
+                  "disabled": false,
+                  "key": "personal",
+                  "value": "<boolean>",
+                  "description": "(Required) The user confirms that he provided address belongs to him and he has access to it via an un-hosted wallet software"
+                },
+                {
+                  "disabled": false,
+                  "key": "unhosted",
+                  "value": "<boolean>",
+                  "description": "(Required) Indicates if the address belongs to an unhosted wallet"
+                },
+                {
+                  "disabled": false,
+                  "key": "beneficiary_vasp_name",
+                  "value": "<string>",
+                  "description": "(Required) Name of beneficiary VASP"
+                },
+                {
+                  "disabled": false,
+                  "key": "beneficiary_vasp_did",
+                  "value": "<string>",
+                  "description": "(Required) DID of beneficiary VASP"
+                },
+                {
+                  "disabled": false,
+                  "key": "beneficiary_vasp_website",
+                  "value": "<string>",
+                  "description": "Website of the beneficiary VASP. Required if the address book entry is associated with a VASP that is not included in the list of known VASPs"
+                },
+                {
+                  "disabled": false,
+                  "key": "beneficiary_first_name",
+                  "value": "<string>",
+                  "description": "First name of beneficiary (if beneficiary is a person)"
+                },
+                {
+                  "disabled": false,
+                  "key": "beneficiary_last_name",
+                  "value": "<string>",
+                  "description": "First name of beneficiary (if beneficiary is a person)"
+                },
+                {
+                  "disabled": false,
+                  "key": "beneficiary_company_name",
+                  "value": "<string>",
+                  "description": "Beneficiary company name (if beneficiary is a company)"
+                },
+                {
+                  "disabled": false,
+                  "key": "beneficiary_address",
+                  "value": "<string>",
+                  "description": "(Required) Geographical address of the beneficiary"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 42,\n  \"method\": \"private/save_address_beneficiary\",\n  \"params\": {\n    \"currency\": \"BTC\",\n    \"address\": \"bc1qar0srrr7xfkvy5l643lydnw9re59gtzzwf0uyj\",\n    \"agreed\": true,\n    \"personal\": false,\n    \"unhosted\": false,\n    \"beneficiary_vasp_name\": \"Money's Gone\",\n    \"beneficiary_vasp_did\": \"did:example:123456789abcdefghi\",\n    \"beneficiary_vasp_website\": \"https://example.com\",\n    \"beneficiary_first_name\": \"John\",\n    \"beneficiary_last_name\": \"Doe\",\n    \"beneficiary_company_name\": \"Example Corp\",\n    \"beneficiary_address\": \"NL, Amsterdam, Street, 1\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2360da2b-c251-4733-895f-f359862dc482",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "private",
+                    "save_address_beneficiary"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "currency",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "address",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tag",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "agreed",
+                      "value": "true"
+                    },
+                    {
+                      "key": "personal",
+                      "value": "true"
+                    },
+                    {
+                      "key": "unhosted",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "beneficiary_vasp_name",
+                      "value": "Money's Gone"
+                    },
+                    {
+                      "key": "beneficiary_vasp_did",
+                      "value": "did:example:123456789abcdefghi"
+                    },
+                    {
+                      "key": "beneficiary_vasp_website",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "beneficiary_first_name",
+                      "value": "John"
+                    },
+                    {
+                      "key": "beneficiary_last_name",
+                      "value": "Doe"
+                    },
+                    {
+                      "key": "beneficiary_company_name",
+                      "value": "Company Name"
+                    },
+                    {
+                      "key": "beneficiary_address",
+                      "value": "NL, Amsterdam, Street, 1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 42,\n  \"method\": \"private/save_address_beneficiary\",\n  \"params\": {\n    \"currency\": \"BTC\",\n    \"address\": \"bc1qar0srrr7xfkvy5l643lydnw9re59gtzzwf0uyj\",\n    \"agreed\": true,\n    \"personal\": false,\n    \"unhosted\": false,\n    \"beneficiary_vasp_name\": \"Money's Gone\",\n    \"beneficiary_vasp_did\": \"did:example:123456789abcdefghi\",\n    \"beneficiary_vasp_website\": \"https://example.com\",\n    \"beneficiary_first_name\": \"John\",\n    \"beneficiary_last_name\": \"Doe\",\n    \"beneficiary_company_name\": \"Example Corp\",\n    \"beneficiary_address\": \"NL, Amsterdam, Street, 1\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 42,\n  \"result\": {\n    \"currency\": \"BTC\",\n    \"address\": \"bc1qar0srrr7xfkvy5l643lydnw9re59gtzzwf0uyj\",\n    \"user_id\": 1016,\n    \"agreed\": true,\n    \"personal\": false,\n    \"unhosted\": false,\n    \"beneficiary_vasp_name\": \"Money's Gone\",\n    \"beneficiary_vasp_did\": \"did:example:123456789abcdefghi\",\n    \"beneficiary_vasp_website\": \"https://example.com\",\n    \"beneficiary_first_name\": \"John\",\n    \"beneficiary_last_name\": \"Doe\",\n    \"beneficiary_company_name\": \"Example Corp\",\n    \"beneficiary_address\": \"NL, Amsterdam, Street, 1\",\n    \"created\": 1536569522277,\n    \"updated\": 1536569522277\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0513f1db-33d4-4f6b-8fd4-eaa4cc3f230f",
+          "name": "Retrieves beneficiary information for a specific address. Returns the stored beneficiary details including VASP information, personal details, and wallet type classification.\n\n**📖 Related Article:** [Managing Withdrawals](https://docs.deribit.com/articles/managing-withdrawals-api)\n\n**Scope:** `wallet:read`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_address_beneficiary)\n\n",
+          "request": {
+            "name": "Retrieves beneficiary information for a specific address. Returns the stored beneficiary details including VASP information, personal details, and wallet type classification.\n\n**📖 Related Article:** [Managing Withdrawals](https://docs.deribit.com/articles/managing-withdrawals-api)\n\n**Scope:** `wallet:read`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_address_beneficiary)\n\n",
+            "description": {
+              "content": "Retrieves beneficiary information for a specific address. Returns the stored beneficiary details including VASP information, personal details, and wallet type classification.\n\n**📖 Related Article:** [Managing Withdrawals](https://docs.deribit.com/articles/managing-withdrawals-api)\n\n**Scope:** `wallet:read`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_address_beneficiary)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "private",
+                "get_address_beneficiary"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "currency",
+                  "value": "<string>",
+                  "description": "(Required) The currency symbol"
+                },
+                {
+                  "disabled": false,
+                  "key": "address",
+                  "value": "<string>",
+                  "description": "(Required) Address in currency format"
+                },
+                {
+                  "disabled": false,
+                  "key": "tag",
+                  "value": "<string>",
+                  "description": "Tag for XRP addresses"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 42,\n  \"method\": \"private/get_address_beneficiary\",\n  \"params\": {\n    \"currency\": \"BTC\",\n    \"address\": \"bc1qar0srrr7xfkvy5l643lydnw9re59gtzzwf0uyj\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e7a7c3bb-a8be-4777-b4ed-feb915b24055",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "private",
+                    "get_address_beneficiary"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "currency",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "address",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tag",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 42,\n  \"method\": \"private/get_address_beneficiary\",\n  \"params\": {\n    \"currency\": \"BTC\",\n    \"address\": \"bc1qar0srrr7xfkvy5l643lydnw9re59gtzzwf0uyj\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 42,\n  \"result\": {\n    \"currency\": \"BTC\",\n    \"address\": \"bc1qar0srrr7xfkvy5l643lydnw9re59gtzzwf0uyj\",\n    \"user_id\": 1016,\n    \"agreed\": true,\n    \"personal\": false,\n    \"unhosted\": false,\n    \"beneficiary_vasp_name\": \"Money's Gone\",\n    \"beneficiary_vasp_did\": \"did:example:123456789abcdefghi\",\n    \"beneficiary_vasp_website\": \"https://example.com\",\n    \"beneficiary_first_name\": \"John\",\n    \"beneficiary_last_name\": \"Doe\",\n    \"beneficiary_company_name\": \"Example Corp\",\n    \"beneficiary_address\": \"NL, Amsterdam, Street, 1\",\n    \"created\": 1536569522277,\n    \"updated\": 1536569522277\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d2d084bf-a5af-42f9-8ddf-31dfef88854b",
+          "name": "Deletes beneficiary information for a specific address.\n\n**📖 Related Article:** [Managing Withdrawals](https://docs.deribit.com/articles/managing-withdrawals-api)\n\n**Scope:** `wallet:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fdelete_address_beneficiary)\n\n",
+          "request": {
+            "name": "Deletes beneficiary information for a specific address.\n\n**📖 Related Article:** [Managing Withdrawals](https://docs.deribit.com/articles/managing-withdrawals-api)\n\n**Scope:** `wallet:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fdelete_address_beneficiary)\n\n",
+            "description": {
+              "content": "Deletes beneficiary information for a specific address.\n\n**📖 Related Article:** [Managing Withdrawals](https://docs.deribit.com/articles/managing-withdrawals-api)\n\n**Scope:** `wallet:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fdelete_address_beneficiary)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "private",
+                "delete_address_beneficiary"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "currency",
+                  "value": "<string>",
+                  "description": "(Required) The currency symbol"
+                },
+                {
+                  "disabled": false,
+                  "key": "address",
+                  "value": "<string>",
+                  "description": "(Required) Address in currency format"
+                },
+                {
+                  "disabled": false,
+                  "key": "tag",
+                  "value": "<string>",
+                  "description": "Tag for XRP addresses"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 42,\n  \"method\": \"private/delete_address_beneficiary\",\n  \"params\": {\n    \"currency\": \"BTC\",\n    \"address\": \"bc1qar0srrr7xfkvy5l643lydnw9re59gtzzwf0uyj\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "979ee68a-cee7-4a87-ba85-0a865d0fbe49",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "private",
+                    "delete_address_beneficiary"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "currency",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "address",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tag",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 42,\n  \"method\": \"private/delete_address_beneficiary\",\n  \"params\": {\n    \"currency\": \"BTC\",\n    \"address\": \"bc1qar0srrr7xfkvy5l643lydnw9re59gtzzwf0uyj\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 42,\n  \"result\": \"ok\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "accf139f-136b-478b-aaa0-a9b6420d4849",
+          "name": "Lists address beneficiaries with optional filtering and pagination. Returns all saved beneficiary information for addresses, with support for filtering by currency, address, wallet type, VASP details, and date ranges.\n\n**📖 Related Article:** [Managing Withdrawals](https://docs.deribit.com/articles/managing-withdrawals-api)\n\n**Scope:** `wallet:read`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Flist_address_beneficiaries)\n\n",
+          "request": {
+            "name": "Lists address beneficiaries with optional filtering and pagination. Returns all saved beneficiary information for addresses, with support for filtering by currency, address, wallet type, VASP details, and date ranges.\n\n**📖 Related Article:** [Managing Withdrawals](https://docs.deribit.com/articles/managing-withdrawals-api)\n\n**Scope:** `wallet:read`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Flist_address_beneficiaries)\n\n",
+            "description": {
+              "content": "Lists address beneficiaries with optional filtering and pagination. Returns all saved beneficiary information for addresses, with support for filtering by currency, address, wallet type, VASP details, and date ranges.\n\n**📖 Related Article:** [Managing Withdrawals](https://docs.deribit.com/articles/managing-withdrawals-api)\n\n**Scope:** `wallet:read`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Flist_address_beneficiaries)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "private",
+                "list_address_beneficiaries"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "currency",
+                  "value": "<string>",
+                  "description": "The currency symbol"
+                },
+                {
+                  "disabled": false,
+                  "key": "address",
+                  "value": "<string>",
+                  "description": "Address in currency format"
+                },
+                {
+                  "disabled": false,
+                  "key": "tag",
+                  "value": "<string>",
+                  "description": "Tag for XRP addresses"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_before",
+                  "value": "<integer>",
+                  "description": "Filter by creation timestamp (before)"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_after",
+                  "value": "<integer>",
+                  "description": "Filter by creation timestamp (after)"
+                },
+                {
+                  "disabled": false,
+                  "key": "updated_before",
+                  "value": "<integer>",
+                  "description": "Filter by update timestamp (before)"
+                },
+                {
+                  "disabled": false,
+                  "key": "updated_after",
+                  "value": "<integer>",
+                  "description": "Filter by update timestamp (after)"
+                },
+                {
+                  "disabled": false,
+                  "key": "personal",
+                  "value": "<boolean>",
+                  "description": "Filter by personal wallet flag"
+                },
+                {
+                  "disabled": false,
+                  "key": "unhosted",
+                  "value": "<boolean>",
+                  "description": "Filter by unhosted wallet flag"
+                },
+                {
+                  "disabled": false,
+                  "key": "beneficiary_vasp_name",
+                  "value": "<string>",
+                  "description": "Filter by beneficiary VASP name"
+                },
+                {
+                  "disabled": false,
+                  "key": "beneficiary_vasp_did",
+                  "value": "<string>",
+                  "description": "Filter by beneficiary VASP DID"
+                },
+                {
+                  "disabled": false,
+                  "key": "beneficiary_vasp_website",
+                  "value": "<string>",
+                  "description": "Website of the beneficiary VASP. Required if the address book entry is associated with a VASP that is not included in the list of known VASPs"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "100",
+                  "description": "Maximum number of results to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "continuation",
+                  "value": "<string>",
+                  "description": "Continuation token for pagination"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 42,\n  \"method\": \"private/list_address_beneficiaries\",\n  \"params\": {\n    \"currency\": \"BTC\",\n    \"limit\": 10\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f751d3d0-46be-413e-9ff5-787f32e4d444",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "private",
+                    "list_address_beneficiaries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "currency",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "address",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tag",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_before",
+                      "value": "1536569522277"
+                    },
+                    {
+                      "key": "created_after",
+                      "value": "1536569522277"
+                    },
+                    {
+                      "key": "updated_before",
+                      "value": "1536569522277"
+                    },
+                    {
+                      "key": "updated_after",
+                      "value": "1536569522277"
+                    },
+                    {
+                      "key": "personal",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "unhosted",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "beneficiary_vasp_name",
+                      "value": "Money's Gone"
+                    },
+                    {
+                      "key": "beneficiary_vasp_did",
+                      "value": "did:example:123456789abcdefghi"
+                    },
+                    {
+                      "key": "beneficiary_vasp_website",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "continuation",
+                      "value": "xY7T6cutS3t2B9YtaDkE6TS379oKnkzTvmEDUnEUP2Msa9xKWNNaT"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 42,\n  \"method\": \"private/list_address_beneficiaries\",\n  \"params\": {\n    \"currency\": \"BTC\",\n    \"limit\": 10\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 42,\n  \"result\": {\n    \"data\": [\n      {\n        \"currency\": \"BTC\",\n        \"address\": \"bc1qar0srrr7xfkvy5l643lydnw9re59gtzzwf0uyj\",\n        \"user_id\": 1026,\n        \"agreed\": true,\n        \"personal\": false,\n        \"unhosted\": false,\n        \"beneficiary_vasp_name\": \"Money's Gone\",\n        \"beneficiary_vasp_did\": \"did:example:123456789abcdefghi\",\n        \"beneficiary_vasp_website\": \"https://example.com\",\n        \"beneficiary_first_name\": \"John\",\n        \"beneficiary_last_name\": \"Doe\",\n        \"beneficiary_company_name\": \"Example Corp\",\n        \"beneficiary_address\": \"NL, Amsterdam, Street, 1\",\n        \"created\": 1536569522277,\n        \"updated\": 1536569522277\n      }\n    ],\n    \"continuation\": \"xY7T6cutS3t2B9YtaDkE6TS379oKnkzTvmEDUnEUP2Msa9xKWNNaT\",\n    \"count\": 1\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5aad3a6a-66f9-4e96-b200-8b3a7976a68d",
+          "name": "Transfer funds from the main account to a subaccount.\n\n**📖 Related Article:** [Managing Transfers](https://docs.deribit.com/articles/managing-transfers-api)\n\n**Scope:** `wallets:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fsubmit_transfer_to_subaccount)\n\n",
+          "request": {
+            "name": "Transfer funds from the main account to a subaccount.\n\n**📖 Related Article:** [Managing Transfers](https://docs.deribit.com/articles/managing-transfers-api)\n\n**Scope:** `wallets:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fsubmit_transfer_to_subaccount)\n\n",
+            "description": {
+              "content": "Transfer funds from the main account to a subaccount.\n\n**📖 Related Article:** [Managing Transfers](https://docs.deribit.com/articles/managing-transfers-api)\n\n**Scope:** `wallets:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fsubmit_transfer_to_subaccount)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "private",
+                "submit_transfer_to_subaccount"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "currency",
+                  "value": "<string>",
+                  "description": "(Required) The currency symbol"
+                },
+                {
+                  "disabled": false,
+                  "key": "amount",
+                  "value": "<number>",
+                  "description": "(Required) Amount of funds to be transferred"
+                },
+                {
+                  "disabled": false,
+                  "key": "destination",
+                  "value": "<integer>",
+                  "description": "(Required) Id of destination subaccount. Can be found in `My Account >> Subaccounts` tab"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 210,\n  \"method\": \"private/submit_transfer_to_subaccount\",\n  \"params\": {\n    \"currency\": \"ETH\",\n    \"amount\": 12.1234,\n    \"destination\": 20\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "dc0a882d-129b-4336-a3ec-82164a28e0f7",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "private",
+                    "submit_transfer_to_subaccount"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "currency",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "amount",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "destination",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 210,\n  \"method\": \"private/submit_transfer_to_subaccount\",\n  \"params\": {\n    \"currency\": \"ETH\",\n    \"amount\": 12.1234,\n    \"destination\": 20\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 9187,\n  \"result\": {\n    \"amount\": 0.2,\n    \"created_timestamp\": 1550579457727,\n    \"currency\": \"BTC\",\n    \"direction\": \"payment\",\n    \"id\": 2,\n    \"other_side\": \"2MzyQc5Tkik61kJbEpJV5D5H9VfWHZK9Sgy\",\n    \"state\": \"cancelled\",\n    \"type\": \"user\",\n    \"updated_timestamp\": 1550579457727\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d94a1acc-1113-49c0-ac83-e880a644635d",
+          "name": "Transfer funds between two subaccounts or between a subaccount and the main account.\n\n**📖 Related Article:** [Managing Transfers](https://docs.deribit.com/articles/managing-transfers-api)\n\n**Scope:** `wallets:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fsubmit_transfer_between_subaccounts)\n\n",
+          "request": {
+            "name": "Transfer funds between two subaccounts or between a subaccount and the main account.\n\n**📖 Related Article:** [Managing Transfers](https://docs.deribit.com/articles/managing-transfers-api)\n\n**Scope:** `wallets:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fsubmit_transfer_between_subaccounts)\n\n",
+            "description": {
+              "content": "Transfer funds between two subaccounts or between a subaccount and the main account.\n\n**📖 Related Article:** [Managing Transfers](https://docs.deribit.com/articles/managing-transfers-api)\n\n**Scope:** `wallets:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fsubmit_transfer_between_subaccounts)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "private",
+                "submit_transfer_between_subaccounts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "currency",
+                  "value": "<string>",
+                  "description": "(Required) The currency symbol"
+                },
+                {
+                  "disabled": false,
+                  "key": "amount",
+                  "value": "<number>",
+                  "description": "(Required) Amount of funds to be transferred"
+                },
+                {
+                  "disabled": false,
+                  "key": "destination",
+                  "value": "<integer>",
+                  "description": "(Required) Id of destination subaccount. Can be found in `My Account >> Subaccounts` tab"
+                },
+                {
+                  "disabled": false,
+                  "key": "source",
+                  "value": "<integer>",
+                  "description": "Id of the source (sub)account. Can be found in `My Account >> Subaccounts` tab. By default, it is the Id of the account which made the request. However, if a different \"source\" is specified, the user must possess the mainaccount scope, and only other subaccounts can be designated as the source."
+                },
+                {
+                  "disabled": false,
+                  "key": "nonce",
+                  "value": "<string>",
+                  "description": "Optional idempotency nonce. If provided, subsequent requests with the same nonce will return the previously created transaction instead of creating a new one. Must be 8-128 characters. The nonce is persisted on the resulting transaction and returned in the response."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 210,\n  \"method\": \"private/submit_transfer_between_subaccounts\",\n  \"params\": {\n    \"currency\": \"ETH\",\n    \"amount\": 12.1234,\n    \"destination\": 20,\n    \"source\": 10\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0234ba98-e517-432d-b94d-c95f7fe54cd3",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "private",
+                    "submit_transfer_between_subaccounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "currency",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "amount",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "destination",
+                      "value": "1"
+                    },
+                    {
+                      "key": "source",
+                      "value": "1"
+                    },
+                    {
+                      "key": "nonce",
+                      "value": "bF1_gfgcsd"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 210,\n  \"method\": \"private/submit_transfer_between_subaccounts\",\n  \"params\": {\n    \"currency\": \"ETH\",\n    \"amount\": 12.1234,\n    \"destination\": 20,\n    \"source\": 10\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 9187,\n  \"result\": {\n    \"amount\": 0.2,\n    \"created_timestamp\": 1550579457727,\n    \"currency\": \"BTC\",\n    \"direction\": \"payment\",\n    \"id\": 2,\n    \"other_side\": \"2MzyQc5Tkik61kJbEpJV5D5H9VfWHZK9Sgy\",\n    \"state\": \"cancelled\",\n    \"type\": \"user\",\n    \"updated_timestamp\": 1550579457727\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9bdac8af-3037-4507-8e55-08169cc7068c",
+          "name": "Transfer funds to another user. This method allows you to send funds from your main account to another Deribit user's account. The transfer is processed internally and does not require blockchain transactions.\n\n**📖 Related Article:** [Managing Transfers](https://docs.deribit.com/articles/managing-transfers-api)\n\n**Scope:** `wallet:read_write` and mainaccount\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fsubmit_transfer_to_user)\n\n",
+          "request": {
+            "name": "Transfer funds to another user. This method allows you to send funds from your main account to another Deribit user's account. The transfer is processed internally and does not require blockchain transactions.\n\n**📖 Related Article:** [Managing Transfers](https://docs.deribit.com/articles/managing-transfers-api)\n\n**Scope:** `wallet:read_write` and mainaccount\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fsubmit_transfer_to_user)\n\n",
+            "description": {
+              "content": "Transfer funds to another user. This method allows you to send funds from your main account to another Deribit user's account. The transfer is processed internally and does not require blockchain transactions.\n\n**📖 Related Article:** [Managing Transfers](https://docs.deribit.com/articles/managing-transfers-api)\n\n**Scope:** `wallet:read_write` and mainaccount\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fsubmit_transfer_to_user)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "private",
+                "submit_transfer_to_user"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "currency",
+                  "value": "<string>",
+                  "description": "(Required) The currency symbol"
+                },
+                {
+                  "disabled": false,
+                  "key": "amount",
+                  "value": "<number>",
+                  "description": "(Required) Amount of funds to be transferred"
+                },
+                {
+                  "disabled": false,
+                  "key": "destination",
+                  "value": "<string>",
+                  "description": "(Required) Destination wallet's address taken from address book"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 9421,\n  \"method\": \"private/submit_transfer_to_user\",\n  \"params\": {\n    \"currency\": \"ETH\",\n    \"amount\": 13.456,\n    \"destination\": \"0x4aa0753d798d668056920094d65321a8e8913e26\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c93ff4df-71a0-4416-a9f4-c2b63e185e0d",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "private",
+                    "submit_transfer_to_user"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "currency",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "amount",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "destination",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 9421,\n  \"method\": \"private/submit_transfer_to_user\",\n  \"params\": {\n    \"currency\": \"ETH\",\n    \"amount\": 13.456,\n    \"destination\": \"0x4aa0753d798d668056920094d65321a8e8913e26\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 9187,\n  \"result\": {\n    \"amount\": 0.2,\n    \"created_timestamp\": 1550579457727,\n    \"currency\": \"BTC\",\n    \"direction\": \"payment\",\n    \"id\": 2,\n    \"other_side\": \"2MzyQc5Tkik61kJbEpJV5D5H9VfWHZK9Sgy\",\n    \"state\": \"cancelled\",\n    \"type\": \"user\",\n    \"updated_timestamp\": 1550579457727\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "61e551c6-1051-4bd6-9689-9e7c62da48be",
+          "name": "Retrieve the user's transfers list. Returns a list of internal transfers between accounts, subaccounts, or to other users, including their status, amounts, and other relevant details.\n\n**📖 Related Article:** [Managing Transfers](https://docs.deribit.com/articles/managing-transfers-api)\n\n**Scope:** `wallet:read`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_transfers)\n\n",
+          "request": {
+            "name": "Retrieve the user's transfers list. Returns a list of internal transfers between accounts, subaccounts, or to other users, including their status, amounts, and other relevant details.\n\n**📖 Related Article:** [Managing Transfers](https://docs.deribit.com/articles/managing-transfers-api)\n\n**Scope:** `wallet:read`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_transfers)\n\n",
+            "description": {
+              "content": "Retrieve the user's transfers list. Returns a list of internal transfers between accounts, subaccounts, or to other users, including their status, amounts, and other relevant details.\n\n**📖 Related Article:** [Managing Transfers](https://docs.deribit.com/articles/managing-transfers-api)\n\n**Scope:** `wallet:read`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_transfers)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "private",
+                "get_transfers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "currency",
+                  "value": "<string>",
+                  "description": "(Required) The currency symbol"
+                },
+                {
+                  "disabled": false,
+                  "key": "count",
+                  "value": "<integer>",
+                  "description": "Number of requested items, default - `10`, maximum - `1000`"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The offset for pagination, default - `0`"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 7606,\n  \"method\": \"private/get_transfers\",\n  \"params\": {\n    \"currency\": \"BTC\",\n    \"count\": 10\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2c35f9d9-c49f-4ca4-b4b9-7bfa8fbed0b8",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "private",
+                    "get_transfers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "currency",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "count",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 7606,\n  \"method\": \"private/get_transfers\",\n  \"params\": {\n    \"currency\": \"BTC\",\n    \"count\": 10\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 7606,\n  \"result\": {\n    \"count\": 2,\n    \"data\": [\n      {\n        \"amount\": 0.2,\n        \"created_timestamp\": 1550579457727,\n        \"currency\": \"BTC\",\n        \"direction\": \"payment\",\n        \"id\": 2,\n        \"other_side\": \"2MzyQc5Tkik61kJbEpJV5D5H9VfWHZK9Sgy\",\n        \"state\": \"prepared\",\n        \"type\": \"user\",\n        \"updated_timestamp\": 1550579457727\n      },\n      {\n        \"amount\": 0.3,\n        \"created_timestamp\": 1550579255800,\n        \"currency\": \"BTC\",\n        \"direction\": \"payment\",\n        \"id\": 1,\n        \"other_side\": \"new_user_1_1\",\n        \"state\": \"confirmed\",\n        \"type\": \"subaccount\",\n        \"updated_timestamp\": 1550579255800\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b285c947-d73b-49c9-b898-e2d4610eff4c",
+          "name": "Cancel a pending transfer by its ID. This method allows you to cancel a transfer that has not yet been processed. Once a transfer is processed, it cannot be cancelled.\n\n**📖 Related Article:** [Managing Transfers](https://docs.deribit.com/articles/managing-transfers-api)\n\n**Scope:** `wallet:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fcancel_transfer_by_id)\n\n",
+          "request": {
+            "name": "Cancel a pending transfer by its ID. This method allows you to cancel a transfer that has not yet been processed. Once a transfer is processed, it cannot be cancelled.\n\n**📖 Related Article:** [Managing Transfers](https://docs.deribit.com/articles/managing-transfers-api)\n\n**Scope:** `wallet:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fcancel_transfer_by_id)\n\n",
+            "description": {
+              "content": "Cancel a pending transfer by its ID. This method allows you to cancel a transfer that has not yet been processed. Once a transfer is processed, it cannot be cancelled.\n\n**📖 Related Article:** [Managing Transfers](https://docs.deribit.com/articles/managing-transfers-api)\n\n**Scope:** `wallet:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fcancel_transfer_by_id)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "private",
+                "cancel_transfer_by_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "currency",
+                  "value": "<string>",
+                  "description": "(Required) The currency symbol"
+                },
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<integer>",
+                  "description": "(Required) Id of transfer"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 9187,\n  \"method\": \"private/cancel_transfer_by_id\",\n  \"params\": {\n    \"currency\": \"BTC\",\n    \"id\": 2\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d21016d7-af89-4519-b294-846d6baff00c",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "private",
+                    "cancel_transfer_by_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "currency",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "12"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 9187,\n  \"method\": \"private/cancel_transfer_by_id\",\n  \"params\": {\n    \"currency\": \"BTC\",\n    \"id\": 2\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 9187,\n  \"result\": {\n    \"amount\": 0.2,\n    \"created_timestamp\": 1550579457727,\n    \"currency\": \"BTC\",\n    \"direction\": \"payment\",\n    \"id\": 2,\n    \"other_side\": \"2MzyQc5Tkik61kJbEpJV5D5H9VfWHZK9Sgy\",\n    \"state\": \"cancelled\",\n    \"type\": \"user\",\n    \"updated_timestamp\": 1550579457727\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9f4ed624-160a-441c-ac3b-a791cbfe8e45",
+          "name": "Returns reward eligibility status and APR data for all supported currencies.\n\nThis method takes no parameters.\n\n**📖 Related Support Article:** [Yield reward-bearing coins](https://support.deribit.com/hc/en-us/articles/31424939199261-Yield-reward-bearing-coins)\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_reward_eligibility)\n\n",
+          "request": {
+            "name": "Returns reward eligibility status and APR data for all supported currencies.\n\nThis method takes no parameters.\n\n**📖 Related Support Article:** [Yield reward-bearing coins](https://support.deribit.com/hc/en-us/articles/31424939199261-Yield-reward-bearing-coins)\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_reward_eligibility)\n\n",
+            "description": {
+              "content": "Returns reward eligibility status and APR data for all supported currencies.\n\nThis method takes no parameters.\n\n**📖 Related Support Article:** [Yield reward-bearing coins](https://support.deribit.com/hc/en-us/articles/31424939199261-Yield-reward-bearing-coins)\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_reward_eligibility)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "private",
+                "get_reward_eligibility"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"method\": \"private/get_reward_eligibility\",\n  \"params\": {}\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5b2efda4-f4b5-430a-8373-5d5e76b6a8ef",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "private",
+                    "get_reward_eligibility"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"method\": \"private/get_reward_eligibility\",\n  \"params\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"result\": {\n    \"usdc\": {\n      \"eligibility_status\": \"non_eligible\",\n      \"apr_sma7\": 4\n    },\n    \"usde\": {\n      \"eligibility_status\": \"eligible\",\n      \"apr_sma7\": 7\n    },\n    \"buidl\": {\n      \"eligibility_status\": \"eligible\",\n      \"apr_sma7\": 3.943606\n    },\n    \"steth\": {\n      \"eligibility_status\": \"eligible\",\n      \"apr_sma7\": 2.692285714285714\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "23f7d191-62bb-499b-b6cb-7abaffde228a",
+          "name": "Sets originator of the deposit\n\n**Scope:** `wallet:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fset_clearance_originator)\n\n",
+          "request": {
+            "name": "Sets originator of the deposit\n\n**Scope:** `wallet:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fset_clearance_originator)\n\n",
+            "description": {
+              "content": "Sets originator of the deposit\n\n**Scope:** `wallet:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fset_clearance_originator)\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "private",
+                "set_clearance_originator"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "deposit_id",
+                  "value": "<string>",
+                  "description": "(Required) Id of the deposit"
+                },
+                {
+                  "disabled": false,
+                  "key": "originator",
+                  "value": "<string>",
+                  "description": "(Required) Information about the originator of the deposit"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"method\": \"private/set_clearance_originator\",\n  \"params\": {\n    \"deposit_id\": {\n      \"currency\": \"BTC\",\n      \"user_id\": 123,\n      \"address\": \"2NBqqD5GRJ8wHy1PYyCXTe9ke5226FhavBz\",\n      \"tx_hash\": \"230669110fdaf0a0dbcdc079b6b8b43d5af29cc73683835b9bc6b3406c065fda\"\n    },\n    \"originator\": {\n      \"is_personal\": false,\n      \"first_name\": \"First\",\n      \"last_name\": \"Last\",\n      \"company_name\": \"Company Name\",\n      \"address\": \"NL, Amsterdam, Street, 1\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "815a55db-9a0d-4d13-b8af-5548e6283f10",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "private",
+                    "set_clearance_originator"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "deposit_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "originator",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"method\": \"private/set_clearance_originator\",\n  \"params\": {\n    \"deposit_id\": {\n      \"currency\": \"BTC\",\n      \"user_id\": 123,\n      \"address\": \"2NBqqD5GRJ8wHy1PYyCXTe9ke5226FhavBz\",\n      \"tx_hash\": \"230669110fdaf0a0dbcdc079b6b8b43d5af29cc73683835b9bc6b3406c065fda\"\n    },\n    \"originator\": {\n      \"is_personal\": false,\n      \"first_name\": \"First\",\n      \"last_name\": \"Last\",\n      \"company_name\": \"Company Name\",\n      \"address\": \"NL, Amsterdam, Street, 1\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"result\": {\n    \"currency\": \"BTC\",\n    \"user_id\": 123,\n    \"address\": \"2NBqqD5GRJ8wHy1PYyCXTe9ke5226FhavBz\",\n    \"amount\": 0.4,\n    \"state\": \"completed\",\n    \"transaction_id\": \"230669110fdaf0a0dbcdc079b6b8b43d5af29cc73683835b9bc6b3406c065fda\",\n    \"source_address\": \"A3BqqD5GRJ8wHy1PYyCXTe9ke5226Fha123\",\n    \"received_timestamp\": 1550574558607,\n    \"updated_timestamp\": 1550574558807,\n    \"note\": \"Note\",\n    \"clearance_state\": \"in_progress\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://test.deribit.com/api/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "2f8aa0f2-e8e8-4bae-9ab7-2409180a3cf7",
+    "name": "Deribit Account Management Wallet API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

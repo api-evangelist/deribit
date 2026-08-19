@@ -1,0 +1,1432 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Deribit Account Management Public API",
+    "version": "2.1.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Public",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GET /public/get_announcements",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/public/get_announcements",
+            "params": [
+              {
+                "name": "start_timestamp",
+                "value": "",
+                "type": "query",
+                "description": "The most recent timestamp to return the results for (milliseconds since the UNIX epoch)"
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "Maximum count of returned announcements, default - `5`, maximum - `50`"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves platform announcements and important notices. Announcements include system updates, maintenance schedules, new features, policy changes, and other important information.\n\nResults are returned in reverse chronological order (newest first). The default `start_timestamp` is the current time, and the `count` parameter must be between 1 and 50 (default is 5).\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_announcements)\n\n"
+        },
+        {
+          "info": {
+            "name": "GET /public/auth",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/public/auth",
+            "params": [
+              {
+                "name": "grant_type",
+                "value": "",
+                "type": "query",
+                "description": "Method of authentication"
+              },
+              {
+                "name": "client_id",
+                "value": "",
+                "type": "query",
+                "description": "Required for grant type `` `client_credentials` `` and `` `client_signature` ``"
+              },
+              {
+                "name": "client_secret",
+                "value": "",
+                "type": "query",
+                "description": "Required for grant type `` `client_credentials` ``"
+              },
+              {
+                "name": "refresh_token",
+                "value": "",
+                "type": "query",
+                "description": "Required for grant type `` `refresh_token` ``"
+              },
+              {
+                "name": "timestamp",
+                "value": "",
+                "type": "query",
+                "description": "Required for grant type `` `client_signature` ``.\n\nProvides time when request has been generated (milliseconds since the UNIX epoch).\n"
+              },
+              {
+                "name": "signature",
+                "value": "",
+                "type": "query",
+                "description": "Required for grant type `` `client_signature` ``.\n\nIt's a cryptographic signature calculated over provided fields using user **secret key**. The signature should be calculated as an HMAC (Hash-based Message Authentication Code) with `` `SHA256` `` hash algorithm.\n"
+              },
+              {
+                "name": "nonce",
+                "value": "",
+                "type": "query",
+                "description": "Optional for grant type `` `client_signature` ``.\n\nDelivers user generated initialization vector for the server token.\n"
+              },
+              {
+                "name": "data",
+                "value": "",
+                "type": "query",
+                "description": "Optional for grant type `` `client_signature` ``.\n\nContains any user specific value.\n"
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query",
+                "description": "Will be passed back in the response."
+              },
+              {
+                "name": "scope",
+                "value": "",
+                "type": "query",
+                "description": "Describes type of the access for assigned token.\n\n\n**Possible values:**\n\n- `` `connection` ``\n- `` `session:name` ``\n- `` `trade:[read, read_write, none]` ``\n- `` `wallet:[read, read_write, none]` ``\n- `` `account:[read, read_write, none]` ``\n- `` `expires:NUMBER` ``\n- `` `ip:ADDR` ``\n\n\nDetails are elucidated in [Access scope](https://docs.deribit.com/articles/access-scope)\n"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieve an OAuth access token, to be used for authentication of 'private' requests.\n\n**📖 Related Article:** [Authentication](https://docs.deribit.com/articles/authentication)\n\n**Authentication Methods:**\n\nThree methods of authentication are supported:\n\n\n- ``client_credentials`` - Using the client id and client secret that can be found on the API page on the website. This is the simplest method, suitable for server-to-server applications and quick setup.\n\n- ``client_signature`` - Enhanced secur"
+        },
+        {
+          "info": {
+            "name": "GET /public/exchange_token",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/public/exchange_token",
+            "params": [
+              {
+                "name": "refresh_token",
+                "value": "",
+                "type": "query",
+                "description": "Refresh token"
+              },
+              {
+                "name": "subject_id",
+                "value": "",
+                "type": "query",
+                "description": "New subject id"
+              },
+              {
+                "name": "scope",
+                "value": "",
+                "type": "query",
+                "description": "Optional scope override for the new session. Cannot exceed caller's permissions. Supports `session` scope for direct session creation during token exchange."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generates a token for a new subject id. This method can be used to switch between subaccounts.\n\n**📖 Related Articles:** \n- [Fork and Exchange Tokens](https://docs.deribit.com/articles/authentication#fork-and-exchange-tokens)\n- [Managing Subaccounts](https://docs.deribit.com/articles/managing-subaccounts-api)\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fexchange_token)\n\n"
+        },
+        {
+          "info": {
+            "name": "GET /public/fork_token",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/public/fork_token",
+            "params": [
+              {
+                "name": "refresh_token",
+                "value": "",
+                "type": "query",
+                "description": "Refresh token"
+              },
+              {
+                "name": "session_name",
+                "value": "",
+                "type": "query",
+                "description": "New session name"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generates a token for a new named session. This method can be used only with session scoped tokens.\n\n**📖 More Details:** [Fork and Exchange Tokens](https://docs.deribit.com/articles/authentication#fork-and-exchange-tokens)\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Ffork_token)\n\n"
+        },
+        {
+          "info": {
+            "name": "GET /public/get_block_rfq_trades",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/public/get_block_rfq_trades",
+            "params": [
+              {
+                "name": "currency",
+                "value": "",
+                "type": "query",
+                "description": "The currency symbol or `\"any\"` for all"
+              },
+              {
+                "name": "continuation",
+                "value": "",
+                "type": "query",
+                "description": "Continuation token for pagination. Consists of `timestamp` and `block_rfq_id`."
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "Count of Block RFQs returned, maximum - `1000`"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns a list of recent Block RFQ trades. Can be optionally filtered by currency.\n\nThis is a public method that provides market data about completed Block RFQ trades. For private Block RFQ information, use [private/get_block_rfqs](https://docs.deribit.com/api-reference/block-rfq/private-get_block_rfqs).\n\n**📖 Related Article:** [Deribit Block RFQ API walkthrough](https://docs.deribit.com/articles/block-rfq-api-walkthrough)\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpub"
+        },
+        {
+          "info": {
+            "name": "GET /public/get_combos",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/public/get_combos",
+            "params": [
+              {
+                "name": "currency",
+                "value": "",
+                "type": "query",
+                "description": "The currency symbol or `\"any\"` for all"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves information about active combos for the specified currency. Returns detailed information including leg structures and combo properties.\n\nFor a list of combo IDs only, use [public/get_combo_ids](https://docs.deribit.com/api-reference/combo-books/public-get_combo_ids). For details about a specific combo, use [public/get_combo_details](https://docs.deribit.com/api-reference/combo-books/public-get_combo_details).\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2"
+        },
+        {
+          "info": {
+            "name": "GET /public/get_combo_ids",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/public/get_combo_ids",
+            "params": [
+              {
+                "name": "currency",
+                "value": "",
+                "type": "query",
+                "description": "The currency symbol"
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query",
+                "description": "Combo state, if not provided combos of all states are considered"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves available combo IDs. This method can be used to get the list of all combos, or only the list of combos in the given state.\n\nUse [public/get_combo_details](https://docs.deribit.com/api-reference/combo-books/public-get_combo_details) to retrieve detailed information about a specific combo.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_combo_ids)\n\n"
+        },
+        {
+          "info": {
+            "name": "GET /public/get_combo_details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/public/get_combo_details",
+            "params": [
+              {
+                "name": "combo_id",
+                "value": "",
+                "type": "query",
+                "description": "Combo ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves detailed information about a specific combo, including its leg structure, state, and other properties.\n\nUse [public/get_combo_ids](https://docs.deribit.com/api-reference/combo-books/public-get_combo_ids) to get a list of available combo IDs.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_combo_details)\n\n"
+        },
+        {
+          "info": {
+            "name": "GET /public/get_order_book",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/public/get_order_book",
+            "params": [
+              {
+                "name": "instrument_name",
+                "value": "",
+                "type": "query",
+                "description": "The instrument name for which to retrieve the order book, see [`public/get_instruments`](#public-get_instruments) to obtain instrument names."
+              },
+              {
+                "name": "depth",
+                "value": "",
+                "type": "query",
+                "description": "The number of entries to return for bids and asks, maximum - `10000`."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves the order book (bids and asks) for a given instrument, along with other market values such as best bid/ask prices, last trade price, mark price, and index price.\n\nThe order book depth can be controlled using the `depth` parameter, which accepts values from 1 to 10000. The response includes price levels sorted by price (bids descending, asks ascending).\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_order_book)\n\n"
+        },
+        {
+          "info": {
+            "name": "GET /public/get_order_book_by_instrument_id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/public/get_order_book_by_instrument_id",
+            "params": [
+              {
+                "name": "instrument_id",
+                "value": "",
+                "type": "query",
+                "description": "The instrument ID for which to retrieve the order book, see [`public/get_instruments`](#public-get_instruments) to obtain instrument IDs."
+              },
+              {
+                "name": "depth",
+                "value": "",
+                "type": "query",
+                "description": "The number of entries to return for bids and asks, maximum - `10000`."
+              }
+            ]
+          },
+          "docs": "Retrieves the order book (bids and asks) for a given instrument ID, along with other market values such as best bid/ask prices, last trade price, mark price, and index price.\n\nThis method is similar to `get_order_book` but uses instrument ID instead of instrument name. The order book depth can be controlled using the `depth` parameter, which accepts values from 1 to 10000.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_order_book_by_instrument_id)\n\n"
+        },
+        {
+          "info": {
+            "name": "GET /public/get_last_settlements_by_currency",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/public/get_last_settlements_by_currency",
+            "params": [
+              {
+                "name": "currency",
+                "value": "",
+                "type": "query",
+                "description": "The currency symbol"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Settlement type"
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "Number of requested items, default - `20`, maximum - `1000`"
+              },
+              {
+                "name": "continuation",
+                "value": "",
+                "type": "query",
+                "description": "Continuation token for pagination"
+              },
+              {
+                "name": "search_start_timestamp",
+                "value": "",
+                "type": "query",
+                "description": "The latest timestamp to return result from (milliseconds since the UNIX epoch)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves historical settlement, delivery, and bankruptcy events from all instruments within a given currency. Settlements occur when futures or options contracts expire and are settled at the delivery price.\n\nResults can be filtered by settlement type and timestamp. Use pagination parameters (`count` and `continuation`) to retrieve large settlement histories. This data is useful for analyzing historical contract settlements and understanding market events.\n\n[Try in API console](https://test.der"
+        },
+        {
+          "info": {
+            "name": "GET /public/get_book_summary_by_currency",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/public/get_book_summary_by_currency",
+            "params": [
+              {
+                "name": "currency",
+                "value": "",
+                "type": "query",
+                "description": "The currency symbol"
+              },
+              {
+                "name": "kind",
+                "value": "",
+                "type": "query",
+                "description": "Instrument kind, if not provided instruments of all kinds are considered"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves summary information such as open interest, 24-hour volume, best bid/ask prices, last trade price, and other market statistics for all instruments in a given currency.\n\nResults can be filtered by instrument kind (future, option, etc.). This method provides a quick overview of market activity across all instruments for a currency.\n\n**Note:** For real-time updates, we recommend using the WebSocket subscription to `ticker.{instrument_name}.{interval}` instead of polling this endpoint.\n\n[Tr"
+        },
+        {
+          "info": {
+            "name": "GET /public/get_book_summary_by_instrument",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/public/get_book_summary_by_instrument",
+            "params": [
+              {
+                "name": "instrument_name",
+                "value": "",
+                "type": "query",
+                "description": "Instrument name"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves summary information such as open interest, 24-hour volume, best bid/ask prices, last trade price, mark price, and other market statistics for a specific instrument.\n\nThis method provides a quick overview of current market activity and liquidity for a single instrument.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_book_summary_by_instrument)\n\n"
+        },
+        {
+          "info": {
+            "name": "GET /public/get_last_settlements_by_instrument",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/public/get_last_settlements_by_instrument",
+            "params": [
+              {
+                "name": "instrument_name",
+                "value": "",
+                "type": "query",
+                "description": "Instrument name"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Settlement type"
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "Number of requested items, default - `20`, maximum - `1000`"
+              },
+              {
+                "name": "continuation",
+                "value": "",
+                "type": "query",
+                "description": "Continuation token for pagination"
+              },
+              {
+                "name": "search_start_timestamp",
+                "value": "",
+                "type": "query",
+                "description": "The latest timestamp to return result from (milliseconds since the UNIX epoch)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves historical settlement, delivery, and bankruptcy events for a specific instrument. Settlements occur when futures or options contracts expire and are settled at the delivery price.\n\nResults can be filtered by settlement type and timestamp. Use pagination parameters (`count` and `continuation`) to retrieve large settlement histories. This method is useful for tracking settlement history for a specific instrument.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic"
+        },
+        {
+          "info": {
+            "name": "GET /public/get_contract_size",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/public/get_contract_size",
+            "params": [
+              {
+                "name": "instrument_name",
+                "value": "",
+                "type": "query",
+                "description": "Instrument name"
+              }
+            ]
+          },
+          "docs": "Retrieves the contract size (also known as contract multiplier) for a given instrument. The contract size determines how many units of the underlying asset one contract represents.\n\nThis value is essential for calculating position values, margin requirements, and P&L calculations. Different instruments may have different contract sizes.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_contract_size)\n\n"
+        },
+        {
+          "info": {
+            "name": "GET /public/get_trade_volumes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/public/get_trade_volumes",
+            "params": [
+              {
+                "name": "extended",
+                "value": "",
+                "type": "query",
+                "description": "Request for extended statistics. Including also 7 and 30 days volumes (default false)"
+              }
+            ]
+          },
+          "docs": "Retrieves aggregated 24-hour trade volumes for different instrument types and currencies. The volume statistics include all executed trades across the platform.\n\n**Note:** Position moves are not included in this volume. Block trades and Block RFQ trades are included in the volume calculations.\n\nUse the `extended` parameter to include additional volume statistics and breakdowns.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_trade_volumes)\n\n"
+        },
+        {
+          "info": {
+            "name": "GET /public/get_index_price",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/public/get_index_price",
+            "params": [
+              {
+                "name": "index_name",
+                "value": "",
+                "type": "query",
+                "description": "Index identifier, matches (base) cryptocurrency with quote currency"
+              }
+            ]
+          },
+          "docs": "Retrieves the current index price value for a given index name. Index prices are used as reference prices for mark price calculations and settlement.\n\nUse `get_index_price_names` or `get_supported_index_names` to retrieve available index names.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_index_price)\n\n"
+        },
+        {
+          "info": {
+            "name": "GET /public/get_index_price_names",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/public/get_index_price_names",
+            "params": [
+              {
+                "name": "extended",
+                "value": "",
+                "type": "query",
+                "description": "When set to `true`, returns additional information including `future_combo_creation_enabled` and `option_combo_creation_enabled` for each index"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves the identifiers (names) of all supported price indexes. Price indexes are reference prices used for mark price calculations, settlement, and other market operations.\n\nWhen the `extended` parameter is set to `true`, the response includes additional information such as whether future combo creation and option combo creation are enabled for each index.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_index_price_names)\n\n"
+        },
+        {
+          "info": {
+            "name": "GET /public/get_supported_index_names",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/public/get_supported_index_names",
+            "params": [
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Type of a cryptocurrency price index"
+              }
+            ]
+          },
+          "docs": "Retrieves the identifiers (names) of all supported price indexes, optionally filtered by index type. Price indexes are reference prices used for mark price calculations, settlement, and other market operations.\n\nUse the `type` parameter to filter indexes by type (e.g., spot, futures, etc.). This method helps discover available indexes for use with other API methods.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_supported_index_names)\n\n"
+        },
+        {
+          "info": {
+            "name": "GET /public/get_instruments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/public/get_instruments",
+            "params": [
+              {
+                "name": "currency",
+                "value": "",
+                "type": "query",
+                "description": "The currency symbol or `\"any\"` for all"
+              },
+              {
+                "name": "kind",
+                "value": "",
+                "type": "query",
+                "description": "Instrument kind, if not provided instruments of all kinds are considered"
+              },
+              {
+                "name": "expired",
+                "value": "",
+                "type": "query",
+                "description": "Set to true to show recently expired instruments instead of active ones."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves available trading instruments. This method can be used to see which instruments are available for trading, or which instruments have recently expired.\n\n**Note - This method has distinct API rate limiting requirements:** Sustained rate: 1 request/second. To avoid rate limits, we recommend using either the REST requests for server-cached data or the WebSocket subscription to [instrument_state.{kind}.{currency}](https://docs.deribit.com/api-reference/subscription-channels/instrument-state"
+        },
+        {
+          "info": {
+            "name": "GET /public/get_instrument",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/public/get_instrument",
+            "params": [
+              {
+                "name": "instrument_name",
+                "value": "",
+                "type": "query",
+                "description": "Instrument name"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves detailed information about a specific instrument, including instrument specifications, contract details, tick size, settlement currency, expiration date (for futures and options), strike price (for options), and other instrument parameters.\n\nThis method is useful for obtaining instrument metadata needed for trading operations and calculations.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_instrument)\n\n"
+        },
+        {
+          "info": {
+            "name": "GET /public/get_historical_volatility",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/public/get_historical_volatility",
+            "params": [
+              {
+                "name": "currency",
+                "value": "",
+                "type": "query",
+                "description": "The currency symbol"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Provides historical volatility data for a given cryptocurrency. Historical volatility measures the degree of price variation over a past period and is useful for risk assessment and option pricing.\n\nThe response includes volatility statistics calculated from historical price movements. This data can be used for portfolio risk analysis and understanding market conditions.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_historical_volatility)\n\n"
+        },
+        {
+          "info": {
+            "name": "GET /public/get_funding_rate_history",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/public/get_funding_rate_history",
+            "params": [
+              {
+                "name": "instrument_name",
+                "value": "",
+                "type": "query",
+                "description": "Instrument name"
+              },
+              {
+                "name": "start_timestamp",
+                "value": "",
+                "type": "query",
+                "description": "The earliest timestamp to return result from (milliseconds since the UNIX epoch)"
+              },
+              {
+                "name": "end_timestamp",
+                "value": "",
+                "type": "query",
+                "description": "The most recent timestamp to return result from (milliseconds since the UNIX epoch)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves hourly historical funding rate (interest rate) data for a PERPETUAL instrument over a specified time period. Funding rates are periodic payments exchanged between long and short positions in perpetual contracts.\n\nThe response includes hourly funding rate values, which can be used to analyze funding rate trends and calculate historical funding costs. This method is applicable only for PERPETUAL instruments.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fge"
+        },
+        {
+          "info": {
+            "name": "GET /public/get_funding_rate_value",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/public/get_funding_rate_value",
+            "params": [
+              {
+                "name": "instrument_name",
+                "value": "",
+                "type": "query",
+                "description": "Instrument name"
+              },
+              {
+                "name": "start_timestamp",
+                "value": "",
+                "type": "query",
+                "description": "The earliest timestamp to return result from (milliseconds since the UNIX epoch)"
+              },
+              {
+                "name": "end_timestamp",
+                "value": "",
+                "type": "query",
+                "description": "The most recent timestamp to return result from (milliseconds since the UNIX epoch)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves the funding rate (interest rate) value for a perpetual instrument over a specified time period. Funding rates are periodic payments exchanged between long and short positions in perpetual contracts.\n\nThis method is applicable only for PERPETUAL instruments. The funding rate is typically expressed as a percentage and is used to keep the perpetual contract price aligned with the underlying index price.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_fund"
+        },
+        {
+          "info": {
+            "name": "GET /public/get_index_chart_data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/public/get_index_chart_data",
+            "params": [
+              {
+                "name": "index_name",
+                "value": "",
+                "type": "query",
+                "description": "Index identifier, matches (base) cryptocurrency with quote currency"
+              },
+              {
+                "name": "range",
+                "value": "",
+                "type": "query",
+                "description": "Range of the data to return"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns historical price index chart data for the specified index name and time range. The data is formatted for use in charting applications and shows price index values over time.\n\nUse the `range` parameter to specify the time period for which to retrieve chart data. This method is useful for visualizing price index trends and historical movements.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_index_chart_data)\n\n"
+        },
+        {
+          "info": {
+            "name": "GET /public/get_mark_price_history",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/public/get_mark_price_history",
+            "params": [
+              {
+                "name": "instrument_name",
+                "value": "",
+                "type": "query",
+                "description": "Instrument name"
+              },
+              {
+                "name": "start_timestamp",
+                "value": "",
+                "type": "query",
+                "description": "The earliest timestamp to return result from (milliseconds since the UNIX epoch)"
+              },
+              {
+                "name": "end_timestamp",
+                "value": "",
+                "type": "query",
+                "description": "The most recent timestamp to return result from (milliseconds since the UNIX epoch)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves 5-minute historical mark price data for an instrument. Mark prices are used for margin calculations and position valuations.\n\n**Note:** Currently, mark price history is available only for a subset of options that participate in volatility index calculations. All other instruments, including futures and perpetuals, will return an empty list.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_mark_price_history)\n\n"
+        },
+        {
+          "info": {
+            "name": "GET /public/get_expirations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/public/get_expirations",
+            "params": [
+              {
+                "name": "currency",
+                "value": "",
+                "type": "query",
+                "description": "The currency symbol or `\"any\"` for all or '\"grouped\"' for all grouped by currency"
+              },
+              {
+                "name": "kind",
+                "value": "",
+                "type": "query",
+                "description": "Instrument kind, `\"future\"` or `\"option\"` or `\"any\"`"
+              },
+              {
+                "name": "currency_pair",
+                "value": "",
+                "type": "query",
+                "description": "The currency pair symbol"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves all available expiration timestamps for instruments. This method can be used to discover which expiration dates are available for trading, which is useful for finding instruments with specific expiration dates.\n\nResults can be filtered by settlement currency, instrument kind (future or option), and currency pair. The response includes expiration timestamps in milliseconds since the UNIX epoch.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_expirations"
+        },
+        {
+          "info": {
+            "name": "GET /public/get_apr_history",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/public/get_apr_history",
+            "params": [
+              {
+                "name": "currency",
+                "value": "",
+                "type": "query",
+                "description": "Currency for which to retrieve APR history"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of days to retrieve (default `365`, maximum `365`)"
+              },
+              {
+                "name": "before",
+                "value": "",
+                "type": "query",
+                "description": "Used to receive APR history before given epoch day"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves historical Annual Percentage Rate (APR) data for yield-generating tokens. APR represents the annualized return rate for holding these tokens on Deribit.\n\nThis method is only applicable to yield-generating tokens: `USDE`, `STETH`, `USDC`, and `BUILD`. Use the `limit` parameter to specify the number of days to retrieve (default 365, maximum 365), and `before` to retrieve APR history before a specific epoch day.\n\n**📖 Related Support Article:** [Yield reward-bearing coins](https://support"
+        },
+        {
+          "info": {
+            "name": "GET /public/get_last_trades_by_instrument",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/public/get_last_trades_by_instrument",
+            "params": [
+              {
+                "name": "instrument_name",
+                "value": "",
+                "type": "query",
+                "description": "Instrument name"
+              },
+              {
+                "name": "start_seq",
+                "value": "",
+                "type": "query",
+                "description": "The sequence number of the first trade to be returned"
+              },
+              {
+                "name": "end_seq",
+                "value": "",
+                "type": "query",
+                "description": "The sequence number of the last trade to be returned"
+              },
+              {
+                "name": "start_timestamp",
+                "value": "",
+                "type": "query",
+                "description": "The earliest timestamp to return result from (milliseconds since the UNIX epoch). When param is provided trades are returned from the earliest"
+              },
+              {
+                "name": "end_timestamp",
+                "value": "",
+                "type": "query",
+                "description": "The most recent timestamp to return result from (milliseconds since the UNIX epoch). Only one of params: start_timestamp, end_timestamp is truly required"
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "Number of requested items, default - `10`, maximum - `1000`"
+              },
+              {
+                "name": "sorting",
+                "value": "",
+                "type": "query",
+                "description": "Direction of results sorting (`default` value means no sorting, results will be returned in order in which they left the database)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves the latest trades that have occurred for a specific instrument. Returns trade details including price, amount, direction, timestamp, and trade ID.\n\nResults can be filtered by sequence number range or timestamp range. Use the `count` parameter to limit the number of trades returned, and `sorting` to control the order (ascending or descending by trade ID).\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_last_trades_by_instrument)\n\n"
+        },
+        {
+          "info": {
+            "name": "GET /public/get_last_trades_by_instrument_and_time",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/public/get_last_trades_by_instrument_and_time",
+            "params": [
+              {
+                "name": "instrument_name",
+                "value": "",
+                "type": "query",
+                "description": "Instrument name"
+              },
+              {
+                "name": "start_timestamp",
+                "value": "",
+                "type": "query",
+                "description": "The earliest timestamp to return result from (milliseconds since the UNIX epoch). When param is provided trades are returned from the earliest"
+              },
+              {
+                "name": "end_timestamp",
+                "value": "",
+                "type": "query",
+                "description": "The most recent timestamp to return result from (milliseconds since the UNIX epoch). Only one of params: start_timestamp, end_timestamp is truly required"
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "Number of requested items, default - `10`, maximum - `1000`"
+              },
+              {
+                "name": "sorting",
+                "value": "",
+                "type": "query",
+                "description": "Direction of results sorting (`default` value means no sorting, results will be returned in order in which they left the database)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves the latest trades that have occurred for a specific instrument within a specified time range. Returns trade details including price, amount, direction, timestamp, and trade ID.\n\nUse the `count` parameter to limit the number of trades returned, and `sorting` to control the order (ascending or descending by trade ID). This method is useful for analyzing trading activity over specific time periods.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_last_trad"
+        },
+        {
+          "info": {
+            "name": "GET /public/get_last_trades_by_currency",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/public/get_last_trades_by_currency",
+            "params": [
+              {
+                "name": "currency",
+                "value": "",
+                "type": "query",
+                "description": "The currency symbol"
+              },
+              {
+                "name": "kind",
+                "value": "",
+                "type": "query",
+                "description": "Instrument kind, `\"combo\"` for any combo or `\"any\"` for all. If not provided instruments of all kinds are considered"
+              },
+              {
+                "name": "start_id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the first trade to be returned. Number for BTC trades, or hyphen name in ex. `\"ETH-15\"` # `\"ETH_USDC-16\"`"
+              },
+              {
+                "name": "end_id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the last trade to be returned. Number for BTC trades, or hyphen name in ex. `\"ETH-15\"` # `\"ETH_USDC-16\"`"
+              },
+              {
+                "name": "start_timestamp",
+                "value": "",
+                "type": "query",
+                "description": "The earliest timestamp to return result from (milliseconds since the UNIX epoch). When param is provided trades are returned from the earliest"
+              },
+              {
+                "name": "end_timestamp",
+                "value": "",
+                "type": "query",
+                "description": "The most recent timestamp to return result from (milliseconds since the UNIX epoch). Only one of params: start_timestamp, end_timestamp is truly required"
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "Number of requested items, default - `10`, maximum - `1000`"
+              },
+              {
+                "name": "sorting",
+                "value": "",
+                "type": "query",
+                "description": "Direction of results sorting (`default` value means no sorting, results will be returned in order in which they left the database)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves the latest trades that have occurred for instruments in a specific currency. Returns trade details including price, amount, direction, timestamp, and trade ID for all instruments in the currency.\n\nResults can be filtered by instrument kind and trade ID range or timestamp range. Use the `count` parameter to limit the number of trades returned, and `sorting` to control the order (ascending or descending by trade ID).\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpu"
+        },
+        {
+          "info": {
+            "name": "GET /public/get_last_trades_by_currency_and_time",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/public/get_last_trades_by_currency_and_time",
+            "params": [
+              {
+                "name": "currency",
+                "value": "",
+                "type": "query",
+                "description": "The currency symbol"
+              },
+              {
+                "name": "kind",
+                "value": "",
+                "type": "query",
+                "description": "Instrument kind, `\"combo\"` for any combo or `\"any\"` for all. If not provided instruments of all kinds are considered"
+              },
+              {
+                "name": "start_timestamp",
+                "value": "",
+                "type": "query",
+                "description": "The earliest timestamp to return result from (milliseconds since the UNIX epoch). When param is provided trades are returned from the earliest"
+              },
+              {
+                "name": "end_timestamp",
+                "value": "",
+                "type": "query",
+                "description": "The most recent timestamp to return result from (milliseconds since the UNIX epoch). Only one of params: start_timestamp, end_timestamp is truly required"
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "Number of requested items, default - `10`, maximum - `1000`"
+              },
+              {
+                "name": "sorting",
+                "value": "",
+                "type": "query",
+                "description": "Direction of results sorting (`default` value means no sorting, results will be returned in order in which they left the database)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves the latest trades that have occurred for instruments in a specific currency within a specified time range. Returns trade details including price, amount, direction, timestamp, and trade ID.\n\nResults can be filtered by instrument kind. Use the `count` parameter to limit the number of trades returned, and `sorting` to control the order (ascending or descending by trade ID).\n\n> **Note:** This endpoint only returns trades from the last **24 hours**. Requests with `start_timestamp` older th"
+        },
+        {
+          "info": {
+            "name": "GET /public/get_currencies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/public/get_currencies",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves all cryptocurrencies supported by the Deribit API. Returns a list of available currencies with their codes and basic information.\n\nThis method takes no parameters and is useful for discovering which currencies are available for trading on the platform.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_currencies)\n\n"
+        },
+        {
+          "info": {
+            "name": "GET /public/get_funding_chart_data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/public/get_funding_chart_data",
+            "params": [
+              {
+                "name": "instrument_name",
+                "value": "",
+                "type": "query",
+                "description": "Instrument name"
+              },
+              {
+                "name": "length",
+                "value": "",
+                "type": "query",
+                "description": "Specifies time period. `8h` - 8 hours, `24h` - 24 hours, `1m` - 1 month"
+              }
+            ]
+          },
+          "docs": "Retrieves funding rate chart data points for a PERPETUAL instrument within a given time period. The data is formatted for use in charting applications and includes funding rate values at regular intervals.\n\nUse the `length` parameter to specify the time period for which to retrieve chart data. This method is useful for visualizing funding rate trends over time.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_funding_chart_data)\n\n"
+        },
+        {
+          "info": {
+            "name": "GET /public/get_tradingview_chart_data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/public/get_tradingview_chart_data",
+            "params": [
+              {
+                "name": "instrument_name",
+                "value": "",
+                "type": "query",
+                "description": "Instrument name"
+              },
+              {
+                "name": "start_timestamp",
+                "value": "",
+                "type": "query",
+                "description": "The earliest timestamp to return result from (milliseconds since the UNIX epoch)"
+              },
+              {
+                "name": "end_timestamp",
+                "value": "",
+                "type": "query",
+                "description": "The most recent timestamp to return result from (milliseconds since the UNIX epoch)"
+              },
+              {
+                "name": "resolution",
+                "value": "",
+                "type": "query",
+                "description": "Chart bars resolution given in full minutes or keyword `1D` (only some specific resolutions are supported)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves publicly available market data formatted for generating TradingView-compatible candle charts. The data includes open, high, low, close (OHLC) prices and volume for specified time intervals.\n\nUse the `chart_resolution` parameter to specify the candle interval (e.g., 1m, 5m, 1h, 1d). This method provides the standard format used by TradingView and other charting platforms.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_tradingview_chart_data)\n\n"
+        },
+        {
+          "info": {
+            "name": "GET /public/get_volatility_index_data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/public/get_volatility_index_data",
+            "params": [
+              {
+                "name": "currency",
+                "value": "",
+                "type": "query",
+                "description": "The currency symbol"
+              },
+              {
+                "name": "start_timestamp",
+                "value": "",
+                "type": "query",
+                "description": "The earliest timestamp to return result from (milliseconds since the UNIX epoch)"
+              },
+              {
+                "name": "end_timestamp",
+                "value": "",
+                "type": "query",
+                "description": "The most recent timestamp to return result from (milliseconds since the UNIX epoch)"
+              },
+              {
+                "name": "resolution",
+                "value": "",
+                "type": "query",
+                "description": "Time resolution given in full seconds or keyword `1D` (only some specific resolutions are supported)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves volatility index (VIX) chart data formatted as candles. Volatility indexes measure market expectations of future volatility and are useful for risk assessment and trading strategies.\n\nUse the `vix_resolution` parameter to specify the candle interval. The data shows historical volatility index values over time and is formatted for use in charting applications.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_volatility_index_data)\n\n"
+        },
+        {
+          "info": {
+            "name": "GET /public/ticker",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/public/ticker",
+            "params": [
+              {
+                "name": "instrument_name",
+                "value": "",
+                "type": "query",
+                "description": "Instrument name"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves the ticker (24-hour statistics) for a specific instrument. The ticker includes the last trade price, best bid/ask prices, 24-hour high/low, 24-hour volume, open interest, mark price, and other market statistics.\n\nThis is a lightweight method for getting current market data for a single instrument. For real-time updates, consider using WebSocket subscriptions to ticker channels.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fticker)\n\n"
+        },
+        {
+          "info": {
+            "name": "GET /public/set_heartbeat",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/public/set_heartbeat",
+            "params": [
+              {
+                "name": "interval",
+                "value": "",
+                "type": "query",
+                "description": "The heartbeat interval in seconds, but not less than 10"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Signals the WebSocket connection to send and request heartbeats. Heartbeats can be used to detect stale connections.\n\nWhen heartbeats have been set up, the API server will send `heartbeat` messages and `test_request` messages. Your software should respond to `test_request` messages by sending a `/api/v2/public/test` request. If your software fails to do so, the API server will immediately close the connection. If your account is configured to cancel on disconnect, any orders opened over the conn"
+        },
+        {
+          "info": {
+            "name": "GET /public/disable_heartbeat",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/public/disable_heartbeat",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Stop sending heartbeat messages. This method takes no parameters.\n\n**WebSocket Only:** This method is designed exclusively for WebSocket connections. Attempting to use it via REST/HTTP will result in an error response.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fdisable_heartbeat)\n\n"
+        },
+        {
+          "info": {
+            "name": "GET /public/subscribe",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/public/subscribe",
+            "params": [
+              {
+                "name": "channels",
+                "value": "",
+                "type": "query",
+                "description": "A list of channels to subscribe to. See [Notifications and Subscriptions](https://docs.deribit.com/articles/notifications) for all available channels."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Subscribe to one or more channels. This is the same method as `/private/subscribe`, but it can only be used for 'public' channels.\n\nFor a complete list of available subscription channels and their notification formats, see [Notifications and Subscriptions](https://docs.deribit.com/articles/notifications).\n\n**Note - This method has distinct API rate limiting requirements:** Sustained rate: ~3.3 requests/second. For more information, see [Rate Limits](https://docs.deribit.com/articles/rate-limits)"
+        },
+        {
+          "info": {
+            "name": "GET /public/unsubscribe",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/public/unsubscribe",
+            "params": [
+              {
+                "name": "channels",
+                "value": "",
+                "type": "query",
+                "description": "A list of channels to unsubscribe from. Only successfully unsubscribed channels will be returned in the result. See [Notifications and Subscriptions](https://docs.deribit.com/articles/notifications) for all available channels."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Unsubscribe from one or more channels. The response contains only the channels that were successfully unsubscribed in this request.\n\nFor a complete list of available subscription channels and their notification formats, see [Notifications and Subscriptions](https://docs.deribit.com/articles/notifications).\n\n**Note:** The `result` field in the response contains only the channels that were successfully processed and unsubscribed from this specific request. It does not include all previously subscr"
+        },
+        {
+          "info": {
+            "name": "GET /public/unsubscribe_all",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/public/unsubscribe_all",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Unsubscribe from all the channels subscribed so far. This method takes no parameters.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Funsubscribe_all)\n\n"
+        },
+        {
+          "info": {
+            "name": "GET /public/hello",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/public/hello",
+            "params": [
+              {
+                "name": "client_name",
+                "value": "",
+                "type": "query",
+                "description": "Client software name"
+              },
+              {
+                "name": "client_version",
+                "value": "",
+                "type": "query",
+                "description": "Client software version"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Method used to introduce the client software connected to Deribit platform over websocket. Provided data may have an impact on the maintained connection and will be collected for internal statistical purposes. In response, Deribit will also introduce itself.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fhello)\n\n"
+        },
+        {
+          "info": {
+            "name": "GET /public/status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/public/status",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Method used to get information about locked currencies\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fstatus)\n\n"
+        },
+        {
+          "info": {
+            "name": "GET /public/test",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/public/test",
+            "params": [
+              {
+                "name": "expected_result",
+                "value": "",
+                "type": "query",
+                "description": "The value \"exception\" will trigger an error response. This may be useful for testing wrapper libraries."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Tests the connection to the API server, and returns its version. You can use this to make sure the API is reachable, and matches the expected version.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Ftest)\n\n"
+        },
+        {
+          "info": {
+            "name": "GET /public/get_time",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.deribit.com/api/v2/public/get_time",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves the current time (in milliseconds). This API endpoint can be used to check the clock skew between your software and Deribit's systems.\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_time)\n\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
