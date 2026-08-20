@@ -42,6 +42,14 @@ apis:
   tags:
   - WebSocket
   - JSON-RPC
+  - Real-Time
+  - Streaming
+  - Subscription
+  - Derivatives
+  - Trading
+  tags_raw:
+  - WebSocket
+  - JSON-RPC
   - Real-time
   - Streaming
   - Subscriptions
@@ -350,6 +358,8 @@ apis:
   humanURL: https://docs.deribit.com/
   baseURL: https://www.deribit.com/api/v2
   tags:
+  - Portfolio-Management
+  tags_raw:
   - Portfolio Management
   properties:
   - type: OpenAPI
@@ -570,6 +580,8 @@ apis:
   humanURL: https://docs.deribit.com/
   baseURL: https://www.deribit.com/api/v2
   tags:
+  - Wallets
+  tags_raw:
   - Wallet
   properties:
   - type: OpenAPI
