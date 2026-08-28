@@ -1,5 +1,17 @@
 name: Deribit
 description: Deribit is a leading Bitcoin and Ethereum options and futures exchange offering a comprehensive REST and WebSocket API for derivatives trading, market data, portfolio management, and block trades. The platform supports futures, perpetuals, options, and spot trading across BTC, ETH, and SOL with both individual and institutional access via JSON-RPC, HTTP, and FIX protocol interfaces.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: paid
   onboarding: self-serve
