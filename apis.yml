@@ -493,6 +493,8 @@ apis:
     url: >-
       https://raw.githubusercontent.com/api-evangelist/deribit/refs/heads/main/finops/finops.yml
 common:
+  - type: Website
+    url: https://www.deribit.com/
   - type: AgenticAccess
     url: agentic-access/deribit-agentic-access.yml
   - type: DomainSecurity
