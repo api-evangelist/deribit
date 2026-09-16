@@ -5,7 +5,7 @@
       "source": "https://insights.deribit.com/feed/",
       "feed_url": "https://insights.deribit.com/feed/",
       "title": "",
-      "saved": 1,
+      "saved": 0,
       "method": "feed",
       "nature": "undetermined",
       "nature_basis": null
@@ -19,7 +19,7 @@
       "error": "parse_failed"
     }
   ],
-  "fetched": "2026-09-06T18:58:10Z",
+  "fetched": "2026-09-13T12:41:53Z",
   "post_count": 25,
   "feed_nature": "undetermined",
   "feed_nature_basis": null,
