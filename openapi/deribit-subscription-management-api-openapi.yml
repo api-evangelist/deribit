@@ -1,13 +1,13 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: Deribit Account Management Subscription Management API
+  title: Deribit Subscription Management API
   version: 2.1.1
-  description: Subscription works as [notifications](#notifications), so users will automatically (after subscribing) receive messages from the server. Overview for each channel response format is described in [subscriptions](#subscriptions) section.
+  description: Subscription works as notifications, so users will automatically (after subscribing) receive messages from the server. Overview for each channel response format is described in subscriptions section.
 servers:
 - url: https://test.deribit.com/api/v2
 tags:
 - name: Subscription Management
-  description: Subscription works as [notifications](#notifications), so users will automatically (after subscribing) receive messages from the server. Overview for each channel response format is described in [subscriptions](#subscriptions) section.
+  description: Subscription works as notifications, so users will automatically (after subscribing) receive messages from the server. Overview for each channel response format is described in subscriptions section.
 paths:
   /public/subscribe:
     get:
@@ -49,19 +49,16 @@ paths:
       description: 'Subscribe to one or more channels. This is the same method as `/private/subscribe`, but it can only be used for ''public'' channels.
 
 
-        For a complete list of available subscription channels and their notification formats, see [Notifications and Subscriptions](https://docs.deribit.com/articles/notifications).
+        For a complete list of available subscription channels and their notification formats, see Notifications and Subscriptions.
 
 
-        **Note - This method has distinct API rate limiting requirements:** Sustained rate: ~3.3 requests/second. For more information, see [Rate Limits](https://docs.deribit.com/articles/rate-limits).
+        **Note - This method has distinct API rate limiting requirements:** Sustained rate: ~3.3 requests/second. For more information, see Rate Limits.
 
 
-        **📖 Related Article:** [Market Data Collection Best Practices](https://docs.deribit.com/articles/market-data-collection-best-practices)
+        **📖 Related Article:** Market Data Collection Best Practices
 
 
-        [Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fsubscribe)
-
-
-        '
+        Try in API console'
       x-mint:
         metadata:
           title: public/subscribe
@@ -70,6 +67,10 @@ paths:
           - public/subscribe
           - channels
         href: /api-reference/subscription-management/public-subscribe
+      summary: Get public subscribe
+      x-summary-source: derived
+      operationId: getPublicSubscribe
+      x-operation-id-source: derived
   /public/unsubscribe:
     get:
       tags:
@@ -110,16 +111,13 @@ paths:
       description: 'Unsubscribe from one or more channels. The response contains only the channels that were successfully unsubscribed in this request.
 
 
-        For a complete list of available subscription channels and their notification formats, see [Notifications and Subscriptions](https://docs.deribit.com/articles/notifications).
+        For a complete list of available subscription channels and their notification formats, see Notifications and Subscriptions.
 
 
         **Note:** The `result` field in the response contains only the channels that were successfully processed and unsubscribed from this specific request. It does not include all previously subscribed topics. If a channel in the request is invalid, not subscribed, or fails validation, it will not appear in the result.
 
 
-        [Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Funsubscribe)
-
-
-        '
+        Try in API console'
       x-mint:
         metadata:
           title: public/unsubscribe
@@ -128,6 +126,10 @@ paths:
           - public/unsubscribe
           - channels
         href: /api-reference/subscription-management/public-unsubscribe
+      summary: Get public unsubscribe
+      x-summary-source: derived
+      operationId: getPublicUnsubscribe
+      x-operation-id-source: derived
   /public/unsubscribe_all:
     get:
       tags:
@@ -150,10 +152,7 @@ paths:
       description: 'Unsubscribe from all the channels subscribed so far. This method takes no parameters.
 
 
-        [Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Funsubscribe_all)
-
-
-        '
+        Try in API console'
       x-mint:
         metadata:
           title: public/unsubscribe_all
@@ -161,6 +160,10 @@ paths:
           keywords:
           - public/unsubscribe_all
         href: /api-reference/subscription-management/public-unsubscribe_all
+      summary: Get public unsubscribe all
+      x-summary-source: derived
+      operationId: getPublicUnsubscribeAll
+      x-operation-id-source: derived
   /private/subscribe:
     get:
       tags:
@@ -208,19 +211,16 @@ paths:
       description: 'Subscribe to one or more channels. The name of the channel determines what information will be provided, and in what form.
 
 
-        For a complete list of available subscription channels and their notification formats, see [Notifications and Subscriptions](https://docs.deribit.com/articles/notifications).
+        For a complete list of available subscription channels and their notification formats, see Notifications and Subscriptions.
 
 
-        **Note - This method has distinct API rate limiting requirements:** Sustained rate: ~3.3 requests/second. For more information, see [Rate Limits](https://docs.deribit.com/articles/rate-limits).
+        **Note - This method has distinct API rate limiting requirements:** Sustained rate: ~3.3 requests/second. For more information, see Rate Limits.
 
 
-        **📖 Related Article:** [Market Data Collection Best Practices](https://docs.deribit.com/articles/market-data-collection-best-practices)
+        **📖 Related Article:** Market Data Collection Best Practices
 
 
-        [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fsubscribe)
-
-
-        '
+        Try in API console'
       x-mint:
         metadata:
           title: private/subscribe
@@ -230,6 +230,10 @@ paths:
           - channels
           - label
         href: /api-reference/subscription-management/private-subscribe
+      summary: Get private subscribe
+      x-summary-source: derived
+      operationId: getPrivateSubscribe
+      x-operation-id-source: derived
   /private/unsubscribe:
     get:
       tags:
@@ -270,16 +274,13 @@ paths:
       description: 'Unsubscribe from one or more channels. The response contains only the channels that were successfully unsubscribed in this request.
 
 
-        For a complete list of available subscription channels and their notification formats, see [Notifications and Subscriptions](https://docs.deribit.com/articles/notifications).
+        For a complete list of available subscription channels and their notification formats, see Notifications and Subscriptions.
 
 
         **Note:** The `result` field in the response contains only the channels that were successfully processed and unsubscribed from this specific request. It does not include all previously subscribed topics. If a channel in the request is invalid, not subscribed, or fails validation, it will not appear in the result.
 
 
-        [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Funsubscribe)
-
-
-        '
+        Try in API console'
       x-mint:
         metadata:
           title: private/unsubscribe
@@ -288,6 +289,10 @@ paths:
           - private/unsubscribe
           - channels
         href: /api-reference/subscription-management/private-unsubscribe
+      summary: Get private unsubscribe
+      x-summary-source: derived
+      operationId: getPrivateUnsubscribe
+      x-operation-id-source: derived
   /private/unsubscribe_all:
     get:
       tags:
@@ -310,10 +315,7 @@ paths:
       description: 'Unsubscribe from all the channels subscribed so far. This method takes no parameters.
 
 
-        [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Funsubscribe_all)
-
-
-        '
+        Try in API console'
       x-mint:
         metadata:
           title: private/unsubscribe_all
@@ -321,7 +323,87 @@ paths:
           keywords:
           - private/unsubscribe_all
         href: /api-reference/subscription-management/private-unsubscribe_all
+      summary: Get private unsubscribe all
+      x-summary-source: derived
+      operationId: getPrivateUnsubscribeAll
+      x-operation-id-source: derived
 components:
+  schemas:
+    OkResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          type: string
+          enum:
+          - ok
+          description: Result of method execution. `ok` in case of success
+      required:
+      - jsonrpc
+      - result
+      type: object
+    PrivateSubscribeResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          type: array
+          items:
+            type: string
+            example: deribit_price_index.btc_usd
+          description: A list of subscribed channels.
+      required:
+      - jsonrpc
+      - result
+      type: object
+    ErrorMessageResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        message:
+          type: string
+        error:
+          type: integer
+      required:
+      - jsonrpc
+      - message
+      - error
+      type: object
+    Getunsubscribe200response:
+      type: object
+      properties:
+        jsonrpc:
+          type: string
+          example: '2.0'
+        id:
+          type: integer
+          example: 8691
+        result:
+          type: array
+          items:
+            type: string
+            x-deribit-type: channel
+          example:
+          - deribit_price_index.btc_usd
+          description: List of channels that were successfully unsubscribed in this request
   responses:
     PrivateSubscribeResponse:
       content:
@@ -376,79 +458,3 @@ components:
                 - deribit_price_index.btc_usd
               description: Response example
       description: Successfully unsubscribed from channels
-  schemas:
-    Getunsubscribe200response:
-      type: object
-      properties:
-        jsonrpc:
-          type: string
-          example: '2.0'
-        id:
-          type: integer
-          example: 8691
-        result:
-          type: array
-          items:
-            type: string
-            x-deribit-type: channel
-          example:
-          - deribit_price_index.btc_usd
-          description: List of channels that were successfully unsubscribed in this request
-    PrivateSubscribeResponse:
-      properties:
-        jsonrpc:
-          type: string
-          enum:
-          - '2.0'
-          description: The JSON-RPC version (2.0)
-        id:
-          type: integer
-          description: The id that was sent in the request
-        result:
-          type: array
-          items:
-            type: string
-            example: deribit_price_index.btc_usd
-          description: A list of subscribed channels.
-      required:
-      - jsonrpc
-      - result
-      type: object
-    OkResponse:
-      properties:
-        jsonrpc:
-          type: string
-          enum:
-          - '2.0'
-          description: The JSON-RPC version (2.0)
-        id:
-          type: integer
-          description: The id that was sent in the request
-        result:
-          type: string
-          enum:
-          - ok
-          description: Result of method execution. `ok` in case of success
-      required:
-      - jsonrpc
-      - result
-      type: object
-    ErrorMessageResponse:
-      properties:
-        jsonrpc:
-          type: string
-          enum:
-          - '2.0'
-          description: The JSON-RPC version (2.0)
-        id:
-          type: integer
-          description: The id that was sent in the request
-        message:
-          type: string
-        error:
-          type: integer
-      required:
-      - jsonrpc
-      - message
-      - error
-      type: object

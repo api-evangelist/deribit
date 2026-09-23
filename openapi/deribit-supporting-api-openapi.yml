@@ -1,6 +1,6 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: Deribit Account Management Supporting API
+  title: Deribit Supporting API
   version: 2.1.1
 servers:
 - url: https://test.deribit.com/api/v2
@@ -46,10 +46,7 @@ paths:
       description: 'Method used to introduce the client software connected to Deribit platform over websocket. Provided data may have an impact on the maintained connection and will be collected for internal statistical purposes. In response, Deribit will also introduce itself.
 
 
-        [Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fhello)
-
-
-        '
+        Try in API console'
       x-mint:
         metadata:
           title: public/hello
@@ -60,6 +57,10 @@ paths:
           - client_version
           - version
         href: /api-reference/supporting/public-hello
+      summary: Get public hello
+      x-summary-source: derived
+      operationId: getPublicHello
+      x-operation-id-source: derived
   /public/status:
     get:
       parameters: []
@@ -83,10 +84,7 @@ paths:
       description: 'Method used to get information about locked currencies
 
 
-        [Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fstatus)
-
-
-        '
+        Try in API console'
       x-mint:
         metadata:
           title: public/status
@@ -96,6 +94,10 @@ paths:
           - locked
           - locked_indices
         href: /api-reference/supporting/public-status
+      summary: Get public status
+      x-summary-source: derived
+      operationId: getPublicStatus
+      x-operation-id-source: derived
   /public/test:
     get:
       parameters:
@@ -127,10 +129,7 @@ paths:
       description: 'Tests the connection to the API server, and returns its version. You can use this to make sure the API is reachable, and matches the expected version.
 
 
-        [Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Ftest)
-
-
-        '
+        Try in API console'
       x-mint:
         metadata:
           title: public/test
@@ -140,6 +139,10 @@ paths:
           - expected_result
           - version
         href: /api-reference/supporting/public-test
+      summary: Get public test
+      x-summary-source: derived
+      operationId: getPublicTest
+      x-operation-id-source: derived
   /public/get_time:
     get:
       parameters: []
@@ -163,10 +166,7 @@ paths:
       description: 'Retrieves the current time (in milliseconds). This API endpoint can be used to check the clock skew between your software and Deribit''s systems.
 
 
-        [Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_time)
-
-
-        '
+        Try in API console'
       x-mint:
         metadata:
           title: public/get_time
@@ -174,7 +174,56 @@ paths:
           keywords:
           - public/get_time
         href: /api-reference/supporting/public-get_time
+      summary: Get public get time
+      x-summary-source: derived
+      operationId: getPublicGetTime
+      x-operation-id-source: derived
 components:
+  responses:
+    PublicStatusResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PublicStatusResponse'
+          examples:
+            response:
+              value:
+                jsonrpc: '2.0'
+                id: 55
+                result:
+                  locked_currencies:
+                  - BTC
+                  - ETH
+                  locked: true
+              description: Response example
+      description: Success response
+    PublicTestResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PublicTestResponse'
+          examples:
+            response:
+              value:
+                jsonrpc: '2.0'
+                id: 8212
+                result:
+                  version: 1.2.26
+              description: Response example
+      description: Success response
+    PublicGetTimeResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PublicGetTimeResponse'
+          examples:
+            response:
+              value:
+                jsonrpc: '2.0'
+                id: 7365
+                result: 1550147385946
+              description: Response example
+      description: Success response
   schemas:
     PublicTestResponse:
       properties:
@@ -242,48 +291,3 @@ components:
       - jsonrpc
       - result
       type: object
-  responses:
-    PublicStatusResponse:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/PublicStatusResponse'
-          examples:
-            response:
-              value:
-                jsonrpc: '2.0'
-                id: 55
-                result:
-                  locked_currencies:
-                  - BTC
-                  - ETH
-                  locked: true
-              description: Response example
-      description: Success response
-    PublicGetTimeResponse:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/PublicGetTimeResponse'
-          examples:
-            response:
-              value:
-                jsonrpc: '2.0'
-                id: 7365
-                result: 1550147385946
-              description: Response example
-      description: Success response
-    PublicTestResponse:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/PublicTestResponse'
-          examples:
-            response:
-              value:
-                jsonrpc: '2.0'
-                id: 8212
-                result:
-                  version: 1.2.26
-              description: Response example
-      description: Success response

@@ -1,6 +1,6 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: Deribit Account Management Session Management API
+  title: Deribit Session Management API
   version: 2.1.1
 servers:
 - url: https://test.deribit.com/api/v2
@@ -44,10 +44,7 @@ paths:
         **WebSocket Only:** This method is designed exclusively for WebSocket connections. Attempting to use it via REST/HTTP will result in an error response.
 
 
-        [Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fset_heartbeat)
-
-
-        '
+        Try in API console'
       x-mint:
         metadata:
           title: public/set_heartbeat
@@ -56,6 +53,10 @@ paths:
           - public/set_heartbeat
           - interval
         href: /api-reference/session-management/public-set_heartbeat
+      summary: Get public set heartbeat
+      x-summary-source: derived
+      operationId: getPublicSetHeartbeat
+      x-operation-id-source: derived
   /public/disable_heartbeat:
     get:
       tags:
@@ -81,10 +82,7 @@ paths:
         **WebSocket Only:** This method is designed exclusively for WebSocket connections. Attempting to use it via REST/HTTP will result in an error response.
 
 
-        [Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fdisable_heartbeat)
-
-
-        '
+        Try in API console'
       x-mint:
         metadata:
           title: public/disable_heartbeat
@@ -92,6 +90,10 @@ paths:
           keywords:
           - public/disable_heartbeat
         href: /api-reference/session-management/public-disable_heartbeat
+      summary: Get public disable heartbeat
+      x-summary-source: derived
+      operationId: getPublicDisableHeartbeat
+      x-operation-id-source: derived
   /private/enable_cancel_on_disconnect:
     get:
       tags:
@@ -125,10 +127,10 @@ paths:
       description: 'Enable Cancel On Disconnect for the connection. After enabling, all orders created via this connection will be automatically cancelled when the connection is closed.
 
 
-        Cancel is triggered in the following cases: when the TCP connection is properly terminated, when the connection is closed due to 10 minutes of inactivity, or when a heartbeat detects a disconnection. To reduce the inactivity timeout, consider using [public/set_heartbeat](https://docs.deribit.com/api-reference/session-management/public-set_heartbeat).
+        Cancel is triggered in the following cases: when the TCP connection is properly terminated, when the connection is closed due to 10 minutes of inactivity, or when a heartbeat detects a disconnection. To reduce the inactivity timeout, consider using public/set_heartbeat.
 
 
-        **Note:** If the connection is gracefully closed using [private/logout](https://docs.deribit.com/api-reference/authentication/private-logout), cancel-on-disconnect will **not** be triggered.
+        **Note:** If the connection is gracefully closed using private/logout, cancel-on-disconnect will **not** be triggered.
 
 
         **Notice:** Cancel-on-Disconnect does not affect orders created by other connections - they will remain active! When change is applied on the `account` scope, then every newly opened connection will start with **active** Cancel on Disconnect.
@@ -140,10 +142,7 @@ paths:
         **Scope:** `account:read_write`
 
 
-        [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fenable_cancel_on_disconnect)
-
-
-        '
+        Try in API console'
       x-mint:
         metadata:
           title: private/enable_cancel_on_disconnect
@@ -152,6 +151,10 @@ paths:
           - private/enable_cancel_on_disconnect
           - scope
         href: /api-reference/session-management/private-enable_cancel_on_disconnect
+      summary: Get private enable cancel on disconnect
+      x-summary-source: derived
+      operationId: getPrivateEnableCancelOnDisconnect
+      x-operation-id-source: derived
   /private/disable_cancel_on_disconnect:
     get:
       tags:
@@ -194,10 +197,7 @@ paths:
         **Scope:** `account:read_write`
 
 
-        [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fdisable_cancel_on_disconnect)
-
-
-        '
+        Try in API console'
       x-mint:
         metadata:
           title: private/disable_cancel_on_disconnect
@@ -206,6 +206,10 @@ paths:
           - private/disable_cancel_on_disconnect
           - scope
         href: /api-reference/session-management/private-disable_cancel_on_disconnect
+      summary: Get private disable cancel on disconnect
+      x-summary-source: derived
+      operationId: getPrivateDisableCancelOnDisconnect
+      x-operation-id-source: derived
   /private/get_cancel_on_disconnect:
     get:
       tags:
@@ -242,10 +246,7 @@ paths:
         **Scope:** `account:read`
 
 
-        [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_cancel_on_disconnect)
-
-
-        '
+        Try in API console'
       x-mint:
         metadata:
           title: private/get_cancel_on_disconnect
@@ -255,33 +256,12 @@ paths:
           - scope
           - enabled
         href: /api-reference/session-management/private-get_cancel_on_disconnect
+      summary: Get private get cancel on disconnect
+      x-summary-source: derived
+      operationId: getPrivateGetCancelOnDisconnect
+      x-operation-id-source: derived
 components:
   schemas:
-    enabled_field:
-      example: true
-      type: boolean
-      description: Current configuration status
-    PrivateGetCancelOnDisconnectResponse:
-      properties:
-        jsonrpc:
-          type: string
-          enum:
-          - '2.0'
-          description: The JSON-RPC version (2.0)
-        id:
-          type: integer
-          description: The id that was sent in the request
-        result:
-          type: object
-          properties:
-            scope:
-              $ref: '#/components/schemas/cod_scope'
-            enabled:
-              $ref: '#/components/schemas/enabled_field'
-      required:
-      - jsonrpc
-      - result
-      type: object
     OkResponse:
       properties:
         jsonrpc:
@@ -307,6 +287,31 @@ components:
       - account
       type: string
       description: Informs if Cancel on Disconnect was checked for the current connection or the account
+    PrivateGetCancelOnDisconnectResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          type: object
+          properties:
+            scope:
+              $ref: '#/components/schemas/cod_scope'
+            enabled:
+              $ref: '#/components/schemas/enabled_field'
+      required:
+      - jsonrpc
+      - result
+      type: object
+    enabled_field:
+      example: true
+      type: boolean
+      description: Current configuration status
   responses:
     OkResponse:
       content:

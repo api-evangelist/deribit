@@ -1,9 +1,18 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: Deribit Account Management Trading API
-  version: 2.1.1
+  title: Deribit Trading API
+  version: '1.0'
+  description: 'Operations tagged Trading across 2 of this provider''s published API definitions: deribit-openapi.json, deribit-starbase-openapi.json. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://test.deribit.com/api/v2
+- url: https://195.138.37.5:4410
+  description: Production — Gateway A (rest-order)
+- url: https://195.138.37.6:4410
+  description: Production — Gateway B (rest-order)
+- url: https://195.138.37.137:4410
+  description: Test — Gateway A (rest-order)
+- url: https://195.138.37.138:4410
+  description: Test — Gateway B (rest-order)
 tags:
 - name: Trading
 paths:
@@ -72,10 +81,7 @@ paths:
         **Scope:** `trade:read`
 
 
-        [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_settlement_history_by_currency)
-
-
-        '
+        Try in API console'
       x-mint:
         metadata:
           title: private/get_settlement_history_by_currency
@@ -102,6 +108,12 @@ paths:
           - socialized
           - timestamp
         href: /api-reference/trading/private-get_settlement_history_by_currency
+      summary: Get private get settlement history by currency
+      x-summary-source: derived
+      operationId: getPrivateGetSettlementHistoryByCurrency
+      x-operation-id-source: derived
+    servers:
+    - url: https://test.deribit.com/api/v2
   /private/get_settlement_history_by_instrument:
     get:
       parameters:
@@ -167,10 +179,7 @@ paths:
         **Scope:** `trade:read`
 
 
-        [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_settlement_history_by_instrument)
-
-
-        '
+        Try in API console'
       x-mint:
         metadata:
           title: private/get_settlement_history_by_instrument
@@ -196,6 +205,12 @@ paths:
           - socialized
           - timestamp
         href: /api-reference/trading/private-get_settlement_history_by_instrument
+      summary: Get private get settlement history by instrument
+      x-summary-source: derived
+      operationId: getPrivateGetSettlementHistoryByInstrument
+      x-operation-id-source: derived
+    servers:
+    - url: https://test.deribit.com/api/v2
   /private/get_order_history_by_instrument:
     get:
       parameters:
@@ -288,16 +303,13 @@ paths:
         Results can be paginated using `offset` and `count` parameters, or using continuation tokens. Use `include_old_orders` to include orders from before a certain date, and `historical` to retrieve historical order data.
 
 
-        **📖 Related Article:** [Accessing Historical Trades and Orders Using API](https://docs.deribit.com/articles/accessing-historical-trades-orders)
+        **📖 Related Article:** Accessing Historical Trades and Orders Using API
 
 
         **Scope:** `trade:read`
 
 
-        [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_order_history_by_instrument)
-
-
-        '
+        Try in API console'
       x-mint:
         metadata:
           title: private/get_order_history_by_instrument
@@ -364,6 +376,12 @@ paths:
           - is_secondary_oto
           - is_primary_otoco
         href: /api-reference/trading/private-get_order_history_by_instrument
+      summary: Get private get order history by instrument
+      x-summary-source: derived
+      operationId: getPrivateGetOrderHistoryByInstrument
+      x-operation-id-source: derived
+    servers:
+    - url: https://test.deribit.com/api/v2
   /private/get_order_history_by_currency:
     get:
       parameters:
@@ -463,16 +481,13 @@ paths:
         Results can be filtered by instrument kind and paginated using `offset` and `count` parameters, or using continuation tokens. Use `include_old_orders` to include orders from before a certain date, and `historical` to retrieve historical order data.
 
 
-        **📖 Related Article:** [Accessing Historical Trades and Orders Using API](https://docs.deribit.com/articles/accessing-historical-trades-orders)
+        **📖 Related Article:** Accessing Historical Trades and Orders Using API
 
 
         **Scope:** `trade:read`
 
 
-        [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_order_history_by_currency)
-
-
-        '
+        Try in API console'
       x-mint:
         metadata:
           title: private/get_order_history_by_currency
@@ -541,6 +556,12 @@ paths:
           - is_secondary_oto
           - is_primary_otoco
         href: /api-reference/trading/private-get_order_history_by_currency
+      summary: Get private get order history by currency
+      x-summary-source: derived
+      operationId: getPrivateGetOrderHistoryByCurrency
+      x-operation-id-source: derived
+    servers:
+    - url: https://test.deribit.com/api/v2
   /private/get_order_state:
     get:
       tags:
@@ -579,10 +600,7 @@ paths:
         **Scope:** `trade:read`
 
 
-        [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_order_state)
-
-
-        '
+        Try in API console'
       x-mint:
         metadata:
           title: private/get_order_state
@@ -642,6 +660,12 @@ paths:
           - is_secondary_oto
           - is_primary_otoco
         href: /api-reference/trading/private-get_order_state
+      summary: Get private get order state
+      x-summary-source: derived
+      operationId: getPrivateGetOrderState
+      x-operation-id-source: derived
+    servers:
+    - url: https://test.deribit.com/api/v2
   /private/get_order_state_by_label:
     get:
       tags:
@@ -687,10 +711,7 @@ paths:
         **Scope:** `trade:read`
 
 
-        [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_order_state_by_label)
-
-
-        '
+        Try in API console'
       x-mint:
         metadata:
           title: private/get_order_state_by_label
@@ -751,6 +772,12 @@ paths:
           - is_secondary_oto
           - is_primary_otoco
         href: /api-reference/trading/private-get_order_state_by_label
+      summary: Get private get order state by label
+      x-summary-source: derived
+      operationId: getPrivateGetOrderStateByLabel
+      x-operation-id-source: derived
+    servers:
+    - url: https://test.deribit.com/api/v2
   /private/get_open_orders:
     get:
       parameters:
@@ -792,10 +819,7 @@ paths:
         **Scope:** `trade:read`
 
 
-        [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_open_orders)
-
-
-        '
+        Try in API console'
       x-mint:
         metadata:
           title: private/get_open_orders
@@ -857,6 +881,12 @@ paths:
           - is_secondary_oto
           - is_primary_otoco
         href: /api-reference/trading/private-get_open_orders
+      summary: Get private get open orders
+      x-summary-source: derived
+      operationId: getPrivateGetOpenOrders
+      x-operation-id-source: derived
+    servers:
+    - url: https://test.deribit.com/api/v2
   /private/get_open_orders_by_instrument:
     get:
       parameters:
@@ -899,10 +929,7 @@ paths:
         **Scope:** `trade:read`
 
 
-        [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_open_orders_by_instrument)
-
-
-        '
+        Try in API console'
       x-mint:
         metadata:
           title: private/get_open_orders_by_instrument
@@ -963,6 +990,12 @@ paths:
           - is_secondary_oto
           - is_primary_otoco
         href: /api-reference/trading/private-get_open_orders_by_instrument
+      summary: Get private get open orders by instrument
+      x-summary-source: derived
+      operationId: getPrivateGetOpenOrdersByInstrument
+      x-operation-id-source: derived
+    servers:
+    - url: https://test.deribit.com/api/v2
   /private/get_open_orders_by_currency:
     get:
       parameters:
@@ -1011,10 +1044,7 @@ paths:
         **Scope:** `trade:read`
 
 
-        [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_open_orders_by_currency)
-
-
-        '
+        Try in API console'
       x-mint:
         metadata:
           title: private/get_open_orders_by_currency
@@ -1077,6 +1107,12 @@ paths:
           - is_secondary_oto
           - is_primary_otoco
         href: /api-reference/trading/private-get_open_orders_by_currency
+      summary: Get private get open orders by currency
+      x-summary-source: derived
+      operationId: getPrivateGetOpenOrdersByCurrency
+      x-operation-id-source: derived
+    servers:
+    - url: https://test.deribit.com/api/v2
   /private/get_open_orders_by_label:
     get:
       parameters:
@@ -1120,10 +1156,7 @@ paths:
         **Scope:** `trade:read`
 
 
-        [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_open_orders_by_label)
-
-
-        '
+        Try in API console'
       x-mint:
         metadata:
           title: private/get_open_orders_by_label
@@ -1184,6 +1217,12 @@ paths:
           - is_secondary_oto
           - is_primary_otoco
         href: /api-reference/trading/private-get_open_orders_by_label
+      summary: Get private get open orders by label
+      x-summary-source: derived
+      operationId: getPrivateGetOpenOrdersByLabel
+      x-operation-id-source: derived
+    servers:
+    - url: https://test.deribit.com/api/v2
   /private/get_order_margin_by_ids:
     get:
       parameters:
@@ -1232,10 +1271,7 @@ paths:
         **Scope:** `trade:read`
 
 
-        [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_order_margin_by_ids)
-
-
-        '
+        Try in API console'
       x-mint:
         metadata:
           title: private/get_order_margin_by_ids
@@ -1247,6 +1283,12 @@ paths:
           - initial_margin
           - initial_margin_currency
         href: /api-reference/trading/private-get_order_margin_by_ids
+      summary: Get private get order margin by ids
+      x-summary-source: derived
+      operationId: getPrivateGetOrderMarginByIds
+      x-operation-id-source: derived
+    servers:
+    - url: https://test.deribit.com/api/v2
   /private/get_trigger_order_history:
     get:
       parameters:
@@ -1305,10 +1347,7 @@ paths:
         **Scope:** `trade:read`
 
 
-        [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_trigger_order_history)
-
-
-        '
+        Try in API console'
       x-mint:
         metadata:
           title: private/get_trigger_order_history
@@ -1340,6 +1379,12 @@ paths:
           - oco_ref
           - source
         href: /api-reference/trading/private-get_trigger_order_history
+      summary: Get private get trigger order history
+      x-summary-source: derived
+      operationId: getPrivateGetTriggerOrderHistory
+      x-operation-id-source: derived
+    servers:
+    - url: https://test.deribit.com/api/v2
   /private/get_user_trades_by_instrument:
     get:
       parameters:
@@ -1439,16 +1484,13 @@ paths:
         Main accounts may use the `subaccount_id` parameter to retrieve trade data for a specific subaccount (requires `mainaccount` scope).
 
 
-        **📖 Related Article:** [Accessing Historical Trades and Orders Using API](https://docs.deribit.com/articles/accessing-historical-trades-orders)
+        **📖 Related Article:** Accessing Historical Trades and Orders Using API
 
 
         **Scope:** `trade:read`
 
 
-        [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_user_trades_by_instrument)
-
-
-        '
+        Try in API console'
       x-mint:
         metadata:
           title: private/get_user_trades_by_instrument
@@ -1509,6 +1551,12 @@ paths:
           - client_link_id
           - name
         href: /api-reference/trading/private-get_user_trades_by_instrument
+      summary: Get private get user trades by instrument
+      x-summary-source: derived
+      operationId: getPrivateGetUserTradesByInstrument
+      x-operation-id-source: derived
+    servers:
+    - url: https://test.deribit.com/api/v2
   /private/get_user_trades_by_instrument_and_time:
     get:
       parameters:
@@ -1597,16 +1645,13 @@ paths:
         Main accounts may use the `subaccount_id` parameter to retrieve trade data for a specific subaccount (requires `mainaccount` scope).
 
 
-        **📖 Related Article:** [Accessing Historical Trades and Orders Using API](https://docs.deribit.com/articles/accessing-historical-trades-orders)
+        **📖 Related Article:** Accessing Historical Trades and Orders Using API
 
 
         **Scope:** `trade:read`
 
 
-        [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_user_trades_by_instrument_and_time)
-
-
-        '
+        Try in API console'
       x-mint:
         metadata:
           title: private/get_user_trades_by_instrument_and_time
@@ -1665,6 +1710,12 @@ paths:
           - client_link_id
           - name
         href: /api-reference/trading/private-get_user_trades_by_instrument_and_time
+      summary: Get private get user trades by instrument and time
+      x-summary-source: derived
+      operationId: getPrivateGetUserTradesByInstrumentAndTime
+      x-operation-id-source: derived
+    servers:
+    - url: https://test.deribit.com/api/v2
   /private/get_user_trades_by_currency:
     get:
       parameters:
@@ -1766,16 +1817,13 @@ paths:
         Results can be filtered by instrument kind, trade ID range, or timestamp range. Use the `count` parameter to limit the number of trades returned, and `sorting` to control the order. To retrieve trades for a specific subaccount, use the `subaccount_id` parameter. Use `historical` to retrieve historical trade data.
 
 
-        **📖 Related Article:** [Accessing Historical Trades and Orders Using API](https://docs.deribit.com/articles/accessing-historical-trades-orders)
+        **📖 Related Article:** Accessing Historical Trades and Orders Using API
 
 
         **Scope:** `trade:read`
 
 
-        [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_user_trades_by_currency)
-
-
-        '
+        Try in API console'
       x-mint:
         metadata:
           title: private/get_user_trades_by_currency
@@ -1838,6 +1886,12 @@ paths:
           - client_link_id
           - name
         href: /api-reference/trading/private-get_user_trades_by_currency
+      summary: Get private get user trades by currency
+      x-summary-source: derived
+      operationId: getPrivateGetUserTradesByCurrency
+      x-operation-id-source: derived
+    servers:
+    - url: https://test.deribit.com/api/v2
   /private/get_user_trades_by_currency_and_time:
     get:
       parameters:
@@ -1932,16 +1986,13 @@ paths:
         Main accounts may use the `subaccount_id` parameter to retrieve trade data for a specific subaccount (requires `mainaccount` scope).
 
 
-        **📖 Related Article:** [Accessing Historical Trades and Orders Using API](https://docs.deribit.com/articles/accessing-historical-trades-orders)
+        **📖 Related Article:** Accessing Historical Trades and Orders Using API
 
 
         **Scope:** `trade:read`
 
 
-        [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_user_trades_by_currency_and_time)
-
-
-        '
+        Try in API console'
       x-mint:
         metadata:
           title: private/get_user_trades_by_currency_and_time
@@ -2002,6 +2053,12 @@ paths:
           - client_link_id
           - name
         href: /api-reference/trading/private-get_user_trades_by_currency_and_time
+      summary: Get private get user trades by currency and time
+      x-summary-source: derived
+      operationId: getPrivateGetUserTradesByCurrencyAndTime
+      x-operation-id-source: derived
+    servers:
+    - url: https://test.deribit.com/api/v2
   /private/get_user_trades_by_order:
     get:
       parameters:
@@ -2067,16 +2124,13 @@ paths:
         Main accounts may use the `subaccount_id` parameter to retrieve trade data for a specific subaccount (requires `mainaccount` scope).
 
 
-        **📖 Related Article:** [Accessing Historical Trades and Orders Using API](https://docs.deribit.com/articles/accessing-historical-trades-orders)
+        **📖 Related Article:** Accessing Historical Trades and Orders Using API
 
 
         **Scope:** `trade:read`
 
 
-        [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_user_trades_by_order)
-
-
-        '
+        Try in API console'
       x-mint:
         metadata:
           title: private/get_user_trades_by_order
@@ -2088,6 +2142,12 @@ paths:
           - historical
           - subaccount_id
         href: /api-reference/trading/private-get_user_trades_by_order
+      summary: Get private get user trades by order
+      x-summary-source: derived
+      operationId: getPrivateGetUserTradesByOrder
+      x-operation-id-source: derived
+    servers:
+    - url: https://test.deribit.com/api/v2
   /private/cancel_all:
     get:
       parameters:
@@ -2140,10 +2200,7 @@ paths:
         **Scope:** `trade:read_write`
 
 
-        [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fcancel_all)
-
-
-        '
+        Try in API console'
       x-mint:
         metadata:
           title: private/cancel_all
@@ -2153,6 +2210,12 @@ paths:
           - detailed
           - freeze_quotes
         href: /api-reference/trading/private-cancel_all
+      summary: Get private cancel all
+      x-summary-source: derived
+      operationId: getPrivateCancelAll
+      x-operation-id-source: derived
+    servers:
+    - url: https://test.deribit.com/api/v2
   /private/cancel_all_by_instrument:
     get:
       parameters:
@@ -2222,10 +2285,7 @@ paths:
         **Scope:** `trade:read_write`
 
 
-        [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fcancel_all_by_instrument)
-
-
-        '
+        Try in API console'
       x-mint:
         metadata:
           title: private/cancel_all_by_instrument
@@ -2238,6 +2298,12 @@ paths:
           - include_combos
           - freeze_quotes
         href: /api-reference/trading/private-cancel_all_by_instrument
+      summary: Get private cancel all by instrument
+      x-summary-source: derived
+      operationId: getPrivateCancelAllByInstrument
+      x-operation-id-source: derived
+    servers:
+    - url: https://test.deribit.com/api/v2
   /private/cancel_all_by_currency:
     get:
       parameters:
@@ -2307,10 +2373,7 @@ paths:
         **Scope:** `trade:read_write`
 
 
-        [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fcancel_all_by_currency)
-
-
-        '
+        Try in API console'
       x-mint:
         metadata:
           title: private/cancel_all_by_currency
@@ -2323,6 +2386,12 @@ paths:
           - detailed
           - freeze_quotes
         href: /api-reference/trading/private-cancel_all_by_currency
+      summary: Get private cancel all by currency
+      x-summary-source: derived
+      operationId: getPrivateCancelAllByCurrency
+      x-operation-id-source: derived
+    servers:
+    - url: https://test.deribit.com/api/v2
   /private/cancel_all_by_currency_pair:
     get:
       parameters:
@@ -2392,10 +2461,7 @@ paths:
         **Scope:** `trade:read_write`
 
 
-        [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fcancel_all_by_currency_pair)
-
-
-        '
+        Try in API console'
       x-mint:
         metadata:
           title: private/cancel_all_by_currency_pair
@@ -2408,6 +2474,12 @@ paths:
           - detailed
           - freeze_quotes
         href: /api-reference/trading/private-cancel_all_by_currency_pair
+      summary: Get private cancel all by currency pair
+      x-summary-source: derived
+      operationId: getPrivateCancelAllByCurrencyPair
+      x-operation-id-source: derived
+    servers:
+    - url: https://test.deribit.com/api/v2
   /private/cancel_all_by_kind_or_type:
     get:
       parameters:
@@ -2479,10 +2551,7 @@ paths:
         **Scope:** `trade:read_write`
 
 
-        [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fcancel_all_by_kind_or_type)
-
-
-        '
+        Try in API console'
       x-mint:
         metadata:
           title: private/cancel_all_by_kind_or_type
@@ -2495,6 +2564,12 @@ paths:
           - detailed
           - freeze_quotes
         href: /api-reference/trading/private-cancel_all_by_kind_or_type
+      summary: Get private cancel all by kind or type
+      x-summary-source: derived
+      operationId: getPrivateCancelAllByKindOrType
+      x-operation-id-source: derived
+    servers:
+    - url: https://test.deribit.com/api/v2
   /private/cancel_by_label:
     get:
       parameters:
@@ -2540,10 +2615,7 @@ paths:
         **Scope:** `trade:read_write`
 
 
-        [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fcancel_by_label)
-
-
-        '
+        Try in API console'
       x-mint:
         metadata:
           title: private/cancel_by_label
@@ -2553,6 +2625,12 @@ paths:
           - label
           - currency
         href: /api-reference/trading/private-cancel_by_label
+      summary: Get private cancel by label
+      x-summary-source: derived
+      operationId: getPrivateCancelByLabel
+      x-operation-id-source: derived
+    servers:
+    - url: https://test.deribit.com/api/v2
   /private/cancel_quotes:
     get:
       parameters:
@@ -2679,10 +2757,7 @@ paths:
         **Scope:** `trade:read_write`
 
 
-        [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fcancel_quotes)
-
-
-        '
+        Try in API console'
       x-mint:
         metadata:
           title: private/cancel_quotes
@@ -2700,6 +2775,12 @@ paths:
           - currency
           - currency_pair
         href: /api-reference/trading/private-cancel_quotes
+      summary: Get private cancel quotes
+      x-summary-source: derived
+      operationId: getPrivateCancelQuotes
+      x-operation-id-source: derived
+    servers:
+    - url: https://test.deribit.com/api/v2
   /private/cancel:
     get:
       parameters:
@@ -2736,10 +2817,7 @@ paths:
         **Scope:** `trade:read_write`
 
 
-        [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fcancel)
-
-
-        '
+        Try in API console'
       x-mint:
         metadata:
           title: private/cancel
@@ -2799,6 +2877,12 @@ paths:
           - is_secondary_oto
           - is_primary_otoco
         href: /api-reference/trading/private-cancel
+      summary: Get private cancel
+      x-summary-source: derived
+      operationId: getPrivateCancel
+      x-operation-id-source: derived
+    servers:
+    - url: https://test.deribit.com/api/v2
   /private/buy:
     get:
       tags:
@@ -3037,16 +3121,13 @@ paths:
         You can specify order parameters such as price, quantity, time-in-force, post-only, reduce-only, and trigger conditions. Orders can be labeled for easier management and tracking.
 
 
-        **📖 Related Article:** [Order Management Best Practices](https://docs.deribit.com/articles/order-management-best-practices)
+        **📖 Related Article:** Order Management Best Practices
 
 
         **Scope:** `trade:read_write`
 
 
-        [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fbuy)
-
-
-        '
+        Try in API console'
       x-mint:
         metadata:
           title: private/buy
@@ -3139,6 +3220,12 @@ paths:
           - client_link_id
           - name
         href: /api-reference/trading/private-buy
+      summary: Get private buy
+      x-summary-source: derived
+      operationId: getPrivateBuy
+      x-operation-id-source: derived
+    servers:
+    - url: https://test.deribit.com/api/v2
   /private/sell:
     get:
       tags:
@@ -3379,16 +3466,13 @@ paths:
         You can specify order parameters such as price, quantity, time-in-force, post-only, reduce-only, and trigger conditions. Orders can be labeled for easier management and tracking. Market Maker Protection (MMP) can be enabled to prevent excessive quoting.
 
 
-        **📖 Related Article:** [Order Management Best Practices](https://docs.deribit.com/articles/order-management-best-practices)
+        **📖 Related Article:** Order Management Best Practices
 
 
         **Scope:** `trade:read_write`
 
 
-        [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fsell)
-
-
-        '
+        Try in API console'
       x-mint:
         metadata:
           title: private/sell
@@ -3481,6 +3565,12 @@ paths:
           - client_link_id
           - name
         href: /api-reference/trading/private-sell
+      summary: Get private sell
+      x-summary-source: derived
+      operationId: getPrivateSell
+      x-operation-id-source: derived
+    servers:
+    - url: https://test.deribit.com/api/v2
   /private/edit:
     get:
       parameters:
@@ -3594,16 +3684,13 @@ paths:
         The order is identified by its order ID. Only open orders can be edited. Changes take effect immediately and may result in the order being filled if the new price matches the market.
 
 
-        **📖 Related Article:** [Order Management Best Practices](https://docs.deribit.com/articles/order-management-best-practices)
+        **📖 Related Article:** Order Management Best Practices
 
 
         **Scope:** `trade:read_write`
 
 
-        [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fedit)
-
-
-        '
+        Try in API console'
       x-mint:
         metadata:
           title: private/edit
@@ -3693,6 +3780,12 @@ paths:
           - client_link_id
           - name
         href: /api-reference/trading/private-edit
+      summary: Get private edit
+      x-summary-source: derived
+      operationId: getPrivateEdit
+      x-operation-id-source: derived
+    servers:
+    - url: https://test.deribit.com/api/v2
   /private/edit_by_label:
     get:
       parameters:
@@ -3802,10 +3895,7 @@ paths:
         **Scope:** `trade:read_write`
 
 
-        [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fedit_by_label)
-
-
-        '
+        Try in API console'
       x-mint:
         metadata:
           title: private/edit_by_label
@@ -3895,6 +3985,12 @@ paths:
           - client_link_id
           - name
         href: /api-reference/trading/private-edit_by_label
+      summary: Get private edit by label
+      x-summary-source: derived
+      operationId: getPrivateEditByLabel
+      x-operation-id-source: derived
+    servers:
+    - url: https://test.deribit.com/api/v2
   /private/close_position:
     get:
       tags:
@@ -3948,10 +4044,7 @@ paths:
         **Scope:** `trade:read_write`
 
 
-        [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fclose_position)
-
-
-        '
+        Try in API console'
       x-mint:
         metadata:
           title: private/close_position
@@ -4041,6 +4134,12 @@ paths:
           - client_link_id
           - name
         href: /api-reference/trading/private-close_position
+      summary: Get private close position
+      x-summary-source: derived
+      operationId: getPrivateClosePosition
+      x-operation-id-source: derived
+    servers:
+    - url: https://test.deribit.com/api/v2
   /private/get_margins:
     get:
       parameters:
@@ -4092,10 +4191,7 @@ paths:
         **Scope:** `trade:read`
 
 
-        [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_margins)
-
-
-        '
+        Try in API console'
       x-mint:
         metadata:
           title: private/get_margins
@@ -4110,6 +4206,12 @@ paths:
           - min_price
           - max_price
         href: /api-reference/trading/private-get_margins
+      summary: Get private get margins
+      x-summary-source: derived
+      operationId: getPrivateGetMargins
+      x-operation-id-source: derived
+    servers:
+    - url: https://test.deribit.com/api/v2
   /private/get_mmp_config:
     get:
       tags:
@@ -4174,16 +4276,13 @@ paths:
         Each entry in the response includes an `id` field (integer) that uniquely identifies the MMP group. This integer ID is the programmatic identifier for the group and can be used to reference it in contexts where the string `mmp_group` name is not accepted. Entries that have no `mmp_group` name in the response correspond to the orders MMP group (the default group).
 
 
-        **📖 Related Article:** [Market Maker Protection API Configuration](https://docs.deribit.com/articles/market-maker-protection)
+        **📖 Related Article:** Market Maker Protection API Configuration
 
 
         **Scope:** `trade:read` or `block_rfq:read` (when `block_rfq` = `true`)
 
 
-        [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_mmp_config)
-
-
-        '
+        Try in API console'
       x-mint:
         metadata:
           title: private/get_mmp_config
@@ -4201,6 +4300,12 @@ paths:
           - max_quote_quantity
           - trade_count_limit
         href: /api-reference/trading/private-get_mmp_config
+      summary: Get private get mmp config
+      x-summary-source: derived
+      operationId: getPrivateGetMmpConfig
+      x-operation-id-source: derived
+    servers:
+    - url: https://test.deribit.com/api/v2
   /private/get_mmp_status:
     get:
       tags:
@@ -4259,16 +4364,13 @@ paths:
         For Mass Quotes, specify the `mmp_group` parameter to check status for a specific MMP group. Set `block_rfq` to `true` to retrieve MMP status for Block RFQ (requires `block_rfq:read` scope).
 
 
-        **📖 Related Article:** [Market Maker Protection API Configuration](https://docs.deribit.com/articles/market-maker-protection)
+        **📖 Related Article:** Market Maker Protection API Configuration
 
 
         **Scope:** `trade:read` or `block_rfq:read` (when `block_rfq` = `true`)
 
 
-        [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_mmp_status)
-
-
-        '
+        Try in API console'
       x-mint:
         metadata:
           title: private/get_mmp_status
@@ -4280,6 +4382,12 @@ paths:
           - block_rfq
           - frozen_until
         href: /api-reference/trading/private-get_mmp_status
+      summary: Get private get mmp status
+      x-summary-source: derived
+      operationId: getPrivateGetMmpStatus
+      x-operation-id-source: derived
+    servers:
+    - url: https://test.deribit.com/api/v2
   /private/set_mmp_config:
     get:
       tags:
@@ -4470,16 +4578,13 @@ paths:
         For Mass Quotes, use the `mmp_group` parameter to configure MMP for a specific group. Set `block_rfq` to `true` to configure MMP for Block RFQ (requires `block_rfq:read_write` scope). Set `interval` to `0` to remove MMP configuration.
 
 
-        **📖 Related Article:** [Market Maker Protection API Configuration](https://docs.deribit.com/articles/market-maker-protection)
+        **📖 Related Article:** Market Maker Protection API Configuration
 
 
         **Scope:** `trade:read_write` or `block_rfq:read_write` (when `block_rfq` = `true`)
 
 
-        [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fset_mmp_config)
-
-
-        '
+        Try in API console'
       x-mint:
         metadata:
           title: private/set_mmp_config
@@ -4497,6 +4602,12 @@ paths:
           - block_rfq
           - trade_count_limit
         href: /api-reference/trading/private-set_mmp_config
+      summary: Get private set mmp config
+      x-summary-source: derived
+      operationId: getPrivateSetMmpConfig
+      x-operation-id-source: derived
+    servers:
+    - url: https://test.deribit.com/api/v2
   /private/reset_mmp:
     get:
       tags:
@@ -4564,16 +4675,13 @@ paths:
         For regular MMP (`block_rfq = false`), the `index_name` must be a specific currency pair (e.g., "btc_usd", "eth_usd"). For Block RFQ MMP (`block_rfq = true`), you can set `index_name` to `"all"` to reset limits across all currency pairs. Use the `mmp_group` parameter to reset limits for a specific MMP group.
 
 
-        **📖 Related Article:** [Market Maker Protection API Configuration](https://docs.deribit.com/articles/market-maker-protection)
+        **📖 Related Article:** Market Maker Protection API Configuration
 
 
         **Scope:** `trade:read_write` or `block_rfq:read_write` (when `block_rfq` = `true`)
 
 
-        [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Freset_mmp)
-
-
-        '
+        Try in API console'
       x-mint:
         metadata:
           title: private/reset_mmp
@@ -4584,6 +4692,12 @@ paths:
           - mmp_group
           - block_rfq
         href: /api-reference/trading/private-reset_mmp
+      summary: Get private reset mmp
+      x-summary-source: derived
+      operationId: getPrivateResetMmp
+      x-operation-id-source: derived
+    servers:
+    - url: https://test.deribit.com/api/v2
   /private/mass_quote:
     get:
       parameters:
@@ -4732,7 +4846,7 @@ paths:
 
         **Requirements:**
 
-        - Cancel-on-Disconnect must be enabled (see [private/enable_cancel_on_disconnect](https://docs.deribit.com/api-reference/session-management/private-enable_cancel_on_disconnect)), otherwise the request will return an error.
+        - Cancel-on-Disconnect must be enabled (see private/enable_cancel_on_disconnect), otherwise the request will return an error.
 
         - This endpoint can only be used after approval from the administrators.
 
@@ -4740,16 +4854,13 @@ paths:
         Each quote can include both bid and ask sides, or just one side. Quotes are identified by `quote_set_id` for targeted cancellation. Use the `wait_for_response` parameter to control whether to wait for all orders to be processed before returning.
 
 
-        **📖 Related Article:** [Mass Quotes Specifications](https://docs.deribit.com/articles/mass-quotes-specifications)
+        **📖 Related Article:** Mass Quotes Specifications
 
 
         **Scope:** `trade:read_write`
 
 
-        [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fmass_quote)
-
-
-        '
+        Try in API console'
       x-mint:
         metadata:
           title: private/mass_quote
@@ -4849,6 +4960,12 @@ paths:
           - code
           - message
         href: /api-reference/trading/private-mass_quote
+      summary: Get private mass quote
+      x-summary-source: derived
+      operationId: getPrivateMassQuote
+      x-operation-id-source: derived
+    servers:
+    - url: https://test.deribit.com/api/v2
   /private/move_positions:
     get:
       parameters:
@@ -4918,7 +5035,32 @@ paths:
                       amount: '0.1'
                 description: JSON-RPC Request Example
         description: JSON-RPC request body
-      description: "Moves positions from a source subaccount to a target subaccount. This operation transfers open positions between subaccounts, which is useful for rebalancing or reorganizing trading activities.\n\nPositions can be filtered by currency. The operation creates trades to transfer positions, which may affect P&L and margin calculations.\n\n**Note - This method has distinct API rate limiting requirements:** \n- Sustained rate: 6 requests/minute\n- Weekly limit: 100 move_position uses per week (168 hours)\n\nFor more information, see [Rate Limits](https://support.deribit.com/hc/en-us/articles/25944617523357-Rate-Limits).\n\n**Important:** In rare cases, the request may return an `internal_server_error`. This does not necessarily mean the operation failed entirely. Part or all of the position transfer might have still been processed successfully. Check the positions in both accounts to verify the transfer status.\n\n**\U0001F4D6 Related Article:** [Moving Positions](https://docs.deribit.com/articles/moving-positions-api)\n\n**Scope:** `trade:read_write`\n\n[Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fmove_positions)\n\n"
+      description: 'Moves positions from a source subaccount to a target subaccount. This operation transfers open positions between subaccounts, which is useful for rebalancing or reorganizing trading activities.
+
+
+        Positions can be filtered by currency. The operation creates trades to transfer positions, which may affect P&L and margin calculations.
+
+
+        **Note - This method has distinct API rate limiting requirements:**
+
+        - Sustained rate: 6 requests/minute
+
+        - Weekly limit: 100 move_position uses per week (168 hours)
+
+
+        For more information, see Rate Limits.
+
+
+        **Important:** In rare cases, the request may return an `internal_server_error`. This does not necessarily mean the operation failed entirely. Part or all of the position transfer might have still been processed successfully. Check the positions in both accounts to verify the transfer status.
+
+
+        **📖 Related Article:** Moving Positions
+
+
+        **Scope:** `trade:read_write`
+
+
+        Try in API console'
       x-mint:
         metadata:
           title: private/move_positions
@@ -4934,6 +5076,12 @@ paths:
           - price
           - amount
         href: /api-reference/trading/private-move_positions
+      summary: Get private move positions
+      x-summary-source: derived
+      operationId: getPrivateMovePositions
+      x-operation-id-source: derived
+    servers:
+    - url: https://test.deribit.com/api/v2
   /api/v2/private/get_open_orders:
     get:
       operationId: get_open_orders
@@ -4989,84 +5137,18 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/JsonRpcError'
+    servers:
+    - url: https://195.138.37.5:4410
+      description: Production — Gateway A (rest-order)
+    - url: https://195.138.37.6:4410
+      description: Production — Gateway B (rest-order)
+    - url: https://195.138.37.137:4410
+      description: Test — Gateway A (rest-order)
+    - url: https://195.138.37.138:4410
+      description: Test — Gateway B (rest-order)
 components:
   schemas:
-    settlement_type:
-      enum:
-      - settlement
-      - delivery
-      - bankruptcy
-      type: string
-      description: The type of settlement. `settlement`, `delivery` or `bankruptcy`.
-    order_state_in_user_trade:
-      enum:
-      - open
-      - filled
-      - rejected
-      - cancelled
-      - untriggered
-      - archive
-      type: string
-      description: 'Order state: `"open"`, `"filled"`, `"rejected"`, `"cancelled"`, `"untriggered"` or `"archive"` (if order was archived)'
-    trigger_offset:
-      type: number
-      description: The maximum deviation from the price peak beyond which the order will be triggered (Only for trailing trigger orders)
-    continuation:
-      example: xY7T6cutS3t2B9YtaDkE6TS379oKnkzTvmEDUnEUP2Msa9xKWNNaT
-      type: string
-      description: Continuation token for pagination.
-    api:
-      type: boolean
-      description: '`true` if created with API'
-    order_id_initial_margin_pair:
-      properties:
-        order_id:
-          $ref: '#/components/schemas/order_id'
-        initial_margin:
-          type: number
-          description: Initial margin of order
-        initial_margin_currency:
-          type: string
-          description: Currency of initial margin
-      required:
-      - order_id
-      - initial_margin
-      type: object
-    trigger:
-      enum:
-      - index_price
-      - mark_price
-      - last_price
-      type: string
-      description: 'Trigger type (only for trigger orders). Allowed values: `"index_price"`, `"mark_price"`, `"last_price"`.'
-    contracts:
-      type: number
-      description: It represents the order size in contract units. (Optional, may be absent in historical data).
-    kind_with_combo_all:
-      enum:
-      - future
-      - option
-      - spot
-      - future_combo
-      - option_combo
-      - combo
-      - any
-      type: string
-      description: 'Instrument kind: `"future"`, `"option"`, `"spot"`, `"future_combo"`, `"option_combo"`, `"combo"` for any combo or `"any"` for all'
-    PrivateGetUserTradesByOrderResponse:
-      properties:
-        jsonrpc:
-          type: string
-          enum:
-          - '2.0'
-          description: The JSON-RPC version (2.0)
-        id:
-          type: integer
-          description: The id that was sent in the request
-      required:
-      - jsonrpc
-      type: object
-    PrivateGetOrderStateByLabelResponse:
+    OkResponse:
       properties:
         jsonrpc:
           type: string
@@ -5077,249 +5159,14 @@ components:
           type: integer
           description: The id that was sent in the request
         result:
-          $ref: '#/components/schemas/orders'
-      required:
-      - jsonrpc
-      - result
-      type: object
-    order_type:
-      enum:
-      - market
-      - limit
-      - stop_market
-      - stop_limit
-      - take_market
-      - take_limit
-      - trailing_stop
-      type: string
-      description: 'Order type: `"limit"`, `"market"`, `"stop_limit"`, `"stop_market"`, `"take_limit"`, `"take_market"`, `"trailing_stop"`'
-    reduce_only:
-      type: boolean
-      description: Optional (not added for spot). '`true` for reduce-only orders only'
-    sorting:
-      enum:
-      - asc
-      - desc
-      - default
-      type: string
-    position_move:
-      properties:
-        trades:
-          type: array
-          items:
-            $ref: '#/components/schemas/position_move_trade'
-      required:
-      - trades
-      type: object
-    PrivateGetMarginsResponse:
-      properties:
-        jsonrpc:
           type: string
           enum:
-          - '2.0'
-          description: The JSON-RPC version (2.0)
-        id:
-          type: integer
-          description: The id that was sent in the request
-        result:
-          properties:
-            buy:
-              example: 0.01681367
-              type: number
-              description: Margin when buying
-            sell:
-              example: 0.01680479
-              type: number
-              description: Margin when selling
-            min_price:
-              $ref: '#/components/schemas/min_price'
-            max_price:
-              $ref: '#/components/schemas/max_price'
-          required:
-          - buy
-          - sell
-          - min_price
-          - max_price
-          type: object
+          - ok
+          description: Result of method execution. `ok` in case of success
       required:
       - jsonrpc
       - result
       type: object
-    price:
-      type: number
-      description: Price in base currency
-    PrivateGetOrderHistoryResponse:
-      properties:
-        jsonrpc:
-          type: string
-          enum:
-          - '2.0'
-          description: The JSON-RPC version (2.0)
-        id:
-          type: integer
-          description: The id that was sent in the request
-        result:
-          type: array
-          items:
-            $ref: '#/components/schemas/order'
-      required:
-      - jsonrpc
-      - result
-      type: object
-    trigger_reference_price:
-      type: number
-      description: The price of the given trigger at the time when the order was placed (Only for trailing trigger orders)
-    display_amount:
-      type: number
-      description: The actual display amount of iceberg order. Absent for other types of orders.
-    filled_amount:
-      type: number
-      description: Filled amount of the order. For perpetual and futures the filled_amount is in USD units, for options - in units or corresponding cryptocurrency contracts, e.g., BTC or ETH.
-    orders:
-      items:
-        $ref: '#/components/schemas/order'
-      type: array
-    block_trade_id_in_result:
-      example: '154'
-      type: string
-      description: Block trade id - when trade was part of a block trade
-    PrivatePositionMoveResponse:
-      properties:
-        jsonrpc:
-          type: string
-          enum:
-          - '2.0'
-          description: The JSON-RPC version (2.0)
-        id:
-          type: integer
-          description: The id that was sent in the request
-        result:
-          $ref: '#/components/schemas/position_move'
-      required:
-      - jsonrpc
-      - result
-      type: object
-    PrivateBuyAndSellResponse:
-      properties:
-        jsonrpc:
-          type: string
-          enum:
-          - '2.0'
-          description: The JSON-RPC version (2.0)
-        id:
-          type: integer
-          description: The id that was sent in the request
-        result:
-          type: object
-          properties:
-            order:
-              $ref: '#/components/schemas/order'
-            trades:
-              type: array
-              items:
-                $ref: '#/components/schemas/user_trade'
-          required:
-          - order
-          - trades
-      required:
-      - jsonrpc
-      - result
-      type: object
-    is_secondary_oto:
-      type: boolean
-      description: '`true` if the order is an order that can be triggered by another order, otherwise not present.'
-    PrivateCancelAllResponse:
-      properties:
-        jsonrpc:
-          type: string
-          enum:
-          - '2.0'
-          description: The JSON-RPC version (2.0)
-        id:
-          type: integer
-          description: The id that was sent in the request
-        result:
-          type: number
-          example: 7
-          description: Total number of successfully cancelled orders
-      required:
-      - jsonrpc
-      - result
-      type: object
-    trade_id:
-      type: string
-      description: Unique (per currency) trade identifier
-    cancel_reason:
-      enum:
-      - user_request
-      - autoliquidation
-      - cancel_on_disconnect
-      - risk_mitigation
-      - pme_risk_reduction
-      - pme_account_locked
-      - position_locked
-      - mmp_trigger
-      - mmp_config_curtailment
-      - edit_post_only_reject
-      - oco_other_closed
-      - oto_primary_closed
-      - settlement
-      type: string
-      description: Enumerated reason behind cancel `"user_request"`, `"autoliquidation"`, `"cancel_on_disconnect"`, `"risk_mitigation"`, `"pme_risk_reduction"` (portfolio margining risk reduction), `"pme_account_locked"` (portfolio margining account locked per currency), `"position_locked"`, `"mmp_trigger"` (market maker protection), `"mmp_config_curtailment"` (market maker configured quantity decreased), `"edit_post_only_reject"` (cancelled on edit because of `reject_post_only` setting), `"oco_other_closed"` (the oco order linked to this order was closed), `"oto_primary_closed"` (the oto primary order that was going to trigger this order was cancelled), `"settlement"` (closed because of a settlement)
-    PrivateCancelQuotesResponse:
-      properties:
-        jsonrpc:
-          type: string
-          enum:
-          - '2.0'
-          description: The JSON-RPC version (2.0)
-        id:
-          type: integer
-          description: The id that was sent in the request
-        result:
-          type: number
-          example: 3
-          description: Total number of successfully cancelled quotes
-      required:
-      - jsonrpc
-      - result
-      type: object
-    PrivateGetTriggerOrderHistoryResponse:
-      properties:
-        jsonrpc:
-          type: string
-          enum:
-          - '2.0'
-          description: The JSON-RPC version (2.0)
-        id:
-          type: integer
-          description: The id that was sent in the request
-        result:
-          type: object
-          properties:
-            entries:
-              type: array
-              items:
-                $ref: '#/components/schemas/trigger_order_history_record'
-            continuation:
-              $ref: '#/components/schemas/continuation'
-      required:
-      - jsonrpc
-      - result
-      type: object
-    timestamp:
-      example: 1536569522277
-      type: integer
-      description: The timestamp (milliseconds since the Unix epoch)
-    currency:
-      enum:
-      - BTC
-      - ETH
-      - USDC
-      - USDT
-      - EURR
-      type: string
-      description: Currency, i.e `"BTC"`, `"ETH"`, `"USDC"`
     order:
       properties:
         order_id:
@@ -5462,9 +5309,148 @@ components:
       - post_only
       - api
       type: object
-    amount:
-      type: number
-      description: It represents the requested order size. For perpetual and inverse futures the amount is in USD units. For options and linear futures it is the underlying base currency coin.
+    direction:
+      enum:
+      - buy
+      - sell
+      type: string
+      description: 'Direction: `buy`, or `sell`'
+    trade_timestamp:
+      example: 1517329113791
+      type: integer
+      description: The timestamp of the trade (milliseconds since the UNIX epoch)
+    index_name_derivative:
+      enum:
+      - btc_usd
+      - eth_usd
+      - btc_usdc
+      - eth_usdc
+      - ada_usdc
+      - algo_usdc
+      - avax_usdc
+      - bch_usdc
+      - bnb_usdc
+      - doge_usdc
+      - dot_usdc
+      - link_usdc
+      - ltc_usdc
+      - near_usdc
+      - paxg_usdc
+      - shib_usdc
+      - sol_usdc
+      - ton_usdc
+      - trx_usdc
+      - trump_usdc
+      - uni_usdc
+      - xrp_usdc
+      - usde_usdc
+      - buidl_usdc
+      - btcdvol_usdc
+      - ethdvol_usdc
+      - btc_usdt
+      - eth_usdt
+      - all
+      type: string
+      description: Index identifier of derivative instrument on the platform
+    order_state_in_user_trade:
+      enum:
+      - open
+      - filled
+      - rejected
+      - cancelled
+      - untriggered
+      - archive
+      type: string
+      description: 'Order state: `"open"`, `"filled"`, `"rejected"`, `"cancelled"`, `"untriggered"` or `"archive"` (if order was archived)'
+    tick_direction:
+      enum:
+      - 0
+      - 1
+      - 2
+      - 3
+      type: integer
+      description: Direction of the "tick" (`0` = Plus Tick, `1` = Zero-Plus Tick, `2` = Minus Tick, `3` = Zero-Minus Tick).
+    order_id:
+      example: ETH-100234
+      type: string
+      description: Unique order identifier
+    trigger_order_history_record:
+      properties:
+        timestamp:
+          $ref: '#/components/schemas/timestamp'
+        trigger:
+          $ref: '#/components/schemas/trigger'
+        trigger_price:
+          $ref: '#/components/schemas/trigger_price'
+        trigger_offset:
+          $ref: '#/components/schemas/trigger_offset'
+        trigger_order_id:
+          type: string
+          example: SLTB-187015
+          description: Id of the user order used for the trigger-order reference before triggering
+        order_id:
+          $ref: '#/components/schemas/order_id'
+        order_state:
+          $ref: '#/components/schemas/order_state_stop'
+        instrument_name:
+          $ref: '#/components/schemas/instrument_name'
+        request:
+          type: string
+          example: trigger:order
+          description: Type of last request performed on the trigger order by user or system. `"cancel"` - when order was cancelled, `"trigger:order"` - when trigger order spawned market or limit order after being triggered
+        direction:
+          $ref: '#/components/schemas/direction'
+        price:
+          $ref: '#/components/schemas/price'
+        amount:
+          $ref: '#/components/schemas/amount'
+        last_update_timestamp:
+          $ref: '#/components/schemas/timestamp'
+        reduce_only:
+          $ref: '#/components/schemas/reduce_only'
+        post_only:
+          $ref: '#/components/schemas/post_only'
+        order_type:
+          type: string
+          enum:
+          - limit
+          - market
+          description: 'Requested order type: `"limit` or `"market"`'
+        label:
+          $ref: '#/components/schemas/label_presentation'
+        is_secondary_oto:
+          $ref: '#/components/schemas/is_secondary_oto'
+        oco_ref:
+          $ref: '#/components/schemas/oco_ref'
+        source:
+          type: string
+          example: api
+          description: Source of the order that is linked to the trigger order.
+      required:
+      - trigger
+      - timestamp
+      - trigger_price
+      - trigger_order_id
+      - order_state
+      - request
+      - post_only
+      - order_type
+      - price
+      - order_id
+      - trigger_offset
+      - instrument_name
+      - amount
+      - direction
+      - reduce_only
+      type: object
+    advanced:
+      enum:
+      - usd
+      - implv
+      type: string
+      description: 'advanced type: `"usd"` or `"implv"` (Only for options; field is omitted if not applicable).
+
+        '
     settlement:
       properties:
         funding:
@@ -5528,147 +5514,18 @@ components:
       - index_price
       - funding
       type: object
-    PrivateMassQuoteResponse:
-      properties:
-        jsonrpc:
-          type: string
-          enum:
-          - '2.0'
-          description: The JSON-RPC version (2.0)
-        id:
-          type: integer
-          description: The id that was sent in the request
-        result:
-          type: object
-          properties:
-            orders:
-              type: array
-              items:
-                $ref: '#/components/schemas/order'
-            trades:
-              type: array
-              items:
-                $ref: '#/components/schemas/user_trade'
-            errors_count:
-              type: integer
-              description: 'Number of errors (present when `detailed` : `false`).'
-            pending_requests_count:
-              type: integer
-              description: 'Number of pending quotes (present when `wait_for_response`: `false` and `detailed` : `false`).'
-            pending_requests:
-              type: array
-              items:
-                type: object
-                properties:
-                  instrument_name:
-                    type: string
-                    description: Instrument name.
-                  side:
-                    type: string
-                    description: Quote side - `bid` or `ask`.
-              description: 'List of pending quotes (present when `wait_for_response`: `false` and `detailed` : `true`).'
-            errors:
-              type: array
-              items:
-                type: object
-                properties:
-                  instrument_name:
-                    type: string
-                    description: Instrument name.
-                  side:
-                    type: string
-                    description: Quote side - `bid` or `ask`.
-                  error:
-                    type: object
-                    description: Error data.
-                  code:
-                    type: integer
-                    description: Error code
-                  message:
-                    type: string
-                    description: Error message.
-              description: 'List of errors (present when `detailed` : `true`).'
-      required:
-      - jsonrpc
-      - result
-      type: object
-    index_name_derivative:
+    order_type:
       enum:
-      - btc_usd
-      - eth_usd
-      - btc_usdc
-      - eth_usdc
-      - ada_usdc
-      - algo_usdc
-      - avax_usdc
-      - bch_usdc
-      - bnb_usdc
-      - doge_usdc
-      - dot_usdc
-      - link_usdc
-      - ltc_usdc
-      - near_usdc
-      - paxg_usdc
-      - shib_usdc
-      - sol_usdc
-      - ton_usdc
-      - trx_usdc
-      - trump_usdc
-      - uni_usdc
-      - xrp_usdc
-      - usde_usdc
-      - buidl_usdc
-      - btcdvol_usdc
-      - ethdvol_usdc
-      - btc_usdt
-      - eth_usdt
-      - all
+      - market
+      - limit
+      - stop_market
+      - stop_limit
+      - take_market
+      - take_limit
+      - trailing_stop
       type: string
-      description: Index identifier of derivative instrument on the platform
-    GetOpenOrdersResponse:
-      type: object
-      required:
-      - jsonrpc
-      - result
-      properties:
-        jsonrpc:
-          type: string
-          enum:
-          - '2.0'
-          description: The JSON-RPC version (2.0)
-        id:
-          type: integer
-          description: The id that was sent in the request
-        result:
-          type: array
-          description: Array of open orders for the authenticated portfolio. May be empty.
-          items:
-            $ref: '#/components/schemas/Order'
-    direction:
-      enum:
-      - buy
-      - sell
-      type: string
-      description: 'Direction: `buy`, or `sell`'
-    PrivateGetOrderMarginByIdsResponse:
-      properties:
-        jsonrpc:
-          type: string
-          enum:
-          - '2.0'
-          description: The JSON-RPC version (2.0)
-        id:
-          type: integer
-          description: The id that was sent in the request
-        result:
-          type: array
-          items:
-            $ref: '#/components/schemas/order_id_initial_margin_pair'
-      required:
-      - jsonrpc
-      - result
-      type: object
-    PrivateCancelResponse:
+      description: 'Order type: `"limit"`, `"market"`, `"stop_limit"`, `"stop_market"`, `"take_limit"`, `"take_market"`, `"trailing_stop"`'
+    PrivateGetOrderStateResponse:
       properties:
         jsonrpc:
           type: string
@@ -5684,17 +5541,92 @@ components:
       - jsonrpc
       - result
       type: object
-    advanced:
-      enum:
-      - usd
-      - implv
+    continuation:
+      example: xY7T6cutS3t2B9YtaDkE6TS379oKnkzTvmEDUnEUP2Msa9xKWNNaT
       type: string
-      description: 'advanced type: `"usd"` or `"implv"` (Only for options; field is omitted if not applicable).
-
-        '
-    web:
+      description: Continuation token for pagination.
+    block_trade_order:
+      example: true
       type: boolean
-      description: '`true` if created via Deribit frontend (optional)'
+      description: '`true` if order made from block_trade trade, added only in that case.'
+    display_amount:
+      type: number
+      description: The actual display amount of iceberg order. Absent for other types of orders.
+    open_order_price:
+      oneOf:
+      - type: number
+      - enum:
+        - market_price
+        type: string
+      description: Price in base currency or "market_price" in case of open trigger market orders
+    sorting:
+      enum:
+      - asc
+      - desc
+      - default
+      type: string
+    oco_ref:
+      type: string
+      description: Unique reference that identifies a one_cancels_others (OCO) pair.
+    trigger_fill_condition:
+      enum:
+      - first_hit
+      - complete_fill
+      - incremental
+      type: string
+      description: '<p>The fill condition of the linked order (Only for linked order types), default: `first_hit`.</p> <ul> <li>`"first_hit"` - any execution of the primary order will fully cancel/place all secondary orders.</li> <li>`"complete_fill"` - a complete execution (meaning the primary order no longer exists) will cancel/place the secondary orders.</li> <li>`"incremental"` - any fill of the primary order will cause proportional partial cancellation/placement of the secondary order. The amount that will be subtracted/added to the secondary order will be rounded down to the contract size.</li> </ul>'
+    api:
+      type: boolean
+      description: '`true` if created with API'
+    PrivateGetTriggerOrderHistoryResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          type: object
+          properties:
+            entries:
+              type: array
+              items:
+                $ref: '#/components/schemas/trigger_order_history_record'
+            continuation:
+              $ref: '#/components/schemas/continuation'
+      required:
+      - jsonrpc
+      - result
+      type: object
+    trigger_offset:
+      type: number
+      description: The maximum deviation from the price peak beyond which the order will be triggered (Only for trailing trigger orders)
+    cancel_reason:
+      enum:
+      - user_request
+      - autoliquidation
+      - cancel_on_disconnect
+      - risk_mitigation
+      - pme_risk_reduction
+      - pme_account_locked
+      - position_locked
+      - mmp_trigger
+      - mmp_config_curtailment
+      - edit_post_only_reject
+      - oco_other_closed
+      - oto_primary_closed
+      - settlement
+      type: string
+      description: Enumerated reason behind cancel `"user_request"`, `"autoliquidation"`, `"cancel_on_disconnect"`, `"risk_mitigation"`, `"pme_risk_reduction"` (portfolio margining risk reduction), `"pme_account_locked"` (portfolio margining account locked per currency), `"position_locked"`, `"mmp_trigger"` (market maker protection), `"mmp_config_curtailment"` (market maker configured quantity decreased), `"edit_post_only_reject"` (cancelled on edit because of `reject_post_only` setting), `"oco_other_closed"` (the oco order linked to this order was closed), `"oto_primary_closed"` (the oto primary order that was going to trigger this order was cancelled), `"settlement"` (closed because of a settlement)
+    triggered:
+      type: boolean
+      description: Whether the trigger order has been triggered
+    implv:
+      type: number
+      description: Implied volatility in percent. (Only if `advanced="implv"`)
     PrivateGetMmpStatusResponse:
       properties:
         jsonrpc:
@@ -5731,6 +5663,85 @@ components:
       - jsonrpc
       - result
       type: object
+    PrivateEditResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          type: object
+          properties:
+            order:
+              $ref: '#/components/schemas/order'
+            trades:
+              type: array
+              items:
+                $ref: '#/components/schemas/user_trade'
+          required:
+          - order
+          - trades
+      required:
+      - jsonrpc
+      - result
+      type: object
+    web:
+      type: boolean
+      description: '`true` if created via Deribit frontend (optional)'
+    trade_id:
+      type: string
+      description: Unique (per currency) trade identifier
+    currency_with_any_and_list:
+      oneOf:
+      - type: string
+      - items:
+          type: string
+        type: array
+      description: The currency symbol, list of currency symbols or `"any"` for all
+    kind_with_combo_all:
+      enum:
+      - future
+      - option
+      - spot
+      - future_combo
+      - option_combo
+      - combo
+      - any
+      type: string
+      description: 'Instrument kind: `"future"`, `"option"`, `"spot"`, `"future_combo"`, `"option_combo"`, `"combo"` for any combo or `"any"` for all'
+    currency:
+      enum:
+      - BTC
+      - ETH
+      - USDC
+      - USDT
+      - EURR
+      type: string
+      description: Currency, i.e `"BTC"`, `"ETH"`, `"USDC"`
+    profit_loss:
+      type: number
+      description: Profit and loss in base currency.
+    contracts:
+      type: number
+      description: It represents the order size in contract units. (Optional, may be absent in historical data).
+    reject_post_only:
+      type: boolean
+      description: '`true` if order has `reject_post_only` flag (field is present only when `post_only` is `true`)'
+    time_in_force:
+      enum:
+      - good_til_cancelled
+      - good_til_day
+      - fill_or_kill
+      - immediate_or_cancel
+      type: string
+      description: 'Order time in force: `"good_til_cancelled"`, `"good_til_day"`, `"fill_or_kill"` or `"immediate_or_cancel"`'
+    post_only:
+      type: boolean
+      description: '`true` for post-only orders only'
     position_move_trade:
       properties:
         source_uid:
@@ -5756,7 +5767,7 @@ components:
       - price
       - amount
       type: object
-    PrivateGetOrderStateResponse:
+    PrivateGetUserTradesHistoryResponse:
       properties:
         jsonrpc:
           type: string
@@ -5767,7 +5778,17 @@ components:
           type: integer
           description: The id that was sent in the request
         result:
-          $ref: '#/components/schemas/order'
+          type: object
+          properties:
+            trades:
+              type: array
+              items:
+                $ref: '#/components/schemas/user_trade'
+            has_more:
+              type: boolean
+          required:
+          - trades
+          - has_more
       required:
       - jsonrpc
       - result
@@ -5776,10 +5797,546 @@ components:
       example: BTC-PERPETUAL
       type: string
       description: Unique instrument identifier
-    block_trade_order:
-      example: true
+    ErrorMessageResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        message:
+          type: string
+        error:
+          type: integer
+      required:
+      - jsonrpc
+      - message
+      - error
+      type: object
+    PrivateGetMarginsResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          properties:
+            buy:
+              example: 0.01681367
+              type: number
+              description: Margin when buying
+            sell:
+              example: 0.01680479
+              type: number
+              description: Margin when selling
+            min_price:
+              $ref: '#/components/schemas/min_price'
+            max_price:
+              $ref: '#/components/schemas/max_price'
+          required:
+          - buy
+          - sell
+          - min_price
+          - max_price
+          type: object
+      required:
+      - jsonrpc
+      - result
+      type: object
+    index_name:
+      enum:
+      - btc_usd
+      - eth_usd
+      - ada_usdc
+      - algo_usdc
+      - avax_usdc
+      - bch_usdc
+      - bnb_usdc
+      - btc_usdc
+      - btcdvol_usdc
+      - buidl_usdc
+      - doge_usdc
+      - dot_usdc
+      - eurr_usdc
+      - eth_usdc
+      - ethdvol_usdc
+      - link_usdc
+      - ltc_usdc
+      - near_usdc
+      - paxg_usdc
+      - shib_usdc
+      - sol_usdc
+      - steth_usdc
+      - ton_usdc
+      - trump_usdc
+      - trx_usdc
+      - uni_usdc
+      - usde_usdc
+      - usyc_usdc
+      - xrp_usdc
+      - btc_usdt
+      - eth_usdt
+      - eurr_usdt
+      - sol_usdt
+      - steth_usdt
+      - usdc_usdt
+      - usde_usdt
+      - btc_eurr
+      - btc_usde
+      - btc_usyc
+      - eth_btc
+      - eth_eurr
+      - eth_usde
+      - eth_usyc
+      - steth_eth
+      - paxg_btc
+      - drbfix-btc_usdc
+      - drbfix-eth_usdc
+      type: string
+      description: Index identifier, matches (base) cryptocurrency with quote currency
+    amount:
+      type: number
+      description: It represents the requested order size. For perpetual and inverse futures the amount is in USD units. For options and linear futures it is the underlying base currency coin.
+    timestamp:
+      example: 1536569522277
+      type: integer
+      description: The timestamp (milliseconds since the Unix epoch)
+    PrivateSetMmpConfigResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          type: array
+          items:
+            type: object
+            properties:
+              index_name:
+                $ref: '#/components/schemas/index_name'
+              interval:
+                type: integer
+                minimum: 0
+                maximum: 3600
+                description: 'The duration of the monitoring window in seconds. For example, an <code>interval</code> of <code>3</code> implies a 3-second window. <br><br>The <code>interval</code> begins after the first trade. <br><br>If a new trade is executed after the <code>interval</code> has ended, a new <code>interval</code> is started, and counters reset. <br><br>If a trade occurs during an already running <code>interval</code>, that <code>interval</code> continues unaffected. <br><br>This mechanism allows the platform to track activity in short, rolling windows to identify potentially risky trading behavior. <br><br>If set to <code>0</code>, MMP is disabled. <br><br>Maximum value: <code>3600</code> seconds (1 hour).'
+              frozen_time:
+                type: integer
+                minimum: 0
+                maximum: 3600
+                description: 'Time in seconds that MMP remains active after being triggered. Once this frozen period has passed, MMP will automatically reset, allowing new orders to be submitted. <br><br>If you want to disable automatic reset, set <code>frozen_time</code> to <code>0</code>. In that case, a manual reset is required using the <code>private/reset_mmp</code> method. <br><br>Manual reset is also possible during the frozen time period. <br><br>Maximum value: <code>3600</code> seconds (1 hour).'
+              id:
+                type: integer
+                format: int64
+                description: Integer identifier for the MMP group (int64). This is the programmatic identifier for the group. Entries without an `mmp_group` name correspond to the orders MMP group (the default group).
+              mmp_group:
+                type: string
+                description: Name of the MMP group. Absent for the orders MMP group (the default group), which has no string name — its entry is identified by the `id` field alone.
+              quantity_limit:
+                type: number
+                description: 'The total traded quantity, measured in units of the base currency (e.g., BTC in <code>BTC-PERPETUAL</code>), within the <code>interval</code>. <br><br>This count is direction-agnostic—a buy followed by a sell counts double. <br><br>Example: Buy <code>10</code> BTC and sell <code>10</code> BTC = <code>20</code> total quantity. <br><br>Applicable to both options and futures. <br><br><strong>Note:</strong> Once this is set, an initial margin will be reserved even without any open positions. Initial Margin due to <code>quantity_limit</code> = <code>quantity_limit</code> * <code>0.03</code> <br><br>Maximum 4 decimal places.'
+              delta_limit:
+                type: number
+                description: 'The maximum allowable net transaction delta change during the <code>interval</code>. <br><br>Expressed in units of base currency. <br><br>The <code>delta_limit</code> is treated as an absolute threshold: e.g., <code>delta_limit: 10</code> → MMP is triggered if net transaction delta exceeds <code>+10</code> or drops below <code>-10</code>. <br><br>Direction matters: buying <code>+5</code> delta and selling <code>−5</code> delta cancels out if within the same <code>interval</code>. <br><br><strong>Note:</strong> Note that we use the net transaction delta instead of delta. Net Transaction Delta = <code>Delta - Mark Price</code>. In the rest of this document, "delta" actually refers to net transaction delta. <br><br>Maximum 4 decimal places.'
+              vega_limit:
+                type: number
+                description: The maximum change in vega exposure allowed within a given <code>interval</code>, measured in absolute terms. <br><br>Expressed in USD, representing the change in sensitivity to implied volatility across executed trades. <br><br>This parameter is primarily relevant for options traders managing risk in volatile markets. <br><br>Similar to <code>delta_limit</code>, the <code>vega_limit</code> is direction-aware and evaluated on a net basis. If the exposure exceeds the set threshold (positively or negatively), MMP will be triggered. <br><br><strong>Notice:</strong> When evaluating Delta and Vega limits for MMP, Deribit uses the greeks at the moment of trade execution. The system does not re-evaluate Delta or Vega using live greeks at the time of MMP checking. <br><br>Maximum 4 decimal places.
+              max_quote_quantity:
+                type: number
+                description: Maximum Quote Quantity (MQQ). MQQ is configured per index but enforced per side, per order book (instrument) — the total combined size of open MMP orders per side per instrument cannot exceed MQQ (specified in base currency). MQQ is used for Initial Margin calculation (3% of MQQ is taken as Initial Margin for MMP orders and quotes). <br><br>**Important Notes:** <br>- **Configured per index, enforced per instrument:** MQQ is configured at the index level (an MMP group is linked to an index). However, the limit is enforced separately per order book (instrument) per side. "Per order book" means per instrument (not per expiry). The limit is NOT the sum across all instruments — each instrument has its own separate MQQ enforcement. <br>- **MQQ limits cumulative size, not order count:** For example, with MQQ of 3 BTC, you can place multiple orders (three orders of 1 BTC each, or one order of 2.5 BTC plus one of 0.5 BTC) as long as the total size per side per instrument does not exceed 3 BTC <br>- **MQQ is separate per MMP group:** Each MMP group has its own independent MQQ configuration. MQQ limits are enforced separately for each MMP group. <br>- **MQQ vs Quantity Limit relationship:** You can set MQQ > `quantity_limit`. This allows quotes to be larger than the quantity limit, and enables MMP to trigger on partial fills of quotes. This decouples the MMP reserved margin from the MMP quantity limit. <br>- **Base currency:** MQQ is specified and enforced in base currency <br>- **Inverse futures:** Size is calculated as Amount / Price to convert to base currency <br>- **Inverse future spreads:** Size is calculated as Amount / IndexPrice <br>- **SM accounts:** MMP orders and quotes on options and option_combos are not supported for SM accounts <br>- **Rejections:** MQQ is enforced for **MMP-enabled orders and quotes**. Quote entries and MMP-enabled orders (i.e., orders with `mmp=true`) are rejected if their individual size is greater than `max_quote_quantity`, or if accepting them would make the total open MMP size per side per instrument exceed `max_quote_quantity`. Non‑MMP orders are not subject to MQQ and may be larger than `max_quote_quantity`. <br>- **Precision:** All MMP configuration values support maximum 4 decimal places <br>- **Latency:** There are no latency benefits from MQQ if you already use mass quotes.
+              block_rfq:
+                type: boolean
+                description: If true, indicates MMP configuration for Block RFQ. Block RFQ MMP settings are completely separate from normal order/quote MMP settings.
+              trade_count_limit:
+                type: integer
+                description: For Block RFQ only. The maximum number of Block RFQ trades allowed in the lookback window. Each RFQ trade counts as +1 towards the limit (not individual legs). Works across all currency pairs.
+            required:
+            - index_name
+            - interval
+            - frozen_time
+      required:
+      - jsonrpc
+      - result
+      type: object
+    reduce_only:
       type: boolean
-      description: '`true` if order made from block_trade trade, added only in that case.'
+      description: Optional (not added for spot). '`true` for reduce-only orders only'
+    PrivateGetMmpConfigResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          type: array
+          items:
+            type: object
+            properties:
+              index_name:
+                $ref: '#/components/schemas/index_name'
+              interval:
+                type: integer
+                minimum: 0
+                maximum: 3600
+                description: 'The duration of the monitoring window in seconds. For example, an <code>interval</code> of <code>3</code> implies a 3-second window. <br><br>The <code>interval</code> begins after the first trade. <br><br>If a new trade is executed after the <code>interval</code> has ended, a new <code>interval</code> is started, and counters reset. <br><br>If a trade occurs during an already running <code>interval</code>, that <code>interval</code> continues unaffected. <br><br>This mechanism allows the platform to track activity in short, rolling windows to identify potentially risky trading behavior. <br><br>If set to <code>0</code>, MMP is disabled. <br><br>Maximum value: <code>3600</code> seconds (1 hour).'
+              frozen_time:
+                type: integer
+                minimum: 0
+                maximum: 3600
+                description: 'Time in seconds that MMP remains active after being triggered. Once this frozen period has passed, MMP will automatically reset, allowing new orders to be submitted. <br><br>If you want to disable automatic reset, set <code>frozen_time</code> to <code>0</code>. In that case, a manual reset is required using the <code>private/reset_mmp</code> method. <br><br>Manual reset is also possible during the frozen time period. <br><br>Maximum value: <code>3600</code> seconds (1 hour).'
+              id:
+                type: integer
+                format: int64
+                description: Integer identifier for the MMP group (int64). This is the programmatic identifier for the group. Entries without an `mmp_group` name correspond to the orders MMP group (the default group).
+              mmp_group:
+                type: string
+                description: Name of the MMP group. Absent for the orders MMP group (the default group), which has no string name — its entry is identified by the `id` field alone.
+              quantity_limit:
+                type: number
+                description: 'The total traded quantity, measured in units of the base currency (e.g., BTC in <code>BTC-PERPETUAL</code>), within the <code>interval</code>. <br><br>This count is direction-agnostic—a buy followed by a sell counts double. <br><br>Example: Buy <code>10</code> BTC and sell <code>10</code> BTC = <code>20</code> total quantity. <br><br>Applicable to both options and futures. <br><br><strong>Note:</strong> Once this is set, an initial margin will be reserved even without any open positions. Initial Margin due to <code>quantity_limit</code> = <code>quantity_limit</code> * <code>0.03</code> <br><br>Maximum 4 decimal places.'
+              delta_limit:
+                type: number
+                description: 'The maximum allowable net transaction delta change during the <code>interval</code>. <br><br>Expressed in units of base currency. <br><br>The <code>delta_limit</code> is treated as an absolute threshold: e.g., <code>delta_limit: 10</code> → MMP is triggered if net transaction delta exceeds <code>+10</code> or drops below <code>-10</code>. <br><br>Direction matters: buying <code>+5</code> delta and selling <code>−5</code> delta cancels out if within the same <code>interval</code>. <br><br><strong>Note:</strong> Note that we use the net transaction delta instead of delta. Net Transaction Delta = <code>Delta - Mark Price</code>. In the rest of this document, "delta" actually refers to net transaction delta. <br><br>Maximum 4 decimal places.'
+              vega_limit:
+                type: number
+                description: The maximum change in vega exposure allowed within a given <code>interval</code>, measured in absolute terms. <br><br>Expressed in USD, representing the change in sensitivity to implied volatility across executed trades. <br><br>This parameter is primarily relevant for options traders managing risk in volatile markets. <br><br>Similar to <code>delta_limit</code>, the <code>vega_limit</code> is direction-aware and evaluated on a net basis. If the exposure exceeds the set threshold (positively or negatively), MMP will be triggered. <br><br><strong>Notice:</strong> When evaluating Delta and Vega limits for MMP, Deribit uses the greeks at the moment of trade execution. The system does not re-evaluate Delta or Vega using live greeks at the time of MMP checking. <br><br>Maximum 4 decimal places.
+              max_quote_quantity:
+                type: number
+                description: Maximum Quote Quantity (MQQ). MQQ is configured per index but enforced per side, per order book (instrument) — the total combined size of open MMP orders per side per instrument cannot exceed MQQ (specified in base currency). MQQ is used for Initial Margin calculation (3% of MQQ is taken as Initial Margin for MMP orders and quotes). <br><br>**Important Notes:** <br>- **Configured per index, enforced per instrument:** MQQ is configured at the index level (an MMP group is linked to an index). However, the limit is enforced separately per order book (instrument) per side. "Per order book" means per instrument (not per expiry). The limit is NOT the sum across all instruments — each instrument has its own separate MQQ enforcement. <br>- **MQQ limits cumulative size, not order count:** For example, with MQQ of 3 BTC, you can place multiple orders (three orders of 1 BTC each, or one order of 2.5 BTC plus one of 0.5 BTC) as long as the total size per side per instrument does not exceed 3 BTC <br>- **MQQ is separate per MMP group:** Each MMP group has its own independent MQQ configuration. MQQ limits are enforced separately for each MMP group. <br>- **MQQ vs Quantity Limit relationship:** You can set MQQ > `quantity_limit`. This allows quotes to be larger than the quantity limit, and enables MMP to trigger on partial fills of quotes. This decouples the MMP reserved margin from the MMP quantity limit. <br>- **Base currency:** MQQ is specified and enforced in base currency <br>- **Inverse futures:** Size is calculated as Amount / Price to convert to base currency <br>- **Inverse future spreads:** Size is calculated as Amount / IndexPrice <br>- **SM accounts:** MMP orders and quotes on options and option_combos are not supported for SM accounts <br>- **Rejections:** MQQ is enforced for **MMP-enabled orders and quotes**. Quote entries and MMP-enabled orders (i.e., orders with `mmp=true`) are rejected if their individual size is greater than `max_quote_quantity`, or if accepting them would make the total open MMP size per side per instrument exceed `max_quote_quantity`. Non‑MMP orders are not subject to MQQ and may be larger than `max_quote_quantity`. <br>- **Precision:** All MMP configuration values support maximum 4 decimal places <br>- **Latency:** There are no latency benefits from MQQ if you already use mass quotes.
+              block_rfq:
+                type: boolean
+                description: If true, indicates MMP configuration for Block RFQ. Block RFQ MMP settings are completely separate from normal order/quote MMP settings.
+              trade_count_limit:
+                type: integer
+                description: For Block RFQ only. The maximum number of Block RFQ trades allowed in the lookback window. Each RFQ trade counts as +1 towards the limit (not individual legs). Works across all currency pairs.
+            required:
+            - index_name
+            - interval
+            - frozen_time
+      required:
+      - jsonrpc
+      - result
+      type: object
+    orders:
+      items:
+        $ref: '#/components/schemas/order'
+      type: array
+    simple_order_type:
+      enum:
+      - all
+      - limit
+      - trigger_all
+      - stop
+      - take
+      - trailing_stop
+      type: string
+      description: 'Order type: `"all"`, `"limit"`, `"stop"`, `"take"`, `"trailing_stop"`, `"trailing_take"`'
+    usd:
+      type: number
+      description: Option price in USD (Only if `advanced="usd"`)
+    label_presentation:
+      type: string
+      description: User defined label (presented only when previously set for order by user)
+    PrivateGetOrderStateByLabelResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          $ref: '#/components/schemas/orders'
+      required:
+      - jsonrpc
+      - result
+      type: object
+    filled_amount:
+      type: number
+      description: Filled amount of the order. For perpetual and futures the filled_amount is in USD units, for options - in units or corresponding cryptocurrency contracts, e.g., BTC or ETH.
+    PrivatePositionMoveResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          $ref: '#/components/schemas/position_move'
+      required:
+      - jsonrpc
+      - result
+      type: object
+    PrivateGetUserTradesByOrderResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+      required:
+      - jsonrpc
+      type: object
+    order_state:
+      enum:
+      - open
+      - filled
+      - rejected
+      - cancelled
+      - untriggered
+      - triggered
+      type: string
+      description: 'Order state: `"open"`, `"filled"`, `"rejected"`, `"cancelled"`, `"untriggered"`'
+    order_state_stop:
+      type: string
+      description: 'Order state: `"triggered"`, `"cancelled"`, or `"rejected"` with rejection reason (e.g. `"rejected:reduce_direction"`).'
+    PrivateGetOpenOrdersResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/order'
+      required:
+      - jsonrpc
+      - result
+      type: object
+    refresh_amount:
+      type: number
+      description: The initial display amount of iceberg order. Iceberg order display amount will be refreshed to that value after match consuming actual display amount. Absent for other types of orders
+    settlement_type:
+      enum:
+      - settlement
+      - delivery
+      - bankruptcy
+      type: string
+      description: The type of settlement. `settlement`, `delivery` or `bankruptcy`.
+    PrivateBuyAndSellResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          type: object
+          properties:
+            order:
+              $ref: '#/components/schemas/order'
+            trades:
+              type: array
+              items:
+                $ref: '#/components/schemas/user_trade'
+          required:
+          - order
+          - trades
+      required:
+      - jsonrpc
+      - result
+      type: object
+    min_price:
+      type: number
+      description: The minimum price for the future. Any sell orders you submit lower than this price will be clamped to this minimum.
+    order_id_initial_margin_pair:
+      properties:
+        order_id:
+          $ref: '#/components/schemas/order_id'
+        initial_margin:
+          type: number
+          description: Initial margin of order
+        initial_margin_currency:
+          type: string
+          description: Currency of initial margin
+      required:
+      - order_id
+      - initial_margin
+      type: object
+    trade_seq:
+      type: integer
+      description: The sequence number of the trade within instrument
+    PrivateCancelQuotesResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          type: number
+          example: 3
+          description: Total number of successfully cancelled quotes
+      required:
+      - jsonrpc
+      - result
+      type: object
+    PrivateGetOrderMarginByIdsResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/order_id_initial_margin_pair'
+      required:
+      - jsonrpc
+      - result
+      type: object
+    is_secondary_oto:
+      type: boolean
+      description: '`true` if the order is an order that can be triggered by another order, otherwise not present.'
+    price:
+      type: number
+      description: Price in base currency
+    original_order_type:
+      enum:
+      - market
+      - market_limit
+      type: string
+      description: Original order type. Optional field
+    PrivateCancelAllResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          type: number
+          example: 7
+          description: Total number of successfully cancelled orders
+      required:
+      - jsonrpc
+      - result
+      type: object
+    trigger_price:
+      type: number
+      description: Trigger price (Only for future trigger orders)
+    mobile:
+      type: boolean
+      description: Optional field with value `true` added only when created with Mobile Application
+    PrivateSettlementResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          properties:
+            continuation:
+              $ref: '#/components/schemas/continuation'
+            settlements:
+              type: array
+              items:
+                $ref: '#/components/schemas/settlement'
+          required:
+          - continuation
+          - settlements
+          type: object
+      required:
+      - jsonrpc
+      - result
+      type: object
+    position_move:
+      properties:
+        trades:
+          type: array
+          items:
+            $ref: '#/components/schemas/position_move_trade'
+      required:
+      - trades
+      type: object
+    block_trade_id_in_result:
+      example: '154'
+      type: string
+      description: Block trade id - when trade was part of a block trade
+    trigger:
+      enum:
+      - index_price
+      - mark_price
+      - last_price
+      type: string
+      description: 'Trigger type (only for trigger orders). Allowed values: `"index_price"`, `"mark_price"`, `"last_price"`.'
+    max_price:
+      type: number
+      description: The maximum price for the future. Any buy orders you submit higher than this price, will be clamped to this maximum.
+    PrivateGetOrderHistoryResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/order'
+      required:
+      - jsonrpc
+      - result
+      type: object
+    label:
+      type: string
+      description: User defined label (up to 64 characters)
+    kind:
+      enum:
+      - future
+      - option
+      - spot
+      - future_combo
+      - option_combo
+      type: string
+      description: 'Instrument kind: `"future"`, `"option"`, `"spot"`, `"future_combo"`, `"option_combo"`'
     user_trade:
       properties:
         trade_id:
@@ -5945,128 +6502,7 @@ components:
       - state
       - mark_price
       type: object
-    original_order_type:
-      enum:
-      - market
-      - market_limit
-      type: string
-      description: Original order type. Optional field
-    average_price:
-      type: number
-      description: Average fill price of the order
-    usd:
-      type: number
-      description: Option price in USD (Only if `advanced="usd"`)
-    simple_order_type:
-      enum:
-      - all
-      - limit
-      - trigger_all
-      - stop
-      - take
-      - trailing_stop
-      type: string
-      description: 'Order type: `"all"`, `"limit"`, `"stop"`, `"take"`, `"trailing_stop"`, `"trailing_take"`'
-    implv:
-      type: number
-      description: Implied volatility in percent. (Only if `advanced="implv"`)
-    label_presentation:
-      type: string
-      description: User defined label (presented only when previously set for order by user)
-    trigger_order_history_record:
-      properties:
-        timestamp:
-          $ref: '#/components/schemas/timestamp'
-        trigger:
-          $ref: '#/components/schemas/trigger'
-        trigger_price:
-          $ref: '#/components/schemas/trigger_price'
-        trigger_offset:
-          $ref: '#/components/schemas/trigger_offset'
-        trigger_order_id:
-          type: string
-          example: SLTB-187015
-          description: Id of the user order used for the trigger-order reference before triggering
-        order_id:
-          $ref: '#/components/schemas/order_id'
-        order_state:
-          $ref: '#/components/schemas/order_state_stop'
-        instrument_name:
-          $ref: '#/components/schemas/instrument_name'
-        request:
-          type: string
-          example: trigger:order
-          description: Type of last request performed on the trigger order by user or system. `"cancel"` - when order was cancelled, `"trigger:order"` - when trigger order spawned market or limit order after being triggered
-        direction:
-          $ref: '#/components/schemas/direction'
-        price:
-          $ref: '#/components/schemas/price'
-        amount:
-          $ref: '#/components/schemas/amount'
-        last_update_timestamp:
-          $ref: '#/components/schemas/timestamp'
-        reduce_only:
-          $ref: '#/components/schemas/reduce_only'
-        post_only:
-          $ref: '#/components/schemas/post_only'
-        order_type:
-          type: string
-          enum:
-          - limit
-          - market
-          description: 'Requested order type: `"limit` or `"market"`'
-        label:
-          $ref: '#/components/schemas/label_presentation'
-        is_secondary_oto:
-          $ref: '#/components/schemas/is_secondary_oto'
-        oco_ref:
-          $ref: '#/components/schemas/oco_ref'
-        source:
-          type: string
-          example: api
-          description: Source of the order that is linked to the trigger order.
-      required:
-      - trigger
-      - timestamp
-      - trigger_price
-      - trigger_order_id
-      - order_state
-      - request
-      - post_only
-      - order_type
-      - price
-      - order_id
-      - trigger_offset
-      - instrument_name
-      - amount
-      - direction
-      - reduce_only
-      type: object
-    tick_direction:
-      enum:
-      - 0
-      - 1
-      - 2
-      - 3
-      type: integer
-      description: Direction of the "tick" (`0` = Plus Tick, `1` = Zero-Plus Tick, `2` = Minus Tick, `3` = Zero-Minus Tick).
-    trigger_price:
-      type: number
-      description: Trigger price (Only for future trigger orders)
-    profit_loss:
-      type: number
-      description: Profit and loss in base currency.
-    reject_post_only:
-      type: boolean
-      description: '`true` if order has `reject_post_only` flag (field is present only when `post_only` is `true`)'
-    oco_ref:
-      type: string
-      description: Unique reference that identifies a one_cancels_others (OCO) pair.
-    trade_timestamp:
-      example: 1517329113791
-      type: integer
-      description: The timestamp of the trade (milliseconds since the UNIX epoch)
-    PrivateGetOpenOrdersResponse:
+    PrivateCancelResponse:
       properties:
         jsonrpc:
           type: string
@@ -6077,9 +6513,7 @@ components:
           type: integer
           description: The id that was sent in the request
         result:
-          type: array
-          items:
-            $ref: '#/components/schemas/order'
+          $ref: '#/components/schemas/order'
       required:
       - jsonrpc
       - result
@@ -6099,7 +6533,7 @@ components:
       - trailing_stop
       type: string
       description: 'Order type: `"all"`, `"limit"`, `"trigger_all"`, `"stop_all"`, `"stop_limit"`, `"stop_market"`, `"take_all"`, `"take_limit"`, `"take_market"`, `"trailing_all"`, `"trailing_stop"`'
-    ErrorMessageResponse:
+    PrivateMassQuoteResponse:
       properties:
         jsonrpc:
           type: string
@@ -6109,59 +6543,101 @@ components:
         id:
           type: integer
           description: The id that was sent in the request
-        message:
-          type: string
-        error:
-          type: integer
+        result:
+          type: object
+          properties:
+            orders:
+              type: array
+              items:
+                $ref: '#/components/schemas/order'
+            trades:
+              type: array
+              items:
+                $ref: '#/components/schemas/user_trade'
+            errors_count:
+              type: integer
+              description: 'Number of errors (present when `detailed` : `false`).'
+            pending_requests_count:
+              type: integer
+              description: 'Number of pending quotes (present when `wait_for_response`: `false` and `detailed` : `false`).'
+            pending_requests:
+              type: array
+              items:
+                type: object
+                properties:
+                  instrument_name:
+                    type: string
+                    description: Instrument name.
+                  side:
+                    type: string
+                    description: Quote side - `bid` or `ask`.
+              description: 'List of pending quotes (present when `wait_for_response`: `false` and `detailed` : `true`).'
+            errors:
+              type: array
+              items:
+                type: object
+                properties:
+                  instrument_name:
+                    type: string
+                    description: Instrument name.
+                  side:
+                    type: string
+                    description: Quote side - `bid` or `ask`.
+                  error:
+                    type: object
+                    description: Error data.
+                  code:
+                    type: integer
+                    description: Error code
+                  message:
+                    type: string
+                    description: Error message.
+              description: 'List of errors (present when `detailed` : `true`).'
       required:
       - jsonrpc
-      - message
+      - result
+      type: object
+    trigger_reference_price:
+      type: number
+      description: The price of the given trigger at the time when the order was placed (Only for trailing trigger orders)
+    average_price:
+      type: number
+      description: Average fill price of the order
+    JsonRpcError:
+      type: object
+      required:
+      - jsonrpc
       - error
-      type: object
-    mobile:
-      type: boolean
-      description: Optional field with value `true` added only when created with Mobile Application
-    max_price:
-      type: number
-      description: The maximum price for the future. Any buy orders you submit higher than this price, will be clamped to this maximum.
-    order_id:
-      example: ETH-100234
-      type: string
-      description: Unique order identifier
-    trigger_fill_condition:
-      enum:
-      - first_hit
-      - complete_fill
-      - incremental
-      type: string
-      description: '<p>The fill condition of the linked order (Only for linked order types), default: `first_hit`.</p> <ul> <li>`"first_hit"` - any execution of the primary order will fully cancel/place all secondary orders.</li> <li>`"complete_fill"` - a complete execution (meaning the primary order no longer exists) will cancel/place the secondary orders.</li> <li>`"incremental"` - any fill of the primary order will cause proportional partial cancellation/placement of the secondary order. The amount that will be subtracted/added to the secondary order will be rounded down to the contract size.</li> </ul>'
-    PrivateSettlementResponse:
+      description: JSON-RPC 2.0 error envelope returned for failed requests.
       properties:
         jsonrpc:
           type: string
           enum:
           - '2.0'
-          description: The JSON-RPC version (2.0)
         id:
-          type: integer
-          description: The id that was sent in the request
-        result:
-          properties:
-            continuation:
-              $ref: '#/components/schemas/continuation'
-            settlements:
-              type: array
-              items:
-                $ref: '#/components/schemas/settlement'
-          required:
-          - continuation
-          - settlements
+          type:
+          - integer
+          - 'null'
+          description: The id that was sent in the request, if any.
+        error:
           type: object
+          required:
+          - code
+          - message
+          properties:
+            code:
+              type: integer
+              description: Numeric JSON-RPC error code.
+            message:
+              type: string
+              description: Human-readable error description.
+            data:
+              description: Optional additional error details.
+    GetOpenOrdersResponse:
+      type: object
       required:
       - jsonrpc
       - result
-      type: object
-    PrivateGetMmpConfigResponse:
       properties:
         jsonrpc:
           type: string
@@ -6173,268 +6649,9 @@ components:
           description: The id that was sent in the request
         result:
           type: array
+          description: Array of open orders for the authenticated portfolio. May be empty.
           items:
-            type: object
-            properties:
-              index_name:
-                $ref: '#/components/schemas/index_name'
-              interval:
-                type: integer
-                minimum: 0
-                maximum: 3600
-                description: 'The duration of the monitoring window in seconds. For example, an <code>interval</code> of <code>3</code> implies a 3-second window. <br><br>The <code>interval</code> begins after the first trade. <br><br>If a new trade is executed after the <code>interval</code> has ended, a new <code>interval</code> is started, and counters reset. <br><br>If a trade occurs during an already running <code>interval</code>, that <code>interval</code> continues unaffected. <br><br>This mechanism allows the platform to track activity in short, rolling windows to identify potentially risky trading behavior. <br><br>If set to <code>0</code>, MMP is disabled. <br><br>Maximum value: <code>3600</code> seconds (1 hour).'
-              frozen_time:
-                type: integer
-                minimum: 0
-                maximum: 3600
-                description: 'Time in seconds that MMP remains active after being triggered. Once this frozen period has passed, MMP will automatically reset, allowing new orders to be submitted. <br><br>If you want to disable automatic reset, set <code>frozen_time</code> to <code>0</code>. In that case, a manual reset is required using the <code>private/reset_mmp</code> method. <br><br>Manual reset is also possible during the frozen time period. <br><br>Maximum value: <code>3600</code> seconds (1 hour).'
-              id:
-                type: integer
-                format: int64
-                description: Integer identifier for the MMP group (int64). This is the programmatic identifier for the group. Entries without an `mmp_group` name correspond to the orders MMP group (the default group).
-              mmp_group:
-                type: string
-                description: Name of the MMP group. Absent for the orders MMP group (the default group), which has no string name — its entry is identified by the `id` field alone.
-              quantity_limit:
-                type: number
-                description: 'The total traded quantity, measured in units of the base currency (e.g., BTC in <code>BTC-PERPETUAL</code>), within the <code>interval</code>. <br><br>This count is direction-agnostic—a buy followed by a sell counts double. <br><br>Example: Buy <code>10</code> BTC and sell <code>10</code> BTC = <code>20</code> total quantity. <br><br>Applicable to both options and futures. <br><br><strong>Note:</strong> Once this is set, an initial margin will be reserved even without any open positions. Initial Margin due to <code>quantity_limit</code> = <code>quantity_limit</code> * <code>0.03</code> <br><br>Maximum 4 decimal places.'
-              delta_limit:
-                type: number
-                description: 'The maximum allowable net transaction delta change during the <code>interval</code>. <br><br>Expressed in units of base currency. <br><br>The <code>delta_limit</code> is treated as an absolute threshold: e.g., <code>delta_limit: 10</code> → MMP is triggered if net transaction delta exceeds <code>+10</code> or drops below <code>-10</code>. <br><br>Direction matters: buying <code>+5</code> delta and selling <code>−5</code> delta cancels out if within the same <code>interval</code>. <br><br><strong>Note:</strong> Note that we use the net transaction delta instead of delta. Net Transaction Delta = <code>Delta - Mark Price</code>. In the rest of this document, "delta" actually refers to net transaction delta. <br><br>Maximum 4 decimal places.'
-              vega_limit:
-                type: number
-                description: The maximum change in vega exposure allowed within a given <code>interval</code>, measured in absolute terms. <br><br>Expressed in USD, representing the change in sensitivity to implied volatility across executed trades. <br><br>This parameter is primarily relevant for options traders managing risk in volatile markets. <br><br>Similar to <code>delta_limit</code>, the <code>vega_limit</code> is direction-aware and evaluated on a net basis. If the exposure exceeds the set threshold (positively or negatively), MMP will be triggered. <br><br><strong>Notice:</strong> When evaluating Delta and Vega limits for MMP, Deribit uses the greeks at the moment of trade execution. The system does not re-evaluate Delta or Vega using live greeks at the time of MMP checking. <br><br>Maximum 4 decimal places.
-              max_quote_quantity:
-                type: number
-                description: Maximum Quote Quantity (MQQ). MQQ is configured per index but enforced per side, per order book (instrument) — the total combined size of open MMP orders per side per instrument cannot exceed MQQ (specified in base currency). MQQ is used for Initial Margin calculation (3% of MQQ is taken as Initial Margin for MMP orders and quotes). <br><br>**Important Notes:** <br>- **Configured per index, enforced per instrument:** MQQ is configured at the index level (an MMP group is linked to an index). However, the limit is enforced separately per order book (instrument) per side. "Per order book" means per instrument (not per expiry). The limit is NOT the sum across all instruments — each instrument has its own separate MQQ enforcement. <br>- **MQQ limits cumulative size, not order count:** For example, with MQQ of 3 BTC, you can place multiple orders (three orders of 1 BTC each, or one order of 2.5 BTC plus one of 0.5 BTC) as long as the total size per side per instrument does not exceed 3 BTC <br>- **MQQ is separate per MMP group:** Each MMP group has its own independent MQQ configuration. MQQ limits are enforced separately for each MMP group. <br>- **MQQ vs Quantity Limit relationship:** You can set MQQ > `quantity_limit`. This allows quotes to be larger than the quantity limit, and enables MMP to trigger on partial fills of quotes. This decouples the MMP reserved margin from the MMP quantity limit. <br>- **Base currency:** MQQ is specified and enforced in base currency <br>- **Inverse futures:** Size is calculated as Amount / Price to convert to base currency <br>- **Inverse future spreads:** Size is calculated as Amount / IndexPrice <br>- **SM accounts:** MMP orders and quotes on options and option_combos are not supported for SM accounts <br>- **Rejections:** MQQ is enforced for **MMP-enabled orders and quotes**. Quote entries and MMP-enabled orders (i.e., orders with `mmp=true`) are rejected if their individual size is greater than `max_quote_quantity`, or if accepting them would make the total open MMP size per side per instrument exceed `max_quote_quantity`. Non‑MMP orders are not subject to MQQ and may be larger than `max_quote_quantity`. <br>- **Precision:** All MMP configuration values support maximum 4 decimal places <br>- **Latency:** There are no latency benefits from MQQ if you already use mass quotes.
-              block_rfq:
-                type: boolean
-                description: If true, indicates MMP configuration for Block RFQ. Block RFQ MMP settings are completely separate from normal order/quote MMP settings.
-              trade_count_limit:
-                type: integer
-                description: For Block RFQ only. The maximum number of Block RFQ trades allowed in the lookback window. Each RFQ trade counts as +1 towards the limit (not individual legs). Works across all currency pairs.
-            required:
-            - index_name
-            - interval
-            - frozen_time
-      required:
-      - jsonrpc
-      - result
-      type: object
-    time_in_force:
-      enum:
-      - good_til_cancelled
-      - good_til_day
-      - fill_or_kill
-      - immediate_or_cancel
-      type: string
-      description: 'Order time in force: `"good_til_cancelled"`, `"good_til_day"`, `"fill_or_kill"` or `"immediate_or_cancel"`'
-    trade_seq:
-      type: integer
-      description: The sequence number of the trade within instrument
-    index_name:
-      enum:
-      - btc_usd
-      - eth_usd
-      - ada_usdc
-      - algo_usdc
-      - avax_usdc
-      - bch_usdc
-      - bnb_usdc
-      - btc_usdc
-      - btcdvol_usdc
-      - buidl_usdc
-      - doge_usdc
-      - dot_usdc
-      - eurr_usdc
-      - eth_usdc
-      - ethdvol_usdc
-      - link_usdc
-      - ltc_usdc
-      - near_usdc
-      - paxg_usdc
-      - shib_usdc
-      - sol_usdc
-      - steth_usdc
-      - ton_usdc
-      - trump_usdc
-      - trx_usdc
-      - uni_usdc
-      - usde_usdc
-      - usyc_usdc
-      - xrp_usdc
-      - btc_usdt
-      - eth_usdt
-      - eurr_usdt
-      - sol_usdt
-      - steth_usdt
-      - usdc_usdt
-      - usde_usdt
-      - btc_eurr
-      - btc_usde
-      - btc_usyc
-      - eth_btc
-      - eth_eurr
-      - eth_usde
-      - eth_usyc
-      - steth_eth
-      - paxg_btc
-      - drbfix-btc_usdc
-      - drbfix-eth_usdc
-      type: string
-      description: Index identifier, matches (base) cryptocurrency with quote currency
-    PrivateSetMmpConfigResponse:
-      properties:
-        jsonrpc:
-          type: string
-          enum:
-          - '2.0'
-          description: The JSON-RPC version (2.0)
-        id:
-          type: integer
-          description: The id that was sent in the request
-        result:
-          type: array
-          items:
-            type: object
-            properties:
-              index_name:
-                $ref: '#/components/schemas/index_name'
-              interval:
-                type: integer
-                minimum: 0
-                maximum: 3600
-                description: 'The duration of the monitoring window in seconds. For example, an <code>interval</code> of <code>3</code> implies a 3-second window. <br><br>The <code>interval</code> begins after the first trade. <br><br>If a new trade is executed after the <code>interval</code> has ended, a new <code>interval</code> is started, and counters reset. <br><br>If a trade occurs during an already running <code>interval</code>, that <code>interval</code> continues unaffected. <br><br>This mechanism allows the platform to track activity in short, rolling windows to identify potentially risky trading behavior. <br><br>If set to <code>0</code>, MMP is disabled. <br><br>Maximum value: <code>3600</code> seconds (1 hour).'
-              frozen_time:
-                type: integer
-                minimum: 0
-                maximum: 3600
-                description: 'Time in seconds that MMP remains active after being triggered. Once this frozen period has passed, MMP will automatically reset, allowing new orders to be submitted. <br><br>If you want to disable automatic reset, set <code>frozen_time</code> to <code>0</code>. In that case, a manual reset is required using the <code>private/reset_mmp</code> method. <br><br>Manual reset is also possible during the frozen time period. <br><br>Maximum value: <code>3600</code> seconds (1 hour).'
-              id:
-                type: integer
-                format: int64
-                description: Integer identifier for the MMP group (int64). This is the programmatic identifier for the group. Entries without an `mmp_group` name correspond to the orders MMP group (the default group).
-              mmp_group:
-                type: string
-                description: Name of the MMP group. Absent for the orders MMP group (the default group), which has no string name — its entry is identified by the `id` field alone.
-              quantity_limit:
-                type: number
-                description: 'The total traded quantity, measured in units of the base currency (e.g., BTC in <code>BTC-PERPETUAL</code>), within the <code>interval</code>. <br><br>This count is direction-agnostic—a buy followed by a sell counts double. <br><br>Example: Buy <code>10</code> BTC and sell <code>10</code> BTC = <code>20</code> total quantity. <br><br>Applicable to both options and futures. <br><br><strong>Note:</strong> Once this is set, an initial margin will be reserved even without any open positions. Initial Margin due to <code>quantity_limit</code> = <code>quantity_limit</code> * <code>0.03</code> <br><br>Maximum 4 decimal places.'
-              delta_limit:
-                type: number
-                description: 'The maximum allowable net transaction delta change during the <code>interval</code>. <br><br>Expressed in units of base currency. <br><br>The <code>delta_limit</code> is treated as an absolute threshold: e.g., <code>delta_limit: 10</code> → MMP is triggered if net transaction delta exceeds <code>+10</code> or drops below <code>-10</code>. <br><br>Direction matters: buying <code>+5</code> delta and selling <code>−5</code> delta cancels out if within the same <code>interval</code>. <br><br><strong>Note:</strong> Note that we use the net transaction delta instead of delta. Net Transaction Delta = <code>Delta - Mark Price</code>. In the rest of this document, "delta" actually refers to net transaction delta. <br><br>Maximum 4 decimal places.'
-              vega_limit:
-                type: number
-                description: The maximum change in vega exposure allowed within a given <code>interval</code>, measured in absolute terms. <br><br>Expressed in USD, representing the change in sensitivity to implied volatility across executed trades. <br><br>This parameter is primarily relevant for options traders managing risk in volatile markets. <br><br>Similar to <code>delta_limit</code>, the <code>vega_limit</code> is direction-aware and evaluated on a net basis. If the exposure exceeds the set threshold (positively or negatively), MMP will be triggered. <br><br><strong>Notice:</strong> When evaluating Delta and Vega limits for MMP, Deribit uses the greeks at the moment of trade execution. The system does not re-evaluate Delta or Vega using live greeks at the time of MMP checking. <br><br>Maximum 4 decimal places.
-              max_quote_quantity:
-                type: number
-                description: Maximum Quote Quantity (MQQ). MQQ is configured per index but enforced per side, per order book (instrument) — the total combined size of open MMP orders per side per instrument cannot exceed MQQ (specified in base currency). MQQ is used for Initial Margin calculation (3% of MQQ is taken as Initial Margin for MMP orders and quotes). <br><br>**Important Notes:** <br>- **Configured per index, enforced per instrument:** MQQ is configured at the index level (an MMP group is linked to an index). However, the limit is enforced separately per order book (instrument) per side. "Per order book" means per instrument (not per expiry). The limit is NOT the sum across all instruments — each instrument has its own separate MQQ enforcement. <br>- **MQQ limits cumulative size, not order count:** For example, with MQQ of 3 BTC, you can place multiple orders (three orders of 1 BTC each, or one order of 2.5 BTC plus one of 0.5 BTC) as long as the total size per side per instrument does not exceed 3 BTC <br>- **MQQ is separate per MMP group:** Each MMP group has its own independent MQQ configuration. MQQ limits are enforced separately for each MMP group. <br>- **MQQ vs Quantity Limit relationship:** You can set MQQ > `quantity_limit`. This allows quotes to be larger than the quantity limit, and enables MMP to trigger on partial fills of quotes. This decouples the MMP reserved margin from the MMP quantity limit. <br>- **Base currency:** MQQ is specified and enforced in base currency <br>- **Inverse futures:** Size is calculated as Amount / Price to convert to base currency <br>- **Inverse future spreads:** Size is calculated as Amount / IndexPrice <br>- **SM accounts:** MMP orders and quotes on options and option_combos are not supported for SM accounts <br>- **Rejections:** MQQ is enforced for **MMP-enabled orders and quotes**. Quote entries and MMP-enabled orders (i.e., orders with `mmp=true`) are rejected if their individual size is greater than `max_quote_quantity`, or if accepting them would make the total open MMP size per side per instrument exceed `max_quote_quantity`. Non‑MMP orders are not subject to MQQ and may be larger than `max_quote_quantity`. <br>- **Precision:** All MMP configuration values support maximum 4 decimal places <br>- **Latency:** There are no latency benefits from MQQ if you already use mass quotes.
-              block_rfq:
-                type: boolean
-                description: If true, indicates MMP configuration for Block RFQ. Block RFQ MMP settings are completely separate from normal order/quote MMP settings.
-              trade_count_limit:
-                type: integer
-                description: For Block RFQ only. The maximum number of Block RFQ trades allowed in the lookback window. Each RFQ trade counts as +1 towards the limit (not individual legs). Works across all currency pairs.
-            required:
-            - index_name
-            - interval
-            - frozen_time
-      required:
-      - jsonrpc
-      - result
-      type: object
-    refresh_amount:
-      type: number
-      description: The initial display amount of iceberg order. Iceberg order display amount will be refreshed to that value after match consuming actual display amount. Absent for other types of orders
-    PrivateGetUserTradesHistoryResponse:
-      properties:
-        jsonrpc:
-          type: string
-          enum:
-          - '2.0'
-          description: The JSON-RPC version (2.0)
-        id:
-          type: integer
-          description: The id that was sent in the request
-        result:
-          type: object
-          properties:
-            trades:
-              type: array
-              items:
-                $ref: '#/components/schemas/user_trade'
-            has_more:
-              type: boolean
-          required:
-          - trades
-          - has_more
-      required:
-      - jsonrpc
-      - result
-      type: object
-    PrivateEditResponse:
-      properties:
-        jsonrpc:
-          type: string
-          enum:
-          - '2.0'
-          description: The JSON-RPC version (2.0)
-        id:
-          type: integer
-          description: The id that was sent in the request
-        result:
-          type: object
-          properties:
-            order:
-              $ref: '#/components/schemas/order'
-            trades:
-              type: array
-              items:
-                $ref: '#/components/schemas/user_trade'
-          required:
-          - order
-          - trades
-      required:
-      - jsonrpc
-      - result
-      type: object
-    order_state_stop:
-      type: string
-      description: 'Order state: `"triggered"`, `"cancelled"`, or `"rejected"` with rejection reason (e.g. `"rejected:reduce_direction"`).'
-    kind:
-      enum:
-      - future
-      - option
-      - spot
-      - future_combo
-      - option_combo
-      type: string
-      description: 'Instrument kind: `"future"`, `"option"`, `"spot"`, `"future_combo"`, `"option_combo"`'
-    min_price:
-      type: number
-      description: The minimum price for the future. Any sell orders you submit lower than this price will be clamped to this minimum.
-    OkResponse:
-      properties:
-        jsonrpc:
-          type: string
-          enum:
-          - '2.0'
-          description: The JSON-RPC version (2.0)
-        id:
-          type: integer
-          description: The id that was sent in the request
-        result:
-          type: string
-          enum:
-          - ok
-          description: Result of method execution. `ok` in case of success
-      required:
-      - jsonrpc
-      - result
-      type: object
-    post_only:
-      type: boolean
-      description: '`true` for post-only orders only'
+            $ref: '#/components/schemas/Order'
     Order:
       type: object
       description: A single open order from the authenticated portfolio.
@@ -6490,8 +6707,9 @@ components:
           - market
           description: Order type, derived from the price field.
         time_in_force:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           enum:
           - GTC
           - IOC
@@ -6499,12 +6717,14 @@ components:
           - GTD
           description: Time-in-force policy.
         post_only:
-          type: boolean
-          nullable: true
+          type:
+          - boolean
+          - 'null'
           description: Whether the order was submitted as post-only.
         reduce_only:
-          type: boolean
-          nullable: true
+          type:
+          - boolean
+          - 'null'
           description: Whether the order was submitted as reduce-only.
         creation_timestamp:
           type: integer
@@ -6517,108 +6737,351 @@ components:
           description: Time of the most recent change to the order, in milliseconds since the Unix epoch.
           example: 1778270370643
         label:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Client-supplied label for the order, if any.
         api:
-          type: boolean
-          nullable: true
+          type:
+          - boolean
+          - 'null'
           description: Whether the order was placed via API.
         max_show:
-          type: number
-          nullable: true
+          type:
+          - number
+          - 'null'
           description: Iceberg display quantity, if applicable.
         profit_loss:
-          type: number
-          nullable: true
+          type:
+          - number
+          - 'null'
           description: Realised profit/loss attributable to this order, if any.
         commission:
-          type: number
-          nullable: true
+          type:
+          - number
+          - 'null'
           description: Commission accrued by this order so far, if any.
-    currency_with_any_and_list:
-      oneOf:
-      - type: string
-      - items:
-          type: string
-        type: array
-      description: The currency symbol, list of currency symbols or `"any"` for all
-    label:
-      type: string
-      description: User defined label (up to 64 characters)
-    open_order_price:
-      oneOf:
-      - type: number
-      - enum:
-        - market_price
-        type: string
-      description: Price in base currency or "market_price" in case of open trigger market orders
-    JsonRpcError:
-      type: object
-      required:
-      - jsonrpc
-      - error
-      description: JSON-RPC 2.0 error envelope returned for failed requests.
-      properties:
-        jsonrpc:
-          type: string
-          enum:
-          - '2.0'
-        id:
-          type: integer
-          nullable: true
-          description: The id that was sent in the request, if any.
-        error:
-          type: object
-          required:
-          - code
-          - message
-          properties:
-            code:
-              type: integer
-              description: Numeric JSON-RPC error code.
-            message:
-              type: string
-              description: Human-readable error description.
-            data:
-              description: Optional additional error details.
-    order_state:
-      enum:
-      - open
-      - filled
-      - rejected
-      - cancelled
-      - untriggered
-      - triggered
-      type: string
-      description: 'Order state: `"open"`, `"filled"`, `"rejected"`, `"cancelled"`, `"untriggered"`'
-    triggered:
-      type: boolean
-      description: Whether the trigger order has been triggered
   responses:
-    PrivatePositionMoveResponse:
+    PrivateGetMmpStatusResponse:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/PrivatePositionMoveResponse'
+            $ref: '#/components/schemas/PrivateGetMmpStatusResponse'
           examples:
             response:
               value:
                 jsonrpc: '2.0'
-                id: 3
+                id: 7851
                 result:
-                - target_uid: 23
-                  source_uid: 3
-                  price: 0.1223
-                  instrument_name: BTC-28JAN22-32500-C
+                - index_name: btc_usd
+                  frozen_until: 1744275841861
+                  mmp_group: MassQuoteBot7
+              description: Response example
+      description: Success response
+    PrivateGetOrderStateResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PrivateGetOrderStateResponse'
+          examples:
+            response:
+              value:
+                jsonrpc: '2.0'
+                id: 4316
+                result:
+                  time_in_force: good_til_cancelled
+                  reduce_only: false
+                  price: 118.94
+                  post_only: false
+                  order_type: limit
+                  order_state: filled
+                  order_id: ETH-331562
+                  max_show: 37
+                  last_update_timestamp: 1550219810944
+                  label: ''
+                  is_rebalance: false
+                  is_liquidation: false
+                  instrument_name: ETH-PERPETUAL
+                  filled_amount: 37
                   direction: sell
-                  amount: 0.1
-                - target_uid: 23
-                  source_uid: 3
-                  price: 35800
-                  instrument_name: BTC-PERPETUAL
+                  creation_timestamp: 1550219749176
+                  average_price: 118.94
+                  api: false
+                  amount: 37
+              description: Response example
+      description: Success response
+    PrivateGetUserTradesByOrderResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PrivateGetUserTradesByOrderResponse'
+          examples:
+            response:
+              value:
+                jsonrpc: '2.0'
+                id: 3466
+                result:
+                - trade_seq: 1966042
+                  trade_id: ETH-2696068
+                  timestamp: 1590480712800
+                  tick_direction: 3
+                  state: filled
+                  reduce_only: false
+                  price: 203.8
+                  post_only: false
+                  order_type: market
+                  order_id: ETH-584830574
+                  matching_id: null
+                  mark_price: 203.78
+                  liquidity: T
+                  instrument_name: ETH-PERPETUAL
+                  index_price: 203.89
+                  fee_currency: ETH
+                  fee: 0.00036801
                   direction: buy
-                  amount: 110
+                  amount: 100
+              description: Response example
+      description: Success response
+    PrivateCancelQuotesResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PrivateCancelQuotesResponse'
+      description: Success response
+    PrivateGetTriggerOrderHistoryResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PrivateGetTriggerOrderHistoryResponse'
+          examples:
+            response:
+              value:
+                jsonrpc: '2.0'
+                id: 2192
+                result:
+                  entries:
+                  - trigger: index
+                    timestamp: 1555918941451
+                    trigger_price: 5285
+                    trigger_order_id: SLIS-103
+                    order_state: new
+                    request: trigger:order
+                    price: 5179.28
+                    order_id: '671473'
+                    offset: 277
+                    instrument_name: BTC-PERPETUAL
+                    amount: 10
+                    direction: buy
+                  continuation: 1555918941451.SLIS-103
+              description: Response example
+      description: Success response
+    OkResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OkResponse'
+          examples:
+            response:
+              value:
+                jsonrpc: '2.0'
+                id: 1569
+                result: ok
+              description: Response example
+      description: Success response
+    PrivateGetOrderStateByLabelResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PrivateGetOrderStateByLabelResponse'
+          examples:
+            response:
+              value:
+                jsonrpc: '2.0'
+                id: 4316
+                result:
+                - time_in_force: good_til_cancelled
+                  reduce_only: false
+                  price: 118.94
+                  post_only: false
+                  order_type: limit
+                  order_state: filled
+                  order_id: ETH-331562
+                  max_show: 37
+                  last_update_timestamp: 1550219810944
+                  label: fooBar
+                  is_rebalance: false
+                  is_liquidation: false
+                  instrument_name: ETH-PERPETUAL
+                  filled_amount: 37
+                  direction: sell
+                  creation_timestamp: 1550219749176
+                  average_price: 118.94
+                  api: false
+                  amount: 37
+              description: Response example
+      description: Success response
+    PrivateGetOrderHistoryResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PrivateGetOrderHistoryResponse'
+          examples:
+            response:
+              value:
+                jsonrpc: '2.0'
+                id: 9305
+                result:
+                - time_in_force: good_til_cancelled
+                  reduce_only: false
+                  price: 3886.5
+                  post_only: false
+                  order_type: limit
+                  order_state: filled
+                  order_id: '146475'
+                  max_show: 40
+                  last_update_timestamp: 1550661808761
+                  label: ''
+                  is_rebalance: false
+                  is_liquidation: false
+                  instrument_name: BTC-PERPETUAL
+                  filled_amount: 40
+                  direction: buy
+                  creation_timestamp: 1550661808761
+                  average_price: 3659.8
+                  api: true
+                  amount: 40
+              description: Response example
+      description: Success response
+    ErrorMessageResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessageResponse'
+      description: Success response
+    PrivateGetUserTradesHistoryResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PrivateGetUserTradesHistoryResponse'
+          examples:
+            response:
+              value:
+                jsonrpc: '2.0'
+                id: 9292
+                result:
+                  trades:
+                  - underlying_price: 8994.95
+                    trade_seq: 1
+                    trade_id: '48078936'
+                    timestamp: 1590480620145
+                    tick_direction: 1
+                    state: filled
+                    reduce_only: false
+                    price: 0.028
+                    post_only: false
+                    order_type: limit
+                    order_id: '4008699030'
+                    matching_id: null
+                    mark_price: 0.03135383
+                    liquidity: M
+                    iv: 38.51
+                    instrument_name: BTC-27MAY20-8750-C
+                    index_price: 8993.47
+                    fee_currency: BTC
+                    fee: 0.0004
+                    direction: sell
+                    amount: 1
+                  - trade_seq: 299513
+                    trade_id: '47958936'
+                    timestamp: 1589923311862
+                    tick_direction: 2
+                    state: filled
+                    reduce_only: false
+                    price: 9681.5
+                    post_only: false
+                    order_type: limit
+                    order_id: '3993343822'
+                    matching_id: null
+                    mark_price: 9684
+                    liquidity: M
+                    instrument_name: BTC-26JUN20
+                    index_price: 9679.48
+                    fee_currency: BTC
+                    fee: -2.1e-07
+                    direction: buy
+                    amount: 10
+                  has_more: false
+              description: Response example
+      description: Success response
+    PrivateCancelResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PrivateCancelResponse'
+          examples:
+            response:
+              value:
+                jsonrpc: '2.0'
+                id: 4214
+                result:
+                  triggered: false
+                  trigger: index_price
+                  time_in_force: good_til_cancelled
+                  trigger_price: 144.73
+                  reduce_only: false
+                  price: market_price
+                  post_only: false
+                  order_type: stop_market
+                  order_state: untriggered
+                  order_id: ETH-SLIS-12
+                  max_show: 5
+                  last_update_timestamp: 1550575961291
+                  label: ''
+                  is_rebalance: false
+                  is_liquidation: false
+                  instrument_name: ETH-PERPETUAL
+                  direction: sell
+                  creation_timestamp: 1550575961291
+                  api: false
+                  amount: 5
+              description: Response example
+      description: Success response
+    PrivateGetMarginsResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PrivateGetMarginsResponse'
+          examples:
+            response:
+              value:
+                jsonrpc: '2.0'
+                id: 7
+                result:
+                  sell: 0
+                  min_price: 3684.8
+                  max_price: 3759.24
+                  buy: 0.0219949
+              description: Response example
+      description: Success response
+    PrivateGetMmpConfigResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PrivateGetMmpConfigResponse'
+          examples:
+            response:
+              value:
+                jsonrpc: '2.0'
+                id: 7859
+                result:
+                - index_name: btc_usd
+                  mmp_group: MassQuoteBot7
+                  interval: 60
+                  frozen_time: 0
+                  quantity_limit: 0.5
+                  delta_limit: 0.3
+                  vega_limit: 0.1
+                  max_quote_quantity: 0.4
               description: Response example
       description: Success response
     PrivateMassQuoteResponse:
@@ -6720,409 +7183,6 @@ components:
                   trades: []
               description: Response example
       description: Success response
-    OkResponse:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/OkResponse'
-          examples:
-            response:
-              value:
-                jsonrpc: '2.0'
-                id: 1569
-                result: ok
-              description: Response example
-      description: Success response
-    PrivateGetMmpConfigResponse:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/PrivateGetMmpConfigResponse'
-          examples:
-            response:
-              value:
-                jsonrpc: '2.0'
-                id: 7859
-                result:
-                - index_name: btc_usd
-                  mmp_group: MassQuoteBot7
-                  interval: 60
-                  frozen_time: 0
-                  quantity_limit: 0.5
-                  delta_limit: 0.3
-                  vega_limit: 0.1
-                  max_quote_quantity: 0.4
-              description: Response example
-      description: Success response
-    PrivateGetOrderMarginByIdsResponse:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/PrivateGetOrderMarginByIdsResponse'
-          examples:
-            response:
-              value:
-                jsonrpc: '2.0'
-                id: 5625
-                result:
-                - order_id: ETH-349278
-                  initial_margin: 0.00091156
-                  initial_margin_currency: ETH
-                - order_id: ETH-349279
-                  initial_margin: 0
-                  initial_margin_currency: ETH
-                - order_id: ETH-349280
-                  initial_margin: 0
-                  initial_margin_currency: ETH
-              description: Response example
-      description: Success response
-    PrivateSettlementResponse:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/PrivateSettlementResponse'
-          examples:
-            response:
-              value:
-                jsonrpc: '2.0'
-                id: 2192
-                result:
-                  settlements:
-                  - type: settlement
-                    timestamp: 1550475692526
-                    session_profit_loss: 0.038358299
-                    profit_loss: -0.001783937
-                    position: -66
-                    mark_price: 121.67
-                    instrument_name: ETH-22FEB19
-                    index_price: 119.8
-                  continuation: xY7T6cusbMBNpH9SNmKb94jXSBxUPojJEdCPL4YociHBUgAhWQvEP
-              description: Response example
-      description: Success response
-    PrivateGetMmpStatusResponse:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/PrivateGetMmpStatusResponse'
-          examples:
-            response:
-              value:
-                jsonrpc: '2.0'
-                id: 7851
-                result:
-                - index_name: btc_usd
-                  frozen_until: 1744275841861
-                  mmp_group: MassQuoteBot7
-              description: Response example
-      description: Success response
-    PrivateCancelAllResponse:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/PrivateCancelAllResponse'
-          examples:
-            response:
-              value:
-                jsonrpc: '2.0'
-                id: 47
-                result: 4
-              description: Response example
-      description: Success response
-    PrivateGetUserTradesByOrderResponse:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/PrivateGetUserTradesByOrderResponse'
-          examples:
-            response:
-              value:
-                jsonrpc: '2.0'
-                id: 3466
-                result:
-                - trade_seq: 1966042
-                  trade_id: ETH-2696068
-                  timestamp: 1590480712800
-                  tick_direction: 3
-                  state: filled
-                  reduce_only: false
-                  price: 203.8
-                  post_only: false
-                  order_type: market
-                  order_id: ETH-584830574
-                  matching_id: null
-                  mark_price: 203.78
-                  liquidity: T
-                  instrument_name: ETH-PERPETUAL
-                  index_price: 203.89
-                  fee_currency: ETH
-                  fee: 0.00036801
-                  direction: buy
-                  amount: 100
-              description: Response example
-      description: Success response
-    PrivateGetOrderHistoryResponse:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/PrivateGetOrderHistoryResponse'
-          examples:
-            response:
-              value:
-                jsonrpc: '2.0'
-                id: 9305
-                result:
-                - time_in_force: good_til_cancelled
-                  reduce_only: false
-                  price: 3886.5
-                  post_only: false
-                  order_type: limit
-                  order_state: filled
-                  order_id: '146475'
-                  max_show: 40
-                  last_update_timestamp: 1550661808761
-                  label: ''
-                  is_rebalance: false
-                  is_liquidation: false
-                  instrument_name: BTC-PERPETUAL
-                  filled_amount: 40
-                  direction: buy
-                  creation_timestamp: 1550661808761
-                  average_price: 3659.8
-                  api: true
-                  amount: 40
-              description: Response example
-      description: Success response
-    PrivateGetUserTradesHistoryResponse:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/PrivateGetUserTradesHistoryResponse'
-          examples:
-            response:
-              value:
-                jsonrpc: '2.0'
-                id: 9292
-                result:
-                  trades:
-                  - underlying_price: 8994.95
-                    trade_seq: 1
-                    trade_id: '48078936'
-                    timestamp: 1590480620145
-                    tick_direction: 1
-                    state: filled
-                    reduce_only: false
-                    price: 0.028
-                    post_only: false
-                    order_type: limit
-                    order_id: '4008699030'
-                    matching_id: null
-                    mark_price: 0.03135383
-                    liquidity: M
-                    iv: 38.51
-                    instrument_name: BTC-27MAY20-8750-C
-                    index_price: 8993.47
-                    fee_currency: BTC
-                    fee: 0.0004
-                    direction: sell
-                    amount: 1
-                  - trade_seq: 299513
-                    trade_id: '47958936'
-                    timestamp: 1589923311862
-                    tick_direction: 2
-                    state: filled
-                    reduce_only: false
-                    price: 9681.5
-                    post_only: false
-                    order_type: limit
-                    order_id: '3993343822'
-                    matching_id: null
-                    mark_price: 9684
-                    liquidity: M
-                    instrument_name: BTC-26JUN20
-                    index_price: 9679.48
-                    fee_currency: BTC
-                    fee: -2.1e-07
-                    direction: buy
-                    amount: 10
-                  has_more: false
-              description: Response example
-      description: Success response
-    PrivateGetMarginsResponse:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/PrivateGetMarginsResponse'
-          examples:
-            response:
-              value:
-                jsonrpc: '2.0'
-                id: 7
-                result:
-                  sell: 0
-                  min_price: 3684.8
-                  max_price: 3759.24
-                  buy: 0.0219949
-              description: Response example
-      description: Success response
-    PrivateEditResponse:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/PrivateEditResponse'
-          examples:
-            response:
-              value:
-                jsonrpc: '2.0'
-                id: 9
-                result:
-                  trades: []
-                  order:
-                    web: false
-                    time_in_force: good_til_cancelled
-                    replaced: true
-                    reduce_only: false
-                    price: 50111
-                    post_only: false
-                    order_type: limit
-                    order_state: open
-                    order_id: '94166'
-                    max_show: 150
-                    last_update_timestamp: 1616155550773
-                    label: i_love_deribit
-                    is_rebalance: false
-                    is_liquidation: false
-                    instrument_name: BTC-PERPETUAL
-                    filled_amount: 0
-                    direction: buy
-                    creation_timestamp: 1616155547764
-                    average_price: 0
-                    api: true
-                    amount: 150
-              description: Response example
-      description: Success response
-    PrivateCancelQuotesResponse:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/PrivateCancelQuotesResponse'
-      description: Success response
-    PrivateGetOrderStateByLabelResponse:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/PrivateGetOrderStateByLabelResponse'
-          examples:
-            response:
-              value:
-                jsonrpc: '2.0'
-                id: 4316
-                result:
-                - time_in_force: good_til_cancelled
-                  reduce_only: false
-                  price: 118.94
-                  post_only: false
-                  order_type: limit
-                  order_state: filled
-                  order_id: ETH-331562
-                  max_show: 37
-                  last_update_timestamp: 1550219810944
-                  label: fooBar
-                  is_rebalance: false
-                  is_liquidation: false
-                  instrument_name: ETH-PERPETUAL
-                  filled_amount: 37
-                  direction: sell
-                  creation_timestamp: 1550219749176
-                  average_price: 118.94
-                  api: false
-                  amount: 37
-              description: Response example
-      description: Success response
-    PrivateGetOrderStateResponse:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/PrivateGetOrderStateResponse'
-          examples:
-            response:
-              value:
-                jsonrpc: '2.0'
-                id: 4316
-                result:
-                  time_in_force: good_til_cancelled
-                  reduce_only: false
-                  price: 118.94
-                  post_only: false
-                  order_type: limit
-                  order_state: filled
-                  order_id: ETH-331562
-                  max_show: 37
-                  last_update_timestamp: 1550219810944
-                  label: ''
-                  is_rebalance: false
-                  is_liquidation: false
-                  instrument_name: ETH-PERPETUAL
-                  filled_amount: 37
-                  direction: sell
-                  creation_timestamp: 1550219749176
-                  average_price: 118.94
-                  api: false
-                  amount: 37
-              description: Response example
-      description: Success response
-    PrivateSetMmpConfigResponse:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/PrivateSetMmpConfigResponse'
-          examples:
-            response:
-              value:
-                jsonrpc: '2.0'
-                id: 7859
-                method: private/set_mmp_config
-                result:
-                  index_name: btc_usd
-                  mmp_group: MassQuoteBot7
-                  interval: 60
-                  frozen_time: 0
-                  quantity_limit: 3
-                  max_quote_quantity: 2.5
-              description: Response example
-      description: Success response
-    PrivateCancelResponse:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/PrivateCancelResponse'
-          examples:
-            response:
-              value:
-                jsonrpc: '2.0'
-                id: 4214
-                result:
-                  triggered: false
-                  trigger: index_price
-                  time_in_force: good_til_cancelled
-                  trigger_price: 144.73
-                  reduce_only: false
-                  price: market_price
-                  post_only: false
-                  order_type: stop_market
-                  order_state: untriggered
-                  order_id: ETH-SLIS-12
-                  max_show: 5
-                  last_update_timestamp: 1550575961291
-                  label: ''
-                  is_rebalance: false
-                  is_liquidation: false
-                  instrument_name: ETH-PERPETUAL
-                  direction: sell
-                  creation_timestamp: 1550575961291
-                  api: false
-                  amount: 5
-              description: Response example
-      description: Success response
     PrivateGetOpenOrdersResponse:
       content:
         application/json:
@@ -7153,6 +7213,31 @@ components:
                   average_price: 0
                   api: true
                   amount: 10
+              description: Response example
+      description: Success response
+    PrivatePositionMoveResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PrivatePositionMoveResponse'
+          examples:
+            response:
+              value:
+                jsonrpc: '2.0'
+                id: 3
+                result:
+                - target_uid: 23
+                  source_uid: 3
+                  price: 0.1223
+                  instrument_name: BTC-28JAN22-32500-C
+                  direction: sell
+                  amount: 0.1
+                - target_uid: 23
+                  source_uid: 3
+                  price: 35800
+                  instrument_name: BTC-PERPETUAL
+                  direction: buy
+                  amount: 110
               description: Response example
       description: Success response
     PrivateBuyAndSellResponse:
@@ -7210,36 +7295,125 @@ components:
                     amount: 21
               description: Response example
       description: Success response
-    PrivateGetTriggerOrderHistoryResponse:
+    PrivateEditResponse:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/PrivateGetTriggerOrderHistoryResponse'
+            $ref: '#/components/schemas/PrivateEditResponse'
+          examples:
+            response:
+              value:
+                jsonrpc: '2.0'
+                id: 9
+                result:
+                  trades: []
+                  order:
+                    web: false
+                    time_in_force: good_til_cancelled
+                    replaced: true
+                    reduce_only: false
+                    price: 50111
+                    post_only: false
+                    order_type: limit
+                    order_state: open
+                    order_id: '94166'
+                    max_show: 150
+                    last_update_timestamp: 1616155550773
+                    label: i_love_deribit
+                    is_rebalance: false
+                    is_liquidation: false
+                    instrument_name: BTC-PERPETUAL
+                    filled_amount: 0
+                    direction: buy
+                    creation_timestamp: 1616155547764
+                    average_price: 0
+                    api: true
+                    amount: 150
+              description: Response example
+      description: Success response
+    PrivateSetMmpConfigResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PrivateSetMmpConfigResponse'
+          examples:
+            response:
+              value:
+                jsonrpc: '2.0'
+                id: 7859
+                method: private/set_mmp_config
+                result:
+                  index_name: btc_usd
+                  mmp_group: MassQuoteBot7
+                  interval: 60
+                  frozen_time: 0
+                  quantity_limit: 3
+                  max_quote_quantity: 2.5
+              description: Response example
+      description: Success response
+    PrivateSettlementResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PrivateSettlementResponse'
           examples:
             response:
               value:
                 jsonrpc: '2.0'
                 id: 2192
                 result:
-                  entries:
-                  - trigger: index
-                    timestamp: 1555918941451
-                    trigger_price: 5285
-                    trigger_order_id: SLIS-103
-                    order_state: new
-                    request: trigger:order
-                    price: 5179.28
-                    order_id: '671473'
-                    offset: 277
-                    instrument_name: BTC-PERPETUAL
-                    amount: 10
-                    direction: buy
-                  continuation: 1555918941451.SLIS-103
+                  settlements:
+                  - type: settlement
+                    timestamp: 1550475692526
+                    session_profit_loss: 0.038358299
+                    profit_loss: -0.001783937
+                    position: -66
+                    mark_price: 121.67
+                    instrument_name: ETH-22FEB19
+                    index_price: 119.8
+                  continuation: xY7T6cusbMBNpH9SNmKb94jXSBxUPojJEdCPL4YociHBUgAhWQvEP
               description: Response example
       description: Success response
-    ErrorMessageResponse:
+    PrivateCancelAllResponse:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/ErrorMessageResponse'
+            $ref: '#/components/schemas/PrivateCancelAllResponse'
+          examples:
+            response:
+              value:
+                jsonrpc: '2.0'
+                id: 47
+                result: 4
+              description: Response example
       description: Success response
+    PrivateGetOrderMarginByIdsResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PrivateGetOrderMarginByIdsResponse'
+          examples:
+            response:
+              value:
+                jsonrpc: '2.0'
+                id: 5625
+                result:
+                - order_id: ETH-349278
+                  initial_margin: 0.00091156
+                  initial_margin_currency: ETH
+                - order_id: ETH-349279
+                  initial_margin: 0
+                  initial_margin_currency: ETH
+                - order_id: ETH-349280
+                  initial_margin: 0
+                  initial_margin_currency: ETH
+              description: Response example
+      description: Success response
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: API key passed as a Bearer token. The authenticated session determines the portfolio that operations are applied to.
+x-refined-from:
+- deribit-openapi.json
+- deribit-starbase-openapi.json

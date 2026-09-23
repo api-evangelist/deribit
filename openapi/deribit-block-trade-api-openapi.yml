@@ -1,6 +1,6 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: Deribit Account Management Block Trade API
+  title: Deribit Block Trade API
   version: 2.1.1
 servers:
 - url: https://test.deribit.com/api/v2
@@ -69,16 +69,13 @@ paths:
       description: 'Checks if a block trade can be executed without actually executing it. Use this method to verify that a block trade will succeed before proceeding with the actual execution.
 
 
-        **📖 Related Article:** [Block Trading](https://docs.deribit.com/articles/block-trading-api)
+        **📖 Related Article:** Block Trading
 
 
         **Scope:** `block_trade:read`
 
 
-        [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fsimulate_block_trade)
-
-
-        '
+        Try in API console'
       x-mint:
         metadata:
           title: private/simulate_block_trade
@@ -88,6 +85,10 @@ paths:
           - role
           - trades
         href: /api-reference/block-trade/private-simulate_block_trade
+      summary: Get private simulate block trade
+      x-summary-source: derived
+      operationId: getPrivateSimulateBlockTrade
+      x-operation-id-source: derived
   /private/verify_block_trade:
     get:
       parameters:
@@ -167,16 +168,13 @@ paths:
         **Note:** In the API, the `direction` field is always expressed from the maker''s perspective. This means that when you accept a block trade as a taker, the direction shown in the API represents the opposite side of your trade. For example, if you are buying puts as a taker, the API will show the operation as a "sell put" (maker''s perspective), and you will be verifying and accepting a "sell put" block trade.
 
 
-        **📖 Related Article:** [Block Trading](https://docs.deribit.com/articles/block-trading-api)
+        **📖 Related Article:** Block Trading
 
 
         **Scope:** `block_trade:read`
 
 
-        [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fverify_block_trade)
-
-
-        '
+        Try in API console'
       x-mint:
         metadata:
           title: private/verify_block_trade
@@ -189,6 +187,10 @@ paths:
           - trades
           - signature
         href: /api-reference/block-trade/private-verify_block_trade
+      summary: Get private verify block trade
+      x-summary-source: derived
+      operationId: getPrivateVerifyBlockTrade
+      x-operation-id-source: derived
   /private/execute_block_trade:
     get:
       parameters:
@@ -272,25 +274,22 @@ paths:
       description: 'Executes a block trade. This is the second step in the block trade workflow - the second party calls this method with the signature received from the first party to execute the trade.
 
 
-        The whole request must be exactly the same as in [private/verify_block_trade](https://docs.deribit.com/api-reference/block-trade/private-verify_block_trade), only the `role` field should be set appropriately - this means that both sides have to agree on the same `timestamp`, `nonce`, and `trades` fields, and the server will ensure that the `role` field is different between sides (each party accepts their own role).
+        The whole request must be exactly the same as in private/verify_block_trade, only the `role` field should be set appropriately - this means that both sides have to agree on the same `timestamp`, `nonce`, and `trades` fields, and the server will ensure that the `role` field is different between sides (each party accepts their own role).
 
 
-        Using the same `timestamp` and `nonce` by both sides in [private/verify_block_trade](https://docs.deribit.com/api-reference/block-trade/private-verify_block_trade) ensures that even if unintentionally both sides execute the given block trade with a valid `counterparty_signature`, the block trade will be executed only once.
+        Using the same `timestamp` and `nonce` by both sides in private/verify_block_trade ensures that even if unintentionally both sides execute the given block trade with a valid `counterparty_signature`, the block trade will be executed only once.
 
 
         **Note:** In the API, the `direction` field is always expressed from the maker''s perspective. This means that when you accept a block trade as a taker, the direction shown in the API represents the opposite side of your trade. For example, if you are buying puts as a taker, the API will show the operation as a "sell put" (maker''s perspective), and you will be verifying and accepting a "sell put" block trade.
 
 
-        **📖 Related Article:** [Block Trading](https://docs.deribit.com/articles/block-trading-api)
+        **📖 Related Article:** Block Trading
 
 
         **Scope:** `block_trade:read_write`
 
 
-        [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fexecute_block_trade)
-
-
-        '
+        Try in API console'
       x-mint:
         metadata:
           title: private/execute_block_trade
@@ -348,6 +347,10 @@ paths:
           - client_link_id
           - name
         href: /api-reference/block-trade/private-execute_block_trade
+      summary: Get private execute block trade
+      x-summary-source: derived
+      operationId: getPrivateExecuteBlockTrade
+      x-operation-id-source: derived
   /private/invalidate_block_trade_signature:
     get:
       parameters:
@@ -375,19 +378,16 @@ paths:
                     signature: 1565173369982.1M9tO0Q-.z9n9WyZUU5op9pEz6Jtd2CI71QxQMMsCZAexnIfK9HQRT1pKH3clxeIbY7Bqm-yMcWIoE3IfCDPW5VEdiN-6oS0YkKUyXPD500MUf3ULKhfkmH81EZs
                 description: JSON-RPC Request Example
         description: JSON-RPC request body
-      description: 'Invalidates a block trade signature, effectively cancelling the block trade. This can be called at any time before [private/execute_block_trade](https://docs.deribit.com/api-reference/block-trade/private-execute_block_trade) is called.
+      description: 'Invalidates a block trade signature, effectively cancelling the block trade. This can be called at any time before private/execute_block_trade is called.
 
 
-        **📖 Related Article:** [Block Trading](https://docs.deribit.com/articles/block-trading-api)
+        **📖 Related Article:** Block Trading
 
 
         **Scope:** `block_trade:read_write`
 
 
-        [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Finvalidate_block_trade_signature)
-
-
-        '
+        Try in API console'
       x-mint:
         metadata:
           title: private/invalidate_block_trade_signature
@@ -396,6 +396,10 @@ paths:
           - private/invalidate_block_trade_signature
           - signature
         href: /api-reference/block-trade/private-invalidate_block_trade_signature
+      summary: Get private invalidate block trade signature
+      x-summary-source: derived
+      operationId: getPrivateInvalidateBlockTradeSignature
+      x-operation-id-source: derived
   /private/get_block_trade:
     get:
       parameters:
@@ -426,16 +430,13 @@ paths:
       description: 'Returns information about a specific block trade identified by `block_trade_id`.
 
 
-        **📖 Related Article:** [Block Trading](https://docs.deribit.com/articles/block-trading-api)
+        **📖 Related Article:** Block Trading
 
 
         **Scope:** `block_trade:read`
 
 
-        [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_block_trade)
-
-
-        '
+        Try in API console'
       x-mint:
         metadata:
           title: private/get_block_trade
@@ -491,6 +492,10 @@ paths:
           - client_link_id
           - name
         href: /api-reference/block-trade/private-get_block_trade
+      summary: Get private get block trade
+      x-summary-source: derived
+      operationId: getPrivateGetBlockTrade
+      x-operation-id-source: derived
   /private/get_block_trades:
     get:
       parameters:
@@ -555,16 +560,13 @@ paths:
       description: 'Returns a list of the user''s block trades. If currency is not provided, returns block trades for all currencies. `block_rfq_id` can be provided to receive block trades related to that particular Block RFQ.
 
 
-        **📖 Related Article:** [Block Trading](https://docs.deribit.com/articles/block-trading-api)
+        **📖 Related Article:** Block Trading
 
 
         **Scope:** `block_trade:read`
 
 
-        [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_block_trades)
-
-
-        '
+        Try in API console'
       x-mint:
         metadata:
           title: private/get_block_trades
@@ -623,6 +625,10 @@ paths:
           - client_link_id
           - name
         href: /api-reference/block-trade/private-get_block_trades
+      summary: Get private get block trades
+      x-summary-source: derived
+      operationId: getPrivateGetBlockTrades
+      x-operation-id-source: derived
   /private/get_block_trade_requests:
     get:
       parameters:
@@ -651,25 +657,22 @@ paths:
                     broker_code: jpqYKgg1
                 description: JSON-RPC Request Example
         description: JSON-RPC request body
-      description: 'Provides a list of block trade requests including pending approvals, declined trades, and expired trades. `timestamp` and `nonce` received in response can be used with [private/approve_block_trade](https://docs.deribit.com/api-reference/block-trade/private-approve_block_trade) or [private/reject_block_trade](https://docs.deribit.com/api-reference/block-trade/private-reject_block_trade) to approve or reject the pending block trade.
+      description: 'Provides a list of block trade requests including pending approvals, declined trades, and expired trades. `timestamp` and `nonce` received in response can be used with private/approve_block_trade or private/reject_block_trade to approve or reject the pending block trade.
 
 
-        To use the block trade approval feature, an [additional API key setting feature](https://docs.deribit.com/articles/creating-api-key#block-trade-approval-feature) called `enabled_features: block_trade_approval` is required. This key has to be given to the broker/registered partner who performs the trades on behalf of the user for the feature to be active. If the user wants to approve the trade, they must approve it from a different API key that doesn''t have this feature enabled.
+        To use the block trade approval feature, an additional API key setting feature called `enabled_features: block_trade_approval` is required. This key has to be given to the broker/registered partner who performs the trades on behalf of the user for the feature to be active. If the user wants to approve the trade, they must approve it from a different API key that doesn''t have this feature enabled.
 
 
         Only broker clients can use `broker_code` to query for their broker block trade requests.
 
 
-        **📖 Related Article:** [Block Trading](https://docs.deribit.com/articles/block-trading-api)
+        **📖 Related Article:** Block Trading
 
 
         **Scope:** `block_trade:read`
 
 
-        [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_block_trade_requests)
-
-
-        '
+        Try in API console'
       x-mint:
         metadata:
           title: private/get_block_trade_requests
@@ -690,6 +693,10 @@ paths:
           - combo_id
           - value
         href: /api-reference/block-trade/private-get_block_trade_requests
+      summary: Get private get block trade requests
+      x-summary-source: derived
+      operationId: getPrivateGetBlockTradeRequests
+      x-operation-id-source: derived
   /private/approve_block_trade:
     get:
       parameters:
@@ -734,22 +741,19 @@ paths:
       description: 'Approves a pending block trade. `nonce` and `timestamp` are used to identify the block trade while `role` should be opposite to the trading counterparty.
 
 
-        Use [private/get_block_trade_requests](https://docs.deribit.com/api-reference/block-trade/private-get_block_trade_requests) to retrieve pending block trades that require approval.
+        Use private/get_block_trade_requests to retrieve pending block trades that require approval.
 
 
-        To use the block trade approval feature, an [additional API key setting feature](https://docs.deribit.com/articles/creating-api-key#block-trade-approval-feature) called `enabled_features: block_trade_approval` is required. This key has to be given to the broker/registered partner who performs the trades on behalf of the user for the feature to be active. If the user wants to approve the trade, they must approve it from a different API key that doesn''t have this feature enabled.
+        To use the block trade approval feature, an additional API key setting feature called `enabled_features: block_trade_approval` is required. This key has to be given to the broker/registered partner who performs the trades on behalf of the user for the feature to be active. If the user wants to approve the trade, they must approve it from a different API key that doesn''t have this feature enabled.
 
 
-        **📖 Related Article:** [Block Trading](https://docs.deribit.com/articles/block-trading-api)
+        **📖 Related Article:** Block Trading
 
 
         **Scope:** `block_trade:read_write`
 
 
-        [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fapprove_block_trade)
-
-
-        '
+        Try in API console'
       x-mint:
         metadata:
           title: private/approve_block_trade
@@ -760,6 +764,10 @@ paths:
           - nonce
           - role
         href: /api-reference/block-trade/private-approve_block_trade
+      summary: Get private approve block trade
+      x-summary-source: derived
+      operationId: getPrivateApproveBlockTrade
+      x-operation-id-source: derived
   /private/reject_block_trade:
     get:
       parameters:
@@ -804,22 +812,19 @@ paths:
       description: 'Rejects a pending block trade. `nonce` and `timestamp` are used to identify the block trade while `role` should be opposite to the trading counterparty.
 
 
-        Use [private/get_block_trade_requests](https://docs.deribit.com/api-reference/block-trade/private-get_block_trade_requests) to retrieve pending block trades that require approval.
+        Use private/get_block_trade_requests to retrieve pending block trades that require approval.
 
 
-        To use the block trade approval feature, an [additional API key setting feature](https://docs.deribit.com/articles/creating-api-key#block-trade-approval-feature) called `enabled_features: block_trade_approval` is required. This key has to be given to the broker/registered partner who performs the trades on behalf of the user for the feature to be active. If the user wants to approve the trade, they must approve it from a different API key that doesn''t have this feature enabled.
+        To use the block trade approval feature, an additional API key setting feature called `enabled_features: block_trade_approval` is required. This key has to be given to the broker/registered partner who performs the trades on behalf of the user for the feature to be active. If the user wants to approve the trade, they must approve it from a different API key that doesn''t have this feature enabled.
 
 
-        **📖 Related Article:** [Block Trading](https://docs.deribit.com/articles/block-trading-api)
+        **📖 Related Article:** Block Trading
 
 
         **Scope:** `block_trade:read_write`
 
 
-        [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Freject_block_trade)
-
-
-        '
+        Try in API console'
       x-mint:
         metadata:
           title: private/reject_block_trade
@@ -830,6 +835,10 @@ paths:
           - nonce
           - role
         href: /api-reference/block-trade/private-reject_block_trade
+      summary: Get private reject block trade
+      x-summary-source: derived
+      operationId: getPrivateRejectBlockTrade
+      x-operation-id-source: derived
   /private/get_broker_trades:
     get:
       parameters:
@@ -884,10 +893,7 @@ paths:
         **Scope:** `block_trade:read`
 
 
-        [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_broker_trades)
-
-
-        '
+        Try in API console'
       x-mint:
         metadata:
           title: private/get_broker_trades
@@ -952,6 +958,10 @@ paths:
           - client_name
           - client_link_name
         href: /api-reference/block-trade/private-get_broker_trades
+      summary: Get private get broker trades
+      x-summary-source: derived
+      operationId: getPrivateGetBrokerTrades
+      x-operation-id-source: derived
   /private/get_broker_trade_requests:
     get:
       responses:
@@ -977,10 +987,7 @@ paths:
         **Scope:** `block_trade:read`
 
 
-        [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_broker_trade_requests)
-
-
-        '
+        Try in API console'
       x-mint:
         metadata:
           title: private/get_broker_trade_requests
@@ -1003,156 +1010,12 @@ paths:
           - client_link_name
           - client_link_id
         href: /api-reference/block-trade/private-get_broker_trade_requests
+      summary: Get private get broker trade requests
+      x-summary-source: derived
+      operationId: getPrivateGetBrokerTradeRequests
+      x-operation-id-source: derived
 components:
   schemas:
-    block_trade_id_in_result:
-      example: '154'
-      type: string
-      description: Block trade id - when trade was part of a block trade
-    pending_block_trade:
-      properties:
-        nonce:
-          type: string
-          example: bF1_gfgcsd
-          description: Nonce that can be used to approve or reject pending block trade.
-        timestamp:
-          type: integer
-          description: Timestamp that can be used to approve or reject pending block trade.
-        trades:
-          type: array
-          items:
-            $ref: '#/components/schemas/pending_block_trade'
-        app_name:
-          type: string
-          example: Example Application
-          description: The name of the application that executed the block trade on behalf of the user (optional).
-        username:
-          type: string
-          example: Trader
-          description: Username of the user who initiated the block trade.
-        role:
-          $ref: '#/components/schemas/role'
-        user_id:
-          $ref: '#/components/schemas/user_id'
-        broker_code:
-          type: string
-          example: jpqYKgg1
-          description: Broker code associated with the broker block trade.
-        broker_name:
-          type: string
-          example: Test Broker
-          description: Name of the broker associated with the block trade.
-        state:
-          type: object
-          properties:
-            value:
-              type: string
-              enum:
-              - initial
-              - accepted
-              - rejected
-              - executed
-              description: State value.
-            timestamp:
-              type: integer
-              description: State timestamp.
-          required:
-          - value
-          - timestamp
-          description: State of the pending block trade for current user.
-        counterparty_state:
-          type: object
-          properties:
-            value:
-              type: string
-              enum:
-              - initial
-              - accepted
-              - rejected
-              - executed
-              description: State value.
-            timestamp:
-              type: integer
-              description: State timestamp.
-          required:
-          - value
-          - timestamp
-          description: State of the pending block trade for the other party (optional).
-        combo_id:
-          type: string
-          example: BTC-CS-27JUN25-80000_85000
-          description: Combo instrument identifier
-      required:
-      - nonce
-      - timestamp
-      - trades
-      - app_name
-      - role
-      - user_id
-      - state
-      type: object
-    order_state_in_user_trade:
-      enum:
-      - open
-      - filled
-      - rejected
-      - cancelled
-      - untriggered
-      - archive
-      type: string
-      description: 'Order state: `"open"`, `"filled"`, `"rejected"`, `"cancelled"`, `"untriggered"` or `"archive"` (if order was archived)'
-    trade_id:
-      type: string
-      description: Unique (per currency) trade identifier
-    PrivateGetBlockTradeRequestsResponse:
-      properties:
-        jsonrpc:
-          type: string
-          enum:
-          - '2.0'
-          description: The JSON-RPC version (2.0)
-        id:
-          type: integer
-          description: The id that was sent in the request
-        result:
-          type: array
-          items:
-            $ref: '#/components/schemas/pending_block_trade'
-      required:
-      - jsonrpc
-      - result
-      type: object
-    timestamp:
-      example: 1536569522277
-      type: integer
-      description: The timestamp (milliseconds since the Unix epoch)
-    label_presentation:
-      type: string
-      description: User defined label (presented only when previously set for order by user)
-    block_trade_id:
-      example: '154'
-      type: string
-      description: Block trade id
-    tick_direction:
-      enum:
-      - 0
-      - 1
-      - 2
-      - 3
-      type: integer
-      description: Direction of the "tick" (`0` = Plus Tick, `1` = Zero-Plus Tick, `2` = Minus Tick, `3` = Zero-Minus Tick).
-    profit_loss:
-      type: number
-      description: Profit and loss in base currency.
-    currency:
-      enum:
-      - BTC
-      - ETH
-      - USDC
-      - USDT
-      - EURR
-      type: string
-      description: Currency, i.e `"BTC"`, `"ETH"`, `"USDC"`
     OkResponse:
       properties:
         jsonrpc:
@@ -1172,80 +1035,6 @@ components:
       - jsonrpc
       - result
       type: object
-    amount:
-      type: number
-      description: It represents the requested order size. For perpetual and inverse futures the amount is in USD units. For options and linear futures it is the underlying base currency coin.
-    PrivateGetBrokerTradesResponse:
-      properties:
-        jsonrpc:
-          type: string
-          enum:
-          - '2.0'
-          description: The JSON-RPC version (2.0)
-        id:
-          type: integer
-          description: The id that was sent in the request
-        result:
-          type: object
-          properties:
-            history:
-              type: array
-              items:
-                type: object
-                properties:
-                  id:
-                    type: string
-                    description: Unique identifier of the block trade history entry.
-                  timestamp:
-                    type: integer
-                    description: Timestamp of the block trade history entry (milliseconds since the UNIX epoch).
-                  trades:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/block_trade'
-                  maker:
-                    type: object
-                    properties:
-                      user_id:
-                        type: integer
-                        description: Obscured user id of the maker.
-                      client_id:
-                        type: integer
-                        description: ID of a client; available to broker. Represents a group of users under a common name.
-                      client_name:
-                        type: string
-                        description: Name of the client; available to broker.
-                      client_link_name:
-                        type: string
-                        description: Name of the linked user within the client; available to broker.
-                      client_link_id:
-                        type: integer
-                        description: ID assigned to a single user in a client; available to broker.
-                  taker:
-                    type: object
-                    properties:
-                      user_id:
-                        type: integer
-                        description: Obscured user id of the taker.
-                      client_id:
-                        type: integer
-                        description: ID of a client; available to broker. Represents a group of users under a common name.
-                      client_name:
-                        type: string
-                        description: Name of the client; available to broker.
-                      client_link_name:
-                        type: string
-                        description: Name of the linked user within the client; available to broker.
-                      client_link_id:
-                        type: integer
-                        description: ID assigned to a single user in a client; available to broker.
-            next_start_id:
-              type: integer
-              description: The next start ID for pagination.
-      required:
-      - jsonrpc
-      - result
-      type: object
     user_id:
       example: 57874
       type: integer
@@ -1256,80 +1045,93 @@ components:
       - sell
       type: string
       description: 'Direction: `buy`, or `sell`'
+    price:
+      type: number
+      description: Price in base currency
     trade_timestamp:
       example: 1517329113791
       type: integer
       description: The timestamp of the trade (milliseconds since the UNIX epoch)
-    PrivateVerifyBlockTradeResponse:
-      properties:
-        jsonrpc:
-          type: string
-          enum:
-          - '2.0'
-          description: The JSON-RPC version (2.0)
-        id:
-          type: integer
-          description: The id that was sent in the request
-        result:
-          type: object
-          properties:
-            signature:
-              $ref: '#/components/schemas/block_trade_signature'
-          required:
-          - signature
-      required:
-      - jsonrpc
-      - result
-      type: object
-    PrivateGetBlockTradesResponse:
-      properties:
-        jsonrpc:
-          type: string
-          enum:
-          - '2.0'
-          description: The JSON-RPC version (2.0)
-        id:
-          type: integer
-          description: The id that was sent in the request
-        result:
-          type: array
-          items:
-            $ref: '#/components/schemas/block_trade'
-      required:
-      - jsonrpc
-      - result
-      type: object
-    block_trade:
-      properties:
-        id:
-          $ref: '#/components/schemas/block_trade_id'
-        timestamp:
-          $ref: '#/components/schemas/timestamp'
-        trades:
-          type: array
-          items:
-            $ref: '#/components/schemas/user_trade'
-        app_name:
-          type: string
-          example: Example Application
-          description: The name of the application that executed the block trade on behalf of the user (optional).
-        broker_code:
-          type: string
-          example: 2krM7sJsx
-          description: Broker code associated with the broker block trade.
-        broker_name:
-          type: string
-          example: Test Broker
-          description: Name of the broker associated with the block trade.
-      required:
-      - id
-      - timestamp
-      - trades
-      type: object
-    nonce:
-      example: bF1_gfgcsd
+    order_state_in_user_trade:
+      enum:
+      - open
+      - filled
+      - rejected
+      - cancelled
+      - untriggered
+      - archive
       type: string
-      description: Nonce
+      description: 'Order state: `"open"`, `"filled"`, `"rejected"`, `"cancelled"`, `"untriggered"` or `"archive"` (if order was archived)'
+    role:
+      enum:
+      - maker
+      - taker
+      type: string
+      description: 'Trade role of the user: `maker` or `taker`'
+    tick_direction:
+      enum:
+      - 0
+      - 1
+      - 2
+      - 3
+      type: integer
+      description: Direction of the "tick" (`0` = Plus Tick, `1` = Zero-Plus Tick, `2` = Minus Tick, `3` = Zero-Minus Tick).
+    block_trade_id:
+      example: '154'
+      type: string
+      description: Block trade id
+    PrivateSimulateBlockTradeResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          type: boolean
+          description: '`true` if block trade can be executed, `false` otherwise'
+      required:
+      - jsonrpc
+      - result
+      type: object
+    label_presentation:
+      type: string
+      description: User defined label (presented only when previously set for order by user)
+    PrivateGetBlockTradeResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          $ref: '#/components/schemas/block_trade'
+      required:
+      - jsonrpc
+      - result
+      type: object
+    trade_id:
+      type: string
+      description: Unique (per currency) trade identifier
+    block_trade_id_in_result:
+      example: '154'
+      type: string
+      description: Block trade id - when trade was part of a block trade
+    currency:
+      enum:
+      - BTC
+      - ETH
+      - USDC
+      - USDT
+      - EURR
+      type: string
+      description: Currency, i.e `"BTC"`, `"ETH"`, `"USDC"`
     PrivateGetBrokerTradeRequestsResponse:
       properties:
         jsonrpc:
@@ -1421,20 +1223,7 @@ components:
       example: 1565173369982.1M9tO0Q-.z9n9WyZUU5op9pEz6Jtd2CI71QxQMMsCZAexnIfK9HQRT1pKH3clxeIbY7Bqm-yMcWIoE3IfCDPW5VEdiN-6oS0YkKUyXPD500MUf3ULKhfkmH81EZs
       type: string
       description: Signature of block trade<br>It is valid only for 5 minutes around given timestamp
-    price:
-      type: number
-      description: Price in base currency
-    role:
-      enum:
-      - maker
-      - taker
-      type: string
-      description: 'Trade role of the user: `maker` or `taker`'
-    instrument_name:
-      example: BTC-PERPETUAL
-      type: string
-      description: Unique instrument identifier
-    PrivateSimulateBlockTradeResponse:
+    PrivateGetBlockTradeRequestsResponse:
       properties:
         jsonrpc:
           type: string
@@ -1445,13 +1234,21 @@ components:
           type: integer
           description: The id that was sent in the request
         result:
-          type: boolean
-          description: '`true` if block trade can be executed, `false` otherwise'
+          type: array
+          items:
+            $ref: '#/components/schemas/pending_block_trade'
       required:
       - jsonrpc
       - result
       type: object
-    PrivateGetBlockTradeResponse:
+    profit_loss:
+      type: number
+      description: Profit and loss in base currency.
+    instrument_name:
+      example: BTC-PERPETUAL
+      type: string
+      description: Unique instrument identifier
+    PrivateVerifyBlockTradeResponse:
       properties:
         jsonrpc:
           type: string
@@ -1462,7 +1259,34 @@ components:
           type: integer
           description: The id that was sent in the request
         result:
-          $ref: '#/components/schemas/block_trade'
+          type: object
+          properties:
+            signature:
+              $ref: '#/components/schemas/block_trade_signature'
+          required:
+          - signature
+      required:
+      - jsonrpc
+      - result
+      type: object
+    nonce:
+      example: bF1_gfgcsd
+      type: string
+      description: Nonce
+    PrivateGetBlockTradesResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/block_trade'
       required:
       - jsonrpc
       - result
@@ -1632,146 +1456,197 @@ components:
       - state
       - mark_price
       type: object
+    timestamp:
+      example: 1536569522277
+      type: integer
+      description: The timestamp (milliseconds since the Unix epoch)
+    amount:
+      type: number
+      description: It represents the requested order size. For perpetual and inverse futures the amount is in USD units. For options and linear futures it is the underlying base currency coin.
+    block_trade:
+      properties:
+        id:
+          $ref: '#/components/schemas/block_trade_id'
+        timestamp:
+          $ref: '#/components/schemas/timestamp'
+        trades:
+          type: array
+          items:
+            $ref: '#/components/schemas/user_trade'
+        app_name:
+          type: string
+          example: Example Application
+          description: The name of the application that executed the block trade on behalf of the user (optional).
+        broker_code:
+          type: string
+          example: 2krM7sJsx
+          description: Broker code associated with the broker block trade.
+        broker_name:
+          type: string
+          example: Test Broker
+          description: Name of the broker associated with the block trade.
+      required:
+      - id
+      - timestamp
+      - trades
+      type: object
+    pending_block_trade:
+      properties:
+        nonce:
+          type: string
+          example: bF1_gfgcsd
+          description: Nonce that can be used to approve or reject pending block trade.
+        timestamp:
+          type: integer
+          description: Timestamp that can be used to approve or reject pending block trade.
+        trades:
+          type: array
+          items:
+            $ref: '#/components/schemas/pending_block_trade'
+        app_name:
+          type: string
+          example: Example Application
+          description: The name of the application that executed the block trade on behalf of the user (optional).
+        username:
+          type: string
+          example: Trader
+          description: Username of the user who initiated the block trade.
+        role:
+          $ref: '#/components/schemas/role'
+        user_id:
+          $ref: '#/components/schemas/user_id'
+        broker_code:
+          type: string
+          example: jpqYKgg1
+          description: Broker code associated with the broker block trade.
+        broker_name:
+          type: string
+          example: Test Broker
+          description: Name of the broker associated with the block trade.
+        state:
+          type: object
+          properties:
+            value:
+              type: string
+              enum:
+              - initial
+              - accepted
+              - rejected
+              - executed
+              description: State value.
+            timestamp:
+              type: integer
+              description: State timestamp.
+          required:
+          - value
+          - timestamp
+          description: State of the pending block trade for current user.
+        counterparty_state:
+          type: object
+          properties:
+            value:
+              type: string
+              enum:
+              - initial
+              - accepted
+              - rejected
+              - executed
+              description: State value.
+            timestamp:
+              type: integer
+              description: State timestamp.
+          required:
+          - value
+          - timestamp
+          description: State of the pending block trade for the other party (optional).
+        combo_id:
+          type: string
+          example: BTC-CS-27JUN25-80000_85000
+          description: Combo instrument identifier
+      required:
+      - nonce
+      - timestamp
+      - trades
+      - app_name
+      - role
+      - user_id
+      - state
+      type: object
+    PrivateGetBrokerTradesResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          type: object
+          properties:
+            history:
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: Unique identifier of the block trade history entry.
+                  timestamp:
+                    type: integer
+                    description: Timestamp of the block trade history entry (milliseconds since the UNIX epoch).
+                  trades:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/block_trade'
+                  maker:
+                    type: object
+                    properties:
+                      user_id:
+                        type: integer
+                        description: Obscured user id of the maker.
+                      client_id:
+                        type: integer
+                        description: ID of a client; available to broker. Represents a group of users under a common name.
+                      client_name:
+                        type: string
+                        description: Name of the client; available to broker.
+                      client_link_name:
+                        type: string
+                        description: Name of the linked user within the client; available to broker.
+                      client_link_id:
+                        type: integer
+                        description: ID assigned to a single user in a client; available to broker.
+                  taker:
+                    type: object
+                    properties:
+                      user_id:
+                        type: integer
+                        description: Obscured user id of the taker.
+                      client_id:
+                        type: integer
+                        description: ID of a client; available to broker. Represents a group of users under a common name.
+                      client_name:
+                        type: string
+                        description: Name of the client; available to broker.
+                      client_link_name:
+                        type: string
+                        description: Name of the linked user within the client; available to broker.
+                      client_link_id:
+                        type: integer
+                        description: ID assigned to a single user in a client; available to broker.
+            next_start_id:
+              type: integer
+              description: The next start ID for pagination.
+      required:
+      - jsonrpc
+      - result
+      type: object
     trade_seq:
       type: integer
       description: The sequence number of the trade within instrument
   responses:
-    PrivateGetBlockTradesResponse:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/PrivateGetBlockTradesResponse'
-          examples:
-            response:
-              value:
-                jsonrpc: '2.0'
-                result:
-                - trades:
-                  - trade_seq: 4
-                    trade_id: '92462'
-                    timestamp: 1565093070164
-                    tick_direction: 2
-                    state: filled
-                    price: 0.0151
-                    order_type: limit
-                    order_id: '343121'
-                    matching_id: null
-                    liquidity: M
-                    iv: 72.38
-                    instrument_name: BTC-9AUG19-11500-P
-                    index_price: 11758.65
-                    fee_currency: BTC
-                    fee: 0
-                    direction: sell
-                    block_trade_id: '66'
-                    amount: 2.3
-                  - trade_seq: 41
-                    trade_id: '92460'
-                    timestamp: 1565093070164
-                    tick_direction: 2
-                    state: filled
-                    price: 11753
-                    order_type: limit
-                    order_id: '343117'
-                    matching_id: null
-                    liquidity: M
-                    instrument_name: BTC-9AUG19
-                    index_price: 11758.65
-                    fee_currency: BTC
-                    fee: 0
-                    direction: sell
-                    block_trade_id: '66'
-                    amount: 50
-                  timestamp: 1565093070165
-                  id: '66'
-              description: Response example
-      description: Success response
-    PrivateGetBlockTradeRequestsResponse:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/PrivateGetBlockTradeRequestsResponse'
-          examples:
-            response:
-              value:
-                jsonrpc: '2.0'
-                id: 1
-                result:
-                - timestamp: 1742824052538
-                  state:
-                    timestamp: 1742824052539
-                    value: initial
-                  username: Trader
-                  user_id: 8
-                  role: taker
-                  trades:
-                  - amount: 100000
-                    direction: buy
-                    price: 87516.83
-                    instrument_name: BTC-PERPETUAL
-                  broker_code: jpqYKgg1
-                  broker_name: Test Broker
-                  counterparty_state:
-                    timestamp: 1742824052538
-                    value: approved
-                  nonce: 29rKkuD3NSBPet4njrpNWEuHBm9s
-              description: Response example
-      description: Success response
-    PrivateSimulateBlockTradeResponse:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/PrivateSimulateBlockTradeResponse'
-          examples:
-            response:
-              value:
-                jsonrpc: '2.0'
-                result: true
-              description: Response example
-      description: Success response
-    PrivateGetBrokerTradesResponse:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/PrivateGetBrokerTradesResponse'
-          examples:
-            response:
-              value:
-                jsonrpc: '2.0'
-                id: 1
-                result:
-                  history:
-                  - id: BLOCK-7
-                    timestamp: 1747239767111
-                    trades:
-                    - timestamp: 1747239767111
-                      amount: 100000
-                      direction: buy
-                      price: 102079.75
-                      index_price: 102079.75
-                      instrument_name: BTC-PERPETUAL
-                      trade_seq: 7
-                      mark_price: 102079.75
-                      tick_direction: 1
-                      contracts: 10000
-                      trade_id: '7'
-                      block_trade_id: BLOCK-7
-                      block_trade_leg_count: 1
-                    maker:
-                      user_id: '****009'
-                      client_id: 2
-                      client_name: Test Client 2
-                      client_link_name: Test Client 2 l
-                      client_link_id: 2
-                    taker:
-                      user_id: '****008'
-                      client_id: 1
-                      client_name: Test Client 1
-                      client_link_name: Test Client 1 l
-                      client_link_id: 1
-                  next_start_id: 6
-              description: Response example
-      description: Success response
     PrivateGetBlockTradeResponse:
       content:
         application/json:
@@ -1820,6 +1695,118 @@ components:
                     amount: 190
                   timestamp: 1565089523720
                   id: '61'
+              description: Response example
+      description: Success response
+    PrivateVerifyBlockTradeResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PrivateVerifyBlockTradeResponse'
+          examples:
+            response:
+              value:
+                jsonrpc: '2.0'
+                result:
+                  signature: 1565172710935.1ESE83qh.g6fbgRd4VWagaJz7xdi2WaV-q-d3J0njoz1jZavuRudZJZif9uH8XdUAx1LHsu0E3e0ZG_xe1UPYlwo41xRVrkWU6OMgygDRafUkEmBuk9iLqjc9rh4
+              description: Response example
+      description: Success response
+    OkResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OkResponse'
+          examples:
+            response:
+              value:
+                jsonrpc: '2.0'
+                id: 1569
+                result: ok
+              description: Response example
+      description: Success response
+    PrivateGetBrokerTradesResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PrivateGetBrokerTradesResponse'
+          examples:
+            response:
+              value:
+                jsonrpc: '2.0'
+                id: 1
+                result:
+                  history:
+                  - id: BLOCK-7
+                    timestamp: 1747239767111
+                    trades:
+                    - timestamp: 1747239767111
+                      amount: 100000
+                      direction: buy
+                      price: 102079.75
+                      index_price: 102079.75
+                      instrument_name: BTC-PERPETUAL
+                      trade_seq: 7
+                      mark_price: 102079.75
+                      tick_direction: 1
+                      contracts: 10000
+                      trade_id: '7'
+                      block_trade_id: BLOCK-7
+                      block_trade_leg_count: 1
+                    maker:
+                      user_id: '****009'
+                      client_id: 2
+                      client_name: Test Client 2
+                      client_link_name: Test Client 2 l
+                      client_link_id: 2
+                    taker:
+                      user_id: '****008'
+                      client_id: 1
+                      client_name: Test Client 1
+                      client_link_name: Test Client 1 l
+                      client_link_id: 1
+                  next_start_id: 6
+              description: Response example
+      description: Success response
+    PrivateGetBlockTradeRequestsResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PrivateGetBlockTradeRequestsResponse'
+          examples:
+            response:
+              value:
+                jsonrpc: '2.0'
+                id: 1
+                result:
+                - timestamp: 1742824052538
+                  state:
+                    timestamp: 1742824052539
+                    value: initial
+                  username: Trader
+                  user_id: 8
+                  role: taker
+                  trades:
+                  - amount: 100000
+                    direction: buy
+                    price: 87516.83
+                    instrument_name: BTC-PERPETUAL
+                  broker_code: jpqYKgg1
+                  broker_name: Test Broker
+                  counterparty_state:
+                    timestamp: 1742824052538
+                    value: approved
+                  nonce: 29rKkuD3NSBPet4njrpNWEuHBm9s
+              description: Response example
+      description: Success response
+    PrivateSimulateBlockTradeResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PrivateSimulateBlockTradeResponse'
+          examples:
+            response:
+              value:
+                jsonrpc: '2.0'
+                result: true
               description: Response example
       description: Success response
     PrivateGetBrokerTradeRequestsResponse:
@@ -1879,29 +1866,53 @@ components:
                   nonce: 29rKkuD3NSBPet4njrpNWEuHBm9s
               description: Response example
       description: Success response
-    OkResponse:
+    PrivateGetBlockTradesResponse:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/OkResponse'
-          examples:
-            response:
-              value:
-                jsonrpc: '2.0'
-                id: 1569
-                result: ok
-              description: Response example
-      description: Success response
-    PrivateVerifyBlockTradeResponse:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/PrivateVerifyBlockTradeResponse'
+            $ref: '#/components/schemas/PrivateGetBlockTradesResponse'
           examples:
             response:
               value:
                 jsonrpc: '2.0'
                 result:
-                  signature: 1565172710935.1ESE83qh.g6fbgRd4VWagaJz7xdi2WaV-q-d3J0njoz1jZavuRudZJZif9uH8XdUAx1LHsu0E3e0ZG_xe1UPYlwo41xRVrkWU6OMgygDRafUkEmBuk9iLqjc9rh4
+                - trades:
+                  - trade_seq: 4
+                    trade_id: '92462'
+                    timestamp: 1565093070164
+                    tick_direction: 2
+                    state: filled
+                    price: 0.0151
+                    order_type: limit
+                    order_id: '343121'
+                    matching_id: null
+                    liquidity: M
+                    iv: 72.38
+                    instrument_name: BTC-9AUG19-11500-P
+                    index_price: 11758.65
+                    fee_currency: BTC
+                    fee: 0
+                    direction: sell
+                    block_trade_id: '66'
+                    amount: 2.3
+                  - trade_seq: 41
+                    trade_id: '92460'
+                    timestamp: 1565093070164
+                    tick_direction: 2
+                    state: filled
+                    price: 11753
+                    order_type: limit
+                    order_id: '343117'
+                    matching_id: null
+                    liquidity: M
+                    instrument_name: BTC-9AUG19
+                    index_price: 11758.65
+                    fee_currency: BTC
+                    fee: 0
+                    direction: sell
+                    block_trade_id: '66'
+                    amount: 50
+                  timestamp: 1565093070165
+                  id: '66'
               description: Response example
       description: Success response

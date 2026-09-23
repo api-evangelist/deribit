@@ -1,23 +1,8 @@
 {
   "provider": "deribit",
   "sources": [
-    "deribit-account-management-api-openapi.yml",
-    "deribit-authentication-api-openapi.yml",
-    "deribit-block-rfq-api-openapi.yml",
-    "deribit-block-trade-api-openapi.yml",
-    "deribit-combo-books-api-openapi.yml",
-    "deribit-mark-price-api-openapi.yml",
-    "deribit-market-data-api-openapi.yml",
-    "deribit-matching-engine-api-openapi.yml",
-    "deribit-portfolio-management-api-openapi.yml",
-    "deribit-private-api-openapi.yml",
-    "deribit-public-api-openapi.yml",
-    "deribit-session-management-api-openapi.yml",
-    "deribit-subscription-management-api-openapi.yml",
-    "deribit-supporting-api-openapi.yml",
-    "deribit-trading-api-openapi.yml",
-    "deribit-wallet-api-openapi.yml",
-    "deribit-websocket-only-api-openapi.yml"
+    "_original/deribit-openapi.json",
+    "_original/deribit-starbase-openapi.json"
   ],
   "outputs": [
     "deribit-account-management-api-openapi.yml",
@@ -25,22 +10,46 @@
     "deribit-block-rfq-api-openapi.yml",
     "deribit-block-trade-api-openapi.yml",
     "deribit-combo-books-api-openapi.yml",
-    "deribit-mark-price-api-openapi.yml",
     "deribit-market-data-api-openapi.yml",
-    "deribit-matching-engine-api-openapi.yml",
-    "deribit-portfolio-management-api-openapi.yml",
-    "deribit-private-api-openapi.yml",
-    "deribit-public-api-openapi.yml",
     "deribit-session-management-api-openapi.yml",
     "deribit-subscription-management-api-openapi.yml",
     "deribit-supporting-api-openapi.yml",
     "deribit-trading-api-openapi.yml",
     "deribit-wallet-api-openapi.yml",
-    "deribit-websocket-only-api-openapi.yml"
+    "deribit-portfolio-management-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "1 archived document(s) dropped as subsets of other archived documents",
+    "sourced from openapi/_original/ (2 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "deribit-openapi.json: upgraded openapi 3.0.0 -> OpenAPI 3.2.0",
+    "deribit-openapi.json: declared missing tag: Block RFQ",
+    "deribit-openapi.json: declared missing tag: Block Trade",
+    "deribit-openapi.json: declared missing tag: Combo Books",
+    "deribit-openapi.json: declared missing tag: Mark Price",
+    "deribit-openapi.json: declared missing tag: Matching Engine",
+    "deribit-openapi.json: declared missing tag: Supporting",
+    "deribit-openapi.json: multi-axis tagging (16 tags, 11 first tags, 2.19x duplication over 173 operations) \u2014 split on first tag, 172 operations narrowed",
+    "deribit-starbase-openapi.json: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "tag 'Market Data' spans 2 source specs (deribit-openapi.json, deribit-starbase-openapi.json): per-path servers applied",
+    "tag 'Trading' spans 2 source specs (deribit-openapi.json, deribit-starbase-openapi.json): per-path servers applied",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "_original/deribit-upcoming-openapi.json: archived document superseded by a larger archived document",
+    "deribit-account-management-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "deribit-authentication-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "deribit-block-rfq-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "deribit-block-trade-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "deribit-combo-books-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "deribit-market-data-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "deribit-portfolio-management-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "deribit-session-management-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "deribit-subscription-management-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "deribit-supporting-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "deribit-trading-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "deribit-wallet-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
