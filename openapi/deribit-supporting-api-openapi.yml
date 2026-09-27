@@ -179,51 +179,6 @@ paths:
       operationId: getPublicGetTime
       x-operation-id-source: derived
 components:
-  responses:
-    PublicStatusResponse:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/PublicStatusResponse'
-          examples:
-            response:
-              value:
-                jsonrpc: '2.0'
-                id: 55
-                result:
-                  locked_currencies:
-                  - BTC
-                  - ETH
-                  locked: true
-              description: Response example
-      description: Success response
-    PublicTestResponse:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/PublicTestResponse'
-          examples:
-            response:
-              value:
-                jsonrpc: '2.0'
-                id: 8212
-                result:
-                  version: 1.2.26
-              description: Response example
-      description: Success response
-    PublicGetTimeResponse:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/PublicGetTimeResponse'
-          examples:
-            response:
-              value:
-                jsonrpc: '2.0'
-                id: 7365
-                result: 1550147385946
-              description: Response example
-      description: Success response
   schemas:
     PublicTestResponse:
       properties:
@@ -291,3 +246,48 @@ components:
       - jsonrpc
       - result
       type: object
+  responses:
+    PublicTestResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PublicTestResponse'
+          examples:
+            response:
+              value:
+                jsonrpc: '2.0'
+                id: 8212
+                result:
+                  version: 1.2.26
+              description: Response example
+      description: Success response
+    PublicGetTimeResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PublicGetTimeResponse'
+          examples:
+            response:
+              value:
+                jsonrpc: '2.0'
+                id: 7365
+                result: 1550147385946
+              description: Response example
+      description: Success response
+    PublicStatusResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PublicStatusResponse'
+          examples:
+            response:
+              value:
+                jsonrpc: '2.0'
+                id: 55
+                result:
+                  locked_currencies:
+                  - BTC
+                  - ETH
+                  locked: true
+              description: Response example
+      description: Success response

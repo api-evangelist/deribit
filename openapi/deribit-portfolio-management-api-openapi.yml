@@ -84,6 +84,24 @@ paths:
                 result: ok
 components:
   schemas:
+    CancelAllResponse:
+      type: object
+      required:
+      - jsonrpc
+      - result
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          type: number
+          example: 7
+          description: Total number of successfully cancelled orders
     OkResponse:
       type: object
       required:
@@ -103,24 +121,6 @@ components:
           enum:
           - ok
           description: Result of method execution. `ok` in case of success
-    CancelAllResponse:
-      type: object
-      required:
-      - jsonrpc
-      - result
-      properties:
-        jsonrpc:
-          type: string
-          enum:
-          - '2.0'
-          description: The JSON-RPC version (2.0)
-        id:
-          type: integer
-          description: The id that was sent in the request
-        result:
-          type: number
-          example: 7
-          description: Total number of successfully cancelled orders
   securitySchemes:
     BearerAuth:
       type: http

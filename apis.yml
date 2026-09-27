@@ -39,6 +39,19 @@ tags:
   - Market Data
   - Block Trading
   - WebSocket
+  - Finance
+tags_raw:
+  - Derivatives
+  - Cryptocurrency
+  - Bitcoin
+  - Ethereum
+  - Options
+  - Futures
+  - Perpetuals
+  - Trading
+  - Market Data
+  - Block Trading
+  - WebSocket
   - Financial
 created: "2026-06-13"
 modified: "2026-06-13"
@@ -100,8 +113,13 @@ apis:
     professional trading firms requiring low-latency order entry and execution reports using the industry-standard
     FIX protocol.
   humanURL: https://docs.deribit.com/
-  baseURL: https://www.deribit.com
   tags:
+  - FIX
+  - Institutional
+  - Trading
+  - Low Latency
+  - Finance
+  tags_raw:
   - FIX
   - Institutional
   - Trading
@@ -311,9 +329,10 @@ apis:
   humanURL: https://docs.deribit.com/
   baseURL: https://www.deribit.com/api/v2
   tags:
-  - Portfolio-Management
+  - Portfolio Management
   tags_raw:
   - Portfolio Management
+  - Portfolio-Management
   properties:
   - type: OpenAPI
     url: openapi/deribit-portfolio-management-api-openapi.yml

@@ -1833,22 +1833,28 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    address_book_type:
-      enum:
-      - transfer
-      - withdrawal
-      - deposit_source
+    beneficiary_vasp_did:
+      example: did:example:123456789abcdefghi
       type: string
-      description: Address book type
-    user_id:
-      example: 57874
-      type: integer
-      description: Unique user identifier
+      description: DID of beneficiary VASP
+    currency:
+      enum:
+      - BTC
+      - ETH
+      - USDC
+      - USDT
+      - EURR
+      type: string
+      description: Currency, i.e `"BTC"`, `"ETH"`, `"USDC"`
+    beneficiary_address:
+      example: NL, Amsterdam, Street, 1
+      type: string
+      description: Geographical address of the beneficiary
     personal_wallet:
       example: true
       type: boolean
       description: The user confirms that he provided address belongs to him and he has access to it via an un-hosted wallet software
-    PrivateGetRewardEligibilityResponse:
+    PrivateGetTransfersResponse:
       properties:
         jsonrpc:
           type: string
@@ -1861,28 +1867,415 @@ components:
         result:
           type: object
           properties:
-            eligibility_status:
-              type: string
-              enum:
-              - eligible
-              - partially_eligible
-              - non_eligible
-              description: '<ul> <li>`eligible`: User can get reward for specific currency for all its equity</li> <li>`partially_eligible`: User can get reward for specific currency, but custody balance is excluded</li> <li>`non_eligible`: User can not get reward for specific currency</li> </ul>'
-            apr_sma7:
-              type: number
-              example: 4.156
-              description: Simple Moving Average (SMA) of the last 7 days of rewards for the currency
+            data:
+              type: array
+              items:
+                $ref: '#/components/schemas/transfer_item'
+            count:
+              $ref: '#/components/schemas/result_count'
           required:
-          - eligibility_status
-          - apr_sma7
+          - data
+          - count
       required:
       - jsonrpc
       - result
       type: object
-    requires_confirmation:
+    PrivateRemoveFromAddressBookResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          type: string
+          example: ok
+          description: ok
+      required:
+      - jsonrpc
+      - result
+      type: object
+    fee:
+      example: 2.3e-05
+      type: number
+      description: Fee in currency
+    PrivateAddressBookResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/address_book_item'
+      required:
+      - jsonrpc
+      - result
+      type: object
+    PrivateDeleteAddressBeneficiaryResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          type: string
+          example: ok
+          description: ok
+      required:
+      - jsonrpc
+      - result
+      type: object
+    timestamp:
+      example: 1536569522277
+      type: integer
+      description: The timestamp (milliseconds since the Unix epoch)
+    PrivateSaveAddressBeneficiaryResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          $ref: '#/components/schemas/address_beneficiary_item'
+      required:
+      - jsonrpc
+      - result
+      type: object
+    extra_currencies:
+      items:
+        type: string
+        description: Name of the currency
+      example:
+      - USDC
+      type: array
+      description: The user can pass a list of currencies to add the address for. It is currently available ONLY for ERC20 currencies. Without passing this paramater for an ERC20 currency, the address will be added to ALL of the ERC20 currencies.
+    waiting_timestamp:
       example: true
       type: boolean
-      description: If address requires email confirmation for withdrawals
+      description: Timestamp when the address will be ready
+    currency_address:
+      example: 1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa
+      type: string
+      description: Address in proper format for currency
+    beneficiary_company_name:
+      example: Company Name
+      type: string
+      description: Company name of the beneficiary (if beneficiary is a company)
+    beneficiary_vasp_website:
+      type: string
+      description: Website of the beneficiary VASP
+    status:
+      enum:
+      - admin_locked
+      - waiting
+      - confirmed
+      - ready
+      type: string
+      description: 'Wallet address status, values: [`admin_locked`, `waiting`, `confirmed`, `ready`]'
+    beneficiary_last_name:
+      example: Doe
+      type: string
+      description: Last name of the beneficiary (if beneficiary is a person)
+    result_count:
+      example: 101
+      type: integer
+      description: Total number of results available
+    currency_transaction_id:
+      example: 1b1fb5568515e2b79503501e3d3680b2d0838d5dfc2d15a04eb8cd9fbbe0b572
+      type:
+      - string
+      - 'null'
+      description: Transaction id in proper format for currency, `null` if id is not available
+    deposit:
+      properties:
+        currency:
+          $ref: '#/components/schemas/currency'
+        address:
+          $ref: '#/components/schemas/currency_address'
+        amount:
+          $ref: '#/components/schemas/currency_amount'
+        state:
+          $ref: '#/components/schemas/deposit_state'
+        transaction_id:
+          $ref: '#/components/schemas/currency_transaction_id'
+        source_address:
+          $ref: '#/components/schemas/currency_address'
+        received_timestamp:
+          $ref: '#/components/schemas/timestamp'
+        updated_timestamp:
+          $ref: '#/components/schemas/timestamp'
+        note:
+          type: string
+        clearance_state:
+          $ref: '#/components/schemas/clearance_state'
+        refund_transaction_id:
+          $ref: '#/components/schemas/currency_transaction_id'
+      required:
+      - currency
+      - address
+      - amount
+      - state
+      - transaction_id
+      - received_timestamp
+      - updated_timestamp
+      type: object
+    PrivateUpdateInAddressBookResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          type: string
+          example: ok
+          description: ok
+      required:
+      - jsonrpc
+      - result
+      type: object
+    wallet_address_type:
+      type: string
+      description: 'Address type/purpose, allowed values : `deposit`'
+    withdrawal_state:
+      enum:
+      - unconfirmed
+      - confirmed
+      - cancelled
+      - completed
+      - interrupted
+      - rejected
+      type: string
+      description: 'Withdrawal state, allowed values : `unconfirmed`, `confirmed`, `cancelled`, `completed`, `interrupted`, `rejected`'
+    clearance_state:
+      enum:
+      - in_progress
+      - pending_admin_decision
+      - pending_user_input
+      - success
+      - failed
+      - cancelled
+      - refund_initiated
+      - refunded
+      type: string
+      description: 'Clearance state indicating the current status of the transaction clearance process. Allowed values: <li><code>in_progress</code>: clearance process is in progress</li> <li><code>pending_admin_decision</code>: transaction is under manual review by Deribit admin</li> <li><code>pending_user_input</code>: user should provide additional information regarding the transaction</li> <li><code>success</code>: clearance process completed successfully</li> <li><code>failed</code>: clearance process failed, transaction is rejected</li> <li><code>cancelled</code>: transaction is cancelled (currently used only for withdrawals, meaning the withdrawal is cancelled)</li> <li><code>refund_initiated</code>: clearance process failed, transaction refund is initiated, funds are removed from Deribit balance (valid for deposits only)</li> <li><code>refunded</code>: clearance process failed, deposit amount is refunded back to the client (valid for deposits only)</li>'
+    PrivateWithdrawResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          $ref: '#/components/schemas/withdrawal'
+      required:
+      - jsonrpc
+      - result
+      type: object
+    PrivateSubmitTransferResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          $ref: '#/components/schemas/transfer_item'
+      required:
+      - jsonrpc
+      - result
+      type: object
+    PrivateGetDepositsResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          type: object
+          properties:
+            data:
+              type: array
+              items:
+                $ref: '#/components/schemas/deposit'
+            count:
+              $ref: '#/components/schemas/result_count'
+          required:
+          - data
+          - count
+      required:
+      - jsonrpc
+      - result
+      type: object
+    nonce:
+      example: bF1_gfgcsd
+      type: string
+      description: Nonce
+    address_info_required:
+      example: true
+      type: boolean
+      description: Signalises that addition information regarding the beneficiary of the address is required
+    address_book_type:
+      enum:
+      - transfer
+      - withdrawal
+      - deposit_source
+      type: string
+      description: Address book type
+    address_label:
+      example: Main address
+      type: string
+      description: Label of the address book entry
+    transfer_state:
+      type: string
+      description: 'Transfer state, allowed values : `prepared`, `confirmed`, `cancelled`, `waiting_for_admin`, `insufficient_funds`,  `withdrawal_limit` otherwise rejection reason'
+    deposit_state:
+      enum:
+      - pending
+      - completed
+      - rejected
+      - replaced
+      type: string
+      description: 'Deposit state. Allowed values: <li><code>pending</code>: deposit detected on blockchain/system, compliance not yet finished</li> <li><code>completed</code>: compliance check finished successfully</li> <li><code>rejected</code>: deposit failed compliance and must be handled manually</li> <li><code>replaced</code>: deposit transaction was replaced on the blockchain and should have a new transaction hash</li>'
+    transfer_id:
+      example: 12
+      type: integer
+      description: Id of transfer
+    transfer_direction:
+      enum:
+      - payment
+      - income
+      type: string
+      description: Transfer direction
+    beneficiary_first_name:
+      example: John
+      type: string
+      description: First name of the beneficiary (if beneficiary is a person)
+    unhosted_wallet:
+      example: false
+      type: boolean
+      description: Indicates if the address belongs to an unhosted wallet
+    requires_confirmation_change:
+      example: true
+      type: boolean
+      description: If email confirmation change is in progress
+    PrivateAddToAddressBookResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          $ref: '#/components/schemas/address_book_item'
+      required:
+      - jsonrpc
+      - result
+      type: object
+    transfer_type:
+      enum:
+      - user
+      - subaccount
+      type: string
+      description: 'Type of transfer: `user` - sent to user, `subaccount` - sent to subaccount'
+    address_book_item:
+      properties:
+        currency:
+          $ref: '#/components/schemas/wallet_currency'
+        address:
+          $ref: '#/components/schemas/currency_address'
+        creation_timestamp:
+          $ref: '#/components/schemas/timestamp'
+        type:
+          $ref: '#/components/schemas/address_book_type'
+        label:
+          $ref: '#/components/schemas/address_label'
+        beneficiary_vasp_name:
+          $ref: '#/components/schemas/beneficiary_vasp_name'
+        beneficiary_vasp_did:
+          $ref: '#/components/schemas/beneficiary_vasp_did'
+        beneficiary_vasp_website:
+          $ref: '#/components/schemas/beneficiary_vasp_website'
+        beneficiary_first_name:
+          $ref: '#/components/schemas/beneficiary_first_name'
+        beneficiary_last_name:
+          $ref: '#/components/schemas/beneficiary_last_name'
+        beneficiary_company_name:
+          $ref: '#/components/schemas/beneficiary_company_name'
+        beneficiary_address:
+          $ref: '#/components/schemas/beneficiary_address'
+        agreed:
+          $ref: '#/components/schemas/agree_to_share_with_3rd_party'
+        personal:
+          $ref: '#/components/schemas/personal_wallet'
+        info_required:
+          $ref: '#/components/schemas/address_info_required'
+        status:
+          $ref: '#/components/schemas/status'
+        waiting_timestamp:
+          $ref: '#/components/schemas/waiting_timestamp'
+        requires_confirmation:
+          $ref: '#/components/schemas/requires_confirmation'
+        requires_confirmation_change:
+          $ref: '#/components/schemas/requires_confirmation_change'
+      required:
+      - currency
+      - address
+      - creation_timestamp
+      type: object
+    PrivateGetAddressBeneficiaryResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          $ref: '#/components/schemas/address_beneficiary_item'
+      required:
+      - jsonrpc
+      - result
+      type: object
+    currency_amount:
+      example: 1
+      type: number
+      description: Amount of funds in given currency
     transfer_item:
       properties:
         id:
@@ -1916,33 +2309,105 @@ components:
       - updated_timestamp
       - created_timestamp
       type: object
+    withdrawal:
+      properties:
+        address:
+          $ref: '#/components/schemas/currency_address'
+        amount:
+          $ref: '#/components/schemas/currency_amount'
+        confirmed_timestamp:
+          type:
+          - integer
+          - 'null'
+          example: 1536569522277
+          description: The timestamp (milliseconds since the Unix epoch) of withdrawal confirmation, `null` when not confirmed
+        created_timestamp:
+          $ref: '#/components/schemas/timestamp'
+        currency:
+          $ref: '#/components/schemas/currency'
+        fee:
+          $ref: '#/components/schemas/fee'
+        id:
+          type: integer
+          example: 1
+          description: Withdrawal id in Deribit system
+        priority:
+          type: number
+          example: 1
+          description: Id of priority level
+        state:
+          $ref: '#/components/schemas/withdrawal_state'
+        transaction_id:
+          $ref: '#/components/schemas/currency_transaction_id'
+        updated_timestamp:
+          $ref: '#/components/schemas/timestamp'
+        nonce:
+          type: string
+          description: Optional idempotency nonce if provided in the request
+      required:
+      - currency
+      - address
+      - amount
+      - state
+      - transaction_id
+      - updated_timestamp
+      type: object
+    transfer_other_side:
+      example: Smith
+      type: string
+      description: For transfer from/to subaccount returns this subaccount name, for transfer to other account returns address, for transfer from other account returns that accounts username.
+    wallet_currency:
+      enum:
+      - BTC
+      - ETH
+      - STETH
+      - ETHW
+      - USDC
+      - USDT
+      - EURR
+      - SOL
+      - XRP
+      - USYC
+      - PAXG
+      - BNB
+      - USDE
+      type: string
+      description: Currency, i.e `"BTC"`, `"ETH"`, `"USDC"`
+    PrivateDepositAddressResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          type: object
+          properties:
+            creation_timestamp:
+              $ref: '#/components/schemas/timestamp'
+            currency:
+              $ref: '#/components/schemas/currency'
+            address:
+              $ref: '#/components/schemas/currency_address'
+            type:
+              $ref: '#/components/schemas/wallet_address_type'
+          required:
+          - creation_timestamp
+          - currency
+          - address
+          - type
+          description: Object if address is created, null otherwise
+      required:
+      - jsonrpc
+      - result
+      type: object
     agree_to_share_with_3rd_party:
       example: true
       type: boolean
       description: Indicates that the user agreed to shared provided information with 3rd parties
-    beneficiary_last_name:
-      example: Doe
-      type: string
-      description: Last name of the beneficiary (if beneficiary is a person)
-    beneficiary_vasp_website:
-      type: string
-      description: Website of the beneficiary VASP
-    beneficiary_company_name:
-      example: Company Name
-      type: string
-      description: Company name of the beneficiary (if beneficiary is a company)
-    currency_address:
-      example: 1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa
-      type: string
-      description: Address in proper format for currency
-    beneficiary_vasp_name:
-      example: Money's Gone
-      type: string
-      description: Name of beneficiary VASP
-    address_info_required:
-      example: true
-      type: boolean
-      description: Signalises that addition information regarding the beneficiary of the address is required
     address_beneficiary_item:
       properties:
         currency:
@@ -1993,399 +2458,10 @@ components:
       - created
       - updated
       type: object
-    deposit:
-      properties:
-        currency:
-          $ref: '#/components/schemas/currency'
-        address:
-          $ref: '#/components/schemas/currency_address'
-        amount:
-          $ref: '#/components/schemas/currency_amount'
-        state:
-          $ref: '#/components/schemas/deposit_state'
-        transaction_id:
-          $ref: '#/components/schemas/currency_transaction_id'
-        source_address:
-          $ref: '#/components/schemas/currency_address'
-        received_timestamp:
-          $ref: '#/components/schemas/timestamp'
-        updated_timestamp:
-          $ref: '#/components/schemas/timestamp'
-        note:
-          type: string
-        clearance_state:
-          $ref: '#/components/schemas/clearance_state'
-        refund_transaction_id:
-          $ref: '#/components/schemas/currency_transaction_id'
-      required:
-      - currency
-      - address
-      - amount
-      - state
-      - transaction_id
-      - received_timestamp
-      - updated_timestamp
-      type: object
-    continuation:
-      example: xY7T6cutS3t2B9YtaDkE6TS379oKnkzTvmEDUnEUP2Msa9xKWNNaT
+    beneficiary_vasp_name:
+      example: Money's Gone
       type: string
-      description: Continuation token for pagination.
-    clearance_state:
-      enum:
-      - in_progress
-      - pending_admin_decision
-      - pending_user_input
-      - success
-      - failed
-      - cancelled
-      - refund_initiated
-      - refunded
-      type: string
-      description: 'Clearance state indicating the current status of the transaction clearance process. Allowed values: <li><code>in_progress</code>: clearance process is in progress</li> <li><code>pending_admin_decision</code>: transaction is under manual review by Deribit admin</li> <li><code>pending_user_input</code>: user should provide additional information regarding the transaction</li> <li><code>success</code>: clearance process completed successfully</li> <li><code>failed</code>: clearance process failed, transaction is rejected</li> <li><code>cancelled</code>: transaction is cancelled (currently used only for withdrawals, meaning the withdrawal is cancelled)</li> <li><code>refund_initiated</code>: clearance process failed, transaction refund is initiated, funds are removed from Deribit balance (valid for deposits only)</li> <li><code>refunded</code>: clearance process failed, deposit amount is refunded back to the client (valid for deposits only)</li>'
-    transfer_other_side:
-      example: Smith
-      type: string
-      description: For transfer from/to subaccount returns this subaccount name, for transfer to other account returns address, for transfer from other account returns that accounts username.
-    address_book_item:
-      properties:
-        currency:
-          $ref: '#/components/schemas/wallet_currency'
-        address:
-          $ref: '#/components/schemas/currency_address'
-        creation_timestamp:
-          $ref: '#/components/schemas/timestamp'
-        type:
-          $ref: '#/components/schemas/address_book_type'
-        label:
-          $ref: '#/components/schemas/address_label'
-        beneficiary_vasp_name:
-          $ref: '#/components/schemas/beneficiary_vasp_name'
-        beneficiary_vasp_did:
-          $ref: '#/components/schemas/beneficiary_vasp_did'
-        beneficiary_vasp_website:
-          $ref: '#/components/schemas/beneficiary_vasp_website'
-        beneficiary_first_name:
-          $ref: '#/components/schemas/beneficiary_first_name'
-        beneficiary_last_name:
-          $ref: '#/components/schemas/beneficiary_last_name'
-        beneficiary_company_name:
-          $ref: '#/components/schemas/beneficiary_company_name'
-        beneficiary_address:
-          $ref: '#/components/schemas/beneficiary_address'
-        agreed:
-          $ref: '#/components/schemas/agree_to_share_with_3rd_party'
-        personal:
-          $ref: '#/components/schemas/personal_wallet'
-        info_required:
-          $ref: '#/components/schemas/address_info_required'
-        status:
-          $ref: '#/components/schemas/status'
-        waiting_timestamp:
-          $ref: '#/components/schemas/waiting_timestamp'
-        requires_confirmation:
-          $ref: '#/components/schemas/requires_confirmation'
-        requires_confirmation_change:
-          $ref: '#/components/schemas/requires_confirmation_change'
-      required:
-      - currency
-      - address
-      - creation_timestamp
-      type: object
-    currency_amount:
-      example: 1
-      type: number
-      description: Amount of funds in given currency
-    transfer_type:
-      enum:
-      - user
-      - subaccount
-      type: string
-      description: 'Type of transfer: `user` - sent to user, `subaccount` - sent to subaccount'
-    wallet_address_type:
-      type: string
-      description: 'Address type/purpose, allowed values : `deposit`'
-    PrivateRemoveFromAddressBookResponse:
-      properties:
-        jsonrpc:
-          type: string
-          enum:
-          - '2.0'
-          description: The JSON-RPC version (2.0)
-        id:
-          type: integer
-          description: The id that was sent in the request
-        result:
-          type: string
-          example: ok
-          description: ok
-      required:
-      - jsonrpc
-      - result
-      type: object
-    PrivateAddToAddressBookResponse:
-      properties:
-        jsonrpc:
-          type: string
-          enum:
-          - '2.0'
-          description: The JSON-RPC version (2.0)
-        id:
-          type: integer
-          description: The id that was sent in the request
-        result:
-          $ref: '#/components/schemas/address_book_item'
-      required:
-      - jsonrpc
-      - result
-      type: object
-    currency:
-      enum:
-      - BTC
-      - ETH
-      - USDC
-      - USDT
-      - EURR
-      type: string
-      description: Currency, i.e `"BTC"`, `"ETH"`, `"USDC"`
-    status:
-      enum:
-      - admin_locked
-      - waiting
-      - confirmed
-      - ready
-      type: string
-      description: 'Wallet address status, values: [`admin_locked`, `waiting`, `confirmed`, `ready`]'
-    transfer_id:
-      example: 12
-      type: integer
-      description: Id of transfer
-    withdrawal:
-      properties:
-        address:
-          $ref: '#/components/schemas/currency_address'
-        amount:
-          $ref: '#/components/schemas/currency_amount'
-        confirmed_timestamp:
-          type:
-          - integer
-          - 'null'
-          example: 1536569522277
-          description: The timestamp (milliseconds since the Unix epoch) of withdrawal confirmation, `null` when not confirmed
-        created_timestamp:
-          $ref: '#/components/schemas/timestamp'
-        currency:
-          $ref: '#/components/schemas/currency'
-        fee:
-          $ref: '#/components/schemas/fee'
-        id:
-          type: integer
-          example: 1
-          description: Withdrawal id in Deribit system
-        priority:
-          type: number
-          example: 1
-          description: Id of priority level
-        state:
-          $ref: '#/components/schemas/withdrawal_state'
-        transaction_id:
-          $ref: '#/components/schemas/currency_transaction_id'
-        updated_timestamp:
-          $ref: '#/components/schemas/timestamp'
-        nonce:
-          type: string
-          description: Optional idempotency nonce if provided in the request
-      required:
-      - currency
-      - address
-      - amount
-      - state
-      - transaction_id
-      - updated_timestamp
-      type: object
-    address_label:
-      example: Main address
-      type: string
-      description: Label of the address book entry
-    PrivateDepositAddressResponse:
-      properties:
-        jsonrpc:
-          type: string
-          enum:
-          - '2.0'
-          description: The JSON-RPC version (2.0)
-        id:
-          type: integer
-          description: The id that was sent in the request
-        result:
-          type: object
-          properties:
-            creation_timestamp:
-              $ref: '#/components/schemas/timestamp'
-            currency:
-              $ref: '#/components/schemas/currency'
-            address:
-              $ref: '#/components/schemas/currency_address'
-            type:
-              $ref: '#/components/schemas/wallet_address_type'
-          required:
-          - creation_timestamp
-          - currency
-          - address
-          - type
-          description: Object if address is created, null otherwise
-      required:
-      - jsonrpc
-      - result
-      type: object
-    waiting_timestamp:
-      example: true
-      type: boolean
-      description: Timestamp when the address will be ready
-    PrivateDeleteAddressBeneficiaryResponse:
-      properties:
-        jsonrpc:
-          type: string
-          enum:
-          - '2.0'
-          description: The JSON-RPC version (2.0)
-        id:
-          type: integer
-          description: The id that was sent in the request
-        result:
-          type: string
-          example: ok
-          description: ok
-      required:
-      - jsonrpc
-      - result
-      type: object
-    PrivateGetAddressBeneficiaryResponse:
-      properties:
-        jsonrpc:
-          type: string
-          enum:
-          - '2.0'
-          description: The JSON-RPC version (2.0)
-        id:
-          type: integer
-          description: The id that was sent in the request
-        result:
-          $ref: '#/components/schemas/address_beneficiary_item'
-      required:
-      - jsonrpc
-      - result
-      type: object
-    PrivateAddressBookResponse:
-      properties:
-        jsonrpc:
-          type: string
-          enum:
-          - '2.0'
-          description: The JSON-RPC version (2.0)
-        id:
-          type: integer
-          description: The id that was sent in the request
-        result:
-          type: array
-          items:
-            $ref: '#/components/schemas/address_book_item'
-      required:
-      - jsonrpc
-      - result
-      type: object
-    extra_currencies:
-      items:
-        type: string
-        description: Name of the currency
-      example:
-      - USDC
-      type: array
-      description: The user can pass a list of currencies to add the address for. It is currently available ONLY for ERC20 currencies. Without passing this paramater for an ERC20 currency, the address will be added to ALL of the ERC20 currencies.
-    requires_confirmation_change:
-      example: true
-      type: boolean
-      description: If email confirmation change is in progress
-    PrivateSubmitTransferResponse:
-      properties:
-        jsonrpc:
-          type: string
-          enum:
-          - '2.0'
-          description: The JSON-RPC version (2.0)
-        id:
-          type: integer
-          description: The id that was sent in the request
-        result:
-          $ref: '#/components/schemas/transfer_item'
-      required:
-      - jsonrpc
-      - result
-      type: object
-    wallet_currency:
-      enum:
-      - BTC
-      - ETH
-      - STETH
-      - ETHW
-      - USDC
-      - USDT
-      - EURR
-      - SOL
-      - XRP
-      - USYC
-      - PAXG
-      - BNB
-      - USDE
-      type: string
-      description: Currency, i.e `"BTC"`, `"ETH"`, `"USDC"`
-    nonce:
-      example: bF1_gfgcsd
-      type: string
-      description: Nonce
-    PrivateUpdateInAddressBookResponse:
-      properties:
-        jsonrpc:
-          type: string
-          enum:
-          - '2.0'
-          description: The JSON-RPC version (2.0)
-        id:
-          type: integer
-          description: The id that was sent in the request
-        result:
-          type: string
-          example: ok
-          description: ok
-      required:
-      - jsonrpc
-      - result
-      type: object
-    PrivateGetTransfersResponse:
-      properties:
-        jsonrpc:
-          type: string
-          enum:
-          - '2.0'
-          description: The JSON-RPC version (2.0)
-        id:
-          type: integer
-          description: The id that was sent in the request
-        result:
-          type: object
-          properties:
-            data:
-              type: array
-              items:
-                $ref: '#/components/schemas/transfer_item'
-            count:
-              $ref: '#/components/schemas/result_count'
-          required:
-          - data
-          - count
-      required:
-      - jsonrpc
-      - result
-      type: object
+      description: Name of beneficiary VASP
     PrivateGetWithdrawalsResponse:
       properties:
         jsonrpc:
@@ -2412,125 +2488,6 @@ components:
       - jsonrpc
       - result
       type: object
-    beneficiary_address:
-      example: NL, Amsterdam, Street, 1
-      type: string
-      description: Geographical address of the beneficiary
-    unhosted_wallet:
-      example: false
-      type: boolean
-      description: Indicates if the address belongs to an unhosted wallet
-    withdrawal_state:
-      enum:
-      - unconfirmed
-      - confirmed
-      - cancelled
-      - completed
-      - interrupted
-      - rejected
-      type: string
-      description: 'Withdrawal state, allowed values : `unconfirmed`, `confirmed`, `cancelled`, `completed`, `interrupted`, `rejected`'
-    beneficiary_first_name:
-      example: John
-      type: string
-      description: First name of the beneficiary (if beneficiary is a person)
-    PrivateWithdrawResponse:
-      properties:
-        jsonrpc:
-          type: string
-          enum:
-          - '2.0'
-          description: The JSON-RPC version (2.0)
-        id:
-          type: integer
-          description: The id that was sent in the request
-        result:
-          $ref: '#/components/schemas/withdrawal'
-      required:
-      - jsonrpc
-      - result
-      type: object
-    beneficiary_vasp_did:
-      example: did:example:123456789abcdefghi
-      type: string
-      description: DID of beneficiary VASP
-    transfer_state:
-      type: string
-      description: 'Transfer state, allowed values : `prepared`, `confirmed`, `cancelled`, `waiting_for_admin`, `insufficient_funds`,  `withdrawal_limit` otherwise rejection reason'
-    timestamp:
-      example: 1536569522277
-      type: integer
-      description: The timestamp (milliseconds since the Unix epoch)
-    currency_transaction_id:
-      example: 1b1fb5568515e2b79503501e3d3680b2d0838d5dfc2d15a04eb8cd9fbbe0b572
-      type:
-      - string
-      - 'null'
-      description: Transaction id in proper format for currency, `null` if id is not available
-    PrivateGetDepositsResponse:
-      properties:
-        jsonrpc:
-          type: string
-          enum:
-          - '2.0'
-          description: The JSON-RPC version (2.0)
-        id:
-          type: integer
-          description: The id that was sent in the request
-        result:
-          type: object
-          properties:
-            data:
-              type: array
-              items:
-                $ref: '#/components/schemas/deposit'
-            count:
-              $ref: '#/components/schemas/result_count'
-          required:
-          - data
-          - count
-      required:
-      - jsonrpc
-      - result
-      type: object
-    PrivateSaveAddressBeneficiaryResponse:
-      properties:
-        jsonrpc:
-          type: string
-          enum:
-          - '2.0'
-          description: The JSON-RPC version (2.0)
-        id:
-          type: integer
-          description: The id that was sent in the request
-        result:
-          $ref: '#/components/schemas/address_beneficiary_item'
-      required:
-      - jsonrpc
-      - result
-      type: object
-    deposit_state:
-      enum:
-      - pending
-      - completed
-      - rejected
-      - replaced
-      type: string
-      description: 'Deposit state. Allowed values: <li><code>pending</code>: deposit detected on blockchain/system, compliance not yet finished</li> <li><code>completed</code>: compliance check finished successfully</li> <li><code>rejected</code>: deposit failed compliance and must be handled manually</li> <li><code>replaced</code>: deposit transaction was replaced on the blockchain and should have a new transaction hash</li>'
-    transfer_direction:
-      enum:
-      - payment
-      - income
-      type: string
-      description: Transfer direction
-    fee:
-      example: 2.3e-05
-      type: number
-      description: Fee in currency
-    result_count:
-      example: 101
-      type: integer
-      description: Total number of results available
     PrivateListAddressBeneficiariesResponse:
       properties:
         jsonrpc:
@@ -2558,55 +2515,50 @@ components:
       - jsonrpc
       - result
       type: object
+    user_id:
+      example: 57874
+      type: integer
+      description: Unique user identifier
+    PrivateGetRewardEligibilityResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          type: object
+          properties:
+            eligibility_status:
+              type: string
+              enum:
+              - eligible
+              - partially_eligible
+              - non_eligible
+              description: '<ul> <li>`eligible`: User can get reward for specific currency for all its equity</li> <li>`partially_eligible`: User can get reward for specific currency, but custody balance is excluded</li> <li>`non_eligible`: User can not get reward for specific currency</li> </ul>'
+            apr_sma7:
+              type: number
+              example: 4.156
+              description: Simple Moving Average (SMA) of the last 7 days of rewards for the currency
+          required:
+          - eligibility_status
+          - apr_sma7
+      required:
+      - jsonrpc
+      - result
+      type: object
+    continuation:
+      example: xY7T6cutS3t2B9YtaDkE6TS379oKnkzTvmEDUnEUP2Msa9xKWNNaT
+      type: string
+      description: Continuation token for pagination.
+    requires_confirmation:
+      example: true
+      type: boolean
+      description: If address requires email confirmation for withdrawals
   responses:
-    PrivateDepositAddressResponse:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/PrivateDepositAddressResponse'
-          examples:
-            response:
-              value:
-                jsonrpc: '2.0'
-                id: 3461
-                result:
-                  address: 2N8udZGBc1hLRCFsU9kGwMPpmYUwMFTuCwB
-                  creation_timestamp: 1550575165170
-                  currency: BTC
-                  type: deposit
-              description: Response example
-      description: Success response
-    PrivateListAddressBeneficiariesResponse:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/PrivateListAddressBeneficiariesResponse'
-          examples:
-            response:
-              value:
-                jsonrpc: '2.0'
-                id: 42
-                result:
-                  data:
-                  - currency: BTC
-                    address: bc1qar0srrr7xfkvy5l643lydnw9re59gtzzwf0uyj
-                    user_id: 1026
-                    agreed: true
-                    personal: false
-                    unhosted: false
-                    beneficiary_vasp_name: Money's Gone
-                    beneficiary_vasp_did: did:example:123456789abcdefghi
-                    beneficiary_vasp_website: https://example.com
-                    beneficiary_first_name: John
-                    beneficiary_last_name: Doe
-                    beneficiary_company_name: Example Corp
-                    beneficiary_address: NL, Amsterdam, Street, 1
-                    created: 1536569522277
-                    updated: 1536569522277
-                  continuation: xY7T6cutS3t2B9YtaDkE6TS379oKnkzTvmEDUnEUP2Msa9xKWNNaT
-                  count: 1
-              description: Response example
-      description: Success response
     PrivateAddressBookResponse:
       content:
         application/json:
@@ -2649,120 +2601,6 @@ components:
                   label: One More Address
               description: Response example
       description: Success response
-    PrivateSubmitTransferResponse:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/PrivateSubmitTransferResponse'
-          examples:
-            response:
-              value:
-                jsonrpc: '2.0'
-                id: 9187
-                result:
-                  amount: 0.2
-                  created_timestamp: 1550579457727
-                  currency: BTC
-                  direction: payment
-                  id: 2
-                  other_side: 2MzyQc5Tkik61kJbEpJV5D5H9VfWHZK9Sgy
-                  state: cancelled
-                  type: user
-                  updated_timestamp: 1550579457727
-              description: Response example
-      description: Success response
-    PrivateAddToAddressBookResponse:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/PrivateAddToAddressBookResponse'
-          examples:
-            response:
-              value:
-                jsonrpc: '2.0'
-                id: 42
-                result:
-                  address: bc1qar0srrr7xfkvy5l643lydnw9re59gtzzwf0uyj
-                  creation_timestamp: 1536569522277
-                  currency: BTC
-                  type: withdrawal
-                  label: Main address
-                  beneficiary_vasp_name: Money`s Gone
-                  beneficiary_vasp_did: did:example:123456789abcdefghi
-                  beneficiary_first_name: John
-                  beneficiary_last_name: Doe
-                  beneficiary_address: NL, Amsterdam, Street, 1
-                  agreed: true
-                  personal: false
-                  info_required: false
-              description: Response example
-      description: Success response
-    PrivateGetAddressBeneficiaryResponse:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/PrivateGetAddressBeneficiaryResponse'
-          examples:
-            response:
-              value:
-                jsonrpc: '2.0'
-                id: 42
-                result:
-                  currency: BTC
-                  address: bc1qar0srrr7xfkvy5l643lydnw9re59gtzzwf0uyj
-                  user_id: 1016
-                  agreed: true
-                  personal: false
-                  unhosted: false
-                  beneficiary_vasp_name: Money's Gone
-                  beneficiary_vasp_did: did:example:123456789abcdefghi
-                  beneficiary_vasp_website: https://example.com
-                  beneficiary_first_name: John
-                  beneficiary_last_name: Doe
-                  beneficiary_company_name: Example Corp
-                  beneficiary_address: NL, Amsterdam, Street, 1
-                  created: 1536569522277
-                  updated: 1536569522277
-              description: Response example
-      description: Success response
-    PrivateUpdateInAddressBookResponse:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/PrivateUpdateInAddressBookResponse'
-          examples:
-            response:
-              value:
-                jsonrpc: '2.0'
-                id: 42
-                result: ok
-              description: Response example
-      description: Success response
-    PrivateGetRewardEligibilityResponse:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/PrivateGetRewardEligibilityResponse'
-          examples:
-            response:
-              value:
-                jsonrpc: '2.0'
-                id: 1
-                result:
-                  usdc:
-                    eligibility_status: non_eligible
-                    apr_sma7: 4
-                  usde:
-                    eligibility_status: eligible
-                    apr_sma7: 7
-                  buidl:
-                    eligibility_status: eligible
-                    apr_sma7: 3.943606
-                  steth:
-                    eligibility_status: eligible
-                    apr_sma7: 2.692285714285714
-              description: Response example
-      description: Success response
     PrivateWithdrawResponse:
       content:
         application/json:
@@ -2798,6 +2636,138 @@ components:
                 jsonrpc: '2.0'
                 id: 42
                 result: ok
+              description: Response example
+      description: Success response
+    PrivateGetTransfersResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PrivateGetTransfersResponse'
+          examples:
+            response:
+              value:
+                jsonrpc: '2.0'
+                id: 7606
+                result:
+                  count: 2
+                  data:
+                  - amount: 0.2
+                    created_timestamp: 1550579457727
+                    currency: BTC
+                    direction: payment
+                    id: 2
+                    other_side: 2MzyQc5Tkik61kJbEpJV5D5H9VfWHZK9Sgy
+                    state: prepared
+                    type: user
+                    updated_timestamp: 1550579457727
+                  - amount: 0.3
+                    created_timestamp: 1550579255800
+                    currency: BTC
+                    direction: payment
+                    id: 1
+                    other_side: new_user_1_1
+                    state: confirmed
+                    type: subaccount
+                    updated_timestamp: 1550579255800
+              description: Response example
+      description: Success response
+    PrivateGetWithdrawalsResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PrivateGetWithdrawalsResponse'
+          examples:
+            response:
+              value:
+                jsonrpc: '2.0'
+                id: 2745
+                result:
+                  count: 1
+                  data:
+                  - address: 2NBqqD5GRJ8wHy1PYyCXTe9ke5226FhavBz
+                    amount: 0.5
+                    confirmed_timestamp: null
+                    created_timestamp: 1550571443070
+                    currency: BTC
+                    fee: 0.0001
+                    id: 1
+                    priority: 0.15
+                    state: unconfirmed
+                    transaction_id: null
+                    updated_timestamp: 1550571443070
+              description: Response example
+      description: Success response
+    PrivateGetRewardEligibilityResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PrivateGetRewardEligibilityResponse'
+          examples:
+            response:
+              value:
+                jsonrpc: '2.0'
+                id: 1
+                result:
+                  usdc:
+                    eligibility_status: non_eligible
+                    apr_sma7: 4
+                  usde:
+                    eligibility_status: eligible
+                    apr_sma7: 7
+                  buidl:
+                    eligibility_status: eligible
+                    apr_sma7: 3.943606
+                  steth:
+                    eligibility_status: eligible
+                    apr_sma7: 2.692285714285714
+              description: Response example
+      description: Success response
+    PrivateListAddressBeneficiariesResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PrivateListAddressBeneficiariesResponse'
+          examples:
+            response:
+              value:
+                jsonrpc: '2.0'
+                id: 42
+                result:
+                  data:
+                  - currency: BTC
+                    address: bc1qar0srrr7xfkvy5l643lydnw9re59gtzzwf0uyj
+                    user_id: 1026
+                    agreed: true
+                    personal: false
+                    unhosted: false
+                    beneficiary_vasp_name: Money's Gone
+                    beneficiary_vasp_did: did:example:123456789abcdefghi
+                    beneficiary_vasp_website: https://example.com
+                    beneficiary_first_name: John
+                    beneficiary_last_name: Doe
+                    beneficiary_company_name: Example Corp
+                    beneficiary_address: NL, Amsterdam, Street, 1
+                    created: 1536569522277
+                    updated: 1536569522277
+                  continuation: xY7T6cutS3t2B9YtaDkE6TS379oKnkzTvmEDUnEUP2Msa9xKWNNaT
+                  count: 1
+              description: Response example
+      description: Success response
+    PrivateDepositAddressResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PrivateDepositAddressResponse'
+          examples:
+            response:
+              value:
+                jsonrpc: '2.0'
+                id: 3461
+                result:
+                  address: 2N8udZGBc1hLRCFsU9kGwMPpmYUwMFTuCwB
+                  creation_timestamp: 1550575165170
+                  currency: BTC
+                  type: deposit
               description: Response example
       description: Success response
     deposit:
@@ -2840,6 +2810,82 @@ components:
                   clearance_state: in_progress
               description: Response example
       description: Success response
+    PrivateSubmitTransferResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PrivateSubmitTransferResponse'
+          examples:
+            response:
+              value:
+                jsonrpc: '2.0'
+                id: 9187
+                result:
+                  amount: 0.2
+                  created_timestamp: 1550579457727
+                  currency: BTC
+                  direction: payment
+                  id: 2
+                  other_side: 2MzyQc5Tkik61kJbEpJV5D5H9VfWHZK9Sgy
+                  state: cancelled
+                  type: user
+                  updated_timestamp: 1550579457727
+              description: Response example
+      description: Success response
+    PrivateSaveAddressBeneficiaryResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PrivateSaveAddressBeneficiaryResponse'
+          examples:
+            response:
+              value:
+                jsonrpc: '2.0'
+                id: 42
+                result:
+                  currency: BTC
+                  address: bc1qar0srrr7xfkvy5l643lydnw9re59gtzzwf0uyj
+                  user_id: 1016
+                  agreed: true
+                  personal: false
+                  unhosted: false
+                  beneficiary_vasp_name: Money's Gone
+                  beneficiary_vasp_did: did:example:123456789abcdefghi
+                  beneficiary_vasp_website: https://example.com
+                  beneficiary_first_name: John
+                  beneficiary_last_name: Doe
+                  beneficiary_company_name: Example Corp
+                  beneficiary_address: NL, Amsterdam, Street, 1
+                  created: 1536569522277
+                  updated: 1536569522277
+              description: Response example
+      description: Success response
+    PrivateAddToAddressBookResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PrivateAddToAddressBookResponse'
+          examples:
+            response:
+              value:
+                jsonrpc: '2.0'
+                id: 42
+                result:
+                  address: bc1qar0srrr7xfkvy5l643lydnw9re59gtzzwf0uyj
+                  creation_timestamp: 1536569522277
+                  currency: BTC
+                  type: withdrawal
+                  label: Main address
+                  beneficiary_vasp_name: Money`s Gone
+                  beneficiary_vasp_did: did:example:123456789abcdefghi
+                  beneficiary_first_name: John
+                  beneficiary_last_name: Doe
+                  beneficiary_address: NL, Amsterdam, Street, 1
+                  agreed: true
+                  personal: false
+                  info_required: false
+              description: Response example
+      description: Success response
     PrivateRemoveFromAddressBookResponse:
       content:
         application/json:
@@ -2853,44 +2899,11 @@ components:
                 result: ok
               description: Response example
       description: Success response
-    PrivateGetTransfersResponse:
+    PrivateGetAddressBeneficiaryResponse:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/PrivateGetTransfersResponse'
-          examples:
-            response:
-              value:
-                jsonrpc: '2.0'
-                id: 7606
-                result:
-                  count: 2
-                  data:
-                  - amount: 0.2
-                    created_timestamp: 1550579457727
-                    currency: BTC
-                    direction: payment
-                    id: 2
-                    other_side: 2MzyQc5Tkik61kJbEpJV5D5H9VfWHZK9Sgy
-                    state: prepared
-                    type: user
-                    updated_timestamp: 1550579457727
-                  - amount: 0.3
-                    created_timestamp: 1550579255800
-                    currency: BTC
-                    direction: payment
-                    id: 1
-                    other_side: new_user_1_1
-                    state: confirmed
-                    type: subaccount
-                    updated_timestamp: 1550579255800
-              description: Response example
-      description: Success response
-    PrivateSaveAddressBeneficiaryResponse:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/PrivateSaveAddressBeneficiaryResponse'
+            $ref: '#/components/schemas/PrivateGetAddressBeneficiaryResponse'
           examples:
             response:
               value:
@@ -2936,29 +2949,16 @@ components:
                     updated_timestamp: 1549295130159
               description: Response example
       description: Success response
-    PrivateGetWithdrawalsResponse:
+    PrivateUpdateInAddressBookResponse:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/PrivateGetWithdrawalsResponse'
+            $ref: '#/components/schemas/PrivateUpdateInAddressBookResponse'
           examples:
             response:
               value:
                 jsonrpc: '2.0'
-                id: 2745
-                result:
-                  count: 1
-                  data:
-                  - address: 2NBqqD5GRJ8wHy1PYyCXTe9ke5226FhavBz
-                    amount: 0.5
-                    confirmed_timestamp: null
-                    created_timestamp: 1550571443070
-                    currency: BTC
-                    fee: 0.0001
-                    id: 1
-                    priority: 0.15
-                    state: unconfirmed
-                    transaction_id: null
-                    updated_timestamp: 1550571443070
+                id: 42
+                result: ok
               description: Response example
       description: Success response

@@ -261,7 +261,42 @@ paths:
       operationId: getPrivateGetCancelOnDisconnect
       x-operation-id-source: derived
 components:
+  responses:
+    PrivateGetCancelOnDisconnectResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PrivateGetCancelOnDisconnectResponse'
+          examples:
+            response:
+              value:
+                jsonrpc: '2.0'
+                id: 220
+                result:
+                  scope: account
+                  enabled: false
+              description: Response example
+      description: Success response
+    OkResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OkResponse'
+          examples:
+            response:
+              value:
+                jsonrpc: '2.0'
+                id: 1569
+                result: ok
+              description: Response example
+      description: Success response
   schemas:
+    cod_scope:
+      enum:
+      - connection
+      - account
+      type: string
+      description: Informs if Cancel on Disconnect was checked for the current connection or the account
     OkResponse:
       properties:
         jsonrpc:
@@ -281,12 +316,10 @@ components:
       - jsonrpc
       - result
       type: object
-    cod_scope:
-      enum:
-      - connection
-      - account
-      type: string
-      description: Informs if Cancel on Disconnect was checked for the current connection or the account
+    enabled_field:
+      example: true
+      type: boolean
+      description: Current configuration status
     PrivateGetCancelOnDisconnectResponse:
       properties:
         jsonrpc:
@@ -308,36 +341,3 @@ components:
       - jsonrpc
       - result
       type: object
-    enabled_field:
-      example: true
-      type: boolean
-      description: Current configuration status
-  responses:
-    OkResponse:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/OkResponse'
-          examples:
-            response:
-              value:
-                jsonrpc: '2.0'
-                id: 1569
-                result: ok
-              description: Response example
-      description: Success response
-    PrivateGetCancelOnDisconnectResponse:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/PrivateGetCancelOnDisconnectResponse'
-          examples:
-            response:
-              value:
-                jsonrpc: '2.0'
-                id: 220
-                result:
-                  scope: account
-                  enabled: false
-              description: Response example
-      description: Success response

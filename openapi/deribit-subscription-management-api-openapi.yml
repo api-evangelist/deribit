@@ -329,7 +329,7 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    OkResponse:
+    ErrorMessageResponse:
       properties:
         jsonrpc:
           type: string
@@ -339,14 +339,14 @@ components:
         id:
           type: integer
           description: The id that was sent in the request
-        result:
+        message:
           type: string
-          enum:
-          - ok
-          description: Result of method execution. `ok` in case of success
+        error:
+          type: integer
       required:
       - jsonrpc
-      - result
+      - message
+      - error
       type: object
     PrivateSubscribeResponse:
       properties:
@@ -368,7 +368,7 @@ components:
       - jsonrpc
       - result
       type: object
-    ErrorMessageResponse:
+    OkResponse:
       properties:
         jsonrpc:
           type: string
@@ -378,14 +378,14 @@ components:
         id:
           type: integer
           description: The id that was sent in the request
-        message:
+        result:
           type: string
-        error:
-          type: integer
+          enum:
+          - ok
+          description: Result of method execution. `ok` in case of success
       required:
       - jsonrpc
-      - message
-      - error
+      - result
       type: object
     Getunsubscribe200response:
       type: object
@@ -405,20 +405,6 @@ components:
           - deribit_price_index.btc_usd
           description: List of channels that were successfully unsubscribed in this request
   responses:
-    PrivateSubscribeResponse:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/PrivateSubscribeResponse'
-          examples:
-            response:
-              value:
-                jsonrpc: '2.0'
-                id: 4235
-                result:
-                - deribit_price_index.btc_usd
-              description: Response example
-      description: Success response
     OkResponse:
       content:
         application/json:
@@ -431,12 +417,6 @@ components:
                 id: 1569
                 result: ok
               description: Response example
-      description: Success response
-    ErrorMessageResponse:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessageResponse'
       description: Success response
     Getunsubscribe200response:
       content:
@@ -458,3 +438,23 @@ components:
                 - deribit_price_index.btc_usd
               description: Response example
       description: Successfully unsubscribed from channels
+    PrivateSubscribeResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PrivateSubscribeResponse'
+          examples:
+            response:
+              value:
+                jsonrpc: '2.0'
+                id: 4235
+                result:
+                - deribit_price_index.btc_usd
+              description: Response example
+      description: Success response
+    ErrorMessageResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessageResponse'
+      description: Success response

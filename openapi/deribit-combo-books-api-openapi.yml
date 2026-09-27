@@ -320,30 +320,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    PublicGetComboIdsResponse:
-      properties:
-        jsonrpc:
-          type: string
-          enum:
-          - '2.0'
-          description: The JSON-RPC version (2.0)
-        id:
-          type: integer
-          description: The id that was sent in the request
-        result:
-          type: array
-          items:
-            $ref: '#/components/schemas/combo_id'
-      required:
-      - jsonrpc
-      - result
-      type: object
-    direction:
-      enum:
-      - buy
-      - sell
-      type: string
-      description: 'Direction: `buy`, or `sell`'
     PrivateCreateComboResponse:
       properties:
         jsonrpc:
@@ -360,44 +336,6 @@ components:
       - jsonrpc
       - result
       type: object
-    instrument_id:
-      type: integer
-      description: Instrument ID
-    combo:
-      properties:
-        id:
-          $ref: '#/components/schemas/combo_id'
-        instrument_id:
-          $ref: '#/components/schemas/instrument_id'
-        state:
-          $ref: '#/components/schemas/combo_state'
-        state_timestamp:
-          $ref: '#/components/schemas/timestamp'
-        creation_timestamp:
-          $ref: '#/components/schemas/timestamp'
-        legs:
-          type: array
-          items:
-            $ref: '#/components/schemas/combo_leg'
-      type: object
-    combo_leg_amount:
-      example: -1
-      type: integer
-      description: Size multiplier of a leg. A negative value indicates that the trades on given leg are in opposite direction to the combo trades they originate from
-    combo_id:
-      example: BTC-FS-31DEC21-PERP
-      type: string
-      description: Unique combo identifier
-    currency_with_any:
-      enum:
-      - BTC
-      - ETH
-      - USDC
-      - USDT
-      - EURR
-      - any
-      type: string
-      description: Currency name or `"any"` if don't care
     currency:
       enum:
       - BTC
@@ -407,85 +345,6 @@ components:
       - EURR
       type: string
       description: Currency, i.e `"BTC"`, `"ETH"`, `"USDC"`
-    instrument_name:
-      example: BTC-PERPETUAL
-      type: string
-      description: Unique instrument identifier
-    PublicGetCombosResponse:
-      properties:
-        jsonrpc:
-          type: string
-          enum:
-          - '2.0'
-          description: The JSON-RPC version (2.0)
-        id:
-          type: integer
-          description: The id that was sent in the request
-        result:
-          type: array
-          items:
-            $ref: '#/components/schemas/combo'
-      required:
-      - jsonrpc
-      - result
-      type: object
-    combo_leg:
-      properties:
-        instrument_name:
-          $ref: '#/components/schemas/instrument_name'
-        amount:
-          $ref: '#/components/schemas/combo_leg_amount'
-      type: object
-    combo_state:
-      enum:
-      - active
-      - inactive
-      type: string
-      description: 'Combo state: `"active"`, "`inactive`"'
-    PublicGetComboDetailsResponse:
-      properties:
-        jsonrpc:
-          type: string
-          enum:
-          - '2.0'
-          description: The JSON-RPC version (2.0)
-        id:
-          type: integer
-          description: The id that was sent in the request
-        result:
-          $ref: '#/components/schemas/combo'
-      required:
-      - jsonrpc
-      - result
-      type: object
-    timestamp:
-      example: 1536569522277
-      type: integer
-      description: The timestamp (milliseconds since the Unix epoch)
-    amount:
-      type: number
-      description: It represents the requested order size. For perpetual and inverse futures the amount is in USD units. For options and linear futures it is the underlying base currency coin.
-    leg_structure:
-      items:
-        properties:
-          ratio:
-            type: integer
-            description: Ratio of amount between legs
-          instrument_name:
-            type: string
-            example: BTC-PERPETUAL
-            description: Unique instrument identifier
-          direction:
-            type: string
-            enum:
-            - buy
-            - sell
-            description: 'Direction: `buy`, or `sell`'
-          price:
-            type: number
-            description: Price for a leg
-        type: object
-      type: array
     PrivateGetLegPricesResponse:
       properties:
         jsonrpc:
@@ -508,51 +367,169 @@ components:
       - jsonrpc
       - result
       type: object
+    combo_state:
+      enum:
+      - active
+      - inactive
+      type: string
+      description: 'Combo state: `"active"`, "`inactive`"'
+    PublicGetCombosResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/combo'
+      required:
+      - jsonrpc
+      - result
+      type: object
+    timestamp:
+      example: 1536569522277
+      type: integer
+      description: The timestamp (milliseconds since the Unix epoch)
+    combo_leg_amount:
+      example: -1
+      type: integer
+      description: Size multiplier of a leg. A negative value indicates that the trades on given leg are in opposite direction to the combo trades they originate from
+    PublicGetComboDetailsResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          $ref: '#/components/schemas/combo'
+      required:
+      - jsonrpc
+      - result
+      type: object
+    direction:
+      enum:
+      - buy
+      - sell
+      type: string
+      description: 'Direction: `buy`, or `sell`'
+    combo_leg:
+      properties:
+        instrument_name:
+          $ref: '#/components/schemas/instrument_name'
+        amount:
+          $ref: '#/components/schemas/combo_leg_amount'
+      type: object
+    instrument_name:
+      example: BTC-PERPETUAL
+      type: string
+      description: Unique instrument identifier
+    combo:
+      properties:
+        id:
+          $ref: '#/components/schemas/combo_id'
+        instrument_id:
+          $ref: '#/components/schemas/instrument_id'
+        state:
+          $ref: '#/components/schemas/combo_state'
+        state_timestamp:
+          $ref: '#/components/schemas/timestamp'
+        creation_timestamp:
+          $ref: '#/components/schemas/timestamp'
+        legs:
+          type: array
+          items:
+            $ref: '#/components/schemas/combo_leg'
+      type: object
+    leg_structure:
+      items:
+        properties:
+          ratio:
+            type: integer
+            description: Ratio of amount between legs
+          instrument_name:
+            type: string
+            example: BTC-PERPETUAL
+            description: Unique instrument identifier
+          direction:
+            type: string
+            enum:
+            - buy
+            - sell
+            description: 'Direction: `buy`, or `sell`'
+          price:
+            type: number
+            description: Price for a leg
+        type: object
+      type: array
+    combo_id:
+      example: BTC-FS-31DEC21-PERP
+      type: string
+      description: Unique combo identifier
+    PublicGetComboIdsResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/combo_id'
+      required:
+      - jsonrpc
+      - result
+      type: object
+    currency_with_any:
+      enum:
+      - BTC
+      - ETH
+      - USDC
+      - USDT
+      - EURR
+      - any
+      type: string
+      description: Currency name or `"any"` if don't care
+    amount:
+      type: number
+      description: It represents the requested order size. For perpetual and inverse futures the amount is in USD units. For options and linear futures it is the underlying base currency coin.
+    instrument_id:
+      type: integer
+      description: Instrument ID
   responses:
-    PrivateCreateComboResponse:
+    PublicGetComboDetailsResponse:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/PrivateCreateComboResponse'
+            $ref: '#/components/schemas/PublicGetComboDetailsResponse'
           examples:
             response:
               value:
                 jsonrpc: '2.0'
-                id: 6
+                id: 3
                 result:
-                  state_timestamp: 1650960943922
+                  state_timestamp: 1650620605150
                   state: active
                   legs:
-                  - instrument_name: BTC-29APR22-37500-C
-                    amount: 1
-                  - instrument_name: BTC-29APR22-37500-P
+                  - instrument_name: BTC-PERPETUAL
                     amount: -1
-                  id: BTC-REV-29APR22-37500
-                  instrument_id: 52
-                  creation_timestamp: 1650960943000
-              description: Response example
-      description: Success response
-    PrivateGetLegPricesResponse:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/PrivateGetLegPricesResponse'
-          examples:
-            response:
-              value:
-                jsonrpc: '2.0'
-                id: 1
-                result:
-                  legs:
-                  - ratio: 1
-                    instrument_name: BTC-1NOV24-67000-C
-                    price: 0.6001
-                    direction: buy
-                  - ratio: 1
-                    instrument_name: BTC-1NOV24-66000-C
-                    price: 0.0001
-                    direction: sell
-                  amount: 2
+                  - instrument_name: BTC-29APR22
+                    amount: 1
+                  id: BTC-FS-29APR22_PERP
+                  instrument_id: 27
+                  creation_timestamp: 1650620575000
               description: Response example
       description: Success response
     PublicGetCombosResponse:
@@ -588,29 +565,6 @@ components:
                   creation_timestamp: 1650620575000
               description: Response example
       description: Success response
-    PublicGetComboDetailsResponse:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/PublicGetComboDetailsResponse'
-          examples:
-            response:
-              value:
-                jsonrpc: '2.0'
-                id: 3
-                result:
-                  state_timestamp: 1650620605150
-                  state: active
-                  legs:
-                  - instrument_name: BTC-PERPETUAL
-                    amount: -1
-                  - instrument_name: BTC-29APR22
-                    amount: 1
-                  id: BTC-FS-29APR22_PERP
-                  instrument_id: 27
-                  creation_timestamp: 1650620575000
-              description: Response example
-      description: Success response
     PublicGetComboIdsResponse:
       content:
         application/json:
@@ -624,5 +578,51 @@ components:
                 result:
                 - BTC-CS-29APR22-39300_39600
                 - BTC-FS-29APR22_PERP
+              description: Response example
+      description: Success response
+    PrivateGetLegPricesResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PrivateGetLegPricesResponse'
+          examples:
+            response:
+              value:
+                jsonrpc: '2.0'
+                id: 1
+                result:
+                  legs:
+                  - ratio: 1
+                    instrument_name: BTC-1NOV24-67000-C
+                    price: 0.6001
+                    direction: buy
+                  - ratio: 1
+                    instrument_name: BTC-1NOV24-66000-C
+                    price: 0.0001
+                    direction: sell
+                  amount: 2
+              description: Response example
+      description: Success response
+    PrivateCreateComboResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PrivateCreateComboResponse'
+          examples:
+            response:
+              value:
+                jsonrpc: '2.0'
+                id: 6
+                result:
+                  state_timestamp: 1650960943922
+                  state: active
+                  legs:
+                  - instrument_name: BTC-29APR22-37500-C
+                    amount: 1
+                  - instrument_name: BTC-29APR22-37500-P
+                    amount: -1
+                  id: BTC-REV-29APR22-37500
+                  instrument_id: 52
+                  creation_timestamp: 1650960943000
               description: Response example
       description: Success response
