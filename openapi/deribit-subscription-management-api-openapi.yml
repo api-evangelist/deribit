@@ -328,96 +328,7 @@ paths:
       operationId: getPrivateUnsubscribeAll
       x-operation-id-source: derived
 components:
-  schemas:
-    ErrorMessageResponse:
-      properties:
-        jsonrpc:
-          type: string
-          enum:
-          - '2.0'
-          description: The JSON-RPC version (2.0)
-        id:
-          type: integer
-          description: The id that was sent in the request
-        message:
-          type: string
-        error:
-          type: integer
-      required:
-      - jsonrpc
-      - message
-      - error
-      type: object
-    PrivateSubscribeResponse:
-      properties:
-        jsonrpc:
-          type: string
-          enum:
-          - '2.0'
-          description: The JSON-RPC version (2.0)
-        id:
-          type: integer
-          description: The id that was sent in the request
-        result:
-          type: array
-          items:
-            type: string
-            example: deribit_price_index.btc_usd
-          description: A list of subscribed channels.
-      required:
-      - jsonrpc
-      - result
-      type: object
-    OkResponse:
-      properties:
-        jsonrpc:
-          type: string
-          enum:
-          - '2.0'
-          description: The JSON-RPC version (2.0)
-        id:
-          type: integer
-          description: The id that was sent in the request
-        result:
-          type: string
-          enum:
-          - ok
-          description: Result of method execution. `ok` in case of success
-      required:
-      - jsonrpc
-      - result
-      type: object
-    Getunsubscribe200response:
-      type: object
-      properties:
-        jsonrpc:
-          type: string
-          example: '2.0'
-        id:
-          type: integer
-          example: 8691
-        result:
-          type: array
-          items:
-            type: string
-            x-deribit-type: channel
-          example:
-          - deribit_price_index.btc_usd
-          description: List of channels that were successfully unsubscribed in this request
   responses:
-    OkResponse:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/OkResponse'
-          examples:
-            response:
-              value:
-                jsonrpc: '2.0'
-                id: 1569
-                result: ok
-              description: Response example
-      description: Success response
     Getunsubscribe200response:
       content:
         application/json:
@@ -452,9 +363,98 @@ components:
                 - deribit_price_index.btc_usd
               description: Response example
       description: Success response
+    OkResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OkResponse'
+          examples:
+            response:
+              value:
+                jsonrpc: '2.0'
+                id: 1569
+                result: ok
+              description: Response example
+      description: Success response
     ErrorMessageResponse:
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorMessageResponse'
       description: Success response
+  schemas:
+    OkResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          type: string
+          enum:
+          - ok
+          description: Result of method execution. `ok` in case of success
+      required:
+      - jsonrpc
+      - result
+      type: object
+    PrivateSubscribeResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          type: array
+          items:
+            type: string
+            example: deribit_price_index.btc_usd
+          description: A list of subscribed channels.
+      required:
+      - jsonrpc
+      - result
+      type: object
+    Getunsubscribe200response:
+      type: object
+      properties:
+        jsonrpc:
+          type: string
+          example: '2.0'
+        id:
+          type: integer
+          example: 8691
+        result:
+          type: array
+          items:
+            type: string
+            x-deribit-type: channel
+          example:
+          - deribit_price_index.btc_usd
+          description: List of channels that were successfully unsubscribed in this request
+    ErrorMessageResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        message:
+          type: string
+        error:
+          type: integer
+      required:
+      - jsonrpc
+      - message
+      - error
+      type: object

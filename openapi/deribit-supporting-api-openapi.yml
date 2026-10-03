@@ -179,88 +179,7 @@ paths:
       operationId: getPublicGetTime
       x-operation-id-source: derived
 components:
-  schemas:
-    PublicTestResponse:
-      properties:
-        jsonrpc:
-          type: string
-          enum:
-          - '2.0'
-          description: The JSON-RPC version (2.0)
-        id:
-          type: integer
-          description: The id that was sent in the request
-        result:
-          type: object
-          properties:
-            version:
-              example: 2.1.26
-              type: string
-              description: The API version
-          required:
-          - version
-      required:
-      - jsonrpc
-      - result
-      type: object
-    PublicGetTimeResponse:
-      properties:
-        jsonrpc:
-          type: string
-          enum:
-          - '2.0'
-          description: The JSON-RPC version (2.0)
-        id:
-          type: integer
-          description: The id that was sent in the request
-        result:
-          type: integer
-          example: 1517329113791
-          description: Current timestamp (milliseconds since the UNIX epoch)
-      required:
-      - jsonrpc
-      - result
-      type: object
-    PublicStatusResponse:
-      properties:
-        jsonrpc:
-          type: string
-          enum:
-          - '2.0'
-          description: The JSON-RPC version (2.0)
-        id:
-          type: integer
-          description: The id that was sent in the request
-        result:
-          type: object
-          properties:
-            locked:
-              type: string
-              description: '`true` when platform is locked in all currencies, `partial` when some currencies are locked, `false` - when there are not currencies locked'
-            locked_indices:
-              type: array
-              description: List of currency indices locked platform-wise
-          required:
-          - locked
-      required:
-      - jsonrpc
-      - result
-      type: object
   responses:
-    PublicTestResponse:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/PublicTestResponse'
-          examples:
-            response:
-              value:
-                jsonrpc: '2.0'
-                id: 8212
-                result:
-                  version: 1.2.26
-              description: Response example
-      description: Success response
     PublicGetTimeResponse:
       content:
         application/json:
@@ -291,3 +210,84 @@ components:
                   locked: true
               description: Response example
       description: Success response
+    PublicTestResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PublicTestResponse'
+          examples:
+            response:
+              value:
+                jsonrpc: '2.0'
+                id: 8212
+                result:
+                  version: 1.2.26
+              description: Response example
+      description: Success response
+  schemas:
+    PublicTestResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          type: object
+          properties:
+            version:
+              example: 2.1.26
+              type: string
+              description: The API version
+          required:
+          - version
+      required:
+      - jsonrpc
+      - result
+      type: object
+    PublicStatusResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          type: object
+          properties:
+            locked:
+              type: string
+              description: '`true` when platform is locked in all currencies, `partial` when some currencies are locked, `false` - when there are not currencies locked'
+            locked_indices:
+              type: array
+              description: List of currency indices locked platform-wise
+          required:
+          - locked
+      required:
+      - jsonrpc
+      - result
+      type: object
+    PublicGetTimeResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          type: integer
+          example: 1517329113791
+          description: Current timestamp (milliseconds since the UNIX epoch)
+      required:
+      - jsonrpc
+      - result
+      type: object
