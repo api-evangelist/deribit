@@ -261,57 +261,6 @@ paths:
       operationId: getPrivateGetCancelOnDisconnect
       x-operation-id-source: derived
 components:
-  schemas:
-    enabled_field:
-      example: true
-      type: boolean
-      description: Current configuration status
-    OkResponse:
-      properties:
-        jsonrpc:
-          type: string
-          enum:
-          - '2.0'
-          description: The JSON-RPC version (2.0)
-        id:
-          type: integer
-          description: The id that was sent in the request
-        result:
-          type: string
-          enum:
-          - ok
-          description: Result of method execution. `ok` in case of success
-      required:
-      - jsonrpc
-      - result
-      type: object
-    cod_scope:
-      enum:
-      - connection
-      - account
-      type: string
-      description: Informs if Cancel on Disconnect was checked for the current connection or the account
-    PrivateGetCancelOnDisconnectResponse:
-      properties:
-        jsonrpc:
-          type: string
-          enum:
-          - '2.0'
-          description: The JSON-RPC version (2.0)
-        id:
-          type: integer
-          description: The id that was sent in the request
-        result:
-          type: object
-          properties:
-            scope:
-              $ref: '#/components/schemas/cod_scope'
-            enabled:
-              $ref: '#/components/schemas/enabled_field'
-      required:
-      - jsonrpc
-      - result
-      type: object
   responses:
     OkResponse:
       content:
@@ -341,3 +290,54 @@ components:
                   enabled: false
               description: Response example
       description: Success response
+  schemas:
+    OkResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          type: string
+          enum:
+          - ok
+          description: Result of method execution. `ok` in case of success
+      required:
+      - jsonrpc
+      - result
+      type: object
+    cod_scope:
+      enum:
+      - connection
+      - account
+      type: string
+      description: Informs if Cancel on Disconnect was checked for the current connection or the account
+    enabled_field:
+      example: true
+      type: boolean
+      description: Current configuration status
+    PrivateGetCancelOnDisconnectResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          type: object
+          properties:
+            scope:
+              $ref: '#/components/schemas/cod_scope'
+            enabled:
+              $ref: '#/components/schemas/enabled_field'
+      required:
+      - jsonrpc
+      - result
+      type: object

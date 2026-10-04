@@ -349,20 +349,6 @@ components:
                 - deribit_price_index.btc_usd
               description: Response example
       description: Successfully unsubscribed from channels
-    PrivateSubscribeResponse:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/PrivateSubscribeResponse'
-          examples:
-            response:
-              value:
-                jsonrpc: '2.0'
-                id: 4235
-                result:
-                - deribit_price_index.btc_usd
-              description: Response example
-      description: Success response
     OkResponse:
       content:
         application/json:
@@ -381,6 +367,20 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorMessageResponse'
+      description: Success response
+    PrivateSubscribeResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PrivateSubscribeResponse'
+          examples:
+            response:
+              value:
+                jsonrpc: '2.0'
+                id: 4235
+                result:
+                - deribit_price_index.btc_usd
+              description: Response example
       description: Success response
   schemas:
     OkResponse:
@@ -422,23 +422,6 @@ components:
       - jsonrpc
       - result
       type: object
-    Getunsubscribe200response:
-      type: object
-      properties:
-        jsonrpc:
-          type: string
-          example: '2.0'
-        id:
-          type: integer
-          example: 8691
-        result:
-          type: array
-          items:
-            type: string
-            x-deribit-type: channel
-          example:
-          - deribit_price_index.btc_usd
-          description: List of channels that were successfully unsubscribed in this request
     ErrorMessageResponse:
       properties:
         jsonrpc:
@@ -458,3 +441,20 @@ components:
       - message
       - error
       type: object
+    Getunsubscribe200response:
+      type: object
+      properties:
+        jsonrpc:
+          type: string
+          example: '2.0'
+        id:
+          type: integer
+          example: 8691
+        result:
+          type: array
+          items:
+            type: string
+            x-deribit-type: channel
+          example:
+          - deribit_price_index.btc_usd
+          description: List of channels that were successfully unsubscribed in this request

@@ -2362,821 +2362,29 @@ paths:
       description: Test — Gateway B (rest-order)
 components:
   schemas:
-    PublicGetTradingviewChartDataResponse:
-      properties:
-        jsonrpc:
-          type: string
-          enum:
-          - '2.0'
-          description: The JSON-RPC version (2.0)
-        id:
-          type: integer
-          description: The id that was sent in the request
-        result:
-          type: object
-          properties:
-            status:
-              type: string
-              enum:
-              - ok
-              - no_data
-              description: 'Status of the query: `ok` or `no_data`'
-            ticks:
-              type: array
-              items:
-                $ref: '#/components/schemas/timestamp'
-              description: Values of the time axis given in milliseconds since UNIX epoch
-            volume:
-              type: array
-              items:
-                $ref: '#/components/schemas/chart_volume'
-              description: List of volume bars (in base currency, one per candle)
-            cost:
-              type: array
-              items:
-                $ref: '#/components/schemas/chart_volume'
-              description: List of cost bars (volume in quote currency, one per candle)
-            open:
-              type: array
-              items:
-                $ref: '#/components/schemas/quote_price'
-              description: List of prices at open (one per candle)
-            close:
-              type: array
-              items:
-                $ref: '#/components/schemas/quote_price'
-              description: List of prices at close (one per candle)
-            high:
-              type: array
-              items:
-                $ref: '#/components/schemas/quote_price'
-              description: List of highest price levels (one per candle)
-            low:
-              type: array
-              items:
-                $ref: '#/components/schemas/quote_price'
-              description: List of lowest price levels (one per candle)
-      required:
-      - jsonrpc
-      - result
-      type: object
-    PublicGetIndexPriceNamesResponse:
-      properties:
-        jsonrpc:
-          type: string
-          enum:
-          - '2.0'
-          description: The JSON-RPC version (2.0)
-        id:
-          type: integer
-          description: The id that was sent in the request
-        result:
-          type: array
-          items:
-            type: object
-            properties:
-              name:
-                type: string
-                description: Index name
-              future_combo_creation_enabled:
-                type: boolean
-                description: Whether future combo creation is enabled for this index (only present when `extended`=`true`)
-              option_combo_creation_enabled:
-                type: boolean
-                description: Whether option combo creation is enabled for this index (only present when `extended`=`true`)
-            required:
-            - name
-      required:
-      - jsonrpc
-      - result
-      type: object
-    tick_direction:
-      enum:
-      - 0
-      - 1
-      - 2
-      - 3
-      type: integer
-      description: Direction of the "tick" (`0` = Plus Tick, `1` = Zero-Plus Tick, `2` = Minus Tick, `3` = Zero-Minus Tick).
-    book_summary:
-      properties:
-        instrument_name:
-          $ref: '#/components/schemas/instrument_name'
-        high:
-          example: 7022.89
-          type: number
-          description: Price of the 24h highest trade
-        low:
-          example: 7022.89
-          type: number
-          description: Price of the 24h lowest trade, `null` if there weren't any trades
-        base_currency:
-          example: ETH
-          type: string
-          description: Base currency
-        quote_currency:
-          example: USD
-          type: string
-          description: Quote currency
-        volume:
-          example: 223
-          type: number
-          description: The total 24h traded volume (in base currency)
-        bid_price:
-          example: 7022.89
-          type: number
-          description: The current best bid price, `null` if there aren't any bids
-        ask_price:
-          example: 7022.89
-          type: number
-          description: The current best ask price, `null` if there aren't any asks
-        mid_price:
-          example: 7022.89
-          type: number
-          description: The average of the best bid and ask, `null` if there aren't any asks or bids
-        mark_price:
-          example: 7022.89
-          type: number
-          description: The current instrument market price
-        last:
-          example: 7022.89
-          type: number
-          description: The price of the latest trade, `null` if there weren't any trades
-        open_interest:
-          example: 0.5
-          type: number
-          description: Optional (only for derivatives). The total amount of outstanding contracts in the corresponding amount units. For perpetual and inverse futures the amount is in USD units. For options and linear futures it is the underlying base currency coin.
-        creation_timestamp:
-          $ref: '#/components/schemas/timestamp'
-        estimated_delivery_price:
-          example: 11628.81
-          type: number
-          description: Optional (only for derivatives). Estimated delivery price for the market.
-        volume_usd:
-          type: number
-          description: Volume in USD
-        volume_notional:
-          type: number
-          description: Volume in quote currency (futures and spots only)
-        current_funding:
-          type: number
-          example: 0.12344
-          description: Current funding (perpetual only)
-        funding_8h:
-          type: number
-          description: Funding 8h (perpetual only)
-        mark_iv:
-          $ref: '#/components/schemas/mark_iv'
-        interest_rate:
-          example: 0
-          type: number
-          description: Interest rate used in implied volatility calculations (options only)
-        underlying_index:
-          example: index_price
-          type: string
-          description: Name of the underlying future, or `'index_price'` (options only)
-        underlying_price:
-          example: 6745.34
-          type: number
-          description: underlying price for implied volatility calculations (options only)
-        price_change:
-          example: 10.23
-          type: number
-          description: 24-hour price change expressed as a percentage, `null` if there weren't any trades
-      required:
-      - instrument_name
-      - high
-      - low
-      - base_currency
-      - quote_currency
-      - volume
-      - bid_price
-      - ask_price
-      - mid_price
-      - mark_price
-      - last
-      - open_interest
-      - creation_timestamp
-      type: object
-    min_price:
-      type: number
-      description: The minimum price for the future. Any sell orders you submit lower than this price will be clamped to this minimum.
-    price_index:
-      example: btc_usdc
-      type: string
-      description: Name of price index that is used for this instrument
-    settlement:
-      properties:
-        funding:
-          example: -2.511e-06
-          type: number
-          description: funding (in base currency ; settlement for perpetual product only)
-        funded:
-          example: 0
-          type: number
-          description: funded amount (bankruptcy only)
-        index_price:
-          example: 11008.37
-          type: number
-          description: underlying index price at time of event (in quote currency; settlement and delivery only)
-        instrument_name:
-          example: BTC-30MAR18
-          type: string
-          description: instrument name (settlement and delivery only)
-        mark_price:
-          example: 11000
-          type: number
-          description: mark price for at the settlement time (in quote currency; settlement and delivery only)
-        position:
-          example: 1000
-          type: number
-          description: position size (in quote currency; settlement and delivery only)
-        profit_loss:
-          example: 0
-          type: number
-          description: profit and loss (in base currency; settlement and delivery only)
-        session_bankruptcy:
-          example: 0.001160788
-          type: number
-          description: value of session bankruptcy (in base currency; bankruptcy only)
-        session_profit_loss:
-          example: 0.001160788
-          type: number
-          description: total value of session profit and losses (in base currency)
-        session_tax:
-          example: -0.001160788
-          type: number
-          description: total amount of paid taxes/fees (in base currency; bankruptcy only)
-        session_tax_rate:
-          example: 0.000103333
-          type: number
-          description: rate of paid taxes/fees (in base currency; bankruptcy only)
-        socialized:
-          example: -0.001160788
-          type: number
-          description: the amount of the socialized losses (in base currency; bankruptcy only)
-        timestamp:
-          $ref: '#/components/schemas/timestamp'
-        type:
-          $ref: '#/components/schemas/settlement_type'
-      required:
-      - type
-      - timestamp
-      - session_profit_loss
-      - position
-      - instrument_name
-      - index_price
-      - funding
-      type: object
-    currency_with_any_and_grouped:
-      enum:
-      - BTC
-      - ETH
-      - USDC
-      - SOL
-      - USDT
-      - EURR
-      - XRP
-      - STETH
-      - USYC
-      - PAXG
-      - BNB
-      - USDE
-      - any
-      - grouped
-      type: string
-      description: Currency name or `"any"` if don't care or `"grouped"` if grouped by currencies
-    quote_price:
-      type: number
-      description: Price in quote currency
-    bids:
-      items:
-        items:
-          type: number
-        minItems: 2
-        maxItems: 2
-        type: array
-        description: List of bids (price-amount pairs)
-      type: array
-    best_ask_price:
-      type:
-      - number
-      - 'null'
-      description: The current best ask price, `null` if there aren't any asks
-    PublicTickerResponse:
-      properties:
-        jsonrpc:
-          type: string
-          enum:
-          - '2.0'
-          description: The JSON-RPC version (2.0)
-        id:
-          type: integer
-          description: The id that was sent in the request
-        result:
-          $ref: '#/components/schemas/TickerNotification'
-      required:
-      - jsonrpc
-      - result
-      type: object
-    kind_with_combo_all:
+    kind:
       enum:
       - future
       - option
       - spot
       - future_combo
       - option_combo
-      - combo
-      - any
       type: string
-      description: 'Instrument kind: `"future"`, `"option"`, `"spot"`, `"future_combo"`, `"option_combo"`, `"combo"` for any combo or `"any"` for all'
-    TickerNotificationWithBidsAndAsks:
-      properties:
-        instrument_name:
-          $ref: '#/components/schemas/instrument_name'
-        timestamp:
-          $ref: '#/components/schemas/timestamp'
-        state:
-          $ref: '#/components/schemas/book_state'
-        stats:
-          $ref: '#/components/schemas/stats'
-        open_interest:
-          $ref: '#/components/schemas/open_interest'
-        best_bid_price:
-          $ref: '#/components/schemas/best_bid_price'
-        best_bid_amount:
-          $ref: '#/components/schemas/best_bid_amount'
-        best_ask_price:
-          $ref: '#/components/schemas/best_ask_price'
-        best_ask_amount:
-          $ref: '#/components/schemas/best_ask_amount'
-        index_price:
-          $ref: '#/components/schemas/index_price'
-        min_price:
-          $ref: '#/components/schemas/min_price'
-        max_price:
-          $ref: '#/components/schemas/max_price'
-        mark_price:
-          $ref: '#/components/schemas/mark_price'
-        last_price:
-          $ref: '#/components/schemas/last_price'
-        underlying_price:
-          $ref: '#/components/schemas/underlying_price'
-        underlying_index:
-          $ref: '#/components/schemas/underlying_index'
-        interest_rate:
-          $ref: '#/components/schemas/interest_rate'
-        bid_iv:
-          $ref: '#/components/schemas/bid_iv'
-        ask_iv:
-          $ref: '#/components/schemas/ask_iv'
-        mark_iv:
-          $ref: '#/components/schemas/mark_iv'
-        greeks:
-          $ref: '#/components/schemas/greeks'
-        funding_8h:
-          $ref: '#/components/schemas/funding_8h'
-        current_funding:
-          $ref: '#/components/schemas/current_funding'
-        delivery_price:
-          $ref: '#/components/schemas/delivery_price'
-        settlement_price:
-          $ref: '#/components/schemas/settlement_price'
-        bids:
-          $ref: '#/components/schemas/bids'
-        asks:
-          $ref: '#/components/schemas/asks'
-      required:
-      - instrument_name
-      - timestamp
-      - state
-      - stats
-      - open_interest
-      - index_price
-      - best_bid_price
-      - best_bid_amount
-      - best_ask_price
-      - best_ask_amount
-      - min_price
-      - max_price
-      - mark_price
-      - last_price
-      - bids
-      - asks
-      type: object
-    PublicGetAprHistoryResponse:
-      properties:
-        jsonrpc:
-          type: string
-          enum:
-          - '2.0'
-          description: The JSON-RPC version (2.0)
-        id:
-          type: integer
-          description: The id that was sent in the request
-        result:
-          properties:
-            continuation:
-              $ref: '#/components/schemas/continuation'
-            data:
-              type: array
-              items:
-                type: object
-                properties:
-                  day:
-                    type: integer
-                    description: The full epoch day
-                  apr:
-                    type: number
-                    description: The APR of the day
-          required:
-          - data
-          type: object
-      required:
-      - jsonrpc
-      - result
-      type: object
-    book_state:
-      enum:
-      - open
-      - settlement
-      - delivered
-      - inactive
-      - locked
-      - halted
-      - archivized
+      description: 'Instrument kind: `"future"`, `"option"`, `"spot"`, `"future_combo"`, `"option_combo"`'
+    date:
+      example: '2019-11-24'
       type: string
-      description: 'The state of the order book. Represents the current lifecycle stage of the instrument.
-
-
-        **State Lifecycle and Meanings:**
-
-
-        - `open`: Default state for running books. In this state book is accepting new orders, edits, cancels; prices should be updated, trading is live.
-
-        - `settlement`: Books enters to this state during settlement/delivery. New orders, edits, cancels are not accepted. After this state normally next state should be `open` if it was settlement, or `delivered` if it was delivery. On enter to this state good till day orders in book are canceled.
-
-        - `delivered`: Final state of book that has been delivered. New orders, edits, cancels are not accepted. After some time book process will be terminated and, instrument moved to `expired_instruments` and its `instrument_state` will become archivized. On enter to this all open orders in book are canceled.
-
-        - `inactive`: After a book is deactivated, this state is set on book. New orders, edits, cancels are not accepted. On enter to this all open orders in book are canceled. Book in this state is not considered as open. This can be also final state for book.
-
-        - `locked`: New orders, edits, are not accepted, only cancels ARE accepted. In some cases when configured books can start as locked or it may become locked on admin request. Settlement is possible on locked books.
-
-        - `halted`: The state that books enter as a result of an error. Settlement is not possible when there is at least one book in this state.
-
-        - `archivized`: Set when instrument is moved to `expired_instruments` table, final state.
-
-        '
-    mark_price:
-      type: number
-      description: The mark price for the instrument
-    best_bid_amount:
-      type:
-      - number
-      - 'null'
-      description: It represents the requested order size of all best bids
-    stats:
-      properties:
-        volume:
-          type: number
-          description: Volume during last 24h in base currency
-        low:
-          type: number
-          description: Lowest price during 24h
-        high:
-          type: number
-          description: Highest price during 24h
-        price_change:
-          example: 10.23
-          type: number
-          description: 24-hour price change expressed as a percentage, `null` if there weren't any trades
-        volume_usd:
-          $ref: '#/components/schemas/volume_usd'
-      required:
-      - volume
-      - high
-      - low
-      type: object
-    index_price:
-      example: 8247.27
-      type: number
-      description: Current index price
-    PublicGetOrderBookResponse:
-      properties:
-        jsonrpc:
-          type: string
-          enum:
-          - '2.0'
-          description: The JSON-RPC version (2.0)
-        id:
-          type: integer
-          description: The id that was sent in the request
-        result:
-          $ref: '#/components/schemas/TickerNotificationWithBidsAndAsks'
-      required:
-      - jsonrpc
-      - result
-      type: object
-    open_interest:
-      type: number
-      description: The total amount of outstanding contracts in the corresponding amount units. For perpetual and inverse futures the amount is in USD units. For options and linear futures it is the underlying base currency coin.
-    PublicGetVolatilityIndexDataResponse:
-      properties:
-        jsonrpc:
-          type: string
-          enum:
-          - '2.0'
-          description: The JSON-RPC version (2.0)
-        id:
-          type: integer
-          description: The id that was sent in the request
-        result:
-          type: object
-          properties:
-            data:
-              type: array
-              description: Candles as an array of arrays with 5 values each. The inner values correspond to the timestamp in ms, open, high, low, and close values of the volatility index correspondingly.
-            continuation:
-              type: integer
-              description: Continuation - to be used as the `end_timestamp` parameter on the next request. `NULL` when no continuation.
-          description: Volatility index candles.
-      required:
-      - jsonrpc
-      - result
-      type: object
-    last_price:
-      type:
-      - number
-      - 'null'
-      description: The price for the last trade
-    TickerNotification:
-      properties:
-        instrument_name:
-          $ref: '#/components/schemas/instrument_name'
-        timestamp:
-          $ref: '#/components/schemas/timestamp'
-        state:
-          $ref: '#/components/schemas/book_state'
-        stats:
-          $ref: '#/components/schemas/stats'
-        open_interest:
-          $ref: '#/components/schemas/open_interest'
-        best_bid_price:
-          $ref: '#/components/schemas/best_bid_price'
-        best_bid_amount:
-          $ref: '#/components/schemas/best_bid_amount'
-        best_ask_price:
-          $ref: '#/components/schemas/best_ask_price'
-        best_ask_amount:
-          $ref: '#/components/schemas/best_ask_amount'
-        index_price:
-          $ref: '#/components/schemas/index_price'
-        min_price:
-          $ref: '#/components/schemas/min_price'
-        max_price:
-          $ref: '#/components/schemas/max_price'
-        mark_price:
-          $ref: '#/components/schemas/mark_price'
-        last_price:
-          $ref: '#/components/schemas/last_price'
-        underlying_price:
-          $ref: '#/components/schemas/underlying_price'
-        underlying_index:
-          $ref: '#/components/schemas/underlying_index'
-        interest_rate:
-          $ref: '#/components/schemas/interest_rate'
-        bid_iv:
-          $ref: '#/components/schemas/bid_iv'
-        ask_iv:
-          $ref: '#/components/schemas/ask_iv'
-        mark_iv:
-          $ref: '#/components/schemas/mark_iv'
-        greeks:
-          $ref: '#/components/schemas/greeks'
-        funding_8h:
-          $ref: '#/components/schemas/funding_8h'
-        current_funding:
-          $ref: '#/components/schemas/current_funding'
-        interest_value:
-          $ref: '#/components/schemas/interest_value'
-        delivery_price:
-          $ref: '#/components/schemas/delivery_price'
-        settlement_price:
-          $ref: '#/components/schemas/settlement_price'
-        estimated_delivery_price:
-          $ref: '#/components/schemas/estimated_delivery_price'
-      required:
-      - instrument_name
-      - timestamp
-      - state
-      - stats
-      - open_interest
-      - index_price
-      - best_bid_price
-      - best_bid_amount
-      - best_ask_price
-      - best_ask_amount
-      - min_price
-      - max_price
-      - mark_price
-      - last_price
-      - estimated_delivery_price
-      type: object
-    instrument_name:
-      example: BTC-PERPETUAL
-      type: string
-      description: Unique instrument identifier
-    currency:
-      enum:
-      - BTC
-      - ETH
-      - USDC
-      - USDT
-      - EURR
-      type: string
-      description: Currency, i.e `"BTC"`, `"ETH"`, `"USDC"`
+      description: The event date with year, month and day
     current_funding:
       type: number
       description: Current funding (perpetual only)
-    trade_id:
-      type: string
-      description: Unique (per currency) trade identifier
-    currency_with_apr:
-      properties:
-        withdrawal_fee:
-          type: number
-          example: 0.0001
-          description: The total transaction fee paid for withdrawals
-        withdrawal_priorities:
-          type: array
-          items:
-            $ref: '#/components/schemas/key_number_pair'
-        min_withdrawal_fee:
-          type: number
-          example: 0.0001
-          description: The minimum transaction fee paid for withdrawals
-        currency:
-          type: string
-          example: BTC
-          description: The abbreviation of the currency. This abbreviation is used elsewhere in the API to identify the currency.
-        currency_long:
-          type: string
-          example: Bitcoin
-          description: The full name for the currency.
-        min_confirmations:
-          type: integer
-          example: 2
-          description: Minimum number of block chain confirmations before deposit is accepted.
-        coin_type:
-          type: string
-          enum:
-          - BITCOIN
-          - ETHER
-          description: The type of the currency.
-        in_cross_collateral_pool:
-          type: boolean
-          description: '`true` if the currency is part of the cross collateral pool'
-        apr:
-          type: number
-          description: Simple Moving Average (SMA) of the last 7 days of rewards. If fewer than 7 days of reward data are available, the APR is calculated as the average of the available rewards. Only applicable to yield-generating tokens (`USDE`, `STETH`, `USDC`, `BUILD`).
-        network_fee:
-          type: number
-          example: 0.0001
-          description: The network fee
-        network_currency:
-          type: string
-          example: BTC
-          description: The currency of the network
-        decimals:
-          type: integer
-          example: 6
-          description: The number of decimal places for the currency
-      required:
-      - currency
-      - currency_long
-      - min_confirmations
-      - withdrawal_fee
-      - coin_type
-      - in_cross_collateral_pool
-      type: object
-    PublicGetIndexChartDataResponse:
-      properties:
-        jsonrpc:
-          type: string
-          enum:
-          - '2.0'
-          description: The JSON-RPC version (2.0)
-        id:
-          type: integer
-          description: The id that was sent in the request
-        result:
-          type: array
-          description: "**Response:**\nThe response returns an array of data points, where each data point is an array containing:\n\n- **Index 0**: Timestamp in milliseconds since the Unix epoch\n- **Index 1**: Average index price at that timestamp\n\nExample response structure:\n```json\n[\n [1573228800000, 8751.7138636],\n [1573232400000, 8751.7138636],\n [1573236000000, 8751.7138636]\n]\n```\n\nEach entry in the result array represents a single data point:\n\n- The first value (timestamp) indicates when the price was recorded\n- The second value (price) is the average index price at that timestamp\n\nThe data points are returned in chronological order, making them ready for direct use in charting libraries.\n"
-      required:
-      - jsonrpc
-      - result
-      type: object
-    PublicGetIndexPriceResponse:
-      properties:
-        jsonrpc:
-          type: string
-          enum:
-          - '2.0'
-          description: The JSON-RPC version (2.0)
-        id:
-          type: integer
-          description: The id that was sent in the request
-        result:
-          properties:
-            index_price:
-              example: 11628.81
-              type: number
-              description: Value of requested index
-            estimated_delivery_price:
-              example: 11628.81
-              type: number
-              description: Estimated delivery price for the market. For more details, see Documentation > General > Expiration Price
-          required:
-          - index_price
-          - estimated_delivery_price
-          type: object
-      required:
-      - jsonrpc
-      - result
-      type: object
-    settlement_price:
-      type: number
-      description: Optional (not added for spot). The settlement price for the instrument. Only when `state = open`
-    PublicGetMarkPriceHistoryResponse:
-      properties:
-        jsonrpc:
-          type: string
-          enum:
-          - '2.0'
-          description: The JSON-RPC version (2.0)
-        id:
-          type: integer
-          description: The id that was sent in the request
-        result:
-          type: array
-          description: Markprice history values as an array of arrays with 2 values each. The inner values correspond to the timestamp in ms and the markprice itself.
-      required:
-      - jsonrpc
-      - result
-      type: object
-    settlement_currency_with_any_and_grouped:
+    settlement_type:
       enum:
-      - BTC
-      - ETH
-      - USDC
-      - USDT
-      - any
-      - grouped
+      - settlement
+      - delivery
+      - bankruptcy
       type: string
-      description: Currency name or `"any"` if don't care or `"grouped"` if grouped by currencies
-    best_bid_price:
-      type:
-      - number
-      - 'null'
-      description: The current best bid price, `null` if there aren't any bids
-    PublicGetHistoricalVolatilityResponse:
-      properties:
-        jsonrpc:
-          type: string
-          enum:
-          - '2.0'
-          description: The JSON-RPC version (2.0)
-        id:
-          type: integer
-          description: The id that was sent in the request
-        result:
-          type: array
-          items:
-            type: object
-            properties:
-              timestamp:
-                type: integer
-              value:
-                type: number
-            required:
-            - timestamp
-            - value
-      required:
-      - jsonrpc
-      - result
-      type: object
-    interest_value:
-      type: number
-      description: Value used to calculate `realized_funding` in positions (perpetual only)
-    mark_iv:
-      type: number
-      description: (Only for option) implied volatility for mark price
-    direction:
-      enum:
-      - buy
-      - sell
-      type: string
-      description: 'Direction: `buy`, or `sell`'
+      description: The type of settlement. `settlement`, `delivery` or `bankruptcy`.
     instrument:
       properties:
         kind:
@@ -3303,6 +2511,245 @@ components:
       - contract_size
       - price_index
       type: object
+    direction:
+      enum:
+      - buy
+      - sell
+      type: string
+      description: 'Direction: `buy`, or `sell`'
+    currency_with_any_and_grouped:
+      enum:
+      - BTC
+      - ETH
+      - USDC
+      - SOL
+      - USDT
+      - EURR
+      - XRP
+      - STETH
+      - USYC
+      - PAXG
+      - BNB
+      - USDE
+      - any
+      - grouped
+      type: string
+      description: Currency name or `"any"` if don't care or `"grouped"` if grouped by currencies
+    max_price:
+      type: number
+      description: The maximum price for the future. Any buy orders you submit higher than this price, will be clamped to this maximum.
+    settlement_currency_with_any_and_grouped:
+      enum:
+      - BTC
+      - ETH
+      - USDC
+      - USDT
+      - any
+      - grouped
+      type: string
+      description: Currency name or `"any"` if don't care or `"grouped"` if grouped by currencies
+    open_interest:
+      type: number
+      description: The total amount of outstanding contracts in the corresponding amount units. For perpetual and inverse futures the amount is in USD units. For options and linear futures it is the underlying base currency coin.
+    trade_seq:
+      type: integer
+      description: The sequence number of the trade within instrument
+    index_name:
+      enum:
+      - btc_usd
+      - eth_usd
+      - ada_usdc
+      - algo_usdc
+      - avax_usdc
+      - bch_usdc
+      - bnb_usdc
+      - btc_usdc
+      - btcdvol_usdc
+      - buidl_usdc
+      - doge_usdc
+      - dot_usdc
+      - eurr_usdc
+      - eth_usdc
+      - ethdvol_usdc
+      - link_usdc
+      - ltc_usdc
+      - near_usdc
+      - paxg_usdc
+      - shib_usdc
+      - sol_usdc
+      - steth_usdc
+      - ton_usdc
+      - trump_usdc
+      - trx_usdc
+      - uni_usdc
+      - usde_usdc
+      - usyc_usdc
+      - xrp_usdc
+      - btc_usdt
+      - eth_usdt
+      - eurr_usdt
+      - sol_usdt
+      - steth_usdt
+      - usdc_usdt
+      - usde_usdt
+      - btc_eurr
+      - btc_usde
+      - btc_usyc
+      - eth_btc
+      - eth_eurr
+      - eth_usde
+      - eth_usyc
+      - steth_eth
+      - paxg_btc
+      - drbfix-btc_usdc
+      - drbfix-eth_usdc
+      type: string
+      description: Index identifier, matches (base) cryptocurrency with quote currency
+    volume_usd:
+      type: number
+      description: Volume in usd (futures only)
+    PublicGetInstrumentsResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/instrument'
+      required:
+      - jsonrpc
+      - result
+      type: object
+    PublicGetTradesVolumesResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/trades_volumes'
+      required:
+      - jsonrpc
+      - result
+      type: object
+    funding_8h:
+      type: number
+      description: Funding 8h (perpetual only)
+    interest_value:
+      type: number
+      description: Value used to calculate `realized_funding` in positions (perpetual only)
+    last_price:
+      type:
+      - number
+      - 'null'
+      description: The price for the last trade
+    TickerNotification:
+      properties:
+        instrument_name:
+          $ref: '#/components/schemas/instrument_name'
+        timestamp:
+          $ref: '#/components/schemas/timestamp'
+        state:
+          $ref: '#/components/schemas/book_state'
+        stats:
+          $ref: '#/components/schemas/stats'
+        open_interest:
+          $ref: '#/components/schemas/open_interest'
+        best_bid_price:
+          $ref: '#/components/schemas/best_bid_price'
+        best_bid_amount:
+          $ref: '#/components/schemas/best_bid_amount'
+        best_ask_price:
+          $ref: '#/components/schemas/best_ask_price'
+        best_ask_amount:
+          $ref: '#/components/schemas/best_ask_amount'
+        index_price:
+          $ref: '#/components/schemas/index_price'
+        min_price:
+          $ref: '#/components/schemas/min_price'
+        max_price:
+          $ref: '#/components/schemas/max_price'
+        mark_price:
+          $ref: '#/components/schemas/mark_price'
+        last_price:
+          $ref: '#/components/schemas/last_price'
+        underlying_price:
+          $ref: '#/components/schemas/underlying_price'
+        underlying_index:
+          $ref: '#/components/schemas/underlying_index'
+        interest_rate:
+          $ref: '#/components/schemas/interest_rate'
+        bid_iv:
+          $ref: '#/components/schemas/bid_iv'
+        ask_iv:
+          $ref: '#/components/schemas/ask_iv'
+        mark_iv:
+          $ref: '#/components/schemas/mark_iv'
+        greeks:
+          $ref: '#/components/schemas/greeks'
+        funding_8h:
+          $ref: '#/components/schemas/funding_8h'
+        current_funding:
+          $ref: '#/components/schemas/current_funding'
+        interest_value:
+          $ref: '#/components/schemas/interest_value'
+        delivery_price:
+          $ref: '#/components/schemas/delivery_price'
+        settlement_price:
+          $ref: '#/components/schemas/settlement_price'
+        estimated_delivery_price:
+          $ref: '#/components/schemas/estimated_delivery_price'
+      required:
+      - instrument_name
+      - timestamp
+      - state
+      - stats
+      - open_interest
+      - index_price
+      - best_bid_price
+      - best_bid_amount
+      - best_ask_price
+      - best_ask_amount
+      - min_price
+      - max_price
+      - mark_price
+      - last_price
+      - estimated_delivery_price
+      type: object
+    PublicGetCurrenciesResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/currency_with_apr'
+      required:
+      - jsonrpc
+      - result
+      type: object
+    block_trade_id_in_result:
+      example: '154'
+      type: string
+      description: Block trade id - when trade was part of a block trade
     key_number_pair:
       properties:
         name:
@@ -3312,6 +2759,119 @@ components:
       required:
       - name
       - value
+      type: object
+    PublicGetTradingviewChartDataResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          type: object
+          properties:
+            status:
+              type: string
+              enum:
+              - ok
+              - no_data
+              description: 'Status of the query: `ok` or `no_data`'
+            ticks:
+              type: array
+              items:
+                $ref: '#/components/schemas/timestamp'
+              description: Values of the time axis given in milliseconds since UNIX epoch
+            volume:
+              type: array
+              items:
+                $ref: '#/components/schemas/chart_volume'
+              description: List of volume bars (in base currency, one per candle)
+            cost:
+              type: array
+              items:
+                $ref: '#/components/schemas/chart_volume'
+              description: List of cost bars (volume in quote currency, one per candle)
+            open:
+              type: array
+              items:
+                $ref: '#/components/schemas/quote_price'
+              description: List of prices at open (one per candle)
+            close:
+              type: array
+              items:
+                $ref: '#/components/schemas/quote_price'
+              description: List of prices at close (one per candle)
+            high:
+              type: array
+              items:
+                $ref: '#/components/schemas/quote_price'
+              description: List of highest price levels (one per candle)
+            low:
+              type: array
+              items:
+                $ref: '#/components/schemas/quote_price'
+              description: List of lowest price levels (one per candle)
+      required:
+      - jsonrpc
+      - result
+      type: object
+    PublicGetIndexChartDataResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          type: array
+          description: "**Response:**\nThe response returns an array of data points, where each data point is an array containing:\n\n- **Index 0**: Timestamp in milliseconds since the Unix epoch\n- **Index 1**: Average index price at that timestamp\n\nExample response structure:\n```json\n[\n [1573228800000, 8751.7138636],\n [1573232400000, 8751.7138636],\n [1573236000000, 8751.7138636]\n]\n```\n\nEach entry in the result array represents a single data point:\n\n- The first value (timestamp) indicates when the price was recorded\n- The second value (price) is the average index price at that timestamp\n\nThe data points are returned in chronological order, making them ready for direct use in charting libraries.\n"
+      required:
+      - jsonrpc
+      - result
+      type: object
+    price:
+      type: number
+      description: Price in base currency
+    ask_iv:
+      type: number
+      description: (Only for option) implied volatility for best ask
+    PublicGetAprHistoryResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          properties:
+            continuation:
+              $ref: '#/components/schemas/continuation'
+            data:
+              type: array
+              items:
+                type: object
+                properties:
+                  day:
+                    type: integer
+                    description: The full epoch day
+                  apr:
+                    type: number
+                    description: The APR of the day
+          required:
+          - data
+          type: object
+      required:
+      - jsonrpc
+      - result
       type: object
     public_trade:
       properties:
@@ -3378,12 +2938,7 @@ components:
       - amount
       - mark_price
       type: object
-    best_ask_amount:
-      type:
-      - number
-      - 'null'
-      description: It represents the requested order size of all best asks
-    PublicGetFundingRateValueResponse:
+    PublicGetContractSizeResponse:
       properties:
         jsonrpc:
           type: string
@@ -3394,15 +2949,619 @@ components:
           type: integer
           description: The id that was sent in the request
         result:
-          type: number
+          type: object
+          properties:
+            contract_size:
+              $ref: '#/components/schemas/contract_size'
+          required:
+          - contract_size
       required:
       - jsonrpc
       - result
       type: object
-    block_trade_id_in_result:
-      example: '154'
+    PublicGetOrderBookResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          $ref: '#/components/schemas/TickerNotificationWithBidsAndAsks'
+      required:
+      - jsonrpc
+      - result
+      type: object
+    continuation:
+      example: xY7T6cutS3t2B9YtaDkE6TS379oKnkzTvmEDUnEUP2Msa9xKWNNaT
       type: string
-      description: Block trade id - when trade was part of a block trade
+      description: Continuation token for pagination.
+    trade_id:
+      type: string
+      description: Unique (per currency) trade identifier
+    bids:
+      items:
+        items:
+          type: number
+        minItems: 2
+        maxItems: 2
+        type: array
+        description: List of bids (price-amount pairs)
+      type: array
+    PublicGetFundingChartDataResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          type: object
+          properties:
+            current_interest:
+              type: number
+              example: 0.005000670552845
+              description: Current interest
+            interest_8h:
+              type: number
+              example: 0.0040080896931
+              description: Current interest 8h
+            data:
+              type: array
+              items:
+                type: object
+                properties:
+                  timestamp:
+                    $ref: '#/components/schemas/timestamp'
+                  index_price:
+                    $ref: '#/components/schemas/index_price'
+                  interest_8h:
+                    type: number
+                    example: 0.004999511380756577
+                    description: Historical interest 8h value
+                required:
+                - timestamp
+                - index_price
+                - interest_8h
+          required:
+          - current_interest
+          - data
+          - interest_8h
+      required:
+      - jsonrpc
+      - result
+      type: object
+    bid_iv:
+      type: number
+      description: (Only for option) implied volatility for best bid
+    expirations:
+      properties:
+        currency:
+          $ref: '#/components/schemas/currency_with_any_and_grouped'
+        kind:
+          $ref: '#/components/schemas/kind_future_or_option_with_any'
+      type: object
+      description: A map where each key is valid currency (e.g. btc, eth, usdc), and the value is a list of expirations or a map where each key is a valid kind (future or options) and value is a list of expirations from every instrument
+    PublicGetMarkPriceHistoryResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          type: array
+          description: Markprice history values as an array of arrays with 2 values each. The inner values correspond to the timestamp in ms and the markprice itself.
+      required:
+      - jsonrpc
+      - result
+      type: object
+    interest_rate:
+      type: number
+      description: Interest rate used in implied volatility calculations (options only)
+    underlying_index:
+      type: number
+      description: Name of the underlying future, or `index_price` (options only)
+    PublicGetFundingRateHistoryResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          type: array
+          items:
+            type: object
+            properties:
+              timestamp:
+                $ref: '#/components/schemas/timestamp'
+              prev_index_price:
+                $ref: '#/components/schemas/price'
+              index_price:
+                $ref: '#/components/schemas/price'
+              interest_1h:
+                type: number
+                description: 1hour interest rate
+              interest_8h:
+                type: number
+                description: 8hour interest rate
+      required:
+      - jsonrpc
+      - result
+      type: object
+    quote_price:
+      type: number
+      description: Price in quote currency
+    PublicTradesHistoryResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          type: object
+          properties:
+            trades:
+              type: array
+              items:
+                $ref: '#/components/schemas/public_trade'
+            has_more:
+              type: boolean
+          required:
+          - trades
+          - has_more
+      required:
+      - jsonrpc
+      - result
+      type: object
+    trades_volumes:
+      properties:
+        currency:
+          $ref: '#/components/schemas/currency'
+        calls_volume:
+          example: 20.1
+          type: number
+          description: Total 24h trade volume for call options.
+        puts_volume:
+          example: 60.2
+          type: number
+          description: Total 24h trade volume for put options.
+        futures_volume:
+          example: 30.5178
+          type: number
+          description: Total 24h trade volume for futures.
+        spot_volume:
+          example: 11.6
+          type: number
+          description: Total 24h trade for spot.
+        calls_volume_7d:
+          example: 75.6
+          type: number
+          description: Total 7d trade volume for call options.
+        puts_volume_7d:
+          example: 356.9
+          type: number
+          description: Total 7d trade volume for put options.
+        futures_volume_7d:
+          example: 213.8841
+          type: number
+          description: Total 7d trade volume for futures.
+        spot_volume_7d:
+          example: 64.8
+          type: number
+          description: Total 7d trade for spot.
+        calls_volume_30d:
+          example: 547.3
+          type: number
+          description: Total 30d trade volume for call options.
+        puts_volume_30d:
+          example: 785.5
+          type: number
+          description: Total 30d trade volume for put options.
+        futures_volume_30d:
+          example: 998.2128
+          type: number
+          description: Total 30d trade volume for futures.
+        spot_volume_30d:
+          example: 310.5
+          type: number
+          description: Total 30d trade for spot.
+      required:
+      - currency
+      - futures_volume
+      - puts_volume
+      - calls_volume
+      type: object
+    contract_size:
+      example: 10
+      type: integer
+      description: Contract size, for futures in USD, for options in base currency of the instrument (BTC, ETH, ...)
+    settlement_price:
+      type: number
+      description: Optional (not added for spot). The settlement price for the instrument. Only when `state = open`
+    PublicGetHistoricalVolatilityResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          type: array
+          items:
+            type: object
+            properties:
+              timestamp:
+                type: integer
+              value:
+                type: number
+            required:
+            - timestamp
+            - value
+      required:
+      - jsonrpc
+      - result
+      type: object
+    kind_future_or_option_with_any:
+      enum:
+      - future
+      - option
+      - any
+      type: string
+      description: 'Instrument kind: `"future"`, `"option"` or `"any"` for all'
+    delivery_price:
+      type: number
+      description: The settlement price for the instrument. Only when `state = closed`
+    settlement:
+      properties:
+        funding:
+          example: -2.511e-06
+          type: number
+          description: funding (in base currency ; settlement for perpetual product only)
+        funded:
+          example: 0
+          type: number
+          description: funded amount (bankruptcy only)
+        index_price:
+          example: 11008.37
+          type: number
+          description: underlying index price at time of event (in quote currency; settlement and delivery only)
+        instrument_name:
+          example: BTC-30MAR18
+          type: string
+          description: instrument name (settlement and delivery only)
+        mark_price:
+          example: 11000
+          type: number
+          description: mark price for at the settlement time (in quote currency; settlement and delivery only)
+        position:
+          example: 1000
+          type: number
+          description: position size (in quote currency; settlement and delivery only)
+        profit_loss:
+          example: 0
+          type: number
+          description: profit and loss (in base currency; settlement and delivery only)
+        session_bankruptcy:
+          example: 0.001160788
+          type: number
+          description: value of session bankruptcy (in base currency; bankruptcy only)
+        session_profit_loss:
+          example: 0.001160788
+          type: number
+          description: total value of session profit and losses (in base currency)
+        session_tax:
+          example: -0.001160788
+          type: number
+          description: total amount of paid taxes/fees (in base currency; bankruptcy only)
+        session_tax_rate:
+          example: 0.000103333
+          type: number
+          description: rate of paid taxes/fees (in base currency; bankruptcy only)
+        socialized:
+          example: -0.001160788
+          type: number
+          description: the amount of the socialized losses (in base currency; bankruptcy only)
+        timestamp:
+          $ref: '#/components/schemas/timestamp'
+        type:
+          $ref: '#/components/schemas/settlement_type'
+      required:
+      - type
+      - timestamp
+      - session_profit_loss
+      - position
+      - instrument_name
+      - index_price
+      - funding
+      type: object
+    currency:
+      enum:
+      - BTC
+      - ETH
+      - USDC
+      - USDT
+      - EURR
+      type: string
+      description: Currency, i.e `"BTC"`, `"ETH"`, `"USDC"`
+    PublicGetIndexPriceResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          properties:
+            index_price:
+              example: 11628.81
+              type: number
+              description: Value of requested index
+            estimated_delivery_price:
+              example: 11628.81
+              type: number
+              description: Estimated delivery price for the market. For more details, see Documentation > General > Expiration Price
+          required:
+          - index_price
+          - estimated_delivery_price
+          type: object
+      required:
+      - jsonrpc
+      - result
+      type: object
+    asks:
+      items:
+        items:
+          type: number
+        minItems: 2
+        maxItems: 2
+        type: array
+        description: List of asks (price-amount pairs)
+      type: array
+    price_index:
+      example: btc_usdc
+      type: string
+      description: Name of price index that is used for this instrument
+    currency_with_apr:
+      properties:
+        withdrawal_fee:
+          type: number
+          example: 0.0001
+          description: The total transaction fee paid for withdrawals
+        withdrawal_priorities:
+          type: array
+          items:
+            $ref: '#/components/schemas/key_number_pair'
+        min_withdrawal_fee:
+          type: number
+          example: 0.0001
+          description: The minimum transaction fee paid for withdrawals
+        currency:
+          type: string
+          example: BTC
+          description: The abbreviation of the currency. This abbreviation is used elsewhere in the API to identify the currency.
+        currency_long:
+          type: string
+          example: Bitcoin
+          description: The full name for the currency.
+        min_confirmations:
+          type: integer
+          example: 2
+          description: Minimum number of block chain confirmations before deposit is accepted.
+        coin_type:
+          type: string
+          enum:
+          - BITCOIN
+          - ETHER
+          description: The type of the currency.
+        in_cross_collateral_pool:
+          type: boolean
+          description: '`true` if the currency is part of the cross collateral pool'
+        apr:
+          type: number
+          description: Simple Moving Average (SMA) of the last 7 days of rewards. If fewer than 7 days of reward data are available, the APR is calculated as the average of the available rewards. Only applicable to yield-generating tokens (`USDE`, `STETH`, `USDC`, `BUILD`).
+        network_fee:
+          type: number
+          example: 0.0001
+          description: The network fee
+        network_currency:
+          type: string
+          example: BTC
+          description: The currency of the network
+        decimals:
+          type: integer
+          example: 6
+          description: The number of decimal places for the currency
+      required:
+      - currency
+      - currency_long
+      - min_confirmations
+      - withdrawal_fee
+      - coin_type
+      - in_cross_collateral_pool
+      type: object
+    PublicSettlementResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          properties:
+            continuation:
+              $ref: '#/components/schemas/continuation'
+            settlements:
+              type: array
+              items:
+                $ref: '#/components/schemas/settlement'
+          required:
+          - continuation
+          - settlements
+          type: object
+      required:
+      - jsonrpc
+      - result
+      type: object
+    best_ask_amount:
+      type:
+      - number
+      - 'null'
+      description: It represents the requested order size of all best asks
+    block_trade_leg_count:
+      example: 3
+      type: integer
+      description: Block trade leg count - when trade was part of a block trade
+    sorting:
+      enum:
+      - asc
+      - desc
+      - default
+      type: string
+    mark_iv:
+      type: number
+      description: (Only for option) implied volatility for mark price
+    mark_price:
+      type: number
+      description: The mark price for the instrument
+    best_ask_price:
+      type:
+      - number
+      - 'null'
+      description: The current best ask price, `null` if there aren't any asks
+    trade_timestamp:
+      example: 1517329113791
+      type: integer
+      description: The timestamp of the trade (milliseconds since the UNIX epoch)
+    book_summary:
+      properties:
+        instrument_name:
+          $ref: '#/components/schemas/instrument_name'
+        high:
+          example: 7022.89
+          type: number
+          description: Price of the 24h highest trade
+        low:
+          example: 7022.89
+          type: number
+          description: Price of the 24h lowest trade, `null` if there weren't any trades
+        base_currency:
+          example: ETH
+          type: string
+          description: Base currency
+        quote_currency:
+          example: USD
+          type: string
+          description: Quote currency
+        volume:
+          example: 223
+          type: number
+          description: The total 24h traded volume (in base currency)
+        bid_price:
+          example: 7022.89
+          type: number
+          description: The current best bid price, `null` if there aren't any bids
+        ask_price:
+          example: 7022.89
+          type: number
+          description: The current best ask price, `null` if there aren't any asks
+        mid_price:
+          example: 7022.89
+          type: number
+          description: The average of the best bid and ask, `null` if there aren't any asks or bids
+        mark_price:
+          example: 7022.89
+          type: number
+          description: The current instrument market price
+        last:
+          example: 7022.89
+          type: number
+          description: The price of the latest trade, `null` if there weren't any trades
+        open_interest:
+          example: 0.5
+          type: number
+          description: Optional (only for derivatives). The total amount of outstanding contracts in the corresponding amount units. For perpetual and inverse futures the amount is in USD units. For options and linear futures it is the underlying base currency coin.
+        creation_timestamp:
+          $ref: '#/components/schemas/timestamp'
+        estimated_delivery_price:
+          example: 11628.81
+          type: number
+          description: Optional (only for derivatives). Estimated delivery price for the market.
+        volume_usd:
+          type: number
+          description: Volume in USD
+        volume_notional:
+          type: number
+          description: Volume in quote currency (futures and spots only)
+        current_funding:
+          type: number
+          example: 0.12344
+          description: Current funding (perpetual only)
+        funding_8h:
+          type: number
+          description: Funding 8h (perpetual only)
+        mark_iv:
+          $ref: '#/components/schemas/mark_iv'
+        interest_rate:
+          example: 0
+          type: number
+          description: Interest rate used in implied volatility calculations (options only)
+        underlying_index:
+          example: index_price
+          type: string
+          description: Name of the underlying future, or `'index_price'` (options only)
+        underlying_price:
+          example: 6745.34
+          type: number
+          description: underlying price for implied volatility calculations (options only)
+        price_change:
+          example: 10.23
+          type: number
+          description: 24-hour price change expressed as a percentage, `null` if there weren't any trades
+      required:
+      - instrument_name
+      - high
+      - low
+      - base_currency
+      - quote_currency
+      - volume
+      - bid_price
+      - ask_price
+      - mid_price
+      - mark_price
+      - last
+      - open_interest
+      - creation_timestamp
+      type: object
+    instrument_id:
+      type: integer
+      description: Instrument ID
     greeks:
       properties:
         delta:
@@ -3511,6 +3670,188 @@ components:
         Vega (not actually a Greek symbol), Gamma, Theta and Rho values shown on Deribit are calculated using **standard Black Scholes without adjustments**.
 
         '
+    stats:
+      properties:
+        volume:
+          type: number
+          description: Volume during last 24h in base currency
+        low:
+          type: number
+          description: Lowest price during 24h
+        high:
+          type: number
+          description: Highest price during 24h
+        price_change:
+          example: 10.23
+          type: number
+          description: 24-hour price change expressed as a percentage, `null` if there weren't any trades
+        volume_usd:
+          $ref: '#/components/schemas/volume_usd'
+      required:
+      - volume
+      - high
+      - low
+      type: object
+    PublicGetInstrumentResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          $ref: '#/components/schemas/instrument'
+      required:
+      - jsonrpc
+      - result
+      type: object
+    chart_volume:
+      type: number
+      description: // todo
+    TickerNotificationWithBidsAndAsks:
+      properties:
+        instrument_name:
+          $ref: '#/components/schemas/instrument_name'
+        timestamp:
+          $ref: '#/components/schemas/timestamp'
+        state:
+          $ref: '#/components/schemas/book_state'
+        stats:
+          $ref: '#/components/schemas/stats'
+        open_interest:
+          $ref: '#/components/schemas/open_interest'
+        best_bid_price:
+          $ref: '#/components/schemas/best_bid_price'
+        best_bid_amount:
+          $ref: '#/components/schemas/best_bid_amount'
+        best_ask_price:
+          $ref: '#/components/schemas/best_ask_price'
+        best_ask_amount:
+          $ref: '#/components/schemas/best_ask_amount'
+        index_price:
+          $ref: '#/components/schemas/index_price'
+        min_price:
+          $ref: '#/components/schemas/min_price'
+        max_price:
+          $ref: '#/components/schemas/max_price'
+        mark_price:
+          $ref: '#/components/schemas/mark_price'
+        last_price:
+          $ref: '#/components/schemas/last_price'
+        underlying_price:
+          $ref: '#/components/schemas/underlying_price'
+        underlying_index:
+          $ref: '#/components/schemas/underlying_index'
+        interest_rate:
+          $ref: '#/components/schemas/interest_rate'
+        bid_iv:
+          $ref: '#/components/schemas/bid_iv'
+        ask_iv:
+          $ref: '#/components/schemas/ask_iv'
+        mark_iv:
+          $ref: '#/components/schemas/mark_iv'
+        greeks:
+          $ref: '#/components/schemas/greeks'
+        funding_8h:
+          $ref: '#/components/schemas/funding_8h'
+        current_funding:
+          $ref: '#/components/schemas/current_funding'
+        delivery_price:
+          $ref: '#/components/schemas/delivery_price'
+        settlement_price:
+          $ref: '#/components/schemas/settlement_price'
+        bids:
+          $ref: '#/components/schemas/bids'
+        asks:
+          $ref: '#/components/schemas/asks'
+      required:
+      - instrument_name
+      - timestamp
+      - state
+      - stats
+      - open_interest
+      - index_price
+      - best_bid_price
+      - best_bid_amount
+      - best_ask_price
+      - best_ask_amount
+      - min_price
+      - max_price
+      - mark_price
+      - last_price
+      - bids
+      - asks
+      type: object
+    timestamp:
+      example: 1536569522277
+      type: integer
+      description: The timestamp (milliseconds since the Unix epoch)
+    PublicTickerResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          $ref: '#/components/schemas/TickerNotification'
+      required:
+      - jsonrpc
+      - result
+      type: object
+    PublicGetIndexPriceNamesResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                description: Index name
+              future_combo_creation_enabled:
+                type: boolean
+                description: Whether future combo creation is enabled for this index (only present when `extended`=`true`)
+              option_combo_creation_enabled:
+                type: boolean
+                description: Whether option combo creation is enabled for this index (only present when `extended`=`true`)
+            required:
+            - name
+      required:
+      - jsonrpc
+      - result
+      type: object
+    tick_size_step:
+      properties:
+        above_price:
+          type: number
+          description: The price from which the increased tick size applies
+        tick_size:
+          type: number
+          description: Tick size to be used above the price. It must be multiple of the minimum tick size.
+      type: object
+    tick_direction:
+      enum:
+      - 0
+      - 1
+      - 2
+      - 3
+      type: integer
+      description: Direction of the "tick" (`0` = Plus Tick, `1` = Zero-Plus Tick, `2` = Minus Tick, `3` = Zero-Minus Tick).
     PublicGetExpirationsResponse:
       properties:
         jsonrpc:
@@ -3529,84 +3870,6 @@ components:
       - jsonrpc
       - result
       type: object
-    PublicGetInstrumentResponse:
-      properties:
-        jsonrpc:
-          type: string
-          enum:
-          - '2.0'
-          description: The JSON-RPC version (2.0)
-        id:
-          type: integer
-          description: The id that was sent in the request
-        result:
-          $ref: '#/components/schemas/instrument'
-      required:
-      - jsonrpc
-      - result
-      type: object
-    interest_rate:
-      type: number
-      description: Interest rate used in implied volatility calculations (options only)
-    chart_volume:
-      type: number
-      description: // todo
-    PublicSettlementResponse:
-      properties:
-        jsonrpc:
-          type: string
-          enum:
-          - '2.0'
-          description: The JSON-RPC version (2.0)
-        id:
-          type: integer
-          description: The id that was sent in the request
-        result:
-          properties:
-            continuation:
-              $ref: '#/components/schemas/continuation'
-            settlements:
-              type: array
-              items:
-                $ref: '#/components/schemas/settlement'
-          required:
-          - continuation
-          - settlements
-          type: object
-      required:
-      - jsonrpc
-      - result
-      type: object
-    asks:
-      items:
-        items:
-          type: number
-        minItems: 2
-        maxItems: 2
-        type: array
-        description: List of asks (price-amount pairs)
-      type: array
-    settlement_type:
-      enum:
-      - settlement
-      - delivery
-      - bankruptcy
-      type: string
-      description: The type of settlement. `settlement`, `delivery` or `bankruptcy`.
-    block_trade_leg_count:
-      example: 3
-      type: integer
-      description: Block trade leg count - when trade was part of a block trade
-    continuation:
-      example: xY7T6cutS3t2B9YtaDkE6TS379oKnkzTvmEDUnEUP2Msa9xKWNNaT
-      type: string
-      description: Continuation token for pagination.
-    volume_usd:
-      type: number
-      description: Volume in usd (futures only)
-    delivery_price:
-      type: number
-      description: The settlement price for the instrument. Only when `state = closed`
     PublicGetDeliveryPricesResponse:
       properties:
         jsonrpc:
@@ -3643,7 +3906,32 @@ components:
       - jsonrpc
       - result
       type: object
-    PublicGetCurrenciesResponse:
+    best_bid_price:
+      type:
+      - number
+      - 'null'
+      description: The current best bid price, `null` if there aren't any bids
+    kind_with_combo_all:
+      enum:
+      - future
+      - option
+      - spot
+      - future_combo
+      - option_combo
+      - combo
+      - any
+      type: string
+      description: 'Instrument kind: `"future"`, `"option"`, `"spot"`, `"future_combo"`, `"option_combo"`, `"combo"` for any combo or `"any"` for all'
+    best_bid_amount:
+      type:
+      - number
+      - 'null'
+      description: It represents the requested order size of all best bids
+    estimated_delivery_price:
+      example: 11628.81
+      type: number
+      description: Estimated delivery price for the market. For more details, see Contract Specification > General Documentation > Expiration Price
+    PublicGetFundingRateValueResponse:
       properties:
         jsonrpc:
           type: string
@@ -3654,17 +3942,29 @@ components:
           type: integer
           description: The id that was sent in the request
         result:
-          type: array
-          items:
-            $ref: '#/components/schemas/currency_with_apr'
+          type: number
       required:
       - jsonrpc
       - result
       type: object
-    underlying_index:
+    underlying_price:
       type: number
-      description: Name of the underlying future, or `index_price` (options only)
-    PublicTradesHistoryResponse:
+      description: Underlying price for implied volatility calculations (options only)
+    currency_with_any:
+      enum:
+      - BTC
+      - ETH
+      - USDC
+      - USDT
+      - EURR
+      - any
+      type: string
+      description: Currency name or `"any"` if don't care
+    instrument_name:
+      example: BTC-PERPETUAL
+      type: string
+      description: Unique instrument identifier
+    PublicGetVolatilityIndexDataResponse:
       properties:
         jsonrpc:
           type: string
@@ -3677,76 +3977,17 @@ components:
         result:
           type: object
           properties:
-            trades:
+            data:
               type: array
-              items:
-                $ref: '#/components/schemas/public_trade'
-            has_more:
-              type: boolean
-          required:
-          - trades
-          - has_more
+              description: Candles as an array of arrays with 5 values each. The inner values correspond to the timestamp in ms, open, high, low, and close values of the volatility index correspondingly.
+            continuation:
+              type: integer
+              description: Continuation - to be used as the `end_timestamp` parameter on the next request. `NULL` when no continuation.
+          description: Volatility index candles.
       required:
       - jsonrpc
       - result
       type: object
-    trade_seq:
-      type: integer
-      description: The sequence number of the trade within instrument
-    price:
-      type: number
-      description: Price in base currency
-    index_name:
-      enum:
-      - btc_usd
-      - eth_usd
-      - ada_usdc
-      - algo_usdc
-      - avax_usdc
-      - bch_usdc
-      - bnb_usdc
-      - btc_usdc
-      - btcdvol_usdc
-      - buidl_usdc
-      - doge_usdc
-      - dot_usdc
-      - eurr_usdc
-      - eth_usdc
-      - ethdvol_usdc
-      - link_usdc
-      - ltc_usdc
-      - near_usdc
-      - paxg_usdc
-      - shib_usdc
-      - sol_usdc
-      - steth_usdc
-      - ton_usdc
-      - trump_usdc
-      - trx_usdc
-      - uni_usdc
-      - usde_usdc
-      - usyc_usdc
-      - xrp_usdc
-      - btc_usdt
-      - eth_usdt
-      - eurr_usdt
-      - sol_usdt
-      - steth_usdt
-      - usdc_usdt
-      - usde_usdt
-      - btc_eurr
-      - btc_usde
-      - btc_usyc
-      - eth_btc
-      - eth_eurr
-      - eth_usde
-      - eth_usyc
-      - steth_eth
-      - paxg_btc
-      - drbfix-btc_usdc
-      - drbfix-eth_usdc
-      type: string
-      description: Index identifier, matches (base) cryptocurrency with quote currency
     PublicGetBookSummaryResponse:
       properties:
         jsonrpc:
@@ -3765,334 +4006,44 @@ components:
       - jsonrpc
       - result
       type: object
-    PublicGetInstrumentsResponse:
-      properties:
-        jsonrpc:
-          type: string
-          enum:
-          - '2.0'
-          description: The JSON-RPC version (2.0)
-        id:
-          type: integer
-          description: The id that was sent in the request
-        result:
-          type: array
-          items:
-            $ref: '#/components/schemas/instrument'
-      required:
-      - jsonrpc
-      - result
-      type: object
-    PublicGetContractSizeResponse:
-      properties:
-        jsonrpc:
-          type: string
-          enum:
-          - '2.0'
-          description: The JSON-RPC version (2.0)
-        id:
-          type: integer
-          description: The id that was sent in the request
-        result:
-          type: object
-          properties:
-            contract_size:
-              $ref: '#/components/schemas/contract_size'
-          required:
-          - contract_size
-      required:
-      - jsonrpc
-      - result
-      type: object
-    PublicGetTradesVolumesResponse:
-      properties:
-        jsonrpc:
-          type: string
-          enum:
-          - '2.0'
-          description: The JSON-RPC version (2.0)
-        id:
-          type: integer
-          description: The id that was sent in the request
-        result:
-          type: array
-          items:
-            $ref: '#/components/schemas/trades_volumes'
-      required:
-      - jsonrpc
-      - result
-      type: object
-    sorting:
+    min_price:
+      type: number
+      description: The minimum price for the future. Any sell orders you submit lower than this price will be clamped to this minimum.
+    book_state:
       enum:
-      - asc
-      - desc
-      - default
+      - open
+      - settlement
+      - delivered
+      - inactive
+      - locked
+      - halted
+      - archivized
       type: string
-    timestamp:
-      example: 1536569522277
-      type: integer
-      description: The timestamp (milliseconds since the Unix epoch)
-    expirations:
-      properties:
-        currency:
-          $ref: '#/components/schemas/currency_with_any_and_grouped'
-        kind:
-          $ref: '#/components/schemas/kind_future_or_option_with_any'
-      type: object
-      description: A map where each key is valid currency (e.g. btc, eth, usdc), and the value is a list of expirations or a map where each key is a valid kind (future or options) and value is a list of expirations from every instrument
-    tick_size_step:
-      properties:
-        above_price:
-          type: number
-          description: The price from which the increased tick size applies
-        tick_size:
-          type: number
-          description: Tick size to be used above the price. It must be multiple of the minimum tick size.
-      type: object
-    estimated_delivery_price:
-      example: 11628.81
+      description: 'The state of the order book. Represents the current lifecycle stage of the instrument.
+
+
+        **State Lifecycle and Meanings:**
+
+
+        - `open`: Default state for running books. In this state book is accepting new orders, edits, cancels; prices should be updated, trading is live.
+
+        - `settlement`: Books enters to this state during settlement/delivery. New orders, edits, cancels are not accepted. After this state normally next state should be `open` if it was settlement, or `delivered` if it was delivery. On enter to this state good till day orders in book are canceled.
+
+        - `delivered`: Final state of book that has been delivered. New orders, edits, cancels are not accepted. After some time book process will be terminated and, instrument moved to `expired_instruments` and its `instrument_state` will become archivized. On enter to this all open orders in book are canceled.
+
+        - `inactive`: After a book is deactivated, this state is set on book. New orders, edits, cancels are not accepted. On enter to this all open orders in book are canceled. Book in this state is not considered as open. This can be also final state for book.
+
+        - `locked`: New orders, edits, are not accepted, only cancels ARE accepted. In some cases when configured books can start as locked or it may become locked on admin request. Settlement is possible on locked books.
+
+        - `halted`: The state that books enter as a result of an error. Settlement is not possible when there is at least one book in this state.
+
+        - `archivized`: Set when instrument is moved to `expired_instruments` table, final state.
+
+        '
+    index_price:
+      example: 8247.27
       type: number
-      description: Estimated delivery price for the market. For more details, see Contract Specification > General Documentation > Expiration Price
-    PublicGetFundingRateHistoryResponse:
-      properties:
-        jsonrpc:
-          type: string
-          enum:
-          - '2.0'
-          description: The JSON-RPC version (2.0)
-        id:
-          type: integer
-          description: The id that was sent in the request
-        result:
-          type: array
-          items:
-            type: object
-            properties:
-              timestamp:
-                $ref: '#/components/schemas/timestamp'
-              prev_index_price:
-                $ref: '#/components/schemas/price'
-              index_price:
-                $ref: '#/components/schemas/price'
-              interest_1h:
-                type: number
-                description: 1hour interest rate
-              interest_8h:
-                type: number
-                description: 8hour interest rate
-      required:
-      - jsonrpc
-      - result
-      type: object
-    PublicGetFundingChartDataResponse:
-      properties:
-        jsonrpc:
-          type: string
-          enum:
-          - '2.0'
-          description: The JSON-RPC version (2.0)
-        id:
-          type: integer
-          description: The id that was sent in the request
-        result:
-          type: object
-          properties:
-            current_interest:
-              type: number
-              example: 0.005000670552845
-              description: Current interest
-            interest_8h:
-              type: number
-              example: 0.0040080896931
-              description: Current interest 8h
-            data:
-              type: array
-              items:
-                type: object
-                properties:
-                  timestamp:
-                    $ref: '#/components/schemas/timestamp'
-                  index_price:
-                    $ref: '#/components/schemas/index_price'
-                  interest_8h:
-                    type: number
-                    example: 0.004999511380756577
-                    description: Historical interest 8h value
-                required:
-                - timestamp
-                - index_price
-                - interest_8h
-          required:
-          - current_interest
-          - data
-          - interest_8h
-      required:
-      - jsonrpc
-      - result
-      type: object
-    bid_iv:
-      type: number
-      description: (Only for option) implied volatility for best bid
-    instrument_id:
-      type: integer
-      description: Instrument ID
-    trades_volumes:
-      properties:
-        currency:
-          $ref: '#/components/schemas/currency'
-        calls_volume:
-          example: 20.1
-          type: number
-          description: Total 24h trade volume for call options.
-        puts_volume:
-          example: 60.2
-          type: number
-          description: Total 24h trade volume for put options.
-        futures_volume:
-          example: 30.5178
-          type: number
-          description: Total 24h trade volume for futures.
-        spot_volume:
-          example: 11.6
-          type: number
-          description: Total 24h trade for spot.
-        calls_volume_7d:
-          example: 75.6
-          type: number
-          description: Total 7d trade volume for call options.
-        puts_volume_7d:
-          example: 356.9
-          type: number
-          description: Total 7d trade volume for put options.
-        futures_volume_7d:
-          example: 213.8841
-          type: number
-          description: Total 7d trade volume for futures.
-        spot_volume_7d:
-          example: 64.8
-          type: number
-          description: Total 7d trade for spot.
-        calls_volume_30d:
-          example: 547.3
-          type: number
-          description: Total 30d trade volume for call options.
-        puts_volume_30d:
-          example: 785.5
-          type: number
-          description: Total 30d trade volume for put options.
-        futures_volume_30d:
-          example: 998.2128
-          type: number
-          description: Total 30d trade volume for futures.
-        spot_volume_30d:
-          example: 310.5
-          type: number
-          description: Total 30d trade for spot.
-      required:
-      - currency
-      - futures_volume
-      - puts_volume
-      - calls_volume
-      type: object
-    kind_future_or_option_with_any:
-      enum:
-      - future
-      - option
-      - any
-      type: string
-      description: 'Instrument kind: `"future"`, `"option"` or `"any"` for all'
-    date:
-      example: '2019-11-24'
-      type: string
-      description: The event date with year, month and day
-    currency_with_any:
-      enum:
-      - BTC
-      - ETH
-      - USDC
-      - USDT
-      - EURR
-      - any
-      type: string
-      description: Currency name or `"any"` if don't care
-    underlying_price:
-      type: number
-      description: Underlying price for implied volatility calculations (options only)
-    funding_8h:
-      type: number
-      description: Funding 8h (perpetual only)
-    ask_iv:
-      type: number
-      description: (Only for option) implied volatility for best ask
-    kind:
-      enum:
-      - future
-      - option
-      - spot
-      - future_combo
-      - option_combo
-      type: string
-      description: 'Instrument kind: `"future"`, `"option"`, `"spot"`, `"future_combo"`, `"option_combo"`'
-    contract_size:
-      example: 10
-      type: integer
-      description: Contract size, for futures in USD, for options in base currency of the instrument (BTC, ETH, ...)
-    max_price:
-      type: number
-      description: The maximum price for the future. Any buy orders you submit higher than this price, will be clamped to this maximum.
-    trade_timestamp:
-      example: 1517329113791
-      type: integer
-      description: The timestamp of the trade (milliseconds since the UNIX epoch)
-    JsonRpcError:
-      type: object
-      required:
-      - jsonrpc
-      - error
-      description: JSON-RPC 2.0 error envelope returned for failed requests.
-      properties:
-        jsonrpc:
-          type: string
-          enum:
-          - '2.0'
-        id:
-          type:
-          - integer
-          - 'null'
-          description: The id that was sent in the request, if any.
-        error:
-          type: object
-          required:
-          - code
-          - message
-          properties:
-            code:
-              type: integer
-              description: Numeric JSON-RPC error code.
-            message:
-              type: string
-              description: Human-readable error description.
-            data:
-              description: Optional additional error details.
-    GetInstrumentsResponse:
-      type: object
-      required:
-      - jsonrpc
-      - result
-      properties:
-        jsonrpc:
-          type: string
-          enum:
-          - '2.0'
-          description: The JSON-RPC version (2.0)
-        id:
-          type: integer
-          description: The id that was sent in the request
-        result:
-          type: array
-          description: Array of instruments matching the supplied filters. May be empty.
-          items:
-            $ref: '#/components/schemas/Instrument'
+      description: Current index price
     Instrument:
       type: object
       description: A tradeable instrument's reference data.
@@ -4210,12 +4161,192 @@ components:
           - number
           - 'null'
           description: Block trade commission rate. May be `null` if not yet populated.
+    GetInstrumentsResponse:
+      type: object
+      required:
+      - jsonrpc
+      - result
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          type: array
+          description: Array of instruments matching the supplied filters. May be empty.
+          items:
+            $ref: '#/components/schemas/Instrument'
+    JsonRpcError:
+      type: object
+      required:
+      - jsonrpc
+      - error
+      description: JSON-RPC 2.0 error envelope returned for failed requests.
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+        id:
+          type:
+          - integer
+          - 'null'
+          description: The id that was sent in the request, if any.
+        error:
+          type: object
+          required:
+          - code
+          - message
+          properties:
+            code:
+              type: integer
+              description: Numeric JSON-RPC error code.
+            message:
+              type: string
+              description: Human-readable error description.
+            data:
+              description: Optional additional error details.
   responses:
-    PublicGetFundingChartDataResponse:
+    PublicGetFundingRateHistoryResponse:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/PublicGetFundingChartDataResponse'
+            $ref: '#/components/schemas/PublicGetFundingRateHistoryResponse'
+          examples:
+            response:
+              value:
+                jsonrpc: '2.0'
+                id: 7617
+                result:
+                - timestamp: 1569891600000
+                  index_price: 8222.87
+                  prev_index_price: 8305.72
+                  interest_8h: -9.234260068476106e-05
+                  interest_1h: -4.739622041017375e-07
+                - timestamp: 1569895200000
+                  index_price: 8286.49
+                  prev_index_price: 8222.87
+                  interest_8h: -6.720918180255509e-05
+                  interest_1h: -2.8583510923267753e-07
+                - timestamp: 1569898800000
+                  index_price: 8431.97
+                  prev_index_price: 8286.49
+                  interest_8h: -3.544496169694662e-05
+                  interest_1h: -3.815906848177951e-06
+                - timestamp: 1569902400000
+                  index_price: 8422.36
+                  prev_index_price: 8431.97
+                  interest_8h: -1.404147515584998e-05
+                  interest_1h: 8.312033064379086e-07
+              description: Response example
+      description: Success response
+    PublicTradesHistoryResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PublicTradesHistoryResponse'
+          examples:
+            response:
+              value:
+                jsonrpc: '2.0'
+                id: 1469
+                result:
+                  trades:
+                  - trade_seq: 467
+                    trade_id: '415305279'
+                    timestamp: 1770984454552
+                    tick_direction: 2
+                    price: 0.0525
+                    mark_price: 0.05253883
+                    iv: 45.91
+                    instrument_name: BTC-24APR26-72000-C
+                    index_price: 66930.31
+                    direction: buy
+                    amount: 3
+                    contracts: 3
+                  has_more: true
+              description: Response example
+      description: Success response
+    PublicGetIndexChartDataResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PublicGetIndexChartDataResponse'
+          examples:
+            response:
+              value:
+                jsonrpc: '2.0'
+                id: 1
+                result:
+                - - 1573228800000
+                  - 8751.7138636
+                - - 1573232400000
+                  - 8751.7138636
+                - - 1573236000000
+                  - 8751.7138636
+                - - 1573239600000
+                  - 8751.7138636
+                - - 1573243200000
+                  - 8751.7138636
+              description: Response example
+      description: Success response
+    PublicGetIndexPriceNamesResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PublicGetIndexPriceNamesResponse'
+          examples:
+            response:
+              value:
+                jsonrpc: '2.0'
+                id: 25718
+                result:
+                - btc_eth
+                - btc_usdc
+                - eth_usdc
+              description: Response example
+      description: Success response
+    PublicGetFundingRateValueResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PublicGetFundingRateValueResponse'
+          examples:
+            response:
+              value:
+                jsonrpc: '2.0'
+                id: 7617
+                result: -0.00025056853702101664
+              description: Response example
+      description: Success response
+    PublicGetAprHistoryResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PublicGetAprHistoryResponse'
+          examples:
+            response:
+              value:
+                jsonrpc: '2.0'
+                id: 1
+                result:
+                  data:
+                  - day: 20200
+                    apr: 2.814
+                  - day: 20199
+                    apr: 2.749
+                  - day: 20198
+                    apr: 2.684
+                  - day: 20197
+                    apr: 2.667
+                  - day: 20196
+                    apr: 2.722
+                  continuation: 20196
+              description: Response example
       description: Success response
     PublicGetInstrumentResponse:
       content:
@@ -4258,98 +4389,47 @@ components:
                   state: open
               description: Response example
       description: Success response
-    PublicSettlementResponse:
+    PublicGetVolatilityIndexDataResponse:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/PublicSettlementResponse'
+            $ref: '#/components/schemas/PublicGetVolatilityIndexDataResponse'
           examples:
             response:
               value:
                 jsonrpc: '2.0'
-                id: 5482
+                id: 5
                 result:
-                  settlements:
-                  - type: settlement
-                    timestamp: 1550502000023
-                    session_profit_loss: 0.116509752
-                    profit_loss: -9.999999999886402e-10
-                    position: 240
-                    mark_price: 3578.16
-                    instrument_name: BTC-22FEB19
-                    index_price: 3796.43
-                  continuation: 2Z7mdtavzYvfuyYcHkJXvPTr9ZSMsEzM3sLCH7AbYEDd1AzTXY2hnhegQDiaP1TtU4b5iSJZ4
+                  data:
+                  - - 1598019300000
+                    - 0.210084879
+                    - 0.212860821
+                    - 0.210084879
+                    - 0.212860821
+                  - - 1598019360000
+                    - 0.212869011
+                    - 0.212987527
+                    - 0.212869011
+                    - 0.212987527
+                  - - 1598019420000
+                    - 0.212987723
+                    - 0.212992597
+                    - 0.212987723
+                    - 0.212992597
+                  continuation: null
               description: Response example
       description: Success response
-    PublicTradesHistoryResponse:
+    PublicGetContractSizeResponse:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/PublicTradesHistoryResponse'
-          examples:
-            response:
-              value:
-                jsonrpc: '2.0'
-                id: 1469
-                result:
-                  trades:
-                  - trade_seq: 467
-                    trade_id: '415305279'
-                    timestamp: 1770984454552
-                    tick_direction: 2
-                    price: 0.0525
-                    mark_price: 0.05253883
-                    iv: 45.91
-                    instrument_name: BTC-24APR26-72000-C
-                    index_price: 66930.31
-                    direction: buy
-                    amount: 3
-                    contracts: 3
-                  has_more: true
-              description: Response example
+            $ref: '#/components/schemas/PublicGetContractSizeResponse'
       description: Success response
-    PublicGetIndexPriceNamesResponse:
+    PublicGetFundingChartDataResponse:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/PublicGetIndexPriceNamesResponse'
-          examples:
-            response:
-              value:
-                jsonrpc: '2.0'
-                id: 25718
-                result:
-                - btc_eth
-                - btc_usdc
-                - eth_usdc
-              description: Response example
-      description: Success response
-    PublicGetHistoricalVolatilityResponse:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/PublicGetHistoricalVolatilityResponse'
-          examples:
-            response:
-              value:
-                jsonrpc: '2.0'
-                id: 8387
-                result:
-                - - 1549720800000
-                  - 14.747743607344217
-                - - 1549720800000
-                  - 14.747743607344217
-                - - 1549724400000
-                  - 14.74257778551467
-                - - 1549728000000
-                  - 14.73502799931767
-                - - 1549731600000
-                  - 14.73502799931767
-                - - 1549735200000
-                  - 14.73502799931767
-                - - 1550228400000
-                  - 46.371891307340015
-              description: Response example
+            $ref: '#/components/schemas/PublicGetFundingChartDataResponse'
       description: Success response
     PublicGetMarkPriceHistoryResponse:
       content:
@@ -4368,6 +4448,160 @@ components:
                   - 0.5165737855432504
                 - - 1608142379227
                   - 0.5165768236356326
+              description: Response example
+      description: Success response
+    PublicGetDeliveryPricesResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PublicGetDeliveryPricesResponse'
+          examples:
+            response:
+              value:
+                jsonrpc: '2.0'
+                id: 3601
+                result:
+                  data:
+                  - date: '2020-01-02'
+                    delivery_price: 7131.214606410254
+                  - date: '2019-12-21'
+                    delivery_price: 7150.943217777777
+                  - date: '2019-12-20'
+                    delivery_price: 7175.988445532345
+                  - date: '2019-12-19'
+                    delivery_price: 7189.540776143791
+                  - date: '2019-12-18'
+                    delivery_price: 6698.353743857118
+                  records_total: 58
+              description: Response example
+      description: Success response
+    PublicTickerResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PublicTickerResponse'
+          examples:
+            response:
+              value:
+                jsonrpc: '2.0'
+                id: 8106
+                result:
+                  best_ask_amount: 53040
+                  best_ask_price: 36290
+                  best_bid_amount: 4600
+                  best_bid_price: 36289.5
+                  current_funding: 0
+                  estimated_delivery_price: 36297.02
+                  funding_8h: 2.203e-05
+                  index_price: 36297.02
+                  instrument_name: BTC-PERPETUAL
+                  interest_value: 1.7362511643080387
+                  last_price: 36289.5
+                  mark_price: 36288.31
+                  max_price: 36833.4
+                  min_price: 35744.73
+                  open_interest: 502231260
+                  settlement_price: 36169.49
+                  state: open
+                  stats:
+                    high: 36824.5
+                    low: 35213.5
+                    price_change: 0.2362
+                    volume: 7831.26548117
+                    volume_usd: 282615600
+                  timestamp: 1623059681955
+              description: Response example
+      description: Success response
+    PublicGetTradingviewChartDataResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PublicGetTradingviewChartDataResponse'
+          examples:
+            response:
+              value:
+                jsonrpc: '2.0'
+                id: 833
+                result:
+                  volume:
+                  - 19.007942601
+                  - 20.095877981
+                  cost:
+                  - 19000
+                  - 23400
+                  ticks:
+                  - 1554373800000
+                  - 1554375600000
+                  status: ok
+                  open:
+                  - 4963.42
+                  - 4986.29
+                  low:
+                  - 4728.94
+                  - 4726.6
+                  high:
+                  - 5185.45
+                  - 5250.87
+                  close:
+                  - 5052.95
+                  - 5013.59
+                usIn: 1554381680742493
+                usOut: 1554381680742698
+                usDiff: 205
+                testnet: false
+              description: Response example
+      description: Success response
+    PublicGetTradesVolumesResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PublicGetTradesVolumesResponse'
+          examples:
+            response:
+              value:
+                jsonrpc: '2.0'
+                id: 6387
+                result:
+                - puts_volume: 48
+                  futures_volume: 6.25578452
+                  currency: BTC
+                  calls_volume: 145
+                  spot_volume: 11.1
+                - puts_volume: 122.65
+                  futures_volume: 374.392173
+                  currency: ETH
+                  calls_volume: 37.4
+                  spot_volume: 57.7
+              description: Response example
+      description: Success response
+    PublicGetBookSummaryResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PublicGetBookSummaryResponse'
+          examples:
+            response:
+              value:
+                jsonrpc: '2.0'
+                id: 3659
+                result:
+                - volume: 0.55
+                  underlying_price: 121.38
+                  underlying_index: index_price
+                  quote_currency: USD
+                  price_change: -26.7793594
+                  open_interest: 0.55
+                  mid_price: 0.2444
+                  mark_price: 80
+                  low: 0.34
+                  last: 0.34
+                  interest_rate: 0.207
+                  instrument_name: ETH-22FEB19-140-P
+                  high: 0.34
+                  creation_timestamp: 1550227952163
+                  bid_price: 0.1488
+                  base_currency: ETH
+                  ask_price: 0.34
               description: Response example
       description: Success response
     PublicGetOrderBookResponse:
@@ -4413,107 +4647,6 @@ components:
                   asks: []
               description: Response example
       description: Success response
-    PublicGetTradingviewChartDataResponse:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/PublicGetTradingviewChartDataResponse'
-          examples:
-            response:
-              value:
-                jsonrpc: '2.0'
-                id: 833
-                result:
-                  volume:
-                  - 19.007942601
-                  - 20.095877981
-                  cost:
-                  - 19000
-                  - 23400
-                  ticks:
-                  - 1554373800000
-                  - 1554375600000
-                  status: ok
-                  open:
-                  - 4963.42
-                  - 4986.29
-                  low:
-                  - 4728.94
-                  - 4726.6
-                  high:
-                  - 5185.45
-                  - 5250.87
-                  close:
-                  - 5052.95
-                  - 5013.59
-                usIn: 1554381680742493
-                usOut: 1554381680742698
-                usDiff: 205
-                testnet: false
-              description: Response example
-      description: Success response
-    PublicTickerResponse:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/PublicTickerResponse'
-          examples:
-            response:
-              value:
-                jsonrpc: '2.0'
-                id: 8106
-                result:
-                  best_ask_amount: 53040
-                  best_ask_price: 36290
-                  best_bid_amount: 4600
-                  best_bid_price: 36289.5
-                  current_funding: 0
-                  estimated_delivery_price: 36297.02
-                  funding_8h: 2.203e-05
-                  index_price: 36297.02
-                  instrument_name: BTC-PERPETUAL
-                  interest_value: 1.7362511643080387
-                  last_price: 36289.5
-                  mark_price: 36288.31
-                  max_price: 36833.4
-                  min_price: 35744.73
-                  open_interest: 502231260
-                  settlement_price: 36169.49
-                  state: open
-                  stats:
-                    high: 36824.5
-                    low: 35213.5
-                    price_change: 0.2362
-                    volume: 7831.26548117
-                    volume_usd: 282615600
-                  timestamp: 1623059681955
-              description: Response example
-      description: Success response
-    PublicGetIndexPriceResponse:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/PublicGetIndexPriceResponse'
-      description: Success response
-    PublicGetContractSizeResponse:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/PublicGetContractSizeResponse'
-      description: Success response
-    PublicGetFundingRateValueResponse:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/PublicGetFundingRateValueResponse'
-          examples:
-            response:
-              value:
-                jsonrpc: '2.0'
-                id: 7617
-                result: -0.00025056853702101664
-              description: Response example
-      description: Success response
     PublicGetCurrenciesResponse:
       content:
         application/json:
@@ -4551,48 +4684,11 @@ components:
                   decimals: 8
               description: Response example
       description: Success response
-    PublicGetExpirationsResponse:
+    PublicGetIndexPriceResponse:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/PublicGetExpirationsResponse'
-          examples:
-            response:
-              value:
-                jsonrpc: '2.0'
-                result:
-                  future:
-                  - 21SEP24
-                  - 22SEP24
-                  - PERPETUAL
-                  option:
-                  - 21SEP24
-                  - 22SEP24
-                  - 23SEP24
-              description: Response example
-      description: Success response
-    PublicGetTradesVolumesResponse:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/PublicGetTradesVolumesResponse'
-          examples:
-            response:
-              value:
-                jsonrpc: '2.0'
-                id: 6387
-                result:
-                - puts_volume: 48
-                  futures_volume: 6.25578452
-                  currency: BTC
-                  calls_volume: 145
-                  spot_volume: 11.1
-                - puts_volume: 122.65
-                  futures_volume: 374.392173
-                  currency: ETH
-                  calls_volume: 37.4
-                  spot_volume: 57.7
-              description: Response example
+            $ref: '#/components/schemas/PublicGetIndexPriceResponse'
       description: Success response
     PublicGetInstrumentsResponse:
       content:
@@ -4657,170 +4753,74 @@ components:
                   state: open
               description: Response example
       description: Success response
-    PublicGetBookSummaryResponse:
+    PublicGetExpirationsResponse:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/PublicGetBookSummaryResponse'
+            $ref: '#/components/schemas/PublicGetExpirationsResponse'
           examples:
             response:
               value:
                 jsonrpc: '2.0'
-                id: 3659
                 result:
-                - volume: 0.55
-                  underlying_price: 121.38
-                  underlying_index: index_price
-                  quote_currency: USD
-                  price_change: -26.7793594
-                  open_interest: 0.55
-                  mid_price: 0.2444
-                  mark_price: 80
-                  low: 0.34
-                  last: 0.34
-                  interest_rate: 0.207
-                  instrument_name: ETH-22FEB19-140-P
-                  high: 0.34
-                  creation_timestamp: 1550227952163
-                  bid_price: 0.1488
-                  base_currency: ETH
-                  ask_price: 0.34
+                  future:
+                  - 21SEP24
+                  - 22SEP24
+                  - PERPETUAL
+                  option:
+                  - 21SEP24
+                  - 22SEP24
+                  - 23SEP24
               description: Response example
       description: Success response
-    PublicGetAprHistoryResponse:
+    PublicSettlementResponse:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/PublicGetAprHistoryResponse'
+            $ref: '#/components/schemas/PublicSettlementResponse'
           examples:
             response:
               value:
                 jsonrpc: '2.0'
-                id: 1
+                id: 5482
                 result:
-                  data:
-                  - day: 20200
-                    apr: 2.814
-                  - day: 20199
-                    apr: 2.749
-                  - day: 20198
-                    apr: 2.684
-                  - day: 20197
-                    apr: 2.667
-                  - day: 20196
-                    apr: 2.722
-                  continuation: 20196
+                  settlements:
+                  - type: settlement
+                    timestamp: 1550502000023
+                    session_profit_loss: 0.116509752
+                    profit_loss: -9.999999999886402e-10
+                    position: 240
+                    mark_price: 3578.16
+                    instrument_name: BTC-22FEB19
+                    index_price: 3796.43
+                  continuation: 2Z7mdtavzYvfuyYcHkJXvPTr9ZSMsEzM3sLCH7AbYEDd1AzTXY2hnhegQDiaP1TtU4b5iSJZ4
               description: Response example
       description: Success response
-    PublicGetDeliveryPricesResponse:
+    PublicGetHistoricalVolatilityResponse:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/PublicGetDeliveryPricesResponse'
+            $ref: '#/components/schemas/PublicGetHistoricalVolatilityResponse'
           examples:
             response:
               value:
                 jsonrpc: '2.0'
-                id: 3601
+                id: 8387
                 result:
-                  data:
-                  - date: '2020-01-02'
-                    delivery_price: 7131.214606410254
-                  - date: '2019-12-21'
-                    delivery_price: 7150.943217777777
-                  - date: '2019-12-20'
-                    delivery_price: 7175.988445532345
-                  - date: '2019-12-19'
-                    delivery_price: 7189.540776143791
-                  - date: '2019-12-18'
-                    delivery_price: 6698.353743857118
-                  records_total: 58
-              description: Response example
-      description: Success response
-    PublicGetIndexChartDataResponse:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/PublicGetIndexChartDataResponse'
-          examples:
-            response:
-              value:
-                jsonrpc: '2.0'
-                id: 1
-                result:
-                - - 1573228800000
-                  - 8751.7138636
-                - - 1573232400000
-                  - 8751.7138636
-                - - 1573236000000
-                  - 8751.7138636
-                - - 1573239600000
-                  - 8751.7138636
-                - - 1573243200000
-                  - 8751.7138636
-              description: Response example
-      description: Success response
-    PublicGetFundingRateHistoryResponse:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/PublicGetFundingRateHistoryResponse'
-          examples:
-            response:
-              value:
-                jsonrpc: '2.0'
-                id: 7617
-                result:
-                - timestamp: 1569891600000
-                  index_price: 8222.87
-                  prev_index_price: 8305.72
-                  interest_8h: -9.234260068476106e-05
-                  interest_1h: -4.739622041017375e-07
-                - timestamp: 1569895200000
-                  index_price: 8286.49
-                  prev_index_price: 8222.87
-                  interest_8h: -6.720918180255509e-05
-                  interest_1h: -2.8583510923267753e-07
-                - timestamp: 1569898800000
-                  index_price: 8431.97
-                  prev_index_price: 8286.49
-                  interest_8h: -3.544496169694662e-05
-                  interest_1h: -3.815906848177951e-06
-                - timestamp: 1569902400000
-                  index_price: 8422.36
-                  prev_index_price: 8431.97
-                  interest_8h: -1.404147515584998e-05
-                  interest_1h: 8.312033064379086e-07
-              description: Response example
-      description: Success response
-    PublicGetVolatilityIndexDataResponse:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/PublicGetVolatilityIndexDataResponse'
-          examples:
-            response:
-              value:
-                jsonrpc: '2.0'
-                id: 5
-                result:
-                  data:
-                  - - 1598019300000
-                    - 0.210084879
-                    - 0.212860821
-                    - 0.210084879
-                    - 0.212860821
-                  - - 1598019360000
-                    - 0.212869011
-                    - 0.212987527
-                    - 0.212869011
-                    - 0.212987527
-                  - - 1598019420000
-                    - 0.212987723
-                    - 0.212992597
-                    - 0.212987723
-                    - 0.212992597
-                  continuation: null
+                - - 1549720800000
+                  - 14.747743607344217
+                - - 1549720800000
+                  - 14.747743607344217
+                - - 1549724400000
+                  - 14.74257778551467
+                - - 1549728000000
+                  - 14.73502799931767
+                - - 1549731600000
+                  - 14.73502799931767
+                - - 1549735200000
+                  - 14.73502799931767
+                - - 1550228400000
+                  - 46.371891307340015
               description: Response example
       description: Success response
   securitySchemes:

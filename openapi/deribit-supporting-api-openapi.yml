@@ -180,19 +180,6 @@ paths:
       x-operation-id-source: derived
 components:
   responses:
-    PublicGetTimeResponse:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/PublicGetTimeResponse'
-          examples:
-            response:
-              value:
-                jsonrpc: '2.0'
-                id: 7365
-                result: 1550147385946
-              description: Response example
-      description: Success response
     PublicStatusResponse:
       content:
         application/json:
@@ -224,30 +211,20 @@ components:
                   version: 1.2.26
               description: Response example
       description: Success response
+    PublicGetTimeResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PublicGetTimeResponse'
+          examples:
+            response:
+              value:
+                jsonrpc: '2.0'
+                id: 7365
+                result: 1550147385946
+              description: Response example
+      description: Success response
   schemas:
-    PublicTestResponse:
-      properties:
-        jsonrpc:
-          type: string
-          enum:
-          - '2.0'
-          description: The JSON-RPC version (2.0)
-        id:
-          type: integer
-          description: The id that was sent in the request
-        result:
-          type: object
-          properties:
-            version:
-              example: 2.1.26
-              type: string
-              description: The API version
-          required:
-          - version
-      required:
-      - jsonrpc
-      - result
-      type: object
     PublicStatusResponse:
       properties:
         jsonrpc:
@@ -269,6 +246,29 @@ components:
               description: List of currency indices locked platform-wise
           required:
           - locked
+      required:
+      - jsonrpc
+      - result
+      type: object
+    PublicTestResponse:
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: The JSON-RPC version (2.0)
+        id:
+          type: integer
+          description: The id that was sent in the request
+        result:
+          type: object
+          properties:
+            version:
+              example: 2.1.26
+              type: string
+              description: The API version
+          required:
+          - version
       required:
       - jsonrpc
       - result
