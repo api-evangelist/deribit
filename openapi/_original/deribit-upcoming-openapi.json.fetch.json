@@ -1,0 +1,12 @@
+{
+ "url": "https://docs.deribit.com/specifications/deribit_openapi.json",
+ "requested_url": "https://docs.deribit.com/specifications/deribit_openapi.json",
+ "status": 200,
+ "content_type": "application/json",
+ "bytes": 1519769,
+ "sha256": "78543b1b2259c37511ea6998cdcab3bd8b888c5252fafa1fe9d2a8deb36dca4f",
+ "fetched_at": "2026-10-04",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "equivalent",
+ "note": "Re-fetched from the provider by verify-openapi-sources.py; the provider's current document describes the same operations (Jaccard 0.93), but the bytes differ, so the archive is an earlier or reformatted copy."
+}
