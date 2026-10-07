@@ -1,3 +1,7 @@
+# Provenance stamped 2026-10-07 (roadmap#943): written by an API Evangelist sweep (undated — the file carries no date and git cannot supply one), not
+# harvested from the provider. `method: generated` so the economics campaign may replace it with a
+# dated, verbatim transcription; every figure below is unverified until it does.
+method: generated
 name: Deribit API Rate Limits
 description: Deribit uses a credit-based rate limiting system for authenticated users. Credits are replenished continuously at a fixed rate depending on the sub-account tier. Public unauthenticated requests are rate-limited per IP address.
 url: https://docs.deribit.com/articles/rate-limits

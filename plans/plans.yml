@@ -1,3 +1,7 @@
+# Provenance stamped 2026-10-07 (roadmap#943): written by an API Evangelist sweep (undated — the file carries no date and git cannot supply one), not
+# harvested from the provider. `method: generated` so the economics campaign may replace it with a
+# dated, verbatim transcription; every figure below is unverified until it does.
+method: generated
 name: Deribit API Plans
 description: Deribit uses a VIP tier system based on monthly trading volume rather than traditional API subscription tiers. The API itself is free to use for all registered users. Fee discounts scale with volume through VIP 1-6 levels.
 url: https://www.deribit.com/pages/information/fees
