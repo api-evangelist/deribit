@@ -79,3 +79,51 @@ plans:
     features:
       - All VIP 5 features
       - Maximum fee discounts available
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models: []
+  units: []
+  plans:
+  - name: Standard
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
+  - name: VIP 1
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
+  - name: VIP 2
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
+  - name: VIP 3
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
+  - name: VIP 4
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
+  - name: VIP 5
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
+  - name: VIP 6
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
