@@ -24,7 +24,7 @@ edges:
   evidence: https://api.coingecko.com/api/v3/exchanges/deribit_spot
   matched_by: domain:deribit.com
   coingecko_id: deribit_spot
-  trust_score: 6
+  trust_score: 5
   detected_by: sweep-crypto.py
   first_seen: '2026-10-13'
 generated: '2026-10-13'
