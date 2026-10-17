@@ -262,19 +262,6 @@ paths:
       x-operation-id-source: derived
 components:
   responses:
-    OkResponse:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/OkResponse'
-          examples:
-            response:
-              value:
-                jsonrpc: '2.0'
-                id: 1569
-                result: ok
-              description: Response example
-      description: Success response
     PrivateGetCancelOnDisconnectResponse:
       content:
         application/json:
@@ -288,6 +275,19 @@ components:
                 result:
                   scope: account
                   enabled: false
+              description: Response example
+      description: Success response
+    OkResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OkResponse'
+          examples:
+            response:
+              value:
+                jsonrpc: '2.0'
+                id: 1569
+                result: ok
               description: Response example
       description: Success response
   schemas:

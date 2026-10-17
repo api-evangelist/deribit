@@ -328,60 +328,6 @@ paths:
       operationId: getPrivateUnsubscribeAll
       x-operation-id-source: derived
 components:
-  responses:
-    Getunsubscribe200response:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Getunsubscribe200response'
-          examples:
-            jsonObject:
-              value:
-                jsonrpc: '2.0'
-                id: 3370
-                result:
-                - deribit_price_index.btc_usd
-            response:
-              value:
-                jsonrpc: '2.0'
-                id: 3370
-                result:
-                - deribit_price_index.btc_usd
-              description: Response example
-      description: Successfully unsubscribed from channels
-    OkResponse:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/OkResponse'
-          examples:
-            response:
-              value:
-                jsonrpc: '2.0'
-                id: 1569
-                result: ok
-              description: Response example
-      description: Success response
-    ErrorMessageResponse:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessageResponse'
-      description: Success response
-    PrivateSubscribeResponse:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/PrivateSubscribeResponse'
-          examples:
-            response:
-              value:
-                jsonrpc: '2.0'
-                id: 4235
-                result:
-                - deribit_price_index.btc_usd
-              description: Response example
-      description: Success response
   schemas:
     OkResponse:
       properties:
@@ -458,3 +404,57 @@ components:
           example:
           - deribit_price_index.btc_usd
           description: List of channels that were successfully unsubscribed in this request
+  responses:
+    ErrorMessageResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessageResponse'
+      description: Success response
+    PrivateSubscribeResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PrivateSubscribeResponse'
+          examples:
+            response:
+              value:
+                jsonrpc: '2.0'
+                id: 4235
+                result:
+                - deribit_price_index.btc_usd
+              description: Response example
+      description: Success response
+    Getunsubscribe200response:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Getunsubscribe200response'
+          examples:
+            jsonObject:
+              value:
+                jsonrpc: '2.0'
+                id: 3370
+                result:
+                - deribit_price_index.btc_usd
+            response:
+              value:
+                jsonrpc: '2.0'
+                id: 3370
+                result:
+                - deribit_price_index.btc_usd
+              description: Response example
+      description: Successfully unsubscribed from channels
+    OkResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OkResponse'
+          examples:
+            response:
+              value:
+                jsonrpc: '2.0'
+                id: 1569
+                result: ok
+              description: Response example
+      description: Success response
